@@ -1,0 +1,803 @@
+<meta charset="utf-8">
+<title>Midterm Night Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+/* Layout: a wire-service tally board — one strip per state, counties beneath, figures in tabular columns. */
+:root{
+  --bg:#f4f4f2; --panel:#ffffff; --line:#d7d7d2; --fg:#16161a; --dim:#6a6a66;
+  --r:#9c3328; --d:#2d4f7c; --o:#8a8a84; --flag:#8a6d1f; --ok:#3d6b45;
+  --display:'Barlow Condensed',Haettenschweiler,'Arial Narrow',sans-serif;
+  --body:'Barlow',-apple-system,Segoe UI,Roboto,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141416; --panel:#1c1c20; --line:#32323a; --fg:#ececea; --dim:#9a9a96;
+  --r:#d2685c; --d:#7aa3d6; --o:#9a9a94; --flag:#d6b454; --ok:#7ab88a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141416; --panel:#1c1c20; --line:#32323a; --fg:#ececea; --dim:#9a9a96;
+  --r:#d2685c; --d:#7aa3d6; --o:#9a9a94; --flag:#d6b454; --ok:#7ab88a; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);margin:0;
+  padding-inline:16px;padding-block:0 48px;font-size:15px;line-height:1.45}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3,.fig,th{font-family:var(--display)}
+.fig{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+
+header{border-bottom:2px solid var(--fg);padding-block:22px 12px;margin-bottom:6px}
+h1{font-size:clamp(30px,5vw,46px);line-height:.95;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.sub{color:var(--dim);font-size:13px;margin-top:6px;display:flex;gap:14px;flex-wrap:wrap;align-items:baseline}
+.tag{font-family:var(--display);text-transform:uppercase;letter-spacing:.09em;font-size:11px;
+  border:1px solid var(--line);border-radius:2px;padding:2px 7px;color:var(--dim)}
+
+.backlink{grid-column:1/-1;background:none;border:none;color:var(--dim);font-family:var(--display);
+  text-transform:uppercase;letter-spacing:.08em;font-size:12px;padding:0;margin:4px 0 2px;cursor:pointer;text-align:left}
+.backlink:hover{color:var(--fg)}
+.crumb{grid-column:1/-1;font-family:var(--display);font-size:24px;font-weight:600;
+  border-bottom:2px solid var(--fg);padding-bottom:7px;margin-bottom:4px}
+.jumprow{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+.jump{font-family:var(--display);font-size:11px;letter-spacing:.05em;padding:4px 9px;
+  background:var(--panel);border:1px solid var(--line);border-radius:2px;color:var(--dim);cursor:pointer}
+.jump:hover{color:var(--fg);border-color:var(--fg)}
+.st.open{grid-column:1/-1;border-left-width:3px}
+.tabs{display:flex;gap:0;margin-top:14px;border-bottom:1px solid var(--line)}
+.tab{font-family:var(--display);text-transform:uppercase;letter-spacing:.08em;font-size:13px;
+  background:none;border:none;border-bottom:2px solid transparent;border-radius:0;
+  padding:9px 15px;color:var(--dim);cursor:pointer;margin-bottom:-1px}
+.tab.on{color:var(--fg);border-bottom-color:var(--fg)}
+.tab:hover{color:var(--fg)}
+.evcard{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px 15px;margin-bottom:12px}
+.evrow{display:grid;grid-template-columns:96px 92px 1fr auto;gap:12px;align-items:center;margin:9px 0}
+.evtot{font-family:var(--display);font-size:16px;font-weight:600;text-align:right}
+.share.ev{height:11px;margin:0;border-radius:1px}
+.evpcts{font-size:12px;display:flex;gap:9px;flex-wrap:wrap}
+table.evtab{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px}
+table.evtab th{font-family:var(--display);text-transform:uppercase;letter-spacing:.05em;font-size:9.5px;
+  color:var(--dim);text-align:right;padding:4px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.evtab th:first-child{text-align:left}
+table.evtab td{padding:4px 6px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
+table.evtab td:first-child{text-align:left;white-space:nowrap}
+table.evtab .dim{color:var(--dim);font-size:11px}
+table.evtab .b{font-weight:600}
+table.evtab.pace{margin-top:12px}
+table.evtab.pace tr.sub td{color:var(--dim);font-size:11px;border-bottom:none;padding-top:0}
+table.evtab.pace tbody tr:last-child td{border-top:2px solid var(--fg);font-weight:600}
+table.evtab .diffs{white-space:nowrap;font-size:11px}
+table.evtab .diffs span{margin-left:6px}
+.evtoggle{margin-top:10px;font-family:var(--display);font-size:11px;letter-spacing:.06em;
+  background:none;border:1px solid var(--line);border-radius:2px;padding:4px 9px;color:var(--dim);cursor:pointer}
+.evtoggle:hover{color:var(--fg);border-color:var(--fg)}
+.streamline{font-size:11.5px;color:var(--flag);margin-top:9px;padding-top:8px;border-top:1px solid var(--line)}
+.evrow.nodata .evtot{color:var(--dim)}
+.nodatanote{font-size:11.5px;color:var(--flag)}
+.evfoot{color:var(--dim);font-size:12px;margin-top:14px;line-height:1.5}
+@media(max-width:620px){.evrow{grid-template-columns:1fr auto;gap:6px}.share.ev{grid-column:1/-1}.evpcts{grid-column:1/-1}}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding-block:14px;
+  border-bottom:1px solid var(--line);margin-bottom:22px}
+button{font-family:var(--display);font-size:14px;letter-spacing:.04em;text-transform:uppercase;
+  background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:2px;
+  padding:7px 13px;cursor:pointer}
+button:hover{border-color:var(--fg)}
+button:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--d);outline-offset:2px}
+
+.tierhd{grid-column:1/-1;font-family:var(--display);text-transform:uppercase;letter-spacing:.09em;
+  font-size:15px;color:var(--fg);border-bottom:2px solid var(--fg);padding-bottom:5px;margin-top:16px;
+  display:flex;justify-content:space-between;align-items:baseline}
+.tierhd .cnt{font-size:11px;color:var(--dim);letter-spacing:.07em}
+.st.t-tossup{border-left:3px solid var(--flag)}
+.st.t-safe{opacity:.72}
+.states[hidden],#evwrap[hidden]{display:none!important}
+.cyc{font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);font-weight:600}
+.states{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}
+.st{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px 15px 13px;min-width:0}
+.st.open{grid-column:1/-1}
+.sthd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;cursor:pointer}
+.stname{font-family:var(--display);font-size:23px;font-weight:600;letter-spacing:-.005em}
+.pin{font-family:var(--display);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim)}
+
+table.cand{width:100%;border-collapse:collapse;margin-top:11px;font-size:13px}
+table.cand th{font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;font-size:10px;
+  font-weight:600;color:var(--dim);text-align:right;padding:0 0 4px;border-bottom:1px solid var(--line)}
+table.cand th:first-child{text-align:left}
+table.cand td{padding:5px 0;border:none}
+table.cand .cname{text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:0;width:40%}
+table.cand .num{text-align:right;font-variant-numeric:tabular-nums;padding-left:12px;white-space:nowrap}
+table.cand .cnt{color:var(--dim);font-size:12.5px}
+table.cand .outs{color:var(--flag);font-size:12.5px}
+table.cand .prj{font-size:13.5px;font-weight:600;line-height:1.25}
+table.cand tr.win .cname{font-weight:600}
+table.cand tfoot td{border-top:1px solid var(--line);padding-top:6px;font-size:12px;color:var(--dim)}
+table.cand tfoot .outs{font-weight:600}
+table.cand .sw{display:inline-block;width:9px;height:9px;border-radius:1px;margin-right:7px}
+.empty-cand .prj{color:var(--dim)}
+.share{display:flex;height:9px;margin:11px 0 7px;border-radius:1px;overflow:hidden;background:var(--line)}
+.share i{display:block}
+.cnt{color:var(--dim);font-size:12.5px}
+.outs{color:var(--flag);font-size:12.5px}
+.prj{font-family:var(--display);font-size:17px;font-weight:600;line-height:1.1}
+.sw{display:inline-block;width:9px;height:9px;border-radius:1px;margin-right:7px;vertical-align:baseline}
+.nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.pj{color:var(--dim);font-size:12px}
+
+.facestats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;padding-top:9px;
+  border-top:1px solid var(--line)}
+.facestats > div{display:flex;flex-direction:column;gap:1px;min-width:0}
+.fnum{font-family:var(--display);font-size:15px;font-weight:600;line-height:1.1}
+.fnum.amber{color:var(--flag)}
+.faceproj{margin-top:8px;font-size:13px;color:var(--dim)}
+.faceproj b{font-weight:600}
+.amber{color:var(--flag)}
+.meter{margin-top:8px;padding-top:9px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:12px;color:var(--dim)}
+.warn{color:var(--flag);font-size:12px;margin-top:7px;display:flex;gap:6px;align-items:flex-start}
+.warn b{font-weight:600}
+
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+th{text-align:right;font-weight:600;font-size:11px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--dim);border-bottom:1px solid var(--line);padding:5px 7px}
+th:first-child,td:first-child{text-align:left}
+td{padding:5px 7px;border-bottom:1px solid var(--line);text-align:right;
+  font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto;margin-inline:-15px;padding-inline:15px}
+.empty{color:var(--dim);font-size:13px;padding:14px 0;border-top:1px solid var(--line);margin-top:11px}
+
+textarea{width:100%;min-height:120px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;
+  background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:2px;padding:9px;resize:vertical}
+label{font-family:var(--display);text-transform:uppercase;letter-spacing:.07em;font-size:11px;color:var(--dim);
+  display:block;margin:12px 0 5px}
+.hint{color:var(--dim);font-size:12px;margin-top:5px}
+.summary{display:grid;gap:4px;margin-top:14px;padding:11px 12px;border:1px solid var(--line);border-radius:2px;background:var(--bg)}
+.srow{display:grid;grid-template-columns:1fr auto 1fr auto;gap:10px;align-items:baseline;font-size:13px}
+.slab{font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;font-size:11px;color:var(--dim)}
+.srow.out{border-top:1px solid var(--line);padding-top:6px;margin-top:2px}
+.srow.out .slab{color:var(--fg)}
+.fig.big{font-family:var(--display);font-size:16px;font-weight:600;color:var(--flag)}
+.pin b{font-weight:600;color:var(--fg)}
+.evtag{font-size:9.5px;letter-spacing:.07em;border:1px solid var(--line);border-radius:2px;
+  padding:1px 5px;margin-right:7px;color:var(--dim);white-space:nowrap}
+.evtag.last{border-color:var(--flag);color:var(--flag)}
+.srow.evorder{border-top:1px solid var(--line);padding-top:6px;margin-top:2px}
+.srow.evorder b.amber{color:var(--flag)}
+.sumrow td{border-top:2px solid var(--fg);border-bottom:none;font-weight:600}
+.miss{color:var(--flag)}
+.upd{color:var(--dim);font-size:11px}
+tbody tr:hover td{background:var(--bg)}
+.sthd:hover .stname{text-decoration:underline;text-underline-offset:3px}
+.summary.flipped{border-color:var(--flag);border-width:2px}
+.marg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px;padding:12px;
+  border:1px solid var(--line);border-radius:2px;background:var(--bg)}
+.marg.flip{border-color:var(--flag);border-width:2px}
+.mcol{display:flex;flex-direction:column;gap:2px;min-width:0}
+.mval{font-family:var(--display);font-size:15px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mnum{font-family:var(--display);font-size:17px;font-weight:600;line-height:1.05}
+.flipnote{margin-top:8px;padding:8px 11px;border-left:3px solid var(--flag);background:var(--bg);
+  font-size:13px;color:var(--fg)}
+@media(max-width:560px){.marg{grid-template-columns:1fr;gap:9px}}
+.earlybox{margin-top:11px;padding:11px 12px;border:1px solid var(--line);border-left:3px solid var(--d);border-radius:2px}
+.ehd{font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;font-size:11px;color:var(--dim);margin-bottom:7px}
+.erow{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;margin-bottom:6px}
+.ehint{font-size:11.5px;color:var(--dim);line-height:1.4}
+footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);color:var(--dim);font-size:12px}
+footer p{margin:0 0 7px}
+</style>
+
+<div class="wrap">
+<header>
+  <h1>Midterm Night Board</h1>
+  <div class="sub">
+    <span>17 races, county by county.</span>
+    <span class="tag" id="stamp">awaiting data</span>
+  </div>
+</header>
+
+<div class="tabs" role="tablist">
+  <button id="tabEV" class="tab on" role="tab">Early &amp; mail vote</button>
+  <button id="tabEN" class="tab" role="tab">Election night</button>
+</div>
+
+<div class="bar">
+  <button id="refresh">Refresh</button>
+  <button id="toggleEntry">Paste results</button>
+  <button id="toggleEarly">Early vote by party</button>
+  <span class="hint" id="status"></span>
+</div>
+
+<div id="entry" hidden>
+  <label for="entryState">State</label>
+  <select id="entryState" style="font-family:var(--body);font-size:14px;padding:6px;background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:2px"></select>
+  <label for="paste">County rows — <code>county, cand1, cand2, cand3, outstanding</code></label>
+  <textarea id="paste" placeholder="Douglas, 118204, 141882, 3301, 21000
+Lancaster, 74119, 92640, 2208, 14500
+Sarpy, 52883, 44017, 1402, 6800"></textarea>
+  <div class="hint">Outstanding is optional — leave it off and that county contributes no projection beyond its counted vote. Paste overwrites that state's counties.</div>
+  <div style="margin-top:10px"><button id="applyPaste">Apply</button></div>
+</div>
+
+<div id="early" hidden>
+  <label for="earlyPaste">Early vote by party — <code>state, dem%, rep%, other%, ballots</code></label>
+  <textarea id="earlyPaste" placeholder="AK, 27, 23, 50, 1483
+FL, 41, 38, 21, 2400000"></textarea>
+  <div class="hint">Percentages of returned early/mail ballots by party registration. Used to weight the projection where the state registers voters by party — Florida, Iowa, Nebraska, Maine, Alaska. Texas, Ohio, Kansas and South Carolina have no usable party registration and fall back to the counted-vote ratio.</div>
+  <div style="margin-top:10px"><button id="applyEarly">Apply</button></div>
+</div>
+
+<div class="states" id="board"></div>
+<div id="evwrap" hidden>
+  <div id="evbody"></div>
+  <p class="evfoot" id="evfoot"></p>
+</div>
+
+<footer>
+  <p><b>These are projections, not calls.</b> Each state applies its counted county vote share to that county's outstanding ballots and sums. A decision desk waits until the remaining vote cannot change the result; this does not.</p>
+  <p id="modeNote"></p>
+</footer>
+</div>
+
+<script>
+const EVORDER = {
+  early:      {when:"First", note:"counted vote skews early/mail; what's left is Election Day"},
+  absentee:   {when:"First", note:"counted vote skews absentee; what's left is Election Day"},
+  advance:    {when:"First", note:"counted vote skews advance; what's left is Election Day"},
+  "election-day":{when:"LAST", note:"counted vote is Election Day; what's left is absentee"},
+  mixed:      {when:"Mixed",  note:"no consistent order across jurisdictions"}
+};
+const FIRST = {early:"early vote",absentee:"absentee",advance:"advance vote","election-day":"Election Day",mixed:"mixed"};
+const PARTYREG = ["FL","IA","NE","ME","AK"];
+const SKELETON = {"updated":null,"note":"Written by the per-state collectors. Each state's cron replaces its own block.","states":{"MI":{"name":"Michigan","abbr":"MI","countsFirst":"mixed","partyReg":false,"unit":"county","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Mike Rogers","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}},"unitsExpected":83},"MN":{"name":"Minnesota","abbr":"MN","countsFirst":"mixed","partyReg":false,"unit":"county","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Michele Tafoya","party":"R"},{"name":"Peggy Flanagan","party":"D"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}},"unitsExpected":87},"ME":{"name":"Maine","abbr":"ME","countsFirst":"mixed","partyReg":true,"unit":"town","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Candidate 3","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}},"unitsExpected":16,"unitsNote":"16 counties, ~500 municipalities reporting"},"NE":{"name":"Nebraska","abbr":"NE","countsFirst":"early","partyReg":true,"unit":"county","source":"electionresults.nebraska.gov","updated":null,"races":{"senate":{"candidates":[{"name":"Pete Ricketts","party":"REP"},{"name":"Dan Osborn","party":"PET"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"watch"}},"unitsExpected":93},"AK":{"name":"Alaska","abbr":"AK","countsFirst":"election-day","partyReg":true,"unit":"district","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Candidate 3","party":"O"}],"counties":[],"updated":null,"tier":"watch"}},"unitsExpected":40},"SC":{"name":"South Carolina","abbr":"SC","countsFirst":"election-day","partyReg":false,"unit":"county","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Darline Graham","party":"R"},{"name":"Annie Andrews","party":"D"},{"name":"Candidate 3","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}},"unitsExpected":46},"NC":{"name":"North Carolina","abbr":"NC","countsFirst":"early","partyReg":true,"unit":"county","source":"er.ncsbe.gov","races":{"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Roy Cooper","party":"D"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"safe"}},"unitsExpected":100},"OH":{"name":"Ohio","abbr":"OH","countsFirst":"absentee","partyReg":false,"unit":"county","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Candidate 3","party":"O"}],"counties":[],"updated":null,"tier":"tossup"},"governor":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}},"unitsExpected":88},"IA":{"name":"Iowa","abbr":"IA","countsFirst":"absentee","partyReg":true,"unit":"county","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Candidate 3","party":"O"}],"counties":[],"updated":null,"tier":"watch"}},"unitsExpected":99},"FL":{"name":"Florida","abbr":"FL","countsFirst":"early","partyReg":true,"unit":"county","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Candidate 3","party":"O"}],"counties":[],"updated":null,"tier":"safe"},"governor":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}},"unitsExpected":67},"GA":{"name":"Georgia","abbr":"GA","countsFirst":"early","partyReg":false,"unit":"county","source":"clarity","updated":null,"races":{"governor":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"tossup"},"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"safe"}},"unitsExpected":159},"TX":{"name":"Texas","abbr":"TX","countsFirst":"early","partyReg":false,"unit":"county","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Candidate 3","party":"O"}],"counties":[],"updated":null,"tier":"watch"},"governor":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}},"unitsExpected":254},"KS":{"name":"Kansas","abbr":"KS","countsFirst":"advance","partyReg":false,"unit":"county","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Candidate 3","party":"O"}],"counties":[],"updated":null,"tier":"watch"}},"unitsExpected":105}}};
+let DATA = JSON.parse(JSON.stringify(SKELETON)), EARLY = {}, OPEN = null;
+// How a registered voter of each party is assumed to vote. These are ASSUMPTIONS,
+// not data — calibrate them from prior cycles. Index order matches st.candidates.
+let BREAK = { R:[0.92,0.06,0.02], D:[0.06,0.92,0.02], NPA:[0.46,0.48,0.06], O:[0.40,0.40,0.20] };
+
+function earlyProjection(key, st){
+  const e = EARLY[key]; if(!e || !e.counties) return null;
+  const k = st.candidates.length, add = Array(k).fill(0); let outstanding = 0, n = 0;
+  for (const [cty, rec] of Object.entries(e.counties)){
+    const o = rec.outstanding; if(!o) continue;
+    n++; outstanding += o.total || 0;
+    for (const p of ["R","D","NPA","O"]){
+      const b = BREAK[p] || BREAK.O, v = o[p] || 0;
+      for (let i=0;i<k;i++) add[i] += v * (b[i] ?? 0);
+    }
+  }
+  return {add, outstanding, counties:n};
+}
+
+const n = v => (v==null||isNaN(v)) ? "—" : Math.round(v).toLocaleString();
+const pct = v => (v==null||isNaN(v)) ? "—" : (v*100).toFixed(1)+"%";
+const col = p => /^(R|REP)$/i.test(p) ? "var(--r)" : /^(D|DEM|PET)$/i.test(p) ? "var(--d)" : "var(--o)";
+
+function project(st){
+  const k = st.candidates.length;
+  const counted = Array(k).fill(0), proj = Array(k).fill(0);
+  let outstanding = 0, known = 0, unknownCty = 0;
+  for (const c of (st.counties||[])){
+    const v = c.votes||[]; const tot = v.reduce((a,b)=>a+(b||0),0);
+    for (let i=0;i<k;i++) counted[i] += v[i]||0;
+    const J = (c.outstanding==null) ? 0 : c.outstanding;
+    if (c.outstanding==null) unknownCty++; else { outstanding += J; known++; }
+    for (let i=0;i<k;i++) proj[i] += (v[i]||0) + (tot>0 ? (v[i]||0)/tot*J : 0);
+  }
+  const totC = counted.reduce((a,b)=>a+b,0);
+  return {counted, proj, totC, outstanding, known, unknownCty,
+          pctIn: (totC+outstanding)>0 ? totC/(totC+outstanding) : null,
+          counties:(st.counties||[]).length};
+}
+
+function margins(st, p){
+  const k = st.candidates.length;
+  const ord = p.counted.map((v,i)=>[v,i]).sort((a,b)=>b[0]-a[0]);
+  const [l1,i1] = ord[0], [l2,i2] = ord[1] || [0,1];
+  const lead = l1 - l2;
+  // net the outstanding brings to the current leader, county by county —
+  // this is the whole method: WHERE the remaining vote sits, not how much of it there is.
+  let net = 0;
+  for (const c of (st.counties||[])){
+    const J = c.outstanding; if(!J) continue;
+    const v = c.votes||[], t = v.reduce((a,b)=>a+(b||0),0); if(!t) continue;
+    net += J * ((v[i1]||0)/t - (v[i2]||0)/t);
+  }
+  const projLead = lead + net;
+  return {leader:i1, runner:i2, lead, net, projLead, flips: lead>0 && projLead<0};
+}
+
+function card(key, st, rk, tier){
+  const race = st.races[rk];
+  const view = {name: st.name, unitsExpected: st.unitsExpected, unitsNote: st.unitsNote,
+                unit: st.unit, countsFirst: st.countsFirst,
+                candidates: race.candidates, counties: race.counties || []};
+  return cardFor(key, view, st.abbr, tier);
+}
+
+function cardFor(key, st, abbr, tier){
+  const p = project(st), open = OPEN===key;
+  const mg = margins(st, p);
+  const el = document.createElement("div");
+  el.className = "st t-"+(tier||"watch") + (open?" open":"");
+  const tot = p.totC || 1;
+
+  const bars = st.candidates.map((c,i)=>
+    `<i style="width:${(p.counted[i]/tot*100).toFixed(2)}%;background:${col(c.party)}"></i>`).join("");
+
+  const winner = p.proj.indexOf(Math.max(...p.proj));
+  const anyOut = p.outstanding > 0;
+  const rows = st.candidates.map((c,i)=>{
+    const win = i===winner && p.totC>0;
+    return `<tr class="${win?"win":""}">
+      <td class="cname"><i class="sw" style="background:${col(c.party)}"></i>${c.name}</td>
+      <td class="num cnt">${n(p.counted[i])}</td>
+      <td class="num outs">${anyOut?"+"+n(p.proj[i]-p.counted[i]):"\u2014"}</td>
+      <td class="num prj" ${win?`style="color:${col(c.party)}"`:""}>${n(p.proj[i])}</td>
+    </tr>`;
+  }).join("");
+  const tally = p.totC>0 ? `<tfoot><tr>
+      <td class="cname">Total</td>
+      <td class="num">${n(p.totC)}</td>
+      <td class="num outs">${anyOut?"+"+n(p.outstanding):"\u2014"}</td>
+      <td class="num">${n(p.totC+p.outstanding)}</td></tr></tfoot>` : "";
+  const ledger = p.totC>0 ? `<table class="cand">
+      <thead><tr><th></th><th>Counted</th><th>Of outstanding</th><th>Projected</th></tr></thead>
+      <tbody>${rows}</tbody>${tally}</table>` :
+    `<table class="cand empty-cand"><tbody>${st.candidates.map(c=>
+      `<tr><td class="cname"><i class="sw" style="background:${col(c.party)}"></i>${c.name}</td>
+           <td class="num cnt">\u2014</td><td class="num"></td><td class="num prj">\u2014</td></tr>`).join("")}</tbody></table>`;
+
+  const skew = p.pctIn!=null && p.pctIn < 0.9 && st.countsFirst!=="mixed"
+    ? `<div class="warn"><b>&#9873;</b><span>Counted vote is mostly <b>${FIRST[st.countsFirst]}</b>. Outstanding ballots are a different mix, so this projection leans the wrong way until more is in.</span></div>` : "";
+
+  const noJ = p.unknownCty>0
+    ? `<div class="warn"><b>&#9873;</b><span>${p.unknownCty} of ${p.counties} ${st.unit==="town"?"towns":st.unit==="district"?"districts":"counties"} report no outstanding count — their projection is counted vote only.</span></div>` : "";
+
+  let detail = "";
+  if (open){
+    const unitName = st.unit==="town"?"Town":st.unit==="district"?"District":"County";
+    // Summary block — the sheet's A2:H6, fed by the sum row
+    const sum = "";
+    const ep = earlyProjection(abbr, st);
+    const epBlock = ep ? `<div class="earlybox">
+        <div class="ehd">Outstanding mail by party registration · ${n(ep.outstanding)} ballots across ${ep.counties} counties</div>
+        <div class="erow">${st.candidates.map((c,i)=>`<span><span class="sw" style="background:${col(c.party)}"></span>${c.name} <b class="fig">+${n(ep.add[i])}</b></span>`).join("")}</div>
+        <div class="ehint">Party-weighted, not the counted-vote ratio. Assumes R→${(BREAK.R[0]*100)|0}% / D→${(BREAK.D[1]*100)|0}% / unaffiliated ${(BREAK.NPA[0]*100)|0}–${(BREAK.NPA[1]*100)|0}. These break rates are assumptions — calibrate them.</div>
+      </div>` : "";
+    const pctOut = p.pctIn==null ? null : 1-p.pctIn;
+    const m = margins(st, p);
+    const nm = i => st.candidates[i] ? st.candidates[i].name : "—";
+    const marginRows = p.totC>0 ? `
+      <div class="srow out"><span class="slab">Leading now</span>
+        <span class="fig"><b style="color:${col(st.candidates[m.leader].party)}">${nm(m.leader)}</b> +${n(m.lead)}</span>
+        <span class="slab">Net from outstanding</span>
+        <span class="fig"><b style="color:${col(st.candidates[m.net>=0?m.leader:m.runner].party)}">${m.net>=0?nm(m.leader):nm(m.runner)}</b> +${n(Math.abs(m.net))}</span></div>
+      <div class="srow"><span class="slab">Projected margin</span>
+        <span class="fig big" style="color:${col(st.candidates[m.projLead>=0?m.leader:m.runner].party)}">${nm(m.projLead>=0?m.leader:m.runner)} +${n(Math.abs(m.projLead))}</span>
+        <span class="slab">${m.flips?"Outstanding overturns the lead":""}</span><span></span></div>` : "";
+    const flipNote = m.flips ? `<div class="flipnote"><b>${nm(m.runner)}</b> projects ahead by ${n(Math.abs(m.projLead))} — the outstanding vote is concentrated where ${nm(m.runner)} is winning, and it is enough to overturn a ${n(m.lead)} deficit.</div>` : "";
+    const head2 = `<div class="summary">
+      <div class="srow brk"><span class="slab">Total votes in</span><span class="fig">${n(p.totC)}</span>
+        <span class="slab">% votes in</span><span class="fig">${p.pctIn==null?"—":pct(p.pctIn)}</span></div>
+      <div class="srow evorder"><span class="slab">Early vote counted</span>
+        <span class="fig"><b class="${(EVORDER[st.countsFirst]||{}).when==="LAST"?"amber":""}">${(EVORDER[st.countsFirst]||{when:"?"}).when}</b></span>
+        <span class="slab" style="grid-column:span 2;text-align:left;text-transform:none;letter-spacing:0;font-family:var(--body);font-size:12px">${(EVORDER[st.countsFirst]||{note:""}).note}</span></div>
+      <div class="srow out"><span class="slab">Votes outstanding</span><span class="fig">${n(p.outstanding)}</span>
+        <span class="slab">% votes outstanding</span><span class="fig big">${pctOut==null?"—":pct(pctOut)}</span></div>${marginRows}</div>` + flipNote + epBlock;
+
+    if (!(st.counties||[]).length){
+      detail = head2 + `<div class="empty">No ${st.unit} rows yet. Use <b>Paste results</b>, or wait for this state's collector.</div>`;
+    } else {
+      const k = st.candidates.length;
+      const rowsSorted = [...st.counties].sort((a,b)=>(b.outstanding||0)-(a.outstanding||0));
+      const body = rowsSorted.map(c=>{
+        const v=c.votes||[], t=v.reduce((a,b)=>a+(b||0),0), J=c.outstanding;
+        const sh = v.map(x=> t>0 ? (x||0)/t : null);
+        const K  = J==null ? null : t + J;                       // projected total for the county
+        const pr = st.candidates.map((_,i)=> (v[i]||0) + (t>0&&J ? sh[i]*J : 0));
+        return `<tr><td>${c.name}</td>`
+          + v.map(x=>`<td class="fig">${n(x)}</td>`).join("")
+          + `<td class="fig">${n(t)}</td>`
+          + sh.map(x=>`<td class="fig pj">${x==null?"—":pct(x)}</td>`).join("")
+          + `<td class="fig">${t+(J||0)>0?pct(t/(t+(J||0))):"—"}</td>`
+          + `<td class="fig">${J==null?'<span class="miss">—</span>':n(J)}</td>`
+          + `<td class="fig">${K==null?"—":n(K)}</td>`
+          + pr.map(x=>`<td class="fig pj">${n(x)}</td>`).join("")
+          + `<td class="fig upd">${c.updated?new Date(c.updated).toLocaleTimeString([], {hour:"numeric",minute:"2-digit"}):"—"}</td></tr>`;
+      }).join("");
+
+      // row 30 — sum all, feeds the top
+      const tot = p.totC, J = p.outstanding;
+      const totRow = `<tr class="sumrow"><td>All ${st.unit==="town"?"towns":st.unit==="district"?"districts":"counties"}</td>`
+        + p.counted.map(x=>`<td class="fig">${n(x)}</td>`).join("")
+        + `<td class="fig">${n(tot)}</td>`
+        + p.counted.map(x=>`<td class="fig pj">${tot>0?pct(x/tot):"—"}</td>`).join("")
+        + `<td class="fig">${p.pctIn==null?"—":pct(p.pctIn)}</td>`
+        + `<td class="fig">${n(J)}</td><td class="fig">${n(tot+J)}</td>`
+        + p.proj.map(x=>`<td class="fig pj">${n(x)}</td>`).join("")
+        + `<td></td></tr>`;
+
+      const th = `<tr><th>${unitName}</th>`
+        + st.candidates.map(c=>`<th>${c.name}</th>`).join("")
+        + `<th>Total</th>`
+        + st.candidates.map(c=>`<th>% ${c.name.split(" ")[0]}</th>`).join("")
+        + `<th>% In</th><th>Mail out</th><th>Proj Total</th>`
+        + st.candidates.map(c=>`<th>Proj ${c.name.split(" ")[0]}</th>`).join("")
+        + `<th>Updated</th></tr>`;
+
+      detail = head2 + `<div class="scroll"><table><thead>${th}</thead><tbody>${body}${totRow}</tbody></table></div>`;
+    }
+  }
+
+  el.innerHTML = `
+    <div class="sthd"><span class="stname">${st.name}</span>
+      <span class="pin"><span class="evtag ${(EVORDER[st.countsFirst]||{}).when==="LAST"?"last":""}">EV ${(EVORDER[st.countsFirst]||{when:"?"}).when.toLowerCase()}</span> ${p.pctIn==null?"no data":"<b>"+pct(1-p.pctIn)+"</b> out"} ${open?"&#9662;":"&#9656;"}</span></div>
+    <div class="share">${bars}</div>
+    ${ledger}
+    ${p.totC>0 ? `<div class="faceproj">Projected <b style="color:${col(st.candidates[mg.projLead>=0?mg.leader:mg.runner].party)}">${st.candidates[mg.projLead>=0?mg.leader:mg.runner].name}</b> +${n(Math.abs(mg.projLead))}${mg.flips?' <span class="amber">&#9873; flips</span>':''}</div>` : ""}
+    <div class="facestats">
+      <div><span class="slab">Votes in</span><span class="fig fnum">${n(p.totC)}</span></div>
+      <div><span class="slab">Left to count</span><span class="fig fnum ${p.outstanding?"amber":""}">${p.outstanding?n(p.outstanding):"—"}</span></div>
+      <div><span class="slab">% left</span><span class="fig fnum ${p.pctIn!=null&&(1-p.pctIn)>0?"amber":""}">${p.pctIn==null?"—":pct(1-p.pctIn)}</span></div>
+    </div>
+    <div class="meter"><span>${p.counties||0}${st.unitsExpected?" of "+st.unitsExpected:""} ${st.unit==="town"?"towns":st.unit==="district"?"districts":"counties"} reporting${p.unknownCty?" · "+p.unknownCty+" without an outstanding count":""}</span>
+      <span>${EARLY[abbr]?n((EARLY[abbr].totals&&EARLY[abbr].totals.outstanding&&EARLY[abbr].totals.outstanding.total)||0)+" mail out":""}</span></div>
+    ${skew}${noJ}${detail}`;
+  el.querySelector(".sthd").onclick = ()=>{ DETAIL = key; OPEN = key; window.scrollTo(0,0); render(); };
+  el.querySelector(".sthd").style.cursor = "pointer";
+  return el;
+}
+
+function render(){
+  const b = document.getElementById("board"); b.innerHTML="";
+  if(!DATA) return;
+
+  if (TAB==="en" && DETAIL){
+    const [sk,rk] = DETAIL.split(":");
+    const st = DATA.states[sk];
+    if (st && st.races[rk]){
+      const back = document.createElement("button");
+      back.className = "backlink"; back.innerHTML = "&larr; All races";
+      back.onclick = ()=>{ DETAIL=null; OPEN=null; window.scrollTo(0,0); render(); };
+      b.appendChild(back);
+      const crumb = document.createElement("div");
+      crumb.className = "crumb";
+      crumb.textContent = (rk==="governor"?"Governor":"Senate") + " \u00b7 " + st.name;
+      b.appendChild(crumb);
+      OPEN = DETAIL;
+      b.appendChild(card(DETAIL, st, rk, st.races[rk].tier));
+      // quick jump to the other races
+      const jump = document.createElement("div"); jump.className="jumprow";
+      for (const [k2,s2] of Object.entries(DATA.states))
+        for (const r2 of ["senate","governor"]) if(s2.races && s2.races[r2]){
+          const key2=k2+":"+r2; if(key2===DETAIL) continue;
+          const a=document.createElement("button"); a.className="jump";
+          a.textContent=s2.abbr+" "+(r2==="governor"?"Gov":"Sen");
+          a.onclick=()=>{DETAIL=key2;OPEN=key2;window.scrollTo(0,0);render();};
+          jump.appendChild(a);
+        }
+      b.appendChild(jump);
+      document.getElementById("stamp").textContent = DATA.updated ? "updated "+new Date(DATA.updated).toLocaleString() : "no results yet";
+      return;
+    }
+    DETAIL=null;
+  }
+
+  OPEN=null;
+  const RANK={tossup:0,watch:1,safe:2};
+  const groups={senate:[],governor:[]};
+  for (const [k,st] of Object.entries(DATA.states)){
+    if(!st || !st.races) continue;
+    for (const rk of ["senate","governor"]) if(st.races[rk]) groups[rk].push([k,st,rk,st.races[rk].tier||"watch"]);
+  }
+  for (const rk of ["senate","governor"]){
+    const rows=groups[rk];
+    if(!rows.length) continue;
+    rows.sort((a,b2)=>(RANK[a[3]]??1)-(RANK[b2[3]]??1) || a[1].name.localeCompare(b2[1].name));
+    const h=document.createElement("div"); h.className="tierhd";
+    h.innerHTML = (rk==="governor"?"Governor":"Senate") + ' <span class="cnt">' + rows.length + ' races</span>';
+    b.appendChild(h);
+    for (const [k,st,r,tier] of rows) b.appendChild(card(k+":"+r, st, r, tier));
+  }
+  if(TAB==="ev") renderEV();
+  document.getElementById("stamp").textContent = DATA.updated ? "updated "+new Date(DATA.updated).toLocaleString() : "no results yet";
+  const sel = document.getElementById("entryState");
+  if(!sel.options.length) for (const [k,st] of Object.entries(DATA.states)) if(st){
+    for (const rk of ["senate","governor"]) if(st.races && st.races[rk]){
+      const o=document.createElement("option"); o.value=k+":"+rk;
+      o.textContent=st.name+" \u2014 "+(rk==="governor"?"Governor":"Senate"); sel.appendChild(o); } }
+  {
+    const sts=Object.values(DATA.states);
+    const last=sts.filter(s=>s.countsFirst==="election-day").map(s=>s.name);
+    const mixed=sts.filter(s=>s.countsFirst==="mixed").map(s=>s.name);
+    const first=sts.length-last.length-mixed.length;
+    const parts=[`${first} of these ${sts.length} states count early or mail ballots first`];
+    if(last.length) parts.push(`${last.join(" and ")} count${last.length===1?"s":""} Election Day first`);
+    if(mixed.length) parts.push(`${mixed.join(", ")} ${mixed.length===1?"has":"have"} no consistent order`);
+    document.getElementById("modeNote").textContent = parts.join("; ") +
+      ". A projection therefore drifts in opposite directions depending on the state.";
+  }
+}
+
+async function loadEarly(){
+  for (const k of Object.keys(DATA.states)){
+    try{
+      const r = await fetch("data/early-"+k+".json?t="+Date.now());
+      if(!r.ok) continue;
+      const j = await r.json();
+      const st = j.state_totals || null;
+      // Maine reports by municipality, not county; Texas publishes no party split at all.
+      // Carry both facts through so the card can say what the state actually provides
+      // instead of printing a zero or a label the source does not support.
+      EARLY[k] = {counties:j.counties||j.units||{}, totals:st, compiled:j.compiled||null,
+                  fetched:j.fetched||null, inPerson: !!j.in_person,
+                  unit: j.unit || "county",
+                  partyAvailable: j.party_available !== false,
+                  asOf: j.as_of || null, through: j.through || null};
+      try{
+        const h = await fetch("data/ev-history-"+k+".json?t="+Date.now());
+        if(h.ok){ const hj = await h.json(); EARLY[k].history = hj.years || null; }
+      }catch(e){}
+    }catch(e){ /* a missing early file is normal, not an error */ }
+  }
+}
+
+const PARTY_COL={D:"var(--d)",R:"var(--r)",NPA:"var(--o)",O:"var(--o)"};
+
+// A state with no party registration (Texas, Ohio, Michigan, Minnesota, South Carolina,
+// Georgia) cannot produce a D/R split from official data — any split you see on TV for
+// these is a vendor model. What the state does publish is turnout, and registered voters
+// make that a real denominator rather than a guess, so pace against 2022/2024 is the
+// signal here.
+function turnoutCard(k, st, e){
+  const t = e.totals||{}, reg = t.registered||0;
+  const pct = v => reg ? (v/reg*100).toFixed(1)+"%" : "—";
+  const line = (lab,v,sub) => `<div class="evrow"><span class="slab">${lab}</span>
+      <span class="fig evtot">${n(v||0)}</span>
+      <span class="evpcts" style="grid-column:span 2"><b class="dim">${sub}</b></span></div>`;
+  const cties = Object.entries(e.counties||{})
+    .filter(([nm])=>nm!=="STATEWIDE")
+    .map(([nm,v])=>({nm,...v}))
+    .sort((a,b)=>(b.total||0)-(a.total||0));
+  const tbl = cties.length ? `<div class="scroll"><table class="evtab">
+      <thead><tr><th>County</th><th>In person</th><th>By mail</th><th>Total early</th>
+        <th>Registered</th><th>% of reg</th></tr></thead>
+      <tbody>${cties.map(c=>`<tr><td>${c.nm}</td>
+        <td class="fig">${n(c.in_person||0)}</td><td class="fig">${n(c.by_mail||0)}</td>
+        <td class="fig b">${n(c.total||0)}</td><td class="fig dim">${n(c.registered||0)}</td>
+        <td class="fig">${c.registered?((c.total||0)/c.registered*100).toFixed(1)+"%":"—"}</td></tr>`).join("")}
+      </tbody></table></div>` : "";
+
+  let pace = "";
+  if(e.history){
+    const yrs = Object.keys(e.history).sort();
+    pace = `<div class="scroll"><table class="evtab pace">
+      <thead><tr><th>Early vote</th><th>In person</th><th>By mail</th><th>Total</th>
+        <th>% of registered</th><th>Pace vs now</th></tr></thead><tbody>${
+      yrs.map(y=>{const h=e.history[y].state_totals;
+        return `<tr><td>${y} final${(+y%4===0)?' <span class="cyc">presidential</span>':""}</td><td class="fig">${n(h.in_person)}</td>
+          <td class="fig">${n(h.by_mail)}</td><td class="fig b">${n(h.total)}</td>
+          <td class="fig">${h.registered?(h.total/h.registered*100).toFixed(1)+"%":"—"}</td>
+          <td class="fig">${h.total?((t.total||0)/h.total*100).toFixed(0)+"% of "+y:""}</td></tr>`;}).join("")
+      }<tr><td>2026 to date</td><td class="fig">${n(t.in_person||0)}</td>
+        <td class="fig">${n(t.by_mail||0)}</td><td class="fig b">${n(t.total||0)}</td>
+        <td class="fig">${pct(t.total||0)}</td><td class="fig"></td></tr></tbody></table></div>`;
+  }
+
+  const card=document.createElement("div");
+  card.className="evcard";
+  card.innerHTML=`<div class="sthd"><span class="stname">${st.name}</span>
+      <span class="pin">${cties.length} counties</span></div>
+    ${line("In-person early", t.in_person, pct(t.in_person||0)+" of registered")}
+    ${line("By mail", t.by_mail, pct(t.by_mail||0)+" of registered")}
+    ${line("Total early", t.total, pct(t.total||0)+" of "+n(reg)+" registered")}
+    <div class="streamline">No party registration in this state &mdash; the official file carries
+      turnout only. Any D/R split you see elsewhere for ${st.name} is a vendor model, not a count.</div>
+    <div class="meter"><span>${e.through?"through "+e.through:"—"}</span>
+      <span>turnout only</span></div>
+    ${pace}${cties.length?`<button class="evtoggle">${cties.length} counties &#9656;</button>`:""}
+    <div class="evdetail" hidden>${tbl}</div>`;
+  const tg=card.querySelector(".evtoggle");
+  if(tg) tg.onclick=()=>{const dv=card.querySelector(".evdetail");dv.hidden=!dv.hidden;
+    tg.innerHTML=cties.length+" counties "+(dv.hidden?"&#9656;":"&#9662;");};
+  return card;
+}
+
+function renderEV(){
+  const host=document.getElementById("evbody"); host.innerHTML="";
+  const have=Object.entries(DATA.states).filter(([k])=>EARLY[k]&&EARLY[k].totals);
+  if(!have.length){
+    host.innerHTML='<div class="empty">No early-vote data pulled yet. Run <code>collectors/fl_vbm.py</code>, '+
+      'or any other state collector, and refresh.</div>';
+    document.getElementById("evfoot").textContent="";
+    return;
+  }
+  for (const [k,st] of have){
+    const e=EARLY[k], out=e.totals.outstanding||{}, ret=e.totals.returned||{};
+    const hasOut = !!(out && out.total);
+    const UNIT = e.unit==="municipality" ? "municipalities" : "counties";
+
+    // --- states with no party registration (TX, and any other that reports turnout only) ---
+    // There is no D/R/NPA split to draw. Showing the party bar with everything in "O" would
+    // read as "all unaffiliated", which is false. These states get a turnout card instead,
+    // where the honest denominator is registered voters.
+    if(!e.partyAvailable){
+      host.appendChild(turnoutCard(k, st, e));
+      continue;
+    }
+    const ip = (e.totals && e.totals.early_in_person) || null;
+    const parties=["D","R","NPA","O"].filter(p=>((out&&out[p])||0)+(ret[p]||0)+((ip&&ip[p])||0)>0);
+    const bar=ps=>{const t=ps.total||1;return parties.map(p=>
+      `<i style="width:${((ps[p]||0)/t*100).toFixed(2)}%;background:${PARTY_COL[p]}"></i>`).join("");};
+    const row=(lab,ps)=>`<div class="evrow"><span class="slab">${lab}</span>
+      <span class="fig evtot">${n(ps.total||0)}</span>
+      <div class="share ev">${bar(ps)}</div>
+      <span class="evpcts">${parties.map(p=>`<b style="color:${PARTY_COL[p]}">${p} ${ps.total?((ps[p]||0)/ps.total*100).toFixed(0):0}%</b>`).join(" ")}</span></div>`;
+    const cties=Object.entries(e.counties||{})
+      .map(([nm,v])=>({nm, out:v.outstanding||{}, ret:v.returned||{}}))
+      .sort((a,b)=>(b.out.total||0)-(a.out.total||0));
+    const evTable = cties.length ? `<div class="scroll"><table class="evtab">
+        <thead><tr><th>${e.unit==="municipality"?"Municipality":"County"}</th><th>Mail returned</th><th>R</th><th>D</th><th>NPA</th>
+          <th>Mail out</th><th>R</th><th>D</th><th>NPA</th><th>D&minus;R out</th></tr></thead>
+        <tbody>${cties.map(c=>{
+          const net=(c.out.D||0)-(c.out.R||0);
+          return `<tr><td>${c.nm}</td>
+            <td class="fig">${n(c.ret.total||0)}</td>
+            <td class="fig dim">${n(c.ret.R||0)}</td><td class="fig dim">${n(c.ret.D||0)}</td><td class="fig dim">${n(c.ret.NPA||0)}</td>
+            <td class="fig b">${n(c.out.total||0)}</td>
+            <td class="fig dim">${n(c.out.R||0)}</td><td class="fig dim">${n(c.out.D||0)}</td><td class="fig dim">${n(c.out.NPA||0)}</td>
+            <td class="fig" style="color:${net>=0?"var(--d)":"var(--r)"}">${net>=0?"+":"\u2212"}${n(Math.abs(net))}</td></tr>`;
+        }).join("")}</tbody></table></div>` : "";
+
+    const hist = e.history || null;
+    const pcts = ps => ["R","D","NPA"].map(p=>({p, v: ps.total ? (ps[p]||0)/ps.total : 0}));
+    const nowMail = ret, nowTot = nowMail.total || 0;
+    let paceTable = "";
+    if (hist){
+      const yrs = Object.keys(hist).sort();
+      // 2020 and 2024 are presidential; 2022 and 2026 are midterms. Turnout between the
+      // two is not comparable — Florida's 2020 mail vote was 4.86M against 2.77M in 2022,
+      // and that gap is the cycle, not a trend. So the party-split diff is always measured
+      // against the most recent MIDTERM, and presidential years are marked as context.
+      const baseYr = yrs.filter(y=>+y%4===2).pop() || yrs[0];
+      const base = baseYr && hist[baseYr].state_totals.mail_returned;
+      const line = (lab, ps, pace, diffAgainst) => {
+        const mine = pcts(ps);
+        const other = diffAgainst ? pcts(diffAgainst) : null;
+        return `<tr><td>${lab}</td>
+          <td class="fig b">${n(ps.total||0)}</td>
+          ${mine.map((x,i)=>`<td class="fig">${(x.v*100).toFixed(0)}%</td>`).join("")}
+          <td class="fig">${pace||""}</td>
+          <td class="fig diffs">${other ? mine.map((x,i)=>{
+              const d=(x.v-other[i].v)*100;
+              return `<span style="color:${Math.abs(d)<0.5?"var(--dim)":(d>0?"var(--d)":"var(--r)")}">${x.p} ${d>=0?"+":"\u2212"}${Math.abs(d).toFixed(0)}</span>`;
+            }).join(" ") : ""}</td></tr>`;
+      };
+      const rowsH = yrs.map(y=>{
+        const ps = hist[y].state_totals.mail_returned;
+        const ip = hist[y].state_totals.early_in_person;
+        const pres = (+y % 4 === 0);
+        return line(y+" final"+(pres?' <span class="cyc">presidential</span>':""), ps, "", null) +
+          `<tr class="sub"><td>&nbsp;&nbsp;in-person early</td><td class="fig">${n(ip.total||0)}</td>
+            ${pcts(ip).map(x=>`<td class="fig">${(x.v*100).toFixed(0)}%</td>`).join("")}<td></td><td></td></tr>`;
+      }).join("");
+      const paceCells = yrs.map(y=>{
+        const f = hist[y].state_totals.mail_returned.total||1;
+        return `${(nowTot/f*100).toFixed(0)}% of ${y}`;
+      }).join(" \u00b7 ");
+      const dhdr = `&Delta; vs ${baseYr}<br><span class="cyc">last midterm</span>`;
+      paceTable = `<div class="scroll"><table class="evtab pace">
+        <thead><tr><th>Mail returned</th><th>Total</th><th>R</th><th>D</th><th>NPA</th><th>Pace</th><th>${dhdr}</th></tr></thead>
+        <tbody>${rowsH}${line("2026 to date", nowMail, paceCells, base)}</tbody></table></div>`;
+    }
+
+    const card=document.createElement("div");
+    card.className="evcard";
+    card.innerHTML=`<div class="sthd"><span class="stname">${st.name}</span>
+        <span class="pin">${Object.keys(e.counties||{}).length} ${UNIT}</span></div>
+      ${row("Mail returned", ret)}
+      ${ip ? row("In-person early", ip) : ""}
+      ${hasOut ? row("Mail outstanding", out)
+               : `<div class="evrow nodata"><span class="slab">Mail outstanding</span>
+                    <span class="fig evtot">&mdash;</span>
+                    <span class="nodatanote" style="grid-column:span 2">not published by this state &mdash; shown as unknown, never as zero</span></div>`}
+      <div class="streamline">${ip?"Mail + in-person early voting":"Vote-by-mail only \u00b7 in-person early voting not yet reporting"}${hasOut?"":" \u00b7 outstanding not available"}</div>
+      <div class="meter"><span>${e.asOf?"as of "+e.asOf:(e.compiled?"compiled "+Object.values(e.compiled)[0]:"\u2014")}</span>
+        <span>${st.partyReg?"state party registration":"modeled partisanship"}</span></div>
+      ${paceTable}${cties.length?`<button class="evtoggle">${cties.length} ${UNIT} &#9656;</button>`:""}
+      <div class="evdetail" hidden>${evTable}</div>`;
+    const tg=card.querySelector(".evtoggle");
+    if(tg) tg.onclick=()=>{const dv=card.querySelector(".evdetail");dv.hidden=!dv.hidden;
+      tg.innerHTML=cties.length+" "+UNIT+" "+(dv.hidden?"&#9656;":"&#9662;");};
+    host.appendChild(card);
+  }
+  const missing=Object.entries(DATA.states).filter(([k])=>!EARLY[k]).map(([k])=>k);
+  document.getElementById("evfoot").innerHTML =
+    "<b>Mail and in-person early voting are separate streams and are never pooled here.</b> They can break "+
+    "in opposite directions: Florida's mail is running D+7 this year, while Florida's in-person early vote "+
+    "finished R+21 in 2022. Pooling them would hide a 28-point gap, and a mail-only total compared against a "+
+    "prior year's combined mail-plus-in-person final will understate the pace. Where a state publishes only "+
+    "one stream, the card says so."+
+    "<br><br><b>Outstanding is never shown as zero.</b> Maine and Florida publish ballots issued but not yet "+
+    "returned, so their outstanding is a real count. North Carolina does not publish it at all, and that card "+
+    "shows a dash — unknown, not none left."+
+    "<br><br><b>Party registration does not exist everywhere.</b> Florida, North Carolina, Maine, Iowa, Nebraska, "+
+    "Kansas and Alaska register voters by party. Texas, Ohio, Michigan, Minnesota, South Carolina and Georgia do not, so "+
+    "those states can only show turnout — any D/R split published elsewhere for them is a vendor model."+
+    (missing.length ? "<br><br>No source wired yet for: "+missing.join(", ")+"." : "");
+}
+
+let TAB="ev";
+let DETAIL=null;   // "MI:senate" when a race page is open
+function setTab(t){
+  TAB=t;
+  document.getElementById("tabEV").classList.toggle("on", t==="ev");
+  document.getElementById("tabEN").classList.toggle("on", t==="en");
+  document.getElementById("board").hidden = t!=="en";
+  document.getElementById("evwrap").hidden = t!=="ev";
+  render();
+}
+
+async function load(){
+  const s = document.getElementById("status");
+  try{
+    const r = await fetch("data/results.json?t="+Date.now());
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const fresh = await r.json();
+    for (const [k,st] of Object.entries(fresh.states||{})){
+      if(!st || !DATA.states[k]) continue;
+      // a collector that returns no rows must never wipe rows already on the board
+      if(st.races) for (const [rk,r] of Object.entries(st.races)){
+        if(!DATA.states[k].races[rk]) DATA.states[k].races[rk] = r;
+        else {
+          if((r.counties||[]).length) DATA.states[k].races[rk].counties = r.counties;
+          if(r.candidates && r.candidates.length) DATA.states[k].races[rk].candidates = r.candidates;
+          if(r.tier) DATA.states[k].races[rk].tier = r.tier;
+        }
+      }
+      if(st.source) DATA.states[k].source = st.source;
+      if(st.candidates && st.candidates.length) DATA.states[k].candidates = st.candidates;
+      if(st.updated) DATA.states[k].updated = st.updated;
+    }
+    if(fresh.updated) DATA.updated = fresh.updated;
+    await loadEarly();
+    s.textContent = ""; render();
+  }catch(e){
+    await loadEarly();
+    s.textContent = "No results feed yet — early-vote data shown where available.";
+    render();
+  }
+}
+
+function parseRows(txt){
+  return txt.split("\n").map(l=>l.trim()).filter(Boolean).map(l=>{
+    const f = l.split(",").map(x=>x.trim());
+    const nums = f.slice(1).map(x=> x===""?null:Number(x.replace(/[^0-9.-]/g,"")));
+    return {name:f[0], votes:nums.slice(0,3).map(x=>x||0),
+            outstanding: nums.length>3 && nums[3]!=null && !isNaN(nums[3]) ? nums[3] : null,
+            updated:new Date().toISOString()};
+  }).filter(r=>r.name);
+}
+
+document.getElementById("tabEV").onclick=()=>setTab("ev");
+document.getElementById("tabEN").onclick=()=>setTab("en");
+document.getElementById("refresh").onclick = load;
+document.getElementById("toggleEntry").onclick = ()=>{const e=document.getElementById("entry");e.hidden=!e.hidden;};
+document.getElementById("toggleEarly").onclick = ()=>{const e=document.getElementById("early");e.hidden=!e.hidden;};
+document.getElementById("applyPaste").onclick = ()=>{
+  const k=document.getElementById("entryState").value, rows=parseRows(document.getElementById("paste").value);
+  const [sk,rk2]=k.split(":");
+  if(DATA&&DATA.states[sk]&&DATA.states[sk].races[rk2]&&rows.length){ DATA.states[sk].races[rk2].counties=rows; DATA.updated=new Date().toISOString();
+    document.getElementById("status").textContent=rows.length+" rows applied to "+DATA.states[sk].name+"."; OPEN=k; render(); }
+};
+document.getElementById("applyEarly").onclick = ()=>{
+  let c=0;
+  for (const l of document.getElementById("earlyPaste").value.split("\n")){
+    const f=l.split(",").map(x=>x.trim()); if(f.length<4) continue;
+    const k=f[0].toUpperCase(); if(!DATA||!DATA.states[k]) continue;
+    EARLY[k]={d:+f[1],r:+f[2],o:+f[3],ballots:f[4]?+f[4].replace(/[^0-9]/g,""):null}; c++;
+  }
+  document.getElementById("status").textContent = c+" state"+(c===1?"":"s")+" seeded with early vote by party.";
+  render();
+};
+setTab("ev");
+load();
+setInterval(load, 120000);
+</script>

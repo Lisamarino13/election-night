@@ -1,0 +1,485 @@
+{
+ "updated": null,
+ "note": "Written by the per-state collectors. Each state's cron replaces its own block.",
+ "states": {
+  "MI": {
+   "name": "Michigan",
+   "abbr": "MI",
+   "countsFirst": "mixed",
+   "partyReg": false,
+   "unit": "county",
+   "source": null,
+   "updated": null,
+   "races": {
+    "senate": {
+     "candidates": [
+      {
+       "name": "Mike Rogers",
+       "party": "R"
+      },
+      {
+       "name": "Candidate 2",
+       "party": "D"
+      },
+      {
+       "name": "Other",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "tossup"
+    }
+   },
+   "unitsExpected": 83
+  },
+  "MN": {
+   "name": "Minnesota",
+   "abbr": "MN",
+   "countsFirst": "mixed",
+   "partyReg": false,
+   "unit": "county",
+   "source": null,
+   "updated": null,
+   "races": {
+    "senate": {
+     "candidates": [
+      {
+       "name": "Michele Tafoya",
+       "party": "R"
+      },
+      {
+       "name": "Peggy Flanagan",
+       "party": "D"
+      },
+      {
+       "name": "Other",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "tossup"
+    }
+   },
+   "unitsExpected": 87
+  },
+  "ME": {
+   "name": "Maine",
+   "abbr": "ME",
+   "countsFirst": "mixed",
+   "partyReg": true,
+   "unit": "town",
+   "source": null,
+   "updated": null,
+   "races": {
+    "senate": {
+     "candidates": [
+      {
+       "name": "Candidate 1",
+       "party": "R"
+      },
+      {
+       "name": "Candidate 2",
+       "party": "D"
+      },
+      {
+       "name": "Candidate 3",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "tossup"
+    }
+   },
+   "unitsExpected": 16,
+   "unitsNote": "16 counties, ~500 municipalities reporting"
+  },
+  "NE": {
+   "name": "Nebraska",
+   "abbr": "NE",
+   "countsFirst": "early",
+   "partyReg": true,
+   "unit": "county",
+   "source": "electionresults.nebraska.gov",
+   "updated": null,
+   "races": {
+    "senate": {
+     "candidates": [
+      {
+       "name": "Pete Ricketts",
+       "party": "REP"
+      },
+      {
+       "name": "Dan Osborn",
+       "party": "PET"
+      },
+      {
+       "name": "Other",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "watch"
+    }
+   },
+   "unitsExpected": 93
+  },
+  "AK": {
+   "name": "Alaska",
+   "abbr": "AK",
+   "countsFirst": "election-day",
+   "partyReg": true,
+   "unit": "district",
+   "source": null,
+   "updated": null,
+   "races": {
+    "senate": {
+     "candidates": [
+      {
+       "name": "Candidate 1",
+       "party": "R"
+      },
+      {
+       "name": "Candidate 2",
+       "party": "D"
+      },
+      {
+       "name": "Candidate 3",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "watch"
+    }
+   },
+   "unitsExpected": 40
+  },
+  "SC": {
+   "name": "South Carolina",
+   "abbr": "SC",
+   "countsFirst": "election-day",
+   "partyReg": false,
+   "unit": "county",
+   "source": null,
+   "updated": null,
+   "races": {
+    "senate": {
+     "candidates": [
+      {
+       "name": "Darline Graham",
+       "party": "R"
+      },
+      {
+       "name": "Annie Andrews",
+       "party": "D"
+      },
+      {
+       "name": "Candidate 3",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "tossup"
+    }
+   },
+   "unitsExpected": 46
+  },
+  "NC": {
+   "name": "North Carolina",
+   "abbr": "NC",
+   "countsFirst": "early",
+   "partyReg": true,
+   "unit": "county",
+   "source": "er.ncsbe.gov",
+   "races": {
+    "senate": {
+     "candidates": [
+      {
+       "name": "Candidate 1",
+       "party": "R"
+      },
+      {
+       "name": "Roy Cooper",
+       "party": "D"
+      },
+      {
+       "name": "Other",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "safe"
+    }
+   },
+   "unitsExpected": 100
+  },
+  "OH": {
+   "name": "Ohio",
+   "abbr": "OH",
+   "countsFirst": "absentee",
+   "partyReg": false,
+   "unit": "county",
+   "source": null,
+   "updated": null,
+   "races": {
+    "senate": {
+     "candidates": [
+      {
+       "name": "Candidate 1",
+       "party": "R"
+      },
+      {
+       "name": "Candidate 2",
+       "party": "D"
+      },
+      {
+       "name": "Candidate 3",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "tossup"
+    },
+    "governor": {
+     "candidates": [
+      {
+       "name": "Candidate 1",
+       "party": "R"
+      },
+      {
+       "name": "Candidate 2",
+       "party": "D"
+      },
+      {
+       "name": "Other",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "tossup"
+    }
+   },
+   "unitsExpected": 88
+  },
+  "IA": {
+   "name": "Iowa",
+   "abbr": "IA",
+   "countsFirst": "absentee",
+   "partyReg": true,
+   "unit": "county",
+   "source": null,
+   "updated": null,
+   "races": {
+    "senate": {
+     "candidates": [
+      {
+       "name": "Candidate 1",
+       "party": "R"
+      },
+      {
+       "name": "Candidate 2",
+       "party": "D"
+      },
+      {
+       "name": "Candidate 3",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "watch"
+    }
+   },
+   "unitsExpected": 99
+  },
+  "FL": {
+   "name": "Florida",
+   "abbr": "FL",
+   "countsFirst": "early",
+   "partyReg": true,
+   "unit": "county",
+   "source": null,
+   "updated": null,
+   "races": {
+    "senate": {
+     "candidates": [
+      {
+       "name": "Candidate 1",
+       "party": "R"
+      },
+      {
+       "name": "Candidate 2",
+       "party": "D"
+      },
+      {
+       "name": "Candidate 3",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "safe"
+    },
+    "governor": {
+     "candidates": [
+      {
+       "name": "Candidate 1",
+       "party": "R"
+      },
+      {
+       "name": "Candidate 2",
+       "party": "D"
+      },
+      {
+       "name": "Other",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "tossup"
+    }
+   },
+   "unitsExpected": 67
+  },
+  "GA": {
+   "name": "Georgia",
+   "abbr": "GA",
+   "countsFirst": "early",
+   "partyReg": false,
+   "unit": "county",
+   "source": "clarity",
+   "updated": null,
+   "races": {
+    "governor": {
+     "candidates": [
+      {
+       "name": "Candidate 1",
+       "party": "R"
+      },
+      {
+       "name": "Candidate 2",
+       "party": "D"
+      },
+      {
+       "name": "Other",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "tossup"
+    },
+    "senate": {
+     "candidates": [
+      {
+       "name": "Candidate 1",
+       "party": "R"
+      },
+      {
+       "name": "Candidate 2",
+       "party": "D"
+      },
+      {
+       "name": "Other",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "safe"
+    }
+   },
+   "unitsExpected": 159
+  },
+  "TX": {
+   "name": "Texas",
+   "abbr": "TX",
+   "countsFirst": "early",
+   "partyReg": false,
+   "unit": "county",
+   "source": null,
+   "updated": null,
+   "races": {
+    "senate": {
+     "candidates": [
+      {
+       "name": "Candidate 1",
+       "party": "R"
+      },
+      {
+       "name": "Candidate 2",
+       "party": "D"
+      },
+      {
+       "name": "Candidate 3",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "watch"
+    },
+    "governor": {
+     "candidates": [
+      {
+       "name": "Candidate 1",
+       "party": "R"
+      },
+      {
+       "name": "Candidate 2",
+       "party": "D"
+      },
+      {
+       "name": "Other",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "tossup"
+    }
+   },
+   "unitsExpected": 254
+  },
+  "KS": {
+   "name": "Kansas",
+   "abbr": "KS",
+   "countsFirst": "advance",
+   "partyReg": true,
+   "unit": "county",
+   "source": null,
+   "updated": null,
+   "races": {
+    "senate": {
+     "candidates": [
+      {
+       "name": "Candidate 1",
+       "party": "R"
+      },
+      {
+       "name": "Candidate 2",
+       "party": "D"
+      },
+      {
+       "name": "Candidate 3",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "updated": null,
+     "tier": "watch"
+    }
+   },
+   "unitsExpected": 105
+  }
+ }
+}

@@ -1,0 +1,10 @@
+# Derived from data/snapshots/ by `python3 collectors/ingest.py --rebuild`.
+# Not committed: it is a build artifact, and a daily-churning binary bloats history.
+data/ev.db
+data/ev.db-wal
+data/ev.db-shm
+
+collectors/run.log
+__pycache__/
+*.pyc
+.DS_Store

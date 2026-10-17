@@ -115,6 +115,10 @@ def main():
             rec["in_person"] = data["in_person"][c]
         payload["counties"][c] = rec
     payload["in_person"] = "in_person" in data
+    # Florida publishes "Vote-by-Mail Provided (Not Yet Returned)", so outstanding is a
+    # reported count, not derived. Say so in the payload: NC sets this false because it
+    # genuinely does not publish one, and the two cases must stay distinguishable.
+    payload["outstanding_available"] = True
     payload["state_totals"] = {"outstanding": data["outstanding"]["State Totals"],
                                "returned": data["returned"]["State Totals"]}
     if "in_person" in data:

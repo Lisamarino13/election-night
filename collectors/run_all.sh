@@ -35,7 +35,10 @@ if ! mkdir "$LOCKDIR" 2>/dev/null; then
 fi
 echo $$ > "$LOCKDIR/pid"
 trap 'rm -rf "$LOCKDIR"' EXIT INT TERM
-PY=$(command -v python3) || { echo "no python3" >&2; exit 1; }
+# Prefer a project venv when one exists: the cron host may have no pip, so Iowa's PDF
+# dependency lives in ../.venv rather than in the system Python.
+if [ -x "../.venv/bin/python3" ]; then PY="$(cd .. && pwd)/.venv/bin/python3"
+else PY=$(command -v python3) || { echo "no python3" >&2; exit 1; }; fi
 
 say(){ printf '%s %s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$*" | tee -a "$LOG"; }
 

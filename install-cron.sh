@@ -36,26 +36,24 @@ print("stdlib:  sqlite3, zipfile, csv, urllib, json, http.cookiejar all present"
 PYCHK
 
 # Iowa parses a PDF and is the ONLY collector with a dependency. Everything else is pure
-# stdlib. If this install fails, Iowa reports "DEPS" and is skipped; the other states are
-# unaffected, so a missing wheel never costs you the whole pull.
+# stdlib. If pdfplumber is absent Iowa reports "DEPS" and is skipped; every other state
+# still pulls, so a missing wheel never costs you the whole run.
+#
+# This script does NOT install system packages. On a box that runs other production jobs,
+# an apt transaction is the owner's decision, not an installer's side effect — so if the
+# dependency is missing it prints the command and leaves Iowa disabled until you run it.
 if python3 -c "import pdfplumber" 2>/dev/null; then
-  echo "pdfplumber: already present (Iowa enabled)"
-else
-  echo "pdfplumber: installing (needed by Iowa only)"
+  echo "pdfplumber: present (Iowa enabled)"
+elif python3 -m pip --version >/dev/null 2>&1; then
   python3 -m pip install --user --quiet pdfplumber 2>/dev/null \
     || python3 -m pip install --user --quiet --break-system-packages pdfplumber 2>/dev/null \
-    || echo "   could not install — Iowa will report DEPS and be skipped; others unaffected"
-fi
-
-# --- deploy key -----------------------------------------------------------------------
-if [ ! -f "$KEY" ]; then
-  ssh-keygen -t ed25519 -f "$KEY" -N "" -C "election-night-cron@$(hostname)" >/dev/null
-  echo "generated deploy key $KEY"
-fi
-if ! grep -q "election_night_deploy" "$HOME/.ssh/config" 2>/dev/null; then
-  mkdir -p "$HOME/.ssh"; chmod 700 "$HOME/.ssh"
-  printf 'Host github.com\n  IdentityFile %s\n  IdentitiesOnly yes\n' "$KEY" >> "$HOME/.ssh/config"
-  echo "added github.com entry to ~/.ssh/config"
+    || true
+  python3 -c "import pdfplumber" 2>/dev/null \
+    && echo "pdfplumber: installed (Iowa enabled)" \
+    || echo "pdfplumber: install failed — Iowa stays disabled (DEPS); others unaffected"
+else
+  NEED_PDF=1
+  echo "pdfplumber: MISSING and this box has no pip — Iowa stays disabled (DEPS)"
 fi
 
 # point the remote at SSH so the deploy key is what pushes
@@ -88,6 +86,20 @@ fi
 echo "other crontab lines preserved: $AFTER"
 echo "installed cron:"
 crontab -l | grep election-night | sed 's/^/   /'
+
+if [ "${NEED_PDF:-0}" = "1" ]; then
+cat <<PDFMSG
+
+IOWA IS DISABLED until this box can parse PDFs. Every other state pulls without it.
+To enable Iowa, run (a system change, so it is yours to make):
+
+    sudo apt-get update && sudo apt-get install -y python3-venv \
+      && python3 -m venv $REPO_DIR/.venv \
+      && $REPO_DIR/.venv/bin/pip install -q pdfplumber
+
+run_all.sh picks up $REPO_DIR/.venv automatically once it exists.
+PDFMSG
+fi
 
 cat <<MSG
 

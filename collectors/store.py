@@ -126,11 +126,25 @@ def _as_of(payload):
     if not raw:
         return (payload.get("fetched") or datetime.now(timezone.utc).isoformat())[:10]
     s = str(raw).strip()
-    for fmt in ("%m-%d-%y", "%m/%d/%Y", "%m/%d/%y", "%B %d,%Y", "%B %d, %Y", "%Y-%m-%d"):
-        try:
-            return datetime.strptime(s.split("  ")[0].strip(), fmt).date().isoformat()
-        except ValueError:
-            pass
+    # Pull the DATE out by pattern instead of splitting on whitespace. Florida's compile
+    # stamp is "10/16/2026  8:04AM" one day and "10/15/2026 11:01AM" the next — a one- vs
+    # two-space difference that made a naive split fall through to the raw string. That
+    # string then reached a filename, where its slashes became directory separators and
+    # took down the whole ingest.
+    import re as _re
+    for pat, fmt in ((r"\d{4}-\d{2}-\d{2}", "%Y-%m-%d"),
+                     (r"\d{1,2}/\d{1,2}/\d{4}", "%m/%d/%Y"),
+                     (r"\d{1,2}-\d{1,2}-\d{4}", "%m-%d-%Y"),
+                     (r"\d{1,2}/\d{1,2}/\d{2}(?!\d)", "%m/%d/%y"),
+                     (r"\d{1,2}-\d{1,2}-\d{2}(?!\d)", "%m-%d-%y"),
+                     (r"[A-Z][a-z]+ \d{1,2},\s*\d{4}", "%B %d, %Y")):
+        m = _re.search(pat, s)
+        if m:
+            try:
+                txt = _re.sub(r",\s*", ", ", m.group(0))
+                return datetime.strptime(txt, fmt).date().isoformat()
+            except ValueError:
+                continue
     return s                                    # keep it verbatim rather than guess wrong
 
 

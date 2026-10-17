@@ -12,7 +12,7 @@ few hundred KB of text, and anyone can reconstruct the exact database from the s
 Naming is keyed on the STATE's as-of date, not the clock, so a second pull on the same day
 overwrites that day's snapshot instead of creating a duplicate.
 """
-import json, pathlib, sys
+import json, pathlib, re, sys
 import store
 
 SNAPS = pathlib.Path(__file__).resolve().parent.parent / "data" / "snapshots"
@@ -23,8 +23,15 @@ def save(payload):
     if "state" not in payload:
         raise RuntimeError("payload has no state field")
     as_of = store._as_of(payload)
+    # Defence in depth: an as-of that could not be parsed is still allowed through as a
+    # label, but it must never be able to steer the write. Anything that is not a safe
+    # filename character becomes a dash, so a date like "10/15/2026 11:01AM" can no longer
+    # turn into nested directories.
+    safe = re.sub(r"[^A-Za-z0-9._-]", "-", as_of)[:40]
+    if safe != as_of:
+        print(f"  note: unparsed as-of {as_of!r} -> filename {safe!r}", file=sys.stderr)
     SNAPS.mkdir(parents=True, exist_ok=True)
-    p = SNAPS / f"early-{payload['state']}-{as_of}.json"
+    p = SNAPS / f"early-{payload['state']}-{safe}.json"
     new = not p.exists()
     body = json.dumps(payload, indent=1, sort_keys=True)
     if not new and p.read_text() == body:

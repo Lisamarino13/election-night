@@ -53,8 +53,8 @@ if git -C "$REPO_DIR" remote get-url origin 2>/dev/null | grep -q '^https://'; t
 fi
 
 # --- cron -----------------------------------------------------------------------------
-DAILY="15 13 * * * $FLOCK $REPO_DIR/collectors/run_all.sh >> $LOG 2>&1 && $REPO_DIR/collectors/publish.sh >> $LOG 2>&1"
-NIGHT="#7,37 * * * * $FLOCK $REPO_DIR/collectors/run_all.sh >> $LOG 2>&1 && $REPO_DIR/collectors/publish.sh >> $LOG 2>&1   # election night: uncomment Nov 3"
+DAILY="15 13 * * * $FLOCK $REPO_DIR/collectors/run_all.sh >> $LOG 2>&1; $REPO_DIR/collectors/publish.sh >> $LOG 2>&1"
+NIGHT="#7,37 * * * * $FLOCK $REPO_DIR/collectors/run_all.sh >> $LOG 2>&1; $REPO_DIR/collectors/publish.sh >> $LOG 2>&1   # election night: uncomment Nov 3"
 # BACK UP FIRST. This box may run other people's jobs — on Lisa's cron VM it runs the
 # Dopple prune / PG-stop / session-sweep lines. Rewriting a crontab without a backup is
 # how you lose them.

@@ -18,6 +18,22 @@
 
 cd "$(dirname "$0")" || exit 1
 LOG="run.log"
+
+# Self-locking, so cron does not need flock. macOS has no flock at all, and depending on a
+# binary that is not everywhere turned the install into a hard failure on a Mac. mkdir is
+# atomic on every POSIX filesystem, so it is the portable primitive.
+LOCKDIR="${TMPDIR:-/tmp}/election-night-run.lock"
+if ! mkdir "$LOCKDIR" 2>/dev/null; then
+  if [ -f "$LOCKDIR/pid" ] && ! kill -0 "$(cat "$LOCKDIR/pid" 2>/dev/null)" 2>/dev/null; then
+    rm -rf "$LOCKDIR"                       # stale lock from a killed run
+    mkdir "$LOCKDIR" 2>/dev/null || { echo "another run holds the lock"; exit 0; }
+  else
+    echo "another run is in progress — skipping this tick"
+    exit 0
+  fi
+fi
+echo $$ > "$LOCKDIR/pid"
+trap 'rm -rf "$LOCKDIR"' EXIT INT TERM
 PY=$(command -v python3) || { echo "no python3" >&2; exit 1; }
 
 say(){ printf '%s %s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$*" | tee -a "$LOG"; }

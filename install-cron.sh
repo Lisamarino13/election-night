@@ -18,15 +18,17 @@
 set -u
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 KEY="$HOME/.ssh/election_night_deploy"
-LOCK="/tmp/election-night-cron.lock"        # distinct from any lock the job itself takes:
-                                            # an outer flock sharing the job's own lock path
-                                            # makes the job block on itself and never tick.
+LOCK="/tmp/election-night-cron.lock"        # DISTINCT from the job's own lock dir: an outer
+                                            # flock sharing the job's lock path makes the job
+                                            # block on itself and never tick.
 LOG="$HOME/election-night-cron.log"
 
 echo "repo:    $REPO_DIR"
 command -v python3 >/dev/null || { echo "ERROR: python3 not found" >&2; exit 1; }
 command -v git     >/dev/null || { echo "ERROR: git not found" >&2; exit 1; }
-command -v flock   >/dev/null || { echo "ERROR: flock not found (util-linux)" >&2; exit 1; }
+# flock is NOT required: run_all.sh locks itself with mkdir, which works everywhere
+# including macOS. If flock happens to exist, cron gets a belt-and-braces outer guard too.
+if command -v flock >/dev/null; then FLOCK="$(command -v flock) -n $LOCK"; else FLOCK=""; fi
 echo "python:  $(python3 -V)"
 python3 - <<'PY' || { echo "ERROR: stdlib check failed" >&2; exit 1; }
 import sqlite3, zipfile, csv, urllib.request, json, http.cookiejar
@@ -51,9 +53,27 @@ if git -C "$REPO_DIR" remote get-url origin 2>/dev/null | grep -q '^https://'; t
 fi
 
 # --- cron -----------------------------------------------------------------------------
-DAILY="15 13 * * * /usr/bin/flock -n $LOCK $REPO_DIR/collectors/run_all.sh >> $LOG 2>&1 && $REPO_DIR/collectors/publish.sh >> $LOG 2>&1"
-NIGHT="#7,37 * * * * /usr/bin/flock -n $LOCK $REPO_DIR/collectors/run_all.sh >> $LOG 2>&1 && $REPO_DIR/collectors/publish.sh >> $LOG 2>&1   # election night: uncomment Nov 3"
-( crontab -l 2>/dev/null | grep -v 'election-night'; echo "$DAILY"; echo "$NIGHT" ) | crontab -
+DAILY="15 13 * * * $FLOCK $REPO_DIR/collectors/run_all.sh >> $LOG 2>&1 && $REPO_DIR/collectors/publish.sh >> $LOG 2>&1"
+NIGHT="#7,37 * * * * $FLOCK $REPO_DIR/collectors/run_all.sh >> $LOG 2>&1 && $REPO_DIR/collectors/publish.sh >> $LOG 2>&1   # election night: uncomment Nov 3"
+# BACK UP FIRST. This box may run other people's jobs — on Lisa's cron VM it runs the
+# Dopple prune / PG-stop / session-sweep lines. Rewriting a crontab without a backup is
+# how you lose them.
+BAK="$HOME/crontab.bak-election-night-$(date -u +%Y%m%dT%H%M%SZ)"
+if crontab -l > "$BAK" 2>/dev/null; then
+  echo "backed up existing crontab -> $BAK ($(wc -l < "$BAK" | tr -d ' ') lines)"
+else
+  echo "no existing crontab to back up"; : > "$BAK"
+fi
+( cat "$BAK" | grep -v 'election-night'; echo "$DAILY"; echo "$NIGHT" ) | crontab -
+
+# Verify nothing else was dropped.
+BEFORE=$(grep -vc 'election-night' "$BAK" 2>/dev/null || echo 0)
+AFTER=$(crontab -l 2>/dev/null | grep -vc 'election-night' || echo 0)
+if [ "$BEFORE" -ne "$AFTER" ]; then
+  echo "ERROR: other crontab lines changed ($BEFORE -> $AFTER). Restoring." >&2
+  crontab "$BAK"; exit 1
+fi
+echo "other crontab lines preserved: $AFTER"
 echo "installed cron:"
 crontab -l | grep election-night | sed 's/^/   /'
 

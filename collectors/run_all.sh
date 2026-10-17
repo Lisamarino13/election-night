@@ -12,7 +12,8 @@
 # showing yesterday's number with yesterday's timestamp rather than a blank or a zero.
 #
 # Exit 2 is "the state has not published this yet" (Texas before the SOS opens the 2026
-# election). That is expected, not a failure, and is logged quietly.
+# election). Exit 3 is "a dependency is missing" (Iowa needs pdfplumber; every other
+# collector is pure stdlib). Both are expected states, not failures, and are logged quietly.
 #
 # Everything is appended to collectors/run.log.
 
@@ -41,13 +42,14 @@ say(){ printf '%s %s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$*" | tee -a "$LOG";
 say "=== early-vote pull starting ==="
 ok=0; pending=0; failed=0; failed_names=""
 
-for c in fl_vbm.py nc_absentee.py me_absentee.py tx_earlyvote.py; do
+for c in fl_vbm.py nc_absentee.py me_absentee.py ia_absentee.py tx_earlyvote.py; do
   [ -f "$c" ] || { say "SKIP $c (not present)"; continue; }
   out=$("$PY" "$c" 2>&1); rc=$?
   printf '%s\n' "$out" >> "$LOG"
   case $rc in
     0) ok=$((ok+1));      say "OK      $c";;
     2) pending=$((pending+1)); say "PENDING $c -- $(printf '%s' "$out" | tail -1)";;
+    3) pending=$((pending+1)); say "DEPS    $c -- $(printf '%s' "$out" | tail -1)";;
     *) failed=$((failed+1)); failed_names="$failed_names $c"
        say "FAILED  $c -- $(printf '%s' "$out" | tail -1) (previous data left in place)";;
   esac

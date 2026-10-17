@@ -30,10 +30,22 @@ command -v git     >/dev/null || { echo "ERROR: git not found" >&2; exit 1; }
 # including macOS. If flock happens to exist, cron gets a belt-and-braces outer guard too.
 if command -v flock >/dev/null; then FLOCK="$(command -v flock) -n $LOCK"; else FLOCK=""; fi
 echo "python:  $(python3 -V)"
-python3 - <<'PY' || { echo "ERROR: stdlib check failed" >&2; exit 1; }
+python3 - <<'PYCHK' || { echo "ERROR: stdlib check failed" >&2; exit 1; }
 import sqlite3, zipfile, csv, urllib.request, json, http.cookiejar
 print("stdlib:  sqlite3, zipfile, csv, urllib, json, http.cookiejar all present")
-PY
+PYCHK
+
+# Iowa parses a PDF and is the ONLY collector with a dependency. Everything else is pure
+# stdlib. If this install fails, Iowa reports "DEPS" and is skipped; the other states are
+# unaffected, so a missing wheel never costs you the whole pull.
+if python3 -c "import pdfplumber" 2>/dev/null; then
+  echo "pdfplumber: already present (Iowa enabled)"
+else
+  echo "pdfplumber: installing (needed by Iowa only)"
+  python3 -m pip install --user --quiet pdfplumber 2>/dev/null \
+    || python3 -m pip install --user --quiet --break-system-packages pdfplumber 2>/dev/null \
+    || echo "   could not install — Iowa will report DEPS and be skipped; others unaffected"
+fi
 
 # --- deploy key -----------------------------------------------------------------------
 if [ ! -f "$KEY" ]; then

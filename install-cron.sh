@@ -1,8 +1,12 @@
 #!/bin/bash
 # Install the early-vote cron on a server (Azure VM, or anything with python3 + git).
 #
-#   git clone git@github.com:Lisamarino13/election-night.git ~/election-night
+#   git clone https://github.com/Lisamarino13/election-night.git ~/election-night
 #   ~/election-night/install-cron.sh
+#
+# Clone over HTTPS: the repo is public so reading needs no credential, and the deploy key
+# that pushes does not exist until this script creates it. The remote is switched to SSH
+# below, once there is a key for it to use.
 #
 # The daily collectors use ONLY the Python standard library — no pip, no venv. (pdfplumber
 # is needed solely by fl_history.py, a one-shot historical pull whose output is already
@@ -21,6 +25,8 @@ LOG="$HOME/election-night-cron.log"
 
 echo "repo:    $REPO_DIR"
 command -v python3 >/dev/null || { echo "ERROR: python3 not found" >&2; exit 1; }
+command -v git     >/dev/null || { echo "ERROR: git not found" >&2; exit 1; }
+command -v flock   >/dev/null || { echo "ERROR: flock not found (util-linux)" >&2; exit 1; }
 echo "python:  $(python3 -V)"
 python3 - <<'PY' || { echo "ERROR: stdlib check failed" >&2; exit 1; }
 import sqlite3, zipfile, csv, urllib.request, json, http.cookiejar
@@ -38,8 +44,14 @@ if ! grep -q "election_night_deploy" "$HOME/.ssh/config" 2>/dev/null; then
   echo "added github.com entry to ~/.ssh/config"
 fi
 
+# point the remote at SSH so the deploy key is what pushes
+if git -C "$REPO_DIR" remote get-url origin 2>/dev/null | grep -q '^https://'; then
+  git -C "$REPO_DIR" remote set-url origin git@github.com:Lisamarino13/election-night.git
+  echo "remote switched to SSH (deploy key will authenticate the push)"
+fi
+
 # --- cron -----------------------------------------------------------------------------
-DAILY="15 9 * * * /usr/bin/flock -n $LOCK $REPO_DIR/collectors/run_all.sh >> $LOG 2>&1 && $REPO_DIR/collectors/publish.sh >> $LOG 2>&1"
+DAILY="15 13 * * * /usr/bin/flock -n $LOCK $REPO_DIR/collectors/run_all.sh >> $LOG 2>&1 && $REPO_DIR/collectors/publish.sh >> $LOG 2>&1"
 NIGHT="#7,37 * * * * /usr/bin/flock -n $LOCK $REPO_DIR/collectors/run_all.sh >> $LOG 2>&1 && $REPO_DIR/collectors/publish.sh >> $LOG 2>&1   # election night: uncomment Nov 3"
 ( crontab -l 2>/dev/null | grep -v 'election-night'; echo "$DAILY"; echo "$NIGHT" ) | crontab -
 echo "installed cron:"
@@ -62,6 +74,6 @@ $(cat "$KEY.pub")
        $REPO_DIR/collectors/run_all.sh && $REPO_DIR/collectors/publish.sh
        tail -5 $LOG
 
-     Then after 09:15 UTC tomorrow, check the log shows an unattended run. A cron that was
+     Then after 13:15 UTC tomorrow (07:15 MST), check the log shows an unattended run. A cron that was
      never observed firing is not installed, it is just written down.
 MSG

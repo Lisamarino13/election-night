@@ -2,7 +2,7 @@
 # Daily early-vote pull. One entry point for cron.
 #
 #   crontab -e
-#   15 9 * * *  $HOME/election-night/collectors/run_all.sh >> $HOME/election-night-cron.log 2>&1
+#   15 13 * * *  $HOME/election-night/collectors/run_all.sh   # 13:15 UTC: after FL compiles ~8am ET >> $HOME/election-night-cron.log 2>&1
 #
 # Runs anywhere with python3 and git: the durable record is data/snapshots/*.json and the
 # SQLite store is rebuilt from it, so no state is tied to the machine that happens to run it.

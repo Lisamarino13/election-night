@@ -24,6 +24,10 @@ git -c user.name="early-vote cron" -c user.email="cron@localhost" \
     commit -q -m "data: early-vote pull $(date -u '+%Y-%m-%d %H:%MZ') ($n files)" || exit 1
 
 # Rebase on top of anything pushed from elsewhere rather than failing or force-pushing.
-git pull --rebase --quiet origin main || { echo "publish: rebase failed" >&2; exit 1; }
+# --autostash so an unrelated edit in the working tree cannot block the data push: the
+# cron host and the laptop both run this, and on the laptop there is often work in flight.
+git pull --rebase --autostash --quiet origin main || {
+  echo "publish: rebase failed — data is committed locally, push it once resolved" >&2
+  exit 1; }
 git push --quiet origin main || { echo "publish: push failed" >&2; exit 1; }
 echo "publish: pushed $n file(s)"

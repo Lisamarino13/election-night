@@ -1,7 +1,12 @@
 #!/bin/bash
-# Pull Maine and publish it, from a machine that can actually reach maine.gov.
+# The laptop half of the daily pull: Maine, plus any files you downloaded by hand.
 #
-#   ~/election-night/maine.sh
+#   ~/election-night/laptop.sh
+#
+# Everything else (FL, NC, IA, TX) runs unattended on the cron VM. Two things cannot:
+#   Maine  — maine.gov returns 403 to the VM's datacenter IP, but answers a laptop fine.
+#   GA/MN/OH — behind a CAPTCHA or bot-management, so they are downloaded by hand into
+#              data/manual/ and parsed from there. See that folder's README for names.
 #
 # WHY THIS IS SEPARATE: maine.gov returns 403 to the Azure cron VM's IP no matter what
 # headers are sent, while it answers a laptop normally. It is IP-level blocking of
@@ -23,6 +28,9 @@ if ! python3 collectors/me_absentee.py; then
   echo "Maine pull failed — nothing written, nothing published." >&2
   exit 1
 fi
+
+echo "importing hand-downloaded files..."
+python3 collectors/manual_import.py
 
 echo "ingesting..."
 python3 collectors/ingest.py >/dev/null || { echo "ingest failed" >&2; exit 1; }

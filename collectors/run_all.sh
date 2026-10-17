@@ -58,6 +58,13 @@ for c in fl_vbm.py nc_absentee.py me_absentee.py ia_absentee.py tx_earlyvote.py;
   esac
 done
 
+# Pick up any hand-downloaded files (GA / MN / OH) before ingest. States behind
+# bot-management cannot be fetched here; whatever is in data/manual/ gets parsed.
+man=$("$PY" manual_import.py 2>&1); mrc=$?
+printf '%s\n' "$man" >> "$LOG"
+[ $mrc -eq 0 ] && say "MANUAL  $(printf '%s' "$man" | grep -cE '^[A-Z]{2} ok:') state(s) imported from data/manual" \
+               || say "MANUAL  import problem -- $(printf '%s' "$man" | tail -1)"
+
 # Ingest into SQLite and re-export the trend view. This runs even when a collector failed:
 # the files that DID refresh still belong in the store, and ingest is keyed on each state's
 # own as-of date, so re-reading an unchanged file is a no-op rather than a double count.

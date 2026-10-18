@@ -36,6 +36,20 @@
     }
    ]
   },
+  "GA": {
+   "days": [
+    {
+     "as_of": "2026-10-17",
+     "registered": 0,
+     "in_person_returned": {
+      "ALL": 801064
+     },
+     "mail_returned": {
+      "ALL": 36246
+     }
+    }
+   ]
+  },
   "IA": {
    "days": [
     {
@@ -58,6 +72,32 @@
       "NPA": 148,
       "O": 0,
       "R": 78
+     }
+    }
+   ]
+  },
+  "KS": {
+   "days": [
+    {
+     "as_of": "2026-10-16",
+     "registered": null,
+     "in_person_returned": {
+      "D": 2872,
+      "NPA": 873,
+      "O": 0,
+      "R": 2462
+     },
+     "mail_outstanding": {
+      "D": 43102,
+      "NPA": 14247,
+      "O": 0,
+      "R": 32267
+     },
+     "mail_returned": {
+      "D": 578,
+      "NPA": 197,
+      "O": 0,
+      "R": 167
      }
     }
    ]
@@ -100,6 +140,20 @@
     }
    ]
   },
+  "MI": {
+   "days": [
+    {
+     "as_of": "2026-10-16",
+     "registered": 0,
+     "in_person_returned": {
+      "ALL": 0
+     },
+     "mail_returned": {
+      "ALL": 630001
+     }
+    }
+   ]
+  },
   "MN": {
    "days": [
     {
@@ -136,6 +190,68 @@
       "NPA": 14939,
       "O": 107,
       "R": 6736
+     }
+    },
+    {
+     "as_of": "2026-10-18",
+     "registered": null,
+     "in_person_returned": {
+      "D": 181696,
+      "NPA": 132783,
+      "O": 762,
+      "R": 83340
+     },
+     "mail_outstanding": {
+      "D": null,
+      "NPA": null,
+      "O": null,
+      "R": null
+     },
+     "mail_returned": {
+      "D": 16854,
+      "NPA": 14939,
+      "O": 107,
+      "R": 6736
+     }
+    }
+   ]
+  },
+  "NE": {
+   "days": [
+    {
+     "as_of": "2026-10-16",
+     "registered": null,
+     "in_person_returned": {
+      "D": 3311,
+      "NPA": 1709,
+      "O": 0,
+      "R": 4258
+     },
+     "mail_outstanding": {
+      "D": 49364,
+      "NPA": 26758,
+      "O": 0,
+      "R": 75938
+     },
+     "mail_returned": {
+      "D": 31309,
+      "NPA": 11382,
+      "O": 0,
+      "R": 25322
+     }
+    }
+   ]
+  },
+  "OH": {
+   "days": [
+    {
+     "as_of": "2026-10-16",
+     "registered": 0,
+     "in_person_returned": {
+      "ALL": 312309
+     },
+     "mail_returned": {
+      "ALL": 139760
      }
     }
    ]

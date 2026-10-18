@@ -58,7 +58,14 @@ for c in fl_vbm.py nc_absentee.py me_absentee.py ia_absentee.py tx_earlyvote.py;
   esac
 done
 
-# Pick up any hand-downloaded files (GA / MN / OH) before ingest. States behind
+# States with no usable direct feed come from the UF Election Lab's CSVs (NE, KS, GA, MI,
+# OH, MN). Run BEFORE manual_import so that a hand-downloaded file from the state itself
+# still wins: a primary source beats an aggregate whenever we have one.
+uf=$("$PY" uf_earlyvote.py 2>&1); urc=$?
+printf '%s\n' "$uf" >> "$LOG"
+say "UFLAB   $(printf '%s' "$uf" | tail -1)"
+
+# Pick up any hand-downloaded files before ingest. States behind
 # bot-management cannot be fetched here; whatever is in data/manual/ gets parsed.
 man=$("$PY" manual_import.py 2>&1); mrc=$?
 printf '%s\n' "$man" >> "$LOG"

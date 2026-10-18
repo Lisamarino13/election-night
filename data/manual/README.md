@@ -1,21 +1,22 @@
 # Manual drop folder
 
-Three states publish the data we want but put it behind bot-management or a CAPTCHA:
+Mostly unnecessary now. The UF Election Lab publishes plain CSVs for the states that do not
+serve a usable file of their own, so Georgia, Ohio, Minnesota, Michigan, Nebraska and
+Kansas are all collected automatically by `collectors/uf_earlyvote.py`.
 
-| State | Why it cannot be automated |
-|---|---|
-| Georgia | reCAPTCHA Enterprise on the file download |
-| Minnesota | Radware bot-manager on the absentee data page |
-| Ohio | Cloudflare plus a dashboard app, no file endpoint |
+This folder still exists for one reason: **a primary source beats an aggregate.** If you
+download a file from the state itself, drop it here and it overrides the Election Lab's
+figure for that state. `manual_import.py` runs after `uf_earlyvote.py` for exactly that
+reason.
 
-Defeating those controls is not something this repo does. So the file is fetched by hand
-and parsed here instead. Drop downloads in this folder using the names below; the importer
-picks up whatever is present and ignores the rest.
+    data/manual/MN-<YYYY-MM-DD>.html     Minnesota absentee page, saved from the browser
+    data/manual/GA-<YYYY-MM-DD>.csv      Georgia absentee file (parser not written yet)
+    data/manual/OH-<YYYY-MM-DD>.txt      Ohio Absentee_Request_Report.txt (parser not written yet)
 
-    data/manual/GA-<YYYY-MM-DD>.csv      Georgia absentee file (statewide)
-    data/manual/MN-<YYYY-MM-DD>.html     Minnesota absentee data page, saved from the browser
-    data/manual/OH-<YYYY-MM-DD>.xlsx     Ohio absentee export
+Use the date the STATE reports for, not the day you downloaded — same rule the automated
+collectors follow, so re-downloading a day replaces it rather than inventing a second one.
 
-The date in the filename is the date the STATE reports the data for, not the day you
-downloaded it. If you are unsure, use the date shown on the page — same rule the automated
-collectors follow, so a re-download of the same day replaces rather than duplicates.
+Worth knowing: for Minnesota the two sources disagree on one figure. The state's page says
+6,263 applications for Aitkin County; the Election Lab says 5,981 requested. Mail returned
+and in-person match exactly (1,814 / 282), so the difference is in what counts as a
+request, and it only affects the derived outstanding number.

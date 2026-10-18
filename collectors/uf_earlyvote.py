@@ -42,6 +42,18 @@ UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit
 # Only states with no usable direct feed. FL/NC/ME/IA/TX are pulled from the state itself.
 STATES = {"NE": "Nebraska", "KS": "Kansas", "GA": "Georgia",
           "MI": "Michigan", "OH": "Ohio", "MN": "Minnesota"}
+
+# Maine is a FALLBACK ONLY, and deliberately so. maine.gov blocks the cron VM's datacenter
+# IP, so Maine normally comes from laptop.sh. The Election Lab does carry Maine, but it
+# lumps mail and in-person into one "accepted" figure, and those two streams break very
+# differently there (mail D+37, in-person D+30). Overwriting the direct parse with that
+# would quietly destroy the split.
+#
+# So the Lab's copy is written ONLY when the direct data has gone properly stale — more
+# than STALE_DAYS behind what the Lab has. That bounds how out of date Maine can get if
+# nobody runs the laptop command, without downgrading it the rest of the time.
+FALLBACK = {"ME": "Maine"}
+STALE_DAYS = 2
 # Only these three are universal. The rest vary by what the state collects: party columns
 # exist only where there is party registration (NE, KS), in-person is absent entirely for
 # Michigan, and Georgia carries age and race instead. Demanding the full set rejected four
@@ -154,12 +166,41 @@ def pull(st, meta):
     return payload, tot, party
 
 
+def _date(v):
+    """A loose date -> date, or None."""
+    from datetime import date as _d
+    for fmt in ("%m/%d/%Y", "%Y-%m-%d", "%m-%d-%y", "%m/%d/%y"):
+        try:
+            return datetime.strptime(str(v).strip(), fmt).date()
+        except (ValueError, TypeError):
+            pass
+    import re as _re
+    m = _re.search(r"\d{1,2}[/-]\d{1,2}[/-]\d{2,4}", str(v or ""))
+    return _date(m.group(0)) if m else None
+
+
+def direct_is_fresh(path, uf_as_of):
+    """True when the existing (direct) file is recent enough to keep."""
+    if not path.exists():
+        return False
+    try:
+        existing = json.loads(path.read_text())
+    except Exception:
+        return False
+    if not existing.get("as_of"):
+        return True                       # cannot date it; do not clobber on a guess
+    mine, theirs = _date(existing["as_of"]), _date(uf_as_of)
+    if not mine or not theirs:
+        return True
+    return (theirs - mine).days <= STALE_DAYS
+
+
 def main(argv):
-    only = [a.upper() for a in argv if a.upper() in STATES]
+    only = [a.upper() for a in argv if a.upper() in STATES or a.upper() in FALLBACK]
     meta = national()
     data = pathlib.Path(__file__).resolve().parent.parent / "data"
-    ok = failed = skipped = 0
-    for st in sorted(only or STATES):
+    ok = failed = skipped = held = 0
+    for st in sorted(only or (list(STATES) + list(FALLBACK))):
         try:
             payload, tot, party = pull(st, meta)
         except Exception as e:
@@ -172,14 +213,28 @@ def main(argv):
                   file=sys.stderr)
             skipped += 1
             continue
-        (data / f"early-{st}.json").write_text(json.dumps(payload, indent=1))
+        target = data / f"early-{st}.json"
+        if st in FALLBACK:
+            if direct_is_fresh(target, payload["as_of"]):
+                print(f"UF {st}: holding — the direct pull is current, and the Lab's copy "
+                      f"has no mail/in-person split")
+                held += 1
+                continue
+            payload["fallback"] = True
+            payload["notes"]["fallback"] = (
+                "the direct state parse went stale, so this is the UF Election Lab's copy. "
+                "It does NOT separate mail from in-person; run laptop.sh to restore the split")
+            print(f"UF {st}: direct data is >{STALE_DAYS}d stale — using the Lab's copy "
+                  f"(no mail/in-person split)", file=sys.stderr)
+        target.write_text(json.dumps(payload, indent=1))
         tag = "party" if party else "turnout only (no party registration)"
         print(f"UF {st} ok: {len(payload['counties'])} counties, as of "
               f"{payload['as_of']}  [{tag}]")
         print(f"   mail returned {tot['by_mail']:>9,}   in-person {tot['in_person']:>9,}"
               f"   mail outstanding {tot['outstanding']:>9,}")
         ok += 1
-    print(f"UF: {ok} written, {skipped} with no data yet, {failed} failed")
+    print(f"UF: {ok} written, {held} held (direct is fresher), "
+          f"{skipped} with no data yet, {failed} failed")
     return 1 if failed else 0
 
 

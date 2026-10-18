@@ -529,6 +529,8 @@ async function loadEarly(){
       EARLY[k] = {counties:j.counties||j.units||{}, totals:st, compiled:j.compiled||null,
                   fetched:j.fetched||null, inPerson: !!j.in_person,
                   unit: j.unit || "county",
+                  inPersonReported: j.in_person_reported !== false,
+                  fallback: !!j.fallback,
                   partyAvailable: j.party_available !== false,
                   asOf: j.as_of || null, through: j.through || null};
       try{
@@ -548,10 +550,16 @@ const PARTY_COL={D:"var(--d)",R:"var(--r)",NPA:"var(--o)",O:"var(--o)"};
 // signal here.
 function turnoutCard(k, st, e){
   const t = e.totals||{}, reg = t.registered||0;
+  const ipRep = e.inPersonReported !== false;
   const pct = v => reg ? (v/reg*100).toFixed(1)+"%" : "—";
-  const line = (lab,v,sub) => `<div class="evrow"><span class="slab">${lab}</span>
-      <span class="fig evtot">${n(v||0)}</span>
-      <span class="evpcts" style="grid-column:span 2"><b class="dim">${sub}</b></span></div>`;
+  // A state that does not REPORT a stream must never show 0 for it. Michigan publishes no
+  // in-person figure at all; printing 0 would read as "nobody has voted early in person",
+  // which is false. Same rule as outstanding everywhere else: unknown is a dash.
+  const line = (lab,v,sub,unreported) => `<div class="evrow${unreported?" nodata":""}">
+      <span class="slab">${lab}</span>
+      <span class="fig evtot">${unreported?"&mdash;":n(v||0)}</span>
+      <span class="evpcts" style="grid-column:span 2"><b class="dim">${unreported?
+        "not reported by this state":sub}</b></span></div>`;
   const cties = Object.entries(e.counties||{})
     .filter(([nm])=>nm!=="STATEWIDE")
     .map(([nm,v])=>({nm,...v}))
@@ -585,9 +593,11 @@ function turnoutCard(k, st, e){
   card.className="evcard";
   card.innerHTML=`<div class="sthd"><span class="stname">${st.name}</span>
       <span class="pin">${cties.length} counties</span></div>
-    ${line("In-person early", t.in_person, pct(t.in_person||0)+" of registered")}
+    ${line("In-person early", t.in_person, pct(t.in_person||0)+" of registered", !ipRep)}
     ${line("By mail", t.by_mail, pct(t.by_mail||0)+" of registered")}
-    ${line("Total early", t.total, pct(t.total||0)+" of "+n(reg)+" registered")}
+    ${line(ipRep?"Total early":"Mail returned", t.total, reg?pct(t.total||0)+" of "+n(reg)+" registered":"")}
+    ${t.requested?line("Mail outstanding", (t.requested||0)-(t.by_mail||0),
+        "derived: requested minus returned"):""}
     <div class="streamline">No party registration in this state &mdash; the official file carries
       turnout only. Any D/R split you see elsewhere for ${st.name} is a vendor model, not a count.</div>
     <div class="meter"><span>${e.through?"through "+e.through:"—"}</span>
@@ -602,7 +612,19 @@ function turnoutCard(k, st, e){
 
 function renderEV(){
   const host=document.getElementById("evbody"); host.innerHTML="";
-  const have=Object.entries(DATA.states).filter(([k])=>EARLY[k]&&EARLY[k].totals);
+  // Order by how much the state actually tells us, not alphabetically: states with a
+  // party split first, then turnout-only, each largest first. The turnout-only cards were
+  // sorting above Nebraska and Maine, which is backwards — they say the least.
+  const size = k => {
+    const t = EARLY[k].totals||{};
+    return (t.total||0) || ((t.returned||{}).total||0) + ((t.early_in_person||{}).total||0);
+  };
+  const have=Object.entries(DATA.states)
+    .filter(([k])=>EARLY[k]&&EARLY[k].totals)
+    .sort((a,b)=>{
+      const pa=EARLY[a[0]].partyAvailable?0:1, pb=EARLY[b[0]].partyAvailable?0:1;
+      return pa-pb || size(b[0])-size(a[0]);
+    });
   if(!have.length){
     host.innerHTML='<div class="empty">No early-vote data pulled yet. Run <code>collectors/fl_vbm.py</code>, '+
       'or any other state collector, and refresh.</div>';

@@ -33,11 +33,22 @@ import json, re, sys, pathlib, urllib.request, collections
 from datetime import datetime, timezone, date
 
 BASE = "https://sos.iowa.gov/sites/default/files/{month}/AbsenteeCounty2026.pdf"
+# Prior generals live under a different, stable path (the current cycle's file sits in a
+# dated Drupal folder; past ones are filed by election). Same format, so --history reuses
+# this parser rather than growing a second one.
+# 2020's file uses an older layout (county on a bare line, no receipt methods at all, so
+# no mail/in-person split and no outstanding). 2022 matches the current format, and 2022
+# is the comparator that matters for a midterm, so only it is taken here. 2020 is left out
+# deliberately rather than parsed into a shape that cannot be compared like for like.
+HISTORY = {2022: ("https://sos.iowa.gov/elections/pdf/2022/general/AbsenteeCounty2022.pdf",
+                  "2022-11-08")}
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
                     "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
 PARTY = {"Democrat": "D", "Republican": "R", "No Party": "NPA", "Other": "O"}
 IN_PERSON = {"Counter / In-Office", "Satellite", "Health Care Facility", "In-Person"}
-BY_MAIL = {"Mail", "E-Mail"}
+# "Drop Box", "Mailing" and "Fax" appear only in the historical files — all are ways a
+# MAIL ballot came back, not in-person voting, so they belong in the mail bucket.
+BY_MAIL = {"Mail", "E-Mail", "Drop Box", "Mailing", "Fax"}
 OUTSTANDING = "Ballot not yet returned by voter"
 SKIP = re.compile(r"^(Absentee Ballot Statistics|November \d+, General Election|"
                   r"County/|Data Pulled:|Prepared by the Office)")
@@ -68,15 +79,22 @@ def fetch():
     raise RuntimeError(f"no AbsenteeCounty2026.pdf in {months} (last: {last})")
 
 
-def parse(body):
+def parse(body, first_section_only=False, default_as_of=None):
+    """first_section_only: the historical PDFs concatenate many dated snapshots of the same
+    report, newest first (2022 is 1,289 pages, 11 distinct dates, the leading block holding
+    the highest received count). Stopping at the first Grand Total takes the FINAL snapshot
+    and ignores the replays behind it."""
     import pdfplumber, io
     counties = collections.defaultdict(lambda: collections.defaultdict(lambda: dict(EMPTY)))
     grand, as_of, county, party = None, None, None, None
     unknown = collections.Counter()
     totals_seen = {}
 
+    stop = False
     with pdfplumber.open(io.BytesIO(body)) as pdf:
         for page in pdf.pages:
+            if stop:
+                break
             for line in (page.extract_text() or "").splitlines():
                 line = line.strip()
                 if not line:
@@ -95,7 +113,12 @@ def parse(body):
 
                 if label == "Grand Total":
                     grand = nums
+                    if first_section_only:
+                        stop = True
+                        break
                     continue
+                if label.endswith(" Total"):
+                    continue                  # per-county subtotal; its parts are counted
                 if label in PARTY:
                     party = PARTY[label]
                     continue
@@ -124,7 +147,13 @@ def parse(body):
     if len(counties) != 99:
         raise RuntimeError(f"{len(counties)} counties, Iowa has 99 — refusing")
     if not as_of:
-        raise RuntimeError("no 'Prepared by ... <date>' footer — cannot date this pull")
+        # The live file always carries a footer date. The historical files only date their
+        # later sections, and we read the FINAL one, so for history the election's own date
+        # is supplied by the caller instead of inventing one.
+        if default_as_of:
+            as_of = default_as_of
+        else:
+            raise RuntimeError("no 'Prepared by ... <date>' footer — cannot date this pull")
     if not grand:
         raise RuntimeError("no Grand Total row — cannot reconcile")
 
@@ -137,6 +166,37 @@ def parse(body):
     return counties, as_of, grand
 
 
+def history():
+    out = {"state": "IA", "unit": "county", "years": {}}
+    for year, (url, elec_day) in sorted(HISTORY.items()):
+        with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=300) as r:
+            body = r.read()
+        counties, as_of, grand = parse(body, first_section_only=True,
+                                       default_as_of=elec_day)
+        totals = {b: dict(EMPTY) for b in
+                  ("mail_returned", "early_in_person", "mail_outstanding")}
+        for buckets in counties.values():
+            for b, rec in buckets.items():
+                for k, v in rec.items():
+                    totals[b][k] += v
+        out["years"][str(year)] = {
+            "election": f"{year} General", "as_of": as_of,
+            "state_totals": {b: dict(r) for b, r in totals.items()},
+            "counties": {c: {b: dict(r) for b, r in v.items()} for c, v in counties.items()},
+            "grand_total": {"requested": grand[0], "issued": grand[1], "received": grand[2]},
+            "source": url}
+        m, e = totals["mail_returned"], totals["early_in_person"]
+        pct = lambda r, k: (r[k] * 100 // r["total"]) if r["total"] else 0
+        print(f"IA {year}: as of {as_of} · mail {m['total']:>9,} "
+              f"(D {pct(m,'D')}% R {pct(m,'R')}% NP {pct(m,'NPA')}%) · "
+              f"in-person {e['total']:>9,} "
+              f"(D {pct(e,'D')}% R {pct(e,'R')}% NP {pct(e,'NPA')}%)")
+    p = pathlib.Path(__file__).resolve().parent.parent / "data" / "ev-history-IA.json"
+    p.write_text(json.dumps(out, indent=1))
+    print(f"   -> {p.name}")
+    return 0
+
+
 def main():
     try:
         import pdfplumber  # noqa: F401
@@ -144,6 +204,8 @@ def main():
         print("IA needs pdfplumber:  python3 -m pip install --user pdfplumber",
               file=sys.stderr)
         return 3
+    if "--history" in sys.argv:
+        return history()
     url, body = fetch()
     counties, as_of, grand = parse(body)
 

@@ -2,7 +2,13 @@
 # Daily early-vote pull. One entry point for cron.
 #
 #   crontab -e
-#   15 13 * * *  $HOME/election-night/collectors/run_all.sh   # 13:15 UTC: after FL compiles ~8am ET >> $HOME/election-night-cron.log 2>&1
+#   15 13,17,21,1 * * *  $HOME/election-night/collectors/run_all.sh
+#
+# FOUR TICKS, not one. A single 13:15 UTC run was pulling before several sources had
+# published that day: the UF Election Lab refreshes states at staggered times, and
+# Florida's two files are often on different days until later in the afternoon. Re-running
+# is free and idempotent — snapshots are keyed on each state's own as-of date, so a repeat
+# of the same day replaces it and nothing is pushed unless a number actually changed. >> $HOME/election-night-cron.log 2>&1
 #
 # Runs anywhere with python3 and git: the durable record is data/snapshots/*.json and the
 # SQLite store is rebuilt from it, so no state is tied to the machine that happens to run it.

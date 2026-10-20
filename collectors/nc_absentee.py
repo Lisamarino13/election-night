@@ -43,14 +43,28 @@ IN_PERSON = {"EARLY VOTING", "ONE-STOP", "ONE STOP", "ONESTOP"}
 BY_MAIL = {"MAIL", "BY MAIL"}
 
 
-def fetch(dirpart, filepart, cache=None):
+def fetch(dirpart, filepart, cache=None, reuse=False):
+    """Download the zip. reuse=True serves a cached copy; only safe for PAST elections.
+
+    THIS CACHE WAS A BUG. It was unconditional, so the live 2026 file was downloaded once
+    and never again: the collector kept reporting a fresh `fetched` timestamp while the
+    numbers underneath were two days old. Stale data wearing a current timestamp is worse
+    than a failed pull, because nothing looks wrong.
+
+    Past elections are immutable, so --history still reuses its 230MB downloads. The live
+    file never does.
+    """
     p = pathlib.Path(cache or f"/tmp/nc_{filepart}.zip")
-    if not p.exists() or p.stat().st_size < 1_000_000:
-        req = urllib.request.Request(URL.format(dirpart, filepart), headers=UA)
-        with urllib.request.urlopen(req, timeout=180) as r:
-            if r.status != 200:
-                raise RuntimeError(f"HTTP {r.status}")
-            p.write_bytes(r.read())
+    if reuse and p.exists() and p.stat().st_size >= 1_000_000:
+        return p
+    req = urllib.request.Request(URL.format(dirpart, filepart), headers=UA)
+    with urllib.request.urlopen(req, timeout=180) as r:
+        if r.status != 200:
+            raise RuntimeError(f"HTTP {r.status}")
+        body = r.read()
+    if len(body) < 1_000_000:
+        raise RuntimeError(f"{filepart}: {len(body)} bytes — refusing a truncated download")
+    p.write_bytes(body)
     return p
 
 
@@ -114,7 +128,7 @@ def rollup(counties):
 def history():
     out = {"state": "NC", "unit": "county", "years": {}}
     for year, elec in sorted(HISTORY.items()):
-        zp = fetch(*elec)
+        zp = fetch(*elec, reuse=True)   # past elections never change
         counties, rows = aggregate(zp)
         st = rollup(counties)
         out["years"][str(year)] = {
@@ -145,6 +159,8 @@ def main():
             for k, v in rec.items():
                 totals[b][k] += v
     payload = {"state": "NC", "unit": "county", "election": "2026 General",
+               "as_of": datetime.fromtimestamp(zp.stat().st_mtime,
+                                               timezone.utc).date().isoformat(),
                "fetched": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                "rows": rows, "in_person": "early_in_person" in totals,
                "counties": {c: {b: dict(r) for b, r in v.items()} for c, v in counties.items()},

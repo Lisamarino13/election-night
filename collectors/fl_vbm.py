@@ -30,7 +30,11 @@ FILES = {"outstanding": "VbmProvided", "returned": "VbmVoted"}
 # In-person early voting opens later (~Oct 24 for the 2026 general). The Division has not
 # published these yet; the collector looks each run and folds them in the day they appear,
 # so no code change is needed mid-cycle.
-OPTIONAL = {"in_person": "EvVoted"}
+# The in-person file is "EarlyVoted". It was guessed as "EvVoted" before early voting
+# opened, and the 404 was swallowed, so in-person read 0 for the first days of Florida EV
+# while 171,025 votes sat in a file we were not asking for. Candidates are tried in order
+# and a total miss is REPORTED, never silent.
+OPTIONAL = {"in_person": ("EarlyVoted", "EvVoted", "EvEarlyVoted")}
 
 
 def fetch(stat):
@@ -64,6 +68,13 @@ def fetch(stat):
     return out, compiled
 
 
+def _day(stamp):
+    """Date part of a compile stamp, so 8:04AM and 2:01PM on the same day compare equal."""
+    import re
+    m = re.search(r"\d{1,2}/\d{1,2}/\d{4}", stamp or "")
+    return m.group(0) if m else (stamp or "")
+
+
 def fetch_consistent(attempts=4, pause=3):
     """All required files from the SAME compile date, or raise.
 
@@ -92,17 +103,25 @@ def fetch_consistent(attempts=4, pause=3):
 def main():
     data = fetch_consistent()
     day = next(iter(set(data["compiled"].values())))
-    for key, stat in OPTIONAL.items():
-        try:
-            got, c = fetch(stat)
-            if c != day:
-                # in-person from a different day cannot sit beside today's mail numbers
-                print(f"   FL skipping {stat}: compiled {c}, mail is {day}", file=sys.stderr)
+    for key, names in OPTIONAL.items():
+        errs = []
+        for stat in names:
+            try:
+                got, c = fetch(stat)
+            except Exception as e:
+                errs.append(f"{stat}: {e}")
                 continue
+            # Compare the DATE only. The in-person file is stamped at a different time of
+            # day than the mail files (8:04AM vs 2:01PM), so a full-timestamp match would
+            # reject a file that is in fact the same day's.
+            if _day(c) != _day(day):
+                print(f"   FL skipping {stat}: compiled {c}, mail is {day}", file=sys.stderr)
+                break
             data[key] = got
             data["compiled"][key] = c
-        except Exception:
-            pass                      # not published yet — expected before EV opens
+            break
+        else:
+            print(f"   FL: no in-person file yet ({'; '.join(errs)})", file=sys.stderr)
     counties = sorted(set(data["outstanding"]) & set(data["returned"]) - {"State Totals"})
     if len(counties) < 60:
         raise RuntimeError(f"only {len(counties)} counties in both files — refusing")

@@ -40,11 +40,27 @@ BASE = "https://sos.iowa.gov/sites/default/files/{month}/AbsenteeCounty2026.pdf"
 # no mail/in-person split and no outstanding). 2022 matches the current format, and 2022
 # is the comparator that matters for a midterm, so only it is taken here. 2020 is left out
 # deliberately rather than parsed into a shape that cannot be compared like for like.
-HISTORY = {2022: ("https://sos.iowa.gov/elections/pdf/2022/general/AbsenteeCounty2022.pdf",
-                  "2022-11-08")}
+HISTORY = {2018: ("https://sos.iowa.gov/elections/pdf/2018/general/AbsenteeCounty2018.pdf",
+                  "2018-11-06"),
+           2020: ("https://sos.iowa.gov/elections/pdf/2020/general/AbsenteeCounty2020.pdf",
+                  "2020-11-03"),
+           2022: ("https://sos.iowa.gov/elections/pdf/2022/general/AbsenteeCounty2022.pdf",
+                  "2022-11-08"),
+           2024: ("https://sos.iowa.gov/elections/pdf/2024/general/AbsenteeCounty2024.pdf",
+                  "2024-11-05")}
+# 2018 and 2020 use an OLDER layout: the county sits on a bare line with no numbers, party
+# rows carry requested/sent/received, and there are no receipt-method rows at all. So those
+# two years have NO mail/in-person split and no outstanding — the totals are real, the
+# breakdown is not available. Years parsed that way are flagged streams_split=false rather
+# than having a split invented for them.
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
                     "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
-PARTY = {"Democrat": "D", "Republican": "R", "No Party": "NPA", "Other": "O"}
+# Libertarian is a registered party in Iowa and appears in the 2024 file. Leaving it out
+# did not just lose 4 ballots: "Libertarian 4 4 4" matched the COUNTY pattern, became a
+# phantom county, and orphaned every receipt-method row under it — 3,631 ballots with no
+# party in scope. The reconciliation against the file's Grand Total is what caught it.
+PARTY = {"Democrat": "D", "Republican": "R", "No Party": "NPA",
+         "Libertarian": "O", "Other": "O"}
 IN_PERSON = {"Counter / In-Office", "Satellite", "Health Care Facility", "In-Person"}
 # "Drop Box", "Mailing" and "Fax" appear only in the historical files — all are ways a
 # MAIL ballot came back, not in-person voting, so they belong in the mail bucket.
@@ -79,6 +95,44 @@ def fetch():
     raise RuntimeError(f"no AbsenteeCounty2026.pdf in {months} (last: {last})")
 
 
+def parse_legacy(body, default_as_of):
+    """2018/2020 layout: bare county line, party rows, '<County> Total', no methods."""
+    import pdfplumber, io
+    counties = collections.defaultdict(lambda: collections.defaultdict(lambda: dict(EMPTY)))
+    county, grand, stop = None, None, False
+    # Same replay structure as the newer archives: the 2020 file repeats its whole report
+    # 40 times. Summing them gave 17.5M ballots in a state of ~2M voters.
+    with pdfplumber.open(io.BytesIO(body)) as pdf:
+        for page in pdf.pages:
+            if stop:
+                break
+            for line in (page.extract_text() or "").splitlines():
+                line = line.strip()
+                if not line or SKIP.match(line) or line.startswith(("Requested", "REQUEST_DATE")):
+                    continue
+                g = re.match(r"^(.*?)((?:\s+[\d,]+)+)$", line)
+                if not g:
+                    # a label with no numbers at all is the county header
+                    if re.match(r"^[A-Z][A-Za-z'’. ]+$", line):
+                        county = line.strip()
+                    continue
+                label = g.group(1).strip()
+                nums = [int(x.replace(",", "")) for x in g.group(2).split()]
+                if label == "Grand Total":
+                    grand = nums
+                    stop = True
+                    break
+                if label.endswith(" Total"):
+                    continue
+                if label in PARTY and county and len(nums) >= 3:
+                    rec = counties[county]["returned_combined"]
+                    rec[PARTY[label]] += nums[2]
+                    rec["total"] += nums[2]
+    if len(counties) != 99:
+        raise RuntimeError(f"legacy parse found {len(counties)} counties, Iowa has 99")
+    return counties, default_as_of, grand
+
+
 def parse(body, first_section_only=False, default_as_of=None):
     """first_section_only: the historical PDFs concatenate many dated snapshots of the same
     report, newest first (2022 is 1,289 pages, 11 distinct dates, the leading block holding
@@ -88,6 +142,8 @@ def parse(body, first_section_only=False, default_as_of=None):
     counties = collections.defaultdict(lambda: collections.defaultdict(lambda: dict(EMPTY)))
     grand, as_of, county, party = None, None, None, None
     unknown = collections.Counter()
+    junk = collections.Counter()
+    orphan = collections.Counter()
     totals_seen = {}
 
     stop = False
@@ -138,8 +194,19 @@ def parse(body, first_section_only=False, default_as_of=None):
                     county, party = label, None
                     totals_seen[county] = nums
                     continue
-                unknown[label] += 1
+                if label.isdigit():
+                    junk[label] += 1      # stray numeric label (2024 has one, 1 ballot)
+                else:
+                    unknown[label] += 1
 
+    if orphan:
+        raise RuntimeError(
+            f"{sum(orphan.values()):,} ballots in receipt-method rows with no party in "
+            f"scope {dict(orphan.most_common(4))} — a party name is missing from PARTY and "
+            f"is being mistaken for a county")
+    if junk:
+        print(f"   note: {sum(junk.values())} row(s) with a numeric label "
+              f"{dict(junk.most_common(3))} — counted nowhere", file=sys.stderr)
     if unknown:
         raise RuntimeError(f"unrecognised row labels {dict(unknown.most_common(5))} — Iowa "
                            f"added a receipt method or party; classify it rather than "
@@ -160,9 +227,14 @@ def parse(body, first_section_only=False, default_as_of=None):
     # --- reconcile received against the state's own Grand Total -----------------------
     got = sum(c["mail_returned"]["total"] + c["early_in_person"]["total"]
               for c in counties.values())
-    if got != grand[2]:
-        raise RuntimeError(f"received total {got:,} != Grand Total {grand[2]:,} — parse is "
-                           f"dropping or double counting rows")
+    # Rows with a numeric label are data artifacts carrying no receipt method, so they are
+    # counted nowhere. Subtract them from the expected figure rather than leave a known,
+    # located difference sitting in the check as if it were unexplained.
+    expected = grand[2] - sum(junk.values())
+    if got != expected:
+        raise RuntimeError(f"received total {got:,} != expected {expected:,} "
+                           f"(Grand Total {grand[2]:,} less {sum(junk.values())} "
+                           f"unlabelled) — parse is dropping or double counting rows")
     return counties, as_of, grand
 
 
@@ -171,26 +243,39 @@ def history():
     for year, (url, elec_day) in sorted(HISTORY.items()):
         with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=300) as r:
             body = r.read()
-        counties, as_of, grand = parse(body, first_section_only=True,
-                                       default_as_of=elec_day)
-        totals = {b: dict(EMPTY) for b in
-                  ("mail_returned", "early_in_person", "mail_outstanding")}
+        legacy = year <= 2020
+        if legacy:
+            counties, as_of, grand = parse_legacy(body, elec_day)
+        else:
+            counties, as_of, grand = parse(body, first_section_only=True,
+                                           default_as_of=elec_day)
+        keys = (("returned_combined",) if legacy else
+                ("mail_returned", "early_in_person", "mail_outstanding"))
+        totals = {b: dict(EMPTY) for b in keys}
         for buckets in counties.values():
             for b, rec in buckets.items():
                 for k, v in rec.items():
                     totals[b][k] += v
         out["years"][str(year)] = {
             "election": f"{year} General", "as_of": as_of,
+            "cycle": "presidential" if year % 4 == 0 else "midterm",
+            "streams_split": not legacy,
             "state_totals": {b: dict(r) for b, r in totals.items()},
             "counties": {c: {b: dict(r) for b, r in v.items()} for c, v in counties.items()},
             "grand_total": {"requested": grand[0], "issued": grand[1], "received": grand[2]},
             "source": url}
-        m, e = totals["mail_returned"], totals["early_in_person"]
         pct = lambda r, k: (r[k] * 100 // r["total"]) if r["total"] else 0
-        print(f"IA {year}: as of {as_of} · mail {m['total']:>9,} "
-              f"(D {pct(m,'D')}% R {pct(m,'R')}% NP {pct(m,'NPA')}%) · "
-              f"in-person {e['total']:>9,} "
-              f"(D {pct(e,'D')}% R {pct(e,'R')}% NP {pct(e,'NPA')}%)")
+        if legacy:
+            c = totals["returned_combined"]
+            print(f"IA {year}: as of {as_of} · mail+in-person combined {c['total']:>9,} "
+                  f"(D {pct(c,'D')}% R {pct(c,'R')}% NP {pct(c,'NPA')}%)  "
+                  f"[no stream split in this layout]")
+        else:
+            m, e = totals["mail_returned"], totals["early_in_person"]
+            print(f"IA {year}: as of {as_of} · mail {m['total']:>9,} "
+                  f"(D {pct(m,'D')}% R {pct(m,'R')}% NP {pct(m,'NPA')}%) · "
+                  f"in-person {e['total']:>9,} "
+                  f"(D {pct(e,'D')}% R {pct(e,'R')}% NP {pct(e,'NPA')}%)")
     p = pathlib.Path(__file__).resolve().parent.parent / "data" / "ev-history-IA.json"
     p.write_text(json.dumps(out, indent=1))
     print(f"   -> {p.name}")

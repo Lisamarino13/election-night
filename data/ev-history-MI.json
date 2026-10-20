@@ -1,0 +1,36 @@
+{
+ "state": "MI",
+ "unit": "state",
+ "party_available": false,
+ "fetched": "2026-10-20T03:52:01+00:00",
+ "years": {
+  "2024": {
+   "election": "2024 General",
+   "cycle": "presidential",
+   "statewide_only": true,
+   "as_of": "11/5/2024",
+   "state_totals": {
+    "mail_returned": {
+     "total": 3319560
+    },
+    "early_in_person": {
+     "total": 0
+    },
+    "by_mail": 3319560,
+    "in_person": 0,
+    "total": 3319560,
+    "registered": 0,
+    "in_person_reported": false
+   },
+   "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2024/US.csv",
+   "upstream": "Michigan Secretary of State"
+  }
+ },
+ "attribution": {
+  "aggregator": "UF Election Lab (election.lab.ufl.edu)"
+ },
+ "notes": {
+  "scope": "statewide only \u2014 the Lab keeps county files for the current cycle only",
+  "cycle": "2024 is presidential; it is a ceiling, not a midterm comparator"
+ }
+}

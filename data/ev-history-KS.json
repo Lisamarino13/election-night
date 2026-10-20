@@ -1,0 +1,44 @@
+{
+ "state": "KS",
+ "unit": "state",
+ "party_available": true,
+ "fetched": "2026-10-20T03:52:01+00:00",
+ "years": {
+  "2024": {
+   "election": "2024 General",
+   "cycle": "presidential",
+   "statewide_only": true,
+   "as_of": "11/4/2024",
+   "state_totals": {
+    "mail_returned": {
+     "D": 54999,
+     "R": 51078,
+     "NPA": 20546,
+     "O": 0,
+     "total": 126623
+    },
+    "early_in_person": {
+     "D": 155858,
+     "R": 279441,
+     "NPA": 91134,
+     "O": 0,
+     "total": 526433
+    },
+    "by_mail": 126623,
+    "in_person": 526433,
+    "total": 653056,
+    "registered": 0,
+    "in_person_reported": true
+   },
+   "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2024/US.csv",
+   "upstream": "https://x.com/BACaskey"
+  }
+ },
+ "attribution": {
+  "aggregator": "UF Election Lab (election.lab.ufl.edu)"
+ },
+ "notes": {
+  "scope": "statewide only \u2014 the Lab keeps county files for the current cycle only",
+  "cycle": "2024 is presidential; it is a ceiling, not a midterm comparator"
+ }
+}

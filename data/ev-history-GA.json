@@ -1,0 +1,36 @@
+{
+ "state": "GA",
+ "unit": "state",
+ "party_available": false,
+ "fetched": "2026-10-20T03:52:01+00:00",
+ "years": {
+  "2024": {
+   "election": "2024 General",
+   "cycle": "presidential",
+   "statewide_only": true,
+   "as_of": "11/5/2024",
+   "state_totals": {
+    "mail_returned": {
+     "total": 265648
+    },
+    "early_in_person": {
+     "total": 3765655
+    },
+    "by_mail": 265648,
+    "in_person": 3765655,
+    "total": 4031303,
+    "registered": 0,
+    "in_person_reported": true
+   },
+   "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2024/US.csv",
+   "upstream": "https://mvp.sos.ga.gov/s/voter-absentee-files"
+  }
+ },
+ "attribution": {
+  "aggregator": "UF Election Lab (election.lab.ufl.edu)"
+ },
+ "notes": {
+  "scope": "statewide only \u2014 the Lab keeps county files for the current cycle only",
+  "cycle": "2024 is presidential; it is a ceiling, not a midterm comparator"
+ }
+}

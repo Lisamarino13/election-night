@@ -36,11 +36,29 @@ BASE = "https://www.maine.gov"
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
                     "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
       "Accept-Encoding": "identity"}
+# Maine's archive goes back to 2008 in this same pipe-delimited format, so history is the
+# same parser. NOTE: there is NO November 2022 general file in the index — the archive
+# jumps from a Jan 2022 special to the June 2022 primary to Nov 2023. So Maine has no
+# midterm comparator available from the state, and 2020/2024 are both presidential.
+HISTORY = {
+    2020: "https://www.maine.gov/sos/sites/maine.gov.sos/files/inline-files/"
+          "1120-absentee-voter-file_0.txt",
+    2024: "https://www.maine.gov/sos/sites/maine.gov.sos/files/inline-files/"
+          "2024-11-05%20Final%20AB%20Voter%20File.txt",
+}
 PARTY = {"D": "D", "R": "R", "U": "NPA"}               # G / L / X -> O
-COLS = ["RES MUNICIPALITY", "P", "Ballot Type", "Req Type", "Issued Date",
-        "Rec Date", "Status", "REJ", "DUP"]            # the ones this script depends on
-ACCEPTED = {"ACT", "ACU", "ACH"}
+# Exactly the columns this parser reads — nothing more. It previously demanded
+# "Ballot Type", "Req Type" and "REJ" as well, none of which it ever looks at, and that
+# rejected the 2020/2024 archives for the absence of a field that makes no difference.
+COLS = ["RES MUNICIPALITY", "P", "Issued Date", "Issued Type",
+        "Rec Date", "Status", "DUP"]
+ACCEPTED = {"ACT", "ACU", "ACH", "ACC"}      # ACC is the legacy spelling
 REJECTED = {"REJ", "RNC"}
+# The 2020 and 2024 archives use an older header. Same data, different names — map it
+# rather than carrying a second parser.
+ALIASES = {"MUNICIPALITY": "RES MUNICIPALITY", "REQTYPE": "Req Type", "REQDATE": "Req Date",
+           "ISSTYPE": "Issued Type", "ISSDATE": "Issued Date", "RECTYPE": "Rec Type",
+           "RECDATE": "Rec Date", "ACC OR REJ": "Status", "REJRSN": "REJ"}
 BUCKETS = ("mail_returned", "mail_outstanding", "early_in_person",
            "requested_not_issued", "rejected", "pending_cure")
 
@@ -89,7 +107,7 @@ def aggregate(raw):
     lines = raw.decode("utf-8", "ignore").splitlines()
     if not lines:
         raise RuntimeError("empty file")
-    hdr = lines[0].split("|")
+    hdr = [ALIASES.get(h.strip(), h.strip()) for h in lines[0].split("|")]
     for c in COLS:
         if c not in hdr:
             raise RuntimeError(f"column {c!r} missing — layout changed; got {hdr}")
@@ -142,6 +160,10 @@ def aggregate(raw):
         raise RuntimeError(f"only {len(units)} municipalities — Maine has ~500; refusing")
 
     # --- reconcile against the state's own trailer ---------------------------------
+    # Only the live file carries one; the archives do not. Where it exists it is asserted,
+    # where it does not the parse stands on the column checks alone and says so.
+    if not any("Total Number of Records" in l for l in trailer_lines):
+        return units, tally, None, data_rows, other, dup_outstanding
     t = parse_trailer(trailer_lines)
     checks = [
         ("records", t["records"], data_rows),
@@ -161,7 +183,42 @@ def aggregate(raw):
     return units, tally, t, data_rows, other, dup_outstanding
 
 
+def history():
+    out = {"state": "ME", "unit": "municipality", "party_available": True, "years": {}}
+    for year, url in sorted(HISTORY.items()):
+        units, tally, trailer, rows, other, dup = aggregate(get(url))
+        if trailer is None:
+            print(f"   (no trailer totals in the {year} archive — column checks only)",
+                  file=sys.stderr)
+        totals = {b: {"R": 0, "D": 0, "NPA": 0, "O": 0, "total": 0} for b in BUCKETS}
+        for buckets in units.values():
+            for b, rec in buckets.items():
+                for k, v in rec.items():
+                    totals[b][k] += v
+        m, e = totals["mail_returned"], totals["early_in_person"]
+        out["years"][str(year)] = {
+            "election": f"{year} General",
+            "cycle": "presidential" if year % 4 == 0 else "midterm",
+            "state_totals": {
+                "mail_returned": dict(m), "early_in_person": dict(e),
+                "by_mail": m["total"], "in_person": e["total"],
+                "total": m["total"] + e["total"], "registered": 0},
+            "units": {u: {b: dict(r) for b, r in v.items()} for u, v in units.items()},
+            "state_trailer": trailer, "source": url}
+        pct = lambda r, k: (r[k] * 100 // r["total"]) if r["total"] else 0
+        print(f"ME {year}: {rows:,} ballots · mail {m['total']:>8,} "
+              f"(D {pct(m,'D')}% R {pct(m,'R')}% U {pct(m,'NPA')}%) · "
+              f"in-person {e['total']:>8,} "
+              f"(D {pct(e,'D')}% R {pct(e,'R')}% U {pct(e,'NPA')}%)")
+    p = pathlib.Path(__file__).resolve().parent.parent / "data" / "ev-history-ME.json"
+    p.write_text(json.dumps(out, indent=1))
+    print(f"   -> {p.name}  (no Nov 2022 file exists in Maine's archive)")
+    return 0
+
+
 def main():
+    if "--history" in sys.argv:
+        return history()
     url, asof = find_file()
     units, tally, trailer, rows, other, dup_out = aggregate(get(url))
 
@@ -211,7 +268,7 @@ def main():
 
 if __name__ == "__main__":
     try:
-        main()
+        sys.exit(main() or 0)
     except Exception as e:
         print(f"ME FAILED (nothing written): {e}", file=sys.stderr)
         sys.exit(1)

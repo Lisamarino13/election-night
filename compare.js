@@ -1,3 +1,5 @@
+(function(){
+"use strict";
 /* Early-vote comparison for Georgia, South Carolina and North Carolina.
    Reads the same data/ files the board does, so the cron's hourly pull moves these
    charts too rather than freezing whatever the numbers were the day it was written.
@@ -366,3 +368,4 @@ window.renderCharts = renderCharts;
 // compare.html renders at once; the board calls renderCharts() the first time its
 // charts tab is opened, so these fetches do not run on every board load.
 if (document.getElementById("panels")) renderCharts(document.getElementById("panels"));
+})();

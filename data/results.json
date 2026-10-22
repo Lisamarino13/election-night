@@ -1,6 +1,6 @@
 {
- "updated": null,
- "note": "Written by the per-state collectors. Each state's cron replaces its own block.",
+ "updated": "2026-10-22T17:51:08+00:00",
+ "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
    "name": "Michigan",
@@ -195,12 +195,16 @@
    "countsFirst": "early",
    "partyReg": true,
    "unit": "county",
-   "source": "er.ncsbe.gov",
+   "source": "https://s3.amazonaws.com/dl.ncsbe.gov/ENRS/2026_11_03/results_pct_20261103.zip",
    "races": {
     "senate": {
      "candidates": [
       {
-       "name": "Candidate 1",
+       "name": "Michael Dublin",
+       "party": "O"
+      },
+      {
+       "name": "Michael Whatley",
        "party": "R"
       },
       {
@@ -208,16 +212,1023 @@
        "party": "D"
       },
       {
-       "name": "Other",
+       "name": "Shannon W. Bray",
        "party": "O"
       }
      ],
-     "counties": [],
-     "updated": null,
-     "tier": "safe"
+     "counties": [
+      {
+       "name": "Alamance",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 18754
+      },
+      {
+       "name": "Alexander",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3171
+      },
+      {
+       "name": "Alleghany",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1346
+      },
+      {
+       "name": "Anson",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1878
+      },
+      {
+       "name": "Ashe",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2960
+      },
+      {
+       "name": "Avery",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1319
+      },
+      {
+       "name": "Beaufort",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5067
+      },
+      {
+       "name": "Bertie",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1832
+      },
+      {
+       "name": "Bladen",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2937
+      },
+      {
+       "name": "Brunswick",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 28720
+      },
+      {
+       "name": "Buncombe",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 46480
+      },
+      {
+       "name": "Burke",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 8580
+      },
+      {
+       "name": "Cabarrus",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 21513
+      },
+      {
+       "name": "Caldwell",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 7162
+      },
+      {
+       "name": "Camden",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1016
+      },
+      {
+       "name": "Carteret",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 10591
+      },
+      {
+       "name": "Caswell",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2132
+      },
+      {
+       "name": "Catawba",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 16893
+      },
+      {
+       "name": "Chatham",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 16322
+      },
+      {
+       "name": "Cherokee",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3023
+      },
+      {
+       "name": "Chowan",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1799
+      },
+      {
+       "name": "Clay",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1636
+      },
+      {
+       "name": "Cleveland",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 8826
+      },
+      {
+       "name": "Columbus",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3656
+      },
+      {
+       "name": "Craven",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 11761
+      },
+      {
+       "name": "Cumberland",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 27373
+      },
+      {
+       "name": "Currituck",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2133
+      },
+      {
+       "name": "Dare",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5494
+      },
+      {
+       "name": "Davidson",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 15216
+      },
+      {
+       "name": "Davie",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4781
+      },
+      {
+       "name": "Duplin",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3741
+      },
+      {
+       "name": "Durham",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 53132
+      },
+      {
+       "name": "Edgecombe",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5405
+      },
+      {
+       "name": "Forsyth",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 45884
+      },
+      {
+       "name": "Franklin",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 9806
+      },
+      {
+       "name": "Gaston",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 22906
+      },
+      {
+       "name": "Gates",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 870
+      },
+      {
+       "name": "Graham",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 866
+      },
+      {
+       "name": "Granville",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 8220
+      },
+      {
+       "name": "Greene",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1700
+      },
+      {
+       "name": "Guilford",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 58800
+      },
+      {
+       "name": "Halifax",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4728
+      },
+      {
+       "name": "Harnett",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 12347
+      },
+      {
+       "name": "Haywood",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 8459
+      },
+      {
+       "name": "Henderson",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 20321
+      },
+      {
+       "name": "Hertford",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1936
+      },
+      {
+       "name": "Hoke",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4927
+      },
+      {
+       "name": "Hyde",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 293
+      },
+      {
+       "name": "Iredell",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 19138
+      },
+      {
+       "name": "Jackson",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4777
+      },
+      {
+       "name": "Johnston",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 21205
+      },
+      {
+       "name": "Jones",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 935
+      },
+      {
+       "name": "Lee",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 6371
+      },
+      {
+       "name": "Lenoir",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5842
+      },
+      {
+       "name": "Lincoln",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 10426
+      },
+      {
+       "name": "Macon",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4904
+      },
+      {
+       "name": "Madison",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2977
+      },
+      {
+       "name": "Martin",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2297
+      },
+      {
+       "name": "Mcdowell",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4663
+      },
+      {
+       "name": "Mecklenburg",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 126751
+      },
+      {
+       "name": "Mitchell",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1812
+      },
+      {
+       "name": "Montgomery",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2021
+      },
+      {
+       "name": "Moore",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 12663
+      },
+      {
+       "name": "Nash",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 12685
+      },
+      {
+       "name": "New Hanover",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 30368
+      },
+      {
+       "name": "Northampton",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1812
+      },
+      {
+       "name": "Onslow",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 14014
+      },
+      {
+       "name": "Orange",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 27503
+      },
+      {
+       "name": "Pamlico",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1895
+      },
+      {
+       "name": "Pasquotank",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4282
+      },
+      {
+       "name": "Pender",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 6914
+      },
+      {
+       "name": "Perquimans",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1494
+      },
+      {
+       "name": "Person",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4467
+      },
+      {
+       "name": "Pitt",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 18077
+      },
+      {
+       "name": "Polk",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3602
+      },
+      {
+       "name": "Randolph",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 11359
+      },
+      {
+       "name": "Richmond",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3590
+      },
+      {
+       "name": "Robeson",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 7004
+      },
+      {
+       "name": "Rockingham",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 9708
+      },
+      {
+       "name": "Rowan",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 11096
+      },
+      {
+       "name": "Rutherford",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5514
+      },
+      {
+       "name": "Sampson",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3916
+      },
+      {
+       "name": "Scotland",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3319
+      },
+      {
+       "name": "Stanly",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5436
+      },
+      {
+       "name": "Stokes",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4108
+      },
+      {
+       "name": "Surry",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 6831
+      },
+      {
+       "name": "Swain",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1378
+      },
+      {
+       "name": "Transylvania",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5583
+      },
+      {
+       "name": "Tyrrell",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 249
+      },
+      {
+       "name": "Union",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 26277
+      },
+      {
+       "name": "Vance",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4839
+      },
+      {
+       "name": "Wake",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 155437
+      },
+      {
+       "name": "Warren",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2251
+      },
+      {
+       "name": "Washington",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1281
+      },
+      {
+       "name": "Watauga",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 7172
+      },
+      {
+       "name": "Wayne",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 11400
+      },
+      {
+       "name": "Wilkes",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4603
+      },
+      {
+       "name": "Wilson",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 8294
+      },
+      {
+       "name": "Yadkin",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2786
+      },
+      {
+       "name": "Yancey",
+       "votes": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2621
+      }
+     ],
+     "updated": "2026-10-22T17:51:06+00:00",
+     "tier": "safe",
+     "precincts_reporting": 0,
+     "precincts_total": 2626,
+     "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes. Election-day ballots still to come are NOT included.",
+     "is_test_data": false,
+     "counted": 0
     }
    },
-   "unitsExpected": 100
+   "unitsExpected": 100,
+   "updated": "2026-10-22T17:51:06+00:00"
   },
   "OH": {
    "name": "Ohio",
@@ -225,46 +1236,2286 @@
    "countsFirst": "absentee",
    "partyReg": false,
    "unit": "county",
-   "source": null,
-   "updated": null,
+   "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
+   "updated": "2026-10-22T17:51:07+00:00",
    "races": {
     "senate": {
      "candidates": [
       {
-       "name": "Candidate 1",
-       "party": "R"
-      },
-      {
-       "name": "Candidate 2",
+       "name": "Sherrod Brown",
        "party": "D"
       },
       {
-       "name": "Candidate 3",
+       "name": "Stephen Faris",
+       "party": "O"
+      },
+      {
+       "name": "Anthony Holliman",
+       "party": "O"
+      },
+      {
+       "name": "Jon Husted",
+       "party": "R"
+      },
+      {
+       "name": "Greg Levy",
+       "party": "O"
+      },
+      {
+       "name": "William Redpath",
+       "party": "O"
+      },
+      {
+       "name": "Timothy Telymonde",
        "party": "O"
       }
      ],
-     "counties": [],
-     "updated": null,
-     "tier": "tossup"
+     "counties": [
+      {
+       "name": "Adams",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1917
+      },
+      {
+       "name": "Allen",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5621
+      },
+      {
+       "name": "Ashland",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4137
+      },
+      {
+       "name": "Ashtabula",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5163
+      },
+      {
+       "name": "Athens",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4004
+      },
+      {
+       "name": "Auglaize",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3386
+      },
+      {
+       "name": "Belmont",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4786
+      },
+      {
+       "name": "Brown",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2652
+      },
+      {
+       "name": "Butler",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 21470
+      },
+      {
+       "name": "Carroll",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1651
+      },
+      {
+       "name": "Champaign",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3097
+      },
+      {
+       "name": "Clark",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 8575
+      },
+      {
+       "name": "Clermont",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 14424
+      },
+      {
+       "name": "Clinton",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3072
+      },
+      {
+       "name": "Columbiana",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4673
+      },
+      {
+       "name": "Coshocton",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2706
+      },
+      {
+       "name": "Crawford",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2710
+      },
+      {
+       "name": "Cuyahoga",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 70433
+      },
+      {
+       "name": "Darke",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3680
+      },
+      {
+       "name": "Defiance",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3706
+      },
+      {
+       "name": "Delaware",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 19137
+      },
+      {
+       "name": "Erie",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 7149
+      },
+      {
+       "name": "Fairfield",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 12389
+      },
+      {
+       "name": "Fayette",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1681
+      },
+      {
+       "name": "Franklin",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 73412
+      },
+      {
+       "name": "Fulton",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2900
+      },
+      {
+       "name": "Gallia",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1398
+      },
+      {
+       "name": "Geauga",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 8652
+      },
+      {
+       "name": "Greene",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 14004
+      },
+      {
+       "name": "Guernsey",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2235
+      },
+      {
+       "name": "Hamilton",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 49537
+      },
+      {
+       "name": "Hancock",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5837
+      },
+      {
+       "name": "Hardin",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1541
+      },
+      {
+       "name": "Harrison",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 847
+      },
+      {
+       "name": "Henry",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1977
+      },
+      {
+       "name": "Highland",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2424
+      },
+      {
+       "name": "Hocking",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2252
+      },
+      {
+       "name": "Holmes",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1631
+      },
+      {
+       "name": "Huron",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3866
+      },
+      {
+       "name": "Jackson",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2559
+      },
+      {
+       "name": "Jefferson",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4757
+      },
+      {
+       "name": "Knox",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4991
+      },
+      {
+       "name": "Lake",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 18097
+      },
+      {
+       "name": "Lawrence",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2382
+      },
+      {
+       "name": "Licking",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 13472
+      },
+      {
+       "name": "Logan",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5345
+      },
+      {
+       "name": "Lorain",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 24932
+      },
+      {
+       "name": "Lucas",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 23118
+      },
+      {
+       "name": "Madison",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3455
+      },
+      {
+       "name": "Mahoning",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 15530
+      },
+      {
+       "name": "Marion",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4974
+      },
+      {
+       "name": "Medina",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 16117
+      },
+      {
+       "name": "Meigs",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1267
+      },
+      {
+       "name": "Mercer",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3868
+      },
+      {
+       "name": "Miami",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 8695
+      },
+      {
+       "name": "Monroe",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 904
+      },
+      {
+       "name": "Montgomery",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 20516
+      },
+      {
+       "name": "Morgan",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1081
+      },
+      {
+       "name": "Morrow",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2234
+      },
+      {
+       "name": "Muskingum",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5834
+      },
+      {
+       "name": "Noble",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 883
+      },
+      {
+       "name": "Ottawa",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3789
+      },
+      {
+       "name": "Paulding",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1331
+      },
+      {
+       "name": "Perry",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2144
+      },
+      {
+       "name": "Pickaway",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3427
+      },
+      {
+       "name": "Pike",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1642
+      },
+      {
+       "name": "Portage",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 10551
+      },
+      {
+       "name": "Preble",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2908
+      },
+      {
+       "name": "Putnam",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2951
+      },
+      {
+       "name": "Richland",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 9175
+      },
+      {
+       "name": "Ross",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5229
+      },
+      {
+       "name": "Sandusky",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3317
+      },
+      {
+       "name": "Scioto",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3245
+      },
+      {
+       "name": "Seneca",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2948
+      },
+      {
+       "name": "Shelby",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3585
+      },
+      {
+       "name": "Stark",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 25408
+      },
+      {
+       "name": "Summit",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 35216
+      },
+      {
+       "name": "Trumbull",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 14481
+      },
+      {
+       "name": "Tuscarawas",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5861
+      },
+      {
+       "name": "Union",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 6573
+      },
+      {
+       "name": "Van Wert",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2329
+      },
+      {
+       "name": "Vinton",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 745
+      },
+      {
+       "name": "Warren",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 21861
+      },
+      {
+       "name": "Washington",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5203
+      },
+      {
+       "name": "Wayne",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 7366
+      },
+      {
+       "name": "Williams",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2228
+      },
+      {
+       "name": "Wood",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 8863
+      },
+      {
+       "name": "Wyandot",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1665
+      }
+     ],
+     "updated": "2026-10-22T17:51:07+00:00",
+     "tier": "tossup",
+     "precincts_reporting": 0,
+     "precincts_total": 8834,
+     "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes. Election-day ballots still to come are NOT included.",
+     "is_test_data": true,
+     "counted": 0
     },
     "governor": {
      "candidates": [
       {
-       "name": "Candidate 1",
-       "party": "R"
-      },
-      {
-       "name": "Candidate 2",
+       "name": "Amy Acton",
        "party": "D"
       },
       {
-       "name": "Other",
+       "name": "Timothy Grady",
+       "party": "O"
+      },
+      {
+       "name": "Heather Hill",
+       "party": "O"
+      },
+      {
+       "name": "Don Kissick",
+       "party": "O"
+      },
+      {
+       "name": "Vivek Ramaswamy",
+       "party": "R"
+      },
+      {
+       "name": "Renea Turner",
        "party": "O"
       }
      ],
-     "counties": [],
-     "updated": null,
-     "tier": "tossup"
+     "counties": [
+      {
+       "name": "Adams",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1917
+      },
+      {
+       "name": "Allen",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5621
+      },
+      {
+       "name": "Ashland",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4137
+      },
+      {
+       "name": "Ashtabula",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5163
+      },
+      {
+       "name": "Athens",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4004
+      },
+      {
+       "name": "Auglaize",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3386
+      },
+      {
+       "name": "Belmont",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4786
+      },
+      {
+       "name": "Brown",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2652
+      },
+      {
+       "name": "Butler",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 21470
+      },
+      {
+       "name": "Carroll",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1651
+      },
+      {
+       "name": "Champaign",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3097
+      },
+      {
+       "name": "Clark",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 8575
+      },
+      {
+       "name": "Clermont",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 14424
+      },
+      {
+       "name": "Clinton",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3072
+      },
+      {
+       "name": "Columbiana",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4673
+      },
+      {
+       "name": "Coshocton",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2706
+      },
+      {
+       "name": "Crawford",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2710
+      },
+      {
+       "name": "Cuyahoga",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 70433
+      },
+      {
+       "name": "Darke",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3680
+      },
+      {
+       "name": "Defiance",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3706
+      },
+      {
+       "name": "Delaware",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 19137
+      },
+      {
+       "name": "Erie",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 7149
+      },
+      {
+       "name": "Fairfield",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 12389
+      },
+      {
+       "name": "Fayette",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1681
+      },
+      {
+       "name": "Franklin",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 73412
+      },
+      {
+       "name": "Fulton",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2900
+      },
+      {
+       "name": "Gallia",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1398
+      },
+      {
+       "name": "Geauga",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 8652
+      },
+      {
+       "name": "Greene",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 14004
+      },
+      {
+       "name": "Guernsey",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2235
+      },
+      {
+       "name": "Hamilton",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 49537
+      },
+      {
+       "name": "Hancock",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5837
+      },
+      {
+       "name": "Hardin",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1541
+      },
+      {
+       "name": "Harrison",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 847
+      },
+      {
+       "name": "Henry",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1977
+      },
+      {
+       "name": "Highland",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2424
+      },
+      {
+       "name": "Hocking",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2252
+      },
+      {
+       "name": "Holmes",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1631
+      },
+      {
+       "name": "Huron",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3866
+      },
+      {
+       "name": "Jackson",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2559
+      },
+      {
+       "name": "Jefferson",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4757
+      },
+      {
+       "name": "Knox",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4991
+      },
+      {
+       "name": "Lake",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 18097
+      },
+      {
+       "name": "Lawrence",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2382
+      },
+      {
+       "name": "Licking",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 13472
+      },
+      {
+       "name": "Logan",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5345
+      },
+      {
+       "name": "Lorain",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 24932
+      },
+      {
+       "name": "Lucas",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 23118
+      },
+      {
+       "name": "Madison",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3455
+      },
+      {
+       "name": "Mahoning",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 15530
+      },
+      {
+       "name": "Marion",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 4974
+      },
+      {
+       "name": "Medina",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 16117
+      },
+      {
+       "name": "Meigs",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1267
+      },
+      {
+       "name": "Mercer",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3868
+      },
+      {
+       "name": "Miami",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 8695
+      },
+      {
+       "name": "Monroe",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 904
+      },
+      {
+       "name": "Montgomery",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 20516
+      },
+      {
+       "name": "Morgan",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1081
+      },
+      {
+       "name": "Morrow",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2234
+      },
+      {
+       "name": "Muskingum",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5834
+      },
+      {
+       "name": "Noble",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 883
+      },
+      {
+       "name": "Ottawa",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3789
+      },
+      {
+       "name": "Paulding",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1331
+      },
+      {
+       "name": "Perry",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2144
+      },
+      {
+       "name": "Pickaway",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3427
+      },
+      {
+       "name": "Pike",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1642
+      },
+      {
+       "name": "Portage",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 10551
+      },
+      {
+       "name": "Preble",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2908
+      },
+      {
+       "name": "Putnam",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2951
+      },
+      {
+       "name": "Richland",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 9175
+      },
+      {
+       "name": "Ross",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5229
+      },
+      {
+       "name": "Sandusky",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3317
+      },
+      {
+       "name": "Scioto",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3245
+      },
+      {
+       "name": "Seneca",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2948
+      },
+      {
+       "name": "Shelby",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 3585
+      },
+      {
+       "name": "Stark",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 25408
+      },
+      {
+       "name": "Summit",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 35216
+      },
+      {
+       "name": "Trumbull",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 14481
+      },
+      {
+       "name": "Tuscarawas",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5861
+      },
+      {
+       "name": "Union",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 6573
+      },
+      {
+       "name": "Van Wert",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2329
+      },
+      {
+       "name": "Vinton",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 745
+      },
+      {
+       "name": "Warren",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 21861
+      },
+      {
+       "name": "Washington",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 5203
+      },
+      {
+       "name": "Wayne",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 7366
+      },
+      {
+       "name": "Williams",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 2228
+      },
+      {
+       "name": "Wood",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 8863
+      },
+      {
+       "name": "Wyandot",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": 1665
+      }
+     ],
+     "updated": "2026-10-22T17:51:07+00:00",
+     "tier": "tossup",
+     "precincts_reporting": 0,
+     "precincts_total": 8834,
+     "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes. Election-day ballots still to come are NOT included.",
+     "is_test_data": true,
+     "counted": 0
     }
    },
    "unitsExpected": 88

@@ -206,6 +206,13 @@ def main():
             pct_in += len(r["precincts_in"]); pct_all += len(r["precincts"])
         counties[cty] = rec
 
+    # party travels with the choice in the per-county block but was lost on the way up,
+    # so every candidate arrived at the board as "other" and nothing could be coloured.
+    party_of = {}
+    for races_ in results.values():
+        for r in races_.values():
+            for c, v in r["choices"].items():
+                party_of[c] = v["party"]
     state = {}
     for race, cnt in totals.items():
         tot = sum(cnt.values())
@@ -213,6 +220,7 @@ def main():
         counted_early = state_modes["Early Voting"] + state_modes["Absentee by Mail"]
         state[race] = {
             "choices": dict(cnt.most_common()),
+            "parties": {c: party_of.get(c, "O") for c in cnt},
             "total": tot,
             "modes": dict(state_modes),
             "precincts_reporting": pct_in, "precincts_total": pct_all,

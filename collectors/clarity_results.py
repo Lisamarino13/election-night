@@ -249,6 +249,11 @@ def build(st):
                 state_tot[race]["modes"].update(modes)
             counties[cty] = out
 
+        party_of = {}
+        for per in races.values():
+            for r in per.values():
+                for c, v in r["choices"].items():
+                    party_of[c] = v["party"]
         state = {}
         for race, s in state_tot.items():
             cast_tot = sum(cast.values()) if cast else None
@@ -256,6 +261,7 @@ def build(st):
             state[race] = {
                 "contest_name": found.get(race),
                 "choices": dict(s["choices"].most_common()),
+                "parties": {c: party_of.get(c, "O") for c in s["choices"]},
                 "total": sum(s["choices"].values()),
                 "modes": dict(s["modes"]),
                 "precincts_reporting": sum(v.get("precincts_reporting") or 0

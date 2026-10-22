@@ -548,7 +548,8 @@ async function loadEarly(){
                   srcFrom: (j.attribution && j.attribution.aggregator) || "",
                   srcUp: (j.attribution && j.attribution.upstream) || "",
                   partyAvailable: j.party_available !== false,
-                  asOf: j.as_of || null, through: j.through || null};
+                  asOf: j.as_of || null, through: j.through || null,
+                  daily: j.daily || null};
       try{
         const h = await fetch("data/ev-history-"+k+".json?t="+Date.now());
         if(h.ok){ const hj = await h.json(); EARLY[k].history = hj.years || null; }
@@ -579,6 +580,41 @@ function srcLine(e){
 // these is a vendor model. What the state does publish is turnout, and registered voters
 // make that a real denominator rather than a guess, so pace against 2022/2024 is the
 // signal here.
+// Day-by-day running totals against prior cycles. Only South Carolina publishes a column
+// per early-voting day in both its live file AND its archives, so this is the one state
+// where a genuine same-day-of-cycle comparison is possible rather than a percent-of-final.
+function dailyPace(e){
+  if(!e.daily || !e.history) return "";
+  const yrs = Object.keys(e.history).filter(y=>e.history[y].running && e.history[y].days).sort();
+  if(!yrs.length) return "";
+  const key = d => {const [m,dd,y]=d.split("/"); return y+m.padStart(2,"0")+dd.padStart(2,"0");};
+  const now = Object.keys(e.daily).sort((a,b)=>key(a).localeCompare(key(b)));
+  let run=0; const run26 = now.map(d=>(run+=e.daily[d], run));
+  const maxDays = Math.max(run26.length, ...yrs.map(y=>e.history[y].days.length));
+  const rows=[];
+  for(let i=0;i<maxDays;i++){
+    const cells = yrs.map(y=>{
+      const h=e.history[y];
+      return i<h.days.length ? h.running[h.days[i]] : null;
+    });
+    const mine = i<run26.length ? run26[i] : null;
+    const mid = yrs.filter(y=>+y%4===2).pop();
+    const base = mid && i<e.history[mid].days.length ? e.history[mid].running[e.history[mid].days[i]] : null;
+    rows.push(`<tr${mine==null?' class="sub"':""}><td>Day ${i+1}</td>
+      ${cells.map(v=>`<td class="fig">${v==null?"&mdash;":n(v)}</td>`).join("")}
+      <td class="fig b">${mine==null?"&mdash;":n(mine)}</td>
+      <td class="fig">${(mine!=null&&base)?`<b style="color:${mine>=base?"var(--d)":"var(--r)"}">${Math.round(mine/base*100)}%</b>`:""}</td></tr>`);
+  }
+  const mid = yrs.filter(y=>+y%4===2).pop();
+  return `<div class="scroll"><table class="evtab pace">
+    <thead><tr><th>Early voting day</th>${yrs.map(y=>`<th>${y}${+y%4===0?' <span class="cyc">pres</span>':""}</th>`).join("")}
+      <th>2026</th><th>vs ${mid||"—"}<br><span class="cyc">same day</span></th></tr></thead>
+    <tbody>${rows.join("")}</tbody></table>
+    <div class="streamline">Running total after each early-voting day. Every cycle shown ran
+      ${e.history[yrs[0]].days.length} days, so these are the same point in the calendar, not a
+      share of a final.</div></div>`;
+}
+
 function turnoutCard(k, st, e){
   const t = e.totals||{}, reg = t.registered||0;
   const ipRep = e.inPersonReported !== false;
@@ -633,7 +669,7 @@ function turnoutCard(k, st, e){
       turnout only. Any D/R split you see elsewhere for ${st.name} is a vendor model, not a count.</div>
     <div class="meter"><span>${e.through?"through "+e.through:"—"}</span>
       <span>turnout only</span></div>
-    ${pace}${cties.length?`<button class="evtoggle">${cties.length} counties &#9656;</button>`:""}
+    ${dailyPace(e) || pace}${cties.length?`<button class="evtoggle">${cties.length} counties &#9656;</button>`:""}
     <div class="evdetail" hidden>${tbl}</div>`;
   const tg=card.querySelector(".evtoggle");
   if(tg) tg.onclick=()=>{const dv=card.querySelector(".evdetail");dv.hidden=!dv.hidden;

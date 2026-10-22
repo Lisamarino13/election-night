@@ -35,8 +35,9 @@ once the data ends.
 
 FAILS CLOSED: any fetch or parse problem raises and writes nothing.
 """
-import json, csv, io, re, sys, pathlib, urllib.request
-from datetime import datetime, timezone
+import json, csv, io, re, sys, pathlib, urllib.request, zipfile
+import xml.etree.ElementTree as ET
+from datetime import datetime, timezone, date, timedelta
 
 PAGE = "https://scvotes.gov/elections-statistics/voter-participation/"
 UF_MAIL = "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/SC_county.csv"
@@ -44,6 +45,61 @@ UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit
                     "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
       "Accept-Encoding": "identity"}
 COUNTIES_EXPECTED = 46
+
+# Prior cycles. South Carolina had NO no-excuse early voting before 2022 — Act 150 created
+# it that May — so the 2020 archive contains absentee reports only and there is nothing to
+# compare. That is a fact about the state, not a gap in the data.
+HISTORY = {
+    2022: ("https://scvotes.gov/wp-content/uploads/2022/12/"
+           "2022-Historical-Absentee-EV-Reports.zip", "EV Stats (2022 GE"),
+    2024: ("https://scvotes.gov/wp-content/uploads/2025/06/"
+           "2024-Historical-Absentee-EV-Reports-1.zip", "2024-GE-Early-Voting"),
+}
+XLNS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
+
+
+def xlsx_rows(data):
+    """Minimal xlsx reader: zipped XML, stdlib only. The cron host has no pip."""
+    xz = zipfile.ZipFile(io.BytesIO(data))
+    shared = []
+    if "xl/sharedStrings.xml" in xz.namelist():
+        r = ET.fromstring(xz.read("xl/sharedStrings.xml"))
+        for si in r.findall(XLNS + "si"):
+            shared.append("".join(t.text or "" for t in si.iter(XLNS + "t")))
+    sheets = sorted(n for n in xz.namelist() if n.startswith("xl/worksheets/sheet"))
+    if not sheets:
+        raise RuntimeError("workbook has no worksheets")
+    sh = ET.fromstring(xz.read(sheets[0]))
+    out = []
+    for row in sh.find(XLNS + "sheetData"):
+        cells = {}
+        for c in row.findall(XLNS + "c"):
+            col = re.match(r"([A-Z]+)", c.get("r")).group(1)
+            if c.get("t") == "inlineStr":
+                is_ = c.find(XLNS + "is")
+                v = "".join(t.text or "" for t in is_.iter(XLNS + "t")) if is_ is not None else ""
+            elif c.get("t") == "s":
+                vv = c.find(XLNS + "v")
+                v = shared[int(vv.text)] if vv is not None else ""
+            else:
+                vv = c.find(XLNS + "v")
+                v = vv.text if vv is not None else ""
+            if v not in ("", None):
+                cells[col] = v
+        if cells:
+            out.append(cells)
+    return out
+
+
+def _coldate(v):
+    """A header cell that is a date: either 'mm/dd/yyyy' or an Excel serial number."""
+    v = (v or "").strip()
+    m = re.fullmatch(r"(\d{1,2})/(\d{1,2})/(\d{4})", v)
+    if m:
+        return date(int(m.group(3)), int(m.group(1)), int(m.group(2))).isoformat()
+    if re.fullmatch(r"\d{5}", v):            # Excel serial, epoch 1899-12-30
+        return (date(1899, 12, 30) + timedelta(days=int(v))).isoformat()
+    return None
 
 
 def get(url, timeout=120):
@@ -148,7 +204,101 @@ def mail_by_county():
     return out
 
 
+def history():
+    """Prior cycles, each with its own day-by-day series -> data/ev-history-SC.json."""
+    out = {"state": "SC", "unit": "county", "party_available": False, "years": {},
+           "notes": {"2020": "South Carolina had no no-excuse early voting before 2022 "
+                             "(Act 150, May 2022), so there is no 2020 early vote to "
+                             "compare — the 2020 archive holds absentee reports only"}}
+    for year, (zurl, needle) in sorted(HISTORY.items()):
+        z = zipfile.ZipFile(io.BytesIO(get(zurl, 180)))
+        names = [n for n in z.namelist() if needle in n and n.lower().endswith(".xlsx")
+                 and "__MACOSX" not in n]
+        if not names:
+            raise RuntimeError(f"{year}: no sheet matching {needle!r} in {zurl}")
+        rows = xlsx_rows(z.read(names[0]))
+        hdr_i = next((i for i, r in enumerate(rows[:12])
+                      if any(str(v).strip() in ("Jurisdiction", "County") for v in r.values())), None)
+        if hdr_i is None:
+            raise RuntimeError(f"{year}: no header row")
+        hdr = rows[hdr_i]
+        days = [(c, _coldate(v)) for c, v in hdr.items() if _coldate(v)]
+        days.sort(key=lambda x: x[1])
+        tot_col = next((c for c, v in hdr.items()
+                        if str(v).strip().lower().startswith("total")), None)
+        if not days or not tot_col:
+            raise RuntimeError(f"{year}: header has no day columns or no total ({hdr})")
+        num = lambda v: int(re.sub(r"[^\d-]", "", str(v or "")) or 0)
+
+        # TWO LAYOUTS. 2024 and 2026 put the jurisdiction in column A, the polling place in
+        # column C, and carry a "South Carolina" statewide row. 2022 has no statewide row at
+        # all: county rows are "<County> Total" and the rows beneath them are polling places
+        # with plain names. Detect which one this is rather than assume.
+        # The statewide row is called "South Carolina" in 2024/2026 and "Statewide Total"
+        # in 2022. Counting it as a county is how 2022 came to 47.
+        is_statewide = lambda v: re.sub(r"\s*total\s*$", "", v.strip(), flags=re.I).lower() in (
+            "south carolina", "statewide")
+        # Distinguish the layouts by what column C IS, read from the header — not by
+        # whether column C has data. In 2024/2026 it is "Poll Place"; in 2022 it is a DAY
+        # column holding counts, so testing for data there skipped every row and summed the
+        # counties to zero.
+        day_cols = {c for c, _ in days}
+        uses_col_c = ("C" not in day_cols
+                      and str(hdr.get("C", "")).strip().lower().startswith("poll"))
+        statewide, counties = None, {}
+        for r in rows[hdr_i + 1:]:
+            first = (r.get("A") or "").strip()
+            if not first:
+                continue
+            rec = {"total": num(r.get(tot_col)),
+                   "by_day": {d: num(r.get(c)) for c, d in days}}
+            if is_statewide(first):
+                statewide = rec
+                continue
+            if uses_col_c:
+                if (r.get("C") or "").strip():
+                    continue                  # polling-place sub-row
+                name = first
+            else:
+                if not first.lower().endswith("total"):
+                    continue                  # polling place under the county above it
+                name = re.sub(r"\s*total\s*$", "", first, flags=re.I)
+            counties[re.sub(r"^\d+\s+", "", name).strip().title()] = rec
+
+        summed = sum(c["total"] for c in counties.values())
+        if statewide is None:
+            # 2022 publishes no statewide row; build it from the counties and say so
+            by_day = {d: sum(c["by_day"].get(d, 0) for c in counties.values())
+                      for _, d in days}
+            statewide = {"total": summed, "by_day": by_day}
+        elif summed != statewide["total"]:
+            raise RuntimeError(f"{year}: counties sum to {summed:,}, statewide row says "
+                               f"{statewide['total']:,}")
+        if len(counties) != COUNTIES_EXPECTED:
+            raise RuntimeError(f"{year}: {len(counties)} counties, South Carolina has "
+                               f"{COUNTIES_EXPECTED}")
+        run, series = 0, {}
+        for d in [x[1] for x in days]:
+            run += statewide["by_day"][d]
+            series[d] = run
+        out["years"][str(year)] = {
+            "election": f"{year} General", "cycle": "presidential" if year % 4 == 0 else "midterm",
+            "counties": len(counties),
+            "state_totals": {"in_person": statewide["total"], "by_mail": 0,
+                             "total": statewide["total"], "registered": 0},
+            "daily": statewide["by_day"], "running": series,
+            "days": [x[1] for x in days], "source": zurl}
+        print(f"SC {year}: {len(counties)} counties, {len(days)} early-voting days, "
+              f"final in-person {statewide['total']:,}")
+    p = pathlib.Path(__file__).resolve().parent.parent / "data" / "ev-history-SC.json"
+    p.write_text(json.dumps(out, indent=1))
+    print(f"   -> {p.name}   (no 2020: early voting did not exist in SC until 2022)")
+    return 0
+
+
 def main():
+    if "--history" in sys.argv:
+        return history()
     url, label = find_csv()
     statewide, counties, days, report_date = parse(get(url))
     mail = mail_by_county()

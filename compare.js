@@ -14,6 +14,14 @@ const n  = v => v == null ? "—" : v.toLocaleString("en-US");
 const ab = v => v >= 1e6 ? (v/1e6).toFixed(v>=1e7?0:1)+"M" : v >= 1e3 ? Math.round(v/1e3)+"K" : String(v);
 const esc = s => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
 
+// Axis ceilings land on 1 / 2 / 2.5 / 5 x 10^n so the gridlines read as round
+// numbers. Dividing a ceiling into quarters gave ticks like 2.3M and 3.4M.
+function scale(max){
+  const raw = max/4, mag = Math.pow(10, Math.floor(Math.log10(raw))), nrm = raw/mag;
+  const step = (nrm<=1?1:nrm<=2?2:nrm<=2.5?2.5:nrm<=5?5:10)*mag;
+  return {step, top: Math.ceil(max/step)*step};
+}
+
 const SRC = [];
 const J = async p => { const r = await fetch(p + "?t=" + Date.now()); if(!r.ok) throw new Error(p+" "+r.status); return r.json(); };
 
@@ -46,17 +54,15 @@ function drawBars(host, rows, opts){
   const H = Math.min(360, Math.max(240, Math.round(W * 0.62)));
   const plotW = W - PAD.l - PAD.r, plotH = H - PAD.t - PAD.b;
   const max = Math.max(...rows.filter(r=>r.total!=null).map(r=>r.total), 1);
-  // a round ceiling so the gridlines land on readable numbers
-  const step = Math.pow(10, Math.floor(Math.log10(max)));
-  const top = Math.ceil(max / (step/2)) * (step/2);
+  const {step, top} = scale(max);
   const yOf = v => PAD.t + plotH - (v/top) * plotH;
 
   const svg = svgEl("svg", {viewBox:`0 0 ${W} ${H}`, width:W, height:H, role:"img",
     "aria-label":opts.aria});
   // gridlines + y labels
-  const ticks = 4;
+  const ticks = Math.round(top/step);
   for (let i=0;i<=ticks;i++){
-    const v = top*i/ticks, y = yOf(v);
+    const v = step*i, y = yOf(v);
     svg.appendChild(svgEl("line", {class:"gridline", x1:PAD.l, x2:W-PAD.r, y1:y, y2:y}));
     const t = svgEl("text", {class:"axlab", x:PAD.l-8, y:y+4, "text-anchor":"end"});
     t.textContent = i ? ab(v) : "0"; svg.appendChild(t);
@@ -113,15 +119,14 @@ function drawLines(host, series, opts){
   const plotW = W - PAD.l - PAD.r, plotH = H - PAD.t - PAD.b;
   const nDays = Math.max(...series.map(s => s.vals.length));
   const max = Math.max(...series.flatMap(s => s.vals), 1);
-  const step = Math.pow(10, Math.floor(Math.log10(max)));
-  const top = Math.ceil(max / (step/2)) * (step/2);
+  const {step, top} = scale(max);
   const xOf = i => PAD.l + (nDays===1?0:(i/(nDays-1))*plotW);
   const yOf = v => PAD.t + plotH - (v/top)*plotH;
 
   const svg = svgEl("svg", {viewBox:`0 0 ${W} ${H}`, width:W, height:H, role:"img",
     "aria-label":opts.aria});
-  for (let i=0;i<=4;i++){
-    const v = top*i/4, y = yOf(v);
+  for (let i=0, nt=Math.round(top/step); i<=nt; i++){
+    const v = step*i, y = yOf(v);
     svg.appendChild(svgEl("line", {class:"gridline", x1:PAD.l, x2:W-PAD.r, y1:y, y2:y}));
     const t = svgEl("text", {class:"axlab", x:PAD.l-8, y:y+4, "text-anchor":"end"});
     t.textContent = i ? ab(v) : "0"; svg.appendChild(t);
@@ -147,8 +152,11 @@ function drawLines(host, series, opts){
       svg.appendChild(svgEl("circle", {cx:xOf(i), cy:yOf(v), r:4.5, fill:col,
         stroke:"var(--panel)", "stroke-width":2}));
     });
-    const li = s.vals.length-1;
-    const lab = svgEl("text", {class:"dlab", x:xOf(li)+9, y:yOf(s.vals[li])+5, fill:col});
+    const li = s.vals.length-1, lx = xOf(li), ly = yOf(s.vals[li]);
+    const room = (W - PAD.r + 34) - lx;          // does "2026" fit to the right?
+    const lab = svgEl("text", {class:"dlab", fill:col,
+      x: room >= 36 ? lx+9 : lx-9, y: ly+5,
+      "text-anchor": room >= 36 ? "start" : "end"});
     lab.textContent = s.year; svg.appendChild(lab);
   });
   // one crosshair hit column per day
@@ -179,7 +187,7 @@ function panel({title, races, lede, legend, caption, table, draw}){
   const sec = document.createElement("section");
   sec.className = "panel";
   sec.innerHTML = `
-    <div class="phd"><h2>${esc(title)}</h2><div class="races">${esc(races)}</div></div>
+    <div class="phd"><h2>${esc(title)}</h2><div class="races">${races}</div></div>
     <p class="lede">${lede}</p>
     <div class="legend">${legend}</div>
     <figure><div class="plot"></div><figcaption>${caption}</figcaption></figure>
@@ -220,7 +228,7 @@ const LEGEND = key("mid","2022 midterm") + key("pres","presidential (2020 / 2024
     ];
     const pres = rows.find(r=>r.year===2024).total, now = rows.find(r=>r.year===2026).total;
     sections.push(panel({
-      title:"Georgia", races:"Governor &middot; Senate",
+      title:"Georgia", races:"Governor \u00b7 Senate",
       lede:`<b class="fig">${n(now)}</b> early and mail ballots so far, against
         <b class="fig">${n(pres)}</b> for all of 2024 — <b>${Math.round(now/pres*100)}%</b> of a
         presidential cycle's entire early vote, with voting still open. Georgia has no
@@ -258,7 +266,7 @@ const LEGEND = key("mid","2022 midterm") + key("pres","presidential (2020 / 2024
     const ratio = (mid && now && i>=0) ? Math.round(now.vals[i]/mid.vals[i]*100) : null;
     const nDays = Math.max(...ser.map(s=>s.vals.length));
     sections.push(panel({
-      title:"South Carolina", races:"Governor &middot; Senate",
+      title:"South Carolina", races:"Governor \u00b7 Senate",
       lede: ratio ? `Through <b>day ${i+1}</b> of early voting, <b class="fig">${n(now.vals[i])}</b>
         ballots — against <b class="fig">${n(mid.vals[i])}</b> on the same day of 2022.
         That is <b>${ratio}%</b> of the last midterm's pace, and ahead of where the 2024

@@ -2,35 +2,148 @@
  "state": "MN",
  "unit": "state",
  "party_available": false,
- "fetched": "2026-10-20T03:52:01+00:00",
  "years": {
   "2024": {
    "election": "2024 General",
    "cycle": "presidential",
    "statewide_only": true,
-   "as_of": "11/4/2024",
+   "streams_split": false,
    "state_totals": {
-    "mail_returned": {
-     "total": 1174224
+    "returned_combined": {
+     "total": 1310773
     },
-    "early_in_person": {
-     "total": 0
-    },
-    "by_mail": 1174224,
+    "by_mail": 1310773,
     "in_person": 0,
-    "total": 1174224,
+    "total": 1310773,
     "registered": 0,
     "in_person_reported": false
    },
-   "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2024/US.csv",
-   "upstream": "https://www.sos.state.mn.us/election-administration-campaigns/data-maps/absentee-data/"
+   "detail": {
+    "transmitted": 1452508,
+    "returned": 1330958,
+    "accepted": 1310773,
+    "rejected": 20172
+   },
+   "source": "https://www.sos.mn.gov/media/fmkbeaok/statewide-absentee-voting-statistics-2014-to-2026.xlsx"
+  },
+  "2022": {
+   "election": "2022 General",
+   "cycle": "midterm",
+   "statewide_only": true,
+   "streams_split": false,
+   "state_totals": {
+    "returned_combined": {
+     "total": 673360
+    },
+    "by_mail": 673360,
+    "in_person": 0,
+    "total": 673360,
+    "registered": 0,
+    "in_person_reported": false
+   },
+   "detail": {
+    "transmitted": 792581,
+    "returned": 687062,
+    "accepted": 673360,
+    "rejected": 13698
+   },
+   "source": "https://www.sos.mn.gov/media/fmkbeaok/statewide-absentee-voting-statistics-2014-to-2026.xlsx"
+  },
+  "2020": {
+   "election": "2020 General",
+   "cycle": "presidential",
+   "statewide_only": true,
+   "streams_split": false,
+   "state_totals": {
+    "returned_combined": {
+     "total": 1909701
+    },
+    "by_mail": 1909701,
+    "in_person": 0,
+    "total": 1909701,
+    "registered": 0,
+    "in_person_reported": false
+   },
+   "detail": {
+    "transmitted": 2193411,
+    "returned": 1929945,
+    "accepted": 1909701,
+    "rejected": 20240
+   },
+   "source": "https://www.sos.mn.gov/media/fmkbeaok/statewide-absentee-voting-statistics-2014-to-2026.xlsx"
+  },
+  "2018": {
+   "election": "2018 General",
+   "cycle": "midterm",
+   "statewide_only": true,
+   "streams_split": false,
+   "state_totals": {
+    "returned_combined": {
+     "total": 638581
+    },
+    "by_mail": 638581,
+    "in_person": 0,
+    "total": 638581,
+    "registered": 0,
+    "in_person_reported": false
+   },
+   "detail": {
+    "transmitted": 730875,
+    "returned": 652053,
+    "accepted": 638581,
+    "rejected": 13468
+   },
+   "source": "https://www.sos.mn.gov/media/fmkbeaok/statewide-absentee-voting-statistics-2014-to-2026.xlsx"
+  },
+  "2016": {
+   "election": "2016 General",
+   "cycle": "presidential",
+   "statewide_only": true,
+   "streams_split": false,
+   "state_totals": {
+    "returned_combined": {
+     "total": 676722
+    },
+    "by_mail": 676722,
+    "in_person": 0,
+    "total": 676722,
+    "registered": 0,
+    "in_person_reported": false
+   },
+   "detail": {
+    "transmitted": 742021,
+    "returned": 689228,
+    "accepted": 676722,
+    "rejected": 12461
+   },
+   "source": "https://www.sos.mn.gov/media/fmkbeaok/statewide-absentee-voting-statistics-2014-to-2026.xlsx"
+  },
+  "2014": {
+   "election": "2014 General",
+   "cycle": "midterm",
+   "statewide_only": true,
+   "streams_split": false,
+   "state_totals": {
+    "returned_combined": {
+     "total": 235212
+    },
+    "by_mail": 235212,
+    "in_person": 0,
+    "total": 235212,
+    "registered": 0,
+    "in_person_reported": false
+   },
+   "detail": {
+    "transmitted": 290309,
+    "returned": 243519,
+    "accepted": 235212,
+    "rejected": 8307
+   },
+   "source": "https://www.sos.mn.gov/media/fmkbeaok/statewide-absentee-voting-statistics-2014-to-2026.xlsx"
   }
  },
- "attribution": {
-  "aggregator": "UF Election Lab (election.lab.ufl.edu)"
- },
+ "fetched": "2026-10-22T15:06:56+00:00",
  "notes": {
-  "scope": "statewide only \u2014 the Lab keeps county files for the current cycle only",
-  "cycle": "2024 is presidential; it is a ceiling, not a midterm comparator"
+  "scope": "statewide only; Minnesota's absentee covers mail and in-person absentee together, so accepted is the total early vote and no mail/in-person split exists in this file"
  }
 }

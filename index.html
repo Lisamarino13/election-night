@@ -734,7 +734,19 @@ function renderEV(){
     const EMPTY_PS = {total:0};
     const pcts = ps => {const q = ps || EMPTY_PS;
       return ["R","D","NPA"].map(p=>({p, v: q.total ? (q[p]||0)/q.total : 0}));};
-    const nowMail = ret, nowTot = nowMail.total || 0;
+    // Compare TOTAL to TOTAL. This row used mail-only while the historical rows it is
+    // measured against are mail + in-person combined for any year whose source had no
+    // receipt methods (Iowa 2018/2020). "9% of 2018" was Iowa's mail against 2018's mail
+    // AND in-person — apples to oranges, and it understated the pace badly. The card above
+    // already leads with the combined figure; this now agrees with it.
+    const nowMail = totEarly, nowTot = totEarly.total || 0;
+    // each historical year's own total, however that year's source split it
+    const yearTotal = y => {
+      const t = st_(y);
+      const comb = (t.returned_combined || {}).total;
+      if (comb) return comb;
+      return ((t.mail_returned||{}).total||0) + ((t.early_in_person||{}).total||0);
+    };
     let paceTable = "";
     if (hist){
       const yrs = Object.keys(hist).sort();
@@ -744,7 +756,13 @@ function renderEV(){
       // against the most recent MIDTERM, and presidential years are marked as context.
       const baseYr = yrs.filter(y=>+y%4===2).pop() || yrs[0];
       const st_ = y => (hist[y] && hist[y].state_totals) || {};
-      const base = baseYr && st_(baseYr).mail_returned;
+      let base = null;
+      if (baseYr){
+        const bt = st_(baseYr);
+        const bm = bt.mail_returned, bi = bt.early_in_person, bc = bt.returned_combined;
+        base = bc ? bc : (bm || bi) ? (()=>{const o={total:yearTotal(baseYr)};
+          ["R","D","NPA"].forEach(k=>{o[k]=((bm||{})[k]||0)+((bi||{})[k]||0);}); return o;})() : null;
+      }
       const line = (lab, ps, pace, diffAgainst) => {
         const mine = pcts(ps);
         const other = diffAgainst ? pcts(diffAgainst) : null;
@@ -769,18 +787,21 @@ function renderEV(){
                       t_.returned_combined, "", null);
         }
         const ps = t_.mail_returned, ip = t_.early_in_person;
-        return line(tag, ps, "", null) +
+        const yt = {total: yearTotal(y)};
+        ["R","D","NPA"].forEach(k=>{yt[k]=((ps||{})[k]||0)+((ip||{})[k]||0);});
+        return line(tag, yt, "", null) +
+          (ps ? `<tr class="sub"><td>&nbsp;&nbsp;mail</td><td class="fig">${n(ps.total||0)}</td>
+            ${pcts(ps).map(x=>`<td class="fig">${(x.v*100).toFixed(0)}%</td>`).join("")}<td></td><td></td></tr>` : "") +
           (ip ? `<tr class="sub"><td>&nbsp;&nbsp;in-person early</td><td class="fig">${n(ip.total||0)}</td>
             ${pcts(ip).map(x=>`<td class="fig">${(x.v*100).toFixed(0)}%</td>`).join("")}<td></td><td></td></tr>` : "");
       }).join("");
       const paceCells = yrs.map(y=>{
-        const b_ = st_(y).mail_returned || st_(y).returned_combined || EMPTY_PS;
-        const f = b_.total||1;
+        const f = yearTotal(y)||1;
         return `${(nowTot/f*100).toFixed(0)}% of ${y}`;
       }).join(" \u00b7 ");
       const dhdr = `&Delta; vs ${baseYr}<br><span class="cyc">last midterm</span>`;
       paceTable = `<div class="scroll"><table class="evtab pace">
-        <thead><tr><th>Mail returned</th><th>Total</th><th>R</th><th>D</th><th>NPA</th><th>Pace</th><th>${dhdr}</th></tr></thead>
+        <thead><tr><th>Early vote</th><th>Total</th><th>R</th><th>D</th><th>NPA</th><th>Pace</th><th>${dhdr}</th></tr></thead>
         <tbody>${rowsH}${line("2026 to date", nowMail, paceCells, base)}</tbody></table></div>`;
     }
 

@@ -233,7 +233,36 @@ footer p{margin:0 0 7px}
   .scroll table td:first-child{position:sticky;left:0;background:var(--panel);
     box-shadow:1px 0 0 var(--line)}
   .scroll table th:first-child{z-index:2}
-  .evfoot,.ehint,.srcnote{font-size:13.5px}
+  .evfoot,.ehint,.srcnote{font-size:14.5px;line-height:1.6}
+
+  /* Breathing room. Everything above was correctly sized but packed too tightly
+     to scan on a phone: the figure rows, the table cells and the card padding
+     were all tuned for a desktop grid where the eye has horizontal space. */
+  body{line-height:1.55}
+  .states{gap:18px}
+  .st,.evcard{padding:18px 16px}
+  .evrow{gap:10px;margin:16px 0}
+  .evrow.lead{padding-bottom:14px;margin-bottom:8px}
+  .evrow.lead .evtot{font-size:30px}
+  .evtot{font-size:23px}
+  .slab{font-size:12.5px;letter-spacing:.07em}
+  .share.ev{height:14px;margin:3px 0 1px}
+  .evpcts{font-size:15px;gap:14px;margin-top:2px}
+  .scroll table th{font-size:12px;padding:8px 11px}
+  .scroll table td{padding:9px 11px;font-size:15px}
+  table.evtab{font-size:15px;margin-top:16px}
+  table.evtab .dim,table.evtab .diffs{font-size:14px}
+  table.evtab.pace tr.sub td{font-size:14px;padding-top:2px}
+  .streamline{font-size:14px;margin-top:14px;padding-top:12px;line-height:1.55}
+  .srcnote{padding:11px 13px;margin-top:14px}
+  .evtoggle{margin-top:16px;padding:8px 13px;font-size:13.5px;min-height:38px}
+  .stname{font-size:26px}
+  .facestats{padding-top:14px;margin-top:14px}
+  .fnum{font-size:17px}
+  .meter,.warn{margin-top:12px;padding-top:12px;font-size:13.5px}
+  .earlybox{padding:14px 14px;margin-top:16px}
+  .erow{font-size:14.5px;margin-bottom:9px}
+  footer{margin-top:40px;font-size:13.5px;line-height:1.6}
 }
 @media(max-width:430px){
   h1{font-size:30px}

@@ -51,7 +51,7 @@ say(){ printf '%s %s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$*" | tee -a "$LOG";
 say "=== early-vote pull starting ==="
 ok=0; pending=0; failed=0; failed_names=""
 
-for c in fl_vbm.py nc_absentee.py me_absentee.py ia_absentee.py tx_earlyvote.py; do
+for c in fl_vbm.py nc_absentee.py me_absentee.py ia_absentee.py sc_earlyvote.py tx_earlyvote.py; do
   [ -f "$c" ] || { say "SKIP $c (not present)"; continue; }
   out=$("$PY" "$c" 2>&1); rc=$?
   printf '%s\n' "$out" >> "$LOG"

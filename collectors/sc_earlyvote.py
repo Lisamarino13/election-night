@@ -21,7 +21,14 @@ D/R split shown for SC on national trackers is TargetSmart's model, not a count,
 deliberately not reproduced here. The state does publish absentee statistics by RACE in a
 separate file; that is not folded in, because race is not party.
 
-This is EARLY IN-PERSON voting only — absentee/mail is a separate SC report.
+MAIL COMES FROM A SECOND SOURCE, and the reason is worth stating. South Carolina's own
+absentee workbook publishes applications REQUESTED and ballots ISSUED, but not ballots
+RETURNED — and returned is the number that matters. The UF Election Lab does carry an
+accepted figure for SC, so mail is taken from their county file and merged in per county.
+In-person stays with the state, because only the state gives the day-by-day columns.
+
+Both sources are named in the payload. If the Lab is unreachable the in-person half still
+publishes and mail is reported as unavailable rather than zero.
 
 The file is ~10MB, nearly all of it empty rows padding to Excel's limit, so parsing stops
 once the data ends.
@@ -32,6 +39,7 @@ import json, csv, io, re, sys, pathlib, urllib.request
 from datetime import datetime, timezone
 
 PAGE = "https://scvotes.gov/elections-statistics/voter-participation/"
+UF_MAIL = "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/SC_county.csv"
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
                     "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
       "Accept-Encoding": "identity"}
@@ -72,9 +80,15 @@ def parse(body):
             if re.fullmatch(r"\d{1,2}/\d{1,2}/\d{4}", c.strip())]
     if not days:
         raise RuntimeError(f"no date columns in header {hdr} — layout changed")
-    tot_i = next((i for i, c in enumerate(hdr) if c.strip().lower() == "total voters"), None)
-    if tot_i is None:
-        raise RuntimeError("no 'Total Voters' column — layout changed")
+    # The header for this column has already changed once mid-cycle: it was "Total Voters"
+    # on 10-20 and "Total " (trailing space) on 10-21. Match on the prefix rather than the
+    # exact string, and fall back to the column after the last date.
+    tot_i = next((i for i, c in enumerate(hdr)
+                  if c.strip().lower().startswith("total")), None)
+    if tot_i is None and days:
+        tot_i = days[-1][0] + 1
+    if tot_i is None or tot_i >= len(hdr):
+        raise RuntimeError(f"no total column in header {hdr} — layout changed")
 
     report_date = None
     for r in rows[:hdr_i]:
@@ -112,11 +126,41 @@ def parse(body):
     return statewide, counties, [d for _, d in days], report_date
 
 
+def mail_by_county():
+    """Mail requested/returned per county from the Election Lab. ({} if unreachable.)"""
+    import csv as _csv, io as _io
+    try:
+        rows = list(_csv.DictReader(_io.StringIO(get(UF_MAIL, 60).decode("utf-8", "ignore"))))
+    except Exception as e:
+        print(f"   SC: mail unavailable ({e}) — publishing in-person only", file=sys.stderr)
+        return {}
+    if not rows or "accept_all" not in rows[0]:
+        print("   SC: Lab mail file has no accept_all column — publishing in-person only",
+              file=sys.stderr)
+        return {}
+    out = {}
+    for r in rows:
+        name = (r.get("county") or "").strip().title()
+        if not name:
+            continue
+        num = lambda k: int((r.get(k) or "0").replace(",", "") or 0)
+        out[name] = {"returned": num("accept_all"), "requested": num("request_all")}
+    return out
+
+
 def main():
     url, label = find_csv()
     statewide, counties, days, report_date = parse(get(url))
+    mail = mail_by_county()
+    mail_ret = sum(v["returned"] for v in mail.values())
+    mail_req = sum(v["requested"] for v in mail.values())
+    # Prefer the newest DAY COLUMN over the file's own "Report Date" header: on 10-22 the
+    # header said 10/20 while the table already carried a 10/21 column. The data is the
+    # better authority on how current it is.
     as_of = None
-    if report_date:
+    if days:
+        as_of = datetime.strptime(days[-1], "%m/%d/%Y").date().isoformat()
+    elif report_date:
         as_of = datetime.strptime(report_date, "%m/%d/%Y").date().isoformat()
 
     payload = {
@@ -126,14 +170,22 @@ def main():
         "party_available": False,          # South Carolina has no party registration
         "outstanding_available": False,
         "in_person": True, "in_person_reported": True,
-        "counties": {c: {"in_person": v["total"], "by_mail": 0, "total": v["total"],
-                         "registered": None, "by_day": v["by_day"]}
+        "counties": {c: {"in_person": v["total"],
+                         "by_mail": mail.get(c, {}).get("returned", 0),
+                         "total": v["total"] + mail.get(c, {}).get("returned", 0),
+                         "registered": None, "by_day": v["by_day"],
+                         "outstanding_derived": max(mail.get(c, {}).get("requested", 0)
+                                                    - mail.get(c, {}).get("returned", 0), 0)}
                      for c, v in counties.items()},
-        "state_totals": {"registered": 0, "by_mail": 0,
-                         "in_person": statewide["total"], "total": statewide["total"]},
+        "state_totals": {"registered": 0, "by_mail": mail_ret,
+                         "in_person": statewide["total"],
+                         "total": statewide["total"] + mail_ret,
+                         "requested": mail_req},
         "daily": statewide["by_day"],
-        "source": url,
-        "notes": {"scope": "early IN-PERSON voting only; absentee/mail is a separate SC report",
+        "source": url, "mail_source": UF_MAIL if mail else None,
+        "notes": {"scope": "in-person early voting from the state's own daily report; mail "
+                           "from the UF Election Lab, because South Carolina's absentee "
+                           "workbook publishes requested and issued but not returned",
                   "party": "South Carolina does not register by party — any D/R split "
                            "published for SC elsewhere is a vendor model, not a count"},
     }
@@ -142,6 +194,12 @@ def main():
     print(f"SC ok: {len(counties)} counties, as of {payload['as_of']} "
           f"({len(days)} early-voting day{'s' if len(days)!=1 else ''})")
     print(f"   in-person early {statewide['total']:>9,}   [turnout only, no party registration]")
+    if mail:
+        print(f"   mail returned   {mail_ret:>9,}   (Election Lab; SC publishes issued, "
+              f"not returned)")
+        print(f"   TOTAL EARLY     {statewide['total'] + mail_ret:>9,}")
+    else:
+        print(f"   mail returned   {'unavailable':>9}")
     for d in days:
         print(f"      {d}  {statewide['by_day'][d]:>9,}")
     print(f"   -> {out.name}")

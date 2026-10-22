@@ -38,8 +38,43 @@ def party_of(name, hint):
     return p if p in PARTY_OK else "O"
 
 
+EARLY_KEYS = ("Early Voting", "Absentee by Mail", "early", "mail")
+EDAY_KEYS = ("Election Day", "Provisional", "election_day", "provisional")
+
+
+def split_modes(choices, candidates):
+    """(early+mail per candidate, election-day per candidate) where the feed splits them."""
+    idx = {c["name"]: i for i, c in enumerate(candidates)}
+    k = len(candidates)
+    early, eday = [0] * k, [0] * k
+    seen = False
+    for name, v in (choices or {}).items():
+        i = idx.get(name)
+        if i is None or not isinstance(v, dict):
+            continue
+        bm = v.get("by_mode")
+        if not isinstance(bm, dict):
+            continue
+        seen = True
+        for m, n in bm.items():
+            if m in EARLY_KEYS:
+                early[i] += n or 0
+            elif m in EDAY_KEYS:
+                eday[i] += n or 0
+    return (early, eday) if seen else (None, None)
+
+
 def county_rows(race_block, counties, candidates):
-    """[{name, votes[], outstanding}] in the candidate order the board will draw."""
+    """[{name, votes[], outstanding, remainder[]}] in the order the board will draw.
+
+    `remainder` is the part that matters. Testing the method against North Carolina
+    2024 showed the SIZE of the remainder matters far less than the vote share you
+    spend it at: spending it at a county's blended share (early plus election day
+    together) was off by 70,000 votes at the halfway mark, while spending the
+    election-day part at the county's ELECTION-DAY share was within 3,000. So the
+    remainder is carried as components, each with the share vector it should be spent
+    at, rather than as one number.
+    """
     idx = {c["name"]: i for i, c in enumerate(candidates)}
     rows = []
     for cty, rec in sorted(counties.items()):
@@ -53,17 +88,38 @@ def county_rows(race_block, counties, candidates):
                 i = idx.get(name)
                 if i is not None:
                     votes[i] += (v if isinstance(v, int) else (v or {}).get("votes", 0)) or 0
-        # the measured remainder for this county, never 0-for-unknown
-        parts = []
+        rr = r if isinstance(r, dict) else {}
+        early_v, eday_v = split_modes(rr.get("choices"), candidates)
+        norm = lambda a: (sum(a) and [x / sum(a) for x in a]) or None
+
+        remainder = []
+        # 1. ballots already cast early or by mail and not yet counted, plus any
+        #    outstanding mail / provisional / UOCAVA the state publishes. Measured.
+        measured = 0
         for key in ("early_and_mail_left", "mail_outstanding",
                     "outstanding_provisional", "outstanding_uocava"):
-            v = (r if isinstance(r, dict) else {}).get(key)
+            v = rr.get(key)
             if v is None:
                 v = rec.get(key)
             if isinstance(v, int):
-                parts.append(v)
-        out = sum(parts) if parts else None
-        rows.append({"name": cty, "votes": votes, "outstanding": out})
+                measured += v
+        if measured:
+            remainder.append({"n": measured, "basis": "measured",
+                              "share": norm(early_v) if early_v else None})
+        # 2. election-day ballots from precincts not yet reporting, scaled from what
+        #    the reporting precincts have already produced. An estimate, and labelled
+        #    one - it cannot be made at all until some precinct has reported.
+        pr = rr.get("precincts_reporting") or rec.get("precincts_reporting") or 0
+        pt = rr.get("precincts_total") or rec.get("precincts_total") or 0
+        if pr and pt and pt > pr and eday_v and sum(eday_v):
+            est = round(sum(eday_v) * (pt - pr) / pr)
+            if est:
+                remainder.append({"n": est, "basis": "scaled from precincts reporting",
+                                  "share": norm(eday_v)})
+        out = sum(c["n"] for c in remainder) if remainder else None
+        rows.append({"name": cty, "votes": votes, "outstanding": out,
+                     "remainder": remainder or None,
+                     "precincts_reporting": pr or None, "precincts_total": pt or None})
     return rows
 
 
@@ -109,8 +165,10 @@ def main():
             # what the outstanding figure does and does not include, carried with it
             blk["outstanding_basis"] = ("measured early and mail not yet counted, plus any "
                                         "outstanding mail, provisional and UOCAVA the state "
-                                        "publishes. Election-day ballots still to come are "
-                                        "NOT included.")
+                                        "publishes, plus election-day ballots from precincts "
+                                        "not yet reporting, scaled from what the reporting "
+                                        "precincts produced. Each part is spent at the vote "
+                                        "share of its OWN mode.")
             blk["is_test_data"] = bool(d.get("is_test_data"))
             blk["counted"] = tot.get("total")
         entry["source"] = d.get("source")

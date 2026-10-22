@@ -420,6 +420,27 @@ const n = v => (v==null||isNaN(v)) ? "—" : Math.round(v).toLocaleString();
 const pct = v => (v==null||isNaN(v)) ? "—" : (v*100).toFixed(1)+"%";
 const col = p => /^(R|REP)$/i.test(p) ? "var(--r)" : /^(D|DEM|PET)$/i.test(p) ? "var(--d)" : "var(--o)";
 
+// How a county's remaining ballots are spent decides the projection, more than how
+// many there are. Tested against North Carolina 2024: spending the remainder at a
+// county's BLENDED share (early and election day together) was 70,000 votes off at the
+// halfway mark, while spending the election-day part at that county's own election-day
+// share was within 3,000. So when a county carries its remainder as components, each
+// with the share vector of the mode it belongs to, each is spent at its own share.
+function spend(c, v, tot, k, out){
+  const parts = c.remainder;
+  if (Array.isArray(parts) && parts.length){
+    for (const part of parts){
+      const n = part.n || 0; if (!n) continue;
+      const sh = (Array.isArray(part.share) && part.share.length === k) ? part.share : null;
+      for (let i=0;i<k;i++)
+        out[i] += n * (sh ? (sh[i]||0) : (tot>0 ? (v[i]||0)/tot : 0));
+    }
+    return;
+  }
+  const J = (c.outstanding==null) ? 0 : c.outstanding;   // one undifferentiated pile
+  for (let i=0;i<k;i++) out[i] += tot>0 ? (v[i]||0)/tot*J : 0;
+}
+
 function project(st){
   const k = st.candidates.length;
   const counted = Array(k).fill(0), proj = Array(k).fill(0);
@@ -429,7 +450,8 @@ function project(st){
     for (let i=0;i<k;i++) counted[i] += v[i]||0;
     const J = (c.outstanding==null) ? 0 : c.outstanding;
     if (c.outstanding==null) unknownCty++; else { outstanding += J; known++; }
-    for (let i=0;i<k;i++) proj[i] += (v[i]||0) + (tot>0 ? (v[i]||0)/tot*J : 0);
+    for (let i=0;i<k;i++) proj[i] += v[i]||0;
+    spend(c, v, tot, k, proj);
   }
   const totC = counted.reduce((a,b)=>a+b,0);
   return {counted, proj, totC, outstanding, known, unknownCty,
@@ -446,9 +468,11 @@ function margins(st, p){
   // this is the whole method: WHERE the remaining vote sits, not how much of it there is.
   let net = 0;
   for (const c of (st.counties||[])){
-    const J = c.outstanding; if(!J) continue;
-    const v = c.votes||[], t = v.reduce((a,b)=>a+(b||0),0); if(!t) continue;
-    net += J * ((v[i1]||0)/t - (v[i2]||0)/t);
+    if(!c.outstanding) continue;
+    const v = c.votes||[], t = v.reduce((a,b)=>a+(b||0),0);
+    const add = Array(k).fill(0);
+    spend(c, v, t, k, add);          // same per-mode rule the projection uses
+    net += add[i1] - add[i2];
   }
   const projLead = lead + net;
   return {leader:i1, runner:i2, lead, net, projLead, flips: lead>0 && projLead<0};
@@ -1006,14 +1030,18 @@ async function renderTakeaways(){
 let REPLAY = null, RP_RACE = "president", RP_STEP = 0;
 
 function rpProject(rows, k){
+  // the same spend() the live board uses, so the panel tests the real method and not
+  // a second implementation that could quietly disagree with it
   const counted = Array(k).fill(0), proj = Array(k).fill(0);
-  let left = 0;
+  let left = 0, est = 0;
   for (const r of rows){
-    const v = r.votes, t = v.reduce((a,b)=>a+b,0), J = r.outstanding || 0;
-    left += J;
-    for (let i=0;i<k;i++){ counted[i]+=v[i]; proj[i]+=v[i] + (t ? v[i]/t*J : 0); }
+    const v = r.votes, t = v.reduce((a,b)=>a+b,0);
+    left += r.outstanding || 0;
+    est += (r.remainder || []).reduce((a,p)=>a+(p.n||0), 0);
+    for (let i=0;i<k;i++){ counted[i]+=v[i]; proj[i]+=v[i]; }
+    spend(r, v, t, k, proj);
   }
-  return {counted, proj, left};
+  return {counted, proj, left, est};
 }
 const rpTop2 = a => a.map((v,i)=>[v,i]).sort((x,y)=>y[0]-x[0]).slice(0,2);
 
@@ -1030,7 +1058,7 @@ async function renderReplay(){
   const cands = REPLAY.races[RP_RACE], k = cands.length;
   const snap = REPLAY.steps[Math.min(RP_STEP, REPLAY.steps.length-1)];
   const rows = snap.races[RP_RACE] || [];
-  const {counted, proj, left} = rpProject(rows, k);
+  const {counted, proj, left, est} = rpProject(rows, k);
   const fin = REPLAY.finals[RP_RACE];
   const finOrder = Object.entries(fin).sort((a,b)=>b[1]-a[1]);
   const [fw, fwv] = finOrder[0], fRun = finOrder[1];
@@ -1064,10 +1092,12 @@ async function renderReplay(){
         <b class="fig rpbig" style="color:${col(cName)}">${cName.split(" ").pop()} +${nf(cLead)}</b>
         <span class="rpsub">${nf(counted.reduce((a,b)=>a+b,0))} votes in ·
           ${reporting.toLocaleString()}/${pAll.toLocaleString()} precincts</span></div>
-      <div class="rpcell"><span class="slab">Projected</span>
+      <div class="rpcell"><span class="slab">Projected from here</span>
         <b class="fig rpbig" style="color:${col(pName)}">${pName.split(" ").pop()} +${nf(pLead)}</b>
-        <span class="rpsub">${nf(left)} ballots still out, spread across the counties
-          that hold them</span></div>
+        <span class="rpsub">${est ? `${nf(est)} ballots estimated still out, scaled from
+          the precincts already in and spent at each county's election-day rate`
+          : "no precinct has reported yet, so there is nothing to scale from \u2014 only the early vote is in"}
+          ${left ? ` &middot; truly left: ${nf(left)}` : ""}</span></div>
       <div class="rpcell"><span class="slab">What actually happened</span>
         <b class="fig rpbig" style="color:${col(fw)}">${fw.split(" ").pop()} +${nf(fwv-fRun[1])}</b>
         <span class="rpsub ${right?"rpok":"rpbad"}">${right

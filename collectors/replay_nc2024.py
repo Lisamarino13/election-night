@@ -59,11 +59,22 @@ def num(v):
 
 
 def load():
+    """Per PRECINCT, not per county.
+
+    The first cut of this replay revealed whole counties at a time, so a county was
+    either finished or untouched and no county was ever partly in. That made it useless
+    for testing any rule that scales the remainder by precincts reported - there was
+    never a partial fraction to scale from. North Carolina reports precinct by precinct,
+    so this does too.
+    """
     z = zipfile.ZipFile(io.BytesIO(fetch()))
     nm = [n for n in z.namelist() if n.lower().endswith(".txt")][0]
-    # county -> race -> choice -> {"early":n, "eday":n}, plus precinct inventory
+    # county -> race -> choice -> {"early":n}  (county-level dump at poll close)
+    # county -> precinct -> race -> choice -> eday votes
     data = collections.defaultdict(lambda: collections.defaultdict(
         lambda: collections.defaultdict(lambda: {"early": 0, "eday": 0})))
+    pct_votes = collections.defaultdict(lambda: collections.defaultdict(
+        lambda: collections.defaultdict(collections.Counter)))
     party = {}
     precincts = collections.defaultdict(set)
     with z.open(nm) as f:
@@ -83,24 +94,30 @@ def load():
             d = data[cty][race][ch]
             d["early"] += early
             d["eday"] += eday
-            if (row.get("Real Precinct") or "").strip().upper() != "N":
-                p = (row.get("Precinct") or "").strip()
-                if p:
-                    precincts[cty].add(p)
+            p = (row.get("Precinct") or "").strip()
+            real = (row.get("Real Precinct") or "").strip().upper() != "N"
+            if real and p:
+                precincts[cty].add(p)
+                pct_votes[cty][p][race][ch] += eday
+            else:
+                # ballots the state has not assigned to a precinct still have to land
+                # somewhere, or they vanish from the replay's own totals
+                pct_votes[cty]["__unassigned__"][race][ch] += eday
     if len(data) < 90:
         raise RuntimeError(f"{len(data)} counties - NC has 100; refusing")
-    return data, party, {c: len(p) for c, p in precincts.items()}
+    return data, party, {c: len(p) for c, p in precincts.items()}, pct_votes
 
 
 def build():
-    data, party, pcts = load()
+    data, party, pcts, pct_votes = load()
     races = sorted({r for per in data.values() for r in per})
-    # Counties finish election-day counting at different times; a fixed shuffle keeps
-    # the replay reproducible while still arriving in no meaningful order.
     counties = sorted(data)
+    # Every real precinct in the state, in one reproducible arrival order. Precincts
+    # from the same county do NOT arrive together, which is the point: it is the
+    # partially-reported county that tests whether a remainder can be scaled.
     rnd = random.Random(20241105)
-    order = counties[:]
-    rnd.shuffle(order)
+    all_pcts = [(c, p) for c in counties for p in sorted(pct_votes[c]) if p != "__unassigned__"]
+    rnd.shuffle(all_pcts)
 
     out = {"state": "NC", "election": "2024 General", "built": datetime.now(
         timezone.utc).isoformat(timespec="seconds"), "source": URL,
@@ -119,29 +136,59 @@ def build():
 
     for step in range(STEPS + 1):
         # step 0 is the early and mail dump, before any election-day precinct is in
-        done = set(order[:round(len(order) * step / STEPS)])
+        n_in = round(len(all_pcts) * step / STEPS)
+        done = set(all_pcts[:n_in])
+        in_by_cty = collections.Counter(c for c, _ in done)
+        # unassigned ballots are released with the last step, as they are reconciled late
+        all_in = (step == STEPS)
         snap = {"step": step,
-                "label": ("Early and mail vote only" if step == 0 else
-                          f"{len(done)} of {len(counties)} counties finished counting"),
-                "counties_done": len(done), "races": {}}
+                "label": ("Early and mail vote only \u2014 no election-day precinct in yet"
+                          if step == 0 else
+                          f"{n_in:,} of {len(all_pcts):,} precincts reporting"),
+                "precincts_in": n_in, "precincts_all": len(all_pcts), "races": {}}
         for race in races:
             rows = []
+            cand = [c["name"] for c in out["races"][race]]
             for cty in counties:
                 per = data[cty].get(race)
                 if not per:
                     continue
-                cand = [c["name"] for c in out["races"][race]]
-                votes, left = [], 0
-                for c in cand:
-                    d = per.get(c, {"early": 0, "eday": 0})
-                    got = d["early"] + (d["eday"] if cty in done else 0)
-                    votes.append(got)
-                    if cty not in done:
-                        left += d["eday"]
+                votes = [per.get(c, {"early": 0})["early"] for c in cand]
+                left = 0
+                for p, byrace in pct_votes[cty].items():
+                    got = byrace.get(race)
+                    if not got:
+                        continue
+                    here = (p, ) and (cty, p) in done
+                    if p == "__unassigned__":
+                        here = all_in
+                    for i, c in enumerate(cand):
+                        v = got.get(c, 0)
+                        if here:
+                            votes[i] += v
+                        else:
+                            left += v
+                # What the method would actually have had on the night: the
+                # election-day ballots from precincts not yet in, scaled from what the
+                # reporting precincts produced, spent at this county's ELECTION-DAY
+                # share. `outstanding` stays the true remainder so the panel can show
+                # the estimate against the truth rather than marking its own homework.
+                pr, ptot = in_by_cty.get(cty, 0), pcts.get(cty, 0)
+                eday = [votes[i] - (per.get(cand[i], {"early": 0})["early"]) 
+                        for i in range(len(cand))]
+                edtot = sum(eday)
+                remainder = []
+                if pr and ptot > pr and edtot > 0:
+                    est = round(edtot * (ptot - pr) / pr)
+                    if est:
+                        remainder.append({"n": est,
+                                          "basis": "scaled from precincts reporting",
+                                          "share": [round(x / edtot, 4) for x in eday]})
                 rows.append({"name": cty, "votes": votes,
                              "outstanding": left if left else None,
-                             "precincts_total": pcts.get(cty, 0),
-                             "precincts_reporting": pcts.get(cty, 0) if cty in done else 0})
+                             "remainder": remainder or None,
+                             "precincts_total": ptot,
+                             "precincts_reporting": pr})
             snap["races"][race] = rows
         out["steps"].append(snap)
 

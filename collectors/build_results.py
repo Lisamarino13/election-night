@@ -42,12 +42,29 @@ EARLY_KEYS = ("Early Voting", "Absentee by Mail", "early", "mail")
 EDAY_KEYS = ("Election Day", "Provisional", "election_day", "provisional")
 
 
-def split_modes(choices, candidates):
-    """(early+mail per candidate, election-day per candidate) where the feed splits them."""
+def split_modes(choices, candidates, by_mode_race=None):
+    """(early+mail per candidate, election-day per candidate) where the split is known.
+
+    Two shapes arrive here. North Carolina and Clarity put a by_mode dict on each
+    choice. Ohio cannot - its feed has no per-contest mode split - so its collector
+    reconstructs one by subtracting a banked early-vote baseline, and hands it over as
+    by_mode_race. Either way the election-day figure that leaves this function contains
+    no early ballots, which is the only thing the precinct scaling requires.
+    """
     idx = {c["name"]: i for i, c in enumerate(candidates)}
     k = len(candidates)
     early, eday = [0] * k, [0] * k
     seen = False
+    if isinstance(by_mode_race, dict) and by_mode_race:
+        for name, v in by_mode_race.items():
+            i = idx.get(name)
+            if i is None or not isinstance(v, dict):
+                continue
+            seen = True
+            early[i] += v.get("early") or 0
+            eday[i] += v.get("election_day") or 0
+        if seen:
+            return early, eday
     for name, v in (choices or {}).items():
         i = idx.get(name)
         if i is None or not isinstance(v, dict):
@@ -89,7 +106,8 @@ def county_rows(race_block, counties, candidates):
                 if i is not None:
                     votes[i] += (v if isinstance(v, int) else (v or {}).get("votes", 0)) or 0
         rr = r if isinstance(r, dict) else {}
-        early_v, eday_v = split_modes(rr.get("choices"), candidates)
+        early_v, eday_v = split_modes(rr.get("choices"), candidates,
+                                      (rec.get("by_mode_races") or {}).get(race_block))
         norm = lambda a: (sum(a) and [x / sum(a) for x in a]) or None
 
         remainder = []

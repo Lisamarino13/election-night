@@ -181,6 +181,49 @@ def parse_xml(body):
     return meta, counties, races, found, choice_party
 
 
+def baseline(counties_races, precincts_reporting_total, stamp):
+    """Capture each county's EARLY vote per contest, once, before any precinct reports.
+
+    Ohio publishes a contest's votes as a single Total per county - no mode split - so
+    on its own the feed cannot say which part of a county's total is early and which is
+    election-day. Dividing that total by the precinct fraction would scale the early
+    vote too, which is already complete, and that is the one mistake that flips a race
+    on the night.
+
+    But Ohio counts absentee BEFORE election day, and reports election-day precincts in
+    their own column. So while that column reads zero, whatever is on the board IS the
+    early vote. Captured once at that moment, every later election-day figure is exact
+    subtraction rather than an approximation - size and party share both.
+
+    The file is written once and never overwritten while it holds votes: a later run
+    must not mistake a half-counted board for the baseline.
+    """
+    p = pathlib.Path(__file__).resolve().parent.parent / "data" / "baseline-OH.json"
+    if p.exists():
+        try:
+            prev = json.loads(p.read_text())
+            if prev.get("counties"):
+                return prev
+        except Exception:
+            pass                                   # a corrupt baseline is re-taken
+    if precincts_reporting_total:
+        return None                                # too late - election day is under way
+    total = sum(v for per in counties_races.values()
+                for ch in per.values() for v in ch.values())
+    if total <= 0:
+        return None                                # nothing counted yet; nothing to bank
+    doc = {"state": "OH", "captured": stamp, "precincts_reporting": 0,
+           "note": ("Each county's vote per contest at the moment Ohio had counted its "
+                    "absentee ballots and no election-day precinct had reported. Used to "
+                    "separate election-day votes from early ones, which this feed does "
+                    "not do itself."),
+           "counties": {c: {r: dict(ch) for r, ch in per.items()}
+                        for c, per in counties_races.items()}}
+    p.write_text(json.dumps(doc, indent=1) + "\n")
+    print(f"   banked the early-vote baseline ({total:,} votes, 0 precincts in) -> {p.name}")
+    return doc
+
+
 def early_cast():
     p = pathlib.Path(__file__).resolve().parent.parent / "data" / "early-OH.json"
     if not p.exists():
@@ -204,6 +247,10 @@ def main():
     summary = summary_csv()
     cast, cast_as_of = early_cast()
 
+    pr_total = sum((info.get("precincts_reporting") or 0) for info in cty_xml.values())
+    base = baseline(races, pr_total, meta["generated"])
+    bcty = (base or {}).get("counties") or {}
+
     counties, state = {}, collections.defaultdict(collections.Counter)
     for cty, info in sorted(cty_xml.items()):
         s = summary.get(cty, {})
@@ -224,6 +271,13 @@ def main():
         }
         for race, choices in races.get(cty, {}).items():
             rec["races"][race] = dict(sorted(choices.items(), key=lambda x: -x[1]))
+            # with the baseline banked, every contest's votes split exactly into the
+            # early vote that was already in and the election-day vote since
+            b = (bcty.get(cty) or {}).get(race) or {}
+            if b:
+                rec.setdefault("by_mode_races", {})[race] = {
+                    ch: {"early": b.get(ch, 0), "election_day": v - b.get(ch, 0)}
+                    for ch, v in choices.items()}
             state[race].update(choices)
         counties[cty] = rec
 
@@ -253,11 +307,16 @@ def main():
         "early_cast_as_of": cast_as_of,
         "counties": counties, "state_totals": totals,
         "source": XML, "summary_source": CSV,
+        "early_baseline": {"captured": (base or {}).get("captured"),
+                           "have": bool(bcty)},
         "notes": {
-            "modes": "Ohio reports a contest's votes as one Total per county. The "
-                     "absentee and provisional split is published on the COUNTY, not on "
-                     "the contest, so early_and_mail_counted uses the county's absentee "
-                     "ballots - an approximation, unlike North Carolina's exact split.",
+            "modes": "Ohio reports a contest's votes as one Total per county, with the "
+                     "absentee split published on the COUNTY rather than the contest. To "
+                     "separate a contest's election-day votes from its early ones, each "
+                     "county's totals are banked once while Ohio's election-day precinct "
+                     "count still reads zero - at which point the board IS the early vote. "
+                     "Everything after that is exact subtraction, so the election-day "
+                     "figure that gets scaled by precincts never contains early ballots.",
             "outstanding": "Outstanding UOCAVA absentees and provisionals are Ohio's own "
                            "figures, not derived here.",
             "election_day": "Ballots still to come on election day are not estimated; "

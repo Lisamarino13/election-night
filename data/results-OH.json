@@ -3,10 +3,10 @@
  "unit": "county",
  "source_kind": "ohio-enr",
  "election": "2026 General",
- "feed_generated": "2026-10-22T05:48:32Z",
+ "feed_generated": "2026-10-22T09:51:33Z",
  "feed_status": "UnofficialPartial",
  "is_test_data": true,
- "fetched": "2026-10-22T17:48:54+00:00",
+ "fetched": "2026-10-22T21:52:19+00:00",
  "early_cast_as_of": "10/21/2026",
  "counties": {
   "Adams": {
@@ -3238,8 +3238,12 @@
  },
  "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
  "summary_source": "https://liveresults.ohiosos.gov/Api/v1/Contest/GetElectionSummaryCsv",
+ "early_baseline": {
+  "captured": null,
+  "have": false
+ },
  "notes": {
-  "modes": "Ohio reports a contest's votes as one Total per county. The absentee and provisional split is published on the COUNTY, not on the contest, so early_and_mail_counted uses the county's absentee ballots - an approximation, unlike North Carolina's exact split.",
+  "modes": "Ohio reports a contest's votes as one Total per county, with the absentee split published on the COUNTY rather than the contest. To separate a contest's election-day votes from its early ones, each county's totals are banked once while Ohio's election-day precinct count still reads zero - at which point the board IS the early vote. Everything after that is exact subtraction, so the election-day figure that gets scaled by precincts never contains early ballots.",
   "outstanding": "Outstanding UOCAVA absentees and provisionals are Ohio's own figures, not derived here.",
   "election_day": "Ballots still to come on election day are not estimated; only precincts not yet reporting are shown.",
   "test": "feed_status and is_test_data come from the feed. Ohio runs mock elections before election day; a board must not show mock votes as real, so this flag travels with the data."

@@ -155,7 +155,10 @@ def pull(st, meta):
                "attribution": {
                    "aggregator": "UF Election Lab (election.lab.ufl.edu)",
                    "upstream": m.get("data_source") or "unstated",
-                   "note": m.get("notes") or ""},
+                   # the CSV writes "NA" for "no note"; rendering that literally put
+                   # "How this is counted: NA" on cards that have nothing to caveat
+                   "note": ("" if (m.get("notes") or "").strip().upper() in ("", "NA")
+                            else m["notes"].strip())},
                "notes": {"outstanding": "derived as mail requested minus mail returned; "
                                         "not a figure the state publishes directly"}}
     if party:

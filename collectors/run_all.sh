@@ -72,6 +72,17 @@ uf=$("$PY" uf_earlyvote.py 2>&1); urc=$?
 printf '%s\n' "$uf" >> "$LOG"
 say "UFLAB   $(printf '%s' "$uf" | tail -1)"
 
+# Race, age and gender of the early vote, from the same UF national file. Only a few
+# states record race at registration (GA, NC and LA for 2026), so this writes nothing
+# for the rest. It is turnout composition, never a result.
+demo=$("$PY" uf_demographics.py 2>&1); drc=$?
+printf '%s\n' "$demo" >> "$LOG"
+if [ $drc -eq 0 ]; then
+  say "DEMOG   $(printf '%s' "$demo" | grep -c '^  wrote') state(s) with race/age/gender"
+else
+  say "DEMOG   no demographics written -- $(printf '%s' "$demo" | tail -1)"
+fi
+
 # Pick up any hand-downloaded files before ingest. States behind
 # bot-management cannot be fetched here; whatever is in data/manual/ gets parsed.
 man=$("$PY" manual_import.py 2>&1); mrc=$?

@@ -1,0 +1,118 @@
+{
+ "state": "LA",
+ "fetched": "2026-10-22T16:46:00+00:00",
+ "note": "Who has voted early, not how they voted. No state counts ballots before election day.",
+ "stream_labels": {
+  "accept": "mail returned",
+  "inperson": "in-person early",
+  "voted": "all early + mail"
+ },
+ "years": {
+  "2024": {
+   "state": "LA",
+   "year": 2024,
+   "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2024/US.csv",
+   "upstream": "https://www.sos.la.gov/ElectionsAndVoting/Pages/EarlyVotingStatisticsStatewide.aspx",
+   "as_of": "11/4/2024",
+   "turnout_2022": null,
+   "streams": {
+    "accept": {
+     "total": 119563
+    },
+    "inperson": {
+     "total": 849799
+    },
+    "voted": {
+     "total": 969362,
+     "race": {
+      "counts": {
+       "nh_white": 679282,
+       "nh_black": 246766,
+       "hispanic": 0,
+       "nh_asian": 0,
+       "nh_native_american": 0,
+       "nh_other": 43314
+      },
+      "total": 969362,
+      "labels": {
+       "nh_white": "White",
+       "nh_black": "Black",
+       "hispanic": "Hispanic",
+       "nh_asian": "Asian",
+       "nh_native_american": "Native American",
+       "nh_other": "Other / multiple / unknown"
+      },
+      "coverage": 1.0
+     },
+     "gender": {
+      "counts": {
+       "male": 412752,
+       "female": 556057,
+       "gender_unknown": 553
+      },
+      "total": 969362,
+      "labels": {
+       "male": "Male",
+       "female": "Female",
+       "gender_unknown": "Unknown"
+      },
+      "coverage": 1.0
+     }
+    }
+   }
+  },
+  "2026": {
+   "state": "LA",
+   "year": 2026,
+   "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/US.csv",
+   "upstream": "https://www.sos.la.gov/elections-voting/early-voting-statistics-statewide",
+   "as_of": "10/22/2026",
+   "turnout_2022": 1410466,
+   "streams": {
+    "accept": {
+     "total": 56477
+    },
+    "inperson": {
+     "total": 119236
+    },
+    "voted": {
+     "total": 175713,
+     "race": {
+      "counts": {
+       "nh_white": 113789,
+       "nh_black": 55706,
+       "hispanic": 0,
+       "nh_asian": 0,
+       "nh_native_american": 0,
+       "nh_other": 6218
+      },
+      "total": 175713,
+      "labels": {
+       "nh_white": "White",
+       "nh_black": "Black",
+       "hispanic": "Hispanic",
+       "nh_asian": "Asian",
+       "nh_native_american": "Native American",
+       "nh_other": "Other / multiple / unknown"
+      },
+      "coverage": 1.0
+     },
+     "gender": {
+      "counts": {
+       "male": 76287,
+       "female": 99362,
+       "gender_unknown": 0
+      },
+      "total": 175649,
+      "labels": {
+       "male": "Male",
+       "female": "Female",
+       "gender_unknown": "Unknown"
+      },
+      "coverage": 0.9996
+     }
+    }
+   }
+  }
+ }
+}

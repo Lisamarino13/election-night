@@ -1,0 +1,350 @@
+{
+ "state": "GA",
+ "fetched": "2026-10-22T16:46:00+00:00",
+ "note": "Who has voted early, not how they voted. No state counts ballots before election day.",
+ "stream_labels": {
+  "accept": "mail returned",
+  "inperson": "in-person early",
+  "voted": "all early + mail"
+ },
+ "years": {
+  "2024": {
+   "state": "GA",
+   "year": 2024,
+   "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2024/US.csv",
+   "upstream": "https://mvp.sos.ga.gov/s/voter-absentee-files",
+   "as_of": "11/5/2024",
+   "turnout_2022": null,
+   "streams": {
+    "accept": {
+     "total": 265648,
+     "race": {
+      "counts": {
+       "nh_white": 148416,
+       "nh_black": 74035,
+       "hispanic": 5876,
+       "nh_asian": 11199,
+       "nh_native_american": 1255,
+       "nh_other": 24866
+      },
+      "total": 265647,
+      "labels": {
+       "nh_white": "White",
+       "nh_black": "Black",
+       "hispanic": "Hispanic",
+       "nh_asian": "Asian",
+       "nh_native_american": "Native American",
+       "nh_other": "Other / multiple / unknown"
+      },
+      "coverage": 1.0
+     },
+     "age": {
+      "counts": {
+       "age_1": 29363,
+       "age_2": 32164,
+       "age_3": 63354,
+       "age_4": 140100
+      },
+      "total": 264981,
+      "labels": {
+       "age_1": "18\u201325",
+       "age_2": "26\u201340",
+       "age_3": "41\u201365",
+       "age_4": "over 65"
+      },
+      "coverage": 0.9975
+     },
+     "gender": {
+      "counts": {
+       "male": 108546,
+       "female": 155227,
+       "gender_unknown": 1875
+      },
+      "total": 265648,
+      "labels": {
+       "male": "Male",
+       "female": "Female",
+       "gender_unknown": "Unknown"
+      },
+      "coverage": 1.0
+     }
+    },
+    "inperson": {
+     "total": 3765655,
+     "race": {
+      "counts": {
+       "nh_white": 2179324,
+       "nh_black": 987768,
+       "hispanic": 121911,
+       "nh_asian": 102892,
+       "nh_native_american": 20710,
+       "nh_other": 353013
+      },
+      "total": 3765618,
+      "labels": {
+       "nh_white": "White",
+       "nh_black": "Black",
+       "hispanic": "Hispanic",
+       "nh_asian": "Asian",
+       "nh_native_american": "Native American",
+       "nh_other": "Other / multiple / unknown"
+      },
+      "coverage": 1.0
+     },
+     "age": {
+      "counts": {
+       "age_1": 350575,
+       "age_2": 737822,
+       "age_3": 1700100,
+       "age_4": 953922
+      },
+      "total": 3742419,
+      "labels": {
+       "age_1": "18\u201325",
+       "age_2": "26\u201340",
+       "age_3": "41\u201365",
+       "age_4": "over 65"
+      },
+      "coverage": 0.9938
+     },
+     "gender": {
+      "counts": {
+       "male": 1644764,
+       "female": 2088461,
+       "gender_unknown": 32430
+      },
+      "total": 3765655,
+      "labels": {
+       "male": "Male",
+       "female": "Female",
+       "gender_unknown": "Unknown"
+      },
+      "coverage": 1.0
+     }
+    },
+    "voted": {
+     "total": 4031303,
+     "race": {
+      "counts": {
+       "nh_white": 2327740,
+       "nh_black": 1061803,
+       "hispanic": 127787,
+       "nh_asian": 114091,
+       "nh_native_american": 21965,
+       "nh_other": 377879
+      },
+      "total": 4031265,
+      "labels": {
+       "nh_white": "White",
+       "nh_black": "Black",
+       "hispanic": "Hispanic",
+       "nh_asian": "Asian",
+       "nh_native_american": "Native American",
+       "nh_other": "Other / multiple / unknown"
+      },
+      "coverage": 1.0
+     },
+     "age": {
+      "counts": {
+       "age_1": 379938,
+       "age_2": 769986,
+       "age_3": 1763454,
+       "age_4": 1094022
+      },
+      "total": 4007400,
+      "labels": {
+       "age_1": "18\u201325",
+       "age_2": "26\u201340",
+       "age_3": "41\u201365",
+       "age_4": "over 65"
+      },
+      "coverage": 0.9941
+     },
+     "gender": {
+      "counts": {
+       "male": 1753310,
+       "female": 2243688,
+       "gender_unknown": 34305
+      },
+      "total": 4031303,
+      "labels": {
+       "male": "Male",
+       "female": "Female",
+       "gender_unknown": "Unknown"
+      },
+      "coverage": 1.0
+     }
+    }
+   }
+  },
+  "2026": {
+   "state": "GA",
+   "year": 2026,
+   "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/US.csv",
+   "upstream": "https://mvp.sos.ga.gov/s/voter-absentee-files",
+   "as_of": "10/22/2026",
+   "turnout_2022": 3964926,
+   "streams": {
+    "accept": {
+     "total": 62716,
+     "race": {
+      "counts": {
+       "nh_white": 35914,
+       "nh_black": 19500,
+       "hispanic": 946,
+       "nh_asian": 1614,
+       "nh_native_american": 219,
+       "nh_other": 4523
+      },
+      "total": 62716,
+      "labels": {
+       "nh_white": "White",
+       "nh_black": "Black",
+       "hispanic": "Hispanic",
+       "nh_asian": "Asian",
+       "nh_native_american": "Native American",
+       "nh_other": "Other / multiple / unknown"
+      },
+      "coverage": 1.0
+     },
+     "age": {
+      "counts": {
+       "age_1": 1533,
+       "age_2": 2971,
+       "age_3": 10854,
+       "age_4": 47103
+      },
+      "total": 62461,
+      "labels": {
+       "age_1": "18\u201325",
+       "age_2": "26\u201340",
+       "age_3": "41\u201365",
+       "age_4": "over 65"
+      },
+      "coverage": 0.9959
+     },
+     "gender": {
+      "counts": {
+       "male": 26413,
+       "female": 35875,
+       "gender_unknown": 428
+      },
+      "total": 62716,
+      "labels": {
+       "male": "Male",
+       "female": "Female",
+       "gender_unknown": "Unknown"
+      },
+      "coverage": 1.0
+     }
+    },
+    "inperson": {
+     "total": 1267739,
+     "race": {
+      "counts": {
+       "nh_white": 664414,
+       "nh_black": 426815,
+       "hispanic": 36959,
+       "nh_asian": 29718,
+       "nh_native_american": 7175,
+       "nh_other": 102652
+      },
+      "total": 1267733,
+      "labels": {
+       "nh_white": "White",
+       "nh_black": "Black",
+       "hispanic": "Hispanic",
+       "nh_asian": "Asian",
+       "nh_native_american": "Native American",
+       "nh_other": "Other / multiple / unknown"
+      },
+      "coverage": 1.0
+     },
+     "age": {
+      "counts": {
+       "age_1": 57191,
+       "age_2": 140092,
+       "age_3": 528020,
+       "age_4": 533738
+      },
+      "total": 1259041,
+      "labels": {
+       "age_1": "18\u201325",
+       "age_2": "26\u201340",
+       "age_3": "41\u201365",
+       "age_4": "over 65"
+      },
+      "coverage": 0.9931
+     },
+     "gender": {
+      "counts": {
+       "male": 561418,
+       "female": 695746,
+       "gender_unknown": 10575
+      },
+      "total": 1267739,
+      "labels": {
+       "male": "Male",
+       "female": "Female",
+       "gender_unknown": "Unknown"
+      },
+      "coverage": 1.0
+     }
+    },
+    "voted": {
+     "total": 1330455,
+     "race": {
+      "counts": {
+       "nh_white": 700328,
+       "nh_black": 446315,
+       "hispanic": 37905,
+       "nh_asian": 31332,
+       "nh_native_american": 7394,
+       "nh_other": 107175
+      },
+      "total": 1330449,
+      "labels": {
+       "nh_white": "White",
+       "nh_black": "Black",
+       "hispanic": "Hispanic",
+       "nh_asian": "Asian",
+       "nh_native_american": "Native American",
+       "nh_other": "Other / multiple / unknown"
+      },
+      "coverage": 1.0
+     },
+     "age": {
+      "counts": {
+       "age_1": 58724,
+       "age_2": 143063,
+       "age_3": 538874,
+       "age_4": 580841
+      },
+      "total": 1321502,
+      "labels": {
+       "age_1": "18\u201325",
+       "age_2": "26\u201340",
+       "age_3": "41\u201365",
+       "age_4": "over 65"
+      },
+      "coverage": 0.9933
+     },
+     "gender": {
+      "counts": {
+       "male": 587831,
+       "female": 731621,
+       "gender_unknown": 11003
+      },
+      "total": 1330455,
+      "labels": {
+       "male": "Male",
+       "female": "Female",
+       "gender_unknown": "Unknown"
+      },
+      "coverage": 1.0
+     }
+    }
+   }
+  }
+ }
+}

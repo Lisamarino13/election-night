@@ -183,6 +183,59 @@ function drawLines(host, series, opts){
   host.replaceChildren(svg);
 }
 
+
+// ---- shares: a composition compared across two cycles -----------------------
+// Horizontal bars, because the category labels are words rather than years and
+// a phone has far more room across than a rotated axis label gives.
+function drawShares(host, groups, series, opts){
+  const W = Math.max(280, host.clientWidth);
+  const labW = Math.min(150, Math.max(96, Math.round(W*0.30)));
+  const PAD = {t:6, r:46, b:26, l:labW};
+  const rowH = series.length * 15 + 16;
+  const H = PAD.t + PAD.b + groups.length * rowH;
+  const plotW = W - PAD.l - PAD.r;
+  const max = Math.max(...groups.flatMap(g => series.map(s => g.vals[s.key] || 0)), 0.01);
+  const {step, top} = scale(max*100);
+  const xOf = p => PAD.l + (p*100/top) * plotW;
+
+  const svg = svgEl("svg", {viewBox:`0 0 ${W} ${H}`, width:W, height:H, role:"img",
+    "aria-label":opts.aria});
+  for (let i=0, nt=Math.round(top/step); i<=nt; i++){
+    const x = PAD.l + (i/nt)*plotW;
+    svg.appendChild(svgEl("line", {class:"gridline", x1:x, x2:x, y1:PAD.t, y2:H-PAD.b}));
+    const t = svgEl("text", {class:"axlab", x, y:H-PAD.b+15, "text-anchor":"middle"});
+    t.textContent = Math.round(step*i) + "%"; svg.appendChild(t);
+  }
+  groups.forEach((g, gi) => {
+    const y0 = PAD.t + gi*rowH + 7;
+    const lab = svgEl("text", {class:"axlab", x:PAD.l-9, y:y0 + (series.length*15)/2 + 1,
+      "text-anchor":"end", style:"fill:var(--fg);font-size:13px"});
+    lab.textContent = g.label; svg.appendChild(lab);
+    series.forEach((s, si) => {
+      const p = g.vals[s.key];
+      if (p == null) return;
+      const y = y0 + si*15, h = 11, col = PAL[s.cycle];
+      svg.appendChild(svgEl("path", {d:barPath(PAD.l, y, Math.max(1, xOf(p)-PAD.l), h, 3),
+        fill: col}));
+      const v = svgEl("text", {class:"fig", x:xOf(p)+7, y:y+h-1,
+        style:"font-size:12.5px;fill:var(--fg)"});
+      v.textContent = (p*100).toFixed(1) + "%"; svg.appendChild(v);
+      const hit = svgEl("rect", {x:PAD.l, y:y-2, width:plotW, height:h+4, fill:"transparent"});
+      const html = `<b>${esc(g.label)}</b>` + series.map(s2 => {
+        const q = g.vals[s2.key];
+        return q==null ? "" : `<div class="k"><i style="background:${PAL[s2.cycle]}"></i>
+          <span>${esc(s2.label)}</span> <span class="fig">${(q*100).toFixed(1)}% &middot;
+          ${n(g.counts[s2.key])}</span></div>`;
+      }).join("");
+      hit.addEventListener("pointerenter", e => showTip(e, html));
+      hit.addEventListener("pointermove", e => showTip(e, html));
+      hit.addEventListener("pointerleave", hideTip);
+      svg.appendChild(hit);
+    });
+  });
+  host.replaceChildren(svg);
+}
+
 // ---- panels ----------------------------------------------------------------
 function panel({title, races, lede, legend, caption, table, draw}){
   const sec = document.createElement("section");
@@ -336,6 +389,93 @@ async function renderCharts(panels){
     sections.push(sec);
     jump.push(`<a href="#st-${code}">${code}</a>`);
   }
+
+
+  // ---------- who has voted early, where a state records it ----------
+  // Only a few states record race at registration. This is turnout composition,
+  // not a result: no state counts ballots before election day, so a share here
+  // says who has shown up, never how they voted.
+  const demoPanels = [];
+  for (const code of ORDER){
+    let d = null;
+    try{ d = await J("data/demographics-"+code+".json"); }catch(e){ continue; }
+    const yrs = Object.keys(d.years||{}).sort();
+    if (!yrs.length) continue;
+    const latest = yrs[yrs.length-1];
+    const vt = (y, stream) => ((((d.years[y]||{}).streams||{})[stream]||{}).race) || null;
+    const nowR = vt(latest, "voted");
+    if (!nowR) continue;
+
+    const series = yrs.filter(y => vt(y,"voted")).map(y => ({
+      key:y, label:y + (+y%4===0 ? " final" : (+y===2026 ? " so far" : "")),
+      cycle: cycleOf(y)
+    }));
+    const keys = Object.keys(nowR.counts);
+    const groups = keys
+      .map(k => ({
+        label: nowR.labels[k], k,
+        vals: Object.fromEntries(series.map(sr => {
+          const r = vt(sr.key,"voted");
+          return [sr.key, r ? r.counts[k]/r.total : null];
+        })),
+        counts: Object.fromEntries(series.map(sr => {
+          const r = vt(sr.key,"voted");
+          return [sr.key, r ? r.counts[k] : null];
+        })),
+      }))
+      .sort((a,b) => (b.vals[latest]||0) - (a.vals[latest]||0));
+
+    const prev = series.length > 1 ? series[series.length-2].key : null;
+    const blk = groups.find(g => g.k === "nh_black");
+    const shift = (blk && prev && blk.vals[prev] != null)
+      ? (blk.vals[latest] - blk.vals[prev]) * 100 : null;
+
+    // mail against in person: the two streams differ sharply and pooling hides it
+    const mail = vt(latest,"accept"), ip = vt(latest,"inperson");
+    const streamLine = (mail && ip && blk) ? `
+      <p class="lede" style="margin-top:9px">By stream: mail returned is
+        <b>${(mail.counts.nh_black/mail.total*100).toFixed(1)}%</b> Black
+        (${n(mail.total)} ballots), in-person early
+        <b>${(ip.counts.nh_black/ip.total*100).toFixed(1)}%</b> (${n(ip.total)}).</p>` : "";
+
+    const legend = series.map(sr => key(sr.cycle, sr.label)).join("");
+    const lede = shift != null
+      ? `Black voters are <b>${(blk.vals[latest]*100).toFixed(1)}%</b> of ${latest}'s early
+         vote so far, against <b>${(blk.vals[prev]*100).toFixed(1)}%</b> in ${prev} —
+         <b>${shift>0?"+":"−"}${Math.abs(shift).toFixed(1)}</b> points.
+         ${prev && +prev%4===0 ? `${prev} is a completed presidential cycle and ${latest} is
+           days old, so expect this gap to move as the window runs.` : ""}`
+      : `Who has voted early so far, by race.`;
+
+    const sec = panel({
+      title: STATES[code] ? STATES[code].name : code,
+      races: (STATES[code] ? STATES[code].races : "") + " · by race",
+      lede: lede + streamLine,
+      legend,
+      caption: `Share of each cycle's early vote. This is who has voted, not how they
+        voted — no state counts ballots before election day, so nothing here is a result
+        or a projection. Only Georgia, North Carolina and Louisiana record race at
+        registration for 2026; the rest of the board cannot show this at all.
+        ${prev ? `${prev} is a completed cycle and ${latest} is still running.` : ""}`,
+      table: `<table><thead><tr><th>Group</th>
+        ${series.map(sr=>`<th>${sr.label}</th>`).join("")}
+        ${prev?"<th>change</th>":""}</tr></thead><tbody>
+        ${groups.map(g=>`<tr><td>${esc(g.label)}</td>
+          ${series.map(sr=>`<td class="fig">${g.vals[sr.key]==null?'<span class="dim">—</span>'
+            :`${(g.vals[sr.key]*100).toFixed(1)}% <span class="dim">${n(g.counts[sr.key])}</span>`}</td>`).join("")}
+          ${prev?`<td class="fig">${(g.vals[prev]!=null&&g.vals[latest]!=null)
+            ?`<b style="color:${g.vals[latest]>=g.vals[prev]?"var(--d)":"var(--r)"}">${
+              g.vals[latest]>=g.vals[prev]?"+":"−"}${Math.abs((g.vals[latest]-g.vals[prev])*100).toFixed(1)}</b>`
+            :""}</td>`:""}</tr>`).join("")}
+        </tbody></table>`,
+      draw: host => drawShares(host, groups, series,
+        {aria:`${code} early vote composition by race, ${series.map(x=>x.key).join(" and ")}.`}),
+    });
+    sec.id = "race-" + code;
+    demoPanels.push(sec);
+    jump.push(`<a href="#race-${code}">${code} race</a>`);
+  }
+  sections.push(...demoPanels);
 
   if (!sections.length){ note("<b>No early-vote data loaded.</b>"); return; }
 

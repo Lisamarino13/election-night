@@ -30,7 +30,10 @@ h1,h2,h3,.fig,th{font-family:var(--display)}
 
 header{border-bottom:2px solid var(--fg);padding-block:22px 12px;margin-bottom:6px}
 h1{font-size:clamp(30px,5vw,46px);line-height:.95;margin:0;letter-spacing:-.01em;text-wrap:balance}
-.sub{color:var(--dim);font-size:14px;margin-top:6px;display:flex;gap:14px;flex-wrap:wrap;align-items:baseline}
+/* header subtitle only. An unscoped .sub also matched the <tr class="sub"> rows in
+   the cycle tables and turned them into flex containers, so those rows stopped being
+   table rows and their figures wrapped out of the column grid. */
+header .sub{color:var(--dim);font-size:14px;margin-top:6px;display:flex;gap:14px;flex-wrap:wrap;align-items:baseline}
 .tag{font-family:var(--display);text-transform:uppercase;letter-spacing:.09em;font-size:12px;
   border:1px solid var(--line);border-radius:2px;padding:2px 7px;color:var(--dim)}
 

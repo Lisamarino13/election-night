@@ -1,0 +1,116 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Georgia, South Carolina, North Carolina — early vote by cycle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#f4f4f2; --panel:#ffffff; --line:#d7d7d2; --fg:#16161a; --dim:#6a6a66;
+  --flag:#8a6d1f; --grid:#e6e6e2;
+  /* Year palette. Validated with the six checks (OKLCH band, chroma floor,
+     protan/deutan dE, normal-vision floor, contrast) against this surface.
+     Deliberately NOT party red/blue: these encode cycle, not party. */
+  --y2022:#9a6a10; --y2024:#6b4f9e; --y2026:#009488;
+  --display:'Barlow Condensed',Haettenschweiler,'Arial Narrow',sans-serif;
+  --body:'Barlow',-apple-system,Segoe UI,Roboto,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141416; --panel:#1c1c20; --line:#32323a; --fg:#ececea; --dim:#9a9a96;
+  --flag:#d6b454; --grid:#2a2a32;
+  /* Dark steps are re-stepped from the same hues against #1c1c20, not flipped. */
+  --y2022:#b87600; --y2024:#9072cc; --y2026:#009c88; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141416; --panel:#1c1c20; --line:#32323a; --fg:#ececea; --dim:#9a9a96;
+  --flag:#d6b454; --grid:#2a2a32;
+  --y2022:#b87600; --y2024:#9072cc; --y2026:#009c88; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);margin:0;
+  padding:0 16px 48px;font-size:16px;line-height:1.55}
+.wrap{max-width:1040px;margin:0 auto}
+h1,h2,h3,.fig,th,.tag{font-family:var(--display)}
+.fig{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+header{border-bottom:2px solid var(--fg);padding:22px 0 12px;margin-bottom:8px}
+h1{font-size:clamp(28px,5.4vw,42px);line-height:1;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.sub{color:var(--dim);font-size:14.5px;margin-top:8px}
+a{color:inherit}
+.back{display:inline-block;font-family:var(--display);text-transform:uppercase;
+  letter-spacing:.08em;font-size:14px;color:var(--dim);text-decoration:none;margin-top:14px}
+.back:hover{color:var(--fg)}
+.note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--flag);
+  border-radius:0 3px 3px 0;padding:13px 15px;margin:18px 0 6px;font-size:14.5px;line-height:1.6}
+.note b{font-weight:600}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+  padding:18px 16px;margin-top:18px}
+.phd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+h2{font-size:25px;margin:0;font-weight:600;letter-spacing:-.005em}
+.races{font-family:var(--display);font-size:13.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim)}
+.lede{font-size:15px;margin:10px 0 0;line-height:1.6}
+.lede b{font-weight:600}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin:14px 0 4px;font-size:14px}
+.legend span{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.legend i{width:13px;height:13px;border-radius:2px;display:inline-block;flex:0 0 auto}
+.legend i.open{background:none;border:2px dashed currentColor}
+figure{margin:10px 0 0}
+svg{width:100%;height:auto;display:block;overflow:visible}
+figcaption{font-size:13.5px;color:var(--dim);margin-top:10px;line-height:1.55}
+.gridline{stroke:var(--grid);stroke-width:1}
+.axis{stroke:var(--line);stroke-width:1}
+.axlab{fill:var(--dim);font-family:var(--body);font-size:12px}
+.dlab{font-family:var(--display);font-size:13px;font-weight:600}
+.tblbtn{margin-top:14px;font-family:var(--display);font-size:13.5px;letter-spacing:.06em;
+  text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:2px;
+  padding:8px 13px;color:var(--dim);cursor:pointer;min-height:38px}
+.tblbtn:hover{color:var(--fg);border-color:var(--fg)}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:12px}
+th{font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;font-size:12px;
+  color:var(--dim);text-align:right;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+td.b{font-weight:600}
+.dim{color:var(--dim)}
+.miss{color:var(--flag);font-style:italic}
+[hidden]{display:none!important}
+.tip{position:fixed;pointer-events:none;background:var(--panel);border:1px solid var(--line);
+  border-radius:3px;padding:8px 11px;font-size:13.5px;line-height:1.45;box-shadow:0 2px 10px rgba(0,0,0,.14);
+  z-index:9;opacity:0;transition:opacity .08s}
+.tip b{font-family:var(--display);font-size:15px}
+.tip .k{display:flex;align-items:center;gap:7px;white-space:nowrap}
+.tip .k i{width:10px;height:10px;border-radius:2px;display:inline-block}
+footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);color:var(--dim);
+  font-size:13px;line-height:1.6}
+@media(max-width:430px){ body{padding-inline:12px} .panel{padding:16px 13px} h2{font-size:23px} }
+</style>
+<div class="wrap">
+<header>
+  <h1>Georgia, South Carolina, North Carolina</h1>
+  <div class="sub">Early and mail vote, this cycle against the ones before it. <span id="asof"></span></div>
+  <a class="back" href="./">&larr; back to the board</a>
+</header>
+
+<div class="note" id="caveat">
+  <b>Read the 2026 bars as partial.</b> Early voting is still open in all three states, so
+  2026 is a running total and every prior year is a completed one. The only honest
+  like-for-like here is South Carolina, which publishes a figure per early-voting day in
+  both its live file and its archives — so 2026 can be set against the same day of 2022.
+  For Georgia and North Carolina, compare the shape, not the height.
+</div>
+
+<div id="panels"></div>
+
+<footer>
+  <p>Early vote is counted statewide, not per contest — every race on a state's ballot
+  draws from the same ballots, so these totals apply to each race listed.</p>
+  <p>2020 and 2024 were presidential cycles and 2022 and 2026 are midterms; turnout
+  between the two is not comparable, which is why pace is measured against 2022.</p>
+  <p id="srcs"></p>
+</footer>
+</div>
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+<script src="compare.js"></script>

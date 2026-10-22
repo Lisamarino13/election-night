@@ -85,6 +85,10 @@ button{font-family:var(--display);font-size:14px;letter-spacing:.04em;text-trans
   background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:2px;
   padding:7px 13px;cursor:pointer}
 button:hover{border-color:var(--fg)}
+.barlink{font-family:var(--display);font-size:14px;letter-spacing:.04em;text-transform:uppercase;
+  background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:2px;
+  padding:7px 13px;text-decoration:none;display:inline-flex;align-items:center}
+.barlink:hover{border-color:var(--fg)}
 button:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--d);outline-offset:2px}
 
 .tierhd{grid-column:1/-1;font-family:var(--display);text-transform:uppercase;letter-spacing:.09em;
@@ -213,7 +217,7 @@ footer p{margin:0 0 7px}
   .tabs::-webkit-scrollbar{display:none}
   .tab{flex:0 0 auto;padding:11px 13px}
   .bar{gap:8px;padding-block:12px;margin-bottom:16px}
-  button{padding:9px 13px;min-height:40px}          /* thumb-sized tap target */
+  button,.barlink{padding:9px 13px;min-height:40px}   /* thumb-sized tap target */
   .jump{min-height:34px;padding:6px 11px;font-size:13px}
   .backlink{min-height:40px;font-size:16px}
   .facestats{grid-template-columns:repeat(2,1fr);gap:9px 12px}
@@ -303,6 +307,7 @@ footer p{margin:0 0 7px}
   <button id="refresh">Refresh</button>
   <button id="toggleEntry">Paste results</button>
   <button id="toggleEarly">Early vote by party</button>
+  <a class="barlink" href="compare.html">GA / SC / NC by cycle</a>
   <span class="hint" id="status"></span>
 </div>
 

@@ -85,16 +85,6 @@ function drawBars(host, rows, opts){
       svg.appendChild(sub);
     }
 
-    if (r.total == null){                       // a gap we cannot fill is shown as a gap
-      // "not published" is wider than a phone's slot and collided with its
-      // neighbour, so it shortens when there is no room for it.
-      const m = svgEl("text", {x:x+bw/2, y:yOf(0)-12, "text-anchor":"middle",
-        style:`font-size:${slot>=96?12.5:11.5}px;fill:var(--flag);font-style:italic`});
-      m.textContent = slot >= 96 ? "not published" : "no data"; svg.appendChild(m);
-      svg.appendChild(svgEl("line", {x1:x, x2:x+bw, y1:yOf(0), y2:yOf(0),
-        stroke:"var(--flag)", "stroke-width":2, "stroke-dasharray":"3 3"}));
-      return;
-    }
     const y = yOf(r.total), h = plotH - (y - PAD.t);
     const cyc = cycleOf(r.year), fill = PAL[cyc];
     const p = svgEl("path", {d:barPath(x, y, bw, h, 4), fill: cyc==="now" ? "none" : fill,
@@ -212,132 +202,151 @@ const key = (c, label) => `<span><i style="background:${c==="now"?"none":PAL[c]}
   c==="now"?`border:2px dashed ${PAL.now}`:""}"></i>${esc(label)}</span>`;
 const LEGEND = key("mid","2022 midterm") + key("pres","presidential (2020 / 2024)") + key("now","2026 — still voting");
 
-// ---- load ------------------------------------------------------------------
+// ---- which contests each state carries, taken from the board's own race list ----
+const STATES = {
+  GA:{name:"Georgia",        races:"Governor · Senate"},
+  SC:{name:"South Carolina", races:"Senate"},
+  NC:{name:"North Carolina", races:"Senate"},
+  FL:{name:"Florida",        races:"Governor · Senate"},
+  IA:{name:"Iowa",           races:"Senate"},
+  MI:{name:"Michigan",       races:"Senate"},
+  MN:{name:"Minnesota",      races:"Senate"},
+  OH:{name:"Ohio",           races:"Governor · Senate"},
+  ME:{name:"Maine",          races:"Senate"},
+  KS:{name:"Kansas",         races:"Senate"},
+  NE:{name:"Nebraska",       races:"Senate"},
+  TX:{name:"Texas",          races:"Governor · Senate"},
+};
+const ORDER = ["GA","SC","NC","FL","IA","MI","MN","OH","ME","KS","NE","TX"];
+
+// Every state names its streams differently — by_mail / mail_returned / returned for
+// mail, in_person / early_in_person for the rest, and Iowa's older files and
+// Minnesota's carry only a combined figure. One reader, so a state cannot quietly
+// contribute a different quantity to the same chart.
+const num = x => x == null ? null : (typeof x === "object" ? (x.total ?? null) : x);
+function streams(s){
+  if (!s) return null;
+  const comb = num(s.returned_combined);
+  let mail = num(s.by_mail); if (mail == null) mail = num(s.mail_returned);
+  if (mail == null) mail = num(s.returned);
+  let ip = num(s.in_person); if (ip == null) ip = num(s.early_in_person);
+  let total = num(s.total);
+  if (total == null) total = comb;
+  if (total == null && (mail != null || ip != null)) total = (mail||0) + (ip||0);
+  if (total == null) return null;
+  return {total, mail, ip};
+}
+
 (async function(){
   const panels = document.getElementById("panels");
-  const sections = [];
-  const fail = m => { const d=document.createElement("div"); d.className="note";
-    d.innerHTML = `<b>Could not draw this.</b> ${esc(m)}`; panels.appendChild(d); };
+  const sections = [], jump = [];
+  const note = (m) => { const d = document.createElement("div"); d.className = "note";
+    d.innerHTML = m; panels.appendChild(d); };
 
-  // ---------- Georgia ----------
-  try{
-    const [h, cur] = await Promise.all([J("data/ev-history-GA.json"), J("data/early-GA.json")]);
-    const y = h.years || {}, t26 = cur.state_totals || {};
-    SRC.push("Georgia: " + (cur.source||""));
-    const rows = [
-      {year:2020, total:null},
-      {year:2022, total:null},
-      {year:2024, total:(y["2024"]||{}).state_totals ? y["2024"].state_totals.total : null,
-        mail:((y["2024"]||{}).state_totals||{}).by_mail, ip:((y["2024"]||{}).state_totals||{}).in_person,
-        tip:"completed cycle"},
-      {year:2026, total:t26.total, mail:t26.by_mail, ip:t26.in_person,
-        tip:"as of "+(cur.as_of||"")+" — still voting"},
-    ];
-    const pres = rows.find(r=>r.year===2024).total, now = rows.find(r=>r.year===2026).total;
-    sections.push(panel({
-      title:"Georgia", races:"Governor \u00b7 Senate",
-      lede:`<b class="fig">${n(now)}</b> early and mail ballots so far, against
-        <b class="fig">${n(pres)}</b> for all of 2024 — <b>${Math.round(now/pres*100)}%</b> of a
-        presidential cycle's entire early vote, with voting still open. Georgia has no
-        midterm here to measure against: our source carries only 2024 at county level.`,
-      legend:LEGEND,
-      caption:`Total early and mail ballots. 2020 and 2022 are not published in the file
-        this board reads, so they are shown as gaps rather than guessed at. Georgia does
-        not register voters by party, so no D/R split exists in the official data.`,
-      table:`<table><thead><tr><th>Cycle</th><th>Mail</th><th>In person</th><th>Total</th></tr></thead>
-        <tbody>${rows.map(r=>`<tr><td>${r.year}${r.year%4===0?' <span class="dim">presidential</span>':""}</td>
-          ${r.total==null?'<td colspan="3" class="miss">not published in our source</td>'
-          :`<td class="fig">${n(r.mail)}</td><td class="fig">${n(r.ip)}</td><td class="fig b">${n(r.total)}</td>`}</tr>`).join("")}
-        </tbody></table>`,
-      draw: host => drawBars(host, rows, {aria:`Georgia early and mail ballots: 2024 ${n(pres)}, 2026 so far ${n(now)}; 2020 and 2022 not published.`}),
-    }));
-  }catch(e){ fail("Georgia — " + e.message); }
+  for (const code of ORDER){
+    const meta = STATES[code];
+    let cur = null, hist = {};
+    try{ cur = await J("data/early-"+code+".json"); }catch(e){ cur = null; }
+    try{ hist = (await J("data/ev-history-"+code+".json")).years || {}; }catch(e){ hist = {}; }
+    if (!cur && !Object.keys(hist).length) continue;
+    if (cur && cur.source) SRC.push(meta.name + ": " + cur.source);
 
-  // ---------- South Carolina ----------
-  try{
-    const [h, cur] = await Promise.all([J("data/ev-history-SC.json"), J("data/early-SC.json")]);
-    const y = h.years || {};
-    SRC.push("South Carolina: " + (cur.source||""));
-    const ser = [];
-    for (const yr of ["2022","2024"]){
-      const d = y[yr]; if(!d || !d.days) continue;
-      ser.push({year:+yr, vals:d.days.map(k=>d.running[k])});
+    // ---- rows: one per cycle that actually has a figure ----
+    const rows = [];
+    for (const y of Object.keys(hist).sort()){
+      const st = streams((hist[y]||{}).state_totals);
+      if (!st) continue;                       // a cycle with nothing published is dropped
+      rows.push({year:+y, ...st, tip:"completed cycle"});
     }
-    // 2026's own day columns are per-day counts; accumulate them the same way.
-    const daily = cur.daily || {}; let run = 0;
-    const v26 = Object.keys(daily).sort((a,b)=>new Date(a)-new Date(b)).map(k => run += daily[k]);
-    if (v26.length) ser.push({year:2026, vals:v26});
-    ser.sort((a,b)=>a.year-b.year);
-    const mid = ser.find(s=>s.year===2022), now = ser.find(s=>s.year===2026);
-    const i = (now?now.vals.length:0) - 1;
-    const ratio = (mid && now && i>=0) ? Math.round(now.vals[i]/mid.vals[i]*100) : null;
-    const nDays = Math.max(...ser.map(s=>s.vals.length));
-    sections.push(panel({
-      title:"South Carolina", races:"Governor \u00b7 Senate",
-      lede: ratio ? `Through <b>day ${i+1}</b> of early voting, <b class="fig">${n(now.vals[i])}</b>
-        ballots — against <b class="fig">${n(mid.vals[i])}</b> on the same day of 2022.
-        That is <b>${ratio}%</b> of the last midterm's pace, and ahead of where the 2024
-        presidential cycle sat on day ${i+1}.`
-        : "South Carolina publishes a figure per early-voting day, so 2026 can be set against the same day of earlier cycles.",
-      legend:LEGEND,
-      caption:`Running total after each early-voting day. This is the one state of the three
-        where the comparison is genuinely like-for-like: the same day of each cycle, not a
-        share of a finished one. 2022 and 2024 ran ${nDays} days.`,
-      table:`<table><thead><tr><th>Day</th>${ser.map(s=>`<th>${s.year}</th>`).join("")}
-        ${mid&&now?`<th>vs 2022</th>`:""}</tr></thead><tbody>
+    const now = cur ? streams(cur.state_totals) : null;
+    if (now){
+      // a state that does not report in person must not contribute a zero
+      if (cur.in_person_reported === false) now.ip = null;
+      rows.push({year:2026, ...now, tip:"as of " + (cur.as_of||"") + " — still voting"});
+    }
+    if (!rows.length) continue;
+
+    const mid = rows.filter(r => r.year % 4 === 2 && r.year !== 2026).pop();
+    const pct = (mid && now) ? Math.round(now.total/mid.total*100) : null;
+
+    // ---- South Carolina is the one state with a figure per early-voting day ----
+    let draw, caption, legend = LEGEND, lede, table;
+    const scDaily = code === "SC" && cur && cur.daily;
+    if (scDaily){
+      const ser = [];
+      for (const y of Object.keys(hist).sort()){
+        const d = hist[y]; if (!d || !d.days) continue;
+        ser.push({year:+y, vals:d.days.map(k => d.running[k])});
+      }
+      let run = 0;
+      const v26 = Object.keys(cur.daily).sort((a,b)=>new Date(a)-new Date(b)).map(k => run += cur.daily[k]);
+      if (v26.length) ser.push({year:2026, vals:v26});
+      ser.sort((a,b)=>a.year-b.year);
+      const m2 = ser.find(s=>s.year===2022), n2 = ser.find(s=>s.year===2026);
+      const i = (n2 ? n2.vals.length : 0) - 1;
+      const same = (m2 && n2 && i>=0) ? Math.round(n2.vals[i]/m2.vals[i]*100) : null;
+      const nDays = Math.max(...ser.map(s=>s.vals.length));
+      lede = same
+        ? `Through <b>day ${i+1}</b> of early voting, <b class="fig">${n(n2.vals[i])}</b> ballots —
+           against <b class="fig">${n(m2.vals[i])}</b> on the same day of 2022.
+           That is <b>${same}%</b> of the last midterm's pace.`
+        : `South Carolina publishes a figure per early-voting day, so 2026 can be set
+           against the same day of earlier cycles.`;
+      caption = `Running total after each early-voting day — the same day of each cycle,
+        not a share of a finished one. 2022 and 2024 ran ${nDays} days.`;
+      table = `<table><thead><tr><th>Day</th>${ser.map(s=>`<th>${s.year}</th>`).join("")}
+        ${m2&&n2?"<th>vs 2022</th>":""}</tr></thead><tbody>
         ${Array.from({length:nDays},(_,k)=>`<tr><td>Day ${k+1}</td>
           ${ser.map(s=>`<td class="fig${s.year===2026?" b":""}">${s.vals[k]==null?'<span class="dim">—</span>':n(s.vals[k])}</td>`).join("")}
-          ${mid&&now?`<td class="fig">${(now.vals[k]!=null&&mid.vals[k])?Math.round(now.vals[k]/mid.vals[k]*100)+"%":""}</td>`:""}</tr>`).join("")}
-        </tbody></table>`,
-      draw: host => drawLines(host, ser, {aria:`South Carolina cumulative early vote by day: 2026 is at ${ratio}% of 2022's same-day pace.`}),
-    }));
-  }catch(e){ fail("South Carolina — " + e.message); }
-
-  // ---------- North Carolina ----------
-  try{
-    const [h, cur] = await Promise.all([J("data/ev-history-NC.json"), J("data/early-NC.json")]);
-    const y = h.years || {}, st = cur.state_totals || {};
-    SRC.push("North Carolina: " + (cur.source||""));
-    const tot = o => ((o||{}).mail_returned||{}).total!=null || ((o||{}).early_in_person||{}).total!=null
-      ? (((o||{}).mail_returned||{}).total||0) + (((o||{}).early_in_person||{}).total||0) : null;
-    const rows = ["2020","2022","2024"].map(yr=>{
-      const s=(y[yr]||{}).state_totals;
-      return {year:+yr, total:tot(s), mail:((s||{}).mail_returned||{}).total,
-        ip:((s||{}).early_in_person||{}).total, tip:"completed cycle"};
-    }).filter(r=>r.total!=null);
-    rows.push({year:2026, total:tot(st), mail:(st.mail_returned||{}).total,
-      ip:(st.early_in_person||{}).total, tip:"as of "+(cur.as_of||"")+" — still voting"});
-    const mid = rows.find(r=>r.year===2022), now = rows[rows.length-1];
-    sections.push(panel({
-      title:"North Carolina", races:"Senate",
-      lede:`<b class="fig">${n(now.total)}</b> early and mail ballots so far — already
-        <b>${Math.round(now.total/mid.total*100)}%</b> of everything 2022 cast early, with
-        voting still open. North Carolina does register by party, so the board's own card
-        carries the D/R/unaffiliated split; this chart is turnout only.`,
-      legend:LEGEND,
-      caption:`Total early and mail ballots. Every year but 2026 is a completed cycle;
-        2026 is a running total and is drawn open for that reason.`,
-      table:`<table><thead><tr><th>Cycle</th><th>Mail</th><th>In person</th><th>Total</th>
-        <th>vs 2022</th></tr></thead><tbody>
+          ${m2&&n2?`<td class="fig">${(n2.vals[k]!=null&&m2.vals[k])?Math.round(n2.vals[k]/m2.vals[k]*100)+"%":""}</td>`:""}</tr>`).join("")}
+        </tbody></table>`;
+      draw = host => drawLines(host, ser, {aria:`South Carolina cumulative early vote by day of early voting.`});
+    } else {
+      const pres = rows.filter(r => r.year % 4 === 0).pop();
+      lede = !now
+        ? `No 2026 early-vote file is published yet, so this is the record of earlier
+           cycles only.`
+        : pct != null
+          ? `<b class="fig">${n(now.total)}</b> early and mail ballots so far — already
+             <b>${pct}%</b> of everything ${mid.year} cast early, with voting still open.`
+          : `<b class="fig">${n(now.total)}</b> early and mail ballots so far.
+             There is no midterm in our archive to set that against${pres?` — only
+             ${pres.year}, a presidential cycle, which is not comparable`:""}.`;
+      caption = `Total early and mail ballots. Every cycle but 2026 is a completed one;
+        2026 is a running total and is drawn open for that reason.
+        ${rows.some(r=>r.ip==null)?"A stream this state does not report is left out rather than shown as zero.":""}`;
+      table = `<table><thead><tr><th>Cycle</th><th>Mail</th><th>In person</th><th>Total</th>
+        ${mid?"<th>vs "+mid.year+"</th>":""}</tr></thead><tbody>
         ${rows.map(r=>`<tr><td>${r.year}${r.year%4===0?' <span class="dim">presidential</span>':""}</td>
-          <td class="fig">${n(r.mail)}</td><td class="fig">${n(r.ip)}</td>
+          <td class="fig">${r.mail==null?'<span class="dim">not reported</span>':n(r.mail)}</td>
+          <td class="fig">${r.ip==null?'<span class="dim">not reported</span>':n(r.ip)}</td>
           <td class="fig b">${n(r.total)}</td>
-          <td class="fig">${r.year===2022?"—":Math.round(r.total/mid.total*100)+"%"}</td></tr>`).join("")}
-        </tbody></table>`,
-      draw: host => drawBars(host, rows, {aria:`North Carolina early and mail ballots by cycle; 2026 so far ${n(now.total)}, ${Math.round(now.total/mid.total*100)} percent of the 2022 total.`}),
-    }));
-  }catch(e){ fail("North Carolina — " + e.message); }
+          ${mid?`<td class="fig">${r.year===mid.year?"—":Math.round(r.total/mid.total*100)+"%"}</td>`:""}</tr>`).join("")}
+        </tbody></table>`;
+      draw = host => drawBars(host, rows, {aria:`${meta.name} early and mail ballots by cycle.`});
+    }
 
+    const sec = panel({title:meta.name, races:meta.races, lede, legend, caption, table, draw});
+    sec.id = "st-" + code;
+    sections.push(sec);
+    jump.push(`<a href="#st-${code}">${code}</a>`);
+  }
+
+  if (!sections.length){ note("<b>No early-vote data loaded.</b>"); return; }
+
+  const nav = document.createElement("nav");
+  nav.className = "jumprow";
+  nav.innerHTML = `<span class="jlab">Jump to</span>` + jump.join("");
+  panels.appendChild(nav);
   sections.forEach(s => panels.appendChild(s));
+
   const redraw = () => sections.forEach(s => s._draw());
   redraw();
   let t; addEventListener("resize", () => { clearTimeout(t); t = setTimeout(redraw, 120); });
 
-  // trend-ev.json carries no run stamp, so date this page off the freshest
-  // "fetched" among the three files it actually drew from.
   const stamps = [];
-  for (const st of ["GA","SC","NC"]){
-    try{ const d = await J("data/early-"+st+".json"); if(d.fetched) stamps.push(d.fetched); }catch(e){}
+  for (const code of ORDER){
+    try{ const d = await J("data/early-"+code+".json"); if (d.fetched) stamps.push(d.fetched); }catch(e){}
   }
   if (stamps.length){
     const d = new Date(stamps.sort().pop());

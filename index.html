@@ -89,6 +89,9 @@ button:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px sol
 .st.t-tossup{border-left:3px solid var(--flag)}
 .st.t-safe{opacity:.72}
 .states[hidden],#evwrap[hidden]{display:none!important}
+.evrow.lead{border-bottom:1px solid var(--fg);padding-bottom:9px;margin-bottom:3px}
+.evrow.lead .slab{color:var(--fg);font-weight:700}
+.evrow.lead .evtot{font-size:25px}
 .srcnote{font-size:12.5px;color:var(--flag);background:rgba(0,0,0,.025);border-left:3px solid var(--flag);
   padding:8px 10px;margin-top:10px;line-height:1.45;border-radius:0 3px 3px 0}
 .srcnote .srcwho{display:block;color:var(--dim);font-size:11.5px;margin-top:4px}
@@ -669,9 +672,15 @@ function renderEV(){
     }
     const ip = (e.totals && e.totals.early_in_person) || null;
     const parties=["D","R","NPA","O"].filter(p=>((out&&out[p])||0)+(ret[p]||0)+((ip&&ip[p])||0)>0);
+    // THE headline number for a state with both streams is the two added together. The
+    // turnout-only cards always had a total; the party cards did not, so Iowa led with
+    // "mail returned 28,568" when its early vote is 124,444 — the small number first and
+    // the real one buried.
+    const totEarly = ["D","R","NPA","O"].reduce((a,p)=>(a[p]=(ret[p]||0)+((ip&&ip[p])||0),a),
+                      {total:(ret.total||0)+((ip&&ip.total)||0)});
     const bar=ps=>{const t=ps.total||1;return parties.map(p=>
       `<i style="width:${((ps[p]||0)/t*100).toFixed(2)}%;background:${PARTY_COL[p]}"></i>`).join("");};
-    const row=(lab,ps)=>`<div class="evrow"><span class="slab">${lab}</span>
+    const row=(lab,ps,lead)=>`<div class="evrow${lead?" lead":""}"><span class="slab">${lab}</span>
       <span class="fig evtot">${n(ps.total||0)}</span>
       <div class="share ev">${bar(ps)}</div>
       <span class="evpcts">${parties.map(p=>`<b style="color:${PARTY_COL[p]}">${p} ${ps.total?((ps[p]||0)/ps.total*100).toFixed(0):0}%</b>`).join(" ")}</span></div>`;
@@ -753,6 +762,7 @@ function renderEV(){
     card.className="evcard";
     card.innerHTML=`<div class="sthd"><span class="stname">${st.name}</span>
         <span class="pin">${Object.keys(e.counties||{}).length} ${UNIT}</span></div>
+      ${ip ? row("Total early vote", totEarly, true) : ""}
       ${row("Mail returned", ret)}
       ${ip ? row("In-person early", ip) : ""}
       ${hasOut ? row("Mail outstanding", out)

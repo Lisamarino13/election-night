@@ -85,6 +85,9 @@ td.b{font-weight:600}
 .tip .k i{width:10px;height:10px;border-radius:2px;display:inline-block}
 footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);color:var(--dim);
   font-size:13px;line-height:1.6}
+/* the source URLs are long unbreakable strings; without this the footer alone
+   made the whole page scroll sideways on a phone */
+footer p{overflow-wrap:anywhere}
 @media(max-width:430px){ body{padding-inline:12px} .panel{padding:16px 13px} h2{font-size:23px} }
 </style>
 <div class="wrap">

@@ -3,6 +3,7 @@
 <title>Midterm Night Board</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="charts.css?v=6aa52bbf">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500;600&display=swap">
 <style>
 /* Layout: a wire-service tally board — one strip per state, counties beneath, figures in tabular columns. */
@@ -301,13 +302,13 @@ footer p{margin:0 0 7px}
 <div class="tabs" role="tablist">
   <button id="tabEV" class="tab on" role="tab">Early &amp; mail vote</button>
   <button id="tabEN" class="tab" role="tab">Election night</button>
+  <button id="tabCH" class="tab" role="tab">Charts</button>
 </div>
 
 <div class="bar">
   <button id="refresh">Refresh</button>
   <button id="toggleEntry">Paste results</button>
   <button id="toggleEarly">Early vote by party</button>
-  <a class="barlink" href="compare.html">GA / SC / NC by cycle</a>
   <span class="hint" id="status"></span>
 </div>
 
@@ -331,6 +332,8 @@ FL, 41, 38, 21, 2400000"></textarea>
 </div>
 
 <div class="states" id="board"></div>
+<div id="chartwrap" class="chartbox" hidden></div>
+
 <div id="evwrap" hidden>
   <div id="evbody"></div>
   <p class="evfoot" id="evfoot"></p>
@@ -1030,8 +1033,17 @@ function setTab(t){
   TAB=t;
   document.getElementById("tabEV").classList.toggle("on", t==="ev");
   document.getElementById("tabEN").classList.toggle("on", t==="en");
+  document.getElementById("tabCH").classList.toggle("on", t==="ch");
   document.getElementById("board").hidden = t!=="en";
   document.getElementById("evwrap").hidden = t!=="ev";
+  const cw = document.getElementById("chartwrap");
+  cw.hidden = t!=="ch";
+  // the bar's controls act on the vote tables, not on the charts
+  document.querySelector(".bar").hidden = t==="ch";
+  if (t==="ch" && !cw.dataset.drawn && window.renderCharts){
+    cw.dataset.drawn = "1";
+    window.renderCharts(cw);
+  }
   render();
 }
 
@@ -1079,6 +1091,7 @@ function parseRows(txt){
 
 document.getElementById("tabEV").onclick=()=>setTab("ev");
 document.getElementById("tabEN").onclick=()=>setTab("en");
+document.getElementById("tabCH").onclick=()=>setTab("ch");
 document.getElementById("refresh").onclick = load;
 document.getElementById("toggleEntry").onclick = ()=>{const e=document.getElementById("entry");e.hidden=!e.hidden;};
 document.getElementById("toggleEarly").onclick = ()=>{const e=document.getElementById("early");e.hidden=!e.hidden;};
@@ -1102,3 +1115,4 @@ setTab("ev");
 load();
 setInterval(load, 120000);
 </script>
+<script src="compare.js?v=d5997992"></script>

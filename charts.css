@@ -1,0 +1,70 @@
+/* Year hues. Validated with the six colour checks (OKLCH band, chroma floor,
+   protan/deutan dE, normal-vision floor, contrast) against each surface.
+   These encode the CYCLE, not party - none of these states registers by party. */
+:root{ --y2022:#9a6a10; --y2024:#6b4f9e; --y2026:#009488; --grid:#e6e6e2; }
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --y2022:#b87600; --y2024:#9072cc; --y2026:#009c88; --grid:#2a2a32; }}
+:root[data-theme="dark"]{
+  --y2022:#b87600; --y2024:#9072cc; --y2026:#009c88; --grid:#2a2a32; }
+
+.chartbox{font-family:var(--body);color:var(--fg)}
+.chartbox .note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--flag);
+  border-radius:0 3px 3px 0;padding:13px 15px;margin:18px 0 6px;font-size:14.5px;line-height:1.6}
+.chartbox .note b{font-weight:600}
+.chartbox .panel{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+  padding:18px 16px;margin-top:18px}
+.chartbox .phd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.chartbox h2{font-size:25px;margin:0;font-weight:600;letter-spacing:-.005em}
+.chartbox .races{font-family:var(--display);font-size:13.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim)}
+.chartbox .lede{font-size:15px;margin:10px 0 0;line-height:1.6}
+.chartbox .lede b{font-weight:600}
+.chartbox .legend{display:flex;gap:16px;flex-wrap:wrap;margin:14px 0 4px;font-size:14px}
+.chartbox .legend span{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.chartbox .legend i{width:13px;height:13px;border-radius:2px;display:inline-block;flex:0 0 auto}
+.chartbox .legend i.open{background:none;border:2px dashed currentColor}
+.chartbox figure{margin:10px 0 0;overflow:hidden}
+.chartbox svg{width:100%;height:auto;display:block;overflow:hidden}
+.chartbox figcaption{font-size:13.5px;color:var(--dim);margin-top:10px;line-height:1.55}
+.chartbox .gridline{stroke:var(--grid);stroke-width:1}
+.chartbox .axis{stroke:var(--line);stroke-width:1}
+.chartbox .axlab{fill:var(--dim);font-family:var(--body);font-size:12px}
+.chartbox .dlab{font-family:var(--display);font-size:13px;font-weight:600}
+.chartbox .tblbtn{margin-top:14px;font-family:var(--display);font-size:13.5px;letter-spacing:.06em;
+  text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:2px;
+  padding:8px 13px;color:var(--dim);cursor:pointer;min-height:38px}
+.chartbox .tblbtn:hover{color:var(--fg);border-color:var(--fg)}
+.chartbox .scroll{overflow-x:auto}
+.chartbox table{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:12px}
+.chartbox th{font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;font-size:12px;
+  color:var(--dim);text-align:right;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.chartbox th:first-child, .chartbox td:first-child{text-align:left}
+.chartbox td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.chartbox td.b{font-weight:600}
+.chartbox .dim{color:var(--dim)}
+.chartbox .miss{color:var(--flag);font-style:italic}
+.chartbox [hidden]{display:none!important}
+.chartbox .jumprow{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-top:18px}
+.chartbox .jlab{font-family:var(--display);text-transform:uppercase;letter-spacing:.08em;
+  font-size:12px;color:var(--dim);margin-right:3px}
+.chartbox .jumprow a{font-family:var(--display);font-size:14px;letter-spacing:.05em;
+  background:var(--panel);border:1px solid var(--line);border-radius:2px;
+  padding:7px 11px;color:var(--dim);text-decoration:none;min-height:36px;
+  display:inline-flex;align-items:center}
+.chartbox .jumprow a:hover{color:var(--fg);border-color:var(--fg)}
+.chartbox .panel{scroll-margin-top:12px}
+.chartbox .tip{position:fixed;pointer-events:none;background:var(--panel);border:1px solid var(--line);
+  border-radius:3px;padding:8px 11px;font-size:13.5px;line-height:1.45;box-shadow:0 2px 10px rgba(0,0,0,.14);
+  z-index:9;opacity:0;transition:opacity .08s}
+.chartbox .tip b{font-family:var(--display);font-size:15px}
+.chartbox .tip .k{display:flex;align-items:center;gap:7px;white-space:nowrap}
+.chartbox .tip .k i{width:10px;height:10px;border-radius:2px;display:inline-block}
+.chartbox footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);color:var(--dim);
+  font-size:13px;line-height:1.6}
+.chartbox /* the source URLs are long unbreakable strings; without this the footer alone
+   made the whole page scroll sideways on a phone */
+footer p{overflow-wrap:anywhere}
+.chartbox body{padding-inline:12px}
+.chartbox .panel{padding:16px 13px}
+.chartbox h2{font-size:23px}
+@media(max-width:430px){.chartbox body{padding-inline:12px} .chartbox .panel{padding:16px 13px} .chartbox h2{font-size:23px}}

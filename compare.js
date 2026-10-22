@@ -26,7 +26,9 @@ const SRC = [];
 const J = async p => { const r = await fetch(p + "?t=" + Date.now()); if(!r.ok) throw new Error(p+" "+r.status); return r.json(); };
 
 // ---- tooltip ---------------------------------------------------------------
-const tip = document.getElementById("tip");
+let tip = document.getElementById("tip");
+if (!tip){ tip = document.createElement("div"); tip.className = "tip";
+  tip.setAttribute("role","status"); document.body.appendChild(tip); }
 function showTip(e, html){
   tip.innerHTML = html; tip.style.opacity = 1;
   const r = tip.getBoundingClientRect();
@@ -237,8 +239,9 @@ function streams(s){
   return {total, mail, ip};
 }
 
-(async function(){
-  const panels = document.getElementById("panels");
+async function renderCharts(panels){
+  if (!panels) return;
+  panels.replaceChildren();
   const sections = [], jump = [];
   const note = (m) => { const d = document.createElement("div"); d.className = "note";
     d.innerHTML = m; panels.appendChild(d); };
@@ -344,14 +347,22 @@ function streams(s){
   redraw();
   let t; addEventListener("resize", () => { clearTimeout(t); t = setTimeout(redraw, 120); });
 
-  const stamps = [];
-  for (const code of ORDER){
-    try{ const d = await J("data/early-"+code+".json"); if (d.fetched) stamps.push(d.fetched); }catch(e){}
+  const asof = document.getElementById("asof");
+  if (asof){
+    const stamps = [];
+    for (const code of ORDER){
+      try{ const d = await J("data/early-"+code+".json"); if (d.fetched) stamps.push(d.fetched); }catch(e){}
+    }
+    if (stamps.length){
+      const d = new Date(stamps.sort().pop());
+      asof.textContent = "Last pull " +
+        d.toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}) + ".";
+    }
   }
-  if (stamps.length){
-    const d = new Date(stamps.sort().pop());
-    document.getElementById("asof").textContent = "Last pull " +
-      d.toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}) + ".";
-  }
-  document.getElementById("srcs").textContent = "Sources — " + SRC.join("  •  ");
-})();
+  const srcs = document.getElementById("srcs");
+  if (srcs) srcs.textContent = "Sources \u2014 " + SRC.join("  \u2022  ");
+}
+window.renderCharts = renderCharts;
+// compare.html renders at once; the board calls renderCharts() the first time its
+// charts tab is opened, so these fetches do not run on every board load.
+if (document.getElementById("panels")) renderCharts(document.getElementById("panels"));

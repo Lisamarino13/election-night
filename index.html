@@ -627,11 +627,12 @@ function dailyPace(e, k){
     rows.push(`<tr${mine==null?' class="sub"':""}><td>${ownDays?"Day "+(i+1):(labels[i]||"Day "+(i+1))}</td>
       ${cells.map(v=>`<td class="fig">${v==null?"&mdash;":n(v)}</td>`).join("")}
       <td class="fig b">${mine==null?'<span class="tbd">TBD</span>':n(mine)}</td>
-      <td class="fig">${(mine!=null&&base)?`<b style="color:${mine>=base?"var(--d)":"var(--r)"}">${Math.round(mine/base*100)}%</b>`:(mine==null?"":'<span class="tbd">no daily archive</span>')}</td></tr>`);
+      ${mid?`<td class="fig">${(mine!=null&&base)?`<b style="color:${mine>=base?"var(--d)":"var(--r)"}">${Math.round(mine/base*100)}%</b>`:""}</td>`:""}</tr>`);
   }
-  const headYrs = yrs.length
-    ? yrs.map(y=>`<th>${y}${+y%4===0?' <span class="cyc">pres</span>':""}</th>`).join("")
-    : `<th>prior cycles<br><span class="cyc">no daily archive</span></th>`;
+  // With no daily history there is nothing to put in those columns, so do not emit them.
+  // Emitting a header with no matching cell left four headers over three cells and the
+  // 2026 figure sitting under "prior cycles".
+  const headYrs = yrs.map(y=>`<th>${y}${+y%4===0?' <span class="cyc">pres</span>':""}</th>`).join("");
   const note = ownDays
     ? `Running total after each early-voting day, from the state's own day columns.
        TBD marks days that have not happened yet.`
@@ -640,7 +641,7 @@ function dailyPace(e, k){
        published finals only.`;
   return `<div class="scroll"><table class="evtab pace">
     <thead><tr><th>${ownDays?"Early voting day":"As of"}</th>${headYrs}
-      <th>2026</th><th>${mid?`vs ${mid}<br><span class="cyc">same day</span>`:""}</th></tr></thead>
+      <th>2026</th>${mid?`<th>vs ${mid}<br><span class="cyc">same day</span></th>`:""}</tr></thead>
     <tbody>${rows.join("")}</tbody></table>
     <div class="streamline">${note}</div></div>`;
 }

@@ -75,15 +75,22 @@ function drawBars(host, rows, opts){
     const lab = svgEl("text", {class:"axlab", x:x+bw/2, y:H-PAD.b+20, "text-anchor":"middle",
       style:"font-family:var(--display);font-size:15px;font-weight:600;fill:var(--fg)"});
     lab.textContent = r.year; svg.appendChild(lab);
-    const sub = svgEl("text", {class:"axlab", x:x+bw/2, y:H-PAD.b+37, "text-anchor":"middle",
-      style:"font-size:11.5px;letter-spacing:.05em;text-transform:uppercase"});
-    sub.textContent = r.note || (cycleOf(r.year)==="pres" ? "presidential" : cycleOf(r.year)==="now" ? "still voting" : "midterm");
-    svg.appendChild(sub);
+    // On a phone four slots are ~70px and these run together into
+    // "PRESIDENTIALMIDTERMPRESIDENTIAL". The legend already carries the cycle,
+    // so below that width the per-bar sublabel is dropped rather than overlapped.
+    if (slot >= 76){
+      const sub = svgEl("text", {class:"axlab", x:x+bw/2, y:H-PAD.b+37, "text-anchor":"middle",
+        style:"font-size:11.5px;letter-spacing:.05em;text-transform:uppercase"});
+      sub.textContent = r.note || (cycleOf(r.year)==="pres" ? "presidential" : cycleOf(r.year)==="now" ? "still voting" : "midterm");
+      svg.appendChild(sub);
+    }
 
     if (r.total == null){                       // a gap we cannot fill is shown as a gap
+      // "not published" is wider than a phone's slot and collided with its
+      // neighbour, so it shortens when there is no room for it.
       const m = svgEl("text", {x:x+bw/2, y:yOf(0)-12, "text-anchor":"middle",
-        style:"font-size:12.5px;fill:var(--flag);font-style:italic"});
-      m.textContent = "not published"; svg.appendChild(m);
+        style:`font-size:${slot>=96?12.5:11.5}px;fill:var(--flag);font-style:italic`});
+      m.textContent = slot >= 96 ? "not published" : "no data"; svg.appendChild(m);
       svg.appendChild(svgEl("line", {x1:x, x2:x+bw, y1:yOf(0), y2:yOf(0),
         stroke:"var(--flag)", "stroke-width":2, "stroke-dasharray":"3 3"}));
       return;

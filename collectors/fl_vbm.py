@@ -68,6 +68,13 @@ def fetch(stat):
     return out, compiled
 
 
+def _sortable(day):
+    """mm/dd/yyyy -> yyyymmdd for comparison."""
+    import re
+    m = re.match(r"(\d{1,2})/(\d{1,2})/(\d{4})", day or "")
+    return f"{m.group(3)}{int(m.group(1)):02d}{int(m.group(2)):02d}" if m else ""
+
+
 def _day(stamp):
     """Date part of a compile stamp, so 8:04AM and 2:01PM on the same day compare equal."""
     import re
@@ -82,19 +89,29 @@ def fetch_consistent(attempts=4, pause=3):
     the full set. Taking whatever came back and publishing it would mean an outstanding
     count from one day sitting beside a returned count from another.
     """
-    last = None
+    last, best, best_day = None, None, None
     for i in range(1, attempts + 1):
         data = {"compiled": {}}
         for key, stat in FILES.items():
             data[key], data["compiled"][key] = fetch(stat)
         stamps = set(data["compiled"].values())
         if len(stamps) == 1 and None not in stamps:
-            return data
-        last = dict(data["compiled"])
-        print(f"   FL compile dates disagree {last} — refetching ({i}/{attempts})",
-              file=sys.stderr)
+            day = _day(next(iter(stamps)))
+            # Keep looking for a NEWER consistent set. The cache holds more than one day at
+            # once, so the first agreeing pair is not necessarily the latest one — taking it
+            # made the published figure jump backwards between runs.
+            if best_day is None or _sortable(day) > _sortable(best_day):
+                best, best_day = data, day
+            if i >= 2:
+                return best
+        else:
+            last = dict(data["compiled"])
+            print(f"   FL compile dates disagree {last} — refetching ({i}/{attempts})",
+                  file=sys.stderr)
         if i < attempts:
             time.sleep(pause)
+    if best:
+        return best
     raise RuntimeError(f"required files never agreed on a compile date after {attempts} "
                        f"tries (last: {last}); the CDN is serving mixed days — refusing "
                        f"to combine them")

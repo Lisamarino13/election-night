@@ -2,3716 +2,2323 @@
  "state": "IA",
  "unit": "county",
  "election": "2026 General",
- "as_of": "2026-10-15",
- "fetched": "2026-10-20T14:03:16+00:00",
+ "as_of": "10/21/2026",
+ "fetched": "2026-10-22T02:52:38+00:00",
+ "party_available": true,
+ "outstanding_available": false,
  "in_person": true,
- "outstanding_available": true,
+ "in_person_reported": true,
  "counties": {
   "Adair": {
-   "early_in_person": {
-    "R": 20,
-    "D": 20,
-    "NPA": 8,
-    "O": 0,
-    "total": 48
-   },
-   "mail_outstanding": {
-    "R": 126,
-    "D": 86,
-    "NPA": 40,
-    "O": 3,
-    "total": 255
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 19,
+    "R": 31,
+    "NPA": 4,
     "O": 0,
-    "total": 0
+    "total": 54
+   },
+   "early_in_person": {
+    "D": 75,
+    "R": 139,
+    "NPA": 55,
+    "O": 0,
+    "total": 269
    },
    "outstanding": {
-    "R": 126,
-    "D": 86,
-    "NPA": 40,
-    "O": 3,
-    "total": 255
+    "D": 76,
+    "R": 129,
+    "NPA": 44,
+    "O": 0,
+    "total": 249
    }
   },
   "Adams": {
-   "early_in_person": {
-    "R": 12,
-    "D": 10,
-    "NPA": 3,
-    "O": 1,
-    "total": 26
-   },
-   "mail_outstanding": {
-    "R": 72,
-    "D": 41,
-    "NPA": 22,
-    "O": 0,
-    "total": 135
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 7,
+    "R": 10,
+    "NPA": 5,
     "O": 0,
-    "total": 0
+    "total": 22
+   },
+   "early_in_person": {
+    "D": 36,
+    "R": 55,
+    "NPA": 20,
+    "O": 0,
+    "total": 111
    },
    "outstanding": {
-    "R": 72,
-    "D": 41,
-    "NPA": 22,
+    "D": 37,
+    "R": 88,
+    "NPA": 23,
     "O": 0,
-    "total": 135
+    "total": 148
    }
   },
   "Allamakee": {
-   "early_in_person": {
-    "R": 26,
-    "D": 43,
-    "NPA": 12,
-    "O": 0,
-    "total": 81
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 3,
-    "NPA": 1,
-    "O": 0,
-    "total": 4
-   },
-   "mail_outstanding": {
-    "R": 182,
-    "D": 217,
-    "NPA": 52,
-    "O": 3,
-    "total": 454
-   },
    "returned": {
-    "R": 0,
-    "D": 3,
-    "NPA": 1,
+    "D": 80,
+    "R": 70,
+    "NPA": 16,
     "O": 0,
-    "total": 4
+    "total": 166
+   },
+   "early_in_person": {
+    "D": 176,
+    "R": 198,
+    "NPA": 81,
+    "O": 0,
+    "total": 455
    },
    "outstanding": {
-    "R": 182,
-    "D": 217,
-    "NPA": 52,
-    "O": 3,
-    "total": 454
+    "D": 177,
+    "R": 230,
+    "NPA": 64,
+    "O": 0,
+    "total": 471
    }
   },
   "Appanoose": {
-   "early_in_person": {
-    "R": 22,
-    "D": 23,
-    "NPA": 7,
-    "O": 0,
-    "total": 52
-   },
-   "mail_outstanding": {
-    "R": 251,
-    "D": 257,
-    "NPA": 68,
-    "O": 0,
-    "total": 576
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 34,
+    "R": 24,
+    "NPA": 4,
     "O": 0,
-    "total": 0
+    "total": 62
+   },
+   "early_in_person": {
+    "D": 127,
+    "R": 144,
+    "NPA": 47,
+    "O": 0,
+    "total": 318
    },
    "outstanding": {
-    "R": 251,
-    "D": 257,
-    "NPA": 68,
+    "D": 249,
+    "R": 300,
+    "NPA": 79,
     "O": 0,
-    "total": 576
+    "total": 628
    }
   },
   "Audubon": {
-   "early_in_person": {
-    "R": 12,
-    "D": 17,
-    "NPA": 1,
-    "O": 0,
-    "total": 30
-   },
-   "mail_outstanding": {
-    "R": 115,
-    "D": 98,
-    "NPA": 33,
-    "O": 3,
-    "total": 249
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 36,
+    "R": 37,
+    "NPA": 9,
     "O": 0,
-    "total": 0
+    "total": 82
+   },
+   "early_in_person": {
+    "D": 53,
+    "R": 75,
+    "NPA": 21,
+    "O": 0,
+    "total": 149
    },
    "outstanding": {
-    "R": 115,
-    "D": 98,
-    "NPA": 33,
-    "O": 3,
-    "total": 249
+    "D": 81,
+    "R": 136,
+    "NPA": 37,
+    "O": 0,
+    "total": 254
    }
   },
   "Benton": {
-   "early_in_person": {
-    "R": 39,
-    "D": 27,
-    "NPA": 13,
-    "O": 0,
-    "total": 79
-   },
-   "mail_returned": {
-    "R": 3,
-    "D": 3,
-    "NPA": 2,
-    "O": 0,
-    "total": 8
-   },
-   "mail_outstanding": {
-    "R": 305,
-    "D": 338,
-    "NPA": 155,
-    "O": 0,
-    "total": 798
-   },
    "returned": {
-    "R": 3,
-    "D": 3,
-    "NPA": 2,
+    "D": 148,
+    "R": 127,
+    "NPA": 41,
     "O": 0,
-    "total": 8
+    "total": 316
+   },
+   "early_in_person": {
+    "D": 164,
+    "R": 217,
+    "NPA": 81,
+    "O": 0,
+    "total": 462
    },
    "outstanding": {
-    "R": 305,
-    "D": 338,
+    "D": 228,
+    "R": 355,
     "NPA": 155,
     "O": 0,
-    "total": 798
+    "total": 738
    }
   },
   "Black Hawk": {
-   "early_in_person": {
-    "R": 154,
-    "D": 488,
-    "NPA": 136,
-    "O": 2,
-    "total": 780
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 27,
-    "NPA": 5,
-    "O": 0,
-    "total": 33
-   },
-   "mail_outstanding": {
-    "R": 1591,
-    "D": 3401,
-    "NPA": 789,
-    "O": 17,
-    "total": 5798
-   },
    "returned": {
-    "R": 1,
-    "D": 27,
-    "NPA": 5,
+    "D": 1422,
+    "R": 622,
+    "NPA": 286,
     "O": 0,
-    "total": 33
+    "total": 2330
+   },
+   "early_in_person": {
+    "D": 2160,
+    "R": 791,
+    "NPA": 745,
+    "O": 0,
+    "total": 3696
    },
    "outstanding": {
-    "R": 1591,
-    "D": 3401,
-    "NPA": 789,
-    "O": 17,
-    "total": 5798
+    "D": 2257,
+    "R": 1563,
+    "NPA": 689,
+    "O": 0,
+    "total": 4509
    }
   },
   "Boone": {
-   "early_in_person": {
-    "R": 57,
-    "D": 120,
-    "NPA": 44,
-    "O": 0,
-    "total": 221
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 6,
-    "NPA": 2,
-    "O": 0,
-    "total": 8
-   },
-   "mail_outstanding": {
-    "R": 455,
-    "D": 645,
-    "NPA": 162,
-    "O": 2,
-    "total": 1264
-   },
    "returned": {
-    "R": 0,
-    "D": 6,
-    "NPA": 2,
+    "D": 174,
+    "R": 94,
+    "NPA": 36,
     "O": 0,
-    "total": 8
+    "total": 304
+   },
+   "early_in_person": {
+    "D": 483,
+    "R": 374,
+    "NPA": 228,
+    "O": 0,
+    "total": 1085
    },
    "outstanding": {
-    "R": 455,
-    "D": 645,
-    "NPA": 162,
-    "O": 2,
-    "total": 1264
+    "D": 558,
+    "R": 506,
+    "NPA": 179,
+    "O": 0,
+    "total": 1243
    }
   },
   "Bremer": {
-   "early_in_person": {
-    "R": 58,
-    "D": 94,
-    "NPA": 32,
-    "O": 0,
-    "total": 184
-   },
-   "mail_outstanding": {
-    "R": 400,
-    "D": 441,
-    "NPA": 252,
-    "O": 2,
-    "total": 1095
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 132,
+    "R": 70,
+    "NPA": 60,
     "O": 0,
-    "total": 0
+    "total": 262
+   },
+   "early_in_person": {
+    "D": 488,
+    "R": 296,
+    "NPA": 233,
+    "O": 0,
+    "total": 1017
    },
    "outstanding": {
-    "R": 400,
-    "D": 441,
-    "NPA": 252,
-    "O": 2,
-    "total": 1095
+    "D": 374,
+    "R": 491,
+    "NPA": 278,
+    "O": 0,
+    "total": 1143
    }
   },
   "Buchanan": {
-   "early_in_person": {
-    "R": 45,
-    "D": 46,
-    "NPA": 18,
-    "O": 1,
-    "total": 110
-   },
-   "mail_outstanding": {
-    "R": 193,
-    "D": 354,
-    "NPA": 149,
-    "O": 3,
-    "total": 699
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 1,
-    "O": 0,
-    "total": 1
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 1,
+    "D": 100,
+    "R": 49,
+    "NPA": 34,
     "O": 0,
-    "total": 1
+    "total": 183
+   },
+   "early_in_person": {
+    "D": 310,
+    "R": 259,
+    "NPA": 187,
+    "O": 0,
+    "total": 756
    },
    "outstanding": {
-    "R": 193,
-    "D": 354,
-    "NPA": 149,
-    "O": 3,
-    "total": 699
+    "D": 293,
+    "R": 271,
+    "NPA": 161,
+    "O": 0,
+    "total": 725
    }
   },
   "Buena Vista": {
-   "mail_outstanding": {
-    "R": 214,
-    "D": 165,
-    "NPA": 69,
-    "O": 2,
-    "total": 450
+   "returned": {
+    "D": 37,
+    "R": 37,
+    "NPA": 14,
+    "O": 0,
+    "total": 88
    },
    "early_in_person": {
-    "R": 38,
-    "D": 48,
-    "NPA": 7,
-    "O": 1,
-    "total": 94
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 0,
-    "NPA": 0,
+    "D": 221,
+    "R": 240,
+    "NPA": 105,
     "O": 0,
-    "total": 1
-   },
-   "returned": {
-    "R": 1,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 1
+    "total": 566
    },
    "outstanding": {
-    "R": 214,
-    "D": 165,
-    "NPA": 69,
-    "O": 2,
-    "total": 450
+    "D": 147,
+    "R": 237,
+    "NPA": 73,
+    "O": 0,
+    "total": 457
    }
   },
   "Butler": {
-   "early_in_person": {
-    "R": 36,
-    "D": 26,
-    "NPA": 12,
-    "O": 0,
-    "total": 74
-   },
-   "mail_outstanding": {
-    "R": 379,
-    "D": 164,
-    "NPA": 70,
-    "O": 1,
-    "total": 614
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 0,
-    "NPA": 2,
-    "O": 0,
-    "total": 3
-   },
    "returned": {
-    "R": 1,
-    "D": 0,
-    "NPA": 2,
+    "D": 25,
+    "R": 42,
+    "NPA": 6,
     "O": 0,
-    "total": 3
+    "total": 73
+   },
+   "early_in_person": {
+    "D": 124,
+    "R": 133,
+    "NPA": 75,
+    "O": 0,
+    "total": 332
    },
    "outstanding": {
-    "R": 379,
-    "D": 164,
-    "NPA": 70,
-    "O": 1,
-    "total": 614
+    "D": 156,
+    "R": 473,
+    "NPA": 93,
+    "O": 0,
+    "total": 722
    }
   },
   "Calhoun": {
-   "early_in_person": {
-    "R": 13,
-    "D": 10,
-    "NPA": 11,
+   "returned": {
+    "D": 13,
+    "R": 16,
+    "NPA": 5,
     "O": 0,
     "total": 34
    },
-   "mail_outstanding": {
-    "R": 161,
-    "D": 108,
-    "NPA": 51,
+   "early_in_person": {
+    "D": 56,
+    "R": 95,
+    "NPA": 46,
     "O": 0,
-    "total": 320
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 0,
-    "NPA": 1,
-    "O": 0,
-    "total": 2
-   },
-   "returned": {
-    "R": 1,
-    "D": 0,
-    "NPA": 1,
-    "O": 0,
-    "total": 2
+    "total": 197
    },
    "outstanding": {
-    "R": 161,
-    "D": 108,
-    "NPA": 51,
+    "D": 110,
+    "R": 214,
+    "NPA": 63,
     "O": 0,
-    "total": 320
+    "total": 387
    }
   },
   "Carroll": {
-   "early_in_person": {
-    "R": 54,
-    "D": 62,
-    "NPA": 29,
-    "O": 0,
-    "total": 145
-   },
-   "mail_outstanding": {
-    "R": 334,
-    "D": 338,
-    "NPA": 145,
-    "O": 3,
-    "total": 820
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 0,
-    "NPA": 1,
-    "O": 0,
-    "total": 2
-   },
    "returned": {
-    "R": 1,
-    "D": 0,
-    "NPA": 1,
+    "D": 63,
+    "R": 34,
+    "NPA": 19,
     "O": 0,
-    "total": 2
+    "total": 116
+   },
+   "early_in_person": {
+    "D": 283,
+    "R": 325,
+    "NPA": 162,
+    "O": 0,
+    "total": 770
    },
    "outstanding": {
-    "R": 334,
-    "D": 338,
-    "NPA": 145,
-    "O": 3,
-    "total": 820
+    "D": 301,
+    "R": 433,
+    "NPA": 175,
+    "O": 0,
+    "total": 909
    }
   },
   "Cass": {
-   "early_in_person": {
-    "R": 44,
-    "D": 36,
-    "NPA": 14,
-    "O": 0,
-    "total": 94
-   },
-   "mail_outstanding": {
-    "R": 199,
-    "D": 122,
-    "NPA": 54,
-    "O": 5,
-    "total": 380
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 24,
+    "R": 19,
+    "NPA": 9,
     "O": 0,
-    "total": 0
+    "total": 52
+   },
+   "early_in_person": {
+    "D": 154,
+    "R": 235,
+    "NPA": 65,
+    "O": 0,
+    "total": 454
    },
    "outstanding": {
-    "R": 199,
-    "D": 122,
-    "NPA": 54,
-    "O": 5,
-    "total": 380
+    "D": 114,
+    "R": 253,
+    "NPA": 61,
+    "O": 0,
+    "total": 428
    }
   },
   "Cedar": {
-   "early_in_person": {
-    "R": 48,
-    "D": 46,
-    "NPA": 16,
-    "O": 0,
-    "total": 110
-   },
-   "mail_outstanding": {
-    "R": 313,
-    "D": 308,
-    "NPA": 172,
-    "O": 0,
-    "total": 793
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 43,
+    "R": 33,
+    "NPA": 27,
     "O": 0,
-    "total": 0
+    "total": 103
+   },
+   "early_in_person": {
+    "D": 254,
+    "R": 239,
+    "NPA": 107,
+    "O": 0,
+    "total": 600
    },
    "outstanding": {
-    "R": 313,
-    "D": 308,
-    "NPA": 172,
+    "D": 324,
+    "R": 419,
+    "NPA": 186,
     "O": 0,
-    "total": 793
+    "total": 929
    }
   },
   "Cerro Gordo": {
-   "early_in_person": {
-    "R": 101,
-    "D": 224,
-    "NPA": 58,
-    "O": 2,
-    "total": 385
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 6,
-    "NPA": 2,
-    "O": 0,
-    "total": 8
-   },
-   "mail_outstanding": {
-    "R": 347,
-    "D": 797,
-    "NPA": 276,
-    "O": 1,
-    "total": 1421
-   },
    "returned": {
-    "R": 0,
-    "D": 6,
-    "NPA": 2,
+    "D": 213,
+    "R": 69,
+    "NPA": 61,
     "O": 0,
-    "total": 8
+    "total": 343
+   },
+   "early_in_person": {
+    "D": 895,
+    "R": 516,
+    "NPA": 324,
+    "O": 0,
+    "total": 1735
    },
    "outstanding": {
-    "R": 347,
-    "D": 797,
-    "NPA": 276,
-    "O": 1,
+    "D": 651,
+    "R": 490,
+    "NPA": 280,
+    "O": 0,
     "total": 1421
    }
   },
   "Cherokee": {
-   "early_in_person": {
-    "R": 51,
-    "D": 27,
-    "NPA": 7,
-    "O": 1,
-    "total": 86
-   },
-   "mail_outstanding": {
-    "R": 238,
-    "D": 130,
-    "NPA": 36,
-    "O": 0,
-    "total": 404
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 1
-   },
    "returned": {
-    "R": 1,
-    "D": 0,
-    "NPA": 0,
+    "D": 48,
+    "R": 88,
+    "NPA": 9,
     "O": 0,
-    "total": 1
+    "total": 145
+   },
+   "early_in_person": {
+    "D": 133,
+    "R": 270,
+    "NPA": 53,
+    "O": 0,
+    "total": 456
    },
    "outstanding": {
-    "R": 238,
-    "D": 130,
-    "NPA": 36,
+    "D": 93,
+    "R": 222,
+    "NPA": 38,
     "O": 0,
-    "total": 404
+    "total": 353
    }
   },
   "Chickasaw": {
-   "mail_returned": {
-    "R": 1,
-    "D": 1,
-    "NPA": 0,
+   "returned": {
+    "D": 91,
+    "R": 56,
+    "NPA": 11,
     "O": 0,
-    "total": 2
-   },
-   "mail_outstanding": {
-    "R": 233,
-    "D": 292,
-    "NPA": 94,
-    "O": 0,
-    "total": 619
+    "total": 158
    },
    "early_in_person": {
-    "R": 28,
-    "D": 41,
-    "NPA": 17,
+    "D": 213,
+    "R": 199,
+    "NPA": 105,
     "O": 0,
-    "total": 86
-   },
-   "returned": {
-    "R": 1,
-    "D": 1,
-    "NPA": 0,
-    "O": 0,
-    "total": 2
+    "total": 517
    },
    "outstanding": {
-    "R": 233,
-    "D": 292,
-    "NPA": 94,
+    "D": 241,
+    "R": 286,
+    "NPA": 112,
     "O": 0,
-    "total": 619
+    "total": 639
    }
   },
   "Clarke": {
-   "early_in_person": {
-    "R": 33,
-    "D": 38,
-    "NPA": 5,
-    "O": 0,
-    "total": 76
-   },
-   "mail_outstanding": {
-    "R": 99,
-    "D": 101,
-    "NPA": 31,
-    "O": 2,
-    "total": 233
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 36,
+    "R": 46,
+    "NPA": 7,
     "O": 0,
-    "total": 0
+    "total": 89
+   },
+   "early_in_person": {
+    "D": 143,
+    "R": 128,
+    "NPA": 43,
+    "O": 0,
+    "total": 314
    },
    "outstanding": {
-    "R": 99,
-    "D": 101,
-    "NPA": 31,
-    "O": 2,
-    "total": 233
+    "D": 77,
+    "R": 102,
+    "NPA": 38,
+    "O": 0,
+    "total": 217
    }
   },
   "Clay": {
-   "early_in_person": {
+   "returned": {
+    "D": 42,
     "R": 40,
-    "D": 41,
-    "NPA": 19,
+    "NPA": 18,
     "O": 0,
     "total": 100
    },
-   "mail_outstanding": {
-    "R": 286,
-    "D": 186,
-    "NPA": 69,
-    "O": 1,
-    "total": 542
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 1,
+   "early_in_person": {
+    "D": 220,
+    "R": 333,
+    "NPA": 102,
     "O": 0,
-    "total": 1
-   },
-   "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 1,
-    "O": 0,
-    "total": 1
+    "total": 655
    },
    "outstanding": {
-    "R": 286,
-    "D": 186,
-    "NPA": 69,
-    "O": 1,
-    "total": 542
+    "D": 161,
+    "R": 328,
+    "NPA": 67,
+    "O": 0,
+    "total": 556
    }
   },
   "Clayton": {
-   "early_in_person": {
-    "R": 19,
-    "D": 40,
-    "NPA": 11,
-    "O": 0,
-    "total": 70
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 0,
-    "O": 0,
-    "total": 2
-   },
-   "mail_outstanding": {
-    "R": 203,
-    "D": 243,
-    "NPA": 110,
-    "O": 0,
-    "total": 556
-   },
    "returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 0,
+    "D": 76,
+    "R": 43,
+    "NPA": 21,
     "O": 0,
-    "total": 2
+    "total": 140
+   },
+   "early_in_person": {
+    "D": 176,
+    "R": 129,
+    "NPA": 72,
+    "O": 0,
+    "total": 377
    },
    "outstanding": {
-    "R": 203,
-    "D": 243,
-    "NPA": 110,
+    "D": 210,
+    "R": 307,
+    "NPA": 119,
     "O": 0,
-    "total": 556
+    "total": 636
    }
   },
   "Clinton": {
-   "early_in_person": {
-    "R": 89,
-    "D": 213,
-    "NPA": 44,
-    "O": 0,
-    "total": 346
-   },
-   "mail_outstanding": {
-    "R": 777,
-    "D": 1254,
-    "NPA": 476,
-    "O": 1,
-    "total": 2508
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 488,
+    "R": 284,
+    "NPA": 151,
     "O": 0,
-    "total": 0
+    "total": 923
+   },
+   "early_in_person": {
+    "D": 924,
+    "R": 563,
+    "NPA": 379,
+    "O": 0,
+    "total": 1866
    },
    "outstanding": {
-    "R": 777,
-    "D": 1254,
-    "NPA": 476,
-    "O": 1,
-    "total": 2508
+    "D": 838,
+    "R": 714,
+    "NPA": 417,
+    "O": 0,
+    "total": 1969
    }
   },
   "Crawford": {
-   "early_in_person": {
-    "R": 16,
-    "D": 15,
-    "NPA": 4,
-    "O": 0,
-    "total": 35
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 0,
-    "O": 0,
-    "total": 2
-   },
-   "mail_outstanding": {
-    "R": 226,
-    "D": 169,
-    "NPA": 54,
-    "O": 1,
-    "total": 450
-   },
    "returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 0,
+    "D": 45,
+    "R": 39,
+    "NPA": 6,
     "O": 0,
-    "total": 2
+    "total": 90
+   },
+   "early_in_person": {
+    "D": 92,
+    "R": 99,
+    "NPA": 34,
+    "O": 0,
+    "total": 225
    },
    "outstanding": {
-    "R": 226,
-    "D": 169,
-    "NPA": 54,
-    "O": 1,
-    "total": 450
+    "D": 167,
+    "R": 282,
+    "NPA": 66,
+    "O": 0,
+    "total": 515
    }
   },
   "Dallas": {
-   "early_in_person": {
-    "R": 165,
-    "D": 270,
-    "NPA": 107,
-    "O": 1,
-    "total": 543
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 4,
-    "NPA": 3,
-    "O": 0,
-    "total": 7
-   },
-   "mail_outstanding": {
-    "R": 2101,
-    "D": 2787,
-    "NPA": 1172,
-    "O": 39,
-    "total": 6099
-   },
    "returned": {
-    "R": 0,
-    "D": 4,
-    "NPA": 3,
+    "D": 449,
+    "R": 268,
+    "NPA": 126,
     "O": 0,
-    "total": 7
+    "total": 843
+   },
+   "early_in_person": {
+    "D": 1330,
+    "R": 922,
+    "NPA": 581,
+    "O": 0,
+    "total": 2833
    },
    "outstanding": {
-    "R": 2101,
-    "D": 2787,
-    "NPA": 1172,
-    "O": 39,
-    "total": 6099
+    "D": 2632,
+    "R": 2515,
+    "NPA": 1360,
+    "O": 0,
+    "total": 6507
    }
   },
   "Davis": {
-   "early_in_person": {
-    "R": 27,
-    "D": 17,
-    "NPA": 1,
-    "O": 0,
-    "total": 45
-   },
-   "mail_outstanding": {
-    "R": 115,
-    "D": 112,
-    "NPA": 22,
-    "O": 1,
-    "total": 250
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 56,
+    "R": 58,
+    "NPA": 5,
     "O": 0,
-    "total": 0
+    "total": 119
+   },
+   "early_in_person": {
+    "D": 73,
+    "R": 111,
+    "NPA": 25,
+    "O": 0,
+    "total": 209
    },
    "outstanding": {
-    "R": 115,
-    "D": 112,
-    "NPA": 22,
-    "O": 1,
-    "total": 250
+    "D": 66,
+    "R": 100,
+    "NPA": 26,
+    "O": 0,
+    "total": 192
    }
   },
   "Decatur": {
-   "early_in_person": {
-    "R": 17,
-    "D": 20,
-    "NPA": 5,
-    "O": 0,
-    "total": 42
-   },
-   "mail_outstanding": {
-    "R": 83,
-    "D": 83,
-    "NPA": 22,
-    "O": 2,
-    "total": 190
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 1
-   },
    "returned": {
-    "R": 1,
-    "D": 0,
+    "D": 11,
+    "R": 12,
     "NPA": 0,
     "O": 0,
-    "total": 1
+    "total": 23
+   },
+   "early_in_person": {
+    "D": 64,
+    "R": 96,
+    "NPA": 24,
+    "O": 0,
+    "total": 184
    },
    "outstanding": {
-    "R": 83,
-    "D": 83,
-    "NPA": 22,
-    "O": 2,
-    "total": 190
+    "D": 74,
+    "R": 121,
+    "NPA": 26,
+    "O": 0,
+    "total": 221
    }
   },
   "Delaware": {
-   "early_in_person": {
-    "R": 60,
-    "D": 63,
-    "NPA": 9,
-    "O": 1,
-    "total": 133
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 5,
-    "NPA": 0,
-    "O": 0,
-    "total": 5
-   },
-   "mail_outstanding": {
-    "R": 278,
-    "D": 298,
-    "NPA": 144,
-    "O": 2,
-    "total": 722
-   },
    "returned": {
-    "R": 0,
-    "D": 5,
-    "NPA": 0,
+    "D": 116,
+    "R": 120,
+    "NPA": 38,
     "O": 0,
-    "total": 5
+    "total": 274
+   },
+   "early_in_person": {
+    "D": 168,
+    "R": 189,
+    "NPA": 83,
+    "O": 0,
+    "total": 440
    },
    "outstanding": {
-    "R": 278,
-    "D": 298,
+    "D": 232,
+    "R": 328,
     "NPA": 144,
-    "O": 2,
-    "total": 722
+    "O": 0,
+    "total": 704
    }
   },
   "Des Moines": {
-   "early_in_person": {
-    "R": 67,
-    "D": 138,
-    "NPA": 24,
-    "O": 1,
-    "total": 230
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 4,
-    "NPA": 4,
-    "O": 0,
-    "total": 9
-   },
-   "mail_outstanding": {
-    "R": 481,
-    "D": 1090,
-    "NPA": 201,
-    "O": 2,
-    "total": 1774
-   },
    "returned": {
-    "R": 1,
-    "D": 4,
-    "NPA": 4,
+    "D": 191,
+    "R": 33,
+    "NPA": 23,
     "O": 0,
-    "total": 9
+    "total": 247
+   },
+   "early_in_person": {
+    "D": 684,
+    "R": 357,
+    "NPA": 189,
+    "O": 0,
+    "total": 1230
    },
    "outstanding": {
-    "R": 481,
-    "D": 1090,
-    "NPA": 201,
-    "O": 2,
+    "D": 974,
+    "R": 586,
+    "NPA": 214,
+    "O": 0,
     "total": 1774
    }
   },
   "Dickinson": {
-   "early_in_person": {
-    "R": 152,
-    "D": 107,
-    "NPA": 48,
-    "O": 0,
-    "total": 307
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 0,
-    "O": 0,
-    "total": 2
-   },
-   "mail_outstanding": {
-    "R": 525,
-    "D": 290,
-    "NPA": 154,
-    "O": 4,
-    "total": 973
-   },
    "returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 0,
+    "D": 75,
+    "R": 146,
+    "NPA": 44,
     "O": 0,
-    "total": 2
+    "total": 265
+   },
+   "early_in_person": {
+    "D": 394,
+    "R": 717,
+    "NPA": 225,
+    "O": 0,
+    "total": 1336
    },
    "outstanding": {
-    "R": 525,
-    "D": 290,
-    "NPA": 154,
-    "O": 4,
-    "total": 973
+    "D": 258,
+    "R": 551,
+    "NPA": 172,
+    "O": 0,
+    "total": 981
    }
   },
   "Dubuque": {
-   "early_in_person": {
-    "R": 161,
-    "D": 395,
-    "NPA": 106,
-    "O": 2,
-    "total": 664
-   },
-   "mail_returned": {
-    "R": 4,
-    "D": 18,
-    "NPA": 5,
-    "O": 0,
-    "total": 27
-   },
-   "mail_outstanding": {
-    "R": 1594,
-    "D": 3952,
-    "NPA": 755,
-    "O": 18,
-    "total": 6319
-   },
    "returned": {
-    "R": 4,
-    "D": 18,
-    "NPA": 5,
+    "D": 1324,
+    "R": 541,
+    "NPA": 193,
     "O": 0,
-    "total": 27
+    "total": 2058
+   },
+   "early_in_person": {
+    "D": 1925,
+    "R": 841,
+    "NPA": 486,
+    "O": 0,
+    "total": 3252
    },
    "outstanding": {
-    "R": 1594,
-    "D": 3952,
-    "NPA": 755,
-    "O": 18,
-    "total": 6319
+    "D": 2937,
+    "R": 1800,
+    "NPA": 749,
+    "O": 0,
+    "total": 5486
    }
   },
   "Emmet": {
-   "early_in_person": {
-    "R": 23,
-    "D": 13,
-    "NPA": 9,
-    "O": 0,
-    "total": 45
-   },
-   "mail_outstanding": {
-    "R": 98,
-    "D": 99,
-    "NPA": 32,
-    "O": 0,
-    "total": 229
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 1,
-    "O": 0,
-    "total": 1
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 1,
+    "D": 38,
+    "R": 53,
+    "NPA": 7,
     "O": 0,
-    "total": 1
+    "total": 98
+   },
+   "early_in_person": {
+    "D": 82,
+    "R": 77,
+    "NPA": 37,
+    "O": 0,
+    "total": 196
    },
    "outstanding": {
-    "R": 98,
-    "D": 99,
+    "D": 73,
+    "R": 77,
     "NPA": 32,
     "O": 0,
-    "total": 229
+    "total": 182
    }
   },
   "Fayette": {
-   "early_in_person": {
-    "R": 30,
-    "D": 34,
-    "NPA": 18,
-    "O": 1,
-    "total": 83
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 2,
-    "NPA": 2,
-    "O": 0,
-    "total": 5
-   },
-   "mail_outstanding": {
-    "R": 283,
-    "D": 341,
-    "NPA": 132,
-    "O": 2,
-    "total": 758
-   },
    "returned": {
-    "R": 1,
-    "D": 2,
-    "NPA": 2,
+    "D": 52,
+    "R": 58,
+    "NPA": 21,
     "O": 0,
-    "total": 5
+    "total": 131
+   },
+   "early_in_person": {
+    "D": 172,
+    "R": 151,
+    "NPA": 65,
+    "O": 0,
+    "total": 388
    },
    "outstanding": {
-    "R": 283,
-    "D": 341,
-    "NPA": 132,
-    "O": 2,
-    "total": 758
+    "D": 321,
+    "R": 361,
+    "NPA": 157,
+    "O": 0,
+    "total": 839
    }
   },
   "Floyd": {
-   "early_in_person": {
-    "R": 30,
-    "D": 45,
-    "NPA": 29,
-    "O": 0,
-    "total": 104
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 1,
-    "O": 0,
-    "total": 2
-   },
-   "mail_outstanding": {
-    "R": 194,
-    "D": 267,
-    "NPA": 134,
-    "O": 0,
-    "total": 595
-   },
    "returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 1,
+    "D": 65,
+    "R": 26,
+    "NPA": 17,
     "O": 0,
-    "total": 2
+    "total": 108
+   },
+   "early_in_person": {
+    "D": 224,
+    "R": 134,
+    "NPA": 100,
+    "O": 0,
+    "total": 458
    },
    "outstanding": {
-    "R": 194,
-    "D": 267,
-    "NPA": 134,
+    "D": 218,
+    "R": 225,
+    "NPA": 143,
     "O": 0,
-    "total": 595
+    "total": 586
    }
   },
   "Franklin": {
-   "mail_outstanding": {
-    "R": 128,
-    "D": 107,
-    "NPA": 23,
-    "O": 1,
-    "total": 259
+   "returned": {
+    "D": 39,
+    "R": 33,
+    "NPA": 11,
+    "O": 0,
+    "total": 83
    },
    "early_in_person": {
-    "R": 26,
-    "D": 12,
-    "NPA": 6,
+    "D": 74,
+    "R": 108,
+    "NPA": 38,
     "O": 0,
-    "total": 44
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 2,
-    "O": 0,
-    "total": 2
-   },
-   "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 2,
-    "O": 0,
-    "total": 2
+    "total": 220
    },
    "outstanding": {
-    "R": 128,
-    "D": 107,
-    "NPA": 23,
-    "O": 1,
-    "total": 259
+    "D": 84,
+    "R": 194,
+    "NPA": 30,
+    "O": 0,
+    "total": 308
    }
   },
   "Fremont": {
-   "early_in_person": {
-    "R": 11,
-    "D": 14,
-    "NPA": 0,
-    "O": 0,
-    "total": 25
-   },
-   "mail_outstanding": {
-    "R": 106,
-    "D": 90,
-    "NPA": 21,
-    "O": 0,
-    "total": 217
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 18,
+    "R": 27,
+    "NPA": 2,
     "O": 0,
-    "total": 0
+    "total": 47
+   },
+   "early_in_person": {
+    "D": 49,
+    "R": 70,
+    "NPA": 15,
+    "O": 0,
+    "total": 134
    },
    "outstanding": {
-    "R": 106,
-    "D": 90,
-    "NPA": 21,
+    "D": 74,
+    "R": 128,
+    "NPA": 24,
     "O": 0,
-    "total": 217
+    "total": 226
    }
   },
   "Greene": {
-   "early_in_person": {
-    "R": 23,
-    "D": 35,
-    "NPA": 12,
-    "O": 0,
-    "total": 70
-   },
-   "mail_outstanding": {
-    "R": 93,
-    "D": 126,
-    "NPA": 42,
-    "O": 0,
-    "total": 261
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 1,
-    "O": 0,
-    "total": 1
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 1,
+    "D": 22,
+    "R": 15,
+    "NPA": 9,
     "O": 0,
-    "total": 1
+    "total": 46
+   },
+   "early_in_person": {
+    "D": 157,
+    "R": 157,
+    "NPA": 77,
+    "O": 0,
+    "total": 391
    },
    "outstanding": {
-    "R": 93,
-    "D": 126,
+    "D": 112,
+    "R": 113,
     "NPA": 42,
     "O": 0,
-    "total": 261
+    "total": 267
    }
   },
   "Grundy": {
-   "early_in_person": {
-    "R": 16,
-    "D": 15,
-    "NPA": 3,
-    "O": 0,
-    "total": 34
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 4,
-    "NPA": 1,
-    "O": 0,
-    "total": 5
-   },
-   "mail_outstanding": {
-    "R": 353,
-    "D": 184,
-    "NPA": 88,
-    "O": 4,
-    "total": 629
-   },
    "returned": {
-    "R": 0,
-    "D": 4,
-    "NPA": 1,
+    "D": 30,
+    "R": 48,
+    "NPA": 12,
     "O": 0,
-    "total": 5
+    "total": 90
+   },
+   "early_in_person": {
+    "D": 86,
+    "R": 119,
+    "NPA": 42,
+    "O": 0,
+    "total": 247
    },
    "outstanding": {
-    "R": 353,
-    "D": 184,
-    "NPA": 88,
-    "O": 4,
-    "total": 629
+    "D": 181,
+    "R": 408,
+    "NPA": 102,
+    "O": 0,
+    "total": 691
    }
   },
   "Guthrie": {
-   "early_in_person": {
-    "R": 27,
-    "D": 32,
-    "NPA": 7,
-    "O": 0,
-    "total": 66
-   },
-   "mail_outstanding": {
-    "R": 201,
-    "D": 182,
-    "NPA": 84,
-    "O": 1,
-    "total": 468
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 32,
+    "R": 8,
+    "NPA": 1,
     "O": 0,
-    "total": 0
+    "total": 41
+   },
+   "early_in_person": {
+    "D": 122,
+    "R": 161,
+    "NPA": 60,
+    "O": 0,
+    "total": 343
    },
    "outstanding": {
-    "R": 201,
-    "D": 182,
-    "NPA": 84,
-    "O": 1,
-    "total": 468
+    "D": 162,
+    "R": 286,
+    "NPA": 116,
+    "O": 0,
+    "total": 564
    }
   },
   "Hamilton": {
-   "early_in_person": {
-    "R": 43,
-    "D": 51,
-    "NPA": 12,
-    "O": 0,
-    "total": 106
-   },
-   "mail_outstanding": {
-    "R": 175,
-    "D": 243,
-    "NPA": 61,
-    "O": 4,
-    "total": 483
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 1
-   },
    "returned": {
-    "R": 1,
-    "D": 0,
-    "NPA": 0,
+    "D": 54,
+    "R": 26,
+    "NPA": 3,
     "O": 0,
-    "total": 1
+    "total": 83
+   },
+   "early_in_person": {
+    "D": 204,
+    "R": 227,
+    "NPA": 97,
+    "O": 0,
+    "total": 528
    },
    "outstanding": {
-    "R": 175,
-    "D": 243,
-    "NPA": 61,
-    "O": 4,
-    "total": 483
+    "D": 228,
+    "R": 291,
+    "NPA": 79,
+    "O": 0,
+    "total": 598
    }
   },
   "Hancock": {
-   "early_in_person": {
-    "R": 6,
-    "D": 18,
-    "NPA": 4,
-    "O": 0,
-    "total": 28
-   },
-   "mail_outstanding": {
-    "R": 144,
-    "D": 145,
-    "NPA": 38,
-    "O": 1,
-    "total": 328
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 10,
+    "R": 14,
+    "NPA": 6,
     "O": 0,
-    "total": 0
+    "total": 30
+   },
+   "early_in_person": {
+    "D": 84,
+    "R": 103,
+    "NPA": 29,
+    "O": 0,
+    "total": 216
    },
    "outstanding": {
-    "R": 144,
-    "D": 145,
-    "NPA": 38,
-    "O": 1,
-    "total": 328
+    "D": 154,
+    "R": 214,
+    "NPA": 42,
+    "O": 0,
+    "total": 410
    }
   },
   "Hardin": {
-   "early_in_person": {
-    "R": 41,
-    "D": 30,
-    "NPA": 15,
-    "O": 0,
-    "total": 86
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 0,
-    "O": 0,
-    "total": 1
-   },
-   "mail_outstanding": {
-    "R": 357,
-    "D": 244,
-    "NPA": 116,
-    "O": 4,
-    "total": 721
-   },
    "returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 0,
+    "D": 28,
+    "R": 28,
+    "NPA": 8,
     "O": 0,
-    "total": 1
+    "total": 64
+   },
+   "early_in_person": {
+    "D": 158,
+    "R": 212,
+    "NPA": 73,
+    "O": 0,
+    "total": 443
    },
    "outstanding": {
-    "R": 357,
-    "D": 244,
-    "NPA": 116,
-    "O": 4,
-    "total": 721
+    "D": 241,
+    "R": 461,
+    "NPA": 136,
+    "O": 0,
+    "total": 838
    }
   },
   "Harrison": {
-   "early_in_person": {
-    "R": 16,
-    "D": 18,
-    "NPA": 6,
-    "O": 0,
-    "total": 40
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 0,
-    "O": 0,
-    "total": 1
-   },
-   "mail_outstanding": {
-    "R": 198,
-    "D": 159,
-    "NPA": 40,
-    "O": 1,
-    "total": 398
-   },
    "returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 0,
+    "D": 46,
+    "R": 66,
+    "NPA": 15,
     "O": 0,
-    "total": 1
+    "total": 127
+   },
+   "early_in_person": {
+    "D": 100,
+    "R": 127,
+    "NPA": 34,
+    "O": 0,
+    "total": 261
    },
    "outstanding": {
-    "R": 198,
-    "D": 159,
-    "NPA": 40,
-    "O": 1,
-    "total": 398
+    "D": 130,
+    "R": 200,
+    "NPA": 33,
+    "O": 0,
+    "total": 363
    }
   },
   "Henry": {
-   "mail_outstanding": {
-    "R": 258,
-    "D": 273,
-    "NPA": 105,
-    "O": 1,
-    "total": 637
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+   "returned": {
+    "D": 38,
+    "R": 40,
+    "NPA": 11,
     "O": 0,
-    "total": 0
+    "total": 89
    },
    "early_in_person": {
-    "R": 0,
     "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
-   "returned": {
     "R": 0,
-    "D": 0,
     "NPA": 0,
     "O": 0,
     "total": 0
    },
    "outstanding": {
-    "R": 258,
-    "D": 273,
-    "NPA": 105,
-    "O": 1,
-    "total": 637
+    "D": 260,
+    "R": 314,
+    "NPA": 113,
+    "O": 0,
+    "total": 687
    }
   },
   "Howard": {
-   "early_in_person": {
-    "R": 12,
-    "D": 31,
-    "NPA": 10,
-    "O": 0,
-    "total": 53
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 0,
-    "O": 0,
-    "total": 2
-   },
-   "mail_outstanding": {
-    "R": 73,
-    "D": 146,
-    "NPA": 63,
-    "O": 0,
-    "total": 282
-   },
    "returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 0,
+    "D": 44,
+    "R": 16,
+    "NPA": 20,
     "O": 0,
-    "total": 2
+    "total": 80
+   },
+   "early_in_person": {
+    "D": 119,
+    "R": 70,
+    "NPA": 61,
+    "O": 0,
+    "total": 250
    },
    "outstanding": {
-    "R": 73,
-    "D": 146,
-    "NPA": 63,
+    "D": 108,
+    "R": 109,
+    "NPA": 56,
     "O": 0,
-    "total": 282
+    "total": 273
    }
   },
   "Humboldt": {
-   "early_in_person": {
-    "R": 23,
-    "D": 28,
-    "NPA": 8,
-    "O": 0,
-    "total": 59
-   },
-   "mail_outstanding": {
-    "R": 167,
-    "D": 137,
-    "NPA": 61,
-    "O": 0,
-    "total": 365
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 40,
+    "R": 48,
+    "NPA": 20,
     "O": 0,
-    "total": 0
+    "total": 108
+   },
+   "early_in_person": {
+    "D": 102,
+    "R": 133,
+    "NPA": 48,
+    "O": 0,
+    "total": 283
    },
    "outstanding": {
-    "R": 167,
-    "D": 137,
-    "NPA": 61,
+    "D": 104,
+    "R": 179,
+    "NPA": 48,
     "O": 0,
-    "total": 365
+    "total": 331
    }
   },
   "Ida": {
-   "early_in_person": {
-    "R": 6,
-    "D": 13,
-    "NPA": 4,
+   "returned": {
+    "D": 7,
+    "R": 7,
+    "NPA": 2,
     "O": 0,
-    "total": 23
+    "total": 16
    },
-   "mail_outstanding": {
-    "R": 104,
-    "D": 65,
+   "early_in_person": {
+    "D": 47,
+    "R": 55,
     "NPA": 19,
     "O": 0,
-    "total": 188
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
-   "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
+    "total": 121
    },
    "outstanding": {
-    "R": 104,
     "D": 65,
-    "NPA": 19,
+    "R": 143,
+    "NPA": 21,
     "O": 0,
-    "total": 188
+    "total": 229
    }
   },
   "Iowa": {
-   "early_in_person": {
-    "R": 36,
-    "D": 31,
-    "NPA": 19,
-    "O": 0,
-    "total": 86
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 1,
-    "O": 0,
-    "total": 3
-   },
-   "mail_outstanding": {
-    "R": 221,
-    "D": 265,
-    "NPA": 123,
-    "O": 1,
-    "total": 610
-   },
    "returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 1,
+    "D": 63,
+    "R": 55,
+    "NPA": 40,
     "O": 0,
-    "total": 3
+    "total": 158
+   },
+   "early_in_person": {
+    "D": 203,
+    "R": 193,
+    "NPA": 110,
+    "O": 0,
+    "total": 506
    },
    "outstanding": {
-    "R": 221,
-    "D": 265,
-    "NPA": 123,
-    "O": 1,
-    "total": 610
+    "D": 252,
+    "R": 301,
+    "NPA": 142,
+    "O": 0,
+    "total": 695
    }
   },
   "Jackson": {
-   "early_in_person": {
-    "R": 25,
-    "D": 47,
-    "NPA": 10,
-    "O": 0,
-    "total": 82
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 10,
-    "NPA": 2,
-    "O": 0,
-    "total": 12
-   },
-   "mail_outstanding": {
-    "R": 417,
-    "D": 518,
-    "NPA": 115,
-    "O": 1,
-    "total": 1051
-   },
    "returned": {
-    "R": 0,
-    "D": 10,
-    "NPA": 2,
+    "D": 175,
+    "R": 159,
+    "NPA": 42,
     "O": 0,
-    "total": 12
+    "total": 376
+   },
+   "early_in_person": {
+    "D": 218,
+    "R": 209,
+    "NPA": 84,
+    "O": 0,
+    "total": 511
    },
    "outstanding": {
-    "R": 417,
-    "D": 518,
-    "NPA": 115,
-    "O": 1,
-    "total": 1051
+    "D": 383,
+    "R": 380,
+    "NPA": 109,
+    "O": 0,
+    "total": 872
    }
   },
   "Jasper": {
-   "mail_returned": {
-    "R": 2,
-    "D": 3,
-    "NPA": 1,
+   "returned": {
+    "D": 139,
+    "R": 84,
+    "NPA": 32,
     "O": 0,
-    "total": 6
-   },
-   "mail_outstanding": {
-    "R": 514,
-    "D": 732,
-    "NPA": 211,
-    "O": 7,
-    "total": 1464
+    "total": 255
    },
    "early_in_person": {
-    "R": 75,
-    "D": 153,
-    "NPA": 42,
+    "D": 664,
+    "R": 453,
+    "NPA": 238,
     "O": 0,
-    "total": 270
-   },
-   "returned": {
-    "R": 2,
-    "D": 3,
-    "NPA": 1,
-    "O": 0,
-    "total": 6
+    "total": 1355
    },
    "outstanding": {
-    "R": 514,
-    "D": 732,
-    "NPA": 211,
-    "O": 7,
-    "total": 1464
+    "D": 642,
+    "R": 613,
+    "NPA": 248,
+    "O": 0,
+    "total": 1503
    }
   },
   "Jefferson": {
-   "early_in_person": {
-    "R": 35,
-    "D": 134,
-    "NPA": 15,
-    "O": 0,
-    "total": 184
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 16,
-    "NPA": 1,
-    "O": 0,
-    "total": 17
-   },
-   "mail_outstanding": {
-    "R": 170,
-    "D": 412,
-    "NPA": 83,
-    "O": 1,
-    "total": 666
-   },
    "returned": {
-    "R": 0,
-    "D": 16,
-    "NPA": 1,
+    "D": 115,
+    "R": 20,
+    "NPA": 16,
     "O": 0,
-    "total": 17
+    "total": 151
+   },
+   "early_in_person": {
+    "D": 616,
+    "R": 210,
+    "NPA": 124,
+    "O": 0,
+    "total": 950
    },
    "outstanding": {
-    "R": 170,
-    "D": 412,
-    "NPA": 83,
-    "O": 1,
-    "total": 666
+    "D": 358,
+    "R": 229,
+    "NPA": 90,
+    "O": 0,
+    "total": 677
    }
   },
   "Johnson": {
-   "early_in_person": {
-    "R": 166,
-    "D": 1284,
-    "NPA": 188,
-    "O": 3,
-    "total": 1641
-   },
-   "mail_returned": {
-    "R": 9,
-    "D": 115,
-    "NPA": 18,
-    "O": 0,
-    "total": 142
-   },
-   "mail_outstanding": {
-    "R": 755,
-    "D": 4045,
-    "NPA": 1172,
-    "O": 22,
-    "total": 5994
-   },
    "returned": {
-    "R": 9,
-    "D": 115,
-    "NPA": 18,
+    "D": 1185,
+    "R": 206,
+    "NPA": 252,
     "O": 0,
-    "total": 142
+    "total": 1643
+   },
+   "early_in_person": {
+    "D": 6350,
+    "R": 936,
+    "NPA": 1369,
+    "O": 0,
+    "total": 8655
    },
    "outstanding": {
-    "R": 755,
-    "D": 4045,
-    "NPA": 1172,
-    "O": 22,
-    "total": 5994
+    "D": 3238,
+    "R": 929,
+    "NPA": 1152,
+    "O": 0,
+    "total": 5319
    }
   },
   "Jones": {
-   "early_in_person": {
-    "R": 45,
-    "D": 53,
-    "NPA": 28,
-    "O": 0,
-    "total": 126
-   },
-   "mail_outstanding": {
-    "R": 330,
-    "D": 473,
-    "NPA": 219,
-    "O": 4,
-    "total": 1026
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 143,
+    "R": 96,
+    "NPA": 48,
     "O": 0,
-    "total": 0
+    "total": 287
+   },
+   "early_in_person": {
+    "D": 248,
+    "R": 228,
+    "NPA": 157,
+    "O": 0,
+    "total": 633
    },
    "outstanding": {
-    "R": 330,
-    "D": 473,
-    "NPA": 219,
-    "O": 4,
-    "total": 1026
+    "D": 381,
+    "R": 374,
+    "NPA": 221,
+    "O": 0,
+    "total": 976
    }
   },
   "Keokuk": {
-   "early_in_person": {
-    "R": 14,
-    "D": 17,
-    "NPA": 2,
-    "O": 0,
-    "total": 33
-   },
-   "mail_outstanding": {
-    "R": 148,
-    "D": 115,
-    "NPA": 33,
-    "O": 0,
-    "total": 296
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 22,
+    "R": 18,
+    "NPA": 6,
     "O": 0,
-    "total": 0
+    "total": 46
+   },
+   "early_in_person": {
+    "D": 66,
+    "R": 86,
+    "NPA": 26,
+    "O": 0,
+    "total": 178
    },
    "outstanding": {
-    "R": 148,
-    "D": 115,
-    "NPA": 33,
+    "D": 106,
+    "R": 189,
+    "NPA": 46,
     "O": 0,
-    "total": 296
+    "total": 341
    }
   },
   "Kossuth": {
-   "early_in_person": {
-    "R": 22,
-    "D": 37,
-    "NPA": 17,
-    "O": 0,
-    "total": 76
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 0,
-    "O": 0,
-    "total": 1
-   },
-   "mail_outstanding": {
-    "R": 320,
-    "D": 226,
-    "NPA": 97,
-    "O": 1,
-    "total": 644
-   },
    "returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 0,
+    "D": 71,
+    "R": 83,
+    "NPA": 23,
     "O": 0,
-    "total": 1
+    "total": 177
+   },
+   "early_in_person": {
+    "D": 179,
+    "R": 208,
+    "NPA": 81,
+    "O": 0,
+    "total": 468
    },
    "outstanding": {
-    "R": 320,
-    "D": 226,
-    "NPA": 97,
-    "O": 1,
-    "total": 644
+    "D": 213,
+    "R": 353,
+    "NPA": 117,
+    "O": 0,
+    "total": 683
    }
   },
   "Lee": {
-   "early_in_person": {
-    "R": 46,
-    "D": 75,
-    "NPA": 32,
-    "O": 1,
-    "total": 154
-   },
-   "mail_returned": {
-    "R": 2,
-    "D": 2,
-    "NPA": 1,
-    "O": 0,
-    "total": 5
-   },
-   "mail_outstanding": {
-    "R": 431,
-    "D": 895,
-    "NPA": 152,
-    "O": 5,
-    "total": 1483
-   },
    "returned": {
-    "R": 2,
-    "D": 2,
-    "NPA": 1,
+    "D": 236,
+    "R": 52,
+    "NPA": 17,
     "O": 0,
-    "total": 5
+    "total": 305
+   },
+   "early_in_person": {
+    "D": 491,
+    "R": 296,
+    "NPA": 180,
+    "O": 0,
+    "total": 967
    },
    "outstanding": {
-    "R": 431,
-    "D": 895,
-    "NPA": 152,
-    "O": 5,
-    "total": 1483
+    "D": 737,
+    "R": 525,
+    "NPA": 195,
+    "O": 0,
+    "total": 1457
    }
   },
   "Linn": {
-   "early_in_person": {
-    "R": 95,
-    "D": 195,
-    "NPA": 39,
-    "O": 3,
-    "total": 332
-   },
-   "mail_returned": {
-    "R": 8,
-    "D": 38,
-    "NPA": 16,
-    "O": 0,
-    "total": 62
-   },
-   "mail_outstanding": {
-    "R": 2118,
-    "D": 5924,
-    "NPA": 1480,
-    "O": 42,
-    "total": 9564
-   },
    "returned": {
-    "R": 8,
-    "D": 38,
-    "NPA": 16,
+    "D": 1321,
+    "R": 434,
+    "NPA": 276,
     "O": 0,
-    "total": 62
+    "total": 2031
+   },
+   "early_in_person": {
+    "D": 3756,
+    "R": 1157,
+    "NPA": 1303,
+    "O": 0,
+    "total": 6216
    },
    "outstanding": {
-    "R": 2118,
-    "D": 5924,
-    "NPA": 1480,
-    "O": 42,
-    "total": 9564
+    "D": 5257,
+    "R": 2730,
+    "NPA": 1599,
+    "O": 0,
+    "total": 9586
    }
   },
   "Louisa": {
-   "early_in_person": {
-    "R": 30,
-    "D": 29,
-    "NPA": 9,
-    "O": 0,
-    "total": 68
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 1,
-    "NPA": 0,
-    "O": 0,
-    "total": 2
-   },
-   "mail_outstanding": {
-    "R": 108,
-    "D": 135,
-    "NPA": 39,
-    "O": 1,
-    "total": 283
-   },
    "returned": {
-    "R": 1,
-    "D": 1,
-    "NPA": 0,
+    "D": 30,
+    "R": 16,
+    "NPA": 6,
     "O": 0,
-    "total": 2
+    "total": 52
+   },
+   "early_in_person": {
+    "D": 125,
+    "R": 142,
+    "NPA": 59,
+    "O": 0,
+    "total": 326
    },
    "outstanding": {
-    "R": 108,
-    "D": 135,
-    "NPA": 39,
-    "O": 1,
-    "total": 283
+    "D": 130,
+    "R": 138,
+    "NPA": 53,
+    "O": 0,
+    "total": 321
    }
   },
   "Lucas": {
-   "early_in_person": {
-    "R": 20,
-    "D": 15,
-    "NPA": 8,
-    "O": 1,
-    "total": 44
-   },
-   "mail_outstanding": {
-    "R": 124,
-    "D": 102,
-    "NPA": 43,
-    "O": 0,
-    "total": 269
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 31,
+    "R": 48,
+    "NPA": 13,
     "O": 0,
-    "total": 0
+    "total": 92
+   },
+   "early_in_person": {
+    "D": 91,
+    "R": 122,
+    "NPA": 53,
+    "O": 0,
+    "total": 266
    },
    "outstanding": {
-    "R": 124,
-    "D": 102,
-    "NPA": 43,
+    "D": 75,
+    "R": 119,
+    "NPA": 36,
     "O": 0,
-    "total": 269
+    "total": 230
    }
   },
   "Lyon": {
+   "returned": {
+    "D": 13,
+    "R": 52,
+    "NPA": 6,
+    "O": 0,
+    "total": 71
+   },
    "early_in_person": {
-    "R": 17,
+    "D": 31,
+    "R": 79,
+    "NPA": 22,
+    "O": 0,
+    "total": 132
+   },
+   "outstanding": {
+    "D": 46,
+    "R": 336,
+    "NPA": 31,
+    "O": 0,
+    "total": 413
+   }
+  },
+  "Madison": {
+   "returned": {
+    "D": 54,
+    "R": 43,
+    "NPA": 23,
+    "O": 0,
+    "total": 120
+   },
+   "early_in_person": {
+    "D": 232,
+    "R": 327,
+    "NPA": 103,
+    "O": 0,
+    "total": 662
+   },
+   "outstanding": {
+    "D": 219,
+    "R": 274,
+    "NPA": 109,
+    "O": 0,
+    "total": 602
+   }
+  },
+  "Mahaska": {
+   "returned": {
+    "D": 42,
+    "R": 57,
+    "NPA": 11,
+    "O": 0,
+    "total": 110
+   },
+   "early_in_person": {
+    "D": 203,
+    "R": 319,
+    "NPA": 99,
+    "O": 0,
+    "total": 621
+   },
+   "outstanding": {
+    "D": 203,
+    "R": 616,
+    "NPA": 118,
+    "O": 0,
+    "total": 937
+   }
+  },
+  "Marion": {
+   "returned": {
+    "D": 138,
+    "R": 109,
+    "NPA": 46,
+    "O": 0,
+    "total": 293
+   },
+   "early_in_person": {
+    "D": 434,
+    "R": 421,
+    "NPA": 198,
+    "O": 0,
+    "total": 1053
+   },
+   "outstanding": {
+    "D": 532,
+    "R": 1079,
+    "NPA": 308,
+    "O": 0,
+    "total": 1919
+   }
+  },
+  "Marshall": {
+   "returned": {
+    "D": 132,
+    "R": 43,
+    "NPA": 27,
+    "O": 0,
+    "total": 202
+   },
+   "early_in_person": {
+    "D": 725,
+    "R": 511,
+    "NPA": 251,
+    "O": 0,
+    "total": 1487
+   },
+   "outstanding": {
+    "D": 679,
+    "R": 634,
+    "NPA": 205,
+    "O": 0,
+    "total": 1518
+   }
+  },
+  "Mills": {
+   "returned": {
+    "D": 40,
+    "R": 48,
+    "NPA": 8,
+    "O": 0,
+    "total": 96
+   },
+   "early_in_person": {
+    "D": 133,
+    "R": 225,
+    "NPA": 50,
+    "O": 0,
+    "total": 408
+   },
+   "outstanding": {
+    "D": 182,
+    "R": 281,
+    "NPA": 50,
+    "O": 0,
+    "total": 513
+   }
+  },
+  "Mitchell": {
+   "returned": {
+    "D": 64,
+    "R": 43,
+    "NPA": 18,
+    "O": 0,
+    "total": 125
+   },
+   "early_in_person": {
+    "D": 136,
+    "R": 136,
+    "NPA": 56,
+    "O": 0,
+    "total": 328
+   },
+   "outstanding": {
+    "D": 142,
+    "R": 160,
+    "NPA": 63,
+    "O": 0,
+    "total": 365
+   }
+  },
+  "Monona": {
+   "returned": {
+    "D": 34,
+    "R": 27,
+    "NPA": 8,
+    "O": 0,
+    "total": 69
+   },
+   "early_in_person": {
+    "D": 86,
+    "R": 115,
+    "NPA": 37,
+    "O": 0,
+    "total": 238
+   },
+   "outstanding": {
+    "D": 93,
+    "R": 126,
+    "NPA": 28,
+    "O": 0,
+    "total": 247
+   }
+  },
+  "Monroe": {
+   "returned": {
+    "D": 3,
+    "R": 7,
+    "NPA": 2,
+    "O": 0,
+    "total": 12
+   },
+   "early_in_person": {
+    "D": 110,
+    "R": 120,
+    "NPA": 45,
+    "O": 0,
+    "total": 275
+   },
+   "outstanding": {
+    "D": 119,
+    "R": 138,
+    "NPA": 36,
+    "O": 0,
+    "total": 293
+   }
+  },
+  "Montgomery": {
+   "returned": {
+    "D": 29,
+    "R": 38,
+    "NPA": 6,
+    "O": 0,
+    "total": 73
+   },
+   "early_in_person": {
+    "D": 96,
+    "R": 94,
+    "NPA": 21,
+    "O": 0,
+    "total": 211
+   },
+   "outstanding": {
+    "D": 111,
+    "R": 245,
+    "NPA": 51,
+    "O": 0,
+    "total": 407
+   }
+  },
+  "Muscatine": {
+   "returned": {
+    "D": 279,
+    "R": 153,
+    "NPA": 50,
+    "O": 0,
+    "total": 482
+   },
+   "early_in_person": {
+    "D": 650,
+    "R": 426,
+    "NPA": 207,
+    "O": 0,
+    "total": 1283
+   },
+   "outstanding": {
+    "D": 673,
+    "R": 567,
+    "NPA": 232,
+    "O": 0,
+    "total": 1472
+   }
+  },
+  "O'Brien": {
+   "returned": {
+    "D": 12,
+    "R": 46,
+    "NPA": 5,
+    "O": 0,
+    "total": 63
+   },
+   "early_in_person": {
+    "D": 47,
+    "R": 103,
+    "NPA": 20,
+    "O": 0,
+    "total": 170
+   },
+   "outstanding": {
+    "D": 93,
+    "R": 387,
+    "NPA": 49,
+    "O": 0,
+    "total": 529
+   }
+  },
+  "Osceola": {
+   "returned": {
     "D": 6,
+    "R": 17,
     "NPA": 6,
     "O": 0,
     "total": 29
    },
-   "mail_outstanding": {
-    "R": 208,
-    "D": 51,
-    "NPA": 28,
-    "O": 0,
-    "total": 287
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 1,
-    "O": 0,
-    "total": 1
-   },
-   "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 1,
-    "O": 0,
-    "total": 1
-   },
-   "outstanding": {
-    "R": 208,
-    "D": 51,
-    "NPA": 28,
-    "O": 0,
-    "total": 287
-   }
-  },
-  "Madison": {
    "early_in_person": {
-    "R": 64,
-    "D": 47,
-    "NPA": 21,
-    "O": 0,
-    "total": 132
-   },
-   "mail_outstanding": {
-    "R": 220,
-    "D": 246,
-    "NPA": 101,
-    "O": 1,
-    "total": 568
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 1
-   },
-   "returned": {
-    "R": 1,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 1
-   },
-   "outstanding": {
-    "R": 220,
-    "D": 246,
-    "NPA": 101,
-    "O": 1,
-    "total": 568
-   }
-  },
-  "Mahaska": {
-   "early_in_person": {
-    "R": 57,
-    "D": 50,
-    "NPA": 17,
-    "O": 0,
-    "total": 124
-   },
-   "mail_outstanding": {
-    "R": 466,
-    "D": 234,
-    "NPA": 99,
-    "O": 2,
-    "total": 801
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
-   "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
-   "outstanding": {
-    "R": 466,
-    "D": 234,
-    "NPA": 99,
-    "O": 2,
-    "total": 801
-   }
-  },
-  "Marion": {
-   "early_in_person": {
-    "R": 67,
-    "D": 71,
-    "NPA": 28,
-    "O": 1,
-    "total": 167
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 1,
-    "O": 0,
-    "total": 3
-   },
-   "mail_outstanding": {
-    "R": 864,
-    "D": 600,
-    "NPA": 268,
-    "O": 2,
-    "total": 1734
-   },
-   "returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 1,
-    "O": 0,
-    "total": 3
-   },
-   "outstanding": {
-    "R": 864,
-    "D": 600,
-    "NPA": 268,
-    "O": 2,
-    "total": 1734
-   }
-  },
-  "Marshall": {
-   "early_in_person": {
-    "R": 86,
-    "D": 147,
-    "NPA": 39,
-    "O": 1,
-    "total": 273
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 10,
-    "NPA": 0,
-    "O": 0,
-    "total": 10
-   },
-   "mail_outstanding": {
-    "R": 324,
-    "D": 658,
-    "NPA": 171,
-    "O": 4,
-    "total": 1157
-   },
-   "returned": {
-    "R": 0,
-    "D": 10,
-    "NPA": 0,
-    "O": 0,
-    "total": 10
-   },
-   "outstanding": {
-    "R": 324,
-    "D": 658,
-    "NPA": 171,
-    "O": 4,
-    "total": 1157
-   }
-  },
-  "Mills": {
-   "early_in_person": {
-    "R": 36,
-    "D": 21,
-    "NPA": 8,
-    "O": 0,
-    "total": 65
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 0,
-    "O": 0,
-    "total": 1
-   },
-   "mail_outstanding": {
-    "R": 235,
-    "D": 200,
-    "NPA": 42,
-    "O": 0,
-    "total": 477
-   },
-   "returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 0,
-    "O": 0,
-    "total": 1
-   },
-   "outstanding": {
-    "R": 235,
-    "D": 200,
-    "NPA": 42,
-    "O": 0,
-    "total": 477
-   }
-  },
-  "Mitchell": {
-   "early_in_person": {
-    "R": 44,
-    "D": 72,
-    "NPA": 9,
-    "O": 0,
-    "total": 125
-   },
-   "mail_outstanding": {
-    "R": 114,
-    "D": 173,
-    "NPA": 67,
-    "O": 0,
-    "total": 354
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
-   "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
-   "outstanding": {
-    "R": 114,
-    "D": 173,
-    "NPA": 67,
-    "O": 0,
-    "total": 354
-   }
-  },
-  "Monona": {
-   "early_in_person": {
-    "R": 15,
     "D": 13,
-    "NPA": 2,
+    "R": 42,
+    "NPA": 11,
     "O": 0,
-    "total": 30
-   },
-   "mail_outstanding": {
-    "R": 101,
-    "D": 119,
-    "NPA": 21,
-    "O": 1,
-    "total": 242
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
-   "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
+    "total": 66
    },
    "outstanding": {
-    "R": 101,
-    "D": 119,
-    "NPA": 21,
-    "O": 1,
-    "total": 242
-   }
-  },
-  "Monroe": {
-   "early_in_person": {
-    "R": 23,
-    "D": 39,
-    "NPA": 9,
-    "O": 0,
-    "total": 71
-   },
-   "mail_outstanding": {
-    "R": 110,
-    "D": 115,
-    "NPA": 29,
-    "O": 0,
-    "total": 254
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 1,
-    "O": 0,
-    "total": 1
-   },
-   "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 1,
-    "O": 0,
-    "total": 1
-   },
-   "outstanding": {
-    "R": 110,
-    "D": 115,
-    "NPA": 29,
-    "O": 0,
-    "total": 254
-   }
-  },
-  "Montgomery": {
-   "early_in_person": {
-    "R": 18,
-    "D": 29,
-    "NPA": 1,
-    "O": 0,
-    "total": 48
-   },
-   "mail_outstanding": {
-    "R": 197,
-    "D": 123,
-    "NPA": 48,
-    "O": 1,
-    "total": 369
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 2,
-    "O": 0,
-    "total": 2
-   },
-   "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 2,
-    "O": 0,
-    "total": 2
-   },
-   "outstanding": {
-    "R": 197,
-    "D": 123,
-    "NPA": 48,
-    "O": 1,
-    "total": 369
-   }
-  },
-  "Muscatine": {
-   "early_in_person": {
-    "R": 59,
-    "D": 112,
-    "NPA": 29,
-    "O": 1,
-    "total": 201
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 1,
-    "O": 0,
-    "total": 3
-   },
-   "mail_outstanding": {
-    "R": 543,
-    "D": 863,
-    "NPA": 221,
-    "O": 4,
-    "total": 1631
-   },
-   "returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 1,
-    "O": 0,
-    "total": 3
-   },
-   "outstanding": {
-    "R": 543,
-    "D": 863,
-    "NPA": 221,
-    "O": 4,
-    "total": 1631
-   }
-  },
-  "O'Brien": {
-   "mail_returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 0,
-    "O": 0,
-    "total": 2
-   },
-   "mail_outstanding": {
-    "R": 269,
-    "D": 89,
-    "NPA": 37,
-    "O": 1,
-    "total": 396
-   },
-   "early_in_person": {
-    "R": 21,
-    "D": 7,
-    "NPA": 5,
-    "O": 0,
-    "total": 33
-   },
-   "returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 0,
-    "O": 0,
-    "total": 2
-   },
-   "outstanding": {
-    "R": 269,
-    "D": 89,
-    "NPA": 37,
-    "O": 1,
-    "total": 396
-   }
-  },
-  "Osceola": {
-   "early_in_person": {
-    "R": 3,
-    "D": 1,
-    "NPA": 1,
-    "O": 0,
-    "total": 5
-   },
-   "mail_outstanding": {
-    "R": 107,
     "D": 33,
-    "NPA": 15,
+    "R": 158,
+    "NPA": 20,
     "O": 0,
-    "total": 155
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
-   "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
-   "outstanding": {
-    "R": 107,
-    "D": 33,
-    "NPA": 15,
-    "O": 0,
-    "total": 155
+    "total": 211
    }
   },
   "Page": {
-   "early_in_person": {
-    "R": 30,
-    "D": 12,
-    "NPA": 8,
-    "O": 0,
-    "total": 50
-   },
-   "mail_outstanding": {
-    "R": 300,
-    "D": 141,
-    "NPA": 43,
-    "O": 1,
-    "total": 485
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
+    "D": 30,
+    "R": 39,
+    "NPA": 7,
     "O": 0,
-    "total": 0
+    "total": 76
+   },
+   "early_in_person": {
+    "D": 90,
+    "R": 146,
+    "NPA": 29,
+    "O": 0,
+    "total": 265
    },
    "outstanding": {
-    "R": 300,
-    "D": 141,
-    "NPA": 43,
-    "O": 1,
-    "total": 485
+    "D": 125,
+    "R": 363,
+    "NPA": 59,
+    "O": 0,
+    "total": 547
    }
   },
   "Palo Alto": {
-   "early_in_person": {
-    "R": 24,
-    "D": 16,
-    "NPA": 5,
-    "O": 1,
-    "total": 46
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 0,
-    "O": 0,
-    "total": 1
-   },
-   "mail_outstanding": {
-    "R": 169,
-    "D": 111,
-    "NPA": 37,
-    "O": 0,
-    "total": 317
-   },
    "returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 0,
+    "D": 29,
+    "R": 15,
+    "NPA": 4,
     "O": 0,
-    "total": 1
+    "total": 48
+   },
+   "early_in_person": {
+    "D": 118,
+    "R": 128,
+    "NPA": 46,
+    "O": 0,
+    "total": 292
    },
    "outstanding": {
-    "R": 169,
-    "D": 111,
-    "NPA": 37,
+    "D": 119,
+    "R": 218,
+    "NPA": 61,
     "O": 0,
-    "total": 317
+    "total": 398
    }
   },
   "Plymouth": {
-   "early_in_person": {
-    "R": 62,
-    "D": 30,
-    "NPA": 16,
-    "O": 1,
-    "total": 109
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 3,
-    "NPA": 1,
-    "O": 0,
-    "total": 5
-   },
-   "mail_outstanding": {
-    "R": 648,
-    "D": 292,
-    "NPA": 142,
-    "O": 3,
-    "total": 1085
-   },
    "returned": {
-    "R": 1,
-    "D": 3,
-    "NPA": 1,
+    "D": 51,
+    "R": 93,
+    "NPA": 16,
     "O": 0,
-    "total": 5
+    "total": 160
+   },
+   "early_in_person": {
+    "D": 187,
+    "R": 397,
+    "NPA": 136,
+    "O": 0,
+    "total": 720
    },
    "outstanding": {
-    "R": 648,
-    "D": 292,
-    "NPA": 142,
-    "O": 3,
-    "total": 1085
+    "D": 260,
+    "R": 754,
+    "NPA": 170,
+    "O": 0,
+    "total": 1184
    }
   },
   "Pocahontas": {
-   "early_in_person": {
-    "R": 10,
-    "D": 9,
-    "NPA": 5,
-    "O": 0,
-    "total": 24
-   },
-   "mail_outstanding": {
-    "R": 145,
-    "D": 89,
-    "NPA": 32,
-    "O": 0,
-    "total": 266
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
-   "outstanding": {
-    "R": 145,
-    "D": 89,
-    "NPA": 32,
-    "O": 0,
-    "total": 266
-   }
-  },
-  "Polk": {
-   "early_in_person": {
-    "R": 303,
-    "D": 1102,
-    "NPA": 201,
-    "O": 4,
-    "total": 1610
-   },
-   "mail_returned": {
-    "R": 12,
-    "D": 80,
-    "NPA": 17,
-    "O": 0,
-    "total": 109
-   },
-   "mail_outstanding": {
-    "R": 5932,
-    "D": 14040,
-    "NPA": 3749,
-    "O": 81,
-    "total": 23802
-   },
-   "returned": {
-    "R": 12,
-    "D": 80,
-    "NPA": 17,
-    "O": 0,
-    "total": 109
-   },
-   "outstanding": {
-    "R": 5932,
-    "D": 14040,
-    "NPA": 3749,
-    "O": 81,
-    "total": 23802
-   }
-  },
-  "Pottawattamie": {
-   "early_in_person": {
-    "R": 86,
-    "D": 180,
-    "NPA": 38,
-    "O": 1,
-    "total": 305
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 15,
-    "NPA": 2,
-    "O": 0,
-    "total": 18
-   },
-   "mail_outstanding": {
-    "R": 1349,
-    "D": 1724,
-    "NPA": 441,
-    "O": 8,
-    "total": 3522
-   },
-   "returned": {
-    "R": 1,
-    "D": 15,
-    "NPA": 2,
-    "O": 0,
-    "total": 18
-   },
-   "outstanding": {
-    "R": 1349,
-    "D": 1724,
-    "NPA": 441,
-    "O": 8,
-    "total": 3522
-   }
-  },
-  "Poweshiek": {
-   "early_in_person": {
-    "R": 15,
-    "D": 35,
-    "NPA": 15,
-    "O": 0,
-    "total": 65
-   },
-   "mail_returned": {
-    "R": 2,
-    "D": 6,
+    "D": 16,
+    "R": 18,
     "NPA": 3,
-    "O": 0,
-    "total": 11
-   },
-   "mail_outstanding": {
-    "R": 288,
-    "D": 346,
-    "NPA": 188,
-    "O": 1,
-    "total": 823
-   },
-   "returned": {
-    "R": 2,
-    "D": 6,
-    "NPA": 3,
-    "O": 0,
-    "total": 11
-   },
-   "outstanding": {
-    "R": 288,
-    "D": 346,
-    "NPA": 188,
-    "O": 1,
-    "total": 823
-   }
-  },
-  "Ringgold": {
-   "early_in_person": {
-    "R": 22,
-    "D": 24,
-    "NPA": 1,
-    "O": 0,
-    "total": 47
-   },
-   "mail_outstanding": {
-    "R": 112,
-    "D": 61,
-    "NPA": 15,
-    "O": 0,
-    "total": 188
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
-   "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
-   "outstanding": {
-    "R": 112,
-    "D": 61,
-    "NPA": 15,
-    "O": 0,
-    "total": 188
-   }
-  },
-  "Sac": {
-   "early_in_person": {
-    "R": 16,
-    "D": 21,
-    "NPA": 6,
-    "O": 0,
-    "total": 43
-   },
-   "mail_outstanding": {
-    "R": 163,
-    "D": 79,
-    "NPA": 35,
-    "O": 0,
-    "total": 277
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
-   "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
-   "outstanding": {
-    "R": 163,
-    "D": 79,
-    "NPA": 35,
-    "O": 0,
-    "total": 277
-   }
-  },
-  "Scott": {
-   "early_in_person": {
-    "R": 327,
-    "D": 668,
-    "NPA": 193,
-    "O": 3,
-    "total": 1191
-   },
-   "mail_returned": {
-    "R": 9,
-    "D": 22,
-    "NPA": 9,
-    "O": 0,
-    "total": 40
-   },
-   "mail_outstanding": {
-    "R": 2228,
-    "D": 3988,
-    "NPA": 1498,
-    "O": 36,
-    "total": 7750
-   },
-   "returned": {
-    "R": 9,
-    "D": 22,
-    "NPA": 9,
-    "O": 0,
-    "total": 40
-   },
-   "outstanding": {
-    "R": 2228,
-    "D": 3988,
-    "NPA": 1498,
-    "O": 36,
-    "total": 7750
-   }
-  },
-  "Shelby": {
-   "early_in_person": {
-    "R": 55,
-    "D": 55,
-    "NPA": 9,
-    "O": 0,
-    "total": 119
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 0,
-    "O": 0,
-    "total": 1
-   },
-   "mail_outstanding": {
-    "R": 244,
-    "D": 162,
-    "NPA": 51,
-    "O": 0,
-    "total": 457
-   },
-   "returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 0,
-    "O": 0,
-    "total": 1
-   },
-   "outstanding": {
-    "R": 244,
-    "D": 162,
-    "NPA": 51,
-    "O": 0,
-    "total": 457
-   }
-  },
-  "Sioux": {
-   "early_in_person": {
-    "R": 54,
-    "D": 21,
-    "NPA": 12,
-    "O": 0,
-    "total": 87
-   },
-   "mail_returned": {
-    "R": 2,
-    "D": 3,
-    "NPA": 0,
-    "O": 0,
-    "total": 5
-   },
-   "mail_outstanding": {
-    "R": 821,
-    "D": 143,
-    "NPA": 56,
-    "O": 0,
-    "total": 1020
-   },
-   "returned": {
-    "R": 2,
-    "D": 3,
-    "NPA": 0,
-    "O": 0,
-    "total": 5
-   },
-   "outstanding": {
-    "R": 821,
-    "D": 143,
-    "NPA": 56,
-    "O": 0,
-    "total": 1020
-   }
-  },
-  "Story": {
-   "early_in_person": {
-    "R": 83,
-    "D": 242,
-    "NPA": 71,
-    "O": 0,
-    "total": 396
-   },
-   "mail_returned": {
-    "R": 2,
-    "D": 46,
-    "NPA": 16,
-    "O": 0,
-    "total": 64
-   },
-   "mail_outstanding": {
-    "R": 975,
-    "D": 2142,
-    "NPA": 851,
-    "O": 10,
-    "total": 3978
-   },
-   "returned": {
-    "R": 2,
-    "D": 46,
-    "NPA": 16,
-    "O": 0,
-    "total": 64
-   },
-   "outstanding": {
-    "R": 975,
-    "D": 2142,
-    "NPA": 851,
-    "O": 10,
-    "total": 3978
-   }
-  },
-  "Tama": {
-   "early_in_person": {
-    "R": 12,
-    "D": 19,
-    "NPA": 15,
-    "O": 0,
-    "total": 46
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 1,
-    "NPA": 4,
-    "O": 0,
-    "total": 6
-   },
-   "mail_outstanding": {
-    "R": 215,
-    "D": 203,
-    "NPA": 94,
-    "O": 1,
-    "total": 513
-   },
-   "returned": {
-    "R": 1,
-    "D": 1,
-    "NPA": 4,
-    "O": 0,
-    "total": 6
-   },
-   "outstanding": {
-    "R": 215,
-    "D": 203,
-    "NPA": 94,
-    "O": 1,
-    "total": 513
-   }
-  },
-  "Taylor": {
-   "early_in_person": {
-    "R": 8,
-    "D": 7,
-    "NPA": 3,
-    "O": 0,
-    "total": 18
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 1,
-    "O": 0,
-    "total": 2
-   },
-   "mail_outstanding": {
-    "R": 122,
-    "D": 62,
-    "NPA": 28,
-    "O": 2,
-    "total": 214
-   },
-   "returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 1,
-    "O": 0,
-    "total": 2
-   },
-   "outstanding": {
-    "R": 122,
-    "D": 62,
-    "NPA": 28,
-    "O": 2,
-    "total": 214
-   }
-  },
-  "Union": {
-   "early_in_person": {
-    "R": 30,
-    "D": 32,
-    "NPA": 8,
-    "O": 0,
-    "total": 70
-   },
-   "mail_outstanding": {
-    "R": 241,
-    "D": 231,
-    "NPA": 97,
-    "O": 3,
-    "total": 572
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
-   "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 0,
-    "O": 0,
-    "total": 0
-   },
-   "outstanding": {
-    "R": 241,
-    "D": 231,
-    "NPA": 97,
-    "O": 3,
-    "total": 572
-   }
-  },
-  "Van Buren": {
-   "early_in_person": {
-    "R": 15,
-    "D": 13,
-    "NPA": 9,
     "O": 0,
     "total": 37
    },
-   "mail_returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 1,
+   "early_in_person": {
+    "D": 49,
+    "R": 81,
+    "NPA": 32,
     "O": 0,
-    "total": 2
-   },
-   "mail_outstanding": {
-    "R": 114,
-    "D": 50,
-    "NPA": 14,
-    "O": 0,
-    "total": 178
-   },
-   "returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 1,
-    "O": 0,
-    "total": 2
+    "total": 162
    },
    "outstanding": {
-    "R": 114,
+    "D": 88,
+    "R": 187,
+    "NPA": 39,
+    "O": 0,
+    "total": 314
+   }
+  },
+  "Polk": {
+   "returned": {
+    "D": 2369,
+    "R": 800,
+    "NPA": 441,
+    "O": 0,
+    "total": 3610
+   },
+   "early_in_person": {
+    "D": 6968,
+    "R": 2264,
+    "NPA": 2018,
+    "O": 0,
+    "total": 11250
+   },
+   "outstanding": {
+    "D": 12568,
+    "R": 6654,
+    "NPA": 3905,
+    "O": 0,
+    "total": 23127
+   }
+  },
+  "Pottawattamie": {
+   "returned": {
+    "D": 803,
+    "R": 630,
+    "NPA": 173,
+    "O": 0,
+    "total": 1606
+   },
+   "early_in_person": {
+    "D": 828,
+    "R": 600,
+    "NPA": 294,
+    "O": 0,
+    "total": 1722
+   },
+   "outstanding": {
+    "D": 1065,
+    "R": 1205,
+    "NPA": 390,
+    "O": 0,
+    "total": 2660
+   }
+  },
+  "Poweshiek": {
+   "returned": {
+    "D": 39,
+    "R": 17,
+    "NPA": 10,
+    "O": 0,
+    "total": 66
+   },
+   "early_in_person": {
+    "D": 451,
+    "R": 179,
+    "NPA": 139,
+    "O": 0,
+    "total": 769
+   },
+   "outstanding": {
+    "D": 334,
+    "R": 361,
+    "NPA": 223,
+    "O": 0,
+    "total": 918
+   }
+  },
+  "Ringgold": {
+   "returned": {
+    "D": 29,
+    "R": 36,
+    "NPA": 5,
+    "O": 0,
+    "total": 70
+   },
+   "early_in_person": {
+    "D": 70,
+    "R": 109,
+    "NPA": 23,
+    "O": 0,
+    "total": 202
+   },
+   "outstanding": {
+    "D": 42,
+    "R": 116,
+    "NPA": 21,
+    "O": 0,
+    "total": 179
+   }
+  },
+  "Sac": {
+   "returned": {
+    "D": 10,
+    "R": 17,
+    "NPA": 1,
+    "O": 0,
+    "total": 28
+   },
+   "early_in_person": {
+    "D": 76,
+    "R": 99,
+    "NPA": 36,
+    "O": 0,
+    "total": 211
+   },
+   "outstanding": {
+    "D": 72,
+    "R": 206,
+    "NPA": 39,
+    "O": 0,
+    "total": 317
+   }
+  },
+  "Scott": {
+   "returned": {
+    "D": 519,
+    "R": 109,
+    "NPA": 117,
+    "O": 0,
+    "total": 745
+   },
+   "early_in_person": {
+    "D": 3627,
+    "R": 1906,
+    "NPA": 1509,
+    "O": 0,
+    "total": 7042
+   },
+   "outstanding": {
+    "D": 3697,
+    "R": 2643,
+    "NPA": 1655,
+    "O": 0,
+    "total": 7995
+   }
+  },
+  "Shelby": {
+   "returned": {
+    "D": 77,
+    "R": 99,
+    "NPA": 12,
+    "O": 0,
+    "total": 188
+   },
+   "early_in_person": {
+    "D": 146,
+    "R": 217,
+    "NPA": 60,
+    "O": 0,
+    "total": 423
+   },
+   "outstanding": {
+    "D": 120,
+    "R": 252,
+    "NPA": 60,
+    "O": 0,
+    "total": 432
+   }
+  },
+  "Sioux": {
+   "returned": {
+    "D": 31,
+    "R": 134,
+    "NPA": 5,
+    "O": 0,
+    "total": 170
+   },
+   "early_in_person": {
+    "D": 64,
+    "R": 340,
+    "NPA": 49,
+    "O": 0,
+    "total": 453
+   },
+   "outstanding": {
+    "D": 126,
+    "R": 1147,
+    "NPA": 80,
+    "O": 0,
+    "total": 1353
+   }
+  },
+  "Story": {
+   "returned": {
+    "D": 477,
+    "R": 190,
+    "NPA": 157,
+    "O": 0,
+    "total": 824
+   },
+   "early_in_person": {
+    "D": 1176,
+    "R": 506,
+    "NPA": 431,
+    "O": 0,
+    "total": 2113
+   },
+   "outstanding": {
+    "D": 1841,
+    "R": 1190,
+    "NPA": 863,
+    "O": 0,
+    "total": 3894
+   }
+  },
+  "Tama": {
+   "returned": {
+    "D": 52,
+    "R": 26,
+    "NPA": 13,
+    "O": 0,
+    "total": 91
+   },
+   "early_in_person": {
+    "D": 114,
+    "R": 97,
+    "NPA": 84,
+    "O": 0,
+    "total": 295
+   },
+   "outstanding": {
+    "D": 171,
+    "R": 281,
+    "NPA": 108,
+    "O": 0,
+    "total": 560
+   }
+  },
+  "Taylor": {
+   "returned": {
+    "D": 20,
+    "R": 20,
+    "NPA": 5,
+    "O": 0,
+    "total": 45
+   },
+   "early_in_person": {
+    "D": 18,
+    "R": 41,
+    "NPA": 15,
+    "O": 0,
+    "total": 74
+   },
+   "outstanding": {
     "D": 50,
+    "R": 147,
+    "NPA": 33,
+    "O": 0,
+    "total": 230
+   }
+  },
+  "Union": {
+   "returned": {
+    "D": 52,
+    "R": 36,
     "NPA": 14,
     "O": 0,
-    "total": 178
+    "total": 102
+   },
+   "early_in_person": {
+    "D": 141,
+    "R": 172,
+    "NPA": 55,
+    "O": 0,
+    "total": 368
+   },
+   "outstanding": {
+    "D": 208,
+    "R": 281,
+    "NPA": 111,
+    "O": 0,
+    "total": 600
+   }
+  },
+  "Van Buren": {
+   "returned": {
+    "D": 12,
+    "R": 15,
+    "NPA": 1,
+    "O": 0,
+    "total": 28
+   },
+   "early_in_person": {
+    "D": 69,
+    "R": 99,
+    "NPA": 23,
+    "O": 0,
+    "total": 191
+   },
+   "outstanding": {
+    "D": 47,
+    "R": 139,
+    "NPA": 18,
+    "O": 0,
+    "total": 204
    }
   },
   "Wapello": {
-   "early_in_person": {
-    "R": 63,
-    "D": 83,
-    "NPA": 13,
-    "O": 1,
-    "total": 160
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 3,
-    "NPA": 0,
-    "O": 0,
-    "total": 4
-   },
-   "mail_outstanding": {
-    "R": 317,
-    "D": 555,
-    "NPA": 130,
-    "O": 2,
-    "total": 1004
-   },
    "returned": {
-    "R": 1,
-    "D": 3,
-    "NPA": 0,
+    "D": 168,
+    "R": 70,
+    "NPA": 25,
     "O": 0,
-    "total": 4
+    "total": 263
+   },
+   "early_in_person": {
+    "D": 446,
+    "R": 304,
+    "NPA": 122,
+    "O": 0,
+    "total": 872
    },
    "outstanding": {
-    "R": 317,
-    "D": 555,
-    "NPA": 130,
-    "O": 2,
-    "total": 1004
+    "D": 441,
+    "R": 334,
+    "NPA": 136,
+    "O": 0,
+    "total": 911
    }
   },
   "Warren": {
-   "mail_returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 2,
+   "returned": {
+    "D": 312,
+    "R": 120,
+    "NPA": 76,
     "O": 0,
-    "total": 3
-   },
-   "mail_outstanding": {
-    "R": 908,
-    "D": 1262,
-    "NPA": 492,
-    "O": 5,
-    "total": 2667
+    "total": 508
    },
    "early_in_person": {
-    "R": 184,
-    "D": 228,
-    "NPA": 63,
+    "D": 1326,
+    "R": 1023,
+    "NPA": 521,
     "O": 0,
-    "total": 475
-   },
-   "returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 2,
-    "O": 0,
-    "total": 3
+    "total": 2870
    },
    "outstanding": {
-    "R": 908,
-    "D": 1262,
-    "NPA": 492,
-    "O": 5,
-    "total": 2667
+    "D": 1023,
+    "R": 1053,
+    "NPA": 520,
+    "O": 0,
+    "total": 2596
    }
   },
   "Washington": {
-   "early_in_person": {
-    "R": 56,
-    "D": 68,
-    "NPA": 16,
-    "O": 0,
-    "total": 140
-   },
-   "mail_returned": {
-    "R": 2,
-    "D": 2,
-    "NPA": 1,
-    "O": 0,
-    "total": 5
-   },
-   "mail_outstanding": {
-    "R": 332,
-    "D": 386,
-    "NPA": 160,
-    "O": 2,
-    "total": 880
-   },
    "returned": {
-    "R": 2,
-    "D": 2,
-    "NPA": 1,
+    "D": 94,
+    "R": 79,
+    "NPA": 34,
     "O": 0,
-    "total": 5
+    "total": 207
+   },
+   "early_in_person": {
+    "D": 316,
+    "R": 331,
+    "NPA": 117,
+    "O": 0,
+    "total": 764
    },
    "outstanding": {
-    "R": 332,
-    "D": 386,
-    "NPA": 160,
-    "O": 2,
-    "total": 880
+    "D": 342,
+    "R": 449,
+    "NPA": 174,
+    "O": 0,
+    "total": 965
    }
   },
   "Wayne": {
-   "early_in_person": {
-    "R": 19,
-    "D": 6,
-    "NPA": 5,
-    "O": 0,
-    "total": 30
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 0,
-    "O": 0,
-    "total": 2
-   },
-   "mail_outstanding": {
-    "R": 95,
-    "D": 51,
-    "NPA": 16,
-    "O": 0,
-    "total": 162
-   },
    "returned": {
-    "R": 0,
-    "D": 2,
-    "NPA": 0,
+    "D": 10,
+    "R": 18,
+    "NPA": 3,
     "O": 0,
-    "total": 2
+    "total": 31
+   },
+   "early_in_person": {
+    "D": 47,
+    "R": 83,
+    "NPA": 27,
+    "O": 0,
+    "total": 157
    },
    "outstanding": {
-    "R": 95,
-    "D": 51,
-    "NPA": 16,
+    "D": 47,
+    "R": 108,
+    "NPA": 20,
     "O": 0,
-    "total": 162
+    "total": 175
    }
   },
   "Webster": {
-   "mail_returned": {
-    "R": 1,
-    "D": 3,
-    "NPA": 0,
+   "returned": {
+    "D": 122,
+    "R": 60,
+    "NPA": 25,
     "O": 0,
-    "total": 4
-   },
-   "mail_outstanding": {
-    "R": 410,
-    "D": 577,
-    "NPA": 139,
-    "O": 3,
-    "total": 1129
+    "total": 207
    },
    "early_in_person": {
-    "R": 48,
-    "D": 103,
-    "NPA": 16,
-    "O": 1,
-    "total": 168
-   },
-   "returned": {
-    "R": 1,
-    "D": 3,
-    "NPA": 0,
+    "D": 388,
+    "R": 311,
+    "NPA": 122,
     "O": 0,
-    "total": 4
+    "total": 821
    },
    "outstanding": {
-    "R": 410,
-    "D": 577,
-    "NPA": 139,
-    "O": 3,
-    "total": 1129
+    "D": 499,
+    "R": 490,
+    "NPA": 152,
+    "O": 0,
+    "total": 1141
    }
   },
   "Winnebago": {
-   "early_in_person": {
-    "R": 16,
-    "D": 29,
-    "NPA": 4,
-    "O": 0,
-    "total": 49
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 1,
-    "O": 0,
-    "total": 2
-   },
-   "mail_outstanding": {
-    "R": 142,
-    "D": 149,
-    "NPA": 50,
-    "O": 1,
-    "total": 342
-   },
    "returned": {
-    "R": 0,
-    "D": 1,
-    "NPA": 1,
+    "D": 4,
+    "R": 6,
+    "NPA": 7,
     "O": 0,
-    "total": 2
+    "total": 17
+   },
+   "early_in_person": {
+    "D": 94,
+    "R": 97,
+    "NPA": 37,
+    "O": 0,
+    "total": 228
    },
    "outstanding": {
-    "R": 142,
-    "D": 149,
-    "NPA": 50,
-    "O": 1,
-    "total": 342
+    "D": 150,
+    "R": 186,
+    "NPA": 59,
+    "O": 0,
+    "total": 395
    }
   },
   "Winneshiek": {
-   "early_in_person": {
-    "R": 73,
-    "D": 180,
-    "NPA": 52,
-    "O": 0,
-    "total": 305
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 12,
-    "NPA": 2,
-    "O": 0,
-    "total": 14
-   },
-   "mail_outstanding": {
-    "R": 246,
-    "D": 423,
-    "NPA": 177,
-    "O": 2,
-    "total": 848
-   },
    "returned": {
-    "R": 0,
-    "D": 12,
-    "NPA": 2,
+    "D": 127,
+    "R": 75,
+    "NPA": 38,
     "O": 0,
-    "total": 14
+    "total": 240
+   },
+   "early_in_person": {
+    "D": 849,
+    "R": 442,
+    "NPA": 362,
+    "O": 0,
+    "total": 1653
    },
    "outstanding": {
-    "R": 246,
-    "D": 423,
-    "NPA": 177,
-    "O": 2,
-    "total": 848
+    "D": 343,
+    "R": 347,
+    "NPA": 173,
+    "O": 0,
+    "total": 863
    }
   },
   "Woodbury": {
-   "mail_returned": {
-    "R": 2,
-    "D": 4,
-    "NPA": 2,
+   "returned": {
+    "D": 237,
+    "R": 172,
+    "NPA": 53,
     "O": 0,
-    "total": 8
-   },
-   "mail_outstanding": {
-    "R": 1368,
-    "D": 1607,
-    "NPA": 348,
-    "O": 9,
-    "total": 3332
+    "total": 462
    },
    "early_in_person": {
-    "R": 121,
-    "D": 253,
-    "NPA": 43,
-    "O": 1,
-    "total": 418
-   },
-   "returned": {
-    "R": 2,
-    "D": 4,
-    "NPA": 2,
+    "D": 1166,
+    "R": 710,
+    "NPA": 389,
     "O": 0,
-    "total": 8
+    "total": 2265
    },
    "outstanding": {
-    "R": 1368,
-    "D": 1607,
-    "NPA": 348,
-    "O": 9,
-    "total": 3332
+    "D": 1508,
+    "R": 1533,
+    "NPA": 385,
+    "O": 0,
+    "total": 3426
    }
   },
   "Worth": {
-   "early_in_person": {
-    "R": 7,
-    "D": 13,
-    "NPA": 7,
-    "O": 0,
-    "total": 27
-   },
-   "mail_outstanding": {
-    "R": 70,
-    "D": 116,
-    "NPA": 27,
-    "O": 2,
-    "total": 215
-   },
-   "mail_returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 1,
-    "O": 0,
-    "total": 1
-   },
    "returned": {
-    "R": 0,
-    "D": 0,
-    "NPA": 1,
+    "D": 33,
+    "R": 21,
+    "NPA": 11,
     "O": 0,
-    "total": 1
+    "total": 65
+   },
+   "early_in_person": {
+    "D": 72,
+    "R": 44,
+    "NPA": 19,
+    "O": 0,
+    "total": 135
    },
    "outstanding": {
-    "R": 70,
-    "D": 116,
-    "NPA": 27,
-    "O": 2,
-    "total": 215
+    "D": 90,
+    "R": 110,
+    "NPA": 23,
+    "O": 0,
+    "total": 223
    }
   },
   "Wright": {
-   "early_in_person": {
-    "R": 17,
-    "D": 15,
-    "NPA": 9,
-    "O": 0,
-    "total": 41
-   },
-   "mail_returned": {
-    "R": 1,
-    "D": 1,
-    "NPA": 1,
-    "O": 0,
-    "total": 3
-   },
-   "mail_outstanding": {
-    "R": 146,
-    "D": 165,
-    "NPA": 69,
-    "O": 1,
-    "total": 381
-   },
    "returned": {
-    "R": 1,
-    "D": 1,
-    "NPA": 1,
+    "D": 20,
+    "R": 18,
+    "NPA": 13,
     "O": 0,
-    "total": 3
+    "total": 51
+   },
+   "early_in_person": {
+    "D": 75,
+    "R": 129,
+    "NPA": 45,
+    "O": 0,
+    "total": 249
    },
    "outstanding": {
-    "R": 146,
-    "D": 165,
+    "D": 168,
+    "R": 234,
     "NPA": 69,
-    "O": 1,
-    "total": 381
+    "O": 0,
+    "total": 471
    }
   }
  },
+ "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/IA_county.csv",
+ "attribution": {
+  "aggregator": "UF Election Lab (election.lab.ufl.edu)",
+  "upstream": "Iowa Secretary of State",
+  "note": "Iowa's BALLOT_STATUS field is not fully documented - this site infers whether a mail ballot was accepted from whether it has a RECEIVED_DATE rather than from BALLOT_STATUS directly. Figures may be revised once the Iowa Secretary of State's office provides official field documentation."
+ },
+ "notes": {
+  "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly",
+  "fallback": "the direct state parse went stale or is unreachable, so this is the UF Election Lab's copy. It lacks the receipt-method detail the state file carries; the direct parse resumes automatically when the state is reachable again"
+ },
  "state_totals": {
-  "mail_returned": {
-   "R": 78,
-   "D": 508,
-   "NPA": 148,
+  "returned": {
+   "D": 16301,
+   "R": 8558,
+   "NPA": 3709,
    "O": 0,
-   "total": 734
+   "total": 28568
   },
   "early_in_person": {
-   "R": 4912,
-   "D": 9303,
-   "NPA": 2398,
-   "O": 38,
-   "total": 16651
-  },
-  "mail_outstanding": {
-   "R": 43322,
-   "D": 68176,
-   "NPA": 20851,
-   "O": 411,
-   "total": 132760
-  },
-  "returned": {
-   "R": 78,
-   "D": 508,
-   "NPA": 148,
+   "D": 49252,
+   "R": 29202,
+   "NPA": 17422,
    "O": 0,
-   "total": 734
+   "total": 95876
   },
   "outstanding": {
-   "R": 43322,
-   "D": 68176,
-   "NPA": 20851,
-   "O": 411,
-   "total": 132760
+   "D": 58049,
+   "R": 51402,
+   "NPA": 22216,
+   "O": 0,
+   "total": 131667
   }
  },
- "grand_total": {
-  "requested": 150145,
-  "issued": 150147,
-  "received": 17385
- },
- "source": "https://sos.iowa.gov/sites/default/files/2026-10/AbsenteeCounty2026.pdf"
+ "fallback": true
 }

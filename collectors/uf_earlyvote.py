@@ -43,6 +43,13 @@ UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit
 STATES = {"NE": "Nebraska", "KS": "Kansas", "GA": "Georgia",
           "MI": "Michigan", "OH": "Ohio", "MN": "Minnesota"}
 
+# IOWA joined the fallback set on 2026-10-22. sos.iowa.gov began returning 403 to every
+# path on 10-20 — from the laptop AND the VM, so it is the site, not a rate limit on us —
+# and the direct pull has failed every tick since. Unlike Maine, the Lab's Iowa carries
+# party AND the mail/in-person split, so it is a clean substitute rather than a downgrade;
+# it is still a fallback so the richer state parse (which also has receipt methods) resumes
+# automatically if the block lifts.
+#
 # Maine is a FALLBACK ONLY, and deliberately so. maine.gov blocks the cron VM's datacenter
 # IP, so Maine normally comes from laptop.sh. The Election Lab does carry Maine, but it
 # lumps mail and in-person into one "accepted" figure, and those two streams break very
@@ -52,7 +59,7 @@ STATES = {"NE": "Nebraska", "KS": "Kansas", "GA": "Georgia",
 # So the Lab's copy is written ONLY when the direct data has gone properly stale — more
 # than STALE_DAYS behind what the Lab has. That bounds how out of date Maine can get if
 # nobody runs the laptop command, without downgrading it the rest of the time.
-FALLBACK = {"ME": "Maine"}
+FALLBACK = {"ME": "Maine", "IA": "Iowa"}
 STALE_DAYS = 2
 # Only these three are universal. The rest vary by what the state collects: party columns
 # exist only where there is party registration (NE, KS), in-person is absent entirely for
@@ -187,6 +194,11 @@ def direct_is_fresh(path, uf_as_of):
         existing = json.loads(path.read_text())
     except Exception:
         return False
+    if existing.get("fallback"):
+        # Already the Lab's own copy from a previous run. Comparing its date against the
+        # Lab's would say "fresh" and hold, freezing the state until it aged past the
+        # threshold — update once — freeze again. A fallback file is always replaced.
+        return False
     if not existing.get("as_of"):
         return True                       # cannot date it; do not clobber on a guess
     mine, theirs = _date(existing["as_of"]), _date(uf_as_of)
@@ -221,11 +233,15 @@ def main(argv):
                 held += 1
                 continue
             payload["fallback"] = True
+            lost = ("It does NOT separate mail from in-person" if not payload["in_person"]
+                    else "It lacks the receipt-method detail the state file carries")
             payload["notes"]["fallback"] = (
-                "the direct state parse went stale, so this is the UF Election Lab's copy. "
-                "It does NOT separate mail from in-person; run laptop.sh to restore the split")
+                f"the direct state parse went stale or is unreachable, so this is the UF "
+                f"Election Lab's copy. {lost}; the direct parse resumes automatically when "
+                f"the state is reachable again")
             print(f"UF {st}: direct data is >{STALE_DAYS}d stale — using the Lab's copy "
-                  f"(no mail/in-person split)", file=sys.stderr)
+                  f"({'no mail/in-person split' if not payload['in_person'] else 'no receipt-method detail'})",
+                  file=sys.stderr)
         target.write_text(json.dumps(payload, indent=1))
         tag = "party" if party else "turnout only (no party registration)"
         print(f"UF {st} ok: {len(payload['counties'])} counties, as of "

@@ -208,9 +208,18 @@ function drawShares(host, groups, series, opts){
   }
   groups.forEach((g, gi) => {
     const y0 = PAD.t + gi*rowH + 7;
+    // The label column is capped, and a long one ("Other / multiple / unknown") ran
+    // off the left edge where the figure clips it. Trimmed to what actually fits,
+    // with the full wording still in the tooltip and the table.
     const lab = svgEl("text", {class:"axlab", x:PAD.l-9, y:y0 + (series.length*15)/2 + 1,
       "text-anchor":"end", style:"fill:var(--fg);font-size:13px"});
-    lab.textContent = g.label; svg.appendChild(lab);
+    const room = Math.max(4, Math.floor((PAD.l - 14) / 6.4));
+    lab.textContent = g.label.length > room ? g.label.slice(0, room - 1).trimEnd() + "\u2026"
+                                            : g.label;
+    if (lab.textContent !== g.label){
+      const t = svgEl("title"); t.textContent = g.label; lab.appendChild(t);
+    }
+    svg.appendChild(lab);
     series.forEach((s, si) => {
       const p = g.vals[s.key];
       if (p == null) return;

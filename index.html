@@ -745,7 +745,11 @@ function renderEV(){
     // AND in-person — apples to oranges, and it understated the pace badly. The card above
     // already leads with the combined figure; this now agrees with it.
     const nowMail = totEarly, nowTot = totEarly.total || 0;
-    // each historical year's own total, however that year's source split it
+    // each historical year's own total, however that year's source split it.
+    // st_ must be defined HERE, not inside the if(hist) block below: yearTotal closes over
+    // it and is declared out here, so defining it later threw "st_ is not defined" and
+    // took out every card that had history to show.
+    const st_ = y => (hist && hist[y] && hist[y].state_totals) || {};
     const yearTotal = y => {
       const t = st_(y);
       const comb = (t.returned_combined || {}).total;
@@ -760,7 +764,6 @@ function renderEV(){
       // and that gap is the cycle, not a trend. So the party-split diff is always measured
       // against the most recent MIDTERM, and presidential years are marked as context.
       const baseYr = yrs.filter(y=>+y%4===2).pop() || yrs[0];
-      const st_ = y => (hist[y] && hist[y].state_totals) || {};
       let base = null;
       if (baseYr){
         const bt = st_(baseYr);

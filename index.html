@@ -92,6 +92,9 @@ button:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px sol
 .evrow.lead{border-bottom:1px solid var(--fg);padding-bottom:9px;margin-bottom:3px}
 .evrow.lead .slab{color:var(--fg);font-weight:700}
 .evrow.lead .evtot{font-size:25px}
+.updated{font-size:13px;color:var(--dim)}
+.updated b{color:var(--fg);font-weight:600}
+.updated .stale{color:var(--flag);font-weight:600}
 .srcnote{font-size:12.5px;color:var(--flag);background:rgba(0,0,0,.025);border-left:3px solid var(--flag);
   padding:8px 10px;margin-top:10px;line-height:1.45;border-radius:0 3px 3px 0}
 .srcnote .srcwho{display:block;color:var(--dim);font-size:11.5px;margin-top:4px}
@@ -195,6 +198,7 @@ footer p{margin:0 0 7px}
   <div class="sub">
     <span>17 races, county by county.</span>
     <span class="tag" id="stamp">awaiting data</span>
+    <span class="updated" id="lastrun"></span>
   </div>
 </header>
 
@@ -502,6 +506,7 @@ function render(){
     b.appendChild(h);
     for (const [k,st,r,tier] of rows) b.appendChild(card(k+":"+r, st, r, tier));
   }
+  renderLastRun();
   if(TAB==="ev") renderEV();
   document.getElementById("stamp").textContent = DATA.updated ? "updated "+new Date(DATA.updated).toLocaleString() : "no results yet";
   const sel = document.getElementById("entryState");
@@ -629,6 +634,27 @@ function turnoutCard(k, st, e){
   if(tg) tg.onclick=()=>{const dv=card.querySelector(".evdetail");dv.hidden=!dv.hidden;
     tg.innerHTML=cties.length+" counties "+(dv.hidden?"&#9656;":"&#9662;");};
   return card;
+}
+
+// When the data last came in. Every payload stamps its own fetch time, so the newest of
+// them is when the board last pulled anything — which is the question a reader actually
+// has when they look at a page of numbers.
+function renderLastRun(){
+  const el=document.getElementById("lastrun"); if(!el) return;
+  let newest=null, states=0;
+  for(const k of Object.keys(EARLY)){
+    const f=EARLY[k] && EARLY[k].fetched; if(!f) continue;
+    states++;
+    const d=new Date(f); if(!isNaN(d) && (!newest || d>newest)) newest=d;
+  }
+  if(!newest){ el.textContent=""; return; }
+  const mins=Math.round((Date.now()-newest.getTime())/60000);
+  const ago = mins<1?"just now" : mins<60?`${mins} min ago`
+            : mins<1440?`${Math.round(mins/60)} hr ago` : `${Math.round(mins/1440)} days ago`;
+  const stale = mins>1440;
+  el.innerHTML = `last pull <b>${newest.toLocaleString(undefined,
+      {month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})}</b> ` +
+    `<span class="${stale?"stale":""}">(${ago})</span> · ${states} states`;
 }
 
 function renderEV(){

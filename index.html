@@ -804,12 +804,28 @@ function turnoutCard(k, st, e){
       turnout only. Any D/R split you see elsewhere for ${st.name} is a vendor model, not a count.</div>
     <div class="meter"><span>${e.through?"through "+e.through:"—"}</span>
       <span>turnout only</span></div>
-    ${dailyPace(e, k) || pace}${cties.length?`<button class="evtoggle">${cties.length} counties &#9656;</button>`:""}
+    ${dailyPace(e, k) || pace}
+    <div class="chartbox cardchart" data-state="${k}"></div>
+    <div class="chartbox cardchart racechart" data-race="${k}"></div>
+    ${cties.length?`<button class="evtoggle">${cties.length} counties &#9656;</button>`:""}
     <div class="evdetail" hidden>${tbl}</div>`;
   const tg=card.querySelector(".evtoggle");
   if(tg) tg.onclick=()=>{const dv=card.querySelector(".evdetail");dv.hidden=!dv.hidden;
     tg.innerHTML=cties.length+" counties "+(dv.hidden?"&#9656;":"&#9662;");};
   return card;
+}
+
+function drawCardCharts(){
+  document.querySelectorAll("#evbody [data-state]").forEach(el=>{
+    if (el.dataset.drawn) return;
+    el.dataset.drawn = "1";
+    if (window.renderStateChart) window.renderStateChart(el, el.dataset.state);
+  });
+  document.querySelectorAll("#evbody [data-race]").forEach(el=>{
+    if (el.dataset.drawn) return;
+    el.dataset.drawn = "1";
+    if (window.renderRaceChart) window.renderRaceChart(el, el.dataset.race);
+  });
 }
 
 // When the data last came in. Every payload stamps its own fetch time, so the newest of
@@ -1008,10 +1024,6 @@ function renderEV(){
     if(tg) tg.onclick=()=>{const dv=card.querySelector(".evdetail");dv.hidden=!dv.hidden;
       tg.innerHTML=cties.length+" "+UNIT+" "+(dv.hidden?"&#9656;":"&#9662;");};
     host.appendChild(card);
-    // Drawn after the card is in the document: the renderers size themselves from the
-    // container's real width, which is zero while it is still detached.
-    if (window.renderStateChart) window.renderStateChart(card.querySelector("[data-state]"), k);
-    if (window.renderRaceChart)  window.renderRaceChart(card.querySelector("[data-race]"), k);
    } catch(err) {
     console.error("card failed for "+k, err);
     const bad=document.createElement("div");
@@ -1024,6 +1036,9 @@ function renderEV(){
     host.appendChild(bad);
    }
   }
+  // Charts are drawn once every card is in the document: the renderers size themselves
+  // from the container's real width, which is zero while a card is still detached.
+  drawCardCharts();
   const missing=Object.entries(DATA.states).filter(([k])=>!EARLY[k]).map(([k])=>k);
   document.getElementById("evfoot").innerHTML =
     "<b>Mail and in-person early voting are separate streams and are never pooled here.</b> They can break "+

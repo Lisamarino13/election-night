@@ -42,6 +42,26 @@ ACCEPTED = ("ACCEPTED",)                               # prefix match covers CUR
 IN_PERSON = {"EARLY VOTING", "ONE-STOP", "ONE STOP", "ONESTOP"}
 BY_MAIL = {"MAIL", "BY MAIL"}
 
+# NC records race and ethnicity per voter in this same file. These are mapped onto the
+# UF Election Lab's categories - non-Hispanic buckets plus a single Hispanic one, with
+# ethnicity taking precedence over race - so NC's own figures and UF's are the same
+# quantity and can sit in one chart. Anything unrecognised raises rather than being
+# folded silently into "other", the same rule the ballot types follow above.
+RACE_MAP = {
+    "WHITE": "nh_white",
+    "BLACK OR AFRICAN AMERICAN": "nh_black",
+    "ASIAN": "nh_asian",
+    "INDIAN AMERICAN OR ALASKA NATIVE": "nh_native_american",
+    "AMERICAN INDIAN OR ALASKA NATIVE": "nh_native_american",
+    "NATIVE HAWAIIAN OR PACIFIC ISLANDER": "nh_other",
+    "TWO OR MORE RACES": "nh_other",
+    "OTHER": "nh_other",
+    "UNDESIGNATED": "nh_other",
+    "": "nh_other",
+}
+HISPANIC = {"HISPANIC OR LATINO"}
+RACE_KEYS = ["nh_white", "nh_black", "hispanic", "nh_asian", "nh_native_american", "nh_other"]
+
 
 def fetch(dirpart, filepart, cache=None, reuse=False):
     """Download the zip. reuse=True serves a cached copy; only safe for PAST elections.
@@ -77,11 +97,17 @@ def aggregate(zip_path):
         lambda: {"R": 0, "D": 0, "NPA": 0, "O": 0, "total": 0}))
     rows = 0
     unknown = collections.Counter()
+    unknown_race = collections.Counter()
+    race = collections.defaultdict(lambda: dict.fromkeys(RACE_KEYS, 0))
+    has_race = False
     with z.open(names[0]) as f:
         rd = csv.DictReader(io.TextIOWrapper(f, encoding="utf-8", errors="ignore"))
         for col in ("county_desc", "ballot_req_type", "ballot_rtn_status", "voter_party_code"):
             if col not in (rd.fieldnames or []):
                 raise RuntimeError(f"{zip_path}: column {col!r} missing — layout changed")
+        # race/ethnicity are a bonus, not a requirement: an older archive that lacks them
+        # must still produce the party numbers rather than failing the whole run.
+        has_race = "race" in (rd.fieldnames or []) and "ethnicity" in (rd.fieldnames or [])
         for row in rd:
             rows += 1
             cty = (row.get("county_desc") or "").strip().title()
@@ -103,17 +129,33 @@ def aggregate(zip_path):
             rec = counties[cty][bucket]
             rec[party] += 1
             rec["total"] += 1
+            if has_race:
+                eth = (row.get("ethnicity") or "").strip().upper()
+                if eth in HISPANIC:
+                    key = "hispanic"
+                else:
+                    raw = (row.get("race") or "").strip()
+                    key = RACE_MAP.get(raw.upper())
+                    if key is None:
+                        unknown_race[raw] += 1
+                        key = "nh_other"
+                race[bucket][key] += 1
     if unknown:
         raise RuntimeError(
             f"{zip_path}: unrecognised ballot_req_type {dict(unknown.most_common(5))} "
             f"covering {sum(unknown.values()):,} rows. NC has renamed this value before "
             f"(ONE-STOP -> EARLY VOTING); add the new spelling to IN_PERSON/BY_MAIL rather "
             f"than letting these rows be dropped")
+    if unknown_race:
+        raise RuntimeError(
+            f"{zip_path}: unrecognised race value {dict(unknown_race.most_common(5))} "
+            f"covering {sum(unknown_race.values()):,} rows. Add it to RACE_MAP rather than "
+            f"letting it fall into 'other', which would understate a group silently.")
     if rows < 1000:
         raise RuntimeError(f"{zip_path}: only {rows} rows — refusing a partial file")
     if len(counties) < 90:
         raise RuntimeError(f"only {len(counties)} counties — NC has 100; refusing")
-    return counties, rows
+    return counties, rows, ({b: dict(r) for b, r in race.items()} if has_race else None)
 
 
 def rollup(counties):
@@ -125,11 +167,59 @@ def rollup(counties):
     return {b: dict(r) for b, r in totals.items()}
 
 
+
+# NC's own file is a primary source and carries more cycles than any aggregate, so for
+# the years it covers it wins over whatever uf_demographics.py wrote - the same rule
+# run_all.sh already applies to the vote totals.
+def write_demographics(by_year):
+    """Merge NC's own race figures into data/demographics-NC.json."""
+    p = pathlib.Path(__file__).resolve().parent.parent / "data" / "demographics-NC.json"
+    doc = {"state": "NC", "years": {}}
+    if p.exists():
+        try:
+            doc = json.loads(p.read_text())
+        except Exception:
+            pass                      # a corrupt file is replaced, not inherited
+    doc.setdefault("years", {})
+    doc["state"] = "NC"
+    doc["fetched"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    doc["note"] = ("Who has voted early, not how they voted. No state counts ballots "
+                   "before election day.")
+    doc["stream_labels"] = {"accept": "mail returned", "inperson": "in-person early",
+                            "voted": "all early + mail"}
+    labels = {"nh_white": "White", "nh_black": "Black", "hispanic": "Hispanic",
+              "nh_asian": "Asian", "nh_native_american": "Native American",
+              "nh_other": "Other / multiple / unknown"}
+    for year, race in by_year.items():
+        if not race:
+            continue
+        mail = race.get("mail_returned", {})
+        ip = race.get("early_in_person", {})
+        voted = {k: mail.get(k, 0) + ip.get(k, 0) for k in RACE_KEYS}
+        streams = {}
+        for name, counts in (("accept", mail), ("inperson", ip), ("voted", voted)):
+            total = sum(counts.values())
+            if not total:
+                continue
+            streams[name] = {"total": total,
+                             "race": {"counts": {k: counts.get(k, 0) for k in RACE_KEYS},
+                                      "total": total, "coverage": 1.0, "labels": labels}}
+        doc["years"][str(year)] = {
+            "state": "NC", "year": int(year),
+            "source": "https://dl.ncsbe.gov/ENRS/ (North Carolina's own absentee file)",
+            "upstream": "https://dl.ncsbe.gov/?prefix=ENRS/",
+            "streams": streams}
+    p.write_text(json.dumps(doc, indent=1) + "\n")
+    print(f"   -> {p.name} (years {sorted(doc['years'])})")
+
+
 def history():
     out = {"state": "NC", "unit": "county", "years": {}}
+    race_by_year = {}
     for year, elec in sorted(HISTORY.items()):
         zp = fetch(*elec, reuse=True)   # past elections never change
-        counties, rows = aggregate(zp)
+        counties, rows, race = aggregate(zp)
+        race_by_year[year] = race
         st = rollup(counties)
         out["years"][str(year)] = {
             "election": f"{year} General", "rows": rows,
@@ -145,6 +235,7 @@ def history():
     p = pathlib.Path(__file__).resolve().parent.parent / "data" / "ev-history-NC.json"
     p.write_text(json.dumps(out, indent=1))
     print(f"   -> {p.name}")
+    write_demographics(race_by_year)
     return 0
 
 
@@ -152,7 +243,7 @@ def main():
     if "--history" in sys.argv:
         return history()
     zp = fetch(*ELECTION)
-    counties, rows = aggregate(zp)
+    counties, rows, race = aggregate(zp)
     totals = collections.defaultdict(lambda: {"R": 0, "D": 0, "NPA": 0, "O": 0, "total": 0})
     for cty, buckets in counties.items():
         for b, rec in buckets.items():
@@ -184,6 +275,7 @@ def main():
     print(f"   mail out      {'not published by NC':>9}")
     print(f"   in-person EV  {e.get('total',0):>9,}  R{e.get('R',0):>8,} D{e.get('D',0):>8,} NPA{e.get('NPA',0):>8,}")
     print(f"   -> {out.name}")
+    write_demographics({2026: race})
     return 0
 
 

@@ -259,6 +259,88 @@ const key = (c, label) => `<span><i style="background:${c==="now"?"none":PAL[c]}
   c==="now"?`border:2px dashed ${PAL.now}`:""}"></i>${esc(label)}</span>`;
 const LEGEND = key("mid","2022 midterm") + key("pres","presidential (2020 / 2024)") + key("now","2026 — still voting");
 
+
+// ---- one state's chart, for embedding straight into that state's card --------
+// The board opens on the vote tables, so a chart that lives only behind a tab is a
+// chart nobody sees. This draws the same figure with no panel chrome so each card
+// can carry its own.
+const _cache = {};
+async function stateData(code){
+  if (_cache[code]) return _cache[code];
+  let cur = null, hist = {};
+  try{ cur = await J("data/early-"+code+".json"); }catch(e){}
+  try{ hist = (await J("data/ev-history-"+code+".json")).years || {}; }catch(e){}
+  return (_cache[code] = {cur, hist});
+}
+async function renderStateChart(host, code){
+  if (!host) return;
+  const {cur, hist} = await stateData(code);
+  if (!cur && !Object.keys(hist).length) return;
+
+  if (code === "SC" && cur && cur.daily){
+    const ser = [];
+    for (const y of Object.keys(hist).sort()){
+      const d = hist[y]; if (!d || !d.days) continue;
+      ser.push({year:+y, vals:d.days.map(k => d.running[k])});
+    }
+    let run = 0;
+    const v26 = Object.keys(cur.daily).sort((a,b)=>new Date(a)-new Date(b)).map(k => run += cur.daily[k]);
+    if (v26.length) ser.push({year:2026, vals:v26});
+    ser.sort((a,b)=>a.year-b.year);
+    if (!ser.length) return;
+    host.innerHTML = `<div class="legend">${LEGEND}</div><div class="plot"></div>`;
+    const draw = () => drawLines(host.querySelector(".plot"), ser,
+      {aria:"South Carolina cumulative early vote by day of early voting."});
+    draw(); host._draw = draw;
+    return;
+  }
+
+  const rows = [];
+  for (const y of Object.keys(hist).sort()){
+    const st = streams((hist[y]||{}).state_totals);
+    if (st) rows.push({year:+y, ...st, tip:"completed cycle"});
+  }
+  const now = cur ? streams(cur.state_totals) : null;
+  if (now){
+    if (cur.in_person_reported === false) now.ip = null;
+    rows.push({year:2026, ...now, tip:"as of " + (cur.as_of||"") + " — still voting"});
+  }
+  if (rows.length < 2) return;            // one bar is a number, not a chart
+  host.innerHTML = `<div class="legend">${LEGEND}</div><div class="plot"></div>`;
+  const draw = () => drawBars(host.querySelector(".plot"), rows,
+    {aria:`${code} early and mail ballots by cycle.`});
+  draw(); host._draw = draw;
+}
+window.renderStateChart = renderStateChart;
+
+// ---- one state's race composition, same deal --------------------------------
+async function renderRaceChart(host, code){
+  if (!host) return;
+  let d = null;
+  try{ d = await J("data/demographics-"+code+".json"); }catch(e){ return; }
+  const yrs = Object.keys(d.years||{}).sort();
+  if (!yrs.length) return;
+  const latest = yrs[yrs.length-1];
+  const vt = (y,st) => ((((d.years[y]||{}).streams||{})[st]||{}).race) || null;
+  const nowR = vt(latest,"voted");
+  if (!nowR) return;
+  const series = yrs.filter(y=>vt(y,"voted")).map(y=>({
+    key:y, label:y + (+y%4===0 ? " final" : (+y===2026 ? " so far" : "")), cycle:cycleOf(y)}));
+  const groups = Object.keys(nowR.counts).map(k => ({
+    label:nowR.labels[k], k,
+    vals:Object.fromEntries(series.map(sr=>{const r=vt(sr.key,"voted");
+      return [sr.key, r ? r.counts[k]/r.total : null];})),
+    counts:Object.fromEntries(series.map(sr=>{const r=vt(sr.key,"voted");
+      return [sr.key, r ? r.counts[k] : null];})),
+  })).sort((a,b)=>(b.vals[latest]||0)-(a.vals[latest]||0));
+  host.innerHTML = `<div class="legend">${series.map(sr=>key(sr.cycle,sr.label)).join("")}</div>
+    <div class="plot"></div>`;
+  const draw = () => drawShares(host.querySelector(".plot"), groups, series,
+    {aria:`${code} early vote composition by race.`});
+  draw(); host._draw = draw;
+}
+window.renderRaceChart = renderRaceChart;
+
 // ---- which contests each state carries, taken from the board's own race list ----
 const STATES = {
   GA:{name:"Georgia",        races:"Governor · Senate"},

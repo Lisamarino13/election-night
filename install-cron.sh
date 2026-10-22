@@ -63,7 +63,7 @@ if git -C "$REPO_DIR" remote get-url origin 2>/dev/null | grep -q '^https://'; t
 fi
 
 # --- cron -----------------------------------------------------------------------------
-DAILY="15 13,17,21,1 * * * $FLOCK $REPO_DIR/collectors/run_all.sh >> $LOG 2>&1; $REPO_DIR/collectors/publish.sh >> $LOG 2>&1"
+DAILY="12 * * * * $FLOCK $REPO_DIR/collectors/run_all.sh >> $LOG 2>&1; $REPO_DIR/collectors/publish.sh >> $LOG 2>&1"
 NIGHT="#7,37 * * * * $FLOCK $REPO_DIR/collectors/run_all.sh >> $LOG 2>&1; $REPO_DIR/collectors/publish.sh >> $LOG 2>&1   # election night: uncomment Nov 3"
 # BACK UP FIRST. This box may run other people's jobs — on Lisa's cron VM it runs the
 # Dopple prune / PG-stop / session-sweep lines. Rewriting a crontab without a backup is
@@ -118,6 +118,6 @@ $(cat "$KEY.pub")
        $REPO_DIR/collectors/run_all.sh && $REPO_DIR/collectors/publish.sh
        tail -5 $LOG
 
-     Then after the next tick (13:15/17:15/21:15/01:15 UTC), check the log shows an unattended run. A cron that was
+     Then within the hour (the job runs at :12 past every hour), check the log shows an unattended run. A cron that was
      never observed firing is not installed, it is just written down.
 MSG

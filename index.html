@@ -89,6 +89,9 @@ button:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px sol
 .st.t-tossup{border-left:3px solid var(--flag)}
 .st.t-safe{opacity:.72}
 .states[hidden],#evwrap[hidden]{display:none!important}
+.srcnote{font-size:12.5px;color:var(--flag);background:rgba(0,0,0,.025);border-left:3px solid var(--flag);
+  padding:8px 10px;margin-top:10px;line-height:1.45;border-radius:0 3px 3px 0}
+.srcnote .srcwho{display:block;color:var(--dim);font-size:11.5px;margin-top:4px}
 .cyc{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);font-weight:600}
 .states{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}
 .st{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px 15px 13px;min-width:0}
@@ -531,6 +534,9 @@ async function loadEarly(){
                   unit: j.unit || "county",
                   inPersonReported: j.in_person_reported !== false,
                   fallback: !!j.fallback,
+                  srcNote: (j.attribution && j.attribution.note) || "",
+                  srcFrom: (j.attribution && j.attribution.aggregator) || "",
+                  srcUp: (j.attribution && j.attribution.upstream) || "",
                   partyAvailable: j.party_available !== false,
                   asOf: j.as_of || null, through: j.through || null};
       try{
@@ -542,6 +548,18 @@ async function loadEarly(){
 }
 
 const PARTY_COL={D:"var(--d)",R:"var(--r)",NPA:"var(--o)",O:"var(--o)"};
+
+// Some sources publish a caveat about how a figure was derived, and those caveats change
+// what the number means. Iowa's acceptance is INFERRED from whether a received date exists;
+// Ohio's in-person is APPROXIMATED by counting ballots sent and received the same day. We
+// were reproducing both faithfully and showing neither. A number whose definition is
+// uncertain has to say so on the card, not only in the payload.
+function srcLine(e){
+  if(!e.srcNote) return "";
+  const who = e.srcFrom ? `${e.srcFrom}${e.srcUp?" &larr; "+e.srcUp:""}` : "";
+  return `<div class="srcnote"><b>How this is counted:</b> ${e.srcNote}
+    ${who?`<span class="srcwho">${who}</span>`:""}</div>`;
+}
 
 // A state with no party registration (Texas, Ohio, Michigan, Minnesota, South Carolina,
 // Georgia) cannot produce a D/R split from official data — any split you see on TV for
@@ -742,6 +760,7 @@ function renderEV(){
                     <span class="fig evtot">&mdash;</span>
                     <span class="nodatanote" style="grid-column:span 2">not published by this state &mdash; shown as unknown, never as zero</span></div>`}
       <div class="streamline">${ip?"Mail + in-person early voting":"Vote-by-mail only \u00b7 in-person early voting not yet reporting"}${hasOut?"":" \u00b7 outstanding not available"}</div>
+      ${srcLine(e)}
       <div class="meter"><span>${e.asOf?"as of "+e.asOf:(e.compiled?"compiled "+Object.values(e.compiled)[0]:"\u2014")}</span>
         <span>${st.partyReg?"state party registration":"modeled partisanship"}</span></div>
       ${paceTable}${cties.length?`<button class="evtoggle">${cties.length} ${UNIT} &#9656;</button>`:""}

@@ -860,17 +860,18 @@ async function renderTakeaways(){
   const bullets = [];
 
   // --- party registration, 2026 so far against the last midterm ---
+  // States name the mail stream differently: Florida and Iowa publish it as
+  // "returned", North Carolina as "mail_returned" (and repeats it as "returned").
+  // Requiring mail_returned and only falling back when NEITHER stream was seen meant
+  // Florida and Iowa were counted on their in-person vote alone, which put Florida's
+  // Republican shift at -2.4 when it is -6.2.
   const comb = src => {
     const o = {D:0,R:0,NPA:0,O:0,total:0};
     if (!src) return o;
-    const seen = new Set();
-    for (const b of ["mail_returned","early_in_person"]){
-      const r = src[b]; if (!r || typeof r !== "object") continue;
-      seen.add(b);
-      for (const k in o) o[k] += r[k] || 0;
-    }
-    if (!seen.size && src.returned && typeof src.returned === "object")
-      for (const k in o) o[k] += src.returned[k] || 0;
+    const obj = v => (v && typeof v === "object") ? v : null;
+    const mail = obj(src.mail_returned) || obj(src.returned);
+    const ip = obj(src.early_in_person);
+    for (const r of [mail, ip]) if (r) for (const k in o) o[k] += r[k] || 0;
     return o;
   };
   const share = (o,k) => o.total ? o[k]/o.total*100 : null;

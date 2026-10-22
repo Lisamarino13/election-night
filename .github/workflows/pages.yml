@@ -1,0 +1,56 @@
+# Deploy this directory to GitHub Pages as static files.
+#
+# WHY THIS EXISTS: the legacy Pages builder ran every push through Jekyll and started
+# failing on 2026-10-22 with nothing but "Page build failed." Four commits in a row errored
+# while main looked healthy, so the site served stale data for forty minutes and the
+# corrected pace table never shipped. A workflow deploy gives an actual log when something
+# breaks, and skips Jekyll entirely — this is a static page plus a data folder.
+name: Deploy board to Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the page and its data parse
+        run: |
+          test -f index.html || { echo "index.html missing"; exit 1; }
+          python3 - <<'PY'
+          import json, pathlib, sys
+          bad = []
+          for p in sorted(pathlib.Path("data").glob("*.json")):
+              try:
+                  json.loads(p.read_text())
+              except Exception as e:
+                  bad.append(f"{p}: {e}")
+          if bad:
+              print("INVALID JSON — refusing to deploy:")
+              for b in bad: print("  ", b)
+              sys.exit(1)
+          print(f"ok: {len(list(pathlib.Path('data').glob('*.json')))} data files parse")
+          PY
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -21,58 +21,58 @@
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--body);margin:0;
-  padding-inline:16px;padding-block:0 48px;font-size:15px;line-height:1.45}
+  padding-inline:16px;padding-block:0 48px;font-size:16px;line-height:1.45}
 .wrap{max-width:1180px;margin:0 auto}
 h1,h2,h3,.fig,th{font-family:var(--display)}
 .fig{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
 
 header{border-bottom:2px solid var(--fg);padding-block:22px 12px;margin-bottom:6px}
 h1{font-size:clamp(30px,5vw,46px);line-height:.95;margin:0;letter-spacing:-.01em;text-wrap:balance}
-.sub{color:var(--dim);font-size:13px;margin-top:6px;display:flex;gap:14px;flex-wrap:wrap;align-items:baseline}
-.tag{font-family:var(--display);text-transform:uppercase;letter-spacing:.09em;font-size:11px;
+.sub{color:var(--dim);font-size:14px;margin-top:6px;display:flex;gap:14px;flex-wrap:wrap;align-items:baseline}
+.tag{font-family:var(--display);text-transform:uppercase;letter-spacing:.09em;font-size:12px;
   border:1px solid var(--line);border-radius:2px;padding:2px 7px;color:var(--dim)}
 
 .backlink{grid-column:1/-1;background:none;border:none;color:var(--dim);font-family:var(--display);
-  text-transform:uppercase;letter-spacing:.08em;font-size:12px;padding:0;margin:4px 0 2px;cursor:pointer;text-align:left}
+  text-transform:uppercase;letter-spacing:.08em;font-size:15px;padding:0;margin:4px 0 2px;cursor:pointer;text-align:left}
 .backlink:hover{color:var(--fg)}
 .crumb{grid-column:1/-1;font-family:var(--display);font-size:24px;font-weight:600;
   border-bottom:2px solid var(--fg);padding-bottom:7px;margin-bottom:4px}
 .jumprow{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
-.jump{font-family:var(--display);font-size:11px;letter-spacing:.05em;padding:4px 9px;
+.jump{font-family:var(--display);font-size:12px;letter-spacing:.05em;padding:4px 9px;
   background:var(--panel);border:1px solid var(--line);border-radius:2px;color:var(--dim);cursor:pointer}
 .jump:hover{color:var(--fg);border-color:var(--fg)}
 .st.open{grid-column:1/-1;border-left-width:3px}
 .tabs{display:flex;gap:0;margin-top:14px;border-bottom:1px solid var(--line)}
-.tab{font-family:var(--display);text-transform:uppercase;letter-spacing:.08em;font-size:13px;
+.tab{font-family:var(--display);text-transform:uppercase;letter-spacing:.08em;font-size:15px;
   background:none;border:none;border-bottom:2px solid transparent;border-radius:0;
   padding:9px 15px;color:var(--dim);cursor:pointer;margin-bottom:-1px}
 .tab.on{color:var(--fg);border-bottom-color:var(--fg)}
 .tab:hover{color:var(--fg)}
 .evcard{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px 15px;margin-bottom:12px}
 .evrow{display:grid;grid-template-columns:96px 92px 1fr auto;gap:12px;align-items:center;margin:9px 0}
-.evtot{font-family:var(--display);font-size:16px;font-weight:600;text-align:right}
+.evtot{font-family:var(--display);font-size:19px;font-weight:600;text-align:right}
 .share.ev{height:11px;margin:0;border-radius:1px}
-.evpcts{font-size:12px;display:flex;gap:9px;flex-wrap:wrap}
-table.evtab{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px}
-table.evtab th{font-family:var(--display);text-transform:uppercase;letter-spacing:.05em;font-size:9.5px;
+.evpcts{font-size:13.5px;display:flex;gap:9px;flex-wrap:wrap}
+table.evtab{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px}
+table.evtab th{font-family:var(--display);text-transform:uppercase;letter-spacing:.05em;font-size:11px;
   color:var(--dim);text-align:right;padding:4px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
 table.evtab th:first-child{text-align:left}
 table.evtab td{padding:4px 6px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
 table.evtab td:first-child{text-align:left;white-space:nowrap}
-table.evtab .dim{color:var(--dim);font-size:11px}
+table.evtab .dim{color:var(--dim);font-size:12.5px}
 table.evtab .b{font-weight:600}
 table.evtab.pace{margin-top:12px}
-table.evtab.pace tr.sub td{color:var(--dim);font-size:11px;border-bottom:none;padding-top:0}
+table.evtab.pace tr.sub td{color:var(--dim);font-size:12.5px;border-bottom:none;padding-top:0}
 table.evtab.pace tbody tr:last-child td{border-top:2px solid var(--fg);font-weight:600}
-table.evtab .diffs{white-space:nowrap;font-size:11px}
+table.evtab .diffs{white-space:nowrap;font-size:12.5px}
 table.evtab .diffs span{margin-left:6px}
-.evtoggle{margin-top:10px;font-family:var(--display);font-size:11px;letter-spacing:.06em;
+.evtoggle{margin-top:10px;font-family:var(--display);font-size:12.5px;letter-spacing:.06em;
   background:none;border:1px solid var(--line);border-radius:2px;padding:4px 9px;color:var(--dim);cursor:pointer}
 .evtoggle:hover{color:var(--fg);border-color:var(--fg)}
-.streamline{font-size:11.5px;color:var(--flag);margin-top:9px;padding-top:8px;border-top:1px solid var(--line)}
+.streamline{font-size:13px;color:var(--flag);margin-top:9px;padding-top:8px;border-top:1px solid var(--line)}
 .evrow.nodata .evtot{color:var(--dim)}
-.nodatanote{font-size:11.5px;color:var(--flag)}
-.evfoot{color:var(--dim);font-size:12px;margin-top:14px;line-height:1.5}
+.nodatanote{font-size:13px;color:var(--flag)}
+.evfoot{color:var(--dim);font-size:13.5px;margin-top:14px;line-height:1.5}
 @media(max-width:620px){.evrow{grid-template-columns:1fr auto;gap:6px}.share.ev{grid-column:1/-1}.evpcts{grid-column:1/-1}}
 .bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding-block:14px;
   border-bottom:1px solid var(--line);margin-bottom:22px}
@@ -89,26 +89,26 @@ button:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px sol
 .st.t-tossup{border-left:3px solid var(--flag)}
 .st.t-safe{opacity:.72}
 .states[hidden],#evwrap[hidden]{display:none!important}
-.cyc{font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);font-weight:600}
+.cyc{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);font-weight:600}
 .states{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}
 .st{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px 15px 13px;min-width:0}
 .st.open{grid-column:1/-1}
 .sthd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;cursor:pointer}
 .stname{font-family:var(--display);font-size:23px;font-weight:600;letter-spacing:-.005em}
-.pin{font-family:var(--display);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim)}
+.pin{font-family:var(--display);font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim)}
 
-table.cand{width:100%;border-collapse:collapse;margin-top:11px;font-size:13px}
-table.cand th{font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;font-size:10px;
+table.cand{width:100%;border-collapse:collapse;margin-top:11px;font-size:14.5px}
+table.cand th{font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;font-size:11.5px;
   font-weight:600;color:var(--dim);text-align:right;padding:0 0 4px;border-bottom:1px solid var(--line)}
 table.cand th:first-child{text-align:left}
 table.cand td{padding:5px 0;border:none}
 table.cand .cname{text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:0;width:40%}
 table.cand .num{text-align:right;font-variant-numeric:tabular-nums;padding-left:12px;white-space:nowrap}
-table.cand .cnt{color:var(--dim);font-size:12.5px}
-table.cand .outs{color:var(--flag);font-size:12.5px}
-table.cand .prj{font-size:13.5px;font-weight:600;line-height:1.25}
+table.cand .cnt{color:var(--dim);font-size:14px}
+table.cand .outs{color:var(--flag);font-size:14px}
+table.cand .prj{font-size:15.5px;font-weight:600;line-height:1.25}
 table.cand tr.win .cname{font-weight:600}
-table.cand tfoot td{border-top:1px solid var(--line);padding-top:6px;font-size:12px;color:var(--dim)}
+table.cand tfoot td{border-top:1px solid var(--line);padding-top:6px;font-size:13.5px;color:var(--dim)}
 table.cand tfoot .outs{font-weight:600}
 table.cand .sw{display:inline-block;width:9px;height:9px;border-radius:1px;margin-right:7px}
 .empty-cand .prj{color:var(--dim)}

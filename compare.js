@@ -342,8 +342,18 @@ async function renderRaceChart(host, code){
     counts:Object.fromEntries(series.map(sr=>{const r=vt(sr.key,"voted");
       return [sr.key, r ? r.counts[k] : null];})),
   })).sort((a,b)=>(b.vals[latest]||0)-(a.vals[latest]||0));
+  // A state whose newest race figure predates this cycle must say so on the card.
+  // Showing 2024 alone with no explanation reads as "South Carolina has no race data",
+  // when what is true is narrower and worth stating: the breakdown exists, it covers
+  // mail ballots only, and this cycle's is not published yet.
+  const gap = !series.some(sr => +sr.key === 2026)
+    ? `<div class="streamline">No 2026 race breakdown published for this state yet &mdash;
+       showing ${latest} alone. ${code === "SC"
+         ? "South Carolina's race figures cover mail ballots only (its in-person early report carries no breakdown), and it has published no mail data this cycle."
+         : "The source has not posted one for this cycle."}</div>`
+    : "";
   host.innerHTML = `<div class="legend">${series.map(sr=>key(sr.cycle,sr.label)).join("")}</div>
-    <div class="plot"></div>`;
+    <div class="plot"></div>${gap}`;
   const draw = () => drawShares(host.querySelector(".plot"), groups, series,
     {aria:`${code} early vote composition by race.`});
   draw(); host._draw = draw;

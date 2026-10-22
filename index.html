@@ -906,18 +906,24 @@ async function renderTakeaways(){
   }
 
   // --- race, where a state records it ---
-  const race = [];
+  const race = [], stale = [];
   for (const k of Object.keys(DATA.states)){
     try{
       const d = await (await fetch("data/demographics-"+k+".json?t="+Date.now())).json();
       const ys = Object.keys(d.years||{}).sort();
       const got = ys.filter(y => (((d.years[y].streams||{}).voted||{}).race));
-      if (got.length < 2) continue;
-      const latest = got[got.length-1], prev = got[got.length-2];
+      if (!got.length) continue;
       const bOf = y => { const r = d.years[y].streams.voted.race;
         return r.counts.nh_black / r.total * 100; };
-      race.push({k, name:(DATA.states[k]||{}).name||k, latest, prev,
-        now:bOf(latest), was:bOf(prev)});
+      const name = (DATA.states[k]||{}).name || k;
+      // A state that records race but has nothing for this cycle is named rather than
+      // dropped: silently leaving South Carolina out reads as "it has no race data".
+      if (got.length < 2 || +got[got.length-1] !== 2026){
+        stale.push({k, name, latest:got[got.length-1]});
+        continue;
+      }
+      race.push({k, name, latest:got[got.length-1], prev:got[got.length-2],
+        now:bOf(got[got.length-1]), was:bOf(got[got.length-2])});
     }catch(e){ /* most states do not record race at all */ }
   }
   race.sort((a,b) => (b.now-b.was) - (a.now-a.was));
@@ -926,9 +932,11 @@ async function renderTakeaways(){
       h: "Black voters are a bigger share of the early vote than they were in " + race[0].prev,
       b: `${race.map(r => `<b>${r.name}</b> ${r.was.toFixed(1)}% &rarr;
             <b>${r.now.toFixed(1)}%</b>`).join(" &middot; ")}.
-          Only these states record race at registration, so this is not a national
+          Only a handful of states record race at registration, so this is not a national
           picture &mdash; and ${race[0].prev} was a completed presidential cycle while
-          2026 is days old.`,
+          2026 is days old.${stale.length ? ` ${stale.map(x=>`<b>${x.name}</b>`).join(" and ")}
+          record${stale.length>1?"":"s"} race too, but ${stale.length>1?"have":"has"} no
+          2026 breakdown published yet &mdash; newest is ${stale[0].latest}.` : ""}`,
       flag: true
     });
   }
@@ -1282,4 +1290,4 @@ setTab("ev");
 load();
 setInterval(load, 120000);
 </script>
-<script src="compare.js?v=72978357"></script>
+<script src="compare.js?v=e4acb495"></script>

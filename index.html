@@ -227,6 +227,12 @@ footer p{margin:0 0 7px}
      lines each and left the pinned labels floating beside a collapsed grid. */
   .scroll{margin-inline:0;padding-inline:0}   /* no bleed: left:0 must mean the card edge */
   .scroll table th,.scroll table td{white-space:nowrap}
+  /* ...except the label column. Iowa's "2020 final presidential mail + in-person,
+     not split" on one line made that column 335px inside a 323px window, so the
+     pinned label covered the card and every figure sat off to the right. Figures
+     keep their columns; labels wrap. */
+  .scroll table th:first-child,.scroll table td:first-child{
+    white-space:normal;max-width:150px;line-height:1.3}
   .scroll table.evtab .diffs span{margin-left:5px}
   /* Pin the label column so the row you are reading survives scrolling right. */
   .scroll table th:first-child,

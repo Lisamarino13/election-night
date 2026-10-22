@@ -85,14 +85,26 @@ def n(row, key):
 
 
 def national():
-    """US.csv -> {ST: {'last_update':..., 'data_source':...}} for provenance."""
+    """US.csv -> {ST: {...}} for provenance AND as a cross-check on the county files.
+
+    The Lab publishes a per-state national file and per-state county files, and they can
+    disagree: on 2026-10-22 Kansas's county file summed to 55,481 while US.csv said 91,185,
+    both stamped 10/21. Every other state matched exactly. We use the county file because
+    the projection needs county-level data, so when the two disagree we are faithfully
+    reproducing the lower one while their own headline shows the higher — which is exactly
+    the kind of gap someone cross-checking will hit. Capture the national figure so the
+    discrepancy can be stated on the card instead of looking like our error.
+    """
     out = {}
     for r in csv.DictReader(io.StringIO(get(BASE + "US.csv"))):
         st = (r.get("state_abbv") or "").strip().upper()
-        if st:
-            out[st] = {"last_update": (r.get("last_update") or "").strip(),
-                       "data_source": (r.get("data_source") or "").strip(),
-                       "notes": (r.get("notes") or "").strip()}
+        if not st:
+            continue
+        num = lambda k: int((r.get(k) or "0").replace(",", "") or 0)
+        out[st] = {"last_update": (r.get("last_update") or "").strip(),
+                   "data_source": (r.get("data_source") or "").strip(),
+                   "notes": (r.get("notes") or "").strip(),
+                   "nat_mail": num("accept_all"), "nat_ip": num("inperson_all")}
     return out
 
 
@@ -144,6 +156,15 @@ def pull(st, meta):
         raise RuntimeError(f"{st}: only {len(counties)} counties — refusing")
 
     m = meta.get(st, {})
+    # cross-check this county file against the Lab's own national figure
+    nat = (m.get("nat_mail", 0) or 0) + (m.get("nat_ip", 0) or 0)
+    cty = tot["by_mail"] + tot["in_person"]
+    mismatch = None
+    if nat and abs(cty - nat) > 500:
+        mismatch = {"county_file": cty, "national_file": nat, "diff": cty - nat}
+        print(f"   {st}: county file totals {cty:,} but the Lab's national file says "
+              f"{nat:,} ({cty-nat:+,}) — using the county file, flagging the gap",
+              file=sys.stderr)
     payload = {"state": st, "unit": "county", "election": "2026 General",
                "as_of": m.get("last_update") or None,
                "fetched": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -161,6 +182,13 @@ def pull(st, meta):
                             else m["notes"].strip())},
                "notes": {"outstanding": "derived as mail requested minus mail returned; "
                                         "not a figure the state publishes directly"}}
+    if mismatch:
+        payload["source_mismatch"] = mismatch
+        payload["notes"]["mismatch"] = (
+            f"the Election Lab's county file totals {mismatch['county_file']:,} while its "
+            f"own national file says {mismatch['national_file']:,}. County-level data is "
+            f"what a per-county projection needs, so the county file is used here; their "
+            f"headline figure elsewhere will be the larger one")
     if party:
         payload["state_totals"] = {
             "returned": {"D": tot["ret_D"], "R": tot["ret_R"], "NPA": tot["ret_NPA"],

@@ -97,6 +97,7 @@ button:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px sol
 .updated .stale{color:var(--flag);font-weight:600}
 .srcnote{font-size:12.5px;color:var(--flag);background:rgba(0,0,0,.025);border-left:3px solid var(--flag);
   padding:8px 10px;margin-top:10px;line-height:1.45;border-radius:0 3px 3px 0}
+.srcnote.warn{border-left-color:var(--r);background:rgba(170,40,40,.05)}
 .srcnote .srcwho{display:block;color:var(--dim);font-size:11.5px;margin-top:4px}
 .cyc{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);font-weight:600}
 .states{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}
@@ -543,6 +544,7 @@ async function loadEarly(){
                   inPersonReported: j.in_person_reported !== false,
                   fallback: !!j.fallback,
                   srcNote: (j.attribution && j.attribution.note) || "",
+                  mismatchNote: (j.notes && j.notes.mismatch) || "",
                   srcFrom: (j.attribution && j.attribution.aggregator) || "",
                   srcUp: (j.attribution && j.attribution.upstream) || "",
                   partyAvailable: j.party_available !== false,
@@ -563,9 +565,12 @@ const PARTY_COL={D:"var(--d)",R:"var(--r)",NPA:"var(--o)",O:"var(--o)"};
 // were reproducing both faithfully and showing neither. A number whose definition is
 // uncertain has to say so on the card, not only in the payload.
 function srcLine(e){
-  if(!e.srcNote) return "";
+  // a disagreement between the source's own files is worth saying out loud: someone
+  // cross-checking against the publisher's headline will otherwise think we are wrong
+  const mm = e.mismatchNote ? `<div class="srcnote warn"><b>Sources disagree:</b> ${e.mismatchNote}</div>` : "";
+  if(!e.srcNote) return mm;
   const who = e.srcFrom ? `${e.srcFrom}${e.srcUp?" &larr; "+e.srcUp:""}` : "";
-  return `<div class="srcnote"><b>How this is counted:</b> ${e.srcNote}
+  return mm + `<div class="srcnote"><b>How this is counted:</b> ${e.srcNote}
     ${who?`<span class="srcwho">${who}</span>`:""}</div>`;
 }
 

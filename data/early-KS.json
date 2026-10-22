@@ -3,7 +3,7 @@
  "unit": "county",
  "election": "2026 General",
  "as_of": "10/21/2026",
- "fetched": "2026-10-22T13:33:27+00:00",
+ "fetched": "2026-10-22T14:11:42+00:00",
  "party_available": true,
  "outstanding_available": false,
  "in_person": true,
@@ -2432,7 +2432,13 @@
   "note": ""
  },
  "notes": {
-  "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly"
+  "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly",
+  "mismatch": "the Election Lab's county file totals 55,481 while its own national file says 91,185. County-level data is what a per-county projection needs, so the county file is used here; their headline figure elsewhere will be the larger one"
+ },
+ "source_mismatch": {
+  "county_file": 55481,
+  "national_file": 91185,
+  "diff": -35704
  },
  "state_totals": {
   "returned": {

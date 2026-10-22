@@ -204,6 +204,28 @@ tbody tr:hover td{background:var(--bg)}
 .ehint{font-size:11.5px;color:var(--dim);line-height:1.4}
 footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);color:var(--dim);font-size:12px}
 footer p{margin:0 0 7px}
+.replaybox{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--d);
+  border-radius:0 3px 3px 0;padding:17px 18px;margin-bottom:16px}
+.rphd{font-family:var(--display);font-size:21px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.05em;margin-bottom:9px}
+.rplede{font-size:15px;line-height:1.55;margin:0 0 13px}
+.rpctl{display:flex;gap:11px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.rpctl label{margin:0;font-size:11px}
+.rpctl select{font-family:var(--display);font-size:14px;padding:7px 9px;min-height:38px;
+  background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:2px}
+.rpctl input[type=range]{flex:1 1 170px;min-width:140px;accent-color:var(--d)}
+.rpstepl{font-size:13.5px;color:var(--dim);flex:1 1 100%}
+.rpgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:6px}
+.rpcell{display:flex;flex-direction:column;gap:3px;padding:11px 12px;border:1px solid var(--line);
+  border-radius:2px;background:var(--bg);min-width:0}
+.rpbig{font-family:var(--display);font-size:21px;line-height:1.1}
+.rpsub{font-size:12.5px;color:var(--dim);line-height:1.4}
+.rpok{color:var(--ok);font-weight:600}
+.rpbad{color:var(--r);font-weight:600}
+.rpcav{margin:13px 0 0;padding-top:11px;border-top:1px solid var(--line);color:var(--dim);
+  font-size:13.5px;line-height:1.6}
+@media(max-width:760px){.replaybox{padding:16px 14px}.rpgrid{grid-template-columns:1fr}
+  .rphd{font-size:19px}.rpbig{font-size:22px}}
 .takeaways{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--flag);
   border-radius:0 3px 3px 0;padding:16px 18px;margin-bottom:16px}
 .takehd{font-family:var(--display);font-size:20px;margin:0 0 10px;font-weight:600;
@@ -348,6 +370,7 @@ FL, 41, 38, 21, 2400000"></textarea>
   <div style="margin-top:10px"><button id="applyEarly">Apply</button></div>
 </div>
 
+<section id="replay" class="replaybox" hidden></section>
 <div class="states" id="board"></div>
 <div id="chartwrap" class="chartbox" hidden></div>
 
@@ -973,6 +996,104 @@ async function renderTakeaways(){
       counted statewide, so none of it is tied to a particular race on the ballot.</p>`;
 }
 
+
+// ---- Replay: test the projection against an election whose answer is known ---------
+// Nothing on this board can be trusted on the night if the arithmetic has never been
+// run against a real result. North Carolina 2024 is the hard case - 4.43M early and
+// mail ballots against 1.17M on election day, breaking in opposite directions - so the
+// replay rebuilds that night the way NC reports it and runs the board's own projection
+// on each step.
+let REPLAY = null, RP_RACE = "president", RP_STEP = 0;
+
+function rpProject(rows, k){
+  const counted = Array(k).fill(0), proj = Array(k).fill(0);
+  let left = 0;
+  for (const r of rows){
+    const v = r.votes, t = v.reduce((a,b)=>a+b,0), J = r.outstanding || 0;
+    left += J;
+    for (let i=0;i<k;i++){ counted[i]+=v[i]; proj[i]+=v[i] + (t ? v[i]/t*J : 0); }
+  }
+  return {counted, proj, left};
+}
+const rpTop2 = a => a.map((v,i)=>[v,i]).sort((x,y)=>y[0]-x[0]).slice(0,2);
+
+async function renderReplay(){
+  const host = document.getElementById("replay");
+  if (!host) return;
+  if (!REPLAY){
+    host.innerHTML = `<div class="rphd">Loading the 2024 replay…</div>`;
+    try{ REPLAY = await (await fetch("data/replay-NC-2024.json?t="+Date.now())).json(); }
+    catch(e){ host.innerHTML = `<div class="rphd">Replay unavailable — ${String(e.message||e)}</div>`; return; }
+  }
+  const races = Object.keys(REPLAY.races);
+  if (!races.includes(RP_RACE)) RP_RACE = races[0];
+  const cands = REPLAY.races[RP_RACE], k = cands.length;
+  const snap = REPLAY.steps[Math.min(RP_STEP, REPLAY.steps.length-1)];
+  const rows = snap.races[RP_RACE] || [];
+  const {counted, proj, left} = rpProject(rows, k);
+  const fin = REPLAY.finals[RP_RACE];
+  const finOrder = Object.entries(fin).sort((a,b)=>b[1]-a[1]);
+  const [fw, fwv] = finOrder[0], fRun = finOrder[1];
+  const cOrd = rpTop2(counted), pOrd = rpTop2(proj);
+  const cName = cands[cOrd[0][1]].name, pName = cands[pOrd[0][1]].name;
+  const cLead = cOrd[0][0]-cOrd[1][0], pLead = Math.round(pOrd[0][0]-pOrd[1][0]);
+  const right = pName === fw;
+  const col = nm => { const c = cands.find(x=>x.name===nm); return c && c.party==="D" ? "var(--d)"
+    : c && c.party==="R" ? "var(--r)" : "var(--o)"; };
+  const nf = v => Math.round(v).toLocaleString("en-US");
+  const reporting = rows.reduce((a,r)=>a+(r.precincts_reporting||0),0);
+  const pAll = rows.reduce((a,r)=>a+(r.precincts_total||0),0);
+
+  host.hidden = false;
+  host.innerHTML = `
+    <div class="rphd">Does the method work? — North Carolina 2024 replay</div>
+    <p class="rplede">The answer is already known, so this is a test rather than a forecast.
+      North Carolina counted <b>4.43M</b> early and mail ballots against <b>1.17M</b> on
+      election day, and the two break in opposite directions — which is exactly the
+      situation that makes a lead on the night misleading. Step through it.</p>
+    <div class="rpctl">
+      <label for="rprace">Race</label>
+      <select id="rprace">${races.map(r=>`<option value="${r}"${r===RP_RACE?" selected":""}>${
+        r.replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase())}</option>`).join("")}</select>
+      <label for="rpstep">Count</label>
+      <input id="rpstep" type="range" min="0" max="${REPLAY.steps.length-1}" value="${RP_STEP}">
+      <span class="rpstepl">${snap.label}</span>
+    </div>
+    <div class="rpgrid">
+      <div class="rpcell"><span class="slab">Counted so far</span>
+        <b class="fig rpbig" style="color:${col(cName)}">${cName.split(" ").pop()} +${nf(cLead)}</b>
+        <span class="rpsub">${nf(counted.reduce((a,b)=>a+b,0))} votes in ·
+          ${reporting.toLocaleString()}/${pAll.toLocaleString()} precincts</span></div>
+      <div class="rpcell"><span class="slab">Projected</span>
+        <b class="fig rpbig" style="color:${col(pName)}">${pName.split(" ").pop()} +${nf(pLead)}</b>
+        <span class="rpsub">${nf(left)} ballots still out, spread across the counties
+          that hold them</span></div>
+      <div class="rpcell"><span class="slab">What actually happened</span>
+        <b class="fig rpbig" style="color:${col(fw)}">${fw.split(" ").pop()} +${nf(fwv-fRun[1])}</b>
+        <span class="rpsub ${right?"rpok":"rpbad"}">${right
+          ? "projection has the right winner" : "projection has the WRONG winner"}</span></div>
+    </div>
+    <div class="scroll"><table class="evtab"><thead><tr><th>County</th>
+      ${cands.slice(0,4).map(c=>`<th>${c.name.split(" ").pop()}</th>`).join("")}
+      <th>Still out</th><th>Precincts</th></tr></thead><tbody>
+      ${rows.slice().sort((a,b)=>(b.outstanding||0)-(a.outstanding||0)).slice(0,12)
+        .map(r=>`<tr><td>${r.name}</td>
+          ${cands.slice(0,4).map((c,i)=>`<td class="fig">${(r.votes[i]||0).toLocaleString()}</td>`).join("")}
+          <td class="fig b">${r.outstanding ? r.outstanding.toLocaleString()
+            : '<span class="dim">—</span>'}</td>
+          <td class="fig dim">${r.precincts_reporting||0}/${r.precincts_total||0}</td></tr>`).join("")}
+      </tbody></table><div class="streamline">The twelve counties still holding the most
+      ballots. A projection is only as good as knowing WHERE the remaining vote sits.</div></div>
+    <p class="rpcav"><b>What this proves and what it does not.</b> It proves the arithmetic:
+      applying a county's own counted share to that county's own remaining ballots lands on
+      the right winner here at every step. It does not prove we can know the remainder on
+      the night — here it is read off the final result, which nobody has while counting.
+      For early and mail we can measure it, because we count what was cast; for election
+      day we cannot, and this board says so instead of guessing.</p>`;
+  host.querySelector("#rprace").onchange = e => { RP_RACE = e.target.value; renderReplay(); };
+  host.querySelector("#rpstep").oninput = e => { RP_STEP = +e.target.value; renderReplay(); };
+}
+
 function renderLastRun(){
   const el=document.getElementById("lastrun"); if(!el) return;
   let newest=null, states=0;
@@ -1206,6 +1327,8 @@ function setTab(t){
   document.getElementById("tabEN").classList.toggle("on", t==="en");
   document.getElementById("tabCH").classList.toggle("on", t==="ch");
   document.getElementById("board").hidden = t!=="en";
+  const rp = document.getElementById("replay");
+  if (t === "en"){ renderReplay(); } else { rp.hidden = true; }
   document.getElementById("evwrap").hidden = t!=="ev";
   const cw = document.getElementById("chartwrap");
   cw.hidden = t!=="ch";

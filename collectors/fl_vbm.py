@@ -111,12 +111,14 @@ def main():
             except Exception as e:
                 errs.append(f"{stat}: {e}")
                 continue
-            # Compare the DATE only. The in-person file is stamped at a different time of
-            # day than the mail files (8:04AM vs 2:01PM), so a full-timestamp match would
-            # reject a file that is in fact the same day's.
+            # DO NOT require the same day. In-person is an INDEPENDENT quantity published
+            # on its own schedule — it does not have to agree with the mail files the way
+            # outstanding and returned do, because no arithmetic combines them. Requiring a
+            # match made in-person appear and vanish between runs as the three files drifted
+            # in and out of alignment. Its own compile date is recorded instead.
             if _day(c) != _day(day):
-                print(f"   FL skipping {stat}: compiled {c}, mail is {day}", file=sys.stderr)
-                break
+                print(f"   FL note: in-person compiled {c}, mail is {day} — kept, dated "
+                      f"separately", file=sys.stderr)
             data[key] = got
             data["compiled"][key] = c
             break
@@ -131,6 +133,7 @@ def main():
     for c in counties:
         rec = {"outstanding": data["outstanding"][c], "returned": data["returned"][c]}
         if "in_person" in data and c in data["in_person"]:
+            rec["early_in_person"] = data["in_person"][c]
             rec["in_person"] = data["in_person"][c]
         payload["counties"][c] = rec
     payload["in_person"] = "in_person" in data
@@ -141,6 +144,11 @@ def main():
     payload["state_totals"] = {"outstanding": data["outstanding"]["State Totals"],
                                "returned": data["returned"]["State Totals"]}
     if "in_person" in data:
+        # early_in_person is the key every other collector uses and the board reads. It was
+        # written as "in_person" here, so Florida's in-person never rendered even once it
+        # was being collected. Both are emitted: the canonical name, and the old one so
+        # nothing that already reads it breaks.
+        payload["state_totals"]["early_in_person"] = data["in_person"]["State Totals"]
         payload["state_totals"]["in_person"] = data["in_person"]["State Totals"]
     p = pathlib.Path(__file__).resolve().parent.parent / "data" / "early-FL.json"
     p.write_text(json.dumps(payload, indent=1))

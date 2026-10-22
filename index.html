@@ -632,6 +632,11 @@ function renderEV(){
     return;
   }
   for (const [k,st] of have){
+   // One state must never be able to take down the others. A single throw inside this
+   // loop silently dropped every card after it — the board showed three states instead of
+   // ten and looked perfectly normal doing it. A failed card now says so and the rest
+   // still render.
+   try {
     const e=EARLY[k], out=e.totals.outstanding||{}, ret=e.totals.returned||{};
     const hasOut = !!(out && out.total);
     const UNIT = e.unit==="municipality" ? "municipalities" : "counties";
@@ -669,7 +674,13 @@ function renderEV(){
         }).join("")}</tbody></table></div>` : "";
 
     const hist = e.history || null;
-    const pcts = ps => ["R","D","NPA"].map(p=>({p, v: ps.total ? (ps[p]||0)/ps.total : 0}));
+    // Tolerate a missing bucket. Iowa's 2018/2020 files have no receipt methods, so those
+    // years carry a combined figure and no mail_returned/early_in_person at all. Reading
+    // .total off undefined threw inside the render loop and killed every card after the
+    // one being drawn — the board silently dropped seven states.
+    const EMPTY_PS = {total:0};
+    const pcts = ps => {const q = ps || EMPTY_PS;
+      return ["R","D","NPA"].map(p=>({p, v: q.total ? (q[p]||0)/q.total : 0}));};
     const nowMail = ret, nowTot = nowMail.total || 0;
     let paceTable = "";
     if (hist){
@@ -679,12 +690,14 @@ function renderEV(){
       // and that gap is the cycle, not a trend. So the party-split diff is always measured
       // against the most recent MIDTERM, and presidential years are marked as context.
       const baseYr = yrs.filter(y=>+y%4===2).pop() || yrs[0];
-      const base = baseYr && hist[baseYr].state_totals.mail_returned;
+      const st_ = y => (hist[y] && hist[y].state_totals) || {};
+      const base = baseYr && st_(baseYr).mail_returned;
       const line = (lab, ps, pace, diffAgainst) => {
         const mine = pcts(ps);
         const other = diffAgainst ? pcts(diffAgainst) : null;
+        const q = ps || EMPTY_PS;
         return `<tr><td>${lab}</td>
-          <td class="fig b">${n(ps.total||0)}</td>
+          <td class="fig b">${n(q.total||0)}</td>
           ${mine.map((x,i)=>`<td class="fig">${(x.v*100).toFixed(0)}%</td>`).join("")}
           <td class="fig">${pace||""}</td>
           <td class="fig diffs">${other ? mine.map((x,i)=>{
@@ -693,15 +706,23 @@ function renderEV(){
             }).join(" ") : ""}</td></tr>`;
       };
       const rowsH = yrs.map(y=>{
-        const ps = hist[y].state_totals.mail_returned;
-        const ip = hist[y].state_totals.early_in_person;
+        const t_ = st_(y);
         const pres = (+y % 4 === 0);
-        return line(y+" final"+(pres?' <span class="cyc">presidential</span>':""), ps, "", null) +
-          `<tr class="sub"><td>&nbsp;&nbsp;in-person early</td><td class="fig">${n(ip.total||0)}</td>
-            ${pcts(ip).map(x=>`<td class="fig">${(x.v*100).toFixed(0)}%</td>`).join("")}<td></td><td></td></tr>`;
+        const tag = y+" final"+(pres?' <span class="cyc">presidential</span>':"");
+        // A year whose source had no receipt methods has one combined figure and no split.
+        // Say that on the row rather than showing a blank or a zero for in-person.
+        if (t_.mail_returned === undefined && t_.returned_combined){
+          return line(tag+' <span class="cyc">mail + in-person, not split</span>',
+                      t_.returned_combined, "", null);
+        }
+        const ps = t_.mail_returned, ip = t_.early_in_person;
+        return line(tag, ps, "", null) +
+          (ip ? `<tr class="sub"><td>&nbsp;&nbsp;in-person early</td><td class="fig">${n(ip.total||0)}</td>
+            ${pcts(ip).map(x=>`<td class="fig">${(x.v*100).toFixed(0)}%</td>`).join("")}<td></td><td></td></tr>` : "");
       }).join("");
       const paceCells = yrs.map(y=>{
-        const f = hist[y].state_totals.mail_returned.total||1;
+        const b_ = st_(y).mail_returned || st_(y).returned_combined || EMPTY_PS;
+        const f = b_.total||1;
         return `${(nowTot/f*100).toFixed(0)}% of ${y}`;
       }).join(" \u00b7 ");
       const dhdr = `&Delta; vs ${baseYr}<br><span class="cyc">last midterm</span>`;
@@ -729,6 +750,17 @@ function renderEV(){
     if(tg) tg.onclick=()=>{const dv=card.querySelector(".evdetail");dv.hidden=!dv.hidden;
       tg.innerHTML=cties.length+" "+UNIT+" "+(dv.hidden?"&#9656;":"&#9662;");};
     host.appendChild(card);
+   } catch(err) {
+    console.error("card failed for "+k, err);
+    const bad=document.createElement("div");
+    bad.className="evcard";
+    bad.innerHTML=`<div class="sthd"><span class="stname">${st.name}</span>
+        <span class="pin">could not render</span></div>
+      <div class="evrow nodata"><span class="slab">This card failed to draw</span>
+        <span class="nodatanote" style="grid-column:span 3">${String(err && err.message || err)}
+        &mdash; the other states are unaffected</span></div>`;
+    host.appendChild(bad);
+   }
   }
   const missing=Object.entries(DATA.states).filter(([k])=>!EARLY[k]).map(([k])=>k);
   document.getElementById("evfoot").innerHTML =

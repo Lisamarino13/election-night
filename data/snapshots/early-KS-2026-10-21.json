@@ -2,7 +2,7 @@
  "as_of": "10/21/2026",
  "attribution": {
   "aggregator": "UF Election Lab (election.lab.ufl.edu)",
-  "note": "NA",
+  "note": "",
   "upstream": "Kansas Secretary of State"
  },
  "counties": {
@@ -2423,15 +2423,21 @@
   }
  },
  "election": "2026 General",
- "fetched": "2026-10-22T13:09:37+00:00",
+ "fetched": "2026-10-22T15:10:05+00:00",
  "in_person": true,
  "in_person_reported": true,
  "notes": {
+  "mismatch": "the Election Lab's county file totals 55,481 while its own national file says 91,185. County-level data is what a per-county projection needs, so the county file is used here; their headline figure elsewhere will be the larger one",
   "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly"
  },
  "outstanding_available": false,
  "party_available": true,
  "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/KS_county.csv",
+ "source_mismatch": {
+  "county_file": 55481,
+  "diff": -35704,
+  "national_file": 91185
+ },
  "state": "KS",
  "state_totals": {
   "early_in_person": {

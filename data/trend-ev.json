@@ -76,16 +76,16 @@
       "R": 69280
      },
      "mail_outstanding": {
-      "D": 623319,
-      "NPA": 315432,
-      "O": 38014,
-      "R": 484327
+      "D": 584423,
+      "NPA": 303400,
+      "O": 36748,
+      "R": 460183
      },
      "mail_returned": {
-      "D": 394962,
-      "NPA": 175533,
-      "O": 22781,
-      "R": 340591
+      "D": 442386,
+      "NPA": 194385,
+      "O": 25073,
+      "R": 373651
      }
     },
     {
@@ -220,6 +220,28 @@
       "NPA": 3709,
       "O": 0,
       "R": 8558
+     }
+    },
+    {
+     "as_of": "2026-10-22",
+     "registered": null,
+     "in_person_returned": {
+      "D": 58768,
+      "NPA": 21472,
+      "O": 0,
+      "R": 35667
+     },
+     "mail_outstanding": {
+      "D": 46724,
+      "NPA": 19109,
+      "O": 0,
+      "R": 43394
+     },
+     "mail_returned": {
+      "D": 27650,
+      "NPA": 6881,
+      "O": 0,
+      "R": 16757
      }
     }
    ]
@@ -397,6 +419,16 @@
      "mail_returned": {
       "ALL": 861072
      }
+    },
+    {
+     "as_of": "2026-10-22",
+     "registered": 0,
+     "in_person_returned": {
+      "ALL": 0
+     },
+     "mail_returned": {
+      "ALL": 920773
+     }
     }
    ]
   },
@@ -551,6 +583,28 @@
       "O": 0,
       "R": 40079
      }
+    },
+    {
+     "as_of": "2026-10-22",
+     "registered": null,
+     "in_person_returned": {
+      "D": 6252,
+      "NPA": 3314,
+      "O": 0,
+      "R": 8272
+     },
+     "mail_outstanding": {
+      "D": 38466,
+      "NPA": 23217,
+      "O": 0,
+      "R": 63523
+     },
+     "mail_returned": {
+      "D": 46577,
+      "NPA": 17682,
+      "O": 0,
+      "R": 43857
+     }
     }
    ]
   },
@@ -598,6 +652,16 @@
      },
      "mail_returned": {
       "ALL": 0
+     }
+    },
+    {
+     "as_of": "2026-10-21",
+     "registered": 0,
+     "in_person_returned": {
+      "ALL": 280114
+     },
+     "mail_returned": {
+      "ALL": 21501
      }
     }
    ]

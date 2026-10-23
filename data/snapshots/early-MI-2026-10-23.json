@@ -1,0 +1,610 @@
+{
+ "as_of": "10/23/2026",
+ "attribution": {
+  "aggregator": "UF Election Lab (election.lab.ufl.edu)",
+  "note": "",
+  "upstream": "Data provided by Michigan Secretary of State"
+ },
+ "counties": {
+  "ALCONA": {
+   "by_mail": 1126,
+   "outstanding_derived": 1033,
+   "registered": null,
+   "requested": 2159,
+   "total": 1126
+  },
+  "ALGER": {
+   "by_mail": 773,
+   "outstanding_derived": 755,
+   "registered": null,
+   "requested": 1528,
+   "total": 773
+  },
+  "ALLEGAN": {
+   "by_mail": 10607,
+   "outstanding_derived": 13208,
+   "registered": null,
+   "requested": 23815,
+   "total": 10607
+  },
+  "ALPENA": {
+   "by_mail": 2934,
+   "outstanding_derived": 2245,
+   "registered": null,
+   "requested": 5179,
+   "total": 2934
+  },
+  "ANTRIM": {
+   "by_mail": 3021,
+   "outstanding_derived": 3059,
+   "registered": null,
+   "requested": 6080,
+   "total": 3021
+  },
+  "ARENAC": {
+   "by_mail": 1149,
+   "outstanding_derived": 1293,
+   "registered": null,
+   "requested": 2442,
+   "total": 1149
+  },
+  "BARAGA": {
+   "by_mail": 722,
+   "outstanding_derived": 636,
+   "registered": null,
+   "requested": 1358,
+   "total": 722
+  },
+  "BARRY": {
+   "by_mail": 5939,
+   "outstanding_derived": 6048,
+   "registered": null,
+   "requested": 11987,
+   "total": 5939
+  },
+  "BAY": {
+   "by_mail": 12362,
+   "outstanding_derived": 9844,
+   "registered": null,
+   "requested": 22206,
+   "total": 12362
+  },
+  "BENZIE": {
+   "by_mail": 2350,
+   "outstanding_derived": 2785,
+   "registered": null,
+   "requested": 5135,
+   "total": 2350
+  },
+  "BERRIEN": {
+   "by_mail": 13925,
+   "outstanding_derived": 15214,
+   "registered": null,
+   "requested": 29139,
+   "total": 13925
+  },
+  "BRANCH": {
+   "by_mail": 2966,
+   "outstanding_derived": 2614,
+   "registered": null,
+   "requested": 5580,
+   "total": 2966
+  },
+  "CALHOUN": {
+   "by_mail": 9770,
+   "outstanding_derived": 10082,
+   "registered": null,
+   "requested": 19852,
+   "total": 9770
+  },
+  "CASS": {
+   "by_mail": 3581,
+   "outstanding_derived": 4074,
+   "registered": null,
+   "requested": 7655,
+   "total": 3581
+  },
+  "CHARLEVOIX": {
+   "by_mail": 3651,
+   "outstanding_derived": 3070,
+   "registered": null,
+   "requested": 6721,
+   "total": 3651
+  },
+  "CHEBOYGAN": {
+   "by_mail": 2412,
+   "outstanding_derived": 3039,
+   "registered": null,
+   "requested": 5451,
+   "total": 2412
+  },
+  "CHIPPEWA": {
+   "by_mail": 2737,
+   "outstanding_derived": 2744,
+   "registered": null,
+   "requested": 5481,
+   "total": 2737
+  },
+  "CLARE": {
+   "by_mail": 2872,
+   "outstanding_derived": 2876,
+   "registered": null,
+   "requested": 5748,
+   "total": 2872
+  },
+  "CLINTON": {
+   "by_mail": 9465,
+   "outstanding_derived": 10526,
+   "registered": null,
+   "requested": 19991,
+   "total": 9465
+  },
+  "CRAWFORD": {
+   "by_mail": 1634,
+   "outstanding_derived": 1191,
+   "registered": null,
+   "requested": 2825,
+   "total": 1634
+  },
+  "DELTA": {
+   "by_mail": 3641,
+   "outstanding_derived": 3193,
+   "registered": null,
+   "requested": 6834,
+   "total": 3641
+  },
+  "DICKINSON": {
+   "by_mail": 2336,
+   "outstanding_derived": 2203,
+   "registered": null,
+   "requested": 4539,
+   "total": 2336
+  },
+  "EATON": {
+   "by_mail": 12428,
+   "outstanding_derived": 13765,
+   "registered": null,
+   "requested": 26193,
+   "total": 12428
+  },
+  "EMMET": {
+   "by_mail": 5068,
+   "outstanding_derived": 3997,
+   "registered": null,
+   "requested": 9065,
+   "total": 5068
+  },
+  "GENESEE": {
+   "by_mail": 37399,
+   "outstanding_derived": 43776,
+   "registered": null,
+   "requested": 81175,
+   "total": 37399
+  },
+  "GLADWIN": {
+   "by_mail": 2451,
+   "outstanding_derived": 2513,
+   "registered": null,
+   "requested": 4964,
+   "total": 2451
+  },
+  "GOGEBIC": {
+   "by_mail": 1240,
+   "outstanding_derived": 843,
+   "registered": null,
+   "requested": 2083,
+   "total": 1240
+  },
+  "GRAND TRAVERSE": {
+   "by_mail": 13467,
+   "outstanding_derived": 14546,
+   "registered": null,
+   "requested": 28013,
+   "total": 13467
+  },
+  "GRATIOT": {
+   "by_mail": 2470,
+   "outstanding_derived": 2700,
+   "registered": null,
+   "requested": 5170,
+   "total": 2470
+  },
+  "HILLSDALE": {
+   "by_mail": 2740,
+   "outstanding_derived": 3384,
+   "registered": null,
+   "requested": 6124,
+   "total": 2740
+  },
+  "HOUGHTON": {
+   "by_mail": 2522,
+   "outstanding_derived": 2902,
+   "registered": null,
+   "requested": 5424,
+   "total": 2522
+  },
+  "HURON": {
+   "by_mail": 2511,
+   "outstanding_derived": 2686,
+   "registered": null,
+   "requested": 5197,
+   "total": 2511
+  },
+  "INGHAM": {
+   "by_mail": 33310,
+   "outstanding_derived": 36988,
+   "registered": null,
+   "requested": 70298,
+   "total": 33310
+  },
+  "IONIA": {
+   "by_mail": 4496,
+   "outstanding_derived": 5800,
+   "registered": null,
+   "requested": 10296,
+   "total": 4496
+  },
+  "IOSCO": {
+   "by_mail": 3168,
+   "outstanding_derived": 2725,
+   "registered": null,
+   "requested": 5893,
+   "total": 3168
+  },
+  "IRON": {
+   "by_mail": 1089,
+   "outstanding_derived": 877,
+   "registered": null,
+   "requested": 1966,
+   "total": 1089
+  },
+  "ISABELLA": {
+   "by_mail": 4614,
+   "outstanding_derived": 4829,
+   "registered": null,
+   "requested": 9443,
+   "total": 4614
+  },
+  "JACKSON": {
+   "by_mail": 13053,
+   "outstanding_derived": 16197,
+   "registered": null,
+   "requested": 29250,
+   "total": 13053
+  },
+  "KALAMAZOO": {
+   "by_mail": 28750,
+   "outstanding_derived": 29782,
+   "registered": null,
+   "requested": 58532,
+   "total": 28750
+  },
+  "KALKASKA": {
+   "by_mail": 1432,
+   "outstanding_derived": 1682,
+   "registered": null,
+   "requested": 3114,
+   "total": 1432
+  },
+  "KENT": {
+   "by_mail": 65640,
+   "outstanding_derived": 74932,
+   "registered": null,
+   "requested": 140572,
+   "total": 65640
+  },
+  "KEWEENAW": {
+   "by_mail": 176,
+   "outstanding_derived": 355,
+   "registered": null,
+   "requested": 531,
+   "total": 176
+  },
+  "LAKE": {
+   "by_mail": 1047,
+   "outstanding_derived": 1064,
+   "registered": null,
+   "requested": 2111,
+   "total": 1047
+  },
+  "LAPEER": {
+   "by_mail": 7584,
+   "outstanding_derived": 9208,
+   "registered": null,
+   "requested": 16792,
+   "total": 7584
+  },
+  "LEELANAU": {
+   "by_mail": 4576,
+   "outstanding_derived": 3888,
+   "registered": null,
+   "requested": 8464,
+   "total": 4576
+  },
+  "LENAWEE": {
+   "by_mail": 8504,
+   "outstanding_derived": 10007,
+   "registered": null,
+   "requested": 18511,
+   "total": 8504
+  },
+  "LIVINGSTON": {
+   "by_mail": 24330,
+   "outstanding_derived": 29151,
+   "registered": null,
+   "requested": 53481,
+   "total": 24330
+  },
+  "LUCE": {
+   "by_mail": 394,
+   "outstanding_derived": 325,
+   "registered": null,
+   "requested": 719,
+   "total": 394
+  },
+  "MACKINAC": {
+   "by_mail": 1224,
+   "outstanding_derived": 1227,
+   "registered": null,
+   "requested": 2451,
+   "total": 1224
+  },
+  "MACOMB": {
+   "by_mail": 86505,
+   "outstanding_derived": 102648,
+   "registered": null,
+   "requested": 189153,
+   "total": 86505
+  },
+  "MANISTEE": {
+   "by_mail": 3103,
+   "outstanding_derived": 2564,
+   "registered": null,
+   "requested": 5667,
+   "total": 3103
+  },
+  "MARQUETTE": {
+   "by_mail": 8174,
+   "outstanding_derived": 6481,
+   "registered": null,
+   "requested": 14655,
+   "total": 8174
+  },
+  "MASON": {
+   "by_mail": 2754,
+   "outstanding_derived": 2258,
+   "registered": null,
+   "requested": 5012,
+   "total": 2754
+  },
+  "MECOSTA": {
+   "by_mail": 3993,
+   "outstanding_derived": 3286,
+   "registered": null,
+   "requested": 7279,
+   "total": 3993
+  },
+  "MENOMINEE": {
+   "by_mail": 2091,
+   "outstanding_derived": 1719,
+   "registered": null,
+   "requested": 3810,
+   "total": 2091
+  },
+  "MIDLAND": {
+   "by_mail": 9096,
+   "outstanding_derived": 8519,
+   "registered": null,
+   "requested": 17615,
+   "total": 9096
+  },
+  "MISSAUKEE": {
+   "by_mail": 1094,
+   "outstanding_derived": 1026,
+   "registered": null,
+   "requested": 2120,
+   "total": 1094
+  },
+  "MONROE": {
+   "by_mail": 15027,
+   "outstanding_derived": 15106,
+   "registered": null,
+   "requested": 30133,
+   "total": 15027
+  },
+  "MONTCALM": {
+   "by_mail": 4861,
+   "outstanding_derived": 5314,
+   "registered": null,
+   "requested": 10175,
+   "total": 4861
+  },
+  "MONTMORENCY": {
+   "by_mail": 1108,
+   "outstanding_derived": 944,
+   "registered": null,
+   "requested": 2052,
+   "total": 1108
+  },
+  "MUSKEGON": {
+   "by_mail": 16109,
+   "outstanding_derived": 19390,
+   "registered": null,
+   "requested": 35499,
+   "total": 16109
+  },
+  "NEWAYGO": {
+   "by_mail": 3414,
+   "outstanding_derived": 4079,
+   "registered": null,
+   "requested": 7493,
+   "total": 3414
+  },
+  "OAKLAND": {
+   "by_mail": 142277,
+   "outstanding_derived": 198793,
+   "registered": null,
+   "requested": 341070,
+   "total": 142277
+  },
+  "OCEANA": {
+   "by_mail": 2252,
+   "outstanding_derived": 2430,
+   "registered": null,
+   "requested": 4682,
+   "total": 2252
+  },
+  "OGEMAW": {
+   "by_mail": 1634,
+   "outstanding_derived": 2126,
+   "registered": null,
+   "requested": 3760,
+   "total": 1634
+  },
+  "ONTONAGON": {
+   "by_mail": 577,
+   "outstanding_derived": 649,
+   "registered": null,
+   "requested": 1226,
+   "total": 577
+  },
+  "OSCEOLA": {
+   "by_mail": 1520,
+   "outstanding_derived": 1650,
+   "registered": null,
+   "requested": 3170,
+   "total": 1520
+  },
+  "OSCODA": {
+   "by_mail": 677,
+   "outstanding_derived": 954,
+   "registered": null,
+   "requested": 1631,
+   "total": 677
+  },
+  "OTSEGO": {
+   "by_mail": 2678,
+   "outstanding_derived": 2351,
+   "registered": null,
+   "requested": 5029,
+   "total": 2678
+  },
+  "OTTAWA": {
+   "by_mail": 33270,
+   "outstanding_derived": 33335,
+   "registered": null,
+   "requested": 66605,
+   "total": 33270
+  },
+  "PRESQUE ISLE": {
+   "by_mail": 1279,
+   "outstanding_derived": 1310,
+   "registered": null,
+   "requested": 2589,
+   "total": 1279
+  },
+  "ROSCOMMON": {
+   "by_mail": 3549,
+   "outstanding_derived": 2932,
+   "registered": null,
+   "requested": 6481,
+   "total": 3549
+  },
+  "SAGINAW": {
+   "by_mail": 17854,
+   "outstanding_derived": 18597,
+   "registered": null,
+   "requested": 36451,
+   "total": 17854
+  },
+  "SANILAC": {
+   "by_mail": 3160,
+   "outstanding_derived": 3429,
+   "registered": null,
+   "requested": 6589,
+   "total": 3160
+  },
+  "SCHOOLCRAFT": {
+   "by_mail": 733,
+   "outstanding_derived": 574,
+   "registered": null,
+   "requested": 1307,
+   "total": 733
+  },
+  "SHIAWASSEE": {
+   "by_mail": 6000,
+   "outstanding_derived": 6564,
+   "registered": null,
+   "requested": 12564,
+   "total": 6000
+  },
+  "ST CLAIR": {
+   "by_mail": 15284,
+   "outstanding_derived": 16486,
+   "registered": null,
+   "requested": 31770,
+   "total": 15284
+  },
+  "ST JOSEPH": {
+   "by_mail": 4166,
+   "outstanding_derived": 4085,
+   "registered": null,
+   "requested": 8251,
+   "total": 4166
+  },
+  "TUSCOLA": {
+   "by_mail": 3909,
+   "outstanding_derived": 4286,
+   "registered": null,
+   "requested": 8195,
+   "total": 3909
+  },
+  "VAN BUREN": {
+   "by_mail": 6430,
+   "outstanding_derived": 7310,
+   "registered": null,
+   "requested": 13740,
+   "total": 6430
+  },
+  "WASHTENAW": {
+   "by_mail": 41036,
+   "outstanding_derived": 59357,
+   "registered": null,
+   "requested": 100393,
+   "total": 41036
+  },
+  "WAYNE": {
+   "by_mail": 152694,
+   "outstanding_derived": 197835,
+   "registered": null,
+   "requested": 350529,
+   "total": 152694
+  },
+  "WEXFORD": {
+   "by_mail": 2243,
+   "outstanding_derived": 2507,
+   "registered": null,
+   "requested": 4750,
+   "total": 2243
+  }
+ },
+ "election": "2026 General",
+ "fetched": "2026-10-23T16:08:49+00:00",
+ "in_person": false,
+ "in_person_reported": false,
+ "notes": {
+  "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly"
+ },
+ "outstanding_available": false,
+ "party_available": false,
+ "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/MI_county.csv",
+ "state": "MI",
+ "state_totals": {
+  "by_mail": 986207,
+  "in_person": 0,
+  "registered": 0,
+  "requested": 2148982,
+  "total": 986207
+ },
+ "unit": "county"
+}

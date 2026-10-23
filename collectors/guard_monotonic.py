@@ -124,8 +124,57 @@ def repair_snapshots(st, streams, live_totals):
     return fixed
 
 
+def repair_misdated_snapshots():
+    """Null a stream in a snapshot whose own compile date is not that snapshot's day.
+
+    A snapshot is one day's state. Where a source stamps each stream separately -
+    Florida does - a stream carrying a different date was never a figure for this day,
+    and leaving it there makes the day-over-day change wrong in both days: the one it
+    was filed under and the one it was taken from.
+
+    Florida's CDN serves no history, so a misfiled figure cannot be replaced with the
+    right one. It becomes unknown, which the board already draws as a dash.
+    """
+    fixed = 0
+    for sf in sorted((DATA / "snapshots").glob("early-*.json")):
+        try:
+            snap = json.loads(sf.read_text())
+        except Exception:
+            continue
+        comp = snap.get("compiled")
+        if not isinstance(comp, dict) or len(set(map(_day, comp.values()))) < 2:
+            continue
+        day = sf.stem.rsplit("-", 3)[-3:]
+        day = "-".join(day)
+        st = snap.get("state_totals") or {}
+        changed = []
+        for stream, stamp in comp.items():
+            if _day(stamp) == day:
+                continue
+            for key in ({"returned": ("returned", "mail_returned", "by_mail"),
+                         "outstanding": ("outstanding",),
+                         "in_person": ("in_person", "early_in_person")}.get(stream, ())):
+                if key in st and val(st, key) is not None:
+                    if isinstance(st[key], dict):
+                        st[key]["total"] = None
+                    else:
+                        st[key] = None
+                    changed.append(f"{key} (compiled {_day(stamp)})")
+        if not changed:
+            continue
+        snap.setdefault("notes", {})["misdated"] = (
+            f"Filed as {day}, but these streams were compiled on another day and were "
+            f"never figures for it: " + "; ".join(changed) + ". The source serves no "
+            f"history, so they are shown as unknown rather than as another day's count.")
+        sf.write_text(json.dumps(snap, indent=1) + "\n")
+        print(f"     {sf.name}: nulled {', '.join(changed)}")
+        fixed += 1
+    return fixed
+
+
 def main():
     hits = 0
+    repair_misdated_snapshots()
     # Standing reconciliation, run every time rather than only when something falls.
     # A withdrawal is caught once, but the archive it poisoned stays wrong until it is
     # repaired, and the fall never happens again to trigger that repair. So on every
@@ -174,6 +223,15 @@ def main():
                     n[key]["total"] = ov
                 else:
                     n[key] = ov
+            # The dates have to travel with the figures. Holding 10/22's numbers while
+            # leaving 10/21 in `compiled` made _as_of file them under 10-21, which
+            # overwrote the real 10-21 snapshot with the next day's values - the exact
+            # misfiling the oldest-date rule was meant to end.
+            for field in ("compiled", "as_of", "through"):
+                if field in old:
+                    new[field] = old[field]
+                elif field in new:
+                    new.pop(field)
             new.setdefault("notes", {})["stale_fetch"] = (
                 f"The source served an older file this run ({nd} against the {od} already "
                 f"recorded), so the figures it carried were lower. The newer figures are "

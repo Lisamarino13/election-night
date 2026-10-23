@@ -472,17 +472,21 @@
  "in_person_reported": true,
  "notes": {
   "party": "South Carolina does not register by party \u2014 any D/R split published for SC elsewhere is a vendor model, not a count",
-  "scope": "early IN-PERSON voting only; absentee/mail is a separate SC report"
+  "scope": "early IN-PERSON voting only; absentee/mail is a separate SC report",
+  "withdrawn": "The source does not publish this stream; it was recorded as 0 before that was understood and is shown as unknown."
  },
  "outstanding_available": false,
  "party_available": false,
  "source": "https://scvotes.gov/wp-content/uploads/2026/10/EV-Totals-10-20-26-1.csv",
  "state": "SC",
  "state_totals": {
-  "by_mail": 0,
+  "by_mail": null,
   "in_person": 192006,
   "registered": 0,
   "total": 192006
  },
- "unit": "county"
+ "unit": "county",
+ "total_excludes": [
+  "by_mail"
+ ]
 }

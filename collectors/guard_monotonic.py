@@ -44,8 +44,76 @@ def val(block, key):
     return v if isinstance(v, (int, float)) else None
 
 
+def repair_snapshots(st, streams, live_totals):
+    """Null the same withdrawn stream in the archive, where it was recorded as 0.
+
+    data/snapshots/ is the durable record - the SQLite store is rebuilt from it - so a
+    withdrawn figure left in there as 0 comes back on the next rebuild and goes into
+    every trend line. South Carolina's mail was recorded as 0 on 2026-10-20, briefly
+    appeared as 21,501 on the 21st, and was withdrawn again; UF's South Carolina county
+    file currently sums to 0 across all 46 counties, which is to say it publishes no
+    South Carolina mail at all.
+
+    Only a 0 is rewritten, and only for a stream the live file now shows as unknown. A
+    genuine 0 early in a cycle - before any mail is back - stays a 0 everywhere the
+    source is still publishing the field.
+    """
+    fixed = 0
+    for sf in sorted((DATA / "snapshots").glob(f"early-{st}-*.json")):
+        try:
+            snap = json.loads(sf.read_text())
+        except Exception:
+            continue
+        s = snap.get("state_totals") or {}
+        changed = []
+        for key in streams:
+            if live_totals.get(key) is not None:
+                continue                       # still published; leave the archive alone
+            if val(s, key) == 0:
+                if isinstance(s.get(key), dict):
+                    s[key]["total"] = None
+                else:
+                    s[key] = None
+                changed.append(key)
+        if not changed:
+            continue
+        known = 0
+        for group in (("by_mail", "mail_returned", "returned"),
+                      ("in_person", "early_in_person")):
+            for key in group:
+                v = val(s, key)
+                if v is not None:
+                    known += v
+                    break
+        if "total" in s:
+            s["total"] = known or None
+        snap["total_excludes"] = changed
+        snap.setdefault("notes", {})["withdrawn"] = (
+            "The source does not publish this stream; it was recorded as 0 before that "
+            "was understood and is shown as unknown.")
+        sf.write_text(json.dumps(snap, indent=1) + "\n")
+        fixed += 1
+        print(f"     repaired archive {sf.name}: {', '.join(changed)} 0 -> null")
+    return fixed
+
+
 def main():
     hits = 0
+    # Standing reconciliation, run every time rather than only when something falls.
+    # A withdrawal is caught once, but the archive it poisoned stays wrong until it is
+    # repaired, and the fall never happens again to trigger that repair. So on every
+    # run, any stream the live file reports as unknown is nulled in the archive wherever
+    # it sits there as a 0.
+    for f in sorted(glob.glob(str(DATA / "early-*.json"))):
+        st = os.path.basename(f)[6:-5]
+        try:
+            live = json.loads(pathlib.Path(f).read_text())
+        except Exception:
+            continue
+        lt = live.get("state_totals") or {}
+        unknown = [k for k in CUMULATIVE if k in lt and val(lt, k) is None]
+        if unknown:
+            repair_snapshots(st, unknown, lt)
     for f in sorted(glob.glob(str(DATA / "early-*.json"))):
         rel = os.path.relpath(f, DATA.parent)
         st = os.path.basename(f)[6:-5]
@@ -101,6 +169,7 @@ def main():
             + "; ".join(f"{k}: was {ov:,}, now {nv:,}" for k, ov, nv in fell))
         new["withdrawn_streams"] = [k for k, _, _ in fell]
         pathlib.Path(f).write_text(json.dumps(new, indent=1) + "\n")
+        repair_snapshots(st, [k for k, _, _ in fell], n)
     print(f"monotonic guard: {hits} state(s) with a withdrawn figure"
           if hits else "monotonic guard: no cumulative figure fell")
     return 0

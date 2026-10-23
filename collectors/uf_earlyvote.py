@@ -59,8 +59,22 @@ STATES = {"NE": "Nebraska", "KS": "Kansas", "GA": "Georgia",
 # So the Lab's copy is written ONLY when the direct data has gone properly stale — more
 # than STALE_DAYS behind what the Lab has. That bounds how out of date Maine can get if
 # nobody runs the laptop command, without downgrading it the rest of the time.
-FALLBACK = {"ME": "Maine", "IA": "Iowa"}
+# FLORIDA joined on 2026-10-23. Its own CDN serves whatever that edge node happens to
+# hold, and it sat on 10/21 files while the Election Lab - reading the SAME Florida
+# source - was two days ahead. The board showed 1,587,693 for Florida against the Lab's
+# 2,127,629, half a million ballots behind, because a direct feed was trusted for being
+# direct rather than for being current. The direct parse is still preferred: it carries
+# party, outstanding mail and the county detail the Lab's state row does not, and it
+# resumes the moment the CDN catches up.
+FALLBACK = {"ME": "Maine", "IA": "Iowa", "FL": "Florida"}
+# How far behind a direct parse may fall before the Lab's copy replaces it. This is a
+# judgement about how much VOTE is at stake, not just how many days, so it is per state.
+# Maine added about 2,000 ballots a day at this point and a two-day tolerance costs
+# almost nothing against the mail/in-person split its direct parse carries. Florida adds
+# 200,000-400,000 a day, so the same two days hid 539,936 ballots: Florida may not be
+# behind at all.
 STALE_DAYS = 2
+STALE_DAYS_BY_STATE = {"FL": 0}
 # Only these three are universal. The rest vary by what the state collects: party columns
 # exist only where there is party registration (NE, KS), in-person is absent entirely for
 # Michigan, and Georgia carries age and race instead. Demanding the full set rejected four
@@ -217,7 +231,7 @@ def _date(v):
     return _date(m.group(0)) if m else None
 
 
-def direct_is_fresh(path, uf_as_of):
+def direct_is_fresh(path, uf_as_of, st=None):
     """True when the existing (direct) file is recent enough to keep."""
     if not path.exists():
         return False
@@ -230,12 +244,23 @@ def direct_is_fresh(path, uf_as_of):
         # Lab's would say "fresh" and hold, freezing the state until it aged past the
         # threshold — update once — freeze again. A fallback file is always replaced.
         return False
-    if not existing.get("as_of"):
-        return True                       # cannot date it; do not clobber on a guess
-    mine, theirs = _date(existing["as_of"]), _date(uf_as_of)
+    # Florida carries no as_of at all - it stamps each file separately in `compiled` -
+    # so this returned True for it on every run since the fallback was added, and
+    # Florida was held no matter how far behind it fell. Where there is no as_of, the
+    # oldest compile stamp is the date, the same rule the store uses: a payload built
+    # from several files is only current to the oldest of them.
+    stamp = existing.get("as_of") or existing.get("through")
+    if not stamp:
+        comp = existing.get("compiled")
+        if isinstance(comp, dict) and comp:
+            dates = [d for d in (_date(v) for v in comp.values()) if d]
+            stamp = min(dates).isoformat() if dates else None
+    if not stamp:
+        return True                       # genuinely undatable; do not clobber on a guess
+    mine, theirs = _date(stamp), _date(uf_as_of)
     if not mine or not theirs:
         return True
-    return (theirs - mine).days <= STALE_DAYS
+    return (theirs - mine).days <= STALE_DAYS_BY_STATE.get(st, STALE_DAYS)
 
 
 def main(argv):
@@ -258,7 +283,7 @@ def main(argv):
             continue
         target = data / f"early-{st}.json"
         if st in FALLBACK:
-            if direct_is_fresh(target, payload["as_of"]):
+            if direct_is_fresh(target, payload["as_of"], st):
                 print(f"UF {st}: holding — the direct pull is current, and the Lab's copy "
                       f"has no mail/in-person split")
                 held += 1

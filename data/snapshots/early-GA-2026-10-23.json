@@ -1280,15 +1280,21 @@
   }
  },
  "election": "2026 General",
- "fetched": "2026-10-23T16:08:47+00:00",
+ "fetched": "2026-10-23T16:30:13+00:00",
  "in_person": true,
  "in_person_reported": true,
  "notes": {
+  "mismatch": "the Election Lab's county file totals 1,467,780 while its own national file says 1,497,446. County-level data is what a per-county projection needs, so the county file is used here; their headline figure elsewhere will be the larger one",
   "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly"
  },
  "outstanding_available": false,
  "party_available": false,
  "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/GA_county.csv",
+ "source_mismatch": {
+  "county_file": 1467780,
+  "diff": -29666,
+  "national_file": 1497446
+ },
  "state": "GA",
  "state_totals": {
   "by_mail": 71081,

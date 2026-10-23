@@ -242,44 +242,58 @@ def main():
                       f"holding the {od} figure {ov:,}")
             continue
         hits += 1
-        for key, ov, nv in fell:
+        # NARROW ON PURPOSE. This guard was written for one thing: a source that stops
+        # publishing a field and sends 0 in its place, which reads as "none were cast"
+        # when it means "no longer published". That is the only case where rewriting a
+        # figure is right.
+        #
+        # It was doing much more than that, and it twice damaged Florida. Holding a
+        # value against a stale fetch and carrying the old date with it filed the next
+        # day's numbers under the previous day. Then, on the following run, the held
+        # date made a genuinely older file look like a withdrawal, and Florida's mail
+        # was nulled outright - 1.1M ballots gone from the board.
+        #
+        # So: a fall to exactly ZERO becomes null. Any other fall is reported and left
+        # alone, because a collector's own output is more trustworthy than this guard's
+        # guess about why it moved. Dates are never touched.
+        zeroed = [(k, ov, nv) for k, ov, nv in fell if nv == 0]
+        other = [(k, ov, nv) for k, ov, nv in fell if nv != 0]
+        for key, ov, nv in other:
+            print(f"  {st}: {key} fell {ov:,} -> {nv:,} — FLAGGED, value left as the "
+                  f"collector wrote it")
+        if other:
+            new.setdefault("notes", {})["fell"] = (
+                "A figure is lower than this board last recorded: "
+                + "; ".join(f"{k} was {ov:,}, now {nv:,}" for k, ov, nv in other)
+                + ". Ballots already cast do not un-cast, so the source has restated "
+                  "something or served an older file. The number shown is the one the "
+                  "source gave.")
+        for key, ov, nv in zeroed:
             if isinstance(n.get(key), dict):
                 n[key]["total"] = None
             else:
                 n[key] = None
-            print(f"  {st}: {key} fell {ov:,} -> {nv:,} — set to null, not {nv:,}")
-        # The total is rebuilt from the streams that ARE still known rather than
-        # nulled outright: South Carolina's 280,114 in-person votes are real and
-        # unaffected, and a dash there would throw away more than it protects. What
-        # the total no longer includes is named, so the board can say so on the card
-        # instead of just showing a smaller number than last time.
-        gone = [k for k, _, _ in fell
-                if k in ("by_mail", "mail_returned", "returned", "in_person",
-                         "early_in_person")]
-        if gone:
+            print(f"  {st}: {key} fell {ov:,} -> 0 — set to null, not 0")
+        if zeroed:
             known = 0
-            for key in ("by_mail", "mail_returned", "returned"):
-                v = val(n, key)
-                if v is not None:
-                    known += v
-                    break
-            for key in ("in_person", "early_in_person"):
-                v = val(n, key)
-                if v is not None:
-                    known += v
-                    break
-            n["total"] = known or None
-            new["total_excludes"] = gone
-        new.setdefault("notes", {})
-        new["notes"]["withdrawn"] = (
-            "A figure this board had already recorded was lower in the source's latest "
-            "file. Ballots already cast do not un-cast, so the source has withdrawn or "
-            "restated it; it is shown as unknown rather than as the smaller number, and "
-            "the total covers only the streams still published. "
-            + "; ".join(f"{k}: was {ov:,}, now {nv:,}" for k, ov, nv in fell))
-        new["withdrawn_streams"] = [k for k, _, _ in fell]
+            for group in (("by_mail", "mail_returned", "returned"),
+                          ("in_person", "early_in_person")):
+                for key in group:
+                    v = val(n, key)
+                    if v is not None:
+                        known += v
+                        break
+            if "total" in n:
+                n["total"] = known or None
+            new["total_excludes"] = [k for k, _, _ in zeroed]
+            new.setdefault("notes", {})["withdrawn"] = (
+                "The source sent 0 for a figure it had been publishing, which means it "
+                "is no longer published rather than that none were cast. It is shown as "
+                "unknown, and the total covers only the streams still published: "
+                + "; ".join(f"{k} was {ov:,}" for k, ov, _ in zeroed))
         pathlib.Path(f).write_text(json.dumps(new, indent=1) + "\n")
-        repair_snapshots(st, [k for k, _, _ in fell], n)
+        if zeroed:
+            repair_snapshots(st, [k for k, _, _ in zeroed], n)
     print(f"monotonic guard: {hits} state(s) with a withdrawn figure"
           if hits else "monotonic guard: no cumulative figure fell")
     return 0

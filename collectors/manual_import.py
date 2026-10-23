@@ -63,6 +63,24 @@ class TableGrab(html.parser.HTMLParser):
             self._c.append(d)
 
 
+def _iso(v):
+    """Any of these sources' date stamps as ISO, so two of them can be compared."""
+    import re
+    from datetime import datetime
+    v = str(v or "").strip()
+    for pat, fmt in ((r"\d{4}-\d{2}-\d{2}", "%Y-%m-%d"),
+                     (r"\d{1,2}/\d{1,2}/\d{4}", "%m/%d/%Y"),
+                     (r"\d{1,2}-\d{1,2}-\d{4}", "%m-%d-%Y"),
+                     (r"\d{1,2}-\d{1,2}-\d{2}(?!\d)", "%m-%d-%y")):
+        m = re.search(pat, v)
+        if m:
+            try:
+                return datetime.strptime(m.group(0), fmt).date().isoformat()
+            except ValueError:
+                continue
+    return ""
+
+
 def num(s):
     s = re.sub(r"[^\d-]", "", s or "")
     return int(s) if s else None
@@ -149,6 +167,26 @@ def main():
         if st in PARSERS:
             payload = PARSERS[st](path, day)
             out = DATA / f"early-{st}.json"
+            # A hand-saved file beats an aggregate only while it is still the fresher
+            # of the two. Minnesota's was saved on 2026-10-16 and kept overwriting the
+            # UF Election Lab's copy every hour for a week: the board showed 202,252 for
+            # Minnesota while the Lab had 419,189, because a primary source was allowed
+            # to win on being primary alone rather than on being current.
+            if out.exists():
+                try:
+                    have = json.loads(out.read_text())
+                except Exception:
+                    have = {}
+                # Normalise before comparing. These sources stamp dates in whatever
+                # format they like, and "10/23/2026" > "2026-10-16" is false as a string
+                # comparison - "1" sorts before "2" - so a fresher file lost to a
+                # week-old one on the first character.
+                cur = _iso(have.get("as_of") or have.get("through"))
+                if cur and cur > _iso(day):
+                    print(f"{st}: holding — {out.name} is dated {cur}, the hand file is "
+                          f"{day}. A saved file only wins while it is the fresher one.",
+                          file=sys.stderr)
+                    continue
             out.write_text(json.dumps(payload, indent=1))
             t = payload["state_totals"]
             print(f"{st} ok: {len(payload['counties'])} counties, as of {day}  <- {path.name}")

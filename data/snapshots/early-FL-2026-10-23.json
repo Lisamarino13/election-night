@@ -1,0 +1,1588 @@
+{
+ "as_of": "10/23/2026",
+ "attribution": {
+  "aggregator": "UF Election Lab (election.lab.ufl.edu)",
+  "note": "Some Florida statistics are obtained from county websites that may report more recent and higher numbers than the Florida Division of Elections reports.",
+  "upstream": "https://countyfilesvbm-ev.floridados.gov/VoteByMailEarlyVotingReports/PublicStats"
+ },
+ "counties": {
+  "Alachua": {
+   "early_in_person": {
+    "D": 7188,
+    "NPA": 2231,
+    "O": 0,
+    "R": 3761,
+    "total": 13180
+   },
+   "outstanding": {
+    "D": 8407,
+    "NPA": 3159,
+    "O": 0,
+    "R": 3030,
+    "total": 14596
+   },
+   "returned": {
+    "D": 8095,
+    "NPA": 2311,
+    "O": 0,
+    "R": 2928,
+    "total": 13334
+   }
+  },
+  "Baker": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 172,
+    "NPA": 66,
+    "O": 0,
+    "R": 435,
+    "total": 673
+   },
+   "returned": {
+    "D": 133,
+    "NPA": 47,
+    "O": 0,
+    "R": 418,
+    "total": 598
+   }
+  },
+  "Bay": {
+   "early_in_person": {
+    "D": 2334,
+    "NPA": 1417,
+    "O": 0,
+    "R": 7012,
+    "total": 10763
+   },
+   "outstanding": {
+    "D": 2148,
+    "NPA": 1472,
+    "O": 0,
+    "R": 3652,
+    "total": 7272
+   },
+   "returned": {
+    "D": 2133,
+    "NPA": 1133,
+    "O": 0,
+    "R": 3564,
+    "total": 6830
+   }
+  },
+  "Bradford": {
+   "early_in_person": {
+    "D": 240,
+    "NPA": 103,
+    "O": 0,
+    "R": 775,
+    "total": 1118
+   },
+   "outstanding": {
+    "D": 227,
+    "NPA": 50,
+    "O": 0,
+    "R": 293,
+    "total": 570
+   },
+   "returned": {
+    "D": 246,
+    "NPA": 69,
+    "O": 0,
+    "R": 362,
+    "total": 677
+   }
+  },
+  "Brevard": {
+   "early_in_person": {
+    "D": 10916,
+    "NPA": 7307,
+    "O": 0,
+    "R": 19774,
+    "total": 37997
+   },
+   "outstanding": {
+    "D": 13636,
+    "NPA": 8314,
+    "O": 0,
+    "R": 12280,
+    "total": 34230
+   },
+   "returned": {
+    "D": 16640,
+    "NPA": 9055,
+    "O": 0,
+    "R": 17109,
+    "total": 42804
+   }
+  },
+  "Broward": {
+   "early_in_person": {
+    "D": 39828,
+    "NPA": 15760,
+    "O": 0,
+    "R": 18132,
+    "total": 73720
+   },
+   "outstanding": {
+    "D": 63742,
+    "NPA": 31706,
+    "O": 0,
+    "R": 21481,
+    "total": 116929
+   },
+   "returned": {
+    "D": 43524,
+    "NPA": 14662,
+    "O": 0,
+    "R": 14283,
+    "total": 72469
+   }
+  },
+  "Calhoun": {
+   "early_in_person": {
+    "D": 89,
+    "NPA": 14,
+    "O": 0,
+    "R": 282,
+    "total": 385
+   },
+   "outstanding": {
+    "D": 123,
+    "NPA": 24,
+    "O": 0,
+    "R": 218,
+    "total": 365
+   },
+   "returned": {
+    "D": 115,
+    "NPA": 15,
+    "O": 0,
+    "R": 221,
+    "total": 351
+   }
+  },
+  "Charlotte": {
+   "early_in_person": {
+    "D": 2790,
+    "NPA": 2892,
+    "O": 0,
+    "R": 9312,
+    "total": 14994
+   },
+   "outstanding": {
+    "D": 3570,
+    "NPA": 3267,
+    "O": 0,
+    "R": 5623,
+    "total": 12460
+   },
+   "returned": {
+    "D": 7369,
+    "NPA": 4969,
+    "O": 0,
+    "R": 9875,
+    "total": 22213
+   }
+  },
+  "Citrus": {
+   "early_in_person": {
+    "D": 1167,
+    "NPA": 930,
+    "O": 0,
+    "R": 3974,
+    "total": 6071
+   },
+   "outstanding": {
+    "D": 2539,
+    "NPA": 1990,
+    "O": 0,
+    "R": 4230,
+    "total": 8759
+   },
+   "returned": {
+    "D": 4195,
+    "NPA": 2711,
+    "O": 0,
+    "R": 6537,
+    "total": 13443
+   }
+  },
+  "Clay": {
+   "early_in_person": {
+    "D": 652,
+    "NPA": 407,
+    "O": 0,
+    "R": 1809,
+    "total": 2868
+   },
+   "outstanding": {
+    "D": 3019,
+    "NPA": 2010,
+    "O": 0,
+    "R": 4016,
+    "total": 9045
+   },
+   "returned": {
+    "D": 2670,
+    "NPA": 1614,
+    "O": 0,
+    "R": 4183,
+    "total": 8467
+   }
+  },
+  "Collier": {
+   "early_in_person": {
+    "D": 2524,
+    "NPA": 1921,
+    "O": 0,
+    "R": 7030,
+    "total": 11475
+   },
+   "outstanding": {
+    "D": 6662,
+    "NPA": 6307,
+    "O": 0,
+    "R": 13630,
+    "total": 26599
+   },
+   "returned": {
+    "D": 9298,
+    "NPA": 7161,
+    "O": 0,
+    "R": 18151,
+    "total": 34610
+   }
+  },
+  "Columbia": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 705,
+    "NPA": 336,
+    "O": 0,
+    "R": 932,
+    "total": 1973
+   },
+   "returned": {
+    "D": 843,
+    "NPA": 325,
+    "O": 0,
+    "R": 1254,
+    "total": 2422
+   }
+  },
+  "DeSoto": {
+   "early_in_person": {
+    "D": 219,
+    "NPA": 85,
+    "O": 0,
+    "R": 444,
+    "total": 748
+   },
+   "outstanding": {
+    "D": 228,
+    "NPA": 145,
+    "O": 0,
+    "R": 325,
+    "total": 698
+   },
+   "returned": {
+    "D": 283,
+    "NPA": 141,
+    "O": 0,
+    "R": 353,
+    "total": 777
+   }
+  },
+  "Dixie": {
+   "early_in_person": {
+    "D": 58,
+    "NPA": 50,
+    "O": 0,
+    "R": 302,
+    "total": 410
+   },
+   "outstanding": {
+    "D": 152,
+    "NPA": 79,
+    "O": 0,
+    "R": 453,
+    "total": 684
+   },
+   "returned": {
+    "D": 138,
+    "NPA": 68,
+    "O": 0,
+    "R": 409,
+    "total": 615
+   }
+  },
+  "Duval": {
+   "early_in_person": {
+    "D": 22304,
+    "NPA": 6876,
+    "O": 0,
+    "R": 18061,
+    "total": 47241
+   },
+   "outstanding": {
+    "D": 12118,
+    "NPA": 5240,
+    "O": 0,
+    "R": 7536,
+    "total": 24894
+   },
+   "returned": {
+    "D": 11327,
+    "NPA": 3879,
+    "O": 0,
+    "R": 8146,
+    "total": 23352
+   }
+  },
+  "Escambia": {
+   "early_in_person": {
+    "D": 4624,
+    "NPA": 1968,
+    "O": 0,
+    "R": 7698,
+    "total": 14290
+   },
+   "outstanding": {
+    "D": 6762,
+    "NPA": 3118,
+    "O": 0,
+    "R": 6651,
+    "total": 16531
+   },
+   "returned": {
+    "D": 4283,
+    "NPA": 1684,
+    "O": 0,
+    "R": 4653,
+    "total": 10620
+   }
+  },
+  "Flagler": {
+   "early_in_person": {
+    "D": 2493,
+    "NPA": 1903,
+    "O": 0,
+    "R": 6464,
+    "total": 10860
+   },
+   "outstanding": {
+    "D": 2894,
+    "NPA": 1649,
+    "O": 0,
+    "R": 2912,
+    "total": 7455
+   },
+   "returned": {
+    "D": 4556,
+    "NPA": 2187,
+    "O": 0,
+    "R": 4403,
+    "total": 11146
+   }
+  },
+  "Franklin": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 213,
+    "NPA": 88,
+    "O": 0,
+    "R": 191,
+    "total": 492
+   },
+   "returned": {
+    "D": 212,
+    "NPA": 92,
+    "O": 0,
+    "R": 244,
+    "total": 548
+   }
+  },
+  "Gadsden": {
+   "early_in_person": {
+    "D": 1313,
+    "NPA": 153,
+    "O": 0,
+    "R": 511,
+    "total": 1977
+   },
+   "outstanding": {
+    "D": 1319,
+    "NPA": 128,
+    "O": 0,
+    "R": 221,
+    "total": 1668
+   },
+   "returned": {
+    "D": 1209,
+    "NPA": 109,
+    "O": 0,
+    "R": 257,
+    "total": 1575
+   }
+  },
+  "Gilchrist": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 153,
+    "NPA": 93,
+    "O": 0,
+    "R": 417,
+    "total": 663
+   },
+   "returned": {
+    "D": 187,
+    "NPA": 72,
+    "O": 0,
+    "R": 431,
+    "total": 690
+   }
+  },
+  "Glades": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 131,
+    "NPA": 75,
+    "O": 0,
+    "R": 231,
+    "total": 437
+   },
+   "returned": {
+    "D": 134,
+    "NPA": 55,
+    "O": 0,
+    "R": 239,
+    "total": 428
+   }
+  },
+  "Gulf": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 179,
+    "NPA": 87,
+    "O": 0,
+    "R": 320,
+    "total": 586
+   },
+   "returned": {
+    "D": 173,
+    "NPA": 84,
+    "O": 0,
+    "R": 350,
+    "total": 607
+   }
+  },
+  "Hamilton": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 160,
+    "NPA": 38,
+    "O": 0,
+    "R": 181,
+    "total": 379
+   },
+   "returned": {
+    "D": 158,
+    "NPA": 27,
+    "O": 0,
+    "R": 213,
+    "total": 398
+   }
+  },
+  "Hardee": {
+   "early_in_person": {
+    "D": 103,
+    "NPA": 32,
+    "O": 0,
+    "R": 319,
+    "total": 454
+   },
+   "outstanding": {
+    "D": 98,
+    "NPA": 56,
+    "O": 0,
+    "R": 170,
+    "total": 324
+   },
+   "returned": {
+    "D": 118,
+    "NPA": 36,
+    "O": 0,
+    "R": 170,
+    "total": 324
+   }
+  },
+  "Hendry": {
+   "early_in_person": {
+    "D": 492,
+    "NPA": 152,
+    "O": 0,
+    "R": 773,
+    "total": 1417
+   },
+   "outstanding": {
+    "D": 263,
+    "NPA": 126,
+    "O": 0,
+    "R": 367,
+    "total": 756
+   },
+   "returned": {
+    "D": 307,
+    "NPA": 94,
+    "O": 0,
+    "R": 358,
+    "total": 759
+   }
+  },
+  "Hernando": {
+   "early_in_person": {
+    "D": 1143,
+    "NPA": 766,
+    "O": 0,
+    "R": 2587,
+    "total": 4496
+   },
+   "outstanding": {
+    "D": 3775,
+    "NPA": 2492,
+    "O": 0,
+    "R": 4331,
+    "total": 10598
+   },
+   "returned": {
+    "D": 5230,
+    "NPA": 2668,
+    "O": 0,
+    "R": 5446,
+    "total": 13344
+   }
+  },
+  "Highlands": {
+   "early_in_person": {
+    "D": 702,
+    "NPA": 489,
+    "O": 0,
+    "R": 2069,
+    "total": 3260
+   },
+   "outstanding": {
+    "D": 1140,
+    "NPA": 652,
+    "O": 0,
+    "R": 1393,
+    "total": 3185
+   },
+   "returned": {
+    "D": 1891,
+    "NPA": 918,
+    "O": 0,
+    "R": 2023,
+    "total": 4832
+   }
+  },
+  "Hillsborough": {
+   "early_in_person": {
+    "D": 22248,
+    "NPA": 11121,
+    "O": 0,
+    "R": 22091,
+    "total": 55460
+   },
+   "outstanding": {
+    "D": 35714,
+    "NPA": 21096,
+    "O": 0,
+    "R": 25587,
+    "total": 82397
+   },
+   "returned": {
+    "D": 38498,
+    "NPA": 18895,
+    "O": 0,
+    "R": 29191,
+    "total": 86584
+   }
+  },
+  "Holmes": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 92,
+    "NPA": 36,
+    "O": 0,
+    "R": 319,
+    "total": 447
+   },
+   "returned": {
+    "D": 105,
+    "NPA": 33,
+    "O": 0,
+    "R": 287,
+    "total": 425
+   }
+  },
+  "Indian River": {
+   "early_in_person": {
+    "D": 2642,
+    "NPA": 1988,
+    "O": 0,
+    "R": 6901,
+    "total": 11531
+   },
+   "outstanding": {
+    "D": 3277,
+    "NPA": 2276,
+    "O": 0,
+    "R": 4577,
+    "total": 10130
+   },
+   "returned": {
+    "D": 5713,
+    "NPA": 3224,
+    "O": 0,
+    "R": 6906,
+    "total": 15843
+   }
+  },
+  "Jackson": {
+   "early_in_person": {
+    "D": 301,
+    "NPA": 67,
+    "O": 0,
+    "R": 622,
+    "total": 990
+   },
+   "outstanding": {
+    "D": 639,
+    "NPA": 109,
+    "O": 0,
+    "R": 735,
+    "total": 1483
+   },
+   "returned": {
+    "D": 616,
+    "NPA": 88,
+    "O": 0,
+    "R": 678,
+    "total": 1382
+   }
+  },
+  "Jefferson": {
+   "early_in_person": {
+    "D": 345,
+    "NPA": 110,
+    "O": 0,
+    "R": 504,
+    "total": 959
+   },
+   "outstanding": {
+    "D": 317,
+    "NPA": 65,
+    "O": 0,
+    "R": 165,
+    "total": 547
+   },
+   "returned": {
+    "D": 300,
+    "NPA": 55,
+    "O": 0,
+    "R": 148,
+    "total": 503
+   }
+  },
+  "Lafayette": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 32,
+    "NPA": 6,
+    "O": 0,
+    "R": 109,
+    "total": 147
+   },
+   "returned": {
+    "D": 32,
+    "NPA": 5,
+    "O": 0,
+    "R": 106,
+    "total": 143
+   }
+  },
+  "Lake": {
+   "early_in_person": {
+    "D": 6519,
+    "NPA": 4025,
+    "O": 0,
+    "R": 10500,
+    "total": 21044
+   },
+   "outstanding": {
+    "D": 5832,
+    "NPA": 3756,
+    "O": 0,
+    "R": 5774,
+    "total": 15362
+   },
+   "returned": {
+    "D": 7941,
+    "NPA": 4358,
+    "O": 0,
+    "R": 7667,
+    "total": 19966
+   }
+  },
+  "Lee": {
+   "early_in_person": {
+    "D": 7713,
+    "NPA": 6887,
+    "O": 0,
+    "R": 18530,
+    "total": 33130
+   },
+   "outstanding": {
+    "D": 16797,
+    "NPA": 16262,
+    "O": 0,
+    "R": 27778,
+    "total": 60837
+   },
+   "returned": {
+    "D": 25127,
+    "NPA": 18812,
+    "O": 0,
+    "R": 39278,
+    "total": 83217
+   }
+  },
+  "Leon": {
+   "early_in_person": {
+    "D": 6354,
+    "NPA": 1834,
+    "O": 0,
+    "R": 3505,
+    "total": 11693
+   },
+   "outstanding": {
+    "D": 10574,
+    "NPA": 3271,
+    "O": 0,
+    "R": 4360,
+    "total": 18205
+   },
+   "returned": {
+    "D": 9867,
+    "NPA": 2453,
+    "O": 0,
+    "R": 4168,
+    "total": 16488
+   }
+  },
+  "Levy": {
+   "early_in_person": {
+    "D": 178,
+    "NPA": 88,
+    "O": 0,
+    "R": 662,
+    "total": 928
+   },
+   "outstanding": {
+    "D": 695,
+    "NPA": 265,
+    "O": 0,
+    "R": 1127,
+    "total": 2087
+   },
+   "returned": {
+    "D": 793,
+    "NPA": 319,
+    "O": 0,
+    "R": 1421,
+    "total": 2533
+   }
+  },
+  "Liberty": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 51,
+    "NPA": 10,
+    "O": 0,
+    "R": 104,
+    "total": 165
+   },
+   "returned": {
+    "D": 56,
+    "NPA": 2,
+    "O": 0,
+    "R": 73,
+    "total": 131
+   }
+  },
+  "Madison": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 229,
+    "NPA": 47,
+    "O": 0,
+    "R": 160,
+    "total": 436
+   },
+   "returned": {
+    "D": 234,
+    "NPA": 48,
+    "O": 0,
+    "R": 189,
+    "total": 471
+   }
+  },
+  "Manatee": {
+   "early_in_person": {
+    "D": 5075,
+    "NPA": 3671,
+    "O": 0,
+    "R": 10642,
+    "total": 19388
+   },
+   "outstanding": {
+    "D": 9235,
+    "NPA": 6704,
+    "O": 0,
+    "R": 10998,
+    "total": 26937
+   },
+   "returned": {
+    "D": 12505,
+    "NPA": 6582,
+    "O": 0,
+    "R": 13408,
+    "total": 32495
+   }
+  },
+  "Marion": {
+   "early_in_person": {
+    "D": 3136,
+    "NPA": 1804,
+    "O": 0,
+    "R": 6402,
+    "total": 11342
+   },
+   "outstanding": {
+    "D": 5646,
+    "NPA": 2735,
+    "O": 0,
+    "R": 5388,
+    "total": 13769
+   },
+   "returned": {
+    "D": 8855,
+    "NPA": 3657,
+    "O": 0,
+    "R": 8383,
+    "total": 20895
+   }
+  },
+  "Martin": {
+   "early_in_person": {
+    "D": 1954,
+    "NPA": 1515,
+    "O": 0,
+    "R": 5379,
+    "total": 8848
+   },
+   "outstanding": {
+    "D": 3154,
+    "NPA": 1966,
+    "O": 0,
+    "R": 3919,
+    "total": 9039
+   },
+   "returned": {
+    "D": 4458,
+    "NPA": 2236,
+    "O": 0,
+    "R": 5424,
+    "total": 12118
+   }
+  },
+  "Miami-Dade": {
+   "early_in_person": {
+    "D": 29892,
+    "NPA": 18624,
+    "O": 0,
+    "R": 30433,
+    "total": 78949
+   },
+   "outstanding": {
+    "D": 54216,
+    "NPA": 39783,
+    "O": 0,
+    "R": 36094,
+    "total": 130093
+   },
+   "returned": {
+    "D": 52053,
+    "NPA": 32957,
+    "O": 0,
+    "R": 38359,
+    "total": 123369
+   }
+  },
+  "Monroe": {
+   "early_in_person": {
+    "D": 1197,
+    "NPA": 691,
+    "O": 0,
+    "R": 1858,
+    "total": 3746
+   },
+   "outstanding": {
+    "D": 2250,
+    "NPA": 1416,
+    "O": 0,
+    "R": 2774,
+    "total": 6440
+   },
+   "returned": {
+    "D": 2495,
+    "NPA": 1005,
+    "O": 0,
+    "R": 2618,
+    "total": 6118
+   }
+  },
+  "Nassau": {
+   "early_in_person": {
+    "D": 1009,
+    "NPA": 719,
+    "O": 0,
+    "R": 3041,
+    "total": 4769
+   },
+   "outstanding": {
+    "D": 1620,
+    "NPA": 1225,
+    "O": 0,
+    "R": 2467,
+    "total": 5312
+   },
+   "returned": {
+    "D": 1729,
+    "NPA": 1082,
+    "O": 0,
+    "R": 2554,
+    "total": 5365
+   }
+  },
+  "Okaloosa": {
+   "early_in_person": {
+    "D": 2201,
+    "NPA": 1557,
+    "O": 0,
+    "R": 7624,
+    "total": 11382
+   },
+   "outstanding": {
+    "D": 2725,
+    "NPA": 2096,
+    "O": 0,
+    "R": 4200,
+    "total": 9021
+   },
+   "returned": {
+    "D": 1740,
+    "NPA": 980,
+    "O": 0,
+    "R": 2521,
+    "total": 5241
+   }
+  },
+  "Okeechobee": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 295,
+    "NPA": 135,
+    "O": 0,
+    "R": 391,
+    "total": 821
+   },
+   "returned": {
+    "D": 407,
+    "NPA": 136,
+    "O": 0,
+    "R": 578,
+    "total": 1121
+   }
+  },
+  "Orange": {
+   "early_in_person": {
+    "D": 27997,
+    "NPA": 12310,
+    "O": 0,
+    "R": 15958,
+    "total": 56265
+   },
+   "outstanding": {
+    "D": 30908,
+    "NPA": 18242,
+    "O": 0,
+    "R": 15613,
+    "total": 64763
+   },
+   "returned": {
+    "D": 31206,
+    "NPA": 14348,
+    "O": 0,
+    "R": 17077,
+    "total": 62631
+   }
+  },
+  "Osceola": {
+   "early_in_person": {
+    "D": 5827,
+    "NPA": 2902,
+    "O": 0,
+    "R": 4030,
+    "total": 12759
+   },
+   "outstanding": {
+    "D": 8257,
+    "NPA": 5683,
+    "O": 0,
+    "R": 4526,
+    "total": 18466
+   },
+   "returned": {
+    "D": 9668,
+    "NPA": 5121,
+    "O": 0,
+    "R": 5354,
+    "total": 20143
+   }
+  },
+  "Palm Beach": {
+   "early_in_person": {
+    "D": 23370,
+    "NPA": 12420,
+    "O": 0,
+    "R": 19479,
+    "total": 55269
+   },
+   "outstanding": {
+    "D": 45224,
+    "NPA": 25100,
+    "O": 0,
+    "R": 24987,
+    "total": 95311
+   },
+   "returned": {
+    "D": 54090,
+    "NPA": 21250,
+    "O": 0,
+    "R": 25137,
+    "total": 100477
+   }
+  },
+  "Pasco": {
+   "early_in_person": {
+    "D": 7776,
+    "NPA": 5639,
+    "O": 0,
+    "R": 13416,
+    "total": 26831
+   },
+   "outstanding": {
+    "D": 10419,
+    "NPA": 7449,
+    "O": 0,
+    "R": 8725,
+    "total": 26593
+   },
+   "returned": {
+    "D": 14119,
+    "NPA": 7969,
+    "O": 0,
+    "R": 12317,
+    "total": 34405
+   }
+  },
+  "Pinellas": {
+   "early_in_person": {
+    "D": 7587,
+    "NPA": 4663,
+    "O": 0,
+    "R": 9191,
+    "total": 21441
+   },
+   "outstanding": {
+    "D": 43835,
+    "NPA": 27855,
+    "O": 0,
+    "R": 37155,
+    "total": 108845
+   },
+   "returned": {
+    "D": 43681,
+    "NPA": 23266,
+    "O": 0,
+    "R": 39488,
+    "total": 106435
+   }
+  },
+  "Polk": {
+   "early_in_person": {
+    "D": 9482,
+    "NPA": 4589,
+    "O": 0,
+    "R": 10678,
+    "total": 24749
+   },
+   "outstanding": {
+    "D": 12600,
+    "NPA": 7120,
+    "O": 0,
+    "R": 10526,
+    "total": 30246
+   },
+   "returned": {
+    "D": 15016,
+    "NPA": 6592,
+    "O": 0,
+    "R": 14502,
+    "total": 36110
+   }
+  },
+  "Putnam": {
+   "early_in_person": {
+    "D": 1136,
+    "NPA": 424,
+    "O": 0,
+    "R": 2600,
+    "total": 4160
+   },
+   "outstanding": {
+    "D": 785,
+    "NPA": 278,
+    "O": 0,
+    "R": 877,
+    "total": 1940
+   },
+   "returned": {
+    "D": 847,
+    "NPA": 278,
+    "O": 0,
+    "R": 1031,
+    "total": 2156
+   }
+  },
+  "Santa Rosa": {
+   "early_in_person": {
+    "D": 1794,
+    "NPA": 1194,
+    "O": 0,
+    "R": 6011,
+    "total": 8999
+   },
+   "outstanding": {
+    "D": 2018,
+    "NPA": 1334,
+    "O": 0,
+    "R": 3199,
+    "total": 6551
+   },
+   "returned": {
+    "D": 1265,
+    "NPA": 593,
+    "O": 0,
+    "R": 1905,
+    "total": 3763
+   }
+  },
+  "Sarasota": {
+   "early_in_person": {
+    "D": 6025,
+    "NPA": 4767,
+    "O": 0,
+    "R": 13620,
+    "total": 24412
+   },
+   "outstanding": {
+    "D": 14022,
+    "NPA": 8775,
+    "O": 0,
+    "R": 13925,
+    "total": 36722
+   },
+   "returned": {
+    "D": 23130,
+    "NPA": 10703,
+    "O": 0,
+    "R": 19492,
+    "total": 53325
+   }
+  },
+  "Seminole": {
+   "early_in_person": {
+    "D": 9030,
+    "NPA": 5107,
+    "O": 0,
+    "R": 9836,
+    "total": 23973
+   },
+   "outstanding": {
+    "D": 10708,
+    "NPA": 6637,
+    "O": 0,
+    "R": 7465,
+    "total": 24810
+   },
+   "returned": {
+    "D": 11288,
+    "NPA": 5745,
+    "O": 0,
+    "R": 8734,
+    "total": 25767
+   }
+  },
+  "St. Johns": {
+   "early_in_person": {
+    "D": 4652,
+    "NPA": 2914,
+    "O": 0,
+    "R": 10419,
+    "total": 17985
+   },
+   "outstanding": {
+    "D": 5397,
+    "NPA": 3315,
+    "O": 0,
+    "R": 5387,
+    "total": 14099
+   },
+   "returned": {
+    "D": 5725,
+    "NPA": 2641,
+    "O": 0,
+    "R": 5481,
+    "total": 13847
+   }
+  },
+  "St. Lucie": {
+   "early_in_person": {
+    "D": 7220,
+    "NPA": 3699,
+    "O": 0,
+    "R": 8597,
+    "total": 19516
+   },
+   "outstanding": {
+    "D": 8670,
+    "NPA": 4672,
+    "O": 0,
+    "R": 5487,
+    "total": 18829
+   },
+   "returned": {
+    "D": 9691,
+    "NPA": 4563,
+    "O": 0,
+    "R": 7225,
+    "total": 21479
+   }
+  },
+  "Sumter": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 4571,
+    "NPA": 3486,
+    "O": 0,
+    "R": 7707,
+    "total": 15764
+   },
+   "returned": {
+    "D": 6287,
+    "NPA": 3735,
+    "O": 0,
+    "R": 8795,
+    "total": 18817
+   }
+  },
+  "Suwannee": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 413,
+    "NPA": 193,
+    "O": 0,
+    "R": 812,
+    "total": 1418
+   },
+   "returned": {
+    "D": 441,
+    "NPA": 152,
+    "O": 0,
+    "R": 838,
+    "total": 1431
+   }
+  },
+  "Taylor": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 198,
+    "NPA": 38,
+    "O": 0,
+    "R": 342,
+    "total": 578
+   },
+   "returned": {
+    "D": 186,
+    "NPA": 43,
+    "O": 0,
+    "R": 277,
+    "total": 506
+   }
+  },
+  "Union": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 69,
+    "NPA": 18,
+    "O": 0,
+    "R": 133,
+    "total": 220
+   },
+   "returned": {
+    "D": 62,
+    "NPA": 11,
+    "O": 0,
+    "R": 100,
+    "total": 173
+   }
+  },
+  "Volusia": {
+   "early_in_person": {
+    "D": 8351,
+    "NPA": 5192,
+    "O": 0,
+    "R": 12859,
+    "total": 26402
+   },
+   "outstanding": {
+    "D": 13748,
+    "NPA": 9347,
+    "O": 0,
+    "R": 13019,
+    "total": 36114
+   },
+   "returned": {
+    "D": 15987,
+    "NPA": 8946,
+    "O": 0,
+    "R": 15381,
+    "total": 40314
+   }
+  },
+  "Wakulla": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 445,
+    "NPA": 174,
+    "O": 0,
+    "R": 548,
+    "total": 1167
+   },
+   "returned": {
+    "D": 440,
+    "NPA": 135,
+    "O": 0,
+    "R": 510,
+    "total": 1085
+   }
+  },
+  "Walton": {
+   "early_in_person": {
+    "D": 639,
+    "NPA": 532,
+    "O": 0,
+    "R": 3329,
+    "total": 4500
+   },
+   "outstanding": {
+    "D": 821,
+    "NPA": 590,
+    "O": 0,
+    "R": 1872,
+    "total": 3283
+   },
+   "returned": {
+    "D": 693,
+    "NPA": 356,
+    "O": 0,
+    "R": 1329,
+    "total": 2378
+   }
+  },
+  "Washington": {
+   "early_in_person": {
+    "D": 0,
+    "NPA": 0,
+    "O": 0,
+    "R": 0,
+    "total": 0
+   },
+   "outstanding": {
+    "D": 188,
+    "NPA": 44,
+    "O": 0,
+    "R": 381,
+    "total": 613
+   },
+   "returned": {
+    "D": 166,
+    "NPA": 52,
+    "O": 0,
+    "R": 384,
+    "total": 602
+   }
+  }
+ },
+ "election": "2026 General",
+ "fallback": true,
+ "fetched": "2026-10-23T16:30:13+00:00",
+ "in_person": true,
+ "in_person_reported": true,
+ "notes": {
+  "fallback": "the direct state parse went stale or is unreachable, so this is the UF Election Lab's copy. It lacks the receipt-method detail the state file carries; the direct parse resumes automatically when the state is reachable again",
+  "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly"
+ },
+ "outstanding_available": false,
+ "party_available": true,
+ "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/FL_county.csv",
+ "state": "FL",
+ "state_totals": {
+  "early_in_person": {
+   "D": 312829,
+   "NPA": 166509,
+   "O": 0,
+   "R": 379806,
+   "total": 859144
+  },
+  "outstanding": {
+   "D": 501221,
+   "NPA": 306376,
+   "O": 0,
+   "R": 395231,
+   "total": 1202828
+  },
+  "returned": {
+   "D": 542979,
+   "NPA": 269612,
+   "O": 0,
+   "R": 455894,
+   "total": 1268485
+  }
+ },
+ "unit": "county"
+}

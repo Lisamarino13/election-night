@@ -2017,12 +2017,13 @@
   }
  },
  "election": "2026 General",
- "fetched": "2026-10-23T16:08:26+00:00",
+ "fetched": "2026-10-23T16:28:57+00:00",
  "in_person": true,
  "mixed_days": true,
  "notes": {
+  "fell": "A figure is lower than this board last recorded: returned was 1,130,457, now 1,035,495. Ballots already cast do not un-cast, so the source has restated something or served an older file. The number shown is the one the source gave.",
   "mixed_days": "Florida publishes these files on separate schedules and they are a day apart right now, so the total early vote spans two: in_person compiled 10/22/2026, outstanding compiled 10/21/2026, returned compiled 10/21/2026. The figure is dated by the OLDEST of them, which is the day every part of it is good through.",
-  "stale_fetch": "The source served an older file this run (2026-10-21 against the 2026-10-22 already recorded), so the figures it carried were lower. The newer figures are kept: returned held at 1,130,457"
+  "misdated": "Filed as 2026-10-21, but these streams were compiled on another day and were never figures for it: in_person (compiled 2026-10-22); early_in_person (compiled 2026-10-22). The source serves no history, so they are shown as unknown rather than as another day's count."
  },
  "outstanding_available": true,
  "state": "FL",
@@ -2032,14 +2033,14 @@
    "NPA": 92842,
    "O": 13514,
    "R": 234959,
-   "total": 552198
+   "total": null
   },
   "in_person": {
    "D": 210883,
    "NPA": 92842,
    "O": 13514,
    "R": 234959,
-   "total": 552198
+   "total": null
   },
   "outstanding": {
    "D": 584423,
@@ -2053,7 +2054,7 @@
    "NPA": 194385,
    "O": 25073,
    "R": 373651,
-   "total": 1130457
+   "total": 1035495
   }
  },
  "unit": "county"

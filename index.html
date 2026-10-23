@@ -718,6 +718,7 @@ async function loadEarly(){
                   srcNote: (j.attribution && j.attribution.note) || "",
                   mismatchNote: (j.notes && j.notes.mismatch) || "",
                   withdrawnNote: (j.notes && j.notes.withdrawn) || "",
+                  mixedDaysNote: (j.notes && j.notes.mixed_days) || "",
                   srcFrom: (j.attribution && j.attribution.aggregator) || "",
                   srcUp: (j.attribution && j.attribution.upstream) || "",
                   partyAvailable: j.party_available !== false,
@@ -746,9 +747,11 @@ function srcLine(e){
   // card: the number simply gets smaller. It is called out, not buried in a payload.
   const wd = e.withdrawnNote
     ? `<div class="srcnote warn"><b>A figure was withdrawn by the source:</b> ${e.withdrawnNote}</div>` : "";
-  if(!e.srcNote) return mm + wd;
+  const md = e.mixedDaysNote
+    ? `<div class="srcnote warn"><b>This total spans two publication days:</b> ${e.mixedDaysNote}</div>` : "";
+  if(!e.srcNote) return mm + wd + md;
   const who = e.srcFrom ? `${e.srcFrom}${e.srcUp?" &larr; "+e.srcUp:""}` : "";
-  return mm + wd + `<div class="srcnote"><b>How this is counted:</b> ${e.srcNote}
+  return mm + wd + md + `<div class="srcnote"><b>How this is counted:</b> ${e.srcNote}
     ${who?`<span class="srcwho">${who}</span>`:""}</div>`;
 }
 

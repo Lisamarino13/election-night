@@ -37,6 +37,33 @@ def committed(path):
         return None
 
 
+def stream_day(payload, key):
+    """The date the source gave for THIS stream, where it gives one per stream."""
+    comp = payload.get("compiled")
+    if isinstance(comp, dict):
+        for k in (key, "returned", "outstanding"):
+            if k in comp:
+                return _day(comp[k])
+    return _day(payload.get("as_of") or payload.get("through"))
+
+
+def _day(s):
+    import re
+    from datetime import datetime
+    s = str(s or "").strip()
+    for pat, fmt in ((r"\d{4}-\d{2}-\d{2}", "%Y-%m-%d"),
+                     (r"\d{1,2}/\d{1,2}/\d{4}", "%m/%d/%Y"),
+                     (r"\d{1,2}-\d{1,2}-\d{4}", "%m-%d-%Y"),
+                     (r"\d{1,2}-\d{1,2}-\d{2}(?!\d)", "%m-%d-%y")):
+        m = re.search(pat, s)
+        if m:
+            try:
+                return datetime.strptime(m.group(0), fmt).date().isoformat()
+            except ValueError:
+                continue
+    return None
+
+
 def val(block, key):
     v = (block or {}).get(key)
     if isinstance(v, dict):
@@ -130,6 +157,31 @@ def main():
             if nv < ov:
                 fell.append((key, ov, nv))
         if not fell:
+            continue
+        # A withdrawn field and a STALE FETCH both look like a number that fell, and
+        # they need opposite answers. Florida serves its mail and in-person files from a
+        # CDN that can hand back yesterday's copy of one of them; that is not a state
+        # un-counting ballots, it is us holding an older file, and the right response is
+        # to keep the newer figure already recorded rather than erase it.
+        #
+        # The source's own date for the stream decides which it is. Older date -> stale
+        # fetch, keep what we had. Same or newer date with a smaller number -> the source
+        # really did restate or withdraw it, and that becomes unknown.
+        od, nd = stream_day(old, fell[0][0]), stream_day(new, fell[0][0])
+        if od and nd and nd < od:
+            for key, ov, nv in fell:
+                if isinstance(n.get(key), dict):
+                    n[key]["total"] = ov
+                else:
+                    n[key] = ov
+            new.setdefault("notes", {})["stale_fetch"] = (
+                f"The source served an older file this run ({nd} against the {od} already "
+                f"recorded), so the figures it carried were lower. The newer figures are "
+                f"kept: " + "; ".join(f"{k} held at {ov:,}" for k, ov, _ in fell))
+            pathlib.Path(f).write_text(json.dumps(new, indent=1) + "\n")
+            for key, ov, nv in fell:
+                print(f"  {st}: {key} came back {nv:,} from an older file ({nd}); "
+                      f"holding the {od} figure {ov:,}")
             continue
         hits += 1
         for key, ov, nv in fell:

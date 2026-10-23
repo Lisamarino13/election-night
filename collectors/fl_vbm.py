@@ -158,6 +158,19 @@ def main():
     # reported count, not derived. Say so in the payload: NC sets this false because it
     # genuinely does not publish one, and the two cases must stay distinguishable.
     payload["outstanding_available"] = True
+    # The streams can be a day apart, and the board adds them together into a total
+    # early vote. The comment above says no arithmetic combines them; that stopped being
+    # true when the total was added, so when they disagree the card has to say the total
+    # spans two publication days rather than present it as one moment.
+    days = {k: _day(v) for k, v in data["compiled"].items() if v}
+    if len(set(days.values())) > 1:
+        payload.setdefault("notes", {})["mixed_days"] = (
+            "Florida publishes these files on separate schedules and they are a day "
+            "apart right now, so the total early vote spans two: "
+            + ", ".join(f"{k} compiled {v}" for k, v in sorted(days.items()))
+            + ". The figure is dated by the OLDEST of them, which is the day every part "
+              "of it is good through.")
+        payload["mixed_days"] = True
     payload["state_totals"] = {"outstanding": data["outstanding"]["State Totals"],
                                "returned": data["returned"]["State Totals"]}
     if "in_person" in data:

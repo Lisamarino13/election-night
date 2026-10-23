@@ -117,12 +117,44 @@ def connect(path=DB):
     return con
 
 
+def _parse_day(s):
+    """ISO date out of any stamp these sources use, or None."""
+    import re as _re
+    from datetime import datetime as _dt
+    s = str(s or "").strip()
+    for pat, fmt in ((r"\d{4}-\d{2}-\d{2}", "%Y-%m-%d"),
+                     (r"\d{1,2}/\d{1,2}/\d{4}", "%m/%d/%Y"),
+                     (r"\d{1,2}-\d{1,2}-\d{4}", "%m-%d-%Y"),
+                     (r"\d{1,2}/\d{1,2}/\d{2}(?!\d)", "%m/%d/%y"),
+                     (r"\d{1,2}-\d{1,2}-\d{2}(?!\d)", "%m-%d-%y"),
+                     (r"[A-Z][a-z]+ \d{1,2},\s*\d{4}", "%B %d, %Y")):
+        m = _re.search(pat, s)
+        if m:
+            try:
+                return _dt.strptime(m.group(0), fmt).date().isoformat()
+            except ValueError:
+                continue
+    return None
+
+
 def _as_of(payload):
     """The state's own date, normalised to ISO where we can read it; else the pull date."""
     raw = payload.get("as_of") or payload.get("through")
     comp = payload.get("compiled")
     if not raw and isinstance(comp, dict) and comp:
-        raw = list(comp.values())[0]
+        # The OLDEST of the stream dates, not an arbitrary one. Florida publishes its
+        # mail and in-person files on separate schedules, so `compiled` can hold two
+        # days at once; taking list(...)[0] took whichever key happened to come first,
+        # which differed between writing a snapshot and re-reading it. The same file
+        # was then filed under 10-21 on the way in and 10-22 on the way out, so a
+        # rebuild silently moved a day of Florida and dropped the one it landed on.
+        #
+        # A total spanning several streams is only good through the EARLIEST of them -
+        # the later stream has counted a day the others have not - so that is the date,
+        # and it is the same on every read.
+        dates = [_parse_day(v) for v in comp.values()]
+        dates = [d for d in dates if d]
+        raw = min(dates) if dates else list(comp.values())[0]
     if not raw:
         return (payload.get("fetched") or datetime.now(timezone.utc).isoformat())[:10]
     s = str(raw).strip()

@@ -90,6 +90,12 @@ printf '%s\n' "$man" >> "$LOG"
 [ $mrc -eq 0 ] && say "MANUAL  $(printf '%s' "$man" | grep -cE '^[A-Z]{2} ok:') state(s) imported from data/manual" \
                || say "MANUAL  import problem -- $(printf '%s' "$man" | tail -1)"
 
+# Catch any cumulative figure that fell before it reaches the store. Ballots already
+# cast do not un-cast, so a fall means the source withdrew or restated something; the
+# guard turns it into an explicit unknown rather than a quietly smaller number.
+grd=$("$PY" guard_monotonic.py 2>&1); printf '%s\n' "$grd" >> "$LOG"
+say "GUARD   $(printf '%s' "$grd" | tail -1)"
+
 # Ingest into SQLite and re-export the trend view. This runs even when a collector failed:
 # the files that DID refresh still belong in the store, and ingest is keyed on each state's
 # own as-of date, so re-reading an unchanged file is a no-op rather than a double count.

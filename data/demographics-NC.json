@@ -1,6 +1,6 @@
 {
  "state": "NC",
- "fetched": "2026-10-22T16:55:23+00:00",
+ "fetched": "2026-10-23T02:49:16+00:00",
  "note": "Who has voted early, not how they voted. No state counts ballots before election day.",
  "stream_labels": {
   "accept": "mail returned",
@@ -180,8 +180,10 @@
   "2026": {
    "state": "NC",
    "year": 2026,
-   "source": "https://dl.ncsbe.gov/ENRS/ (North Carolina's own absentee file)",
-   "upstream": "https://dl.ncsbe.gov/?prefix=ENRS/",
+   "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/US.csv",
+   "upstream": "https://dl.ncsbe.gov/?prefix=ENRS/2026_11_03/",
+   "as_of": "10/22/2026",
+   "turnout_2022": 3790202,
    "streams": {
     "accept": {
      "total": 51096,
@@ -192,10 +194,9 @@
        "hispanic": 1174,
        "nh_asian": 1454,
        "nh_native_american": 122,
-       "nh_other": 5990
+       "nh_other": 5987
       },
-      "total": 51096,
-      "coverage": 1.0,
+      "total": 51093,
       "labels": {
        "nh_white": "White",
        "nh_black": "Black",
@@ -203,7 +204,38 @@
        "nh_asian": "Asian",
        "nh_native_american": "Native American",
        "nh_other": "Other / multiple / unknown"
-      }
+      },
+      "coverage": 0.9999
+     },
+     "age": {
+      "counts": {
+       "age_1": 3849,
+       "age_2": 5500,
+       "age_3": 13676,
+       "age_4": 28071
+      },
+      "total": 51096,
+      "labels": {
+       "age_1": "18\u201325",
+       "age_2": "26\u201340",
+       "age_3": "41\u201365",
+       "age_4": "over 65"
+      },
+      "coverage": 1.0
+     },
+     "gender": {
+      "counts": {
+       "male": 21054,
+       "female": 26223,
+       "gender_unknown": 3819
+      },
+      "total": 51096,
+      "labels": {
+       "male": "Male",
+       "female": "Female",
+       "gender_unknown": "Unknown"
+      },
+      "coverage": 1.0
      }
     },
     "inperson": {
@@ -215,10 +247,9 @@
        "hispanic": 28736,
        "nh_asian": 15328,
        "nh_native_american": 4473,
-       "nh_other": 68381
+       "nh_other": 68313
       },
-      "total": 1050226,
-      "coverage": 1.0,
+      "total": 1050158,
       "labels": {
        "nh_white": "White",
        "nh_black": "Black",
@@ -226,7 +257,38 @@
        "nh_asian": "Asian",
        "nh_native_american": "Native American",
        "nh_other": "Other / multiple / unknown"
-      }
+      },
+      "coverage": 0.9999
+     },
+     "age": {
+      "counts": {
+       "age_1": 50165,
+       "age_2": 106613,
+       "age_3": 379943,
+       "age_4": 513505
+      },
+      "total": 1050226,
+      "labels": {
+       "age_1": "18\u201325",
+       "age_2": "26\u201340",
+       "age_3": "41\u201365",
+       "age_4": "over 65"
+      },
+      "coverage": 1.0
+     },
+     "gender": {
+      "counts": {
+       "male": 445068,
+       "female": 555079,
+       "gender_unknown": 50075
+      },
+      "total": 1050222,
+      "labels": {
+       "male": "Male",
+       "female": "Female",
+       "gender_unknown": "Unknown"
+      },
+      "coverage": 1.0
      }
     },
     "voted": {
@@ -238,10 +300,9 @@
        "hispanic": 29910,
        "nh_asian": 16782,
        "nh_native_american": 4595,
-       "nh_other": 74371
+       "nh_other": 74300
       },
-      "total": 1101322,
-      "coverage": 1.0,
+      "total": 1101251,
       "labels": {
        "nh_white": "White",
        "nh_black": "Black",
@@ -249,7 +310,38 @@
        "nh_asian": "Asian",
        "nh_native_american": "Native American",
        "nh_other": "Other / multiple / unknown"
-      }
+      },
+      "coverage": 0.9999
+     },
+     "age": {
+      "counts": {
+       "age_1": 54014,
+       "age_2": 112113,
+       "age_3": 393619,
+       "age_4": 541576
+      },
+      "total": 1101322,
+      "labels": {
+       "age_1": "18\u201325",
+       "age_2": "26\u201340",
+       "age_3": "41\u201365",
+       "age_4": "over 65"
+      },
+      "coverage": 1.0
+     },
+     "gender": {
+      "counts": {
+       "male": 466122,
+       "female": 581302,
+       "gender_unknown": 53894
+      },
+      "total": 1101318,
+      "labels": {
+       "male": "Male",
+       "female": "Female",
+       "gender_unknown": "Unknown"
+      },
+      "coverage": 1.0
      }
     }
    }

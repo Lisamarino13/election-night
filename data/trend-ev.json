@@ -76,6 +76,28 @@
       "R": 69280
      },
      "mail_outstanding": {
+      "D": 623319,
+      "NPA": 315432,
+      "O": 38014,
+      "R": 484327
+     },
+     "mail_returned": {
+      "D": 394962,
+      "NPA": 175533,
+      "O": 22781,
+      "R": 340591
+     }
+    },
+    {
+     "as_of": "2026-10-21",
+     "registered": null,
+     "in_person_returned": {
+      "D": 141075,
+      "NPA": 60055,
+      "O": 8781,
+      "R": 149555
+     },
+     "mail_outstanding": {
       "D": 584423,
       "NPA": 303400,
       "O": 36748,
@@ -89,13 +111,13 @@
      }
     },
     {
-     "as_of": "2026-10-21",
+     "as_of": "2026-10-22",
      "registered": null,
      "in_person_returned": {
-      "D": 141075,
-      "NPA": 60055,
-      "O": 8781,
-      "R": 149555
+      "D": 210883,
+      "NPA": 92842,
+      "O": 13514,
+      "R": 234959
      },
      "mail_outstanding": {
       "D": 584423,
@@ -313,6 +335,28 @@
       "O": 0,
       "R": 2425
      }
+    },
+    {
+     "as_of": "2026-10-22",
+     "registered": null,
+     "in_person_returned": {
+      "D": 47028,
+      "NPA": 12875,
+      "O": 0,
+      "R": 38286
+     },
+     "mail_outstanding": {
+      "D": 34179,
+      "NPA": 13096,
+      "O": 0,
+      "R": 27618
+     },
+     "mail_returned": {
+      "D": 12724,
+      "NPA": 3157,
+      "O": 0,
+      "R": 8274
+     }
     }
    ]
   },
@@ -513,6 +557,28 @@
       "O": 141,
       "R": 9042
      }
+    },
+    {
+     "as_of": "2026-10-23",
+     "registered": null,
+     "in_person_returned": {
+      "D": 452224,
+      "NPA": 356595,
+      "O": 2328,
+      "R": 239079
+     },
+     "mail_outstanding": {
+      "D": null,
+      "NPA": null,
+      "O": null,
+      "R": null
+     },
+     "mail_returned": {
+      "D": 21742,
+      "NPA": 20171,
+      "O": 141,
+      "R": 9042
+     }
     }
    ]
   },
@@ -639,6 +705,16 @@
      "mail_returned": {
       "ALL": 316640
      }
+    },
+    {
+     "as_of": "2026-10-22",
+     "registered": 0,
+     "in_person_returned": {
+      "ALL": 489141
+     },
+     "mail_returned": {
+      "ALL": 348877
+     }
     }
    ]
   },
@@ -661,7 +737,7 @@
       "ALL": 280114
      },
      "mail_returned": {
-      "ALL": 21501
+      "ALL": null
      }
     }
    ]

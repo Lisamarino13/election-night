@@ -1,6 +1,6 @@
 {
  "state": "GA",
- "fetched": "2026-10-22T16:46:00+00:00",
+ "fetched": "2026-10-23T02:49:16+00:00",
  "note": "Who has voted early, not how they voted. No state counts ballots before election day.",
  "stream_labels": {
   "accept": "mail returned",
@@ -186,7 +186,7 @@
    "turnout_2022": 3964926,
    "streams": {
     "accept": {
-     "total": 62716,
+     "total": 70873,
      "race": {
       "counts": {
        "nh_white": 35914,
@@ -205,7 +205,7 @@
        "nh_native_american": "Native American",
        "nh_other": "Other / multiple / unknown"
       },
-      "coverage": 1.0
+      "coverage": 0.8849
      },
      "age": {
       "counts": {
@@ -221,7 +221,7 @@
        "age_3": "41\u201365",
        "age_4": "over 65"
       },
-      "coverage": 0.9959
+      "coverage": 0.8813
      },
      "gender": {
       "counts": {
@@ -235,11 +235,11 @@
        "female": "Female",
        "gender_unknown": "Unknown"
       },
-      "coverage": 1.0
+      "coverage": 0.8849
      }
     },
     "inperson": {
-     "total": 1267739,
+     "total": 1396777,
      "race": {
       "counts": {
        "nh_white": 664414,
@@ -258,7 +258,7 @@
        "nh_native_american": "Native American",
        "nh_other": "Other / multiple / unknown"
       },
-      "coverage": 1.0
+      "coverage": 0.9076
      },
      "age": {
       "counts": {
@@ -274,7 +274,7 @@
        "age_3": "41\u201365",
        "age_4": "over 65"
       },
-      "coverage": 0.9931
+      "coverage": 0.9014
      },
      "gender": {
       "counts": {
@@ -288,11 +288,11 @@
        "female": "Female",
        "gender_unknown": "Unknown"
       },
-      "coverage": 1.0
+      "coverage": 0.9076
      }
     },
     "voted": {
-     "total": 1330455,
+     "total": 1467650,
      "race": {
       "counts": {
        "nh_white": 700328,
@@ -311,7 +311,7 @@
        "nh_native_american": "Native American",
        "nh_other": "Other / multiple / unknown"
       },
-      "coverage": 1.0
+      "coverage": 0.9065
      },
      "age": {
       "counts": {
@@ -327,7 +327,7 @@
        "age_3": "41\u201365",
        "age_4": "over 65"
       },
-      "coverage": 0.9933
+      "coverage": 0.9004
      },
      "gender": {
       "counts": {
@@ -341,7 +341,7 @@
        "female": "Female",
        "gender_unknown": "Unknown"
       },
-      "coverage": 1.0
+      "coverage": 0.9065
      }
     }
    }

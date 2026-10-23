@@ -717,6 +717,7 @@ async function loadEarly(){
                   fallback: !!j.fallback,
                   srcNote: (j.attribution && j.attribution.note) || "",
                   mismatchNote: (j.notes && j.notes.mismatch) || "",
+                  withdrawnNote: (j.notes && j.notes.withdrawn) || "",
                   srcFrom: (j.attribution && j.attribution.aggregator) || "",
                   srcUp: (j.attribution && j.attribution.upstream) || "",
                   partyAvailable: j.party_available !== false,
@@ -741,9 +742,13 @@ function srcLine(e){
   // a disagreement between the source's own files is worth saying out loud: someone
   // cross-checking against the publisher's headline will otherwise think we are wrong
   const mm = e.mismatchNote ? `<div class="srcnote warn"><b>Sources disagree:</b> ${e.mismatchNote}</div>` : "";
-  if(!e.srcNote) return mm;
+  // A figure the source has taken back is the one thing a reader cannot infer from the
+  // card: the number simply gets smaller. It is called out, not buried in a payload.
+  const wd = e.withdrawnNote
+    ? `<div class="srcnote warn"><b>A figure was withdrawn by the source:</b> ${e.withdrawnNote}</div>` : "";
+  if(!e.srcNote) return mm + wd;
   const who = e.srcFrom ? `${e.srcFrom}${e.srcUp?" &larr; "+e.srcUp:""}` : "";
-  return mm + `<div class="srcnote"><b>How this is counted:</b> ${e.srcNote}
+  return mm + wd + `<div class="srcnote"><b>How this is counted:</b> ${e.srcNote}
     ${who?`<span class="srcwho">${who}</span>`:""}</div>`;
 }
 

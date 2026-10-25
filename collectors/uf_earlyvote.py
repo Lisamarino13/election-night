@@ -73,6 +73,13 @@ STATES = {"NE": "Nebraska", "KS": "Kansas", "GA": "Georgia",
 # state on the board was missing entirely because one publisher was quiet and nothing
 # looked anywhere else. The direct parse still wins the moment the SOS does publish.
 FALLBACK = {"ME": "Maine", "IA": "Iowa", "FL": "Florida", "TX": "Texas"}
+
+# ALASKA has no county file at the Lab - only its row in the national one - so it cannot
+# be pulled the way every other state here is, and it was the one state on the board with
+# NO early-vote figure at all. A state-level number is worth having and is better than a
+# blank card, but it carries no per-county detail, so the per-county projection cannot
+# run there and the payload says so rather than implying otherwise.
+STATE_ONLY = {"AK": "Alaska"}
 # How far behind a direct parse may fall before the Lab's copy replaces it. This is a
 # judgement about how much VOTE is at stake, not just how many days, so it is per state.
 # Maine added about 2,000 ballots a day at this point and a two-day tolerance costs
@@ -124,7 +131,8 @@ def national():
         out[st] = {"last_update": (r.get("last_update") or "").strip(),
                    "data_source": (r.get("data_source") or "").strip(),
                    "notes": (r.get("notes") or "").strip(),
-                   "nat_mail": num("accept_all"), "nat_ip": num("inperson_all")}
+                   "nat_mail": num("accept_all"), "nat_ip": num("inperson_all"),
+                   "nat_voted": num("voted_all"), "nat_requested": num("request_all")}
     return out
 
 
@@ -312,14 +320,53 @@ def _last_modified(url):
         return None
 
 
+def pull_state_row(st, meta):
+    """A payload from the Lab's NATIONAL row alone, for a state with no county file."""
+    m = meta.get(st) or {}
+    if not m:
+        raise RuntimeError(f"{st}: no row in the Lab's national file")
+    # national() keeps its own names for these, not the CSV's.
+    mail, ip = m.get("nat_mail") or 0, m.get("nat_ip") or 0
+    total = m.get("nat_voted") or (mail + ip)
+    return {
+        "state": st, "unit": "state", "election": "2026 General",
+        "as_of": m.get("last_update") or None,
+        "fetched": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "party_available": False, "outstanding_available": False,
+        "in_person": ip > 0, "in_person_reported": ip > 0,
+        "counties": {},
+        "county_detail": False,
+        "state_totals": {"registered": 0, "by_mail": mail, "in_person": ip,
+                         "total": total, "requested": m.get("nat_requested") or 0},
+        "source": f"{BASE}US.csv",
+        "fallback": True,
+        "attribution": {"aggregator": "UF Election Lab (election.lab.ufl.edu)",
+                        "upstream": (m.get("data_source") or "unstated"),
+                        "note": ("" if (m.get("notes") or "").strip().upper() in ("", "NA")
+                                 else m["notes"].strip())},
+        "notes": {"scope": ("The Election Lab publishes no county file for this state, so "
+                            "this is its statewide row only. There is no per-county "
+                            "breakdown, which means the county-by-county projection "
+                            "cannot be run here - only the statewide totals."),
+                  "party": "No party registration figures are published for this state."},
+    }, {"total": total, "by_mail": mail, "in_person": ip, "outstanding": 0,
+        "mail_outstanding": 0, "ret_D": 0, "ret_R": 0, "ret_NPA": 0,
+        "requested": m.get("nat_requested") or 0}
+
+
 def main(argv):
-    only = [a.upper() for a in argv if a.upper() in STATES or a.upper() in FALLBACK]
+    only = [a.upper() for a in argv
+            if a.upper() in STATES or a.upper() in FALLBACK or a.upper() in STATE_ONLY]
     meta = national()
     data = pathlib.Path(__file__).resolve().parent.parent / "data"
     ok = failed = skipped = held = 0
-    for st in sorted(only or (list(STATES) + list(FALLBACK))):
+    for st in sorted(only or (list(STATES) + list(FALLBACK) + list(STATE_ONLY))):
         try:
-            payload, tot, party = pull(st, meta)
+            if st in STATE_ONLY:
+                payload, tot = pull_state_row(st, meta)
+                party = False
+            else:
+                payload, tot, party = pull(st, meta)
         except Exception as e:
             print(f"UF {st} FAILED (nothing written): {e}", file=sys.stderr)
             failed += 1

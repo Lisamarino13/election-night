@@ -1,0 +1,31 @@
+{
+ "state": "AK",
+ "unit": "state",
+ "election": "2026 General",
+ "as_of": "10/24/2026",
+ "fetched": "2026-10-25T21:20:26+00:00",
+ "party_available": false,
+ "outstanding_available": false,
+ "in_person": true,
+ "in_person_reported": true,
+ "counties": {},
+ "county_detail": false,
+ "state_totals": {
+  "registered": 0,
+  "by_mail": 13072,
+  "in_person": 26612,
+  "total": 39684,
+  "requested": 47713
+ },
+ "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/US.csv",
+ "fallback": true,
+ "attribution": {
+  "aggregator": "UF Election Lab (election.lab.ufl.edu)",
+  "upstream": "https://www.elections.alaska.gov/research/statistics/#aeqstats",
+  "note": ""
+ },
+ "notes": {
+  "scope": "The Election Lab publishes no county file for this state, so this is its statewide row only. There is no per-county breakdown, which means the county-by-county projection cannot be run here - only the statewide totals.",
+  "party": "No party registration figures are published for this state."
+ }
+}

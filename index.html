@@ -1198,6 +1198,7 @@ function renderLastRun(){
       bar.innerHTML = msg ? `<b>Stale data.</b> ${msg}` : "";
       bar.hidden = !msg;
     });
+  }).catch(()=>{});      // closes the heartbeat fetch's own callback
 }
 
 function renderEV(){

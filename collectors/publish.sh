@@ -15,7 +15,9 @@
 set -u
 cd "$(dirname "$0")/.." || exit 1
 
-PATHS="data/early-*.json data/ev-history-*.json data/trend-ev.json data/snapshots"
+# Everything run_all.sh produces. demographics-*.json was added to the pull on 10-22 and
+# never added here, so it was neither saved before the branch move nor pushed after it.
+PATHS="data/early-*.json data/ev-history-*.json data/trend-ev.json data/snapshots data/demographics-*.json"
 
 if [ -z "$(git status --porcelain data/)" ]; then
   echo "publish: no data changes — nothing to push"
@@ -38,10 +40,24 @@ trap 'rm -rf "$tmp"' EXIT
 for f in $PATHS; do [ -e "$f" ] && cp -R "$f" "$tmp/" 2>/dev/null; done
 
 git fetch -q origin main || { echo "publish: fetch failed" >&2; exit 1; }
-git checkout -q -B main origin/main || { echo "publish: could not set main" >&2; exit 1; }
+
+# Take the remote by force. `git checkout -B` REFUSES when the working tree has local
+# changes or untracked files that the switch would overwrite - and after a pull it always
+# does, because the collectors just wrote them. That is what wedged this VM: from
+# 2026-10-22 it collected every four hours, failed here with "could not set main", and
+# pushed nothing for three days while the published board went stale. Nothing is lost by
+# forcing it: every file that matters was copied to $tmp two lines ago, and all of it is
+# derived data that the next run regenerates.
+git reset -q --hard HEAD 2>/dev/null
+git checkout -q -B main origin/main 2>/dev/null || {
+  git clean -qfd data/ 2>/dev/null          # untracked files the remote now tracks
+  git checkout -q -B main origin/main || { echo "publish: could not set main" >&2; exit 1; }
+}
+git reset -q --hard origin/main || { echo "publish: could not match origin" >&2; exit 1; }
 
 mkdir -p data/snapshots
-cp -R "$tmp"/early-*.json "$tmp"/ev-history-*.json "$tmp"/trend-ev.json data/ 2>/dev/null
+cp -R "$tmp"/early-*.json "$tmp"/ev-history-*.json "$tmp"/trend-ev.json \
+      "$tmp"/demographics-*.json data/ 2>/dev/null
 [ -d "$tmp/snapshots" ] && cp -R "$tmp"/snapshots/. data/snapshots/ 2>/dev/null
 
 # Stage by name, never `git add -A`: nothing outside data/ rides along on a cron run.

@@ -1,6 +1,6 @@
 {
  "state": "NC",
- "fetched": "2026-10-23T16:30:16+00:00",
+ "fetched": "2026-10-25T12:01:47+00:00",
  "note": "Who has voted early, not how they voted. No state counts ballots before election day.",
  "stream_labels": {
   "accept": "mail returned",
@@ -182,21 +182,21 @@
    "year": 2026,
    "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/US.csv",
    "upstream": "https://dl.ncsbe.gov/?prefix=ENRS/2026_11_03/",
-   "as_of": "10/23/2026",
+   "as_of": "10/24/2026",
    "turnout_2022": 3790202,
    "streams": {
     "accept": {
-     "total": 54888,
+     "total": 58392,
      "race": {
       "counts": {
-       "nh_white": 40144,
-       "nh_black": 5328,
-       "hispanic": 1270,
-       "nh_asian": 1577,
-       "nh_native_american": 136,
-       "nh_other": 6429
+       "nh_white": 42616,
+       "nh_black": 5714,
+       "hispanic": 1360,
+       "nh_asian": 1693,
+       "nh_native_american": 147,
+       "nh_other": 6858
       },
-      "total": 54884,
+      "total": 58388,
       "labels": {
        "nh_white": "White",
        "nh_black": "Black",
@@ -209,12 +209,12 @@
      },
      "age": {
       "counts": {
-       "age_1": 4253,
-       "age_2": 5971,
-       "age_3": 14705,
-       "age_4": 29959
+       "age_1": 4581,
+       "age_2": 6444,
+       "age_3": 15724,
+       "age_4": 31643
       },
-      "total": 54888,
+      "total": 58392,
       "labels": {
        "age_1": "18\u201325",
        "age_2": "26\u201340",
@@ -225,11 +225,11 @@
      },
      "gender": {
       "counts": {
-       "male": 22520,
-       "female": 28252,
-       "gender_unknown": 4116
+       "male": 23839,
+       "female": 30131,
+       "gender_unknown": 4422
       },
-      "total": 54888,
+      "total": 58392,
       "labels": {
        "male": "Male",
        "female": "Female",
@@ -239,17 +239,17 @@
      }
     },
     "inperson": {
-     "total": 1215032,
+     "total": 1395125,
      "race": {
       "counts": {
-       "nh_white": 805822,
-       "nh_black": 273210,
-       "hispanic": 33560,
-       "nh_asian": 17436,
-       "nh_native_american": 5264,
-       "nh_other": 79652
+       "nh_white": 927254,
+       "nh_black": 308872,
+       "hispanic": 39885,
+       "nh_asian": 20106,
+       "nh_native_american": 6042,
+       "nh_other": 92871
       },
-      "total": 1214944,
+      "total": 1395030,
       "labels": {
        "nh_white": "White",
        "nh_black": "Black",
@@ -262,12 +262,12 @@
      },
      "age": {
       "counts": {
-       "age_1": 59284,
-       "age_2": 126421,
-       "age_3": 441513,
-       "age_4": 587814
+       "age_1": 71902,
+       "age_2": 152403,
+       "age_3": 516186,
+       "age_4": 654634
       },
-      "total": 1215032,
+      "total": 1395125,
       "labels": {
        "age_1": "18\u201325",
        "age_2": "26\u201340",
@@ -278,11 +278,11 @@
      },
      "gender": {
       "counts": {
-       "male": 512879,
-       "female": 643536,
-       "gender_unknown": 58613
+       "male": 587086,
+       "female": 739395,
+       "gender_unknown": 68640
       },
-      "total": 1215028,
+      "total": 1395121,
       "labels": {
        "male": "Male",
        "female": "Female",
@@ -292,17 +292,17 @@
      }
     },
     "voted": {
-     "total": 1269920,
+     "total": 1453517,
      "race": {
       "counts": {
-       "nh_white": 845966,
-       "nh_black": 278538,
-       "hispanic": 34830,
-       "nh_asian": 19013,
-       "nh_native_american": 5400,
-       "nh_other": 86081
+       "nh_white": 969870,
+       "nh_black": 314586,
+       "hispanic": 41245,
+       "nh_asian": 21799,
+       "nh_native_american": 6189,
+       "nh_other": 99729
       },
-      "total": 1269828,
+      "total": 1453418,
       "labels": {
        "nh_white": "White",
        "nh_black": "Black",
@@ -315,12 +315,12 @@
      },
      "age": {
       "counts": {
-       "age_1": 63537,
-       "age_2": 132392,
-       "age_3": 456218,
-       "age_4": 617773
+       "age_1": 76483,
+       "age_2": 158847,
+       "age_3": 531910,
+       "age_4": 686277
       },
-      "total": 1269920,
+      "total": 1453517,
       "labels": {
        "age_1": "18\u201325",
        "age_2": "26\u201340",
@@ -331,11 +331,11 @@
      },
      "gender": {
       "counts": {
-       "male": 535399,
-       "female": 671788,
-       "gender_unknown": 62729
+       "male": 610925,
+       "female": 769526,
+       "gender_unknown": 73062
       },
-      "total": 1269916,
+      "total": 1453513,
       "labels": {
        "male": "Male",
        "female": "Female",

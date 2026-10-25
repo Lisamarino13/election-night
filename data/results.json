@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-25T17:24:25+00:00",
+ "updated": "2026-10-25T18:00:43+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -2118,7 +2118,7 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-10-25T17:24:22+00:00",
+     "updated": "2026-10-25T18:00:39+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 2626,
@@ -2128,7 +2128,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-10-25T17:24:22+00:00"
+   "updated": "2026-10-25T18:00:39+00:00"
   },
   "OH": {
    "name": "Ohio",
@@ -2137,7 +2137,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-10-25T17:24:23+00:00",
+   "updated": "2026-10-25T18:00:41+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -4108,7 +4108,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-10-25T17:24:23+00:00",
+     "updated": "2026-10-25T18:00:41+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
@@ -5993,7 +5993,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-10-25T17:24:23+00:00",
+     "updated": "2026-10-25T18:00:41+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
@@ -6041,46 +6041,2163 @@
    "countsFirst": "early",
    "partyReg": true,
    "unit": "county",
-   "source": null,
-   "updated": null,
+   "source": "https://flelectionfiles.floridados.gov/enightfilespublic/20261103_ElecResultsFL.txt",
+   "updated": "2026-10-25T18:00:41+00:00",
    "races": {
     "senate": {
      "candidates": [
       {
-       "name": "Candidate 1",
+       "name": "Ashley Moody",
        "party": "R"
       },
       {
-       "name": "Candidate 2",
+       "name": "Angie Nixon",
        "party": "D"
       },
       {
-       "name": "Candidate 3",
+       "name": "Neil J. Gillespie",
        "party": "O"
       }
      ],
-     "counties": [],
-     "updated": null,
-     "tier": "safe"
+     "counties": [
+      {
+       "name": "Alachua",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 63
+      },
+      {
+       "name": "Baker",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 9
+      },
+      {
+       "name": "Bay",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 30
+      },
+      {
+       "name": "Bradford",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 13
+      },
+      {
+       "name": "Brevard",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 156
+      },
+      {
+       "name": "Broward",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 346
+      },
+      {
+       "name": "Calhoun",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Charlotte",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 34
+      },
+      {
+       "name": "Citrus",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 31
+      },
+      {
+       "name": "Clay",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 48
+      },
+      {
+       "name": "Collier",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 67
+      },
+      {
+       "name": "Columbia",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 26
+      },
+      {
+       "name": "Desoto",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 15
+      },
+      {
+       "name": "Dixie",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Duval",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 159
+      },
+      {
+       "name": "Escambia",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 80
+      },
+      {
+       "name": "Flagler",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 21
+      },
+      {
+       "name": "Franklin",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Gadsden",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 25
+      },
+      {
+       "name": "Gilchrist",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Glades",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 13
+      },
+      {
+       "name": "Gulf",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Hamilton",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Hardee",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Hendry",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Hernando",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 32
+      },
+      {
+       "name": "Highlands",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 25
+      },
+      {
+       "name": "Hillsborough",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 446
+      },
+      {
+       "name": "Holmes",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Indian River",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 35
+      },
+      {
+       "name": "Jackson",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Jefferson",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 16
+      },
+      {
+       "name": "Lafayette",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Lake",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 92
+      },
+      {
+       "name": "Lee",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 99
+      },
+      {
+       "name": "Leon",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 134
+      },
+      {
+       "name": "Levy",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 13
+      },
+      {
+       "name": "Liberty",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Madison",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Manatee",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 71
+      },
+      {
+       "name": "Marion",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 106
+      },
+      {
+       "name": "Martin",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 29
+      },
+      {
+       "name": "Miami-Dade",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 718
+      },
+      {
+       "name": "Monroe",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 33
+      },
+      {
+       "name": "Nassau",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 18
+      },
+      {
+       "name": "Okaloosa",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 52
+      },
+      {
+       "name": "Okeechobee",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Orange",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 261
+      },
+      {
+       "name": "Osceola",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 137
+      },
+      {
+       "name": "Palm Beach",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 798
+      },
+      {
+       "name": "Pasco",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 122
+      },
+      {
+       "name": "Pinellas",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 287
+      },
+      {
+       "name": "Polk",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 177
+      },
+      {
+       "name": "Putnam",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 37
+      },
+      {
+       "name": "Santa Rosa",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 41
+      },
+      {
+       "name": "Sarasota",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 98
+      },
+      {
+       "name": "Seminole",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 82
+      },
+      {
+       "name": "St. Johns",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 55
+      },
+      {
+       "name": "St. Lucie",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 62
+      },
+      {
+       "name": "Sumter",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 33
+      },
+      {
+       "name": "Suwannee",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Taylor",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Union",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 13
+      },
+      {
+       "name": "Volusia",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 155
+      },
+      {
+       "name": "Wakulla",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Walton",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 22
+      },
+      {
+       "name": "Washington",
+       "votes": [
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 12
+      }
+     ],
+     "updated": "2026-10-25T18:00:41+00:00",
+     "tier": "safe",
+     "precincts_reporting": 0,
+     "precincts_total": 5626,
+     "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
+     "is_test_data": false,
+     "counted": 0
     },
     "governor": {
      "candidates": [
       {
-       "name": "Candidate 1",
+       "name": "Donalds / Avila",
        "party": "R"
       },
       {
-       "name": "Candidate 2",
+       "name": "Jolly / Graham",
        "party": "D"
       },
       {
-       "name": "Other",
+       "name": "Jewett / Skelly",
+       "party": "O"
+      },
+      {
+       "name": "Burkett / Coto",
+       "party": "O"
+      },
+      {
+       "name": "Russo / Rodriguez",
+       "party": "O"
+      },
+      {
+       "name": "Dimanche / Rojas",
+       "party": "O"
+      },
+      {
+       "name": "Abrams / Van Vactor",
+       "party": "O"
+      },
+      {
+       "name": "Datto / Santana",
+       "party": "O"
+      },
+      {
+       "name": "Anderson / Nokovich",
+       "party": "O"
+      },
+      {
+       "name": "Morris / Alaways",
        "party": "O"
       }
      ],
-     "counties": [],
-     "updated": null,
-     "tier": "tossup"
+     "counties": [
+      {
+       "name": "Alachua",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 63
+      },
+      {
+       "name": "Baker",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 9
+      },
+      {
+       "name": "Bay",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 30
+      },
+      {
+       "name": "Bradford",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 13
+      },
+      {
+       "name": "Brevard",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 156
+      },
+      {
+       "name": "Broward",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 346
+      },
+      {
+       "name": "Calhoun",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Charlotte",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 34
+      },
+      {
+       "name": "Citrus",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 31
+      },
+      {
+       "name": "Clay",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 48
+      },
+      {
+       "name": "Collier",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 67
+      },
+      {
+       "name": "Columbia",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 26
+      },
+      {
+       "name": "Desoto",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 15
+      },
+      {
+       "name": "Dixie",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Duval",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 159
+      },
+      {
+       "name": "Escambia",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 80
+      },
+      {
+       "name": "Flagler",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 21
+      },
+      {
+       "name": "Franklin",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Gadsden",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 25
+      },
+      {
+       "name": "Gilchrist",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Glades",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 13
+      },
+      {
+       "name": "Gulf",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Hamilton",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Hardee",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Hendry",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Hernando",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 32
+      },
+      {
+       "name": "Highlands",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 25
+      },
+      {
+       "name": "Hillsborough",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 446
+      },
+      {
+       "name": "Holmes",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Indian River",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 35
+      },
+      {
+       "name": "Jackson",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Jefferson",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 16
+      },
+      {
+       "name": "Lafayette",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Lake",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 92
+      },
+      {
+       "name": "Lee",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 99
+      },
+      {
+       "name": "Leon",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 134
+      },
+      {
+       "name": "Levy",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 13
+      },
+      {
+       "name": "Liberty",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Madison",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Manatee",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 71
+      },
+      {
+       "name": "Marion",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 106
+      },
+      {
+       "name": "Martin",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 29
+      },
+      {
+       "name": "Miami-Dade",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 718
+      },
+      {
+       "name": "Monroe",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 33
+      },
+      {
+       "name": "Nassau",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 18
+      },
+      {
+       "name": "Okaloosa",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 52
+      },
+      {
+       "name": "Okeechobee",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Orange",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 261
+      },
+      {
+       "name": "Osceola",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 137
+      },
+      {
+       "name": "Palm Beach",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 798
+      },
+      {
+       "name": "Pasco",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 122
+      },
+      {
+       "name": "Pinellas",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 287
+      },
+      {
+       "name": "Polk",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 177
+      },
+      {
+       "name": "Putnam",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 37
+      },
+      {
+       "name": "Santa Rosa",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 41
+      },
+      {
+       "name": "Sarasota",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 98
+      },
+      {
+       "name": "Seminole",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 82
+      },
+      {
+       "name": "St. Johns",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 55
+      },
+      {
+       "name": "St. Lucie",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 62
+      },
+      {
+       "name": "Sumter",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 33
+      },
+      {
+       "name": "Suwannee",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Taylor",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Union",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 13
+      },
+      {
+       "name": "Volusia",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 155
+      },
+      {
+       "name": "Wakulla",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Walton",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 22
+      },
+      {
+       "name": "Washington",
+       "votes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 12
+      }
+     ],
+     "updated": "2026-10-25T18:00:41+00:00",
+     "tier": "tossup",
+     "precincts_reporting": 0,
+     "precincts_total": 5626,
+     "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
+     "is_test_data": false,
+     "counted": 0
     }
    },
    "unitsExpected": 67

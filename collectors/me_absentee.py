@@ -118,6 +118,7 @@ def aggregate(raw):
         lambda: {"R": 0, "D": 0, "NPA": 0, "O": 0, "total": 0}))
     tally = collections.Counter()
     data_rows = other = dup_outstanding = 0
+    anomalies = []
     trailer_lines = []
 
     for line in lines[1:]:
@@ -133,6 +134,22 @@ def aggregate(raw):
         party = PARTY.get(g("P").upper(), "O")
         status, rec, issued = g("Status").upper(), g("Rec Date"), g("Issued Date")
 
+        # Maine's own file can contain a record its own trailer does not count. On
+        # 2026-10-23 one Rockport ballot (voter 100775707) carried Status REJ, reason
+        # LDB, a Rec Date of 10/16 and a Rec Time - but no Rec Type. With no Rec Type
+        # the state does not count it as Returned & Rejected, and being rejected it is
+        # not Not Returned & Rejected either, so it appears in NEITHER trailer line and
+        # the reconciliation failed by exactly one, every run, for days.
+        #
+        # The ballot is real: it was received on the 16th and rejected as late. It is
+        # counted here and recorded as an anomaly, so the reconciliation can account for
+        # it by NAME rather than being loosened into uselessness.
+        if status in REJECTED and rec and not g("Rec Type"):
+            anomalies.append({"municipality": muni, "voter_record": g("Voter Record #"),
+                              "status": status, "reason": g("REJ"),
+                              "rec_date": rec, "rec_type": "",
+                              "why": "received and rejected, but with no Rec Type the "
+                                     "state's trailer counts it in neither rejected line"})
         if status in ACCEPTED and rec:
             bucket = "early_in_person" if g("Issued Type").upper() == "VP" else "mail_returned"
         elif status in REJECTED:
@@ -163,7 +180,7 @@ def aggregate(raw):
     # Only the live file carries one; the archives do not. Where it exists it is asserted,
     # where it does not the parse stands on the column checks alone and says so.
     if not any("Total Number of Records" in l for l in trailer_lines):
-        return units, tally, None, data_rows, other, dup_outstanding
+        return units, tally, None, data_rows, other, dup_outstanding, anomalies
     t = parse_trailer(trailer_lines)
     checks = [
         ("records", t["records"], data_rows),
@@ -175,18 +192,31 @@ def aggregate(raw):
         ("returned_accepted", t["returned_accepted"],
          tally["mail_returned"] + tally["early_in_person"]),
     ]
-    bad = [f"{name}: state says {want:,}, parsed {have:,}"
-           for name, want, have in checks if want != have]
+    # A mismatch is only forgiven when it is exactly the size of the anomalies we can
+    # NAME. Anything else still fails: the point of this check is that a silent parse
+    # error cannot reach the board, and a tolerance that swallows unexplained rows
+    # would give that away.
+    bad = []
+    for name, want, have in checks:
+        if want == have:
+            continue
+        if name.endswith("rejected") and anomalies and have - want == len(anomalies):
+            print(f"   ME: {name} differs by {len(anomalies)} — accounted for by "
+                  f"{len(anomalies)} record(s) the state's own trailer omits "
+                  f"({', '.join(a['municipality'] + ' ' + a['voter_record'] for a in anomalies)})",
+                  file=sys.stderr)
+            continue
+        bad.append(f"{name}: state says {want:,}, parsed {have:,}")
     if bad:
         raise RuntimeError("does not reconcile with the state's own totals -> "
                            + "; ".join(bad))
-    return units, tally, t, data_rows, other, dup_outstanding
+    return units, tally, t, data_rows, other, dup_outstanding, anomalies
 
 
 def history():
     out = {"state": "ME", "unit": "municipality", "party_available": True, "years": {}}
     for year, url in sorted(HISTORY.items()):
-        units, tally, trailer, rows, other, dup = aggregate(get(url))
+        units, tally, trailer, rows, other, dup, _anom = aggregate(get(url))
         if trailer is None:
             print(f"   (no trailer totals in the {year} archive — column checks only)",
                   file=sys.stderr)
@@ -220,7 +250,7 @@ def main():
     if "--history" in sys.argv:
         return history()
     url, asof = find_file()
-    units, tally, trailer, rows, other, dup_out = aggregate(get(url))
+    units, tally, trailer, rows, other, dup_out, anomalies = aggregate(get(url))
 
     totals = {b: {"R": 0, "D": 0, "NPA": 0, "O": 0, "total": 0} for b in BUCKETS}
     for buckets in units.values():
@@ -229,6 +259,10 @@ def main():
                 totals[b][k] += v
 
     payload = {
+        "source_anomalies": anomalies,
+        "source_anomaly_note": ("Records Maine's own trailer does not count. They are "
+                                "real ballots and are counted here; the reconciliation "
+                                "accounts for them by name rather than being loosened."),
         "state": "ME", "unit": "municipality", "election": "2026 General",
         "as_of": asof, "fetched": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "rows": rows, "in_person": totals["early_in_person"]["total"] > 0,

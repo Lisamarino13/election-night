@@ -94,9 +94,16 @@ def fetch_consistent(attempts=4, pause=3):
         data = {"compiled": {}}
         for key, stat in FILES.items():
             data[key], data["compiled"][key] = fetch(stat)
+        # Compare the DAY, not the exact stamp. _day exists for precisely this - the
+        # docstring says so - but the check used the raw timestamps, so Florida posting
+        # its two files at 11:01AM and 5:02PM on the SAME DAY read as "the CDN is
+        # serving mixed days" and the collector refused on every run for days. What
+        # must not be combined is two different days; two times on one day is just
+        # Florida updating one file after the other.
         stamps = set(data["compiled"].values())
-        if len(stamps) == 1 and None not in stamps:
-            day = _day(next(iter(stamps)))
+        days = {_day(v) for v in data["compiled"].values()}
+        if len(days) == 1 and None not in stamps and not any(d in ("", None) for d in days):
+            day = next(iter(days))
             # Keep looking for a NEWER consistent set. The cache holds more than one day at
             # once, so the first agreeing pair is not necessarily the latest one — taking it
             # made the published figure jump backwards between runs.
@@ -106,15 +113,15 @@ def fetch_consistent(attempts=4, pause=3):
                 return best
         else:
             last = dict(data["compiled"])
-            print(f"   FL compile dates disagree {last} — refetching ({i}/{attempts})",
+            print(f"   FL compile DAYS disagree {last} — refetching ({i}/{attempts})",
                   file=sys.stderr)
         if i < attempts:
             time.sleep(pause)
     if best:
         return best
-    raise RuntimeError(f"required files never agreed on a compile date after {attempts} "
-                       f"tries (last: {last}); the CDN is serving mixed days — refusing "
-                       f"to combine them")
+    raise RuntimeError(f"required files never agreed on a compile DAY after {attempts} "
+                       f"tries (last: {last}); the CDN is serving different days — "
+                       f"refusing to combine them")
 
 
 def main():

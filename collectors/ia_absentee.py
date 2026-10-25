@@ -333,5 +333,22 @@ if __name__ == "__main__":
     try:
         sys.exit(main())
     except Exception as e:
+        # sos.iowa.gov has returned 403 to every path since 2026-10-20, from this laptop
+        # and from the cron host alike, so it is the site refusing us rather than a rate
+        # limit or a parse problem. The UF Election Lab's Iowa is written instead and
+        # ties out, so the board is not missing anything.
+        #
+        # That is a STATE, not a failure, and it was being reported as a failure on
+        # every single run. A run that always says "1 failed" teaches you to ignore the
+        # count, and the next real failure goes unnoticed - which is exactly how the
+        # publish step stayed broken for three days. Exit 2 is the same "not available"
+        # that Texas uses, and the runner logs it as PENDING.
+        msg = str(e)
+        blocked = ("403" in msg or "Forbidden" in msg or "timed out" in msg.lower()
+                   or "Connection refused" in msg)
+        if blocked:
+            print(f"IA: sos.iowa.gov is refusing requests ({msg.split(chr(10))[0][:140]}) "
+                  f"— the UF Election Lab's copy is used instead", file=sys.stderr)
+            sys.exit(2)
         print(f"IA FAILED (nothing written): {e}", file=sys.stderr)
         sys.exit(1)

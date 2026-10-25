@@ -207,6 +207,35 @@ def main():
                 fell.append((key, ov, nv))
         if not fell:
             continue
+        # A stream can shrink because the SOURCE CHANGED SHAPE, not because ballots
+        # vanished. Maine fell back to the Election Lab, which lumps mail and in-person
+        # into one "returned" figure; when the direct parse recovered it split them
+        # again - 178,680 became 87,034 mail plus 92,499 in person. The stream halved
+        # while the state's total went UP. Flagging that as a lost figure is wrong and
+        # puts a false warning on the card.
+        #
+        # So compare what the card actually shows. If the combined total did not fall,
+        # nothing was lost and this is a re-split.
+        def combined(block):
+            g = lambda k: val(block, k)
+            mail = next((g(k) for k in ("by_mail", "mail_returned", "returned")
+                         if g(k) is not None), 0)
+            ip = next((g(k) for k in ("in_person", "early_in_person")
+                       if g(k) is not None), 0)
+            return (mail or 0) + (ip or 0)
+        if combined(n) >= combined(o):
+            print(f"  {st}: {', '.join(k for k, _, _ in fell)} shrank but the total rose "
+                  f"({combined(o):,} -> {combined(n):,}) — the source split a stream, "
+                  f"nothing lost")
+            new.setdefault("notes", {})["restructured"] = (
+                "A stream is smaller than last recorded because the source changed how it "
+                "divides them, not because ballots were lost: the combined total went from "
+                f"{combined(o):,} to {combined(n):,}. "
+                + "; ".join(f"{k} was {ov:,}, now {nv:,}" for k, ov, nv in fell))
+            new.pop("withdrawn_streams", None)
+            (new.get("notes") or {}).pop("fell", None)
+            pathlib.Path(f).write_text(json.dumps(new, indent=1) + "\n")
+            continue
         # A withdrawn field and a STALE FETCH both look like a number that fell, and
         # they need opposite answers. Florida serves its mail and in-person files from a
         # CDN that can hand back yesterday's copy of one of them; that is not a state

@@ -176,14 +176,27 @@ def pull(st, meta):
         raise RuntimeError(f"{st}: only {len(counties)} counties — refusing")
 
     m = meta.get(st, {})
-    # cross-check this county file against the Lab's own national figure
+    # cross-check this county file against the Lab's own national figure.
+    #
+    # The two are not peers. The Lab rebuilds its national file more often than its
+    # per-state county files, so a county file can be many hours behind it. Calling
+    # that "the sources disagree" was wrong and it hid a real staleness: a cumulative
+    # count cannot be LOWER with more time behind it, so when ours is the smaller
+    # number we are simply the older one, and the card should say so.
     nat = (m.get("nat_mail", 0) or 0) + (m.get("nat_ip", 0) or 0)
     cty = tot["by_mail"] + tot["in_person"]
     mismatch = None
     if nat and abs(cty - nat) > 500:
-        mismatch = {"county_file": cty, "national_file": nat, "diff": cty - nat}
-        print(f"   {st}: county file totals {cty:,} but the Lab's national file says "
-              f"{nat:,} ({cty-nat:+,}) — using the county file, flagging the gap",
+        _cm = _last_modified(f"{BASE}{st}_county.csv")
+        _nm = _last_modified(f"{BASE}US.csv")
+        # ISO strings in the payload: a datetime is not JSON-serialisable, and writing
+        # one silently killed the whole write, so the stale note stayed on the card.
+        mismatch = {"county_file": cty, "national_file": nat, "diff": cty - nat,
+                    "county_file_modified": _cm.isoformat() if _cm else None,
+                    "national_file_modified": _nm.isoformat() if _nm else None}
+        how = "behind" if cty < nat else "ahead of"
+        print(f"   {st}: county file totals {cty:,}, {how} the Lab's national file at "
+              f"{nat:,} ({cty-nat:+,}) — county file kept for its per-county detail",
               file=sys.stderr)
     payload = {"state": st, "unit": "county", "election": "2026 General",
                "as_of": m.get("last_update") or None,
@@ -204,11 +217,29 @@ def pull(st, meta):
                                         "not a figure the state publishes directly"}}
     if mismatch:
         payload["source_mismatch"] = mismatch
-        payload["notes"]["mismatch"] = (
-            f"the Election Lab's county file totals {mismatch['county_file']:,} while its "
-            f"own national file says {mismatch['national_file']:,}. County-level data is "
-            f"what a per-county projection needs, so the county file is used here; their "
-            f"headline figure elsewhere will be the larger one")
+        cm, nm = _cm, _nm
+        lag = ""
+        if cm and nm:
+            try:
+                hrs = round((nm - cm).total_seconds() / 3600)
+                if hrs > 0:
+                    lag = (f" The county file was last written {hrs} hour"
+                           f"{'s' if hrs != 1 else ''} before the national one.")
+            except Exception:
+                pass
+        if mismatch["diff"] < 0:
+            payload["notes"]["mismatch"] = (
+                f"This figure is {abs(mismatch['diff']):,} BEHIND the Election Lab's own "
+                f"headline for {st}: their county file totals "
+                f"{mismatch['county_file']:,}, their national file {mismatch['national_file']:,}."
+                f"{lag} A count cannot fall as time passes, so this is staleness and not "
+                f"a disagreement. The county file is kept because a per-county projection "
+                f"needs per-county numbers, and it catches up when the Lab rewrites it.")
+        else:
+            payload["notes"]["mismatch"] = (
+                f"the Election Lab's county file totals {mismatch['county_file']:,} while "
+                f"its own national file says {mismatch['national_file']:,}."
+                f"{lag} The county file is used here, for its per-county detail")
     if party:
         payload["state_totals"] = {
             "returned": {"D": tot["ret_D"], "R": tot["ret_R"], "NPA": tot["ret_NPA"],
@@ -267,6 +298,18 @@ def direct_is_fresh(path, uf_as_of, st=None):
     if not mine or not theirs:
         return True
     return (theirs - mine).days <= STALE_DAYS_BY_STATE.get(st, STALE_DAYS)
+
+
+def _last_modified(url):
+    """The server's Last-Modified for a file, so two of the Lab's files can be ordered."""
+    import email.utils
+    try:
+        req = urllib.request.Request(url, method="HEAD", headers=UA)
+        with urllib.request.urlopen(req, timeout=30) as r:
+            lm = r.headers.get("Last-Modified")
+        return email.utils.parsedate_to_datetime(lm) if lm else None
+    except Exception:
+        return None
 
 
 def main(argv):

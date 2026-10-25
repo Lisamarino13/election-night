@@ -1178,9 +1178,26 @@ function renderLastRun(){
     } else if (dead){
       msg = `No figure here has changed in <b>${ago(mins)}</b>.`;
     }
-    bar.innerHTML = msg ? `<b>Stale data.</b> ${msg}` : "";
-    bar.hidden = !msg;
-  }).catch(()=>{});
+    // Independent check: does this board tie out against the UF Election Lab? Written
+    // by every pull. A state BEHIND the Lab is stale here, not a disagreement.
+    fetch("data/tie-out.json?t="+Date.now()).then(r=>r.ok?r.json():null).then(t=>{
+      let tmsg = "";
+      if (t && t.behind_states && t.behind_states.length){
+        const names = t.behind_states.map(s=>{
+          const v=t.states[s]; return `<b>${s}</b> ${v.gap.toLocaleString()} behind`;
+        }).join(", ");
+        tmsg = `${names}. Checked against the UF Election Lab
+                ${t.ties_out} of ${t.checked} states tie out.`;
+      }
+      const both = [msg, tmsg].filter(Boolean);
+      bar.innerHTML = both.length
+        ? `<b>${msg ? "Stale data." : "Behind an independent source."}</b> ${both.join(" ")}`
+        : "";
+      bar.hidden = !both.length;
+    }).catch(()=>{
+      bar.innerHTML = msg ? `<b>Stale data.</b> ${msg}` : "";
+      bar.hidden = !msg;
+    });
 }
 
 function renderEV(){

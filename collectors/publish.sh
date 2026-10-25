@@ -17,7 +17,7 @@ cd "$(dirname "$0")/.." || exit 1
 
 # Everything run_all.sh produces. demographics-*.json was added to the pull on 10-22 and
 # never added here, so it was neither saved before the branch move nor pushed after it.
-PATHS="data/early-*.json data/ev-history-*.json data/trend-ev.json data/snapshots data/demographics-*.json data/last-run.json"
+PATHS="data/early-*.json data/ev-history-*.json data/trend-ev.json data/snapshots data/demographics-*.json data/last-run.json data/tie-out.json"
 
 # A HEARTBEAT, written every run whether or not the data moved. Without one, a cron
 # that dies is indistinguishable from a cron with nothing new to say: both leave the
@@ -86,7 +86,7 @@ git reset -q --hard origin/main || { echo "publish: could not match origin" >&2;
 
 mkdir -p data/snapshots
 cp -R "$tmp"/early-*.json "$tmp"/ev-history-*.json "$tmp"/trend-ev.json \
-      "$tmp"/demographics-*.json "$tmp"/last-run.json data/ 2>/dev/null
+      "$tmp"/demographics-*.json "$tmp"/last-run.json "$tmp"/tie-out.json data/ 2>/dev/null
 [ -d "$tmp/snapshots" ] && cp -R "$tmp"/snapshots/. data/snapshots/ 2>/dev/null
 
 # Stage by name, never `git add -A`: nothing outside data/ rides along on a cron run.

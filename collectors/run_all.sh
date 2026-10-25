@@ -108,6 +108,12 @@ else
   say "FAILED  ingest.py -- $(printf '%s' "$ing" | tail -1)"
 fi
 
+# Does this tie out against an independent source? Nothing else asks. Every stale-data
+# failure so far was caught by a person comparing totals by hand, because a collector
+# that writes an OLD number still reports success.
+tie=$("$PY" tie_out.py 2>&1); printf '%s\n' "$tie" >> "$LOG"
+say "TIEOUT  $(printf '%s' "$tie" | head -1)"
+
 say "=== done: $ok ok, $pending pending, $failed failed$failed_names ==="
 # Hand the outcome to publish.sh so the heartbeat records WHY a run was unhappy, not
 # just that it happened. A non-zero exit here must never stop the publish - the cron

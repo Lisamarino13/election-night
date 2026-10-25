@@ -1,0 +1,111 @@
+{
+ "checked_at": "2026-10-25T17:15:49+00:00",
+ "uf_file_modified": "Sun, 25 Oct 2026 14:58:36 GMT",
+ "board_total": 12857803,
+ "uf_total": 13007216,
+ "behind_states": [
+  "GA"
+ ],
+ "behind_ballots": 118176,
+ "ties_out": 11,
+ "checked": 12,
+ "note": "Each state against the UF Election Lab's national row, which is independent of how this board collects. BEHIND means this board is stale, not that the sources disagree - a count cannot fall as time passes.",
+ "states": {
+  "FL": {
+   "board": 2597716,
+   "uf": 2619679,
+   "gap": 21963,
+   "verdict": "ties out",
+   "as_of": "10/24/2026",
+   "source": "UF"
+  },
+  "GA": {
+   "board": 1632981,
+   "uf": 1751157,
+   "gap": 118176,
+   "verdict": "behind",
+   "as_of": "10/24/2026",
+   "source": "UF"
+  },
+  "IA": {
+   "board": 207774,
+   "uf": 207774,
+   "gap": 0,
+   "verdict": "ties out",
+   "as_of": "10/23/2026",
+   "source": "UF"
+  },
+  "KS": {
+   "board": 154074,
+   "uf": 154074,
+   "gap": 0,
+   "verdict": "ties out",
+   "as_of": "10/23/2026",
+   "source": "UF"
+  },
+  "ME": {
+   "board": 178680,
+   "uf": 178680,
+   "gap": 0,
+   "verdict": "ties out",
+   "as_of": "10/23/2026",
+   "source": "UF"
+  },
+  "MI": {
+   "board": 986207,
+   "uf": 986207,
+   "gap": 0,
+   "verdict": "ties out",
+   "as_of": "10/23/2026",
+   "source": "UF"
+  },
+  "MN": {
+   "board": 419189,
+   "uf": 419189,
+   "gap": 0,
+   "verdict": "ties out",
+   "as_of": "10/23/2026",
+   "source": "UF"
+  },
+  "NC": {
+   "board": 1544674,
+   "uf": 1544674,
+   "gap": 0,
+   "verdict": "ties out",
+   "as_of": "2026-10-25",
+   "source": "direct"
+  },
+  "NE": {
+   "board": 136433,
+   "uf": 136433,
+   "gap": 0,
+   "verdict": "ties out",
+   "as_of": "10/23/2026",
+   "source": "UF"
+  },
+  "OH": {
+   "board": 922179,
+   "uf": 922179,
+   "gap": 0,
+   "verdict": "ties out",
+   "as_of": "10/23/2026",
+   "source": "UF"
+  },
+  "SC": {
+   "board": 389672,
+   "uf": 389672,
+   "gap": 0,
+   "verdict": "ties out",
+   "as_of": "2026-10-22",
+   "source": "direct"
+  },
+  "TX": {
+   "board": 3688224,
+   "uf": 3697498,
+   "gap": 9274,
+   "verdict": "ties out",
+   "as_of": "10/24/2026",
+   "source": "UF"
+  }
+ }
+}

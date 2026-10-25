@@ -13372,13 +13372,12 @@
  },
  "election": "2026 General",
  "fallback": true,
- "fetched": "2026-10-25T12:01:46+00:00",
+ "fetched": "2026-10-25T12:03:01+00:00",
  "in_person": false,
  "in_person_reported": false,
  "notes": {
   "fallback": "the direct state parse went stale or is unreachable, so this is the UF Election Lab's copy. It does NOT separate mail from in-person; the direct parse resumes automatically when the state is reachable again",
-  "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly",
-  "withdrawn": "The source sent 0 for a figure it had been publishing, which means it is no longer published rather than that none were cast. It is shown as unknown, and the total covers only the streams still published: early_in_person was 68,225"
+  "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly"
  },
  "outstanding_available": false,
  "party_available": true,
@@ -13390,7 +13389,7 @@
    "NPA": 0,
    "O": 0,
    "R": 0,
-   "total": null
+   "total": 0
   },
   "outstanding": {
    "D": 24678,
@@ -13407,8 +13406,5 @@
    "total": 178680
   }
  },
- "total_excludes": [
-  "early_in_person"
- ],
  "unit": "county"
 }

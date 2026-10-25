@@ -66,7 +66,13 @@ STATES = {"NE": "Nebraska", "KS": "Kansas", "GA": "Georgia",
 # direct rather than for being current. The direct parse is still preferred: it carries
 # party, outstanding mail and the county detail the Lab's state row does not, and it
 # resumes the moment the CDN catches up.
-FALLBACK = {"ME": "Maine", "IA": "Iowa", "FL": "Florida"}
+# TEXAS joined on 2026-10-25. tx_earlyvote.py reads the Texas SOS directly and the SOS
+# had still not posted a 2026 election, so it exited 2 - "not published yet" - on every
+# tick and the board showed nothing for Texas. The Election Lab had 3,688,224 Texas
+# ballots by 10/24, compiled from the counties rather than from the SOS. The largest
+# state on the board was missing entirely because one publisher was quiet and nothing
+# looked anywhere else. The direct parse still wins the moment the SOS does publish.
+FALLBACK = {"ME": "Maine", "IA": "Iowa", "FL": "Florida", "TX": "Texas"}
 # How far behind a direct parse may fall before the Lab's copy replaces it. This is a
 # judgement about how much VOTE is at stake, not just how many days, so it is per state.
 # Maine added about 2,000 ballots a day at this point and a two-day tolerance costs

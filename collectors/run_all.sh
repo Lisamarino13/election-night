@@ -109,4 +109,8 @@ else
 fi
 
 say "=== done: $ok ok, $pending pending, $failed failed$failed_names ==="
+# Hand the outcome to publish.sh so the heartbeat records WHY a run was unhappy, not
+# just that it happened. A non-zero exit here must never stop the publish - the cron
+# line uses ';' for exactly that reason - but the reason should travel with it.
+[ "$failed" -gt 0 ] && printf '%s' "$failed_names" > "${TMPDIR:-/tmp}/election-night-failed" || rm -f "${TMPDIR:-/tmp}/election-night-failed"
 [ "$failed" -eq 0 ]

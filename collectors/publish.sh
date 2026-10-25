@@ -17,9 +17,38 @@ cd "$(dirname "$0")/.." || exit 1
 
 # Everything run_all.sh produces. demographics-*.json was added to the pull on 10-22 and
 # never added here, so it was neither saved before the branch move nor pushed after it.
-PATHS="data/early-*.json data/ev-history-*.json data/trend-ev.json data/snapshots data/demographics-*.json"
+PATHS="data/early-*.json data/ev-history-*.json data/trend-ev.json data/snapshots data/demographics-*.json data/last-run.json"
 
-if [ -z "$(git status --porcelain data/)" ]; then
+# A HEARTBEAT, written every run whether or not the data moved. Without one, a cron
+# that dies is indistinguishable from a cron with nothing new to say: both leave the
+# repository untouched. This one went unnoticed for three days because the only
+# evidence of life was a data change, and the publish was failing before it could make
+# one. The board reads this file and shouts when it stops moving.
+STATUS="ok"
+FAILED_FILE="${TMPDIR:-/tmp}/election-night-failed"
+RUN_FAILED="${RUN_FAILED:-$( [ -f "$FAILED_FILE" ] && cat "$FAILED_FILE" )}"
+[ -n "$RUN_FAILED" ] && STATUS="collectors-failed"
+mkdir -p data
+cat > data/last-run.json <<JSON
+{
+ "ran_at": "$(date -u '+%Y-%m-%dT%H:%M:%SZ')",
+ "host": "$(hostname -s 2>/dev/null || echo unknown)",
+ "status": "$STATUS",
+ "failed": "${RUN_FAILED:-}",
+ "note": "Written by publish.sh on every run, even when no figure changed. If ran_at stops advancing the collector has stopped, which is not the same as the numbers not moving."
+}
+JSON
+
+if [ -z "$(git status --porcelain data/ | grep -v 'data/last-run.json')" ]; then
+  # Still push the heartbeat: the run happened and the board must be able to say so.
+  git add data/last-run.json 2>/dev/null
+  if [ -n "$(git diff --cached --name-only)" ]; then
+    git -c user.name="early-vote cron" -c user.email="cron@localhost" \
+        commit -q -m "heartbeat: $(date -u '+%Y-%m-%d %H:%MZ') (no data change)" \
+      && git push -q origin main \
+      && echo "publish: no data changes — heartbeat pushed"
+    exit 0
+  fi
   echo "publish: no data changes — nothing to push"
   exit 0
 fi
@@ -57,7 +86,7 @@ git reset -q --hard origin/main || { echo "publish: could not match origin" >&2;
 
 mkdir -p data/snapshots
 cp -R "$tmp"/early-*.json "$tmp"/ev-history-*.json "$tmp"/trend-ev.json \
-      "$tmp"/demographics-*.json data/ 2>/dev/null
+      "$tmp"/demographics-*.json "$tmp"/last-run.json data/ 2>/dev/null
 [ -d "$tmp/snapshots" ] && cp -R "$tmp"/snapshots/. data/snapshots/ 2>/dev/null
 
 # Stage by name, never `git add -A`: nothing outside data/ rides along on a cron run.

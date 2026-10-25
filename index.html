@@ -204,6 +204,9 @@ tbody tr:hover td{background:var(--bg)}
 .ehint{font-size:11.5px;color:var(--dim);line-height:1.4}
 footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);color:var(--dim);font-size:12px}
 footer p{margin:0 0 7px}
+.alarmbar{background:rgba(170,40,40,.08);border:1px solid var(--r);border-left:4px solid var(--r);
+  border-radius:0 3px 3px 0;padding:13px 15px;margin-bottom:14px;font-size:15px;line-height:1.55}
+.alarmbar b{font-weight:600}
 .replaybox{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--d);
   border-radius:0 3px 3px 0;padding:17px 18px;margin-bottom:16px}
 .rphd{font-family:var(--display);font-size:21px;font-weight:600;text-transform:uppercase;
@@ -375,6 +378,7 @@ FL, 41, 38, 21, 2400000"></textarea>
 <div id="chartwrap" class="chartbox" hidden></div>
 
 <div id="evwrap" hidden>
+  <div id="alarm" class="alarmbar" hidden></div>
   <section id="takeaways" class="takeaways" hidden></section>
   <div id="evbody"></div>
   <p class="evfoot" id="evfoot"></p>
@@ -1142,12 +1146,41 @@ function renderLastRun(){
   }
   if(!newest){ el.textContent=""; return; }
   const mins=Math.round((Date.now()-newest.getTime())/60000);
-  const ago = mins<1?"just now" : mins<60?`${mins} min ago`
-            : mins<1440?`${Math.round(mins/60)} hr ago` : `${Math.round(mins/1440)} days ago`;
-  const stale = mins>1440;
+  const ago = m => m<1?"just now" : m<60?`${m} min ago`
+            : m<1440?`${Math.round(m/60)} hr ago` : `${Math.round(m/1440)} days ago`;
+  // The collector runs every four hours. Flagging only after 1,440 minutes meant a
+  // full day of failure looked normal and three days looked like one amber word -
+  // which is exactly what happened when the publish step wedged on 2026-10-22 and
+  // nobody noticed until the numbers were obviously wrong. Thresholds now follow the
+  // real cadence: one missed run is worth a word, two is worth a banner.
+  const stale = mins>360, dead = mins>720;
   el.innerHTML = `last pull <b>${newest.toLocaleString(undefined,
       {month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})}</b> ` +
-    `<span class="${stale?"stale":""}">(${ago})</span> · ${states} states`;
+    `<span class="${stale?"stale":""}">(${ago(mins)})</span> · ${states} states`;
+
+  // The heartbeat separates "nothing changed" from "nothing ran". They look identical
+  // in the data and only one of them is a problem.
+  fetch("data/last-run.json?t="+Date.now()).then(r=>r.ok?r.json():null).then(hb=>{
+    const bar = document.getElementById("alarm");
+    if(!bar) return;
+    const ran = hb && hb.ran_at ? new Date(hb.ran_at) : null;
+    const rmins = ran && !isNaN(ran) ? Math.round((Date.now()-ran.getTime())/60000) : null;
+    let msg = "";
+    if (rmins == null && dead){
+      msg = `The board has not been updated in <b>${ago(mins)}</b> and the collector is
+             not reporting at all. The figures below are that old.`;
+    } else if (rmins != null && rmins > 480){
+      msg = `The collector last ran <b>${ago(rmins)}</b>. It is scheduled every four
+             hours, so it has missed at least two runs and the figures below are stale.`;
+    } else if (rmins != null && hb.status !== "ok" && dead){
+      msg = `The collector is running but has not refreshed the data in
+             <b>${ago(mins)}</b>${hb.failed?` — failing on:<b>${hb.failed}</b>`:""}.`;
+    } else if (dead){
+      msg = `No figure here has changed in <b>${ago(mins)}</b>.`;
+    }
+    bar.innerHTML = msg ? `<b>Stale data.</b> ${msg}` : "";
+    bar.hidden = !msg;
+  }).catch(()=>{});
 }
 
 function renderEV(){

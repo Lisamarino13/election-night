@@ -3,7 +3,7 @@
  "unit": "county",
  "election": "2026 General",
  "as_of": "10/26/2026",
- "fetched": "2026-10-26T17:07:21+00:00",
+ "fetched": "2026-10-26T17:37:19+00:00",
  "party_available": false,
  "outstanding_available": false,
  "in_person": true,
@@ -1289,7 +1289,15 @@
   "note": "Georgia's county-level \"Ballots Issued and Accepted\" and \"Ballots to Date\" downloads (from the state's election-data-hub dashboard, https://sos.ga.gov/page/election-data-hub-unofficial-turnout) are compared against the statewide absentee file, county by county, using whichever is higher - this is how same-day in-person early-voting activity (which the statewide absentee file doesn't carry until the next overnight refresh) gets folded in. No district or demographic breakdown is available from these county-level downloads."
  },
  "notes": {
-  "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly"
+  "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly",
+  "mismatch": "This figure is 45,387 BEHIND the Election Lab's own headline for GA: their county file totals 1,780,239, their national file 1,825,626. The county file was last written 7 hours before the national one. A count cannot fall as time passes, so this is staleness and not a disagreement. The county file is kept because a per-county projection needs per-county numbers, and it catches up when the Lab rewrites it."
+ },
+ "source_mismatch": {
+  "county_file": 1780239,
+  "national_file": 1825626,
+  "diff": -45387,
+  "county_file_modified": "2026-10-26T10:51:24+00:00",
+  "national_file_modified": "2026-10-26T17:26:55+00:00"
  },
  "state_totals": {
   "registered": 0,

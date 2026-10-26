@@ -26,7 +26,9 @@ say(){ printf '%s %s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$*" | tee -a "$LOG";
 
 say "=== results pull starting ==="
 ok=0; pending=0; failed=0
-for c in nc_results.py oh_results.py fl_results.py tx_results.py ne_results.py clarity_results.py; do
+# me_results.py is deliberately last and tolerated: maine.gov refuses the cron host's
+# datacenter IP, so it exits 2 there and is run from the laptop instead.
+for c in nc_results.py oh_results.py fl_results.py tx_results.py ne_results.py me_results.py clarity_results.py; do
   [ -f "$c" ] || { say "SKIP $c"; continue; }
   out=$("$PY" "$c" 2>&1); rc=$?
   printf '%s\n' "$out" >> "$LOG"

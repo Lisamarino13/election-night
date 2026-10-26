@@ -1,0 +1,97 @@
+{
+ "state": "MI",
+ "surveyed": "2026-10-26",
+ "why": "Michigan has no statewide election-night feed. Its SoS results page is a 155-entry archive (1998-current) published after canvass, and it says outright that its reports are 'for statewide elections only. Local election data can be found at the respective county website.' The old statewide host miboecfr.nictusa.com is now a parked people-search domain and mielections.us is a Comcast NXDOMAIN hijack. So county coverage has to be assembled vendor by vendor.",
+ "enhanced_voting": {
+  "api": "https://app.enhancedvoting.com/results/public/api/jurisdictions/<slug> | /elections/<slug>/<electionId>/data",
+  "transport": "plain HTTP, no browser, VM-safe",
+  "gotcha": "the jurisdictions endpoint answers 200 with a ~542-byte stub for ANY slug (banana-county-mi included) - a real jurisdiction is one that carries an id. Testing on status alone reported 83 of 83, which was false.",
+  "counties": {
+   "Barry": "barry-county-mi",
+   "Berrien": "berrien-county-mi",
+   "Branch": "branch-county-mi",
+   "Cass": "cass-county-mi",
+   "Clare": "clare-county-mi",
+   "Delta": "delta-county-mi",
+   "Gratiot": "gratiot-county-mi",
+   "Ingham": "ingham-county-mi",
+   "Iosco": "iosco-county-mi",
+   "Isabella": "isabella-county-mi",
+   "Kalamazoo": "kalamazoo-county-mi",
+   "Kent": "kent-county-mi",
+   "Lake": "lake-county-mi",
+   "Leelanau": "leelanau-county-mi",
+   "Midland": "midland-county-mi",
+   "Monroe": "monroe-county-mi",
+   "Newaygo": "newaygo-county-mi",
+   "Osceola": "osceola-county-mi",
+   "Saginaw": "saginaw-county-mi",
+   "Shiawassee": "shiawassee-county-mi",
+   "Van Buren": "van-buren-county-mi"
+  },
+  "city_jurisdictions": {
+   "Detroit": "detroit-mi"
+  }
+ },
+ "clarity": {
+  "api": "https://results.enr.clarityelections.com/MI/<Slug>/elections.json",
+  "transport": "plain HTTP; same detailxml.zip shape clarity_results.py already reads",
+  "gotcha": "elections.json returns 200 with [] when no election is staged, and 404 for a slug that does not exist - so [] means 'on Clarity, nothing live', not 'absent'. Requiring a non-empty list reported 0 of 83, which was false.",
+  "counties": {
+   "Cass": "Cass",
+   "Eaton": "Eaton",
+   "Emmet": "Emmet",
+   "Genesee": "Genesee",
+   "Grand Traverse": "Grand_Traverse",
+   "Macomb": "Macomb",
+   "Oakland": "Oakland",
+   "Ottawa": "Ottawa"
+  }
+ },
+ "not_machine_readable": {
+  "Wayne": "PDFs only, posted after canvass - 'Official Summary Report (PDF)', 'Official Precinct by Precinct (PDF, 6MB)'. Its Nov 3 2026 page currently carries only candidate and proposal lists. Detroit the CITY is on Enhanced Voting, but none of the other 40 Wayne communities probed are, so Wayne cannot be rebuilt from its parts.",
+  "Detroit_city_site": "posts via app.smartsheet.com, not an API"
+ },
+ "coverage": {
+  "counties_reachable": 28,
+  "of": 83,
+  "counties": [
+   "Barry",
+   "Berrien",
+   "Branch",
+   "Cass",
+   "Clare",
+   "Delta",
+   "Eaton",
+   "Emmet",
+   "Genesee",
+   "Grand Traverse",
+   "Gratiot",
+   "Ingham",
+   "Iosco",
+   "Isabella",
+   "Kalamazoo",
+   "Kent",
+   "Lake",
+   "Leelanau",
+   "Macomb",
+   "Midland",
+   "Monroe",
+   "Newaygo",
+   "Oakland",
+   "Osceola",
+   "Ottawa",
+   "Saginaw",
+   "Shiawassee",
+   "Van Buren"
+  ],
+  "plus_city": "Detroit",
+  "missing_big": [
+   "Wayne",
+   "Washtenaw",
+   "Livingston",
+   "Muskegon",
+   "Bay"
+  ]
+ }
+}

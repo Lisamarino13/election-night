@@ -26,9 +26,16 @@ say(){ printf '%s %s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$*" | tee -a "$LOG";
 
 say "=== results pull starting ==="
 ok=0; pending=0; failed=0
-# me_results.py is deliberately last and tolerated: maine.gov refuses the cron host's
-# datacenter IP, so it exits 2 there and is run from the laptop instead.
-for c in nc_results.py oh_results.py fl_results.py tx_results.py ne_results.py me_results.py clarity_results.py; do
+# No collector may publish before its state's polls close - see election_day.py.
+# Minnesota's 2026 file is live eight days early and already full of its accuracy test
+# (write-in second statewide), so "the feed has numbers" is not the same as "there are
+# results".
+#
+# me_results.py and ks_results.py are last and tolerated, because both need something
+# the cron host hasn't got: maine.gov refuses its datacenter IP, and Kansas sits behind
+# a Cloudflare browser challenge that only a real windowed Chrome clears. Both exit 2
+# there and are run from the laptop instead.
+for c in nc_results.py oh_results.py fl_results.py tx_results.py ne_results.py mn_results.py clarity_results.py me_results.py ks_results.py; do
   [ -f "$c" ] || { say "SKIP $c"; continue; }
   out=$("$PY" "$c" 2>&1); rc=$?
   printf '%s\n' "$out" >> "$LOG"

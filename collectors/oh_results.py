@@ -31,6 +31,7 @@ FAILS CLOSED: any fetch or parse problem raises and writes nothing.
 import csv, io, json, pathlib, re, sys, urllib.request, collections
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
+import election_day
 
 HOST = "https://liveresults.ohiosos.gov"
 XML = HOST + "/Api/v1/download?filename=VSSC1622XmlFileBlob"
@@ -327,7 +328,9 @@ def main():
         },
     }
     p = pathlib.Path(__file__).resolve().parent.parent / "data" / "results-OH.json"
-    p.write_text(json.dumps(payload, indent=1) + "\n")
+    rc = election_day.write_or_hold("OH", p, payload, totals)
+    if rc:
+        return rc
     flag = "  [TEST DATA]" if meta["is_test"] else ""
     print(f"OH {meta['status']}{flag}  generated {meta['generated']}")
     for race, t in totals.items():

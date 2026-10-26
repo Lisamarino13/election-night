@@ -38,6 +38,7 @@ showing the previous good count with its own timestamp rather than a partial one
 """
 import csv, io, json, pathlib, sys, zipfile, urllib.request, collections
 from datetime import datetime, timezone
+import election_day
 
 ELECTION = ("2026_11_03", "20261103")
 BASE = "https://s3.amazonaws.com/dl.ncsbe.gov/ENRS/{}/{}"
@@ -252,7 +253,9 @@ def main():
         },
     }
     p = pathlib.Path(__file__).resolve().parent.parent / "data" / "results-NC.json"
-    p.write_text(json.dumps(payload, indent=1) + "\n")
+    rc = election_day.write_or_hold("NC", p, payload, state)
+    if rc:
+        return rc
     for race, s in state.items():
         lead = list(s["choices"].items())[:2]
         print(f"NC {race}: {s['total']:,} counted  "

@@ -28,6 +28,7 @@ answer until polls close.
 """
 import io, json, pathlib, re, sys, urllib.parse, urllib.request, zipfile, collections
 from datetime import datetime, timezone
+import election_day
 
 INDEX = "https://www.maine.gov/sos/cec/elec/results/index.html"
 BASE = "https://www.maine.gov"
@@ -223,7 +224,9 @@ def main():
         },
     }
     p = pathlib.Path(__file__).resolve().parent.parent / "data" / "results-ME.json"
-    p.write_text(json.dumps(payload, indent=1) + "\n")
+    rc = election_day.write_or_hold("ME", p, payload, totals)
+    if rc:
+        return rc
     for race, t in totals.items():
         print(f"ME {race}: {t['total']:,} votes across {t['units']} municipalities")
     print(f"   -> {p.name}")

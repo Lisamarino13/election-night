@@ -24,6 +24,7 @@ FAILS CLOSED: any fetch or parse problem raises and writes nothing.
 """
 import csv, io, json, pathlib, re, sys, urllib.request, collections
 from datetime import datetime, timezone
+import election_day
 
 BASE = "https://flelectionfiles.floridados.gov/enightfilespublic"
 ELECTION_DATE = "20261103"
@@ -236,7 +237,9 @@ def main():
             return 2
         raise
     p = pathlib.Path(__file__).resolve().parent.parent / "data" / "results-FL.json"
-    p.write_text(json.dumps(payload, indent=1) + "\n")
+    rc = election_day.write_or_hold("FL", p, payload, totals)
+    if rc:
+        return rc
     for race, t in totals.items():
         print(f"FL {race}: {t['total']:,} counted  precincts "
               f"{t['precincts_reporting']:,}/{t['precincts_total']:,}")

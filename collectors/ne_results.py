@@ -24,6 +24,7 @@ writes nothing.
 """
 import gzip, json, pathlib, re, sys, urllib.request, collections
 from datetime import datetime, timezone
+import election_day
 
 SVC = "https://neresultswebservice.azurewebsites.us/ResultsAjax.svc"
 PAGE = "https://electionresults.nebraska.gov/resultsSW.aspx?type=SW&map=CTY"
@@ -169,7 +170,9 @@ def main():
         },
     }
     p = pathlib.Path(__file__).resolve().parent.parent / "data" / "results-NE.json"
-    p.write_text(json.dumps(payload, indent=1) + "\n")
+    rc = election_day.write_or_hold("NE", p, payload, totals)
+    if rc:
+        return rc
     for race, t in totals.items():
         print(f"NE {race}: {t['total']:,} counted across {len(counties)} counties")
     print(f"   -> {p.name}")

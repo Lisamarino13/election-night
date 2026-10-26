@@ -31,6 +31,7 @@ state in October and not a failure. Any other problem raises and writes nothing.
 import io, json, pathlib, re, sys, urllib.request, zipfile, collections
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
+import election_day
 
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
                     "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
@@ -292,7 +293,9 @@ def build(st):
             },
         }
         p = pathlib.Path(__file__).resolve().parent.parent / "data" / f"results-{st}.json"
-        p.write_text(json.dumps(payload, indent=1) + "\n")
+        rc = election_day.write_or_hold(st, p, payload, state)
+        if rc:
+            return rc
         for race, s in state.items():
             print(f"{st} {race}: {s['total']:,} counted  "
                   f"precincts {s['precincts_reporting']:,}/{s['precincts_total']:,}  "

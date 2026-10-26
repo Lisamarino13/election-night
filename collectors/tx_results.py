@@ -38,6 +38,7 @@ and writes nothing.
 """
 import gzip, json, pathlib, re, sys, urllib.request, collections
 from datetime import datetime, timezone
+import election_day
 
 BASE = "https://results.texas-election.com/static/data"
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -214,7 +215,9 @@ def main():
         return 2
     payload, totals, counties = build(eid, name)
     p = pathlib.Path(__file__).resolve().parent.parent / "data" / "results-TX.json"
-    p.write_text(json.dumps(payload, indent=1) + "\n")
+    rc = election_day.write_or_hold("TX", p, payload, totals)
+    if rc:
+        return rc
     for race, t in totals.items():
         print(f"TX {race}: {t['total']:,} counted  precincts "
               f"{t['precincts_reporting']:,}/{t['precincts_total']:,}  "

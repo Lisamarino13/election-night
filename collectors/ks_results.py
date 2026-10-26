@@ -254,6 +254,15 @@ def proof(b):
 
 
 def main(argv):
+    # On the cron VM there is no browser, and Kansas without one is not a failure, it
+    # is the wrong host - the same answer Maine gives there. Saying so with exit 2
+    # keeps election night's every-three-minutes log honest instead of red.
+    try:
+        browser_fetch.chrome_path()
+    except RuntimeError as e:
+        print(f"KS: {e} — run this from the laptop, as Maine is")
+        return 2
+
     with browser_fetch.Browser() as b:
         if "--nominees" in argv:
             return build_roster(b)

@@ -828,11 +828,15 @@ function turnoutCard(k, st, e){
   // A state that does not REPORT a stream must never show 0 for it. Michigan publishes no
   // in-person figure at all; printing 0 would read as "nobody has voted early in person",
   // which is false. Same rule as outstanding everywhere else: unknown is a dash.
+  // `unreported` prints a dash rather than a zero, because a figure a state does not
+  // publish is not zero. The caller may pass its own explanation; only fall back to the
+  // generic phrase when it does not.
   const line = (lab,v,sub,unreported) => `<div class="evrow${unreported?" nodata":""}">
       <span class="slab">${lab}</span>
       <span class="fig evtot">${unreported?"&mdash;":n(v||0)}</span>
-      <span class="evpcts" style="grid-column:span 2"><b class="dim">${unreported?
-        "not reported by this state":sub}</b></span></div>`;
+      <span class="evpcts" style="grid-column:span 2"><b class="dim">${unreported
+        ? (sub || "not reported by this state")
+        : sub}</b></span></div>`;
   const cties = Object.entries(e.counties||{})
     .filter(([nm])=>nm!=="STATEWIDE")
     .map(([nm,v])=>({nm,...v}))
@@ -869,8 +873,20 @@ function turnoutCard(k, st, e){
     ${line("In-person early", t.in_person, pct(t.in_person||0)+" of registered", !ipRep)}
     ${line("By mail", t.by_mail, pct(t.by_mail||0)+" of registered")}
     ${line(ipRep?"Total early":"Mail returned", t.total, reg?pct(t.total||0)+" of "+n(reg)+" registered":"")}
-    ${t.requested?line("Mail outstanding", (t.requested||0)-(t.by_mail||0),
-        "derived: requested minus returned"):""}
+    ${(() => {
+      // "Mail outstanding" is requested minus returned, so it only means anything when
+      // the state actually publishes a request count. Texas does not: UF fills its
+      // request_all with accept_all, so requested equals returned and this line used to
+      // render a hard "0" - which reads as "no mail ballots left to count" when the
+      // truth is that nobody knows. A figure a state does not publish gets a dash.
+      const unknown = e.outstanding_available === false
+                   || !t.requested
+                   || t.requested === t.by_mail;
+      if (unknown) return line("Mail outstanding", null,
+        "not published by this state &mdash; not zero", true);
+      return line("Mail outstanding", (t.requested||0)-(t.by_mail||0),
+        "derived: requested minus returned");
+    })()}
     <div class="streamline">No party registration in this state &mdash; the official file carries
       turnout only. Any D/R split you see elsewhere for ${st.name} is a vendor model, not a count.</div>
     <div class="meter"><span>${e.through?"through "+e.through:"—"}</span>

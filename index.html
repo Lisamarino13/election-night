@@ -975,6 +975,18 @@ async function renderTakeaways(){
       const bOf = y => { const r = d.years[y].streams.voted.race;
         return r.counts.nh_black / r.total * 100; };
       const name = (DATA.states[k]||{}).name || k;
+      // How much of the state's early vote does the breakdown actually describe?
+      // South Carolina publishes race for mail ballots only, so its figure rests on
+      // about 5% of its early vote. Printed beside Georgia's and North Carolina's,
+      // which cover effectively all of theirs, that reads as the same kind of number
+      // and it is not. Coverage is measured here so the bullet can say so.
+      let cov = null;
+      try{
+        const ev = await (await fetch("data/early-"+k+".json?t="+Date.now())).json();
+        const tot = (ev.state_totals||{}).total;
+        const described = d.years[got[got.length-1]].streams.voted.race.total;
+        if (tot && described) cov = described / tot;
+      }catch(e){ /* no live file for this state; leave coverage unknown */ }
       // A state that records race but has nothing for this cycle is named rather than
       // dropped: silently leaving South Carolina out reads as "it has no race data".
       if (got.length < 2 || +got[got.length-1] !== 2026){
@@ -982,7 +994,8 @@ async function renderTakeaways(){
         continue;
       }
       race.push({k, name, latest:got[got.length-1], prev:got[got.length-2],
-        now:bOf(got[got.length-1]), was:bOf(got[got.length-2])});
+        now:bOf(got[got.length-1]), was:bOf(got[got.length-2]), cov,
+        described:d.years[got[got.length-1]].streams.voted.race.total});
     }catch(e){ /* most states do not record race at all */ }
   }
   race.sort((a,b) => (b.now-b.was) - (a.now-a.was));
@@ -990,10 +1003,18 @@ async function renderTakeaways(){
     bullets.push({
       h: "Black voters are a bigger share of the early vote than they were in " + race[0].prev,
       b: `${race.map(r => `<b>${r.name}</b> ${r.was.toFixed(1)}% &rarr;
-            <b>${r.now.toFixed(1)}%</b>`).join(" &middot; ")}.
+            <b>${r.now.toFixed(1)}%</b>${(r.cov != null && r.cov < 0.95)
+              ? ` <span class="dim">(${r.cov < 0.1 ? (100*r.cov).toFixed(1)
+                  : Math.round(100*r.cov)}% of its early vote)</span>` : ""}`)
+            .join(" &middot; ")}.
           Only a handful of states record race at registration, so this is not a national
           picture &mdash; and ${race[0].prev} was a completed presidential cycle while
-          2026 is days old.${stale.length ? ` ${stale.map(x=>`<b>${x.name}</b>`).join(" and ")}
+          2026 is days old.${race.some(r => r.cov != null && r.cov < 0.95)
+            ? ` ${race.filter(r => r.cov != null && r.cov < 0.95)
+                .map(r => `<b>${r.name}</b>`).join(" and ")} publish${
+                race.filter(r => r.cov != null && r.cov < 0.95).length > 1 ? "" : "es"}
+              race for mail ballots only, so that share rests on a small and
+              unrepresentative slice of its early vote.` : ""}${stale.length ? ` ${stale.map(x=>`<b>${x.name}</b>`).join(" and ")}
           record${stale.length>1?"":"s"} race too, but ${stale.length>1?"have":"has"} no
           2026 breakdown published yet &mdash; newest is ${stale[0].latest}.` : ""}`,
       flag: true

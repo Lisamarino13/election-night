@@ -342,16 +342,39 @@ async function renderRaceChart(host, code){
     counts:Object.fromEntries(series.map(sr=>{const r=vt(sr.key,"voted");
       return [sr.key, r ? r.counts[k] : null];})),
   })).sort((a,b)=>(b.vals[latest]||0)-(a.vals[latest]||0));
-  // A state whose newest race figure predates this cycle must say so on the card.
-  // Showing 2024 alone with no explanation reads as "South Carolina has no race data",
-  // when what is true is narrower and worth stating: the breakdown exists, it covers
-  // mail ballots only, and this cycle's is not published yet.
-  const gap = !series.some(sr => +sr.key === 2026)
-    ? `<div class="streamline">No 2026 race breakdown published for this state yet &mdash;
+  // Two different things can be wrong with a race card, and the old guard only caught
+  // one of them. It warned when a state had published NO figure for this cycle - which
+  // meant that the moment South Carolina published a thin one, the warning disappeared
+  // and the card silently drew SC's composition from 28,614 mail ballots against a
+  // 530,558 early vote, with nothing on screen to say so. Presence of a 2026 series is
+  // not the question. COVERAGE is: what share of the state's early vote does this
+  // breakdown actually describe, and which modes are missing from it.
+  let gap = "";
+  if (!series.some(sr => +sr.key === 2026)){
+    gap = `<div class="streamline">No 2026 race breakdown published for this state yet &mdash;
        showing ${latest} alone. ${code === "SC"
-         ? "South Carolina's race figures cover mail ballots only (its in-person early report carries no breakdown), and it has published no mail data this cycle."
-         : "The source has not posted one for this cycle."}</div>`
-    : "";
+         ? "South Carolina's race figures cover mail ballots only; its in-person early report carries no breakdown."
+         : "The source has not posted one for this cycle."}</div>`;
+  } else {
+    let evTotal = null;
+    try{ evTotal = (await J("data/early-"+code+".json")).state_totals.total; }catch(e){}
+    const covered = (nowR && nowR.total) || 0;
+    if (evTotal && covered && covered < 0.95 * evTotal){
+      const pct = covered / evTotal;
+      // Name the modes that carry ballots but no breakdown, so the shortfall is
+      // attributable rather than just a number.
+      const streams = (d.years[latest]||{}).streams || {};
+      const blind = ["inperson","accept"].filter(k => {
+        const r = (streams[k]||{}).race;
+        return !r || !r.total;
+      }).map(k => k === "inperson" ? "in-person early" : "mail");
+      gap = `<div class="streamline">This breakdown covers
+        ${n(covered)} of ${n(evTotal)} early ballots
+        (${pct < 0.1 ? (100*pct).toFixed(1) : Math.round(100*pct)}%)${
+          blind.length ? " &mdash; " + blind.join(" and ") + " ballots carry no race breakdown" : ""
+        }, so the shares describe that subset, not everyone who has voted.</div>`;
+    }
+  }
   host.innerHTML = `<div class="legend">${series.map(sr=>key(sr.cycle,sr.label)).join("")}</div>
     <div class="plot"></div>${gap}`;
   const draw = () => drawShares(host.querySelector(".plot"), groups, series,

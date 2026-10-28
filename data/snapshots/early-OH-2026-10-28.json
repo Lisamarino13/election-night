@@ -1,0 +1,733 @@
+{
+ "as_of": "10/28/2026",
+ "attribution": {
+  "aggregator": "UF Election Lab (election.lab.ufl.edu)",
+  "note": "In-person early votes may be different than reported by the Ohio Secretary of State. They are approximated by counting a ballot sent and received on the same day as an in-person early vote.",
+  "upstream": "https://data.ohiosos.gov/portal/election-dashboards"
+ },
+ "counties": {
+  "ADAMS": {
+   "by_mail": 787,
+   "in_person": 2497,
+   "outstanding_derived": 401,
+   "registered": null,
+   "requested": 1188,
+   "total": 3284
+  },
+  "ALLEN": {
+   "by_mail": 2818,
+   "in_person": 5957,
+   "outstanding_derived": 1119,
+   "registered": null,
+   "requested": 3937,
+   "total": 8775
+  },
+  "ASHLAND": {
+   "by_mail": 1700,
+   "in_person": 5012,
+   "outstanding_derived": 552,
+   "registered": null,
+   "requested": 2252,
+   "total": 6712
+  },
+  "ASHTABULA": {
+   "by_mail": 3320,
+   "in_person": 4763,
+   "outstanding_derived": 1237,
+   "registered": null,
+   "requested": 4557,
+   "total": 8083
+  },
+  "ATHENS": {
+   "by_mail": 2133,
+   "in_person": 4509,
+   "outstanding_derived": 774,
+   "registered": null,
+   "requested": 2907,
+   "total": 6642
+  },
+  "AUGLAIZE": {
+   "by_mail": 1586,
+   "in_person": 3597,
+   "outstanding_derived": 556,
+   "registered": null,
+   "requested": 2142,
+   "total": 5183
+  },
+  "BELMONT": {
+   "by_mail": 3825,
+   "in_person": 3689,
+   "outstanding_derived": 1296,
+   "registered": null,
+   "requested": 5121,
+   "total": 7514
+  },
+  "BROWN": {
+   "by_mail": 1328,
+   "in_person": 2947,
+   "outstanding_derived": 412,
+   "registered": null,
+   "requested": 1740,
+   "total": 4275
+  },
+  "BUTLER": {
+   "by_mail": 11843,
+   "in_person": 29267,
+   "outstanding_derived": 5154,
+   "registered": null,
+   "requested": 16997,
+   "total": 41110
+  },
+  "CARROLL": {
+   "by_mail": 1026,
+   "in_person": 1660,
+   "outstanding_derived": 302,
+   "registered": null,
+   "requested": 1328,
+   "total": 2686
+  },
+  "CHAMPAIGN": {
+   "by_mail": 1186,
+   "in_person": 3752,
+   "outstanding_derived": 442,
+   "registered": null,
+   "requested": 1628,
+   "total": 4938
+  },
+  "CLARK": {
+   "by_mail": 4139,
+   "in_person": 10079,
+   "outstanding_derived": 1504,
+   "registered": null,
+   "requested": 5643,
+   "total": 14218
+  },
+  "CLERMONT": {
+   "by_mail": 10167,
+   "in_person": 13614,
+   "outstanding_derived": 3870,
+   "registered": null,
+   "requested": 14037,
+   "total": 23781
+  },
+  "CLINTON": {
+   "by_mail": 1199,
+   "in_person": 3549,
+   "outstanding_derived": 452,
+   "registered": null,
+   "requested": 1651,
+   "total": 4748
+  },
+  "COLUMBIANA": {
+   "by_mail": 3319,
+   "in_person": 4599,
+   "outstanding_derived": 1184,
+   "registered": null,
+   "requested": 4503,
+   "total": 7918
+  },
+  "COSHOCTON": {
+   "by_mail": 1305,
+   "in_person": 3139,
+   "outstanding_derived": 412,
+   "registered": null,
+   "requested": 1717,
+   "total": 4444
+  },
+  "CRAWFORD": {
+   "by_mail": 1664,
+   "in_person": 2653,
+   "outstanding_derived": 507,
+   "registered": null,
+   "requested": 2171,
+   "total": 4317
+  },
+  "CUYAHOGA": {
+   "by_mail": 85323,
+   "in_person": 35999,
+   "outstanding_derived": 35592,
+   "registered": null,
+   "requested": 120915,
+   "total": 121322
+  },
+  "DARKE": {
+   "by_mail": 1374,
+   "in_person": 4477,
+   "outstanding_derived": 481,
+   "registered": null,
+   "requested": 1855,
+   "total": 5851
+  },
+  "DEFIANCE": {
+   "by_mail": 1187,
+   "in_person": 4339,
+   "outstanding_derived": 315,
+   "registered": null,
+   "requested": 1502,
+   "total": 5526
+  },
+  "DELAWARE": {
+   "by_mail": 10954,
+   "in_person": 22221,
+   "outstanding_derived": 5814,
+   "registered": null,
+   "requested": 16768,
+   "total": 33175
+  },
+  "ERIE": {
+   "by_mail": 3834,
+   "in_person": 7053,
+   "outstanding_derived": 1195,
+   "registered": null,
+   "requested": 5029,
+   "total": 10887
+  },
+  "FAIRFIELD": {
+   "by_mail": 7584,
+   "in_person": 13221,
+   "outstanding_derived": 2705,
+   "registered": null,
+   "requested": 10289,
+   "total": 20805
+  },
+  "FAYETTE": {
+   "by_mail": 627,
+   "in_person": 2079,
+   "outstanding_derived": 225,
+   "registered": null,
+   "requested": 852,
+   "total": 2706
+  },
+  "FRANKLIN": {
+   "by_mail": 56747,
+   "in_person": 65108,
+   "outstanding_derived": 25379,
+   "registered": null,
+   "requested": 82126,
+   "total": 121855
+  },
+  "FULTON": {
+   "by_mail": 1120,
+   "in_person": 3663,
+   "outstanding_derived": 401,
+   "registered": null,
+   "requested": 1521,
+   "total": 4783
+  },
+  "GALLIA": {
+   "by_mail": 935,
+   "in_person": 1523,
+   "outstanding_derived": 471,
+   "registered": null,
+   "requested": 1406,
+   "total": 2458
+  },
+  "GEAUGA": {
+   "by_mail": 6523,
+   "in_person": 7686,
+   "outstanding_derived": 2445,
+   "registered": null,
+   "requested": 8968,
+   "total": 14209
+  },
+  "GREENE": {
+   "by_mail": 6350,
+   "in_person": 17789,
+   "outstanding_derived": 3375,
+   "registered": null,
+   "requested": 9725,
+   "total": 24139
+  },
+  "GUERNSEY": {
+   "by_mail": 1483,
+   "in_person": 2075,
+   "outstanding_derived": 489,
+   "registered": null,
+   "requested": 1972,
+   "total": 3558
+  },
+  "HAMILTON": {
+   "by_mail": 32996,
+   "in_person": 51208,
+   "outstanding_derived": 15021,
+   "registered": null,
+   "requested": 48017,
+   "total": 84204
+  },
+  "HANCOCK": {
+   "by_mail": 2360,
+   "in_person": 7129,
+   "outstanding_derived": 977,
+   "registered": null,
+   "requested": 3337,
+   "total": 9489
+  },
+  "HARDIN": {
+   "by_mail": 858,
+   "in_person": 1743,
+   "outstanding_derived": 233,
+   "registered": null,
+   "requested": 1091,
+   "total": 2601
+  },
+  "HARRISON": {
+   "by_mail": 632,
+   "in_person": 725,
+   "outstanding_derived": 214,
+   "registered": null,
+   "requested": 846,
+   "total": 1357
+  },
+  "HENRY": {
+   "by_mail": 753,
+   "in_person": 2586,
+   "outstanding_derived": 240,
+   "registered": null,
+   "requested": 993,
+   "total": 3339
+  },
+  "HIGHLAND": {
+   "by_mail": 994,
+   "in_person": 3042,
+   "outstanding_derived": 461,
+   "registered": null,
+   "requested": 1455,
+   "total": 4036
+  },
+  "HOCKING": {
+   "by_mail": 910,
+   "in_person": 2738,
+   "outstanding_derived": 365,
+   "registered": null,
+   "requested": 1275,
+   "total": 3648
+  },
+  "HOLMES": {
+   "by_mail": 868,
+   "in_person": 1798,
+   "outstanding_derived": 315,
+   "registered": null,
+   "requested": 1183,
+   "total": 2666
+  },
+  "HURON": {
+   "by_mail": 1920,
+   "in_person": 4014,
+   "outstanding_derived": 611,
+   "registered": null,
+   "requested": 2531,
+   "total": 5934
+  },
+  "JACKSON": {
+   "by_mail": 957,
+   "in_person": 3132,
+   "outstanding_derived": 393,
+   "registered": null,
+   "requested": 1350,
+   "total": 4089
+  },
+  "JEFFERSON": {
+   "by_mail": 3165,
+   "in_person": 3957,
+   "outstanding_derived": 797,
+   "registered": null,
+   "requested": 3962,
+   "total": 7122
+  },
+  "KNOX": {
+   "by_mail": 2329,
+   "in_person": 5766,
+   "outstanding_derived": 916,
+   "registered": null,
+   "requested": 3245,
+   "total": 8095
+  },
+  "LAKE": {
+   "by_mail": 14027,
+   "in_person": 17101,
+   "outstanding_derived": 5327,
+   "registered": null,
+   "requested": 19354,
+   "total": 31128
+  },
+  "LAWRENCE": {
+   "by_mail": 1453,
+   "in_person": 2992,
+   "outstanding_derived": 1063,
+   "registered": null,
+   "requested": 2516,
+   "total": 4445
+  },
+  "LICKING": {
+   "by_mail": 8957,
+   "in_person": 13462,
+   "outstanding_derived": 3775,
+   "registered": null,
+   "requested": 12732,
+   "total": 22419
+  },
+  "LOGAN": {
+   "by_mail": 1481,
+   "in_person": 6892,
+   "outstanding_derived": 433,
+   "registered": null,
+   "requested": 1914,
+   "total": 8373
+  },
+  "LORAIN": {
+   "by_mail": 16661,
+   "in_person": 24692,
+   "outstanding_derived": 6371,
+   "registered": null,
+   "requested": 23032,
+   "total": 41353
+  },
+  "LUCAS": {
+   "by_mail": 14123,
+   "in_person": 29358,
+   "outstanding_derived": 8620,
+   "registered": null,
+   "requested": 22743,
+   "total": 43481
+  },
+  "MADISON": {
+   "by_mail": 1779,
+   "in_person": 3821,
+   "outstanding_derived": 643,
+   "registered": null,
+   "requested": 2422,
+   "total": 5600
+  },
+  "MAHONING": {
+   "by_mail": 11933,
+   "in_person": 13157,
+   "outstanding_derived": 4258,
+   "registered": null,
+   "requested": 16191,
+   "total": 25090
+  },
+  "MARION": {
+   "by_mail": 1848,
+   "in_person": 5589,
+   "outstanding_derived": 630,
+   "registered": null,
+   "requested": 2478,
+   "total": 7437
+  },
+  "MEDINA": {
+   "by_mail": 9485,
+   "in_person": 20570,
+   "outstanding_derived": 4109,
+   "registered": null,
+   "requested": 13594,
+   "total": 30055
+  },
+  "MEIGS": {
+   "by_mail": 625,
+   "in_person": 1383,
+   "outstanding_derived": 264,
+   "registered": null,
+   "requested": 889,
+   "total": 2008
+  },
+  "MERCER": {
+   "by_mail": 1476,
+   "in_person": 4558,
+   "outstanding_derived": 509,
+   "registered": null,
+   "requested": 1985,
+   "total": 6034
+  },
+  "MIAMI": {
+   "by_mail": 3879,
+   "in_person": 11252,
+   "outstanding_derived": 1676,
+   "registered": null,
+   "requested": 5555,
+   "total": 15131
+  },
+  "MONROE": {
+   "by_mail": 598,
+   "in_person": 952,
+   "outstanding_derived": 197,
+   "registered": null,
+   "requested": 795,
+   "total": 1550
+  },
+  "MONTGOMERY": {
+   "by_mail": 18867,
+   "in_person": 27679,
+   "outstanding_derived": 11636,
+   "registered": null,
+   "requested": 30503,
+   "total": 46546
+  },
+  "MORGAN": {
+   "by_mail": 538,
+   "in_person": 1170,
+   "outstanding_derived": 175,
+   "registered": null,
+   "requested": 713,
+   "total": 1708
+  },
+  "MORROW": {
+   "by_mail": 1104,
+   "in_person": 2574,
+   "outstanding_derived": 424,
+   "registered": null,
+   "requested": 1528,
+   "total": 3678
+  },
+  "MUSKINGUM": {
+   "by_mail": 2890,
+   "in_person": 6456,
+   "outstanding_derived": 1221,
+   "registered": null,
+   "requested": 4111,
+   "total": 9346
+  },
+  "NOBLE": {
+   "by_mail": 493,
+   "in_person": 957,
+   "outstanding_derived": 180,
+   "registered": null,
+   "requested": 673,
+   "total": 1450
+  },
+  "OTTAWA": {
+   "by_mail": 2046,
+   "in_person": 3973,
+   "outstanding_derived": 883,
+   "registered": null,
+   "requested": 2929,
+   "total": 6019
+  },
+  "PAULDING": {
+   "by_mail": 524,
+   "in_person": 1695,
+   "outstanding_derived": 201,
+   "registered": null,
+   "requested": 725,
+   "total": 2219
+  },
+  "PERRY": {
+   "by_mail": 1246,
+   "in_person": 2394,
+   "outstanding_derived": 502,
+   "registered": null,
+   "requested": 1748,
+   "total": 3640
+  },
+  "PICKAWAY": {
+   "by_mail": 1701,
+   "in_person": 3730,
+   "outstanding_derived": 781,
+   "registered": null,
+   "requested": 2482,
+   "total": 5431
+  },
+  "PIKE": {
+   "by_mail": 967,
+   "in_person": 1881,
+   "outstanding_derived": 422,
+   "registered": null,
+   "requested": 1389,
+   "total": 2848
+  },
+  "PORTAGE": {
+   "by_mail": 7974,
+   "in_person": 9749,
+   "outstanding_derived": 2791,
+   "registered": null,
+   "requested": 10765,
+   "total": 17723
+  },
+  "PREBLE": {
+   "by_mail": 1143,
+   "in_person": 3664,
+   "outstanding_derived": 415,
+   "registered": null,
+   "requested": 1558,
+   "total": 4807
+  },
+  "PUTNAM": {
+   "by_mail": 1125,
+   "in_person": 3571,
+   "outstanding_derived": 421,
+   "registered": null,
+   "requested": 1546,
+   "total": 4696
+  },
+  "RICHLAND": {
+   "by_mail": 3770,
+   "in_person": 10893,
+   "outstanding_derived": 1141,
+   "registered": null,
+   "requested": 4911,
+   "total": 14663
+  },
+  "ROSS": {
+   "by_mail": 2318,
+   "in_person": 6128,
+   "outstanding_derived": 841,
+   "registered": null,
+   "requested": 3159,
+   "total": 8446
+  },
+  "SANDUSKY": {
+   "by_mail": 1710,
+   "in_person": 3602,
+   "outstanding_derived": 761,
+   "registered": null,
+   "requested": 2471,
+   "total": 5312
+  },
+  "SCIOTO": {
+   "by_mail": 2017,
+   "in_person": 3633,
+   "outstanding_derived": 919,
+   "registered": null,
+   "requested": 2936,
+   "total": 5650
+  },
+  "SENECA": {
+   "by_mail": 1524,
+   "in_person": 3274,
+   "outstanding_derived": 777,
+   "registered": null,
+   "requested": 2301,
+   "total": 4798
+  },
+  "SHELBY": {
+   "by_mail": 1342,
+   "in_person": 4358,
+   "outstanding_derived": 555,
+   "registered": null,
+   "requested": 1897,
+   "total": 5700
+  },
+  "STARK": {
+   "by_mail": 17634,
+   "in_person": 22758,
+   "outstanding_derived": 5683,
+   "registered": null,
+   "requested": 23317,
+   "total": 40392
+  },
+  "SUMMIT": {
+   "by_mail": 28200,
+   "in_person": 30431,
+   "outstanding_derived": 11132,
+   "registered": null,
+   "requested": 39332,
+   "total": 58631
+  },
+  "TRUMBULL": {
+   "by_mail": 9639,
+   "in_person": 13307,
+   "outstanding_derived": 2783,
+   "registered": null,
+   "requested": 12422,
+   "total": 22946
+  },
+  "TUSCARAWAS": {
+   "by_mail": 4073,
+   "in_person": 4977,
+   "outstanding_derived": 1480,
+   "registered": null,
+   "requested": 5553,
+   "total": 9050
+  },
+  "UNION": {
+   "by_mail": 2469,
+   "in_person": 8537,
+   "outstanding_derived": 1165,
+   "registered": null,
+   "requested": 3634,
+   "total": 11006
+  },
+  "VAN WERT": {
+   "by_mail": 687,
+   "in_person": 3297,
+   "outstanding_derived": 311,
+   "registered": null,
+   "requested": 998,
+   "total": 3984
+  },
+  "VINTON": {
+   "by_mail": 476,
+   "in_person": 820,
+   "outstanding_derived": 189,
+   "registered": null,
+   "requested": 665,
+   "total": 1296
+  },
+  "WARREN": {
+   "by_mail": 12548,
+   "in_person": 24058,
+   "outstanding_derived": 5041,
+   "registered": null,
+   "requested": 17589,
+   "total": 36606
+  },
+  "WASHINGTON": {
+   "by_mail": 2196,
+   "in_person": 6428,
+   "outstanding_derived": 984,
+   "registered": null,
+   "requested": 3180,
+   "total": 8624
+  },
+  "WAYNE": {
+   "by_mail": 4071,
+   "in_person": 8479,
+   "outstanding_derived": 1346,
+   "registered": null,
+   "requested": 5417,
+   "total": 12550
+  },
+  "WILLIAMS": {
+   "by_mail": 922,
+   "in_person": 2750,
+   "outstanding_derived": 375,
+   "registered": null,
+   "requested": 1297,
+   "total": 3672
+  },
+  "WOOD": {
+   "by_mail": 4774,
+   "in_person": 9826,
+   "outstanding_derived": 2382,
+   "registered": null,
+   "requested": 7156,
+   "total": 14600
+  },
+  "WYANDOT": {
+   "by_mail": 606,
+   "in_person": 2088,
+   "outstanding_derived": 248,
+   "registered": null,
+   "requested": 854,
+   "total": 2694
+  }
+ },
+ "election": "2026 General",
+ "fetched": "2026-10-28T17:07:32+00:00",
+ "in_person": true,
+ "in_person_reported": true,
+ "notes": {
+  "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly"
+ },
+ "outstanding_available": false,
+ "party_available": false,
+ "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/OH_county.csv",
+ "state": "OH",
+ "state_totals": {
+  "by_mail": 516047,
+  "in_person": 775270,
+  "registered": 0,
+  "requested": 731691,
+  "total": 1291317
+ },
+ "unit": "county"
+}

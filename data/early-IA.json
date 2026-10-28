@@ -3,7 +3,7 @@
  "unit": "county",
  "election": "2026 General",
  "as_of": "10/28/2026",
- "fetched": "2026-10-28T21:07:36+00:00",
+ "fetched": "2026-10-28T21:37:31+00:00",
  "party_available": true,
  "outstanding_available": false,
  "in_person": true,
@@ -2291,7 +2291,7 @@
  "attribution": {
   "aggregator": "UF Election Lab (election.lab.ufl.edu)",
   "upstream": "Iowa Secretary of State",
-  "note": "Arizona's request_* figures are mail ballots issued (sent out), not applications received - this state's early voting is run through a permanent early-voting list rather than a one-off per-election request."
+  "note": "Statewide and county totals, method of voting (mail vs. in-person), and party registration all come from two public JSON files the state's own Vivid dashboard uses. District (congressional/legislative), age, and district-level party breakdowns come from a separate individual-level file and may not sum to exactly the same statewide total."
  },
  "notes": {
   "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly",

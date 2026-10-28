@@ -1,11 +1,11 @@
 {
- "checked_at": "2026-10-28T13:37:32+00:00",
- "uf_file_modified": "Wed, 28 Oct 2026 12:43:05 GMT",
- "board_total": 17347462,
- "uf_total": 17346300,
+ "checked_at": "2026-10-28T14:07:35+00:00",
+ "uf_file_modified": "Wed, 28 Oct 2026 13:58:41 GMT",
+ "board_total": 17515969,
+ "uf_total": 17430778,
  "behind_states": [],
  "behind_ballots": 0,
- "ties_out": 13,
+ "ties_out": 12,
  "checked": 13,
  "note": "Each state against the UF Election Lab's national row, which is independent of how this board collects. BEHIND means this board is stale, not that the sources disagree - a count cannot fall as time passes.",
  "states": {
@@ -34,19 +34,19 @@
    "source": "UF"
   },
   "IA": {
-   "board": 306956,
-   "uf": 306956,
+   "board": 338739,
+   "uf": 338739,
    "gap": 0,
    "verdict": "ties out",
-   "as_of": "10/27/2026",
+   "as_of": "10/28/2026",
    "source": "UF"
   },
   "KS": {
-   "board": 245079,
-   "uf": 245079,
+   "board": 282232,
+   "uf": 282232,
    "gap": 0,
    "verdict": "ties out",
-   "as_of": "10/27/2026",
+   "as_of": "10/28/2026",
    "source": "UF"
   },
   "ME": {
@@ -82,11 +82,11 @@
    "source": "direct"
   },
   "NE": {
-   "board": 169652,
-   "uf": 169652,
+   "board": 185194,
+   "uf": 185194,
    "gap": 0,
    "verdict": "ties out",
-   "as_of": "10/27/2026",
+   "as_of": "10/28/2026",
    "source": "UF"
   },
   "OH": {
@@ -98,11 +98,11 @@
    "source": "UF"
   },
   "SC": {
-   "board": 618986,
+   "board": 703015,
    "uf": 618986,
-   "gap": 0,
-   "verdict": "ties out",
-   "as_of": "2026-10-26",
+   "gap": -84029,
+   "verdict": "ours is newer",
+   "as_of": "2026-10-27",
    "source": "direct"
   },
   "TX": {

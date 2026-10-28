@@ -3,7 +3,7 @@
  "unit": "county",
  "election": "2026 General",
  "as_of": "10/28/2026",
- "fetched": "2026-10-28T19:07:31+00:00",
+ "fetched": "2026-10-28T19:37:26+00:00",
  "party_available": false,
  "outstanding_available": false,
  "in_person": true,
@@ -1290,14 +1290,14 @@
  },
  "notes": {
   "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly",
-  "mismatch": "This figure is 47,635 BEHIND the Election Lab's own headline for GA: their county file totals 2,128,281, their national file 2,175,916. The county file was last written 5 hours before the national one. A count cannot fall as time passes, so this is staleness and not a disagreement. The county file is kept because a per-county projection needs per-county numbers, and it catches up when the Lab rewrites it."
+  "mismatch": "This figure is 47,635 BEHIND the Election Lab's own headline for GA: their county file totals 2,128,281, their national file 2,175,916. The county file was last written 7 hours before the national one. A count cannot fall as time passes, so this is staleness and not a disagreement. The county file is kept because a per-county projection needs per-county numbers, and it catches up when the Lab rewrites it."
  },
  "source_mismatch": {
   "county_file": 2128281,
   "national_file": 2175916,
   "diff": -47635,
   "county_file_modified": "2026-10-28T12:04:56+00:00",
-  "national_file_modified": "2026-10-28T17:30:24+00:00"
+  "national_file_modified": "2026-10-28T19:19:23+00:00"
  },
  "state_totals": {
   "registered": 0,

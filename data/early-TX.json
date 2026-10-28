@@ -3,7 +3,7 @@
  "unit": "county",
  "election": "2026 General",
  "as_of": "10/28/2026",
- "fetched": "2026-10-28T20:37:32+00:00",
+ "fetched": "2026-10-28T21:07:37+00:00",
  "party_available": false,
  "outstanding_available": false,
  "in_person": true,
@@ -346,11 +346,11 @@
    "outstanding_derived": 0
   },
   "COLLIN": {
-   "by_mail": 6375,
-   "in_person": 268277,
-   "total": 274652,
+   "by_mail": 7456,
+   "in_person": 272750,
+   "total": 280206,
    "registered": null,
-   "requested": 6375,
+   "requested": 7456,
    "outstanding_derived": 0
   },
   "COLLINGSWORTH": {
@@ -370,11 +370,11 @@
    "outstanding_derived": 0
   },
   "COMAL": {
-   "by_mail": 2506,
-   "in_person": 49370,
-   "total": 51876,
+   "by_mail": 2904,
+   "in_person": 49344,
+   "total": 52248,
    "registered": null,
-   "requested": 2506,
+   "requested": 2904,
    "outstanding_derived": 0
   },
   "COMANCHE": {
@@ -570,11 +570,11 @@
    "outstanding_derived": 0
   },
   "EL PASO": {
-   "by_mail": 6760,
-   "in_person": 112278,
-   "total": 119038,
+   "by_mail": 7155,
+   "in_person": 112887,
+   "total": 120042,
    "registered": null,
-   "requested": 6760,
+   "requested": 7155,
    "outstanding_derived": 0
   },
   "ERATH": {
@@ -634,11 +634,11 @@
    "outstanding_derived": 0
   },
   "FORT BEND": {
-   "by_mail": 4650,
-   "in_person": 180679,
-   "total": 185329,
+   "by_mail": 5507,
+   "in_person": 198722,
+   "total": 204229,
    "registered": null,
-   "requested": 4650,
+   "requested": 5507,
    "outstanding_derived": 0
   },
   "FRANKLIN": {
@@ -674,11 +674,11 @@
    "outstanding_derived": 0
   },
   "GALVESTON": {
-   "by_mail": 2860,
-   "in_person": 80068,
-   "total": 82928,
+   "by_mail": 3256,
+   "in_person": 80067,
+   "total": 83323,
    "registered": null,
-   "requested": 2860,
+   "requested": 3256,
    "outstanding_derived": 0
   },
   "GARZA": {
@@ -810,11 +810,11 @@
    "outstanding_derived": 0
   },
   "HARRIS": {
-   "by_mail": 35962,
-   "in_person": 685812,
-   "total": 721774,
+   "by_mail": 39707,
+   "in_person": 742234,
+   "total": 781941,
    "registered": null,
-   "requested": 35962,
+   "requested": 39707,
    "outstanding_derived": 0
   },
   "HARRISON": {
@@ -866,11 +866,11 @@
    "outstanding_derived": 0
   },
   "HIDALGO": {
-   "by_mail": 3828,
-   "in_person": 120687,
-   "total": 124515,
+   "by_mail": 3950,
+   "in_person": 121268,
+   "total": 125218,
    "registered": null,
-   "requested": 3828,
+   "requested": 3950,
    "outstanding_derived": 0
   },
   "HILL": {
@@ -986,11 +986,11 @@
    "outstanding_derived": 0
   },
   "JEFFERSON": {
-   "by_mail": 1942,
-   "in_person": 43325,
-   "total": 45267,
+   "by_mail": 2021,
+   "in_person": 43351,
+   "total": 45372,
    "registered": null,
-   "requested": 1942,
+   "requested": 2021,
    "outstanding_derived": 0
   },
   "JIM HOGG": {
@@ -1362,11 +1362,11 @@
    "outstanding_derived": 0
   },
   "MONTGOMERY": {
-   "by_mail": 7652,
-   "in_person": 129019,
-   "total": 136671,
+   "by_mail": 7989,
+   "in_person": 129021,
+   "total": 137010,
    "registered": null,
-   "requested": 7652,
+   "requested": 7989,
    "outstanding_derived": 0
   },
   "MOORE": {
@@ -1922,11 +1922,11 @@
    "outstanding_derived": 0
   },
   "WEBB": {
-   "by_mail": 677,
-   "in_person": 32247,
-   "total": 32924,
+   "by_mail": 689,
+   "in_person": 32428,
+   "total": 33117,
    "registered": null,
-   "requested": 677,
+   "requested": 689,
    "outstanding_derived": 0
   },
   "WHARTON": {
@@ -2046,7 +2046,7 @@
  "attribution": {
   "aggregator": "UF Election Lab (election.lab.ufl.edu)",
   "upstream": "https://goelect.txelections.civixapps.com/ivis-evr-ui/evr",
-  "note": "Texas does not report mail ballot requests. Requests are equal to mail ballots sent."
+  "note": "Texas does not report mail ballot requests. Requests are equal to mail ballots sent. For some counties, I may scrape directly from a county website. These do not always provide breakdowns of early voting by mail and in-person voting."
  },
  "notes": {
   "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly",
@@ -2054,10 +2054,10 @@
  },
  "state_totals": {
   "registered": 0,
-  "by_mail": 227570,
-  "in_person": 5358208,
-  "total": 5585778,
-  "requested": 227570
+  "by_mail": 234992,
+  "in_person": 5438518,
+  "total": 5673510,
+  "requested": 234992
  },
  "fallback": true
 }

@@ -2,7 +2,7 @@
  "as_of": "10/28/2026",
  "attribution": {
   "aggregator": "UF Election Lab (election.lab.ufl.edu)",
-  "note": "Texas does not report mail ballot requests. Requests are equal to mail ballots sent.",
+  "note": "Texas does not report mail ballot requests. Requests are equal to mail ballots sent. For some counties, I may scrape directly from a county website. These do not always provide breakdowns of early voting by mail and in-person voting.",
   "upstream": "https://goelect.txelections.civixapps.com/ivis-evr-ui/evr"
  },
  "counties": {
@@ -343,12 +343,12 @@
    "total": 2011
   },
   "COLLIN": {
-   "by_mail": 6375,
-   "in_person": 268277,
+   "by_mail": 7456,
+   "in_person": 272750,
    "outstanding_derived": 0,
    "registered": null,
-   "requested": 6375,
-   "total": 274652
+   "requested": 7456,
+   "total": 280206
   },
   "COLLINGSWORTH": {
    "by_mail": 33,
@@ -367,12 +367,12 @@
    "total": 4835
   },
   "COMAL": {
-   "by_mail": 2506,
-   "in_person": 49370,
+   "by_mail": 2904,
+   "in_person": 49344,
    "outstanding_derived": 0,
    "registered": null,
-   "requested": 2506,
-   "total": 51876
+   "requested": 2904,
+   "total": 52248
   },
   "COMANCHE": {
    "by_mail": 77,
@@ -559,12 +559,12 @@
    "total": 447
   },
   "EL PASO": {
-   "by_mail": 6760,
-   "in_person": 112278,
+   "by_mail": 7155,
+   "in_person": 112887,
    "outstanding_derived": 0,
    "registered": null,
-   "requested": 6760,
-   "total": 119038
+   "requested": 7155,
+   "total": 120042
   },
   "ELLIS": {
    "by_mail": 1376,
@@ -631,12 +631,12 @@
    "total": 198
   },
   "FORT BEND": {
-   "by_mail": 4650,
-   "in_person": 180679,
+   "by_mail": 5507,
+   "in_person": 198722,
    "outstanding_derived": 0,
    "registered": null,
-   "requested": 4650,
-   "total": 185329
+   "requested": 5507,
+   "total": 204229
   },
   "FRANKLIN": {
    "by_mail": 98,
@@ -671,12 +671,12 @@
    "total": 2139
   },
   "GALVESTON": {
-   "by_mail": 2860,
-   "in_person": 80068,
+   "by_mail": 3256,
+   "in_person": 80067,
    "outstanding_derived": 0,
    "registered": null,
-   "requested": 2860,
-   "total": 82928
+   "requested": 3256,
+   "total": 83323
   },
   "GARZA": {
    "by_mail": 42,
@@ -807,12 +807,12 @@
    "total": 11025
   },
   "HARRIS": {
-   "by_mail": 35962,
-   "in_person": 685812,
+   "by_mail": 39707,
+   "in_person": 742234,
    "outstanding_derived": 0,
    "registered": null,
-   "requested": 35962,
-   "total": 721774
+   "requested": 39707,
+   "total": 781941
   },
   "HARRISON": {
    "by_mail": 533,
@@ -863,12 +863,12 @@
    "total": 17493
   },
   "HIDALGO": {
-   "by_mail": 3828,
-   "in_person": 120687,
+   "by_mail": 3950,
+   "in_person": 121268,
    "outstanding_derived": 0,
    "registered": null,
-   "requested": 3828,
-   "total": 124515
+   "requested": 3950,
+   "total": 125218
   },
   "HILL": {
    "by_mail": 281,
@@ -983,12 +983,12 @@
    "total": 646
   },
   "JEFFERSON": {
-   "by_mail": 1942,
-   "in_person": 43325,
+   "by_mail": 2021,
+   "in_person": 43351,
    "outstanding_derived": 0,
    "registered": null,
-   "requested": 1942,
-   "total": 45267
+   "requested": 2021,
+   "total": 45372
   },
   "JIM HOGG": {
    "by_mail": 133,
@@ -1359,12 +1359,12 @@
    "total": 4702
   },
   "MONTGOMERY": {
-   "by_mail": 7652,
-   "in_person": 129019,
+   "by_mail": 7989,
+   "in_person": 129021,
    "outstanding_derived": 0,
    "registered": null,
-   "requested": 7652,
-   "total": 136671
+   "requested": 7989,
+   "total": 137010
   },
   "MOORE": {
    "by_mail": 95,
@@ -1919,12 +1919,12 @@
    "total": 6273
   },
   "WEBB": {
-   "by_mail": 677,
-   "in_person": 32247,
+   "by_mail": 689,
+   "in_person": 32428,
    "outstanding_derived": 0,
    "registered": null,
-   "requested": 677,
-   "total": 32924
+   "requested": 689,
+   "total": 33117
   },
   "WHARTON": {
    "by_mail": 282,
@@ -2041,7 +2041,7 @@
  },
  "election": "2026 General",
  "fallback": true,
- "fetched": "2026-10-28T20:37:32+00:00",
+ "fetched": "2026-10-28T21:07:37+00:00",
  "in_person": true,
  "in_person_reported": true,
  "notes": {
@@ -2053,11 +2053,11 @@
  "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/TX_county.csv",
  "state": "TX",
  "state_totals": {
-  "by_mail": 227570,
-  "in_person": 5358208,
+  "by_mail": 234992,
+  "in_person": 5438518,
   "registered": 0,
-  "requested": 227570,
-  "total": 5585778
+  "requested": 234992,
+  "total": 5673510
  },
  "unit": "county"
 }

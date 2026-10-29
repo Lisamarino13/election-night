@@ -1,8 +1,8 @@
 {
  "compiled": {
   "in_person": "10/28/2026  8:07AM",
-  "outstanding": "10/28/2026  2:02PM",
-  "returned": "10/28/2026  2:02PM"
+  "outstanding": "10/28/2026  8:07AM",
+  "returned": "10/28/2026  8:07AM"
  },
  "counties": {
   "Alachua": {
@@ -1221,18 +1221,18 @@
     "total": 35778
    },
    "outstanding": {
-    "D": 3440,
-    "NPA": 1578,
-    "O": 285,
-    "R": 3489,
-    "total": 8792
+    "D": 3908,
+    "NPA": 1764,
+    "O": 317,
+    "R": 3951,
+    "total": 9940
    },
    "returned": {
-    "D": 11210,
-    "NPA": 3930,
-    "O": 725,
-    "R": 10457,
-    "total": 26322
+    "D": 10747,
+    "NPA": 3744,
+    "O": 692,
+    "R": 9990,
+    "total": 25173
    }
   },
   "Martin": {
@@ -2017,10 +2017,10 @@
   }
  },
  "election": "2026 General",
- "fetched": "2026-10-29T03:07:08+00:00",
+ "fetched": "2026-10-29T03:37:05+00:00",
  "in_person": true,
  "notes": {
-  "fell": "A figure is lower than this board last recorded: returned was 1,685,682, now 1,587,176; early_in_person was 2,210,864, now 1,934,281. Ballots already cast do not un-cast, so the source has restated something or served an older file. The number shown is the one the source gave."
+  "fell": "A figure is lower than this board last recorded: returned was 1,587,176, now 1,586,027. Ballots already cast do not un-cast, so the source has restated something or served an older file. The number shown is the one the source gave."
  },
  "outstanding_available": true,
  "state": "FL",
@@ -2040,18 +2040,18 @@
    "total": 1934281
   },
   "outstanding": {
-   "D": 338037,
-   "NPA": 198532,
-   "O": 24248,
-   "R": 285028,
-   "total": 845845
+   "D": 338505,
+   "NPA": 198718,
+   "O": 24280,
+   "R": 285490,
+   "total": 846993
   },
   "returned": {
-   "D": 685405,
-   "NPA": 302097,
-   "O": 38508,
-   "R": 561166,
-   "total": 1587176
+   "D": 684942,
+   "NPA": 301911,
+   "O": 38475,
+   "R": 560699,
+   "total": 1586027
   }
  },
  "unit": "county"

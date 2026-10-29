@@ -274,12 +274,17 @@ const LEGEND = key("mid","2022 midterm") + key("pres","presidential (2020 / 2024
 // chart nobody sees. This draws the same figure with no panel chrome so each card
 // can carry its own.
 const _cache = {};
+// Prefer the payloads the page already captured at load. Re-fetching here meant the
+// charts could read a newer collector run than the cards above them, so one board
+// showed two vintages at once.
 async function stateData(code){
   if (_cache[code]) return _cache[code];
-  let cur = null, hist = {};
-  try{ cur = await J("data/early-"+code+".json"); }catch(e){}
-  try{ hist = (await J("data/ev-history-"+code+".json")).years || {}; }catch(e){}
-  return (_cache[code] = {cur, hist});
+  const shared = window.__BOARD_RAW || {};
+  let cur = (shared.early || {})[code] || null;
+  let hist = (shared.hist || {})[code] || null;
+  if (!cur){ try{ cur = await J("data/early-"+code+".json"); }catch(e){} }
+  if (!hist){ try{ hist = (await J("data/ev-history-"+code+".json")).years || {}; }catch(e){ hist = {}; } }
+  return (_cache[code] = {cur, hist: hist || {}});
 }
 async function renderStateChart(host, code){
   if (!host) return;
@@ -357,7 +362,7 @@ async function renderRaceChart(host, code){
          : "The source has not posted one for this cycle."}</div>`;
   } else {
     let evTotal = null;
-    try{ evTotal = (await J("data/early-"+code+".json")).state_totals.total; }catch(e){}
+    try{ evTotal = (await stateData(code)).cur.state_totals.total; }catch(e){}
     const covered = (nowR && nowR.total) || 0;
     if (evTotal && covered && covered < 0.95 * evTotal){
       const pct = covered / evTotal;
@@ -427,9 +432,9 @@ async function renderCharts(panels){
 
   for (const code of ORDER){
     const meta = STATES[code];
-    let cur = null, hist = {};
-    try{ cur = await J("data/early-"+code+".json"); }catch(e){ cur = null; }
-    try{ hist = (await J("data/ev-history-"+code+".json")).years || {}; }catch(e){ hist = {}; }
+    // same shared payloads as the cards, so the two panels cannot disagree
+    const sd = await stateData(code);
+    const cur = sd.cur, hist = sd.hist || {};
     if (!cur && !Object.keys(hist).length) continue;
     if (cur && cur.source) SRC.push(meta.name + ": " + cur.source);
 
@@ -617,7 +622,7 @@ async function renderCharts(panels){
   if (asof){
     const stamps = [];
     for (const code of ORDER){
-      try{ const d = await J("data/early-"+code+".json"); if (d.fetched) stamps.push(d.fetched); }catch(e){}
+      try{ const d = (await stateData(code)).cur; if (d && d.fetched) stamps.push(d.fetched); }catch(e){}
     }
     if (stamps.length){
       const d = new Date(stamps.sort().pop());

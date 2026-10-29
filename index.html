@@ -402,6 +402,13 @@ const FIRST = {early:"early vote",absentee:"absentee",advance:"advance vote","el
 const PARTYREG = ["FL","IA","NE","ME","AK"];
 const SKELETON = {"updated":null,"note":"Written by the per-state collectors. Each state's cron replaces its own block.","states":{"MI":{"name":"Michigan","abbr":"MI","countsFirst":"mixed","partyReg":false,"unit":"county","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Mike Rogers","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}},"unitsExpected":83},"MN":{"name":"Minnesota","abbr":"MN","countsFirst":"mixed","partyReg":false,"unit":"county","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Michele Tafoya","party":"R"},{"name":"Peggy Flanagan","party":"D"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}},"unitsExpected":87},"ME":{"name":"Maine","abbr":"ME","countsFirst":"mixed","partyReg":true,"unit":"town","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Candidate 3","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}},"unitsExpected":16,"unitsNote":"16 counties, ~500 municipalities reporting"},"NE":{"name":"Nebraska","abbr":"NE","countsFirst":"early","partyReg":true,"unit":"county","source":"electionresults.nebraska.gov","updated":null,"races":{"senate":{"candidates":[{"name":"Pete Ricketts","party":"REP"},{"name":"Dan Osborn","party":"PET"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"watch"}},"unitsExpected":93},"AK":{"name":"Alaska","abbr":"AK","countsFirst":"election-day","partyReg":true,"unit":"district","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Candidate 3","party":"O"}],"counties":[],"updated":null,"tier":"watch"}},"unitsExpected":40},"SC":{"name":"South Carolina","abbr":"SC","countsFirst":"election-day","partyReg":false,"unit":"county","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Darline Graham","party":"R"},{"name":"Annie Andrews","party":"D"},{"name":"Candidate 3","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}},"unitsExpected":46},"NC":{"name":"North Carolina","abbr":"NC","countsFirst":"early","partyReg":true,"unit":"county","source":"er.ncsbe.gov","races":{"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Roy Cooper","party":"D"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"safe"}},"unitsExpected":100},"OH":{"name":"Ohio","abbr":"OH","countsFirst":"absentee","partyReg":false,"unit":"county","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Candidate 3","party":"O"}],"counties":[],"updated":null,"tier":"tossup"},"governor":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}},"unitsExpected":88},"IA":{"name":"Iowa","abbr":"IA","countsFirst":"absentee","partyReg":true,"unit":"county","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Candidate 3","party":"O"}],"counties":[],"updated":null,"tier":"watch"}},"unitsExpected":99},"FL":{"name":"Florida","abbr":"FL","countsFirst":"early","partyReg":true,"unit":"county","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Candidate 3","party":"O"}],"counties":[],"updated":null,"tier":"safe"},"governor":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}},"unitsExpected":67},"GA":{"name":"Georgia","abbr":"GA","countsFirst":"early","partyReg":false,"unit":"county","source":"clarity","updated":null,"races":{"governor":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"tossup"},"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"safe"}},"unitsExpected":159},"TX":{"name":"Texas","abbr":"TX","countsFirst":"early","partyReg":false,"unit":"county","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Candidate 3","party":"O"}],"counties":[],"updated":null,"tier":"watch"},"governor":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}},"unitsExpected":254},"KS":{"name":"Kansas","abbr":"KS","countsFirst":"advance","partyReg":false,"unit":"county","source":null,"updated":null,"races":{"senate":{"candidates":[{"name":"Candidate 1","party":"R"},{"name":"Candidate 2","party":"D"},{"name":"Candidate 3","party":"O"}],"counties":[],"updated":null,"tier":"watch"}},"unitsExpected":105}}};
 let DATA = JSON.parse(JSON.stringify(SKELETON)), EARLY = {}, OPEN = null;
+// The early-vote cards and the charts used to fetch the same files independently -
+// the cards at page load, the charts on the first click of the tab. The collector
+// pushes every half hour, so a pull landing in between left one board showing two
+// different vintages, in every state at once, with nothing on screen saying so.
+// Both now read these raw payloads, captured once per load.
+const RAW = {early:{}, hist:{}};
+window.__BOARD_RAW = RAW;
 // How a registered voter of each party is assumed to vote. These are ASSUMPTIONS,
 // not data — calibrate them from prior cycles. Index order matches st.candidates.
 let BREAK = { R:[0.92,0.06,0.02], D:[0.06,0.92,0.02], NPA:[0.46,0.48,0.06], O:[0.40,0.40,0.20] };
@@ -710,6 +717,7 @@ async function loadEarly(){
       const r = await fetch("data/early-"+k+".json?t="+Date.now());
       if(!r.ok) continue;
       const j = await r.json();
+      RAW.early[k] = j;
       const st = j.state_totals || null;
       // Maine reports by municipality, not county; Texas publishes no party split at all.
       // Carry both facts through so the card can say what the state actually provides
@@ -730,7 +738,8 @@ async function loadEarly(){
                   daily: j.daily || null};
       try{
         const h = await fetch("data/ev-history-"+k+".json?t="+Date.now());
-        if(h.ok){ const hj = await h.json(); EARLY[k].history = hj.years || null; }
+        if(h.ok){ const hj = await h.json(); EARLY[k].history = hj.years || null;
+                  RAW.hist[k] = hj.years || {}; }
       }catch(e){}
     }catch(e){ /* a missing early file is normal, not an error */ }
   }
@@ -998,7 +1007,8 @@ async function renderTakeaways(){
       // and it is not. Coverage is measured here so the bullet can say so.
       let cov = null;
       try{
-        const ev = await (await fetch("data/early-"+k+".json?t="+Date.now())).json();
+        const ev = RAW.early[k]
+          || await (await fetch("data/early-"+k+".json?t="+Date.now())).json();
         const tot = (ev.state_totals||{}).total;
         const described = d.years[got[got.length-1]].streams.voted.race.total;
         if (tot && described) cov = described / tot;

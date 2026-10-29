@@ -1225,6 +1225,38 @@ function renderLastRun(){
     } else if (dead){
       msg = `No figure here has changed in <b>${ago(mins)}</b>.`;
     }
+    // The tie-out cannot catch a frozen source. Ten of the thirteen states take their
+    // figure FROM the UF Election Lab, so when the Lab stops refreshing one - as it did
+    // with Minnesota, whose county file and national row both sat at 10/23 for six days
+    // - the check compares the Lab against itself and reports "ties out" while the
+    // number is a week old. Agreement and freshness are different questions, so ask the
+    // second one separately: how far behind the rest of the board is each state's own
+    // as_of date.
+    const asOfDate = (v) => {
+      if (!v) return null;
+      const t = String(v).trim();
+      let m = t.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (m) return new Date(+m[1], +m[2]-1, +m[3]);
+      m = t.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{2,4})$/);
+      if (m){ let y=+m[3]; if (y<100) y+=2000; return new Date(y, +m[1]-1, +m[2]); }
+      return null;
+    };
+    const dated = Object.keys(RAW.early).map(k => ({k, d: asOfDate(RAW.early[k].as_of)}))
+                        .filter(x => x.d && !isNaN(x.d));
+    let frozen = [];
+    if (dated.length > 2){
+      const newest = Math.max(...dated.map(x => x.d.getTime()));
+      frozen = dated.filter(x => newest - x.d.getTime() > 48*3600*1000)
+                    .map(x => ({k:x.k, days: Math.round((newest-x.d.getTime())/86400000)}))
+                    .sort((a,b) => b.days - a.days);
+    }
+    const fmsg = frozen.length
+      ? `${frozen.map(f => `<b>${f.k}</b> ${f.days} day${f.days===1?"":"s"} behind the
+          rest of the board`).join(", ")} &mdash; its source has stopped refreshing, which
+          the tie-out cannot see because that figure comes from the source it is checked
+          against.`
+      : "";
+
     // Independent check: does this board tie out against the UF Election Lab? Written
     // by every pull. A state BEHIND the Lab is stale here, not a disagreement.
     fetch("data/tie-out.json?t="+Date.now()).then(r=>r.ok?r.json():null).then(t=>{
@@ -1236,14 +1268,17 @@ function renderLastRun(){
         tmsg = `${names}. Checked against the UF Election Lab
                 ${t.ties_out} of ${t.checked} states tie out.`;
       }
-      const both = [msg, tmsg].filter(Boolean);
+      const both = [msg, tmsg, fmsg].filter(Boolean);
       bar.innerHTML = both.length
-        ? `<b>${msg ? "Stale data." : "Behind an independent source."}</b> ${both.join(" ")}`
+        ? `<b>${msg ? "Stale data."
+                : (fmsg && !tmsg) ? "A state has stopped updating."
+                : "Behind an independent source."}</b> ${both.join(" ")}`
         : "";
       bar.hidden = !both.length;
     }).catch(()=>{
-      bar.innerHTML = msg ? `<b>Stale data.</b> ${msg}` : "";
-      bar.hidden = !msg;
+      const both = [msg, fmsg].filter(Boolean);
+      bar.innerHTML = both.length ? `<b>Stale data.</b> ${both.join(" ")}` : "";
+      bar.hidden = !both.length;
     });
   }).catch(()=>{});      // closes the heartbeat fetch's own callback
 }

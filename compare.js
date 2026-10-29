@@ -473,21 +473,30 @@ async function renderCharts(panels){
       const i = (n2 ? n2.vals.length : 0) - 1;
       const same = (m2 && n2 && i>=0) ? Math.round(n2.vals[i]/m2.vals[i]*100) : null;
       const nDays = Math.max(...ser.map(s=>s.vals.length));
+      // The daily series is IN-PERSON only: South Carolina's daily report counts people
+      // through the door, and its absentee workbook publishes requested and issued but
+      // not returned, so mail has no per-day figure. Calling these "ballots" made this
+      // card read as the state total and contradict the 789,240 on the card above, which
+      // includes mail. Say which quantity this is.
+      const scMail = (cur.state_totals || {}).by_mail;
       lede = same
-        ? `Through <b>day ${i+1}</b> of early voting, <b class="fig">${n(n2.vals[i])}</b> ballots —
-           against <b class="fig">${n(m2.vals[i])}</b> on the same day of 2022.
-           That is <b>${same}%</b> of the last midterm's pace.`
+        ? `Through <b>day ${i+1}</b> of early voting, <b class="fig">${n(n2.vals[i])}</b>
+           <b>in-person</b> ballots — against <b class="fig">${n(m2.vals[i])}</b> on the
+           same day of 2022. That is <b>${same}%</b> of the last midterm's pace.`
         : `South Carolina publishes a figure per early-voting day, so 2026 can be set
            against the same day of earlier cycles.`;
-      caption = `Running total after each early-voting day — the same day of each cycle,
-        not a share of a finished one. 2022 and 2024 ran ${nDays} days.`;
+      caption = `Running total of <b>in-person</b> ballots after each early-voting day —
+        the same day of each cycle, not a share of a finished one. 2022 and 2024 ran
+        ${nDays} days.${scMail ? ` Mail is not in this series: South Carolina's daily
+        report counts in-person voters only, so the ${n(scMail)} mail ballots returned
+        are excluded here and included in the card above.` : ""}`;
       table = `<table><thead><tr><th>Day</th>${ser.map(s=>`<th>${s.year}</th>`).join("")}
         ${m2&&n2?"<th>vs 2022</th>":""}</tr></thead><tbody>
         ${Array.from({length:nDays},(_,k)=>`<tr><td>Day ${k+1}</td>
           ${ser.map(s=>`<td class="fig${s.year===2026?" b":""}">${s.vals[k]==null?'<span class="dim">—</span>':n(s.vals[k])}</td>`).join("")}
           ${m2&&n2?`<td class="fig">${(n2.vals[k]!=null&&m2.vals[k])?Math.round(n2.vals[k]/m2.vals[k]*100)+"%":""}</td>`:""}</tr>`).join("")}
         </tbody></table>`;
-      draw = host => drawLines(host, ser, {aria:`South Carolina cumulative early vote by day of early voting.`});
+      draw = host => drawLines(host, ser, {aria:`South Carolina cumulative in-person early vote by day of early voting.`});
     } else {
       const pres = rows.filter(r => r.year % 4 === 0).pop();
       lede = !now

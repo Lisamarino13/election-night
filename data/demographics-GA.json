@@ -1,6 +1,6 @@
 {
  "state": "GA",
- "fetched": "2026-10-30T11:37:38+00:00",
+ "fetched": "2026-10-30T12:07:32+00:00",
  "note": "Who has voted early, not how they voted. No state counts ballots before election day.",
  "stream_labels": {
   "accept": "mail returned",
@@ -182,21 +182,21 @@
    "year": 2026,
    "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/US.csv",
    "upstream": "https://mvp.sos.ga.gov/s/voter-absentee-files",
-   "as_of": "10/29/2026",
+   "as_of": "10/30/2026",
    "turnout_2022": 3964926,
    "streams": {
     "accept": {
-     "total": 110970,
+     "total": 111365,
      "race": {
       "counts": {
-       "nh_white": 60524,
-       "nh_black": 31592,
-       "hispanic": 1781,
-       "nh_asian": 3432,
-       "nh_native_american": 401,
-       "nh_other": 7518
+       "nh_white": 63975,
+       "nh_black": 33320,
+       "hispanic": 1913,
+       "nh_asian": 3743,
+       "nh_native_american": 431,
+       "nh_other": 7983
       },
-      "total": 105248,
+      "total": 111365,
       "labels": {
        "nh_white": "White",
        "nh_black": "Black",
@@ -205,51 +205,51 @@
        "nh_native_american": "Native American",
        "nh_other": "Other / multiple / unknown"
       },
-      "coverage": 0.9484
+      "coverage": 1.0
      },
      "age": {
       "counts": {
-       "age_1": 4563,
-       "age_2": 6649,
-       "age_3": 19871,
-       "age_4": 73971
+       "age_1": 5211,
+       "age_2": 7366,
+       "age_3": 21285,
+       "age_4": 77300
       },
-      "total": 105054,
+      "total": 111162,
       "labels": {
        "age_1": "18\u201325",
        "age_2": "26\u201340",
        "age_3": "41\u201365",
        "age_4": "over 65"
       },
-      "coverage": 0.9467
+      "coverage": 0.9982
      },
      "gender": {
       "counts": {
-       "male": 43571,
-       "female": 61147,
-       "gender_unknown": 530
+       "male": 45985,
+       "female": 64804,
+       "gender_unknown": 576
       },
-      "total": 105248,
+      "total": 111365,
       "labels": {
        "male": "Male",
        "female": "Female",
        "gender_unknown": "Unknown"
       },
-      "coverage": 0.9484
+      "coverage": 1.0
      }
     },
     "inperson": {
-     "total": 2379900,
+     "total": 2402283,
      "race": {
       "counts": {
-       "nh_white": 1164231,
-       "nh_black": 715184,
-       "hispanic": 76340,
-       "nh_asian": 60900,
-       "nh_native_american": 14158,
-       "nh_other": 172704
+       "nh_white": 1266014,
+       "nh_black": 777818,
+       "hispanic": 86185,
+       "nh_asian": 67287,
+       "nh_native_american": 15888,
+       "nh_other": 189075
       },
-      "total": 2203517,
+      "total": 2402267,
       "labels": {
        "nh_white": "White",
        "nh_black": "Black",
@@ -258,51 +258,51 @@
        "nh_native_american": "Native American",
        "nh_other": "Other / multiple / unknown"
       },
-      "coverage": 0.9259
+      "coverage": 1.0
      },
      "age": {
       "counts": {
-       "age_1": 139715,
-       "age_2": 307216,
-       "age_3": 959847,
-       "age_4": 791757
+       "age_1": 160087,
+       "age_2": 351909,
+       "age_3": 1050912,
+       "age_4": 833872
       },
-      "total": 2198535,
+      "total": 2396780,
       "labels": {
        "age_1": "18\u201325",
        "age_2": "26\u201340",
        "age_3": "41\u201365",
        "age_4": "over 65"
       },
-      "coverage": 0.9238
+      "coverage": 0.9977
      },
      "gender": {
       "counts": {
-       "male": 961032,
-       "female": 1233464,
-       "gender_unknown": 9035
+       "male": 1041969,
+       "female": 1350289,
+       "gender_unknown": 10025
       },
-      "total": 2203531,
+      "total": 2402283,
       "labels": {
        "male": "Male",
        "female": "Female",
        "gender_unknown": "Unknown"
       },
-      "coverage": 0.9259
+      "coverage": 1.0
      }
     },
     "voted": {
-     "total": 2490870,
+     "total": 2513648,
      "race": {
       "counts": {
-       "nh_white": 1224755,
-       "nh_black": 746776,
-       "hispanic": 78121,
-       "nh_asian": 64332,
-       "nh_native_american": 14559,
-       "nh_other": 180222
+       "nh_white": 1329989,
+       "nh_black": 811138,
+       "hispanic": 88098,
+       "nh_asian": 71030,
+       "nh_native_american": 16319,
+       "nh_other": 197058
       },
-      "total": 2308765,
+      "total": 2513632,
       "labels": {
        "nh_white": "White",
        "nh_black": "Black",
@@ -311,37 +311,37 @@
        "nh_native_american": "Native American",
        "nh_other": "Other / multiple / unknown"
       },
-      "coverage": 0.9269
+      "coverage": 1.0
      },
      "age": {
       "counts": {
-       "age_1": 144278,
-       "age_2": 313865,
-       "age_3": 979718,
-       "age_4": 865728
+       "age_1": 165298,
+       "age_2": 359275,
+       "age_3": 1072197,
+       "age_4": 911172
       },
-      "total": 2303589,
+      "total": 2507942,
       "labels": {
        "age_1": "18\u201325",
        "age_2": "26\u201340",
        "age_3": "41\u201365",
        "age_4": "over 65"
       },
-      "coverage": 0.9248
+      "coverage": 0.9977
      },
      "gender": {
       "counts": {
-       "male": 1004603,
-       "female": 1294611,
-       "gender_unknown": 9565
+       "male": 1087954,
+       "female": 1415093,
+       "gender_unknown": 10601
       },
-      "total": 2308779,
+      "total": 2513648,
       "labels": {
        "male": "Male",
        "female": "Female",
        "gender_unknown": "Unknown"
       },
-      "coverage": 0.9269
+      "coverage": 1.0
      }
     }
    }

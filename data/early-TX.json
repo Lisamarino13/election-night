@@ -3,7 +3,7 @@
  "unit": "county",
  "election": "2026 General",
  "as_of": "10/30/2026",
- "fetched": "2026-10-30T12:37:36+00:00",
+ "fetched": "2026-10-30T13:07:33+00:00",
  "party_available": false,
  "outstanding_available": false,
  "in_person": true,
@@ -2050,8 +2050,7 @@
  },
  "notes": {
   "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly",
-  "fallback": "the direct state parse went stale or is unreachable, so this is the UF Election Lab's copy. It lacks the receipt-method detail the state file carries; the direct parse resumes automatically when the state is reachable again",
-  "restructured": "A stream is smaller than last recorded because the source changed how it divides them, not because ballots were lost: the combined total went from 6,270,736 to 6,437,689. by_mail was 249,144, now 245,642"
+  "fallback": "the direct state parse went stale or is unreachable, so this is the UF Election Lab's copy. It lacks the receipt-method detail the state file carries; the direct parse resumes automatically when the state is reachable again"
  },
  "state_totals": {
   "registered": 0,

@@ -1,7 +1,7 @@
 {
- "ran_at": "2026-10-30T05:07:39Z",
+ "ran_at": "2026-10-30T05:37:33Z",
  "host": "dopple-cron",
- "status": "collectors-failed",
- "failed": " fl_vbm.py",
+ "status": "ok",
+ "failed": "",
  "note": "Written by publish.sh on every run, even when no figure changed. If ran_at stops advancing the collector has stopped, which is not the same as the numbers not moving."
 }

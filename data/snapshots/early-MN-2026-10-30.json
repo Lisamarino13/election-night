@@ -1,0 +1,725 @@
+{
+ "as_of": "10/30/2026",
+ "attribution": {
+  "aggregator": "UF Election Lab (election.lab.ufl.edu)",
+  "note": "",
+  "upstream": "https://www.sos.mn.gov/election-administration-campaigns/data-maps/absentee-data/"
+ },
+ "counties": {
+  "Aitkin": {
+   "by_mail": 2988,
+   "in_person": 890,
+   "outstanding_derived": 3030,
+   "registered": null,
+   "requested": 6018,
+   "total": 3878
+  },
+  "Anoka": {
+   "by_mail": 9831,
+   "in_person": 33699,
+   "outstanding_derived": 6596,
+   "registered": null,
+   "requested": 16427,
+   "total": 43530
+  },
+  "Becker": {
+   "by_mail": 1676,
+   "in_person": 1950,
+   "outstanding_derived": 1834,
+   "registered": null,
+   "requested": 3510,
+   "total": 3626
+  },
+  "Beltrami": {
+   "by_mail": 1788,
+   "in_person": 3172,
+   "outstanding_derived": 2546,
+   "registered": null,
+   "requested": 4334,
+   "total": 4960
+  },
+  "Benton": {
+   "by_mail": 881,
+   "in_person": 1341,
+   "outstanding_derived": 772,
+   "registered": null,
+   "requested": 1653,
+   "total": 2222
+  },
+  "Big Stone": {
+   "by_mail": 1079,
+   "in_person": 110,
+   "outstanding_derived": 797,
+   "registered": null,
+   "requested": 1876,
+   "total": 1189
+  },
+  "Blue Earth": {
+   "by_mail": 4656,
+   "in_person": 4498,
+   "outstanding_derived": 4962,
+   "registered": null,
+   "requested": 9618,
+   "total": 9154
+  },
+  "Brown": {
+   "by_mail": 1745,
+   "in_person": 1181,
+   "outstanding_derived": 1967,
+   "registered": null,
+   "requested": 3712,
+   "total": 2926
+  },
+  "Carlton": {
+   "by_mail": 2038,
+   "in_person": 2020,
+   "outstanding_derived": 2235,
+   "registered": null,
+   "requested": 4273,
+   "total": 4058
+  },
+  "Carver": {
+   "by_mail": 4225,
+   "in_person": 11751,
+   "outstanding_derived": 2340,
+   "registered": null,
+   "requested": 6565,
+   "total": 15976
+  },
+  "Cass": {
+   "by_mail": 3936,
+   "in_person": 1722,
+   "outstanding_derived": 3632,
+   "registered": null,
+   "requested": 7568,
+   "total": 5658
+  },
+  "Chippewa": {
+   "by_mail": 1065,
+   "in_person": 518,
+   "outstanding_derived": 1144,
+   "registered": null,
+   "requested": 2209,
+   "total": 1583
+  },
+  "Chisago": {
+   "by_mail": 1596,
+   "in_person": 3910,
+   "outstanding_derived": 812,
+   "registered": null,
+   "requested": 2408,
+   "total": 5506
+  },
+  "Clay": {
+   "by_mail": 3135,
+   "in_person": 3575,
+   "outstanding_derived": 3050,
+   "registered": null,
+   "requested": 6185,
+   "total": 6710
+  },
+  "Clearwater": {
+   "by_mail": 335,
+   "in_person": 248,
+   "outstanding_derived": 401,
+   "registered": null,
+   "requested": 736,
+   "total": 583
+  },
+  "Cook": {
+   "by_mail": 1911,
+   "in_person": 218,
+   "outstanding_derived": 1251,
+   "registered": null,
+   "requested": 3162,
+   "total": 2129
+  },
+  "Cottonwood": {
+   "by_mail": 206,
+   "in_person": 366,
+   "outstanding_derived": 149,
+   "registered": null,
+   "requested": 355,
+   "total": 572
+  },
+  "Crow Wing": {
+   "by_mail": 3224,
+   "in_person": 4809,
+   "outstanding_derived": 3193,
+   "registered": null,
+   "requested": 6417,
+   "total": 8033
+  },
+  "Dakota": {
+   "by_mail": 15909,
+   "in_person": 50720,
+   "outstanding_derived": 11851,
+   "registered": null,
+   "requested": 27760,
+   "total": 66629
+  },
+  "Dodge": {
+   "by_mail": 296,
+   "in_person": 991,
+   "outstanding_derived": 278,
+   "registered": null,
+   "requested": 574,
+   "total": 1287
+  },
+  "Douglas": {
+   "by_mail": 869,
+   "in_person": 3592,
+   "outstanding_derived": 681,
+   "registered": null,
+   "requested": 1550,
+   "total": 4461
+  },
+  "Faribault": {
+   "by_mail": 563,
+   "in_person": 387,
+   "outstanding_derived": 582,
+   "registered": null,
+   "requested": 1145,
+   "total": 950
+  },
+  "Fillmore": {
+   "by_mail": 1311,
+   "in_person": 600,
+   "outstanding_derived": 1851,
+   "registered": null,
+   "requested": 3162,
+   "total": 1911
+  },
+  "Freeborn": {
+   "by_mail": 1021,
+   "in_person": 1459,
+   "outstanding_derived": 770,
+   "registered": null,
+   "requested": 1791,
+   "total": 2480
+  },
+  "Goodhue": {
+   "by_mail": 1510,
+   "in_person": 2462,
+   "outstanding_derived": 886,
+   "registered": null,
+   "requested": 2396,
+   "total": 3972
+  },
+  "Grant": {
+   "by_mail": 1486,
+   "in_person": 66,
+   "outstanding_derived": 1949,
+   "registered": null,
+   "requested": 3435,
+   "total": 1552
+  },
+  "Hennepin": {
+   "by_mail": 51659,
+   "in_person": 155142,
+   "outstanding_derived": 39370,
+   "registered": null,
+   "requested": 91029,
+   "total": 206801
+  },
+  "Houston": {
+   "by_mail": 455,
+   "in_person": 686,
+   "outstanding_derived": 299,
+   "registered": null,
+   "requested": 754,
+   "total": 1141
+  },
+  "Hubbard": {
+   "by_mail": 1256,
+   "in_person": 1744,
+   "outstanding_derived": 1045,
+   "registered": null,
+   "requested": 2301,
+   "total": 3000
+  },
+  "Isanti": {
+   "by_mail": 867,
+   "in_person": 2465,
+   "outstanding_derived": 626,
+   "registered": null,
+   "requested": 1493,
+   "total": 3332
+  },
+  "Itasca": {
+   "by_mail": 5303,
+   "in_person": 2411,
+   "outstanding_derived": 5739,
+   "registered": null,
+   "requested": 11042,
+   "total": 7714
+  },
+  "Jackson": {
+   "by_mail": 1108,
+   "in_person": 394,
+   "outstanding_derived": 1245,
+   "registered": null,
+   "requested": 2353,
+   "total": 1502
+  },
+  "Kanabec": {
+   "by_mail": 286,
+   "in_person": 717,
+   "outstanding_derived": 179,
+   "registered": null,
+   "requested": 465,
+   "total": 1003
+  },
+  "Kandiyohi": {
+   "by_mail": 1364,
+   "in_person": 2292,
+   "outstanding_derived": 1464,
+   "registered": null,
+   "requested": 2828,
+   "total": 3656
+  },
+  "Kittson": {
+   "by_mail": 1096,
+   "in_person": 49,
+   "outstanding_derived": 945,
+   "registered": null,
+   "requested": 2041,
+   "total": 1145
+  },
+  "Koochiching": {
+   "by_mail": 1965,
+   "in_person": 624,
+   "outstanding_derived": 2299,
+   "registered": null,
+   "requested": 4264,
+   "total": 2589
+  },
+  "Lac Qui Parle": {
+   "by_mail": 1066,
+   "in_person": 180,
+   "outstanding_derived": 1237,
+   "registered": null,
+   "requested": 2303,
+   "total": 1246
+  },
+  "Lake": {
+   "by_mail": 645,
+   "in_person": 741,
+   "outstanding_derived": 444,
+   "registered": null,
+   "requested": 1089,
+   "total": 1386
+  },
+  "Lake Of The Woods": {
+   "by_mail": 985,
+   "in_person": 84,
+   "outstanding_derived": 1229,
+   "registered": null,
+   "requested": 2214,
+   "total": 1069
+  },
+  "Le Sueur": {
+   "by_mail": 2205,
+   "in_person": 892,
+   "outstanding_derived": 2292,
+   "registered": null,
+   "requested": 4497,
+   "total": 3097
+  },
+  "Lincoln": {
+   "by_mail": 182,
+   "in_person": 162,
+   "outstanding_derived": 130,
+   "registered": null,
+   "requested": 312,
+   "total": 344
+  },
+  "Lyon": {
+   "by_mail": 1825,
+   "in_person": 1055,
+   "outstanding_derived": 1830,
+   "registered": null,
+   "requested": 3655,
+   "total": 2880
+  },
+  "Mahnomen": {
+   "by_mail": 753,
+   "in_person": 122,
+   "outstanding_derived": 1056,
+   "registered": null,
+   "requested": 1809,
+   "total": 875
+  },
+  "Marshall": {
+   "by_mail": 2506,
+   "in_person": 82,
+   "outstanding_derived": 2186,
+   "registered": null,
+   "requested": 4692,
+   "total": 2588
+  },
+  "Martin": {
+   "by_mail": 929,
+   "in_person": 990,
+   "outstanding_derived": 991,
+   "registered": null,
+   "requested": 1920,
+   "total": 1919
+  },
+  "McLeod": {
+   "by_mail": 867,
+   "in_person": 2017,
+   "outstanding_derived": 740,
+   "registered": null,
+   "requested": 1607,
+   "total": 2884
+  },
+  "Meeker": {
+   "by_mail": 1233,
+   "in_person": 1084,
+   "outstanding_derived": 1560,
+   "registered": null,
+   "requested": 2793,
+   "total": 2317
+  },
+  "Mille Lacs": {
+   "by_mail": 702,
+   "in_person": 946,
+   "outstanding_derived": 805,
+   "registered": null,
+   "requested": 1507,
+   "total": 1648
+  },
+  "Morrison": {
+   "by_mail": 2180,
+   "in_person": 1305,
+   "outstanding_derived": 2456,
+   "registered": null,
+   "requested": 4636,
+   "total": 3485
+  },
+  "Mower": {
+   "by_mail": 1808,
+   "in_person": 1954,
+   "outstanding_derived": 1926,
+   "registered": null,
+   "requested": 3734,
+   "total": 3762
+  },
+  "Murray": {
+   "by_mail": 1130,
+   "in_person": 157,
+   "outstanding_derived": 985,
+   "registered": null,
+   "requested": 2115,
+   "total": 1287
+  },
+  "Nicollet": {
+   "by_mail": 2475,
+   "in_person": 2009,
+   "outstanding_derived": 2183,
+   "registered": null,
+   "requested": 4658,
+   "total": 4484
+  },
+  "Nobles": {
+   "by_mail": 1604,
+   "in_person": 509,
+   "outstanding_derived": 1847,
+   "registered": null,
+   "requested": 3451,
+   "total": 2113
+  },
+  "Norman": {
+   "by_mail": 1102,
+   "in_person": 75,
+   "outstanding_derived": 1637,
+   "registered": null,
+   "requested": 2739,
+   "total": 1177
+  },
+  "Olmsted": {
+   "by_mail": 5690,
+   "in_person": 13842,
+   "outstanding_derived": 4285,
+   "registered": null,
+   "requested": 9975,
+   "total": 19532
+  },
+  "Otter Tail": {
+   "by_mail": 1606,
+   "in_person": 2958,
+   "outstanding_derived": 1370,
+   "registered": null,
+   "requested": 2976,
+   "total": 4564
+  },
+  "Pennington": {
+   "by_mail": 587,
+   "in_person": 500,
+   "outstanding_derived": 815,
+   "registered": null,
+   "requested": 1402,
+   "total": 1087
+  },
+  "Pine": {
+   "by_mail": 1095,
+   "in_person": 1411,
+   "outstanding_derived": 1205,
+   "registered": null,
+   "requested": 2300,
+   "total": 2506
+  },
+  "Pipestone": {
+   "by_mail": 1245,
+   "in_person": 222,
+   "outstanding_derived": 1500,
+   "registered": null,
+   "requested": 2745,
+   "total": 1467
+  },
+  "Polk": {
+   "by_mail": 3010,
+   "in_person": 522,
+   "outstanding_derived": 3295,
+   "registered": null,
+   "requested": 6305,
+   "total": 3532
+  },
+  "Pope": {
+   "by_mail": 1285,
+   "in_person": 603,
+   "outstanding_derived": 1670,
+   "registered": null,
+   "requested": 2955,
+   "total": 1888
+  },
+  "Ramsey": {
+   "by_mail": 20689,
+   "in_person": 42604,
+   "outstanding_derived": 13641,
+   "registered": null,
+   "requested": 34330,
+   "total": 63293
+  },
+  "Red Lake": {
+   "by_mail": 997,
+   "in_person": 30,
+   "outstanding_derived": 691,
+   "registered": null,
+   "requested": 1688,
+   "total": 1027
+  },
+  "Redwood": {
+   "by_mail": 252,
+   "in_person": 674,
+   "outstanding_derived": 184,
+   "registered": null,
+   "requested": 436,
+   "total": 926
+  },
+  "Renville": {
+   "by_mail": 397,
+   "in_person": 369,
+   "outstanding_derived": 425,
+   "registered": null,
+   "requested": 822,
+   "total": 766
+  },
+  "Rice": {
+   "by_mail": 1742,
+   "in_person": 5378,
+   "outstanding_derived": 1123,
+   "registered": null,
+   "requested": 2865,
+   "total": 7120
+  },
+  "Rock": {
+   "by_mail": 1105,
+   "in_person": 291,
+   "outstanding_derived": 1569,
+   "registered": null,
+   "requested": 2674,
+   "total": 1396
+  },
+  "Roseau": {
+   "by_mail": 1562,
+   "in_person": 372,
+   "outstanding_derived": 2105,
+   "registered": null,
+   "requested": 3667,
+   "total": 1934
+  },
+  "Scott": {
+   "by_mail": 3939,
+   "in_person": 15413,
+   "outstanding_derived": 3158,
+   "registered": null,
+   "requested": 7097,
+   "total": 19352
+  },
+  "Sherburne": {
+   "by_mail": 2189,
+   "in_person": 5112,
+   "outstanding_derived": 1509,
+   "registered": null,
+   "requested": 3698,
+   "total": 7301
+  },
+  "Sibley": {
+   "by_mail": 1221,
+   "in_person": 557,
+   "outstanding_derived": 1888,
+   "registered": null,
+   "requested": 3109,
+   "total": 1778
+  },
+  "St. Louis": {
+   "by_mail": 8123,
+   "in_person": 9511,
+   "outstanding_derived": 6366,
+   "registered": null,
+   "requested": 14489,
+   "total": 17634
+  },
+  "Stearns": {
+   "by_mail": 5589,
+   "in_person": 11569,
+   "outstanding_derived": 4612,
+   "registered": null,
+   "requested": 10201,
+   "total": 17158
+  },
+  "Steele": {
+   "by_mail": 630,
+   "in_person": 2669,
+   "outstanding_derived": 351,
+   "registered": null,
+   "requested": 981,
+   "total": 3299
+  },
+  "Stevens": {
+   "by_mail": 1439,
+   "in_person": 246,
+   "outstanding_derived": 1568,
+   "registered": null,
+   "requested": 3007,
+   "total": 1685
+  },
+  "Swift": {
+   "by_mail": 1201,
+   "in_person": 227,
+   "outstanding_derived": 1081,
+   "registered": null,
+   "requested": 2282,
+   "total": 1428
+  },
+  "Todd": {
+   "by_mail": 389,
+   "in_person": 644,
+   "outstanding_derived": 199,
+   "registered": null,
+   "requested": 588,
+   "total": 1033
+  },
+  "Traverse": {
+   "by_mail": 468,
+   "in_person": 82,
+   "outstanding_derived": 529,
+   "registered": null,
+   "requested": 997,
+   "total": 550
+  },
+  "Wabasha": {
+   "by_mail": 1038,
+   "in_person": 819,
+   "outstanding_derived": 620,
+   "registered": null,
+   "requested": 1658,
+   "total": 1857
+  },
+  "Wadena": {
+   "by_mail": 441,
+   "in_person": 511,
+   "outstanding_derived": 415,
+   "registered": null,
+   "requested": 856,
+   "total": 952
+  },
+  "Waseca": {
+   "by_mail": 395,
+   "in_person": 771,
+   "outstanding_derived": 375,
+   "registered": null,
+   "requested": 770,
+   "total": 1166
+  },
+  "Washington": {
+   "by_mail": 10321,
+   "in_person": 33991,
+   "outstanding_derived": 6934,
+   "registered": null,
+   "requested": 17255,
+   "total": 44312
+  },
+  "Watonwan": {
+   "by_mail": 1214,
+   "in_person": 246,
+   "outstanding_derived": 1519,
+   "registered": null,
+   "requested": 2733,
+   "total": 1460
+  },
+  "Wilkin": {
+   "by_mail": 849,
+   "in_person": 119,
+   "outstanding_derived": 1243,
+   "registered": null,
+   "requested": 2092,
+   "total": 968
+  },
+  "Winona": {
+   "by_mail": 1776,
+   "in_person": 2342,
+   "outstanding_derived": 1153,
+   "registered": null,
+   "requested": 2929,
+   "total": 4118
+  },
+  "Wright": {
+   "by_mail": 2890,
+   "in_person": 11594,
+   "outstanding_derived": 2847,
+   "registered": null,
+   "requested": 5737,
+   "total": 14484
+  },
+  "Yellow Medicine": {
+   "by_mail": 1231,
+   "in_person": 178,
+   "outstanding_derived": 1176,
+   "registered": null,
+   "requested": 2407,
+   "total": 1409
+  }
+ },
+ "election": "2026 General",
+ "fetched": "2026-10-30T15:37:32+00:00",
+ "in_person": true,
+ "in_person_reported": true,
+ "notes": {
+  "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly"
+ },
+ "outstanding_available": false,
+ "party_available": false,
+ "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/MN_county.csv",
+ "state": "MN",
+ "state_totals": {
+  "by_mail": 245441,
+  "in_person": 483520,
+  "registered": 0,
+  "requested": 455166,
+  "total": 728961
+ },
+ "unit": "county"
+}

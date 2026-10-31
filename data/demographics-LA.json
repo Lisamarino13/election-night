@@ -1,6 +1,6 @@
 {
  "state": "LA",
- "fetched": "2026-10-31T12:07:33+00:00",
+ "fetched": "2026-10-31T12:37:39+00:00",
  "note": "Who has voted early, not how they voted. No state counts ballots before election day.",
  "stream_labels": {
   "accept": "mail returned",
@@ -66,27 +66,27 @@
    "year": 2026,
    "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/US.csv",
    "upstream": "https://www.sos.la.gov/elections-voting/early-voting-statistics-statewide",
-   "as_of": "10/30/2026",
+   "as_of": "10/31/2026",
    "turnout_2022": 1410466,
    "streams": {
     "accept": {
-     "total": 78516
+     "total": 81537
     },
     "inperson": {
-     "total": 448588
+     "total": 448586
     },
     "voted": {
-     "total": 527104,
+     "total": 530123,
      "race": {
       "counts": {
-       "nh_white": 323156,
-       "nh_black": 181076,
+       "nh_white": 325049,
+       "nh_black": 182114,
        "hispanic": 0,
        "nh_asian": 0,
        "nh_native_american": 0,
-       "nh_other": 22872
+       "nh_other": 22960
       },
-      "total": 527104,
+      "total": 530123,
       "labels": {
        "nh_white": "White",
        "nh_black": "Black",
@@ -99,11 +99,11 @@
      },
      "gender": {
       "counts": {
-       "male": 221149,
-       "female": 305688,
+       "male": 222205,
+       "female": 307650,
        "gender_unknown": 0
       },
-      "total": 526837,
+      "total": 529855,
       "labels": {
        "male": "Male",
        "female": "Female",

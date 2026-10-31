@@ -1,6 +1,6 @@
 {
  "state": "GA",
- "fetched": "2026-10-31T12:07:33+00:00",
+ "fetched": "2026-10-31T12:37:39+00:00",
  "note": "Who has voted early, not how they voted. No state counts ballots before election day.",
  "stream_labels": {
   "accept": "mail returned",
@@ -182,11 +182,11 @@
    "year": 2026,
    "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/US.csv",
    "upstream": "https://mvp.sos.ga.gov/s/voter-absentee-files",
-   "as_of": "10/30/2026",
+   "as_of": "10/31/2026",
    "turnout_2022": 3964926,
    "streams": {
     "accept": {
-     "total": 118610,
+     "total": 111365,
      "race": {
       "counts": {
        "nh_white": 63975,
@@ -205,7 +205,7 @@
        "nh_native_american": "Native American",
        "nh_other": "Other / multiple / unknown"
       },
-      "coverage": 0.9389
+      "coverage": 1.0
      },
      "age": {
       "counts": {
@@ -221,7 +221,7 @@
        "age_3": "41\u201365",
        "age_4": "over 65"
       },
-      "coverage": 0.9372
+      "coverage": 0.9982
      },
      "gender": {
       "counts": {
@@ -235,11 +235,11 @@
        "female": "Female",
        "gender_unknown": "Unknown"
       },
-      "coverage": 0.9389
+      "coverage": 1.0
      }
     },
     "inperson": {
-     "total": 2699282,
+     "total": 2402283,
      "race": {
       "counts": {
        "nh_white": 1266014,
@@ -258,7 +258,7 @@
        "nh_native_american": "Native American",
        "nh_other": "Other / multiple / unknown"
       },
-      "coverage": 0.89
+      "coverage": 1.0
      },
      "age": {
       "counts": {
@@ -274,7 +274,7 @@
        "age_3": "41\u201365",
        "age_4": "over 65"
       },
-      "coverage": 0.8879
+      "coverage": 0.9977
      },
      "gender": {
       "counts": {
@@ -288,11 +288,11 @@
        "female": "Female",
        "gender_unknown": "Unknown"
       },
-      "coverage": 0.89
+      "coverage": 1.0
      }
     },
     "voted": {
-     "total": 2810170,
+     "total": 2513648,
      "race": {
       "counts": {
        "nh_white": 1329989,
@@ -311,7 +311,7 @@
        "nh_native_american": "Native American",
        "nh_other": "Other / multiple / unknown"
       },
-      "coverage": 0.8945
+      "coverage": 1.0
      },
      "age": {
       "counts": {
@@ -327,7 +327,7 @@
        "age_3": "41\u201365",
        "age_4": "over 65"
       },
-      "coverage": 0.8925
+      "coverage": 0.9977
      },
      "gender": {
       "counts": {
@@ -341,7 +341,7 @@
        "female": "Female",
        "gender_unknown": "Unknown"
       },
-      "coverage": 0.8945
+      "coverage": 1.0
      }
     }
    }

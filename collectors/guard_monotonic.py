@@ -223,7 +223,18 @@ def main():
             ip = next((g(k) for k in ("in_person", "early_in_person")
                        if g(k) is not None), 0)
             return (mail or 0) + (ip or 0)
-        if combined(n) >= combined(o):
+        # But "the total rose" is not evidence of a re-split. Texas's mail fell 261,521
+        # -> 255,078 on 10-31 while its in-person rose 216,427 that same day, so the
+        # total rose and the fall was waved through: the board showed a mail figure
+        # 6,443 lower than the day before, undisclosed. The two facts were unrelated.
+        #
+        # A re-split means the fall is ACCOUNTED FOR by a sibling stream - the ballots
+        # moved rather than vanished, so the total barely moves. Maine's lumped 178,680
+        # becoming 87,034 mail plus 92,499 in person moved the total by 853 while mail
+        # halved by 91,646. Ordinary new voting moves the total by far more than the
+        # fall, and explains nothing about it.
+        shrank = sum(ov - nv for _, ov, nv in fell)
+        if combined(n) >= combined(o) and (combined(n) - combined(o)) <= shrank:
             print(f"  {st}: {', '.join(k for k, _, _ in fell)} shrank but the total rose "
                   f"({combined(o):,} -> {combined(n):,}) — the source split a stream, "
                   f"nothing lost")

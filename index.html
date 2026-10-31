@@ -731,6 +731,14 @@ async function loadEarly(){
                   mismatchNote: (j.notes && j.notes.mismatch) || "",
                   withdrawnNote: (j.notes && j.notes.withdrawn) || "",
                   mixedDaysNote: (j.notes && j.notes.mixed_days) || "",
+                  // guard_monotonic writes notes.fell when a cumulative figure came back
+                  // smaller than it was. It leaves the number alone on purpose - the
+                  // collector's output is trusted over the guard's guess about why it
+                  // moved - but the board read every other note that guard writes and
+                  // not this one, so a figure that had gone DOWN was shown as if nothing
+                  // had happened. Texas's mail did exactly that: 261,521 on 10/30,
+                  // 255,078 on 10/31.
+                  fellNote: (j.notes && j.notes.fell) || "",
                   srcFrom: (j.attribution && j.attribution.aggregator) || "",
                   srcUp: (j.attribution && j.attribution.upstream) || "",
                   partyAvailable: j.party_available !== false,
@@ -762,9 +770,13 @@ function srcLine(e){
     ? `<div class="srcnote warn"><b>A figure was withdrawn by the source:</b> ${e.withdrawnNote}</div>` : "";
   const md = e.mixedDaysNote
     ? `<div class="srcnote warn"><b>This total spans two publication days:</b> ${e.mixedDaysNote}</div>` : "";
-  if(!e.srcNote) return mm + wd + md;
+  // Ballots already cast do not un-cast, so a smaller figure means the source restated
+  // something. The number stands, but the reader is told it moved backwards.
+  const fl = e.fellNote
+    ? `<div class="srcnote warn"><b>A figure went down:</b> ${e.fellNote}</div>` : "";
+  if(!e.srcNote) return mm + wd + md + fl;
   const who = e.srcFrom ? `${e.srcFrom}${e.srcUp?" &larr; "+e.srcUp:""}` : "";
-  return mm + wd + md + `<div class="srcnote"><b>How this is counted:</b> ${e.srcNote}
+  return mm + wd + md + fl + `<div class="srcnote"><b>How this is counted:</b> ${e.srcNote}
     ${who?`<span class="srcwho">${who}</span>`:""}</div>`;
 }
 
@@ -898,6 +910,13 @@ function turnoutCard(k, st, e){
     })()}
     <div class="streamline">No party registration in this state &mdash; the official file carries
       turnout only. Any D/R split you see elsewhere for ${st.name} is a vendor model, not a count.</div>
+    ${/* The turnout card never called srcLine, so the source notes the guard and the
+          collectors write - a withdrawn figure, sources disagreeing, a total spanning two
+          publication days, a figure that went down - were invisible on exactly the states
+          that use this card: Texas, Georgia, Michigan, Ohio, Minnesota, South Carolina,
+          Alaska. They are the states with no party split, so the card was simpler, and
+          the warnings were simply dropped. */ ""}
+    ${srcLine(e)}
     <div class="meter"><span>${e.through?"through "+e.through:"—"}</span>
       <span>turnout only</span></div>
     ${dailyPace(e, k) || pace}

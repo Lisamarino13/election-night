@@ -61,6 +61,16 @@
      "mail_returned": {
       "ALL": 23640
      }
+    },
+    {
+     "as_of": "2026-10-30",
+     "registered": 0,
+     "in_person_returned": {
+      "ALL": 51636
+     },
+     "mail_returned": {
+      "ALL": 26113
+     }
     }
    ]
   },
@@ -348,22 +358,22 @@
      "as_of": "2026-10-30",
      "registered": null,
      "in_person_returned": {
-      "D": 994579,
-      "NPA": 597718,
+      "D": 1007065,
+      "NPA": 606561,
       "O": 0,
-      "R": 1254966
+      "R": 1266880
      },
      "mail_outstanding": {
-      "D": 256792,
-      "NPA": 175832,
+      "D": 255150,
+      "NPA": 175065,
       "O": 0,
-      "R": 208281
+      "R": 206975
      },
      "mail_returned": {
-      "D": 789473,
-      "NPA": 402403,
+      "D": 791024,
+      "NPA": 403133,
       "O": 0,
-      "R": 647097
+      "R": 648389
      }
     }
    ]
@@ -1674,6 +1684,28 @@
     },
     {
      "as_of": "2026-10-30",
+     "registered": null,
+     "in_person_returned": {
+      "D": 891495,
+      "NPA": 785277,
+      "O": 6320,
+      "R": 588124
+     },
+     "mail_outstanding": {
+      "D": null,
+      "NPA": null,
+      "O": null,
+      "R": null
+     },
+     "mail_returned": {
+      "D": 33630,
+      "NPA": 32625,
+      "O": 257,
+      "R": 15506
+     }
+    },
+    {
+     "as_of": "2026-10-31",
      "registered": null,
      "in_person_returned": {
       "D": 891495,

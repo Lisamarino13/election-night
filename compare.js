@@ -277,7 +277,12 @@ const _cache = {};
 // Prefer the payloads the page already captured at load. Re-fetching here meant the
 // charts could read a newer collector run than the cards above them, so one board
 // showed two vintages at once.
+let _gen = null;
 async function stateData(code){
+  // The page restamps __BOARD_RAW.gen on every early-vote refresh. Holding a cache
+  // across that is what let the charts sit hours behind the cards.
+  const g = (window.__BOARD_RAW || {}).gen;
+  if (g !== _gen){ for (const k in _cache) delete _cache[k]; _gen = g; }
   if (_cache[code]) return _cache[code];
   const shared = window.__BOARD_RAW || {};
   let cur = (shared.early || {})[code] || null;

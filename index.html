@@ -751,6 +751,11 @@ async function loadEarly(){
       }catch(e){}
     }catch(e){ /* a missing early file is normal, not an error */ }
   }
+  // load() re-runs every two minutes and repopulates these payloads, so the cards move.
+  // The charts hold their own cache of them and are drawn once, so they did NOT move -
+  // which put the cards hours ahead of the charts on a tab left open. Stamp each
+  // refresh so the charts can tell their copy is out of date.
+  RAW.gen = (RAW.gen || 0) + 1;
 }
 
 const PARTY_COL={D:"var(--d)",R:"var(--r)",NPA:"var(--o)",O:"var(--o)"};
@@ -1556,10 +1561,25 @@ async function load(){
     await loadTrend();
   await loadEarly();
     s.textContent = ""; render();
+    refreshCharts();
   }catch(e){
     await loadEarly();
     s.textContent = "No results feed yet — early-vote data shown where available.";
     render();
+    refreshCharts();
+  }
+}
+
+// The per-card charts are rebuilt with the cards, so they redraw on their own. The
+// charts TAB is a single panel that keeps its drawn flag forever, so it has to be told.
+function refreshCharts(){
+  const cw = document.getElementById("chartwrap");
+  if (!cw || !cw.dataset.drawn) return;      // never opened; it will draw fresh
+  delete cw.dataset.drawn;
+  const onChartsTab = !cw.hidden;
+  if (onChartsTab && window.renderCharts){
+    cw.dataset.drawn = "1";
+    window.renderCharts(cw);
   }
 }
 
@@ -1603,4 +1623,4 @@ setTab("ev");
 load();
 setInterval(load, 120000);
 </script>
-<script src="compare.js?v=5593318b"></script>
+<script src="compare.js?v=ba1d97d6"></script>

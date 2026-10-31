@@ -1,14 +1,13 @@
 {
- "checked_at": "2026-10-31T11:37:37+00:00",
+ "checked_at": "2026-10-31T12:07:37+00:00",
  "uf_file_modified": "Sat, 31 Oct 2026 01:39:39 GMT",
- "board_total": 22588252,
+ "board_total": 23037270,
  "uf_total": 23073066,
  "behind_states": [
-  "FL",
   "GA"
  ],
- "behind_ballots": 745540,
- "ties_out": 10,
+ "behind_ballots": 296522,
+ "ties_out": 11,
  "checked": 13,
  "note": "Each state against the UF Election Lab's national row, which is independent of how this board collects. BEHIND means this board is stale, not that the sources disagree - a count cannot fall as time passes.",
  "states": {
@@ -21,12 +20,12 @@
    "source": "UF"
   },
   "FL": {
-   "board": 4274034,
+   "board": 4723052,
    "uf": 4723052,
-   "gap": 449018,
-   "verdict": "behind",
-   "as_of": null,
-   "source": "direct"
+   "gap": 0,
+   "verdict": "ties out",
+   "as_of": "10/30/2026",
+   "source": "UF"
   },
   "GA": {
    "board": 2513648,

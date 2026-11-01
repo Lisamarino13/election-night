@@ -212,6 +212,11 @@ def total_vote(st, eid):
 
 def main():
     turn = turnout_by_year()
+    ep = DATA / "eavs.json"
+    eavs = (json.loads(ep.read_text()).get("states") or {}) if ep.exists() else {}
+    if not eavs:
+        print("  (no eavs.json — run eavs.py; falling back to the turnout columns)",
+              file=sys.stderr)
     states = {}
     for st in sorted(set(list(PRIOR) + [p.name[11:-5] for p in DATA.glob("ev-history-*.json")])):
         hist = ev_history(st)
@@ -220,7 +225,24 @@ def main():
         # only exists for a year where BOTH are known, and is never inferred from a
         # neighbouring cycle.
         split = {}
+        # EAVS first: the EAC's survey carries a MEASURED mode split for every state and
+        # every cycle, where the cast-based figure is only ballots received. It is also
+        # the only source that covers Georgia, Kansas, Michigan, Nebraska and Ohio before
+        # 2024 at all.
+        for yr, cell in (eavs.get(st) or {}).items():
+            tv, ev = cell.get("total_ballots"), cell.get("early_total")
+            if tv and ev is not None:
+                split[yr] = {"total_vote": tv, "early": ev,
+                             "election_day": cell.get("election_day"),
+                             "mail": cell.get("mail"),
+                             "early_in_person": cell.get("early_in_person"),
+                             "other": cell.get("other"),
+                             "early_pct": ev / tv, "basis": "EAVS"}
+        # Then the turnout column, for any cycle EAVS does not cover (it starts at 2018,
+        # and Minnesota's card goes back to 2014).
         for yr, totals in turn.items():
+            if yr in split:
+                continue
             tv, ev = totals.get(st), (hist.get(yr) or {}).get("cast")
             if tv and ev is not None:
                 split[yr] = {"total_vote": tv, "early": ev, "election_day": tv - ev,

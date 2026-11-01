@@ -1,0 +1,1913 @@
+{
+ "note": "Total ballots and the mode split from the EAC's Election Administration and Voting Survey. 'early_total' is mail plus early in person; 'other' is what the named modes leave over, mostly provisional.",
+ "sources": [
+  "https://www.eac.gov/sites/default/files/2023-10/EAVS_2022_Data_Interactive_Raw_Data.xlsx",
+  "https://www.eac.gov/sites/default/files/2025-06/2024_EAVS_for_Public_Release_V1_xlsx.xlsx"
+ ],
+ "states": {
+  "ME": {
+   "2018": {
+    "total_ballots": 646083,
+    "election_day": 459998,
+    "mail": 183644,
+    "early_in_person": 0,
+    "early_total": 183644,
+    "other": 2441
+   },
+   "2020": {
+    "total_ballots": 822534,
+    "election_day": 311560,
+    "mail": 359331,
+    "early_in_person": 151535,
+    "early_total": 510866,
+    "other": 108
+   },
+   "2022": {
+    "total_ballots": 680909,
+    "election_day": 438658,
+    "mail": 171940,
+    "early_in_person": 68458,
+    "early_total": 240398,
+    "other": 1853
+   },
+   "2024": {
+    "total_ballots": 842447,
+    "election_day": 463500,
+    "mail": 215242,
+    "early_in_person": 157116,
+    "early_total": 372358,
+    "other": 6589
+   }
+  },
+  "AL": {
+   "2018": {
+    "total_ballots": 1723694,
+    "election_day": 1661254,
+    "mail": 55908,
+    "early_in_person": 0,
+    "early_total": 55908,
+    "other": 6532
+   },
+   "2020": {
+    "total_ballots": 2329047,
+    "election_day": 2014242,
+    "mail": 300684,
+    "early_in_person": 0,
+    "early_total": 300684,
+    "other": 14121
+   },
+   "2022": {
+    "total_ballots": 1424087,
+    "election_day": 1373247,
+    "mail": 32577,
+    "early_in_person": 0,
+    "early_total": 32577,
+    "other": 18263
+   },
+   "2024": {
+    "total_ballots": 2272911,
+    "election_day": 0,
+    "mail": 126055,
+    "early_in_person": 0,
+    "early_total": 126055,
+    "other": 2146856
+   }
+  },
+  "AK": {
+   "2018": {
+    "total_ballots": 287485,
+    "election_day": 189827,
+    "mail": 24425,
+    "early_in_person": 56434,
+    "early_total": 80859,
+    "other": 16799
+   },
+   "2020": {
+    "total_ballots": 361400,
+    "election_day": 157220,
+    "mail": 92471,
+    "early_in_person": 82451,
+    "early_total": 174922,
+    "other": 29258
+   },
+   "2022": {
+    "total_ballots": 267047,
+    "election_day": 167829,
+    "mail": 38889,
+    "early_in_person": 47298,
+    "early_total": 86187,
+    "other": 13031
+   },
+   "2024": {
+    "total_ballots": 340981,
+    "election_day": 175541,
+    "mail": 48744,
+    "early_in_person": 92281,
+    "early_total": 141025,
+    "other": 24415
+   }
+  },
+  "AZ": {
+   "2018": {
+    "total_ballots": 2409906,
+    "election_day": 465256,
+    "mail": 1859842,
+    "early_in_person": 44417,
+    "early_total": 1904259,
+    "other": 40391
+   },
+   "2020": {
+    "total_ballots": 3420481,
+    "election_day": 371565,
+    "mail": 2931175,
+    "early_in_person": 69063,
+    "early_total": 3000238,
+    "other": 48678
+   },
+   "2022": {
+    "total_ballots": 2592375,
+    "election_day": 473550,
+    "mail": 2075970,
+    "early_in_person": 27705,
+    "early_total": 2103675,
+    "other": 15150
+   },
+   "2024": {
+    "total_ballots": 3477975,
+    "election_day": 496753,
+    "mail": 2597974,
+    "early_in_person": 349129,
+    "early_total": 2947103,
+    "other": 34119
+   }
+  },
+  "AR": {
+   "2018": {
+    "total_ballots": 790656,
+    "election_day": 358869,
+    "mail": 13721,
+    "early_in_person": 413254,
+    "early_total": 426975,
+    "other": 4812
+   },
+   "2020": {
+    "total_ballots": 1209997,
+    "election_day": 258836,
+    "mail": 84910,
+    "early_in_person": 830561,
+    "early_total": 915471,
+    "other": 35690
+   },
+   "2022": {
+    "total_ballots": 896423,
+    "election_day": 378667,
+    "mail": 15949,
+    "early_in_person": 501915,
+    "early_total": 517864,
+    "other": -108
+   },
+   "2024": {
+    "total_ballots": 1122278,
+    "election_day": 294235,
+    "mail": 23843,
+    "early_in_person": 810714,
+    "early_total": 834557,
+    "other": -6514
+   }
+  },
+  "CA": {
+   "2018": {
+    "total_ballots": 13828680,
+    "election_day": 3299391,
+    "mail": 9507472,
+    "early_in_person": 61901,
+    "early_total": 9569373,
+    "other": 959916
+   },
+   "2020": {
+    "total_ballots": 17720746,
+    "election_day": 1124389,
+    "mail": 14515783,
+    "early_in_person": 966201,
+    "early_total": 15481984,
+    "other": 1114373
+   },
+   "2022": {
+    "total_ballots": 11146561,
+    "election_day": 1059250,
+    "mail": 9743427,
+    "early_in_person": 216732,
+    "early_total": 9960159,
+    "other": 127152
+   },
+   "2024": {
+    "total_ballots": 16164330,
+    "election_day": 1836518,
+    "mail": 0,
+    "early_in_person": 878489,
+    "early_total": 878489,
+    "other": 13449323
+   }
+  },
+  "CO": {
+   "2018": {
+    "total_ballots": 2586432,
+    "election_day": 31628,
+    "mail": 2449409,
+    "early_in_person": 89355,
+    "early_total": 2538764,
+    "other": 16040
+   },
+   "2020": {
+    "total_ballots": 3320607,
+    "election_day": 89789,
+    "mail": 3092904,
+    "early_in_person": 108856,
+    "early_total": 3201760,
+    "other": 29058
+   },
+   "2022": {
+    "total_ballots": 2539897,
+    "election_day": 93149,
+    "mail": 2406246,
+    "early_in_person": 27022,
+    "early_total": 2433268,
+    "other": 13480
+   },
+   "2024": {
+    "total_ballots": 3240754,
+    "election_day": 141556,
+    "mail": 0,
+    "early_in_person": 109209,
+    "early_total": 109209,
+    "other": 2989989
+   }
+  },
+  "CT": {
+   "2018": {
+    "total_ballots": 1421650,
+    "election_day": 1328226,
+    "mail": 91602,
+    "early_in_person": 0,
+    "early_total": 91602,
+    "other": 1822
+   },
+   "2020": {
+    "total_ballots": 1863479,
+    "election_day": 1188283,
+    "mail": 667403,
+    "early_in_person": 0,
+    "early_total": 667403,
+    "other": 7793
+   },
+   "2022": {
+    "total_ballots": 1297811,
+    "election_day": 1134493,
+    "mail": 150284,
+    "early_in_person": 0,
+    "early_total": 150284,
+    "other": 13034
+   },
+   "2024": {
+    "total_ballots": 1820891,
+    "election_day": 0,
+    "mail": 118362,
+    "early_in_person": 715275,
+    "early_total": 833637,
+    "other": 987254
+   }
+  },
+  "DE": {
+   "2018": {
+    "total_ballots": 366550,
+    "election_day": 346850,
+    "mail": 13431,
+    "early_in_person": 5525,
+    "early_total": 18956,
+    "other": 744
+   },
+   "2020": {
+    "total_ballots": 514656,
+    "election_day": 345809,
+    "mail": 161135,
+    "early_in_person": 5236,
+    "early_total": 166371,
+    "other": 2476
+   },
+   "2022": {
+    "total_ballots": 325828,
+    "election_day": 247043,
+    "mail": 19027,
+    "early_in_person": 55639,
+    "early_total": 74666,
+    "other": 4119
+   },
+   "2024": {
+    "total_ballots": 514367,
+    "election_day": 268718,
+    "mail": 33659,
+    "early_in_person": 210295,
+    "early_total": 243954,
+    "other": 1695
+   }
+  },
+  "DC": {
+   "2018": {
+    "total_ballots": 231700,
+    "election_day": 168546,
+    "mail": 9019,
+    "early_in_person": 52512,
+    "early_total": 61531,
+    "other": 1623
+   },
+   "2020": {
+    "total_ballots": 346491,
+    "election_day": 29036,
+    "mail": 229459,
+    "early_in_person": 80959,
+    "early_total": 310418,
+    "other": 7037
+   },
+   "2022": {
+    "total_ballots": 205774,
+    "election_day": 59538,
+    "mail": 130287,
+    "early_in_person": 15438,
+    "early_total": 145725,
+    "other": 511
+   },
+   "2024": {
+    "total_ballots": 328871,
+    "election_day": 82396,
+    "mail": 0,
+    "early_in_person": 72914,
+    "early_total": 72914,
+    "other": 173561
+   }
+  },
+  "FL": {
+   "2018": {
+    "total_ballots": 8355817,
+    "election_day": 2954737,
+    "mail": 2585359,
+    "early_in_person": 2681708,
+    "early_total": 5267067,
+    "other": 134013
+   },
+   "2020": {
+    "total_ballots": 11137676,
+    "election_day": 1942102,
+    "mail": 4546896,
+    "early_in_person": 4332912,
+    "early_total": 8879808,
+    "other": 315766
+   },
+   "2022": {
+    "total_ballots": 7798866,
+    "election_day": 2727051,
+    "mail": 2759432,
+    "early_in_person": 2271845,
+    "early_total": 5031277,
+    "other": 40538
+   },
+   "2024": {
+    "total_ballots": 10999125,
+    "election_day": 2596761,
+    "mail": 2945893,
+    "early_in_person": 5364821,
+    "early_total": 8310714,
+    "other": 91650
+   }
+  },
+  "GA": {
+   "2018": {
+    "total_ballots": 3951876,
+    "election_day": 1820515,
+    "mail": 220709,
+    "early_in_person": 1893368,
+    "early_total": 2114077,
+    "other": 17284
+   },
+   "2020": {
+    "total_ballots": 5023812,
+    "election_day": 980627,
+    "mail": 1311361,
+    "early_in_person": 2704002,
+    "early_total": 4015363,
+    "other": 27822
+   },
+   "2022": {
+    "total_ballots": 3963152,
+    "election_day": 1420392,
+    "mail": 248487,
+    "early_in_person": 2290459,
+    "early_total": 2538946,
+    "other": 3814
+   },
+   "2024": {
+    "total_ballots": 5297500,
+    "election_day": 1239125,
+    "mail": 268751,
+    "early_in_person": 3768395,
+    "early_total": 4037146,
+    "other": 21229
+   }
+  },
+  "HI": {
+   "2018": {
+    "total_ballots": 398657,
+    "election_day": 175120,
+    "mail": 0,
+    "early_in_person": 28300,
+    "early_total": 28300,
+    "other": 195237
+   },
+   "2020": {
+    "total_ballots": 580098,
+    "election_day": 4522,
+    "mail": 548636,
+    "early_in_person": 24214,
+    "early_total": 572850,
+    "other": 2726
+   },
+   "2022": {
+    "total_ballots": 423443,
+    "election_day": 5789,
+    "mail": 402243,
+    "early_in_person": 10879,
+    "early_total": 413122,
+    "other": 4532
+   },
+   "2024": {
+    "total_ballots": 522236,
+    "election_day": 0,
+    "mail": 0,
+    "early_in_person": 39158,
+    "early_total": 39158,
+    "other": 483078
+   }
+  },
+  "ID": {
+   "2018": {
+    "total_ballots": 612582,
+    "election_day": 366844,
+    "mail": 78690,
+    "early_in_person": 166195,
+    "early_total": 244885,
+    "other": 853
+   },
+   "2020": {
+    "total_ballots": 878527,
+    "election_day": 384319,
+    "mail": 345636,
+    "early_in_person": 145388,
+    "early_total": 491024,
+    "other": 3184
+   },
+   "2022": {
+    "total_ballots": 595350,
+    "election_day": 401184,
+    "mail": 128723,
+    "early_in_person": 65129,
+    "early_total": 193852,
+    "other": 314
+   },
+   "2024": {
+    "total_ballots": 917469,
+    "election_day": 508734,
+    "mail": 177211,
+    "early_in_person": 225973,
+    "early_total": 403184,
+    "other": 5551
+   }
+  },
+  "IL": {
+   "2018": {
+    "total_ballots": 4751180,
+    "election_day": 3156324,
+    "mail": 426271,
+    "early_in_person": 1078372,
+    "early_total": 1504643,
+    "other": 90213
+   },
+   "2020": {
+    "total_ballots": 6140545,
+    "election_day": 2049927,
+    "mail": 2037583,
+    "early_in_person": 2005711,
+    "early_total": 4043294,
+    "other": 47324
+   },
+   "2022": {
+    "total_ballots": 4175767,
+    "election_day": 1926270,
+    "mail": 568728,
+    "early_in_person": 605992,
+    "early_total": 1174720,
+    "other": 1074777
+   },
+   "2024": {
+    "total_ballots": 5717147,
+    "election_day": 2666185,
+    "mail": 1016208,
+    "early_in_person": 2001203,
+    "early_total": 3017411,
+    "other": 33551
+   }
+  },
+  "IN": {
+   "2018": {
+    "total_ballots": 2933234,
+    "election_day": 1548710,
+    "mail": 762511,
+    "early_in_person": 616016,
+    "early_total": 1378527,
+    "other": 5997
+   },
+   "2020": {
+    "total_ballots": 3103284,
+    "election_day": 1201154,
+    "mail": 535942,
+    "early_in_person": 1354897,
+    "early_total": 1890839,
+    "other": 11291
+   },
+   "2022": {
+    "total_ballots": 1893022,
+    "election_day": 1196206,
+    "mail": 154882,
+    "early_in_person": 538699,
+    "early_total": 693581,
+    "other": 3235
+   },
+   "2024": {
+    "total_ballots": 2986839,
+    "election_day": 1372508,
+    "mail": 1603815,
+    "early_in_person": 1397345,
+    "early_total": 3001160,
+    "other": -1386829
+   }
+  },
+  "IA": {
+   "2018": {
+    "total_ballots": 1334279,
+    "election_day": 787074,
+    "mail": 535125,
+    "early_in_person": 0,
+    "early_total": 535125,
+    "other": 12080
+   },
+   "2020": {
+    "total_ballots": 1700130,
+    "election_day": 698557,
+    "mail": 994300,
+    "early_in_person": 0,
+    "early_total": 994300,
+    "other": 7273
+   },
+   "2022": {
+    "total_ballots": 1230143,
+    "election_day": 859562,
+    "mail": 368907,
+    "early_in_person": 0,
+    "early_total": 368907,
+    "other": 1674
+   },
+   "2024": {
+    "total_ballots": 1674011,
+    "election_day": 0,
+    "mail": 0,
+    "early_in_person": 0,
+    "early_total": 0,
+    "other": 1674011
+   }
+  },
+  "KS": {
+   "2018": {
+    "total_ballots": 1070221,
+    "election_day": 866473,
+    "mail": 172743,
+    "early_in_person": 250114,
+    "early_total": 422857,
+    "other": -219109
+   },
+   "2020": {
+    "total_ballots": 1379623,
+    "election_day": 505132,
+    "mail": 463909,
+    "early_in_person": 375196,
+    "early_total": 839105,
+    "other": 35386
+   },
+   "2022": {
+    "total_ballots": 997607,
+    "election_day": 577607,
+    "mail": 131633,
+    "early_in_person": 273287,
+    "early_total": 404920,
+    "other": 15080
+   },
+   "2024": {
+    "total_ballots": 1342102,
+    "election_day": 604319,
+    "mail": 147276,
+    "early_in_person": 557906,
+    "early_total": 705182,
+    "other": 32601
+   }
+  },
+  "KY": {
+   "2018": {
+    "total_ballots": 1619587,
+    "election_day": 1525843,
+    "mail": 26746,
+    "early_in_person": 64407,
+    "early_total": 91153,
+    "other": 2591
+   },
+   "2020": {
+    "total_ballots": 2149444,
+    "election_day": 477612,
+    "mail": 631497,
+    "early_in_person": 1024965,
+    "early_total": 1656462,
+    "other": 15370
+   },
+   "2022": {
+    "total_ballots": 1500419,
+    "election_day": 1150303,
+    "mail": 72663,
+    "early_in_person": 269572,
+    "early_total": 342235,
+    "other": 7881
+   },
+   "2024": {
+    "total_ballots": 2086090,
+    "election_day": 1267653,
+    "mail": 116324,
+    "early_in_person": 687057,
+    "early_total": 803381,
+    "other": 15056
+   }
+  },
+  "LA": {
+   "2018": {
+    "total_ballots": 1519552,
+    "election_day": 1203694,
+    "mail": 43096,
+    "early_in_person": 271191,
+    "early_total": 314287,
+    "other": 1571
+   },
+   "2020": {
+    "total_ballots": 2169354,
+    "election_day": 1182672,
+    "mail": 162692,
+    "early_in_person": 817951,
+    "early_total": 980643,
+    "other": 6039
+   },
+   "2022": {
+    "total_ballots": 1410597,
+    "election_day": 1034781,
+    "mail": 102618,
+    "early_in_person": 272260,
+    "early_total": 374878,
+    "other": 938
+   },
+   "2024": {
+    "total_ballots": 2021588,
+    "election_day": 1047445,
+    "mail": 119694,
+    "early_in_person": 849784,
+    "early_total": 969478,
+    "other": 4665
+   }
+  },
+  "MD": {
+   "2018": {
+    "total_ballots": 2335128,
+    "election_day": 1496913,
+    "mail": 113702,
+    "early_in_person": 663188,
+    "early_total": 776890,
+    "other": 61325
+   },
+   "2020": {
+    "total_ballots": 3059603,
+    "election_day": 439094,
+    "mail": 1502852,
+    "early_in_person": 987373,
+    "early_total": 2490225,
+    "other": 130284
+   },
+   "2022": {
+    "total_ballots": 2028850,
+    "election_day": 1046153,
+    "mail": 536285,
+    "early_in_person": 380874,
+    "early_total": 917159,
+    "other": 65538
+   },
+   "2024": {
+    "total_ballots": 3028813,
+    "election_day": 1145134,
+    "mail": 744244,
+    "early_in_person": 974945,
+    "early_total": 1719189,
+    "other": 164490
+   }
+  },
+  "MA": {
+   "2018": {
+    "total_ballots": 2753623,
+    "election_day": 2061647,
+    "mail": 84768,
+    "early_in_person": 580091,
+    "early_total": 664859,
+    "other": 27117
+   },
+   "2020": {
+    "total_ballots": 3658005,
+    "election_day": 1256443,
+    "mail": 1521052,
+    "early_in_person": 852926,
+    "early_total": 2373978,
+    "other": 27584
+   },
+   "2022": {
+    "total_ballots": 2511460,
+    "election_day": 1386373,
+    "mail": 922559,
+    "early_in_person": 197288,
+    "early_total": 1119847,
+    "other": 5240
+   },
+   "2024": {
+    "total_ballots": 3512930,
+    "election_day": 1713191,
+    "mail": 1173112,
+    "early_in_person": 600225,
+    "early_total": 1773337,
+    "other": 26402
+   }
+  },
+  "MI": {
+   "2018": {
+    "total_ballots": 4341340,
+    "election_day": 3180299,
+    "mail": 1055822,
+    "early_in_person": 98136,
+    "early_total": 1153958,
+    "other": 7083
+   },
+   "2020": {
+    "total_ballots": 5579317,
+    "election_day": 2286764,
+    "mail": 2741668,
+    "early_in_person": 529015,
+    "early_total": 3270683,
+    "other": 21870
+   },
+   "2022": {
+    "total_ballots": 4500400,
+    "election_day": 2614123,
+    "mail": 1656814,
+    "early_in_person": 223644,
+    "early_total": 1880458,
+    "other": 5819
+   },
+   "2024": {
+    "total_ballots": 5706503,
+    "election_day": 2453252,
+    "mail": 2017704,
+    "early_in_person": 1214409,
+    "early_total": 3232113,
+    "other": 21138
+   }
+  },
+  "MN": {
+   "2018": {
+    "total_ballots": 2618245,
+    "election_day": 1972519,
+    "mail": 300343,
+    "early_in_person": 340004,
+    "early_total": 640347,
+    "other": 5379
+   },
+   "2020": {
+    "total_ballots": 3290013,
+    "election_day": 1380309,
+    "mail": 1286660,
+    "early_in_person": 607304,
+    "early_total": 1893964,
+    "other": 15740
+   },
+   "2022": {
+    "total_ballots": 2526646,
+    "election_day": 1853310,
+    "mail": 339396,
+    "early_in_person": 330809,
+    "early_total": 670205,
+    "other": 3131
+   },
+   "2024": {
+    "total_ballots": 3271069,
+    "election_day": 1960360,
+    "mail": 328830,
+    "early_in_person": 850705,
+    "early_total": 1179535,
+    "other": 131174
+   }
+  },
+  "MS": {
+   "2018": {
+    "total_ballots": 961025,
+    "election_day": 883771,
+    "mail": 63213,
+    "early_in_person": 50727,
+    "early_total": 113940,
+    "other": -36686
+   },
+   "2020": {
+    "total_ballots": 1334155,
+    "election_day": 1085337,
+    "mail": 234500,
+    "early_in_person": 0,
+    "early_total": 234500,
+    "other": 14318
+   },
+   "2022": {
+    "total_ballots": 708585,
+    "election_day": 656874,
+    "mail": 0,
+    "early_in_person": 0,
+    "early_total": 0,
+    "other": 51711
+   },
+   "2024": {
+    "total_ballots": 1225176,
+    "election_day": 1010752,
+    "mail": 0,
+    "early_in_person": 0,
+    "early_total": 0,
+    "other": 214424
+   }
+  },
+  "MO": {
+   "2018": {
+    "total_ballots": 2553274,
+    "election_day": 2332847,
+    "mail": 215879,
+    "early_in_person": 0,
+    "early_total": 215879,
+    "other": 4548
+   },
+   "2020": {
+    "total_ballots": 3201458,
+    "election_day": 2288607,
+    "mail": 899695,
+    "early_in_person": 0,
+    "early_total": 899695,
+    "other": 13156
+   },
+   "2022": {
+    "total_ballots": 2304250,
+    "election_day": 1834916,
+    "mail": 278539,
+    "early_in_person": 184687,
+    "early_total": 463226,
+    "other": 6108
+   },
+   "2024": {
+    "total_ballots": 3126837,
+    "election_day": 2067247,
+    "mail": 178526,
+    "early_in_person": 867936,
+    "early_total": 1046462,
+    "other": 13128
+   }
+  },
+  "MT": {
+   "2018": {
+    "total_ballots": 508652,
+    "election_day": 135272,
+    "mail": 370677,
+    "early_in_person": 0,
+    "early_total": 370677,
+    "other": 2703
+   },
+   "2020": {
+    "total_ballots": 612141,
+    "election_day": 9497,
+    "mail": 597912,
+    "early_in_person": 0,
+    "early_total": 597912,
+    "other": 4732
+   },
+   "2022": {
+    "total_ballots": 468326,
+    "election_day": 0,
+    "mail": 0,
+    "early_in_person": 0,
+    "early_total": 0,
+    "other": 468326
+   },
+   "2024": {
+    "total_ballots": 612423,
+    "election_day": 0,
+    "mail": 0,
+    "early_in_person": 0,
+    "early_total": 0,
+    "other": 612423
+   }
+  },
+  "NE": {
+   "2018": {
+    "total_ballots": 708924,
+    "election_day": 490043,
+    "mail": 168844,
+    "early_in_person": 40786,
+    "early_total": 209630,
+    "other": 9251
+   },
+   "2020": {
+    "total_ballots": 966786,
+    "election_day": 417349,
+    "mail": 485195,
+    "early_in_person": 51537,
+    "early_total": 536732,
+    "other": 12705
+   },
+   "2022": {
+    "total_ballots": 682741,
+    "election_day": 412213,
+    "mail": 242009,
+    "early_in_person": 21944,
+    "early_total": 263953,
+    "other": 6575
+   },
+   "2024": {
+    "total_ballots": 965145,
+    "election_day": 564660,
+    "mail": 260899,
+    "early_in_person": 80304,
+    "early_total": 341203,
+    "other": 59282
+   }
+  },
+  "NV": {
+   "2018": {
+    "total_ballots": 976587,
+    "election_day": 334250,
+    "mail": 86306,
+    "early_in_person": 554591,
+    "early_total": 640897,
+    "other": 1440
+   },
+   "2020": {
+    "total_ballots": 1407761,
+    "election_day": 128729,
+    "mail": 664461,
+    "early_in_person": 540767,
+    "early_total": 1205228,
+    "other": 73804
+   },
+   "2022": {
+    "total_ballots": 1021780,
+    "election_day": 210325,
+    "mail": 518398,
+    "early_in_person": 281760,
+    "early_total": 800158,
+    "other": 11297
+   },
+   "2024": {
+    "total_ballots": 1486297,
+    "election_day": 247291,
+    "mail": 0,
+    "early_in_person": 543461,
+    "early_total": 543461,
+    "other": 695545
+   }
+  },
+  "NH": {
+   "2018": {
+    "total_ballots": 581551,
+    "election_day": 534786,
+    "mail": 44615,
+    "early_in_person": 0,
+    "early_total": 44615,
+    "other": 2150
+   },
+   "2020": {
+    "total_ballots": 814499,
+    "election_day": 554315,
+    "mail": 253932,
+    "early_in_person": 0,
+    "early_total": 253932,
+    "other": 6252
+   },
+   "2022": {
+    "total_ballots": 626931,
+    "election_day": 568276,
+    "mail": 56971,
+    "early_in_person": 0,
+    "early_total": 56971,
+    "other": 1684
+   },
+   "2024": {
+    "total_ballots": 829090,
+    "election_day": 730273,
+    "mail": 92945,
+    "early_in_person": 0,
+    "early_total": 92945,
+    "other": 5872
+   }
+  },
+  "NJ": {
+   "2018": {
+    "total_ballots": 3248642,
+    "election_day": 2757416,
+    "mail": 406325,
+    "early_in_person": 0,
+    "early_total": 406325,
+    "other": 84901
+   },
+   "2020": {
+    "total_ballots": 4494659,
+    "election_day": 987,
+    "mail": 4178875,
+    "early_in_person": 0,
+    "early_total": 4178875,
+    "other": 314797
+   },
+   "2022": {
+    "total_ballots": 2658149,
+    "election_day": 0,
+    "mail": 581955,
+    "early_in_person": 0,
+    "early_total": 581955,
+    "other": 2076194
+   },
+   "2024": {
+    "total_ballots": 4321921,
+    "election_day": 0,
+    "mail": 828200,
+    "early_in_person": 0,
+    "early_total": 828200,
+    "other": 3493721
+   }
+  },
+  "NM": {
+   "2018": {
+    "total_ballots": 697681,
+    "election_day": 254378,
+    "mail": 64813,
+    "early_in_person": 375283,
+    "early_total": 440096,
+    "other": 3207
+   },
+   "2020": {
+    "total_ballots": 928230,
+    "election_day": 142470,
+    "mail": 323661,
+    "early_in_person": 456280,
+    "early_total": 779941,
+    "other": 5819
+   },
+   "2022": {
+    "total_ballots": 709556,
+    "election_day": 256438,
+    "mail": 97746,
+    "early_in_person": 353476,
+    "early_total": 451222,
+    "other": 1896
+   },
+   "2024": {
+    "total_ballots": 927923,
+    "election_day": 252629,
+    "mail": 111167,
+    "early_in_person": 556395,
+    "early_total": 667562,
+    "other": 7732
+   }
+  },
+  "NY": {
+   "2018": {
+    "total_ballots": 6356896,
+    "election_day": 5951951,
+    "mail": 246278,
+    "early_in_person": 0,
+    "early_total": 246278,
+    "other": 158667
+   },
+   "2020": {
+    "total_ballots": 8701749,
+    "election_day": 4284263,
+    "mail": 1763448,
+    "early_in_person": 2502161,
+    "early_total": 4265609,
+    "other": 151877
+   },
+   "2022": {
+    "total_ballots": 5886371,
+    "election_day": 4250739,
+    "mail": 382926,
+    "early_in_person": 1158391,
+    "early_total": 1541317,
+    "other": 94315
+   },
+   "2024": {
+    "total_ballots": 8389626,
+    "election_day": 4320467,
+    "mail": 836987,
+    "early_in_person": 2986704,
+    "early_total": 3823691,
+    "other": 245468
+   }
+  },
+  "NC": {
+   "2018": {
+    "total_ballots": 3705224,
+    "election_day": 1666500,
+    "mail": 89711,
+    "early_in_person": 1926639,
+    "early_total": 2016350,
+    "other": 22374
+   },
+   "2020": {
+    "total_ballots": 5543405,
+    "election_day": 896818,
+    "mail": 974351,
+    "early_in_person": 3460562,
+    "early_total": 4434913,
+    "other": 211674
+   },
+   "2022": {
+    "total_ballots": 3789932,
+    "election_day": 1578581,
+    "mail": 179280,
+    "early_in_person": 1929870,
+    "early_total": 2109150,
+    "other": 102201
+   },
+   "2024": {
+    "total_ballots": 5756106,
+    "election_day": 1175905,
+    "mail": 298269,
+    "early_in_person": 4224909,
+    "early_total": 4523178,
+    "other": 57023
+   }
+  },
+  "ND": {
+   "2018": {
+    "total_ballots": 329950,
+    "election_day": 234705,
+    "mail": 94562,
+    "early_in_person": 0,
+    "early_total": 94562,
+    "other": 683
+   },
+   "2020": {
+    "total_ballots": 364499,
+    "election_day": 91803,
+    "mail": 183161,
+    "early_in_person": 87882,
+    "early_total": 271043,
+    "other": 1653
+   },
+   "2022": {
+    "total_ballots": 242566,
+    "election_day": 136304,
+    "mail": 69399,
+    "early_in_person": 36513,
+    "early_total": 105912,
+    "other": 350
+   },
+   "2024": {
+    "total_ballots": 371974,
+    "election_day": 181998,
+    "mail": 89429,
+    "early_in_person": 99007,
+    "early_total": 188436,
+    "other": 1540
+   }
+  },
+  "OH": {
+   "2018": {
+    "total_ballots": 4520678,
+    "election_day": 3040698,
+    "mail": 941447,
+    "early_in_person": 429916,
+    "early_total": 1371363,
+    "other": 108617
+   },
+   "2020": {
+    "total_ballots": 5974121,
+    "election_day": 2344886,
+    "mail": 2135600,
+    "early_in_person": 1345715,
+    "early_total": 3481315,
+    "other": 147920
+   },
+   "2022": {
+    "total_ballots": 4201368,
+    "election_day": 2654497,
+    "mail": 911517,
+    "early_in_person": 550092,
+    "early_total": 1461609,
+    "other": 85262
+   },
+   "2024": {
+    "total_ballots": 5851625,
+    "election_day": 3130240,
+    "mail": 1060096,
+    "early_in_person": 1536604,
+    "early_total": 2596700,
+    "other": 124685
+   }
+  },
+  "OK": {
+   "2018": {
+    "total_ballots": 1200164,
+    "election_day": 1017951,
+    "mail": 69771,
+    "early_in_person": 107350,
+    "early_total": 177121,
+    "other": 5092
+   },
+   "2020": {
+    "total_ballots": 1564886,
+    "election_day": 1114001,
+    "mail": 275017,
+    "early_in_person": 167516,
+    "early_total": 442533,
+    "other": 8352
+   },
+   "2022": {
+    "total_ballots": 1153203,
+    "election_day": 949235,
+    "mail": 68697,
+    "early_in_person": 132591,
+    "early_total": 201288,
+    "other": 2680
+   },
+   "2024": {
+    "total_ballots": 1573274,
+    "election_day": 1174876,
+    "mail": 98548,
+    "early_in_person": 294037,
+    "early_total": 392585,
+    "other": 5813
+   }
+  },
+  "OR": {
+   "2018": {
+    "total_ballots": 1914923,
+    "election_day": 0,
+    "mail": 1914923,
+    "early_in_person": 0,
+    "early_total": 1914923,
+    "other": 0
+   },
+   "2020": {
+    "total_ballots": 2396123,
+    "election_day": 0,
+    "mail": 2379544,
+    "early_in_person": 0,
+    "early_total": 2379544,
+    "other": 16579
+   },
+   "2022": {
+    "total_ballots": 1968717,
+    "election_day": 0,
+    "mail": 1961760,
+    "early_in_person": 0,
+    "early_total": 1961760,
+    "other": 6957
+   },
+   "2024": {
+    "total_ballots": 2269608,
+    "election_day": 0,
+    "mail": 0,
+    "early_in_person": 0,
+    "early_total": 0,
+    "other": 2269608
+   }
+  },
+  "PA": {
+   "2018": {
+    "total_ballots": 5057630,
+    "election_day": 4852631,
+    "mail": 185803,
+    "early_in_person": 0,
+    "early_total": 185803,
+    "other": 19196
+   },
+   "2020": {
+    "total_ballots": 6973951,
+    "election_day": 4214277,
+    "mail": 2623867,
+    "early_in_person": 0,
+    "early_total": 2623867,
+    "other": 135807
+   },
+   "2022": {
+    "total_ballots": 5410022,
+    "election_day": 4126903,
+    "mail": 1234943,
+    "early_in_person": 0,
+    "early_total": 1234943,
+    "other": 48176
+   },
+   "2024": {
+    "total_ballots": 7074875,
+    "election_day": 5043808,
+    "mail": 1933707,
+    "early_in_person": 0,
+    "early_total": 1933707,
+    "other": 97360
+   }
+  },
+  "RI": {
+   "2018": {
+    "total_ballots": 389161,
+    "election_day": 354407,
+    "mail": 19165,
+    "early_in_person": 10872,
+    "early_total": 30037,
+    "other": 4717
+   },
+   "2020": {
+    "total_ballots": 519412,
+    "election_day": 198611,
+    "mail": 168696,
+    "early_in_person": 149481,
+    "early_total": 318177,
+    "other": 2624
+   },
+   "2022": {
+    "total_ballots": 361275,
+    "election_day": 254334,
+    "mail": 33556,
+    "early_in_person": 71737,
+    "early_total": 105293,
+    "other": 1648
+   },
+   "2024": {
+    "total_ballots": 522164,
+    "election_day": 290699,
+    "mail": 51995,
+    "early_in_person": 173547,
+    "early_total": 225542,
+    "other": 5923
+   }
+  },
+  "SC": {
+   "2018": {
+    "total_ballots": 1739705,
+    "election_day": 1432727,
+    "mail": 80271,
+    "early_in_person": 217857,
+    "early_total": 298128,
+    "other": 8850
+   },
+   "2020": {
+    "total_ballots": 2523856,
+    "election_day": 1182726,
+    "mail": 428704,
+    "early_in_person": 894078,
+    "early_total": 1322782,
+    "other": 18348
+   },
+   "2022": {
+    "total_ballots": 1718519,
+    "election_day": 1096154,
+    "mail": 54911,
+    "early_in_person": 561597,
+    "early_total": 616508,
+    "other": 5857
+   },
+   "2024": {
+    "total_ballots": 2566404,
+    "election_day": 977341,
+    "mail": 98782,
+    "early_in_person": 1476843,
+    "early_total": 1575625,
+    "other": 13438
+   }
+  },
+  "SD": {
+   "2018": {
+    "total_ballots": 340324,
+    "election_day": 237041,
+    "mail": 71434,
+    "early_in_person": 18273,
+    "early_total": 89707,
+    "other": 13576
+   },
+   "2020": {
+    "total_ballots": 427406,
+    "election_day": 208396,
+    "mail": 122525,
+    "early_in_person": 93469,
+    "early_total": 215994,
+    "other": 3016
+   },
+   "2022": {
+    "total_ballots": 354605,
+    "election_day": 183663,
+    "mail": 97472,
+    "early_in_person": 72705,
+    "early_total": 170177,
+    "other": 765
+   },
+   "2024": {
+    "total_ballots": 435739,
+    "election_day": 273648,
+    "mail": 159335,
+    "early_in_person": 0,
+    "early_total": 159335,
+    "other": 2756
+   }
+  },
+  "TN": {
+   "2018": {
+    "total_ballots": 2267428,
+    "election_day": 878576,
+    "mail": 38855,
+    "early_in_person": 1342970,
+    "early_total": 1381825,
+    "other": 7027
+   },
+   "2020": {
+    "total_ballots": 3074692,
+    "election_day": 766552,
+    "mail": 216074,
+    "early_in_person": 2071168,
+    "early_total": 2287242,
+    "other": 20898
+   },
+   "2022": {
+    "total_ballots": 1756397,
+    "election_day": 864965,
+    "mail": 44097,
+    "early_in_person": 844429,
+    "early_total": 888526,
+    "other": 2906
+   },
+   "2024": {
+    "total_ballots": 3090161,
+    "election_day": 856491,
+    "mail": 86904,
+    "early_in_person": 2132535,
+    "early_total": 2219439,
+    "other": 14231
+   }
+  },
+  "TX": {
+   "2018": {
+    "total_ballots": 7976548,
+    "election_day": 2318676,
+    "mail": 530238,
+    "early_in_person": 5452510,
+    "early_total": 5982748,
+    "other": -324876
+   },
+   "2020": {
+    "total_ballots": 11449044,
+    "election_day": 1707821,
+    "mail": 982362,
+    "early_in_person": 8660809,
+    "early_total": 9643171,
+    "other": 98052
+   },
+   "2022": {
+    "total_ballots": 8151590,
+    "election_day": 2590664,
+    "mail": 356987,
+    "early_in_person": 5176910,
+    "early_total": 5533897,
+    "other": 27029
+   },
+   "2024": {
+    "total_ballots": 11488820,
+    "election_day": 2329171,
+    "mail": 384221,
+    "early_in_person": 8703181,
+    "early_total": 9087402,
+    "other": 72247
+   }
+  },
+  "UT": {
+   "2018": {
+    "total_ballots": 1082972,
+    "election_day": 64395,
+    "mail": 944806,
+    "early_in_person": 11042,
+    "early_total": 955848,
+    "other": 62729
+   },
+   "2020": {
+    "total_ballots": 1542529,
+    "election_day": 81970,
+    "mail": 1386385,
+    "early_in_person": 35048,
+    "early_total": 1421433,
+    "other": 39126
+   },
+   "2022": {
+    "total_ballots": 1074344,
+    "election_day": 56264,
+    "mail": 970274,
+    "early_in_person": 12942,
+    "early_total": 983216,
+    "other": 34864
+   },
+   "2024": {
+    "total_ballots": 1466896,
+    "election_day": 104350,
+    "mail": 0,
+    "early_in_person": 36381,
+    "early_total": 36381,
+    "other": 1326165
+   }
+  },
+  "VT": {
+   "2018": {
+    "total_ballots": 268758,
+    "election_day": 206008,
+    "mail": 28309,
+    "early_in_person": 33190,
+    "early_total": 61499,
+    "other": 1251
+   },
+   "2020": {
+    "total_ballots": 368075,
+    "election_day": 90959,
+    "mail": 272318,
+    "early_in_person": 2033,
+    "early_total": 274351,
+    "other": 2765
+   },
+   "2022": {
+    "total_ballots": 286300,
+    "election_day": 91637,
+    "mail": 193618,
+    "early_in_person": 0,
+    "early_total": 193618,
+    "other": 1045
+   },
+   "2024": {
+    "total_ballots": 361604,
+    "election_day": 122386,
+    "mail": 234038,
+    "early_in_person": 2631,
+    "early_total": 236669,
+    "other": 2549
+   }
+  },
+  "VA": {
+   "2018": {
+    "total_ballots": 3343186,
+    "election_day": 3030772,
+    "mail": 102658,
+    "early_in_person": 193993,
+    "early_total": 296651,
+    "other": 15763
+   },
+   "2020": {
+    "total_ballots": 4487338,
+    "election_day": 1657228,
+    "mail": 983907,
+    "early_in_person": 1798050,
+    "early_total": 2781957,
+    "other": 48153
+   },
+   "2022": {
+    "total_ballots": 3074762,
+    "election_day": 2033530,
+    "mail": 289428,
+    "early_in_person": 711206,
+    "early_total": 1000634,
+    "other": 40598
+   },
+   "2024": {
+    "total_ballots": 4511853,
+    "election_day": 2053905,
+    "mail": 474332,
+    "early_in_person": 1840239,
+    "early_total": 2314571,
+    "other": 143377
+   }
+  },
+  "WA": {
+   "2018": {
+    "total_ballots": 3133462,
+    "election_day": 0,
+    "mail": 3090619,
+    "early_in_person": 20,
+    "early_total": 3090639,
+    "other": 42823
+   },
+   "2020": {
+    "total_ballots": 4116055,
+    "election_day": 0,
+    "mail": 4050981,
+    "early_in_person": 183,
+    "early_total": 4051164,
+    "other": 64891
+   },
+   "2022": {
+    "total_ballots": 3067686,
+    "election_day": 0,
+    "mail": 3037023,
+    "early_in_person": 3079,
+    "early_total": 3040102,
+    "other": 27584
+   },
+   "2024": {
+    "total_ballots": 3949810,
+    "election_day": 0,
+    "mail": 0,
+    "early_in_person": 171,
+    "early_total": 171,
+    "other": 3949639
+   }
+  },
+  "WV": {
+   "2018": {
+    "total_ballots": 597149,
+    "election_day": 402733,
+    "mail": 10342,
+    "early_in_person": 175403,
+    "early_total": 185745,
+    "other": 8671
+   },
+   "2020": {
+    "total_ballots": 801667,
+    "election_day": 396926,
+    "mail": 142191,
+    "early_in_person": 256113,
+    "early_total": 398304,
+    "other": 6437
+   },
+   "2022": {
+    "total_ballots": 493581,
+    "election_day": 350187,
+    "mail": 12301,
+    "early_in_person": 128799,
+    "early_total": 141100,
+    "other": 2294
+   },
+   "2024": {
+    "total_ballots": 769206,
+    "election_day": 431925,
+    "mail": 22377,
+    "early_in_person": 310305,
+    "early_total": 332682,
+    "other": 4599
+   }
+  },
+  "WI": {
+   "2018": {
+    "total_ballots": 2688307,
+    "election_day": 2109209,
+    "mail": 147014,
+    "early_in_person": 427383,
+    "early_total": 574397,
+    "other": 4701
+   },
+   "2020": {
+    "total_ballots": 3308296,
+    "election_day": 1337236,
+    "mail": 1298311,
+    "early_in_person": 651756,
+    "early_total": 1950067,
+    "other": 20993
+   },
+   "2022": {
+    "total_ballots": 2673124,
+    "election_day": 1909134,
+    "mail": 425932,
+    "early_in_person": 331966,
+    "early_total": 757898,
+    "other": 6092
+   },
+   "2024": {
+    "total_ballots": 3434185,
+    "election_day": 1870285,
+    "mail": 570657,
+    "early_in_person": 977648,
+    "early_total": 1548305,
+    "other": 15595
+   }
+  },
+  "WY": {
+   "2018": {
+    "total_ballots": 205275,
+    "election_day": 121373,
+    "mail": 57834,
+    "early_in_person": 25659,
+    "early_total": 83493,
+    "other": 409
+   },
+   "2020": {
+    "total_ballots": 278503,
+    "election_day": 135426,
+    "mail": 85454,
+    "early_in_person": 55903,
+    "early_total": 141357,
+    "other": 1720
+   },
+   "2022": {
+    "total_ballots": 199513,
+    "election_day": 122114,
+    "mail": 38164,
+    "early_in_person": 38868,
+    "early_total": 77032,
+    "other": 367
+   },
+   "2024": {
+    "total_ballots": 271123,
+    "election_day": 154579,
+    "mail": 38217,
+    "early_in_person": 76943,
+    "early_total": 115160,
+    "other": 1384
+   }
+  },
+  "AS": {
+   "2018": {
+    "total_ballots": 8462,
+    "election_day": 7531,
+    "mail": 7,
+    "early_in_person": 893,
+    "early_total": 900,
+    "other": 31
+   },
+   "2020": {
+    "total_ballots": 11944,
+    "election_day": 10310,
+    "mail": 905,
+    "early_in_person": 455,
+    "early_total": 1360,
+    "other": 274
+   },
+   "2022": {
+    "total_ballots": 7460,
+    "election_day": 6583,
+    "mail": 15,
+    "early_in_person": 845,
+    "early_total": 860,
+    "other": 17
+   },
+   "2024": {
+    "total_ballots": 10215,
+    "election_day": 9035,
+    "mail": 189,
+    "early_in_person": 991,
+    "early_total": 1180,
+    "other": 0
+   }
+  },
+  "GU": {
+   "2018": {
+    "total_ballots": 37386,
+    "election_day": 35408,
+    "mail": 809,
+    "early_in_person": 1042,
+    "early_total": 1851,
+    "other": 127
+   },
+   "2020": {
+    "total_ballots": 29377,
+    "election_day": 16167,
+    "mail": 108,
+    "early_in_person": 12966,
+    "early_total": 13074,
+    "other": 136
+   },
+   "2022": {
+    "total_ballots": 34074,
+    "election_day": 25687,
+    "mail": 163,
+    "early_in_person": 7995,
+    "early_total": 8158,
+    "other": 229
+   },
+   "2024": {
+    "total_ballots": 30283,
+    "election_day": 24291,
+    "mail": 104,
+    "early_in_person": 5774,
+    "early_total": 5878,
+    "other": 114
+   }
+  },
+  "MP": {
+   "2018": {
+    "total_ballots": 0,
+    "election_day": 0,
+    "mail": 0,
+    "early_in_person": 0,
+    "early_total": 0,
+    "other": 0
+   },
+   "2020": {
+    "total_ballots": 13355,
+    "election_day": 3970,
+    "mail": 12321,
+    "early_in_person": 8130,
+    "early_total": 20451,
+    "other": -11066
+   },
+   "2022": {
+    "total_ballots": 13376,
+    "election_day": 6408,
+    "mail": 0,
+    "early_in_person": 6968,
+    "early_total": 6968,
+    "other": 0
+   },
+   "2024": {
+    "total_ballots": 12610,
+    "election_day": 5571,
+    "mail": 915,
+    "early_in_person": 6124,
+    "early_total": 7039,
+    "other": 0
+   }
+  },
+  "PR": {
+   "2018": {
+    "total_ballots": 0,
+    "election_day": 0,
+    "mail": 0,
+    "early_in_person": 0,
+    "early_total": 0,
+    "other": 0
+   },
+   "2020": {
+    "total_ballots": 1296169,
+    "election_day": 1092637,
+    "mail": 145244,
+    "early_in_person": 48724,
+    "early_total": 193968,
+    "other": 9564
+   },
+   "2022": {
+    "total_ballots": 0,
+    "election_day": 0,
+    "mail": 0,
+    "early_in_person": 0,
+    "early_total": 0,
+    "other": 0
+   },
+   "2024": {
+    "total_ballots": 1283628,
+    "election_day": 1071954,
+    "mail": 132157,
+    "early_in_person": 4004,
+    "early_total": 136161,
+    "other": 75513
+   }
+  },
+  "VI": {
+   "2018": {
+    "total_ballots": 26346,
+    "election_day": 21236,
+    "mail": 908,
+    "early_in_person": 3952,
+    "early_total": 4860,
+    "other": 250
+   },
+   "2020": {
+    "total_ballots": 18064,
+    "election_day": 8119,
+    "mail": 1670,
+    "early_in_person": 8173,
+    "early_total": 9843,
+    "other": 102
+   },
+   "2022": {
+    "total_ballots": 22557,
+    "election_day": 9671,
+    "mail": 532,
+    "early_in_person": 11851,
+    "early_total": 12383,
+    "other": 503
+   },
+   "2024": {
+    "total_ballots": 15952,
+    "election_day": 6832,
+    "mail": 613,
+    "early_in_person": 8506,
+    "early_total": 9119,
+    "other": 1
+   }
+  }
+ }
+}

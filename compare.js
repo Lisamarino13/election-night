@@ -340,6 +340,18 @@ function shareFor(share, code, year){
 // - the ones actually on screen - did not. One function, called by both.
 async function addElectionDay(rows, code){
   const share = await evShare();
+  // The bars are built from the early-vote archive, which for Georgia, Kansas,
+  // Michigan, Nebraska and Ohio holds 2024 and nothing else. The EAC's survey covers
+  // every state back to 2018, so any cycle it has and the archive does not is added
+  // here rather than leaving the card with one historical bar.
+  const by = ((share.states||{})[code]||{}).by_year || {};
+  const have = new Set(rows.map(r => String(r.year)));
+  for (const [yr, v] of Object.entries(by)){
+    if (have.has(yr) || !v.total_vote || v.early == null) continue;
+    rows.push({year:+yr, total:v.early, mail:v.mail ?? null, ip:v.early_in_person ?? null,
+               tip:"completed cycle — mode split from the EAC survey"});
+  }
+  rows.sort((a,b) => a.year - b.year);
   let any = false;
   for (const r of rows){
     if (r.year === 2020){

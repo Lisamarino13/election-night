@@ -1,30 +1,41 @@
 {
- "baseline": "2024 county margins",
- "basis": "Projection framework: how far behind is each party on banked ballots, and",
- "ev_skew_applied": -5.59,
- "ev_skew_measured": {
-  "governor": -5.59,
-  "president": -11.78
- },
+ "basis": "Projection framework: how far behind is each side on the ballots already in",
+ "ev_skew_applied": -22.84,
  "hispanic_cut_pct": 40.0,
  "margin_convention": "R-positive: +5 = Republican ahead by 5 points",
  "reversion_k": 0.0,
  "reversion_k_hispanic": null,
+ "skew_within_county_measured": {
+  "2018": -19.64,
+  "2020_covid": -30.45,
+  "2022": -26.05
+ },
  "states": {
   "FL": {
    "as_of": "11/1/2026",
-   "banked_at_2024_behavior": 12.62,
-   "banked_margin": 7.03,
+   "banked_mix": 12.62,
    "break_even": {
-    "high_turnout": {
-     "banked_share": 41.2,
-     "ed_margin_R_needs": -4.92,
-     "turnout": 8286035
+    "eday_high": {
+     "R_gap": -28.07,
+     "banked_margin": 2.02,
+     "banked_share": 53.6,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": -2.33,
+     "eday_ballots": 2954737,
+     "eday_margin_at_baseline": 25.74,
+     "projected_final": 13.03,
+     "turnout": 6364829
     },
-    "low_turnout": {
-     "banked_share": 48.2,
-     "ed_margin_R_needs": -6.54,
-     "turnout": 7074786
+    "eday_low": {
+     "R_gap": -29.28,
+     "banked_margin": 2.47,
+     "banked_share": 55.6,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": -3.09,
+     "eday_ballots": 2727051,
+     "eday_margin_at_baseline": 26.19,
+     "projected_final": 13.01,
+     "turnout": 6137143
     }
    },
    "counties": [
@@ -988,32 +999,65 @@
     "swing_20_24": 6.04,
     "votes_2024": 3419452
    },
+   "eday_mix": 13.5,
    "ev_joined": 3410092,
-   "ev_skew_applied": -5.59,
+   "ev_skew_within_county": -22.84,
    "margin_2024_statewide": 13.22,
    "margin_baseline_statewide": 13.22,
    "mix_effect": -0.6,
-   "remaining_at_2024_behavior": 13.5,
-   "remaining_margin": 16.08,
    "reversion_k": 0.0,
+   "reversion_k_hispanic": null,
    "swing_20_24_ev_weighted": 8.88,
+   "turnout": {
+    "cases": {
+     "eday_high": {
+      "banked_share": 53.6,
+      "capped_at_2024": false,
+      "eday_ballots": 2954737,
+      "turnout": 6364829
+     },
+     "eday_low": {
+      "banked_share": 55.6,
+      "capped_at_2024": false,
+      "eday_ballots": 2727051,
+      "turnout": 6137143
+     }
+    },
+    "eday_2024": 2596761,
+    "eday_midterms": {
+     "2018": 2954737,
+     "2022": 2727051
+    },
+    "turnout_2024": 10999125
+   },
    "turnout_2024_joined": 10893547,
    "twoparty_2024_joined": 10793163
   },
   "GA": {
    "as_of": "11/1/2026",
-   "banked_at_2024_behavior": -2.58,
-   "banked_margin": -8.17,
+   "banked_mix": -2.58,
    "break_even": {
-    "high_turnout": {
-     "banked_share": 64.1,
-     "ed_margin_R_needs": 14.57,
-     "turnout": 4411455
+    "eday_high": {
+     "R_gap": -3.88,
+     "banked_margin": -11.53,
+     "banked_share": 60.8,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": 17.9,
+     "eday_ballots": 1820515,
+     "eday_margin_at_baseline": 21.78,
+     "projected_final": 1.52,
+     "turnout": 4646660
     },
-    "low_turnout": {
-     "banked_share": 76.2,
-     "ed_margin_R_needs": 26.17,
-     "turnout": 3708439
+    "eday_low": {
+     "R_gap": -2.75,
+     "banked_margin": -10.22,
+     "banked_share": 66.6,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": 20.33,
+     "eday_ballots": 1420392,
+     "eday_margin_at_baseline": 23.08,
+     "projected_final": 0.92,
+     "turnout": 4246537
     }
    },
    "counties": [
@@ -3265,32 +3309,65 @@
     "swing_20_24": 1.23,
     "votes_2024": 2310252
    },
+   "eday_mix": 7.88,
    "ev_joined": 2826145,
-   "ev_skew_applied": -5.59,
+   "ev_skew_within_county": -22.84,
    "margin_2024_statewide": 2.21,
    "margin_baseline_statewide": 2.21,
    "mix_effect": -4.79,
-   "remaining_at_2024_behavior": 7.88,
-   "remaining_margin": 14.51,
    "reversion_k": 0.0,
+   "reversion_k_hispanic": null,
    "swing_20_24_ev_weighted": 0.59,
+   "turnout": {
+    "cases": {
+     "eday_high": {
+      "banked_share": 60.8,
+      "capped_at_2024": false,
+      "eday_ballots": 1820515,
+      "turnout": 4646660
+     },
+     "eday_low": {
+      "banked_share": 66.6,
+      "capped_at_2024": false,
+      "eday_ballots": 1420392,
+      "turnout": 4246537
+     }
+    },
+    "eday_2024": 1239125,
+    "eday_midterms": {
+     "2018": 1820515,
+     "2022": 1420392
+    },
+    "turnout_2024": 5297500
+   },
    "turnout_2024_joined": 5250047,
    "twoparty_2024_joined": 5211134
   },
   "IA": {
    "as_of": "10/31/2026",
-   "banked_at_2024_behavior": 10.38,
-   "banked_margin": 4.79,
+   "banked_mix": 10.38,
    "break_even": {
-    "high_turnout": {
-     "banked_share": 20.0,
-     "ed_margin_R_needs": -1.2,
-     "turnout": 1468504
+    "eday_high": {
+     "R_gap": -17.66,
+     "banked_margin": -6.65,
+     "banked_share": 25.4,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": 2.27,
+     "eday_ballots": 859562,
+     "eday_margin_at_baseline": 19.93,
+     "projected_final": 13.17,
+     "turnout": 1152924
     },
-    "low_turnout": {
-     "banked_share": 20.0,
-     "ed_margin_R_needs": -1.2,
-     "turnout": 1468504
+    "eday_low": {
+     "R_gap": -17.99,
+     "banked_margin": -6.26,
+     "banked_share": 27.2,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": 2.33,
+     "eday_ballots": 787074,
+     "eday_margin_at_baseline": 20.32,
+     "projected_final": 13.1,
+     "turnout": 1080436
     }
    },
    "counties": [
@@ -4702,32 +4779,65 @@
     "swing_20_24": 5.08,
     "votes_2024": 669708
    },
+   "eday_mix": 14.12,
    "ev_joined": 293362,
-   "ev_skew_applied": -5.59,
+   "ev_skew_within_county": -22.84,
    "margin_2024_statewide": 13.45,
    "margin_baseline_statewide": 13.45,
    "mix_effect": -3.07,
-   "remaining_at_2024_behavior": 14.12,
-   "remaining_margin": 15.34,
    "reversion_k": 0.0,
+   "reversion_k_hispanic": null,
    "swing_20_24_ev_weighted": 5.43,
+   "turnout": {
+    "cases": {
+     "eday_high": {
+      "banked_share": 25.4,
+      "capped_at_2024": false,
+      "eday_ballots": 859562,
+      "turnout": 1152924
+     },
+     "eday_low": {
+      "banked_share": 27.2,
+      "capped_at_2024": false,
+      "eday_ballots": 787074,
+      "turnout": 1080436
+     }
+    },
+    "eday_2024": 0,
+    "eday_midterms": {
+     "2018": 787074,
+     "2022": 859562
+    },
+    "turnout_2024": 1674011
+   },
    "turnout_2024_joined": 1656849,
    "twoparty_2024_joined": 1634297
   },
   "KS": {
    "as_of": "10/31/2026",
-   "banked_at_2024_behavior": 8.68,
-   "banked_margin": 3.09,
+   "banked_mix": 8.68,
    "break_even": {
-    "high_turnout": {
-     "banked_share": 33.3,
-     "ed_margin_R_needs": -1.54,
-     "turnout": 1040040
+    "eday_high": {
+     "R_gap": -22.67,
+     "banked_margin": -7.64,
+     "banked_share": 28.5,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": 3.05,
+     "eday_ballots": 866473,
+     "eday_margin_at_baseline": 25.72,
+     "projected_final": 16.2,
+     "turnout": 1212452
     },
-    "low_turnout": {
-     "banked_share": 43.1,
-     "ed_margin_R_needs": -2.34,
-     "turnout": 803422
+    "eday_low": {
+     "R_gap": -24.4,
+     "banked_margin": -5.6,
+     "banked_share": 37.5,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": 3.35,
+     "eday_ballots": 577607,
+     "eday_margin_at_baseline": 27.76,
+     "projected_final": 15.26,
+     "turnout": 923586
     }
    },
    "counties": [
@@ -6223,32 +6333,65 @@
     "swing_20_24": 1.86,
     "votes_2024": 357215
    },
+   "eday_mix": 19.2,
    "ev_joined": 345979,
-   "ev_skew_applied": -5.59,
+   "ev_skew_within_county": -22.84,
    "margin_2024_statewide": 16.41,
    "margin_baseline_statewide": 16.41,
    "mix_effect": -7.73,
-   "remaining_at_2024_behavior": 19.2,
-   "remaining_margin": 21.22,
    "reversion_k": 0.0,
+   "reversion_k_hispanic": null,
    "swing_20_24_ev_weighted": 1.09,
+   "turnout": {
+    "cases": {
+     "eday_high": {
+      "banked_share": 28.5,
+      "capped_at_2024": false,
+      "eday_ballots": 866473,
+      "turnout": 1212452
+     },
+     "eday_low": {
+      "banked_share": 37.5,
+      "capped_at_2024": false,
+      "eday_ballots": 577607,
+      "turnout": 923586
+     }
+    },
+    "eday_2024": 604319,
+    "eday_midterms": {
+     "2018": 866473,
+     "2022": 577607
+    },
+    "turnout_2024": 1342102
+   },
    "turnout_2024_joined": 1327591,
    "twoparty_2024_joined": 1303655
   },
   "MI": {
    "as_of": "10/30/2026",
-   "banked_at_2024_behavior": -0.61,
-   "banked_margin": -6.2,
+   "banked_mix": -0.61,
    "break_even": {
-    "high_turnout": {
-     "banked_share": 41.8,
-     "ed_margin_R_needs": 4.45,
-     "turnout": 4448402
+    "eday_high": {
+     "R_gap": -2.12,
+     "banked_margin": -15.02,
+     "banked_share": 36.9,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": 8.78,
+     "eday_ballots": 3180299,
+     "eday_margin_at_baseline": 10.9,
+     "projected_final": 1.34,
+     "turnout": 5039030
     },
-    "low_turnout": {
-     "banked_share": 56.6,
-     "ed_margin_R_needs": 8.09,
-     "turnout": 3281709
+    "eday_low": {
+     "R_gap": -2.04,
+     "banked_margin": -13.95,
+     "banked_share": 41.6,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": 9.92,
+     "eday_ballots": 2614123,
+     "eday_margin_at_baseline": 11.96,
+     "projected_final": 1.19,
+     "turnout": 4472854
     }
    },
    "counties": [
@@ -7436,32 +7579,65 @@
     "swing_20_24": 2.17,
     "votes_2024": 1632974
    },
+   "eday_mix": 2.47,
    "ev_joined": 1858731,
-   "ev_skew_applied": -5.59,
+   "ev_skew_within_county": -22.84,
    "margin_2024_statewide": 1.44,
    "margin_baseline_statewide": 1.44,
    "mix_effect": -2.05,
-   "remaining_at_2024_behavior": 2.47,
-   "remaining_margin": 5.29,
    "reversion_k": 0.0,
+   "reversion_k_hispanic": null,
    "swing_20_24_ev_weighted": 3.56,
+   "turnout": {
+    "cases": {
+     "eday_high": {
+      "banked_share": 36.9,
+      "capped_at_2024": false,
+      "eday_ballots": 3180299,
+      "turnout": 5039030
+     },
+     "eday_low": {
+      "banked_share": 41.6,
+      "capped_at_2024": false,
+      "eday_ballots": 2614123,
+      "turnout": 4472854
+     }
+    },
+    "eday_2024": 2453252,
+    "eday_midterms": {
+     "2018": 3180299,
+     "2022": 2614123
+    },
+    "turnout_2024": 5706503
+   },
    "turnout_2024_joined": 5662504,
    "twoparty_2024_joined": 5553169
   },
   "MN": {
    "as_of": "10/30/2026",
-   "banked_at_2024_behavior": -9.53,
-   "banked_margin": -15.12,
+   "banked_mix": -9.53,
    "break_even": {
-    "high_turnout": {
-     "banked_share": 26.5,
-     "ed_margin_R_needs": 5.46,
-     "turnout": 2748154
+    "eday_high": {
+     "R_gap": 6.32,
+     "banked_margin": -26.21,
+     "banked_share": 27.0,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": 9.69,
+     "eday_ballots": 1972519,
+     "eday_margin_at_baseline": 3.37,
+     "projected_final": -4.61,
+     "turnout": 2701480
     },
-    "low_turnout": {
-     "banked_share": 36.1,
-     "ed_margin_R_needs": 8.53,
-     "turnout": 2021544
+    "eday_low": {
+     "R_gap": 6.55,
+     "banked_margin": -25.93,
+     "banked_share": 28.2,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": 10.2,
+     "eday_ballots": 1853310,
+     "eday_margin_at_baseline": 3.65,
+     "projected_final": -4.7,
+     "turnout": 2582271
     }
    },
    "counties": [
@@ -8705,32 +8881,65 @@
     "swing_20_24": 3.3,
     "votes_2024": 893895
    },
+   "eday_mix": -2.8,
    "ev_joined": 728961,
-   "ev_skew_applied": -5.59,
+   "ev_skew_within_county": -22.84,
    "margin_2024_statewide": -4.34,
    "margin_baseline_statewide": -4.34,
    "mix_effect": -5.19,
-   "remaining_at_2024_behavior": -2.8,
-   "remaining_margin": -1.13,
    "reversion_k": 0.0,
+   "reversion_k_hispanic": null,
    "swing_20_24_ev_weighted": 1.77,
+   "turnout": {
+    "cases": {
+     "eday_high": {
+      "banked_share": 27.0,
+      "capped_at_2024": false,
+      "eday_ballots": 1972519,
+      "turnout": 2701480
+     },
+     "eday_low": {
+      "banked_share": 28.2,
+      "capped_at_2024": false,
+      "eday_ballots": 1853310,
+      "turnout": 2582271
+     }
+    },
+    "eday_2024": 1960360,
+    "eday_midterms": {
+     "2018": 1972519,
+     "2022": 1853310
+    },
+    "turnout_2024": 3271069
+   },
    "turnout_2024_joined": 3240916,
    "twoparty_2024_joined": 3176011
   },
   "NC": {
    "as_of": "2026-11-01",
-   "banked_at_2024_behavior": -0.06,
-   "banked_margin": -5.65,
+   "banked_mix": -0.06,
    "break_even": {
-    "high_turnout": {
-     "banked_share": 55.7,
-     "ed_margin_R_needs": 7.1,
-     "turnout": 5061546
+    "eday_high": {
+     "R_gap": -6.5,
+     "banked_margin": -8.55,
+     "banked_share": 62.8,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": 14.46,
+     "eday_ballots": 1666500,
+     "eday_margin_at_baseline": 20.96,
+     "projected_final": 2.42,
+     "turnout": 4483321
     },
-    "low_turnout": {
-     "banked_share": 78.6,
-     "ed_margin_R_needs": 20.75,
-     "turnout": 3584630
+    "eday_low": {
+     "R_gap": -6.49,
+     "banked_margin": -8.27,
+     "banked_share": 64.1,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": 14.75,
+     "eday_ballots": 1578581,
+     "eday_margin_at_baseline": 21.25,
+     "projected_final": 2.33,
+     "turnout": 4395402
     }
    },
    "counties": [
@@ -10156,32 +10365,65 @@
     "swing_20_24": 2.17,
     "votes_2024": 2533924
    },
+   "eday_mix": 6.61,
    "ev_joined": 2816821,
-   "ev_skew_applied": -5.59,
+   "ev_skew_within_county": -22.84,
    "margin_2024_statewide": 3.26,
    "margin_baseline_statewide": 3.26,
    "mix_effect": -3.33,
-   "remaining_at_2024_behavior": 6.61,
-   "remaining_margin": 12.24,
    "reversion_k": 0.0,
+   "reversion_k_hispanic": null,
    "swing_20_24_ev_weighted": 1.16,
+   "turnout": {
+    "cases": {
+     "eday_high": {
+      "banked_share": 62.8,
+      "capped_at_2024": false,
+      "eday_ballots": 1666500,
+      "turnout": 4483321
+     },
+     "eday_low": {
+      "banked_share": 64.1,
+      "capped_at_2024": false,
+      "eday_ballots": 1578581,
+      "turnout": 4395402
+     }
+    },
+    "eday_2024": 1175905,
+    "eday_midterms": {
+     "2018": 1666500,
+     "2022": 1578581
+    },
+    "turnout_2024": 5756106
+   },
    "turnout_2024_joined": 5679647,
    "twoparty_2024_joined": 5613798
   },
   "NE": {
    "as_of": "10/30/2026",
-   "banked_at_2024_behavior": 19.95,
-   "banked_margin": 14.36,
+   "banked_mix": 19.95,
    "break_even": {
-    "high_turnout": {
-     "banked_share": 6.7,
-     "ed_margin_R_needs": -1.03,
-     "turnout": 609360
+    "eday_high": {
+     "R_gap": -22.54,
+     "banked_margin": -1.14,
+     "banked_share": 7.7,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": 0.09,
+     "eday_ballots": 490043,
+     "eday_margin_at_baseline": 22.64,
+     "projected_final": 20.81,
+     "turnout": 530903
     },
-    "low_turnout": {
-     "banked_share": 7.3,
-     "ed_margin_R_needs": -1.14,
-     "turnout": 557216
+    "eday_low": {
+     "R_gap": -22.86,
+     "banked_margin": -0.83,
+     "banked_share": 9.0,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": 0.08,
+     "eday_ballots": 412213,
+     "eday_margin_at_baseline": 22.94,
+     "projected_final": 20.8,
+     "turnout": 453073
     }
    },
    "counties": [
@@ -11509,32 +11751,65 @@
     "swing_20_24": 1.51,
     "votes_2024": 222385
    },
+   "eday_mix": 20.88,
    "ev_joined": 40860,
-   "ev_skew_applied": -5.59,
+   "ev_skew_within_county": -22.84,
    "margin_2024_statewide": 20.84,
    "margin_baseline_statewide": 20.84,
    "mix_effect": -0.89,
-   "remaining_at_2024_behavior": 20.88,
-   "remaining_margin": 21.14,
    "reversion_k": 0.0,
+   "reversion_k_hispanic": null,
    "swing_20_24_ev_weighted": 1.43,
+   "turnout": {
+    "cases": {
+     "eday_high": {
+      "banked_share": 7.7,
+      "capped_at_2024": false,
+      "eday_ballots": 490043,
+      "turnout": 530903
+     },
+     "eday_low": {
+      "banked_share": 9.0,
+      "capped_at_2024": false,
+      "eday_ballots": 412213,
+      "turnout": 453073
+     }
+    },
+    "eday_2024": 564660,
+    "eday_midterms": {
+     "2018": 490043,
+     "2022": 412213
+    },
+    "turnout_2024": 965145
+   },
    "turnout_2024_joined": 947159,
    "twoparty_2024_joined": 934811
   },
   "OH": {
    "as_of": "11/1/2026",
-   "banked_at_2024_behavior": 12.47,
-   "banked_margin": 6.88,
+   "banked_mix": 12.47,
    "break_even": {
-    "high_turnout": {
-     "banked_share": 34.8,
-     "ed_margin_R_needs": -3.67,
-     "turnout": 4822868
+    "eday_high": {
+     "R_gap": -17.71,
+     "banked_margin": -2.24,
+     "banked_share": 35.6,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": 1.24,
+     "eday_ballots": 3040698,
+     "eday_margin_at_baseline": 18.95,
+     "projected_final": 11.42,
+     "turnout": 4718520
     },
-    "low_turnout": {
-     "banked_share": 44.4,
-     "ed_margin_R_needs": -5.49,
-     "turnout": 3780947
+    "eday_low": {
+     "R_gap": -18.72,
+     "banked_margin": -1.52,
+     "banked_share": 38.7,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": 0.96,
+     "eday_ballots": 2654497,
+     "eday_margin_at_baseline": 19.68,
+     "projected_final": 11.47,
+     "turnout": 4332319
     }
    },
    "counties": [
@@ -12792,32 +13067,65 @@
     "swing_20_24": 2.57,
     "votes_2024": 2201637
    },
+   "eday_mix": 10.83,
    "ev_joined": 1677822,
-   "ev_skew_applied": -5.59,
+   "ev_skew_within_county": -22.84,
    "margin_2024_statewide": 11.31,
    "margin_baseline_statewide": 11.31,
    "mix_effect": 1.16,
-   "remaining_at_2024_behavior": 10.83,
-   "remaining_margin": 13.15,
    "reversion_k": 0.0,
+   "reversion_k_hispanic": null,
    "swing_20_24_ev_weighted": 2.39,
+   "turnout": {
+    "cases": {
+     "eday_high": {
+      "banked_share": 35.6,
+      "capped_at_2024": false,
+      "eday_ballots": 3040698,
+      "turnout": 4718520
+     },
+     "eday_low": {
+      "banked_share": 38.7,
+      "capped_at_2024": false,
+      "eday_ballots": 2654497,
+      "turnout": 4332319
+     }
+    },
+    "eday_2024": 3130240,
+    "eday_midterms": {
+     "2018": 3040698,
+     "2022": 2654497
+    },
+    "turnout_2024": 5851625
+   },
    "turnout_2024_joined": 5765017,
    "twoparty_2024_joined": 5713815
   },
   "SC": {
    "as_of": "2026-10-30",
-   "banked_at_2024_behavior": 15.81,
-   "banked_margin": 10.22,
+   "banked_mix": 15.81,
    "break_even": {
-    "high_turnout": {
-     "banked_share": 35.9,
-     "ed_margin_R_needs": -5.72,
-     "turnout": 2749762
+    "eday_high": {
+     "R_gap": -30.5,
+     "banked_margin": 2.28,
+     "banked_share": 40.8,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": -1.57,
+     "eday_ballots": 1432727,
+     "eday_margin_at_baseline": 28.93,
+     "projected_final": 18.07,
+     "turnout": 2419091
     },
-    "low_turnout": {
-     "banked_share": 61.4,
-     "ed_margin_R_needs": -16.25,
-     "turnout": 1606762
+    "eday_low": {
+     "R_gap": -33.85,
+     "banked_margin": 3.79,
+     "banked_share": 47.4,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": -3.41,
+     "eday_ballots": 1096154,
+     "eday_margin_at_baseline": 30.44,
+     "projected_final": 17.81,
+     "turnout": 2082518
     }
    },
    "counties": [
@@ -13487,32 +13795,76 @@
     "swing_20_24": 8.03,
     "votes_2024": 573973
    },
+   "eday_mix": 19.62,
    "ev_joined": 986364,
-   "ev_skew_applied": -5.59,
+   "ev_skew_within_county": -22.84,
    "margin_2024_statewide": 18.12,
    "margin_baseline_statewide": 18.12,
    "mix_effect": -2.31,
-   "remaining_at_2024_behavior": 19.62,
-   "remaining_margin": 23.23,
    "reversion_k": 0.0,
+   "reversion_k_hispanic": null,
    "swing_20_24_ev_weighted": 5.31,
+   "turnout": {
+    "cases": {
+     "eday_high": {
+      "banked_share": 40.8,
+      "capped_at_2024": false,
+      "eday_ballots": 1432727,
+      "turnout": 2419091
+     },
+     "eday_low": {
+      "banked_share": 47.4,
+      "capped_at_2024": false,
+      "eday_ballots": 1096154,
+      "turnout": 2082518
+     }
+    },
+    "eday_2024": 977341,
+    "eday_midterms": {
+     "2018": 1432727,
+     "2022": 1096154
+    },
+    "turnout_2024": 2566404
+   },
    "turnout_2024_joined": 2548140,
    "twoparty_2024_joined": 2512199
   },
   "TX": {
    "as_of": "11/01/2026",
-   "banked_at_2024_behavior": 11.2,
-   "banked_margin": 5.61,
+   "banked_mix": 11.2,
    "break_even": {
-    "high_turnout": {
-     "banked_share": 67.9,
-     "ed_margin_R_needs": -11.86,
-     "turnout": 11341609
+    "eday_high": {
+     "R_gap": -53.01,
+     "banked_margin": 5.45,
+     "banked_share": 74.8,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": -16.2,
+     "eday_ballots": 2590664,
+     "eday_margin_at_baseline": 36.81,
+     "projected_final": 13.35,
+     "turnout": 10290180
     },
-    "low_turnout": {
-     "banked_share": 79.1,
-     "ed_margin_R_needs": -21.23,
-     "turnout": 9734174
+    "eday_low": {
+     "R_gap": -56.91,
+     "banked_margin": 5.91,
+     "banked_share": 76.9,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": -19.64,
+     "eday_ballots": 2318676,
+     "eday_margin_at_baseline": 37.27,
+     "projected_final": 13.17,
+     "turnout": 10018192
+    },
+    "eday_set": {
+     "R_gap": -54.21,
+     "banked_margin": 5.6,
+     "banked_share": 75.5,
+     "capped_at_2024": false,
+     "ed_margin_R_needs": -17.25,
+     "eday_ballots": 2500000,
+     "eday_margin_at_baseline": 36.96,
+     "projected_final": 13.29,
+     "turnout": 10199516
     }
    },
    "counties": [
@@ -17094,15 +17446,44 @@
     "swing_20_24": 5.19,
     "votes_2024": 3952878
    },
+   "eday_mix": 19.72,
    "ev_joined": 7699516,
-   "ev_skew_applied": -5.59,
+   "ev_skew_within_county": -22.84,
    "margin_2024_statewide": 13.88,
    "margin_baseline_statewide": 13.88,
    "mix_effect": -2.68,
-   "remaining_at_2024_behavior": 19.72,
-   "remaining_margin": 31.92,
    "reversion_k": 0.0,
+   "reversion_k_hispanic": null,
    "swing_20_24_ev_weighted": 6.94,
+   "turnout": {
+    "cases": {
+     "eday_high": {
+      "banked_share": 74.8,
+      "capped_at_2024": false,
+      "eday_ballots": 2590664,
+      "turnout": 10290180
+     },
+     "eday_low": {
+      "banked_share": 76.9,
+      "capped_at_2024": false,
+      "eday_ballots": 2318676,
+      "turnout": 10018192
+     },
+     "eday_set": {
+      "banked_share": 75.5,
+      "capped_at_2024": false,
+      "eday_ballots": 2500000,
+      "turnout": 10199516
+     }
+    },
+    "eday_2024": 2329171,
+    "eday_midterms": {
+     "2018": 2318676,
+     "2022": 2590664
+    },
+    "eday_override": 2500000,
+    "turnout_2024": 11488820
+   },
    "turnout_2024_joined": 11380105,
    "twoparty_2024_joined": 11228847
   }

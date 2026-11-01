@@ -90,6 +90,36 @@ def test_data_signature(totals):
     return flags
 
 
+def record_candidates(state, payload, totals):
+    """Who is ON the ballot, with no vote counts. Safe to write before polls close.
+
+    Every collector already parses the contest and its choices in order to refuse to
+    publish them, so the ballot is known days early even though the results are not.
+    Names and party are not results - withholding them only means the board cannot
+    label a bar on the night - so they are recorded while the figures are not.
+    """
+    import json, pathlib
+    out = {}
+    for race, t in (totals or {}).items():
+        parties = t.get("parties") or {}
+        names = []
+        for who in (t.get("choices") or {}):
+            names.append({"name": who, "party": parties.get(who)})
+        if names:
+            out[race] = {"contest_name": t.get("contest_name") or race,
+                         "candidates": sorted(names, key=lambda c: c["name"])}
+    if not out:
+        return
+    doc = {"state": state,
+           "note": ("Who is on the ballot. No vote counts: this is written before polls "
+                    "close, when the results themselves are withheld."),
+           "election": (payload or {}).get("election"),
+           "source": (payload or {}).get("source"),
+           "races": out}
+    d = pathlib.Path(__file__).resolve().parent.parent / "data"
+    (d / f"candidates-{state}.json").write_text(json.dumps(doc, indent=1) + "\n")
+
+
 def write_or_hold(state, path, payload, totals=None):
     """Write a results file, or refuse to and say why. Returns the collector's exit code.
 
@@ -101,6 +131,11 @@ def write_or_hold(state, path, payload, totals=None):
     import json
     shut = before_close(state)
     if shut:
+        # The ballot is not a result. Record it even when the figures are refused.
+        try:
+            record_candidates(state, payload, totals)
+        except Exception:
+            pass
         if overridden():
             print(f"{state}: parsed the live feed but wrote nothing — {OVERRIDE} is set "
                   f"and polls have not closed.")

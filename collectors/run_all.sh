@@ -112,6 +112,7 @@ fi
 # failure so far was caught by a person comparing totals by hand, because a collector
 # that writes an OLD number still reports success.
 shr=$("$PY" ev_share.py 2>&1); printf '%s\n' "$shr" >> "$LOG"
+fac=$("$PY" state_facts.py 2>&1); printf '%s\n' "$fac" >> "$LOG"
 tie=$("$PY" tie_out.py 2>&1); printf '%s\n' "$tie" >> "$LOG"
 say "TIEOUT  $(printf '%s' "$tie" | head -1)"
 

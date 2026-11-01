@@ -1,0 +1,423 @@
+{
+ "note": "Early-voting window, how the results feed treats modes, and who is on the ballot. The window is a scheduled fact and cannot be derived from our data - every state was still reporting in-person growth after its close because the last day's returns post afterwards.",
+ "ev_window_source": "ballotpedia.org/Early_voting_dates,_2026 (read 2026-11-01)",
+ "states": {
+  "AK": {
+   "early_in_person": {
+    "first_day": "2026-10-19",
+    "last_day": "2026-11-03",
+    "last_day_we_saw_growth": "2026-10-31",
+    "our_series_runs_through": "2026-10-31"
+   },
+   "counting": {
+    "mode": "no split",
+    "evidence": "no election-night collector built"
+   },
+   "candidates": null
+  },
+  "FL": {
+   "early_in_person": {
+    "first_day": "2026-10-24",
+    "last_day": "2026-10-31",
+    "last_day_we_saw_growth": "2026-11-01",
+    "our_series_runs_through": "2026-11-01"
+   },
+   "counting": {
+    "mode": "early first",
+    "evidence": "one total per contest; the collector banks a baseline while no election-day precinct has reported"
+   },
+   "candidates": {
+    "senate": {
+     "contest_name": "United States Senator",
+     "candidates": [
+      {
+       "name": "Angie Nixon",
+       "party": "D"
+      },
+      {
+       "name": "Ashley Moody",
+       "party": "R"
+      },
+      {
+       "name": "Neil J. Gillespie",
+       "party": "O"
+      }
+     ]
+    },
+    "governor": {
+     "contest_name": "Governor and Lieutenant Governor",
+     "candidates": [
+      {
+       "name": "Abrams / Van Vactor",
+       "party": "O"
+      },
+      {
+       "name": "Anderson / Nokovich",
+       "party": "O"
+      },
+      {
+       "name": "Burkett / Coto",
+       "party": "O"
+      },
+      {
+       "name": "Datto / Santana",
+       "party": "O"
+      },
+      {
+       "name": "Dimanche / Rojas",
+       "party": "O"
+      },
+      {
+       "name": "Donalds / Avila",
+       "party": "R"
+      },
+      {
+       "name": "Jewett / Skelly",
+       "party": "O"
+      },
+      {
+       "name": "Jolly / Graham",
+       "party": "D"
+      },
+      {
+       "name": "Morris / Alaways",
+       "party": "O"
+      },
+      {
+       "name": "Russo / Rodriguez",
+       "party": "O"
+      }
+     ]
+    }
+   }
+  },
+  "GA": {
+   "early_in_person": {
+    "first_day": "2026-10-13",
+    "last_day": "2026-10-30",
+    "last_day_we_saw_growth": "2026-11-01",
+    "our_series_runs_through": "2026-11-01"
+   },
+   "counting": {
+    "mode": "labelled",
+    "evidence": "Clarity VoteType per choice"
+   },
+   "candidates": null
+  },
+  "IA": {
+   "early_in_person": {
+    "first_day": "2026-10-14",
+    "last_day": "2026-11-02",
+    "last_day_we_saw_growth": "2026-10-31",
+    "our_series_runs_through": "2026-10-31"
+   },
+   "counting": {
+    "mode": "labelled",
+    "evidence": "Clarity VoteType per choice"
+   },
+   "candidates": {
+    "senate": {
+     "contest_name": "United States Senator",
+     "candidates": [
+      {
+       "name": "Ashley Hinson",
+       "party": "R"
+      },
+      {
+       "name": "Josh Turek",
+       "party": "D"
+      },
+      {
+       "name": "Thomas Laehn",
+       "party": "O"
+      },
+      {
+       "name": "Write-in",
+       "party": "O"
+      }
+     ]
+    }
+   }
+  },
+  "KS": {
+   "early_in_person": {
+    "first_day": "2026-10-14",
+    "last_day": "2026-11-02",
+    "last_day_we_saw_growth": "2026-10-31",
+    "our_series_runs_through": "2026-10-31"
+   },
+   "counting": {
+    "mode": "no split",
+    "evidence": "county pages carry no early/election-day split"
+   },
+   "candidates": {
+    "senate": {
+     "contest_name": "United States Senate",
+     "candidates": [
+      {
+       "name": "Adam Hamilton",
+       "party": "D"
+      },
+      {
+       "name": "David C Graham",
+       "party": "O"
+      },
+      {
+       "name": "Roger Marshall",
+       "party": "R"
+      }
+     ]
+    },
+    "governor": {
+     "contest_name": "Governor / Lt. Governor",
+     "candidates": [
+      {
+       "name": "Cindy Holscher",
+       "party": "D"
+      },
+      {
+       "name": "Ty Masterson",
+       "party": "R"
+      }
+     ]
+    }
+   }
+  },
+  "ME": {
+   "early_in_person": {
+    "first_day": "2026-10-05",
+    "last_day": "2026-10-29",
+    "last_day_we_saw_growth": "2026-10-30",
+    "our_series_runs_through": "2026-10-30"
+   },
+   "counting": {
+    "mode": "no split",
+    "evidence": "result files carry no early/election-day split"
+   },
+   "candidates": null
+  },
+  "MI": {
+   "early_in_person": {
+    "first_day": "2026-10-24",
+    "last_day": "2026-11-01",
+    "last_day_we_saw_growth": "2026-10-30",
+    "our_series_runs_through": "2026-10-30"
+   },
+   "counting": {
+    "mode": "no split",
+    "evidence": "no statewide election-night feed exists"
+   },
+   "candidates": null
+  },
+  "MN": {
+   "early_in_person": {
+    "first_day": "2026-09-18",
+    "last_day": "2026-11-02",
+    "last_day_we_saw_growth": "2026-10-30",
+    "our_series_runs_through": "2026-10-30"
+   },
+   "counting": {
+    "mode": "no split",
+    "evidence": "absentee ballots are folded into each precinct's own result"
+   },
+   "candidates": {
+    "senate": {
+     "contest_name": "U.S. Senator",
+     "candidates": [
+      {
+       "name": "Marisa Simonetti",
+       "party": "O"
+      },
+      {
+       "name": "Michele Tafoya",
+       "party": "R"
+      },
+      {
+       "name": "Peggy Flanagan",
+       "party": "D"
+      },
+      {
+       "name": "Rebecca Whiting",
+       "party": "O"
+      },
+      {
+       "name": "WRITE-IN",
+       "party": "O"
+      }
+     ]
+    },
+    "governor": {
+     "contest_name": "Governor & Lt Governor",
+     "candidates": [
+      {
+       "name": "Amy Klobuchar and Ben Schierer",
+       "party": "D"
+      },
+      {
+       "name": "Lisa Demuth and Ryan Wilson",
+       "party": "R"
+      },
+      {
+       "name": "Steven Young and Jane Kirby",
+       "party": "O"
+      },
+      {
+       "name": "WRITE-IN",
+       "party": "O"
+      }
+     ]
+    }
+   }
+  },
+  "NC": {
+   "early_in_person": {
+    "first_day": "2026-10-15",
+    "last_day": "2026-10-31",
+    "last_day_we_saw_growth": "2026-11-01",
+    "our_series_runs_through": "2026-11-01"
+   },
+   "counting": {
+    "mode": "labelled",
+    "evidence": "every contest split by mode in results_pct"
+   },
+   "candidates": {
+    "senate": {
+     "contest_name": "senate",
+     "candidates": [
+      {
+       "name": "Michael Dublin",
+       "party": "O"
+      },
+      {
+       "name": "Michael Whatley",
+       "party": "R"
+      },
+      {
+       "name": "Roy Cooper",
+       "party": "D"
+      },
+      {
+       "name": "Shannon W. Bray",
+       "party": "O"
+      }
+     ]
+    }
+   }
+  },
+  "NE": {
+   "early_in_person": {
+    "first_day": "2026-10-05",
+    "last_day": "2026-11-02",
+    "last_day_we_saw_growth": "2026-10-30",
+    "our_series_runs_through": "2026-10-30"
+   },
+   "counting": {
+    "mode": "no split",
+    "evidence": "the county map service carries no mode"
+   },
+   "candidates": null
+  },
+  "OH": {
+   "early_in_person": {
+    "first_day": "2026-10-06",
+    "last_day": "2026-11-01",
+    "last_day_we_saw_growth": "2026-11-01",
+    "our_series_runs_through": "2026-11-01"
+   },
+   "counting": {
+    "mode": "early first",
+    "evidence": "one total per county; the collector banks a baseline while no election-day precinct has reported"
+   },
+   "candidates": {
+    "governor": {
+     "contest_name": "Governor and Lieutenant Governor",
+     "candidates": [
+      {
+       "name": "Amy Acton",
+       "party": "D"
+      },
+      {
+       "name": "Don Kissick",
+       "party": "O"
+      },
+      {
+       "name": "Heather Hill",
+       "party": "O"
+      },
+      {
+       "name": "Renea Turner",
+       "party": "O"
+      },
+      {
+       "name": "Timothy Grady",
+       "party": "O"
+      },
+      {
+       "name": "Vivek Ramaswamy",
+       "party": "R"
+      }
+     ]
+    },
+    "senate": {
+     "contest_name": "U.S. Senator",
+     "candidates": [
+      {
+       "name": "Anthony Holliman",
+       "party": "O"
+      },
+      {
+       "name": "Greg Levy",
+       "party": "O"
+      },
+      {
+       "name": "Jon Husted",
+       "party": "R"
+      },
+      {
+       "name": "Sherrod Brown",
+       "party": "D"
+      },
+      {
+       "name": "Stephen Faris",
+       "party": "O"
+      },
+      {
+       "name": "Timothy Telymonde",
+       "party": "O"
+      },
+      {
+       "name": "William Redpath",
+       "party": "O"
+      }
+     ]
+    }
+   }
+  },
+  "SC": {
+   "early_in_person": {
+    "first_day": "2026-10-19",
+    "last_day": "2026-10-31",
+    "last_day_we_saw_growth": "2026-10-30",
+    "our_series_runs_through": "2026-10-30"
+   },
+   "counting": {
+    "mode": "labelled",
+    "evidence": "Clarity VoteType per choice"
+   },
+   "candidates": null
+  },
+  "TX": {
+   "early_in_person": {
+    "first_day": "2026-10-19",
+    "last_day": "2026-10-30",
+    "last_day_we_saw_growth": "2026-11-01",
+    "our_series_runs_through": "2026-11-01"
+   },
+   "counting": {
+    "mode": "labelled",
+    "evidence": "publishes EV beside V per candidate per county"
+   },
+   "candidates": null
+  }
+ }
+}

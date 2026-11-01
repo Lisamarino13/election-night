@@ -61,6 +61,21 @@ DATA = pathlib.Path(__file__).resolve().parent.parent / "data"
 ROSTER = DATA / "ks-nominees.json"
 
 
+# On the GENERAL ballot Kansas prefixes the party onto the name - "D-Adam Hamilton",
+# "R-Roger Marshall", "L-David C Graham" - which is not how the primary listed them.
+# Left alone, the roster lookup misses every name and the whole ballot reads party "O".
+PARTY_PREFIX = re.compile(r"^\s*([DRLIG])\s*-\s*(.+)$")
+PREFIX_PARTY = {"D": "D", "R": "R", "L": "O", "I": "O", "G": "O"}
+
+
+def split_party(name):
+    """('Adam Hamilton', 'D') from 'D-Adam Hamilton'; (name, None) when unprefixed."""
+    m = PARTY_PREFIX.match(name or "")
+    if not m:
+        return (name or "").strip(), None
+    return m.group(2).strip(), PREFIX_PARTY.get(m.group(1))
+
+
 def strip(s):
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", s)).replace(" ", " ") \
              .replace("&nbsp;", " ").strip()
@@ -305,8 +320,9 @@ def main(argv):
                 r = page["races"][name]
                 choices = {}
                 for c in r["candidates"]:
-                    choices[c["name"]] = {
-                        "party": party_of.get((race, c["name"].strip().lower()), "O"),
+                    nm, pk = split_party(c["name"])
+                    choices[nm] = {
+                        "party": pk or party_of.get((race, nm.strip().lower()), "O"),
                         "votes": c["votes"]}
                 if r["counted"]:
                     any_votes = True
@@ -326,8 +342,11 @@ def main(argv):
             src = state_page["races"].get(name) or sw_page["races"][name]
             totals[race] = {
                 "contest_name": name,
-                "choices": {c["name"]: c["votes"] for c in src["candidates"]},
-                "parties": {c["name"]: party_of.get((race, c["name"].strip().lower()), "O")
+                "choices": {split_party(c["name"])[0]: c["votes"]
+                            for c in src["candidates"]},
+                "parties": {split_party(c["name"])[0]:
+                            (split_party(c["name"])[1]
+                             or party_of.get((race, split_party(c["name"])[0].lower()), "O"))
                             for c in src["candidates"]},
                 "total": src["counted"],
                 "precincts_reporting": src["precincts_reporting"],

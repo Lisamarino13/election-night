@@ -100,6 +100,11 @@ def early_cast():
     return early_cast_shared.by_unit("MN", key=lambda s: s.strip().upper())
 
 
+def payload_stub(totals):
+    return {"election": "2026 General",
+            "source": f"{HOST}/{ELECTION_DIR}/allracesbycounty.txt"}
+
+
 def main():
     cty = counties_table()
     allrows = rows()
@@ -172,6 +177,12 @@ def main():
         }
 
     if not any_votes:
+        # The ballot is known even though the votes are all zero, and the gate never
+        # gets a chance to record it because this returns first.
+        try:
+            election_day.record_candidates("MN", payload_stub(totals), totals)
+        except Exception:
+            pass
         shown = ", ".join(f"{t['contest_name']} ({t['precincts_reporting']}/"
                           f"{t['precincts_total']} precincts)" for t in totals.values())
         print(f"MN: results not published yet — {ELECTION_DIR} carries the 2026 field "

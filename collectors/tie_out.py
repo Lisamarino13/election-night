@@ -59,6 +59,95 @@ def board_total(s):
     ip = next((g(k) for k in ("in_person", "early_in_person") if g(k) is not None), 0)
     return (mail or 0) + (ip or 0)
 
+COUNTY_URL = ("https://election.lab.ufl.edu/data-downloads/earlyvote/2026/"
+              "{st}_county.csv")
+# A county difference is noise below this; the state-level floor is far too coarse for
+# a single county.
+CTY_FLOOR, CTY_SHARE = 50, 0.02
+
+
+def _key(name):
+    """Compare county names across sources that disagree on case and punctuation."""
+    out = "".join(c for c in str(name).upper() if c.isalnum() or c == " ")
+    for junk in (" COUNTY", " PARISH", " BOROUGH", " CENSUS AREA", " CITY AND BOROUGH"):
+        if out.endswith(junk):
+            out = out[: -len(junk)]
+    return " ".join(out.split())
+
+
+def uf_counties(st):
+    """{county -> early+mail cast} from the Lab's own county file, or None if it has none."""
+    try:
+        url = COUNTY_URL.format(st=st)
+        with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=90) as r:
+            body = r.read()
+    except Exception:
+        return None
+    if body[:2] == b"\x1f\x8b":
+        body = gzip.decompress(body)
+    text = body.decode("utf-8", "ignore")
+    if text.lstrip()[:1] == "<":
+        return None                      # the Lab's 404 page
+    rows = list(csv.DictReader(io.StringIO(text)))
+    if not rows or "county" not in rows[0]:
+        return None
+    out = {}
+    for r in rows:
+        name = (r.get("county") or "").strip()
+        # The Lab carries an "NA" row for ballots it could not attribute to a county -
+        # Georgia has one with a single vote. It is not a county and must not be compared
+        # as one, but it is not dropped either: it is reported so the ballots are not
+        # silently lost from the comparison.
+        out[_key(name)] = out.get(_key(name), 0) + num(r.get("voted_all"))
+    return out
+
+
+def county_check(st, board_path):
+    """Our counties against the Lab's, one unit at a time."""
+    try:
+        d = json.loads(board_path.read_text())
+    except Exception:
+        return None
+    units = d.get("counties") or d.get("units") or {}
+    if not units:
+        return {"status": "no county detail on this board"}
+    if (d.get("unit") or "county") != "county":
+        return {"status": f"board reports by {d.get('unit')}, the Lab by county — "
+                          f"not comparable unit for unit"}
+    theirs = uf_counties(st)
+    if theirs is None:
+        return {"status": "the Lab publishes no county file for this state"}
+    ours = {}
+    for name, block in units.items():
+        if _key(name) in ("STATEWIDE", "STATE", "TOTAL", "TOTALS", "ALL"):
+            continue
+        ours[_key(name)] = ours.get(_key(name), 0) + board_total(block)
+    both = sorted(set(ours) & set(theirs))
+    diffs = []
+    for c in both:
+        gap = ours[c] - theirs[c]
+        if abs(gap) > max(CTY_FLOOR, CTY_SHARE * max(theirs[c], 1)):
+            diffs.append({"county": c, "board": ours[c], "uf": theirs[c], "gap": gap})
+    diffs.sort(key=lambda x: -abs(x["gap"]))
+    # Direction is the whole story. North Carolina differs in 99 of 100 counties and is
+    # AHEAD in every one of them, because it is read direct and the Lab lags it; that is
+    # the collector working, not failing. Florida differs in 66 and is behind in all 66.
+    # Reporting a bare "differ" count makes those look like the same thing.
+    return {
+        "status": "checked",
+        "counties_board": len(ours), "counties_uf": len(theirs),
+        "compared": len(both),
+        "agree": len(both) - len(diffs),
+        "differ": len(diffs),
+        "ahead": sum(1 for x in diffs if x["gap"] > 0),
+        "behind": sum(1 for x in diffs if x["gap"] < 0),
+        "only_on_board": sorted(set(ours) - set(theirs)),
+        "only_at_uf": sorted(set(theirs) - set(ours)),
+        "worst": diffs[:10],
+        "board_sum": sum(ours.values()), "uf_sum": sum(theirs.values()),
+    }
+
+
 
 def main():
     uf, lm = fetch()
@@ -98,6 +187,15 @@ def main():
                     "stale, not that the sources disagree - a count cannot fall as time "
                     "passes."),
            "states": states}
+    # County level. The state totals can agree while the counties behind them do not -
+    # a missing county cancelled by a double-counted one - and the per-county figures are
+    # what the projection actually spends. This is also the only check that proves the
+    # real-time county scrapes are reaching every county rather than most of them.
+    counties = {}
+    for st in sorted(states):
+        counties[st] = county_check(st, DATA / f"early-{st}.json") or {
+            "status": "unreadable"}
+    out["counties"] = counties
     (DATA / "tie-out.json").write_text(json.dumps(out, indent=1) + "\n")
     print(f"tie-out: {out['ties_out']}/{out['checked']} tie out; "
           f"behind by {behind_total:,} ballots"
@@ -105,6 +203,28 @@ def main():
     for st in behind:
         v = states[st]
         print(f"   {st} behind {v['gap']:,} — board {v['board']:,} vs UF {v['uf']:,}")
+    print("county level, board against the Lab county by county:")
+    for st, c in sorted(out["counties"].items()):
+        if c.get("status") != "checked":
+            print(f"   {st}: {c.get('status')}")
+            continue
+        extra = ""
+        if c["only_on_board"]:
+            extra += f"  only here: {', '.join(c['only_on_board'][:4])}"
+        if c["only_at_uf"]:
+            extra += f"  only at UF: {', '.join(c['only_at_uf'][:4])}"
+        if not c["differ"]:
+            shape = "every county agrees"
+        elif c["behind"] and not c["ahead"]:
+            shape = f"{c['behind']} behind the Lab"
+        elif c["ahead"] and not c["behind"]:
+            shape = f"{c['ahead']} ahead of the Lab (direct read is fresher)"
+        else:
+            shape = f"{c['ahead']} ahead, {c['behind']} behind"
+        print(f"   {st}: {c['agree']}/{c['compared']} agree — {shape}{extra}")
+        for w in c["worst"][:3]:
+            print(f"        {w['county']}: board {w['board']:,} vs UF {w['uf']:,} "
+                  f"({w['gap']:+,})")
     return 0
 
 

@@ -1,11 +1,11 @@
 {
- "checked_at": "2026-11-01T11:37:44+00:00",
- "uf_file_modified": "Sun, 01 Nov 2026 01:58:29 GMT",
- "board_total": 25042013,
- "uf_total": 24835732,
+ "checked_at": "2026-11-01T12:07:36+00:00",
+ "uf_file_modified": "Sun, 01 Nov 2026 12:01:38 GMT",
+ "board_total": 25044894,
+ "uf_total": 25043184,
  "behind_states": [],
  "behind_ballots": 0,
- "ties_out": 12,
+ "ties_out": 13,
  "checked": 13,
  "note": "Each state against the UF Election Lab's national row, which is independent of how this board collects. BEHIND means this board is stale, not that the sources disagree - a count cannot fall as time passes.",
  "states": {
@@ -26,11 +26,11 @@
    "source": "UF"
   },
   "GA": {
-   "board": 2823265,
-   "uf": 2823265,
+   "board": 2826146,
+   "uf": 2826146,
    "gap": 0,
    "verdict": "ties out",
-   "as_of": "10/31/2026",
+   "as_of": "11/1/2026",
    "source": "UF"
   },
   "IA": {
@@ -75,9 +75,9 @@
   },
   "NC": {
    "board": 2816821,
-   "uf": 2612250,
-   "gap": -204571,
-   "verdict": "ours is newer",
+   "uf": 2816821,
+   "gap": 0,
+   "verdict": "ties out",
    "as_of": "2026-11-01",
    "source": "direct"
   },
@@ -112,6 +112,186 @@
    "verdict": "ties out",
    "as_of": "10/31/2026",
    "source": "UF"
+  }
+ },
+ "counties": {
+  "AK": {
+   "status": "no county detail on this board"
+  },
+  "FL": {
+   "status": "checked",
+   "counties_board": 67,
+   "counties_uf": 67,
+   "compared": 67,
+   "agree": 67,
+   "differ": 0,
+   "ahead": 0,
+   "behind": 0,
+   "only_on_board": [],
+   "only_at_uf": [],
+   "worst": [],
+   "board_sum": 5148276,
+   "uf_sum": 5148276
+  },
+  "GA": {
+   "status": "checked",
+   "counties_board": 160,
+   "counties_uf": 160,
+   "compared": 160,
+   "agree": 160,
+   "differ": 0,
+   "ahead": 0,
+   "behind": 0,
+   "only_on_board": [],
+   "only_at_uf": [],
+   "worst": [],
+   "board_sum": 2826146,
+   "uf_sum": 2826146
+  },
+  "IA": {
+   "status": "checked",
+   "counties_board": 99,
+   "counties_uf": 99,
+   "compared": 99,
+   "agree": 99,
+   "differ": 0,
+   "ahead": 0,
+   "behind": 0,
+   "only_on_board": [],
+   "only_at_uf": [],
+   "worst": [],
+   "board_sum": 440389,
+   "uf_sum": 440389
+  },
+  "KS": {
+   "status": "checked",
+   "counties_board": 105,
+   "counties_uf": 105,
+   "compared": 105,
+   "agree": 105,
+   "differ": 0,
+   "ahead": 0,
+   "behind": 0,
+   "only_on_board": [],
+   "only_at_uf": [],
+   "worst": [],
+   "board_sum": 422143,
+   "uf_sum": 422143
+  },
+  "ME": {
+   "status": "board reports by municipality, the Lab by county \u2014 not comparable unit for unit"
+  },
+  "MI": {
+   "status": "checked",
+   "counties_board": 83,
+   "counties_uf": 83,
+   "compared": 83,
+   "agree": 83,
+   "differ": 0,
+   "ahead": 0,
+   "behind": 0,
+   "only_on_board": [],
+   "only_at_uf": [],
+   "worst": [],
+   "board_sum": 1858731,
+   "uf_sum": 1858731
+  },
+  "MN": {
+   "status": "checked",
+   "counties_board": 87,
+   "counties_uf": 87,
+   "compared": 87,
+   "agree": 87,
+   "differ": 0,
+   "ahead": 0,
+   "behind": 0,
+   "only_on_board": [],
+   "only_at_uf": [],
+   "worst": [],
+   "board_sum": 728961,
+   "uf_sum": 728961
+  },
+  "NC": {
+   "status": "checked",
+   "counties_board": 100,
+   "counties_uf": 100,
+   "compared": 100,
+   "agree": 100,
+   "differ": 0,
+   "ahead": 0,
+   "behind": 0,
+   "only_on_board": [],
+   "only_at_uf": [],
+   "worst": [],
+   "board_sum": 2816821,
+   "uf_sum": 2816821
+  },
+  "NE": {
+   "status": "checked",
+   "counties_board": 93,
+   "counties_uf": 93,
+   "compared": 93,
+   "agree": 93,
+   "differ": 0,
+   "ahead": 0,
+   "behind": 0,
+   "only_on_board": [],
+   "only_at_uf": [],
+   "worst": [],
+   "board_sum": 215424,
+   "uf_sum": 215424
+  },
+  "OH": {
+   "status": "checked",
+   "counties_board": 88,
+   "counties_uf": 88,
+   "compared": 88,
+   "agree": 88,
+   "differ": 0,
+   "ahead": 0,
+   "behind": 0,
+   "only_on_board": [],
+   "only_at_uf": [],
+   "worst": [],
+   "board_sum": 1594055,
+   "uf_sum": 1594055
+  },
+  "SC": {
+   "status": "checked",
+   "counties_board": 46,
+   "counties_uf": 46,
+   "compared": 46,
+   "agree": 45,
+   "differ": 1,
+   "ahead": 0,
+   "behind": 1,
+   "only_on_board": [],
+   "only_at_uf": [],
+   "worst": [
+    {
+     "county": "MCCORMICK",
+     "board": 3183,
+     "uf": 3279,
+     "gap": -96
+    }
+   ],
+   "board_sum": 986364,
+   "uf_sum": 986460
+  },
+  "TX": {
+   "status": "checked",
+   "counties_board": 254,
+   "counties_uf": 254,
+   "compared": 254,
+   "agree": 254,
+   "differ": 0,
+   "ahead": 0,
+   "behind": 0,
+   "only_on_board": [],
+   "only_at_uf": [],
+   "worst": [],
+   "board_sum": 7630789,
+   "uf_sum": 7630789
   }
  }
 }

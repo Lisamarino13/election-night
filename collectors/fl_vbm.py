@@ -178,6 +178,20 @@ def main():
             + ". The figure is dated by the OLDEST of them, which is the day every part "
               "of it is good through.")
         payload["mixed_days"] = True
+    # Florida stamps each file separately and never carried an as_of, so every consumer
+    # that asks "how current is this state" got nothing and skipped it - including the
+    # board's own staleness check, which compares as_of dates. The payload is only good
+    # through the OLDEST of its files, which is the date the mixed_days note already
+    # names, so record that as the as_of.
+    if days:
+        # _day returns MM/DD/YYYY strings, and min() on those is lexical: fine inside one
+        # month, wrong the moment the files straddle one ("11/01/2026" sorts before
+        # "10/31/2026" only by luck of the leading digits, and across a year it is simply
+        # wrong). Parse before comparing.
+        def _asdate(mdy):
+            mm, dd, yy = (int(x) for x in mdy.split("/"))
+            return datetime(yy, mm, dd).date()
+        payload["as_of"] = min(_asdate(v) for v in days.values()).isoformat()
     payload["state_totals"] = {"outstanding": data["outstanding"]["State Totals"],
                                "returned": data["returned"]["State Totals"]}
     if "in_person" in data:

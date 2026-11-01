@@ -727,6 +727,11 @@ async function loadEarly(){
                   unit: j.unit || "county",
                   inPersonReported: j.in_person_reported !== false,
                   fallback: !!j.fallback,
+                  // Written when a state's own parse is not current and the board has
+                  // switched to the Election Lab's copy. It was read here and never
+                  // rendered, so Florida could stop being Florida's own figure without
+                  // the card saying so.
+                  fallbackNote: (j.notes && j.notes.fallback) || "",
                   srcNote: (j.attribution && j.attribution.note) || "",
                   mismatchNote: (j.notes && j.notes.mismatch) || "",
                   withdrawnNote: (j.notes && j.notes.withdrawn) || "",
@@ -779,9 +784,14 @@ function srcLine(e){
   // something. The number stands, but the reader is told it moved backwards.
   const fl = e.fellNote
     ? `<div class="srcnote warn"><b>A figure went down:</b> ${e.fellNote}</div>` : "";
-  if(!e.srcNote) return mm + wd + md + fl;
+  // Which source a figure came from is not a detail: this state's own file is the
+  // authority, and the Lab's copy is a substitute with less detail.
+  const fb = (e.fallback || e.fallbackNote)
+    ? `<div class="srcnote warn"><b>Not this state's own file:</b> ${e.fallbackNote ||
+        "the direct state parse is not current, so this is the UF Election Lab's copy."}</div>` : "";
+  if(!e.srcNote) return mm + wd + md + fl + fb;
   const who = e.srcFrom ? `${e.srcFrom}${e.srcUp?" &larr; "+e.srcUp:""}` : "";
-  return mm + wd + md + fl + `<div class="srcnote"><b>How this is counted:</b> ${e.srcNote}
+  return mm + wd + md + fl + fb + `<div class="srcnote"><b>How this is counted:</b> ${e.srcNote}
     ${who?`<span class="srcwho">${who}</span>`:""}</div>`;
 }
 

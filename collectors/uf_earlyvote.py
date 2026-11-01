@@ -276,8 +276,38 @@ def _date(v):
     return _date(m.group(0)) if m else None
 
 
-def direct_is_fresh(path, uf_as_of, st=None):
-    """True when the existing (direct) file is recent enough to keep."""
+def _cumulative_total(payload):
+    """The early+mail total a payload carries, whichever shape it uses."""
+    st = (payload or {}).get("state_totals") or {}
+    v = st.get("total")
+    if isinstance(v, (int, float)):
+        return v
+    got, tot = False, 0
+    for group in (("by_mail", "mail_returned", "returned"),
+                  ("in_person", "early_in_person")):
+        for key in group:
+            cell = st.get(key)
+            n = cell.get("total") if isinstance(cell, dict) else cell
+            if isinstance(n, (int, float)):
+                tot += n
+                got = True
+                break
+    return tot if got else None
+
+
+def direct_is_fresh(path, uf_as_of, st=None, uf_total=None):
+    """True when the existing (direct) file is recent enough to keep.
+
+    Dates alone cannot answer this. Florida's Division of Elections compiles its files
+    once a day - all three stamped 10/31 8:08AM - while the Lab scrapes Florida's
+    COUNTIES several times a day and said so in its own note. Both sides therefore
+    claimed 10/31, the day comparison saw no gap, and Florida was held 421,783 ballots
+    behind on the eve of the election.
+
+    Ballots already cast do not un-cast, so a materially LOWER count for the same day is
+    staleness, not disagreement - the same rule this file already applies to a count
+    that falls. When the Lab is meaningfully ahead, the direct file is not fresh.
+    """
     if not path.exists():
         return False
     try:
@@ -305,7 +335,17 @@ def direct_is_fresh(path, uf_as_of, st=None):
     mine, theirs = _date(stamp), _date(uf_as_of)
     if not mine or not theirs:
         return True
-    return (theirs - mine).days <= STALE_DAYS_BY_STATE.get(st, STALE_DAYS)
+    if (theirs - mine).days > STALE_DAYS_BY_STATE.get(st, STALE_DAYS):
+        return False
+    # Same day by the labels: let the counts decide.
+    if uf_total:
+        ours = _cumulative_total(existing)
+        if ours is not None and uf_total - ours > max(5000, 0.01 * uf_total):
+            print(f"UF {st or path.stem}: direct file says {ours:,} for {stamp} but the "
+                  f"Lab has {uf_total:,} — a count does not fall, so the direct file is "
+                  f"behind by {uf_total - ours:,}", file=sys.stderr)
+            return False
+    return True
 
 
 def _last_modified(url):
@@ -379,7 +419,7 @@ def main(argv):
             continue
         target = data / f"early-{st}.json"
         if st in FALLBACK:
-            if direct_is_fresh(target, payload["as_of"], st):
+            if direct_is_fresh(target, payload["as_of"], st, tot.get("total")):
                 print(f"UF {st}: holding — the direct pull is current, and the Lab's copy "
                       f"has no mail/in-person split")
                 held += 1
@@ -391,7 +431,10 @@ def main(argv):
                 f"the direct state parse went stale or is unreachable, so this is the UF "
                 f"Election Lab's copy. {lost}; the direct parse resumes automatically when "
                 f"the state is reachable again")
-            print(f"UF {st}: direct data is >{STALE_DAYS}d stale — using the Lab's copy "
+            # Two different reasons land here - too old by date, or behind by count -
+            # and saying ">2d stale" for both was wrong: Florida was same-day and
+            # 421,783 behind. direct_is_fresh has already printed which one it was.
+            print(f"UF {st}: the direct pull is not current — using the Lab's copy "
                   f"({'no mail/in-person split' if not payload['in_person'] else 'no receipt-method detail'})",
                   file=sys.stderr)
         target.write_text(json.dumps(payload, indent=1))

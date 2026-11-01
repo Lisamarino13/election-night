@@ -557,6 +557,17 @@ async function renderCharts(panels){
       // guessed one.
       let anyEday = false;
       for (const r of rows){
+        // 2020 ran under pandemic rules - expanded mail, expanded early voting - so it
+        // is not a normal presidential baseline. Measured against 2024 the early share
+        // was only 4-5 points higher (Florida 82.4 -> 78.0, Texas 85.5 -> 80.4), so the
+        // distortion is real but small; the far bigger gap is midterm against
+        // presidential. Where 2024 exists it is the better comparison, and where it
+        // does not, 2020 is the only presidential figure there is and is labelled.
+        if (r.year === 2020){
+          r.note = "covid cycle";
+          r.tip = (r.tip ? r.tip + " — " : "") +
+            "pandemic rules: expanded mail and early voting";
+        }
         const sh = shareFor(share, code, r.year);
         if (!sh || sh.total <= r.total) continue;
         r.totalVote = sh.total;

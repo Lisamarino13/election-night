@@ -320,6 +320,117 @@
      "election_day": 915589,
      "early_pct": 0.8349055004753105,
      "basis": "cast"
+    },
+    "2024": {
+     "total_vote": 5699141,
+     "early": 4530053,
+     "election_day": 1169088,
+     "early_pct": 0.7948659280407345,
+     "basis": "counted"
+    }
+   },
+   "counted_by_contest": {
+    "2024": {
+     "US PRESIDENT": {
+      "total": 5699141,
+      "election_day": 1169088,
+      "early": 4530053,
+      "early_pct": 0.7948659280407345,
+      "by_mode": {
+       "Election Day": 1169088,
+       "Early Voting": 4208839,
+       "Absentee by Mail": 295602,
+       "Provisional": 25612
+      },
+      "by_party": {
+       "OTH": {
+        "total": 19494,
+        "election_day": 6804,
+        "early": 12690,
+        "early_pct": 0.6509695290858726
+       },
+       "GRE": {
+        "total": 24762,
+        "election_day": 8810,
+        "early": 15952,
+        "early_pct": 0.6442129068734351
+       },
+       "REP": {
+        "total": 2898423,
+        "election_day": 642726,
+        "early": 2255697,
+        "early_pct": 0.7782497585756116
+       },
+       "CST": {
+        "total": 6863,
+        "election_day": 2438,
+        "early": 4425,
+        "early_pct": 0.6447617659915489
+       },
+       "JFA": {
+        "total": 12099,
+        "election_day": 4387,
+        "early": 7712,
+        "early_pct": 0.6374080502520869
+       },
+       "LIB": {
+        "total": 22125,
+        "election_day": 8482,
+        "early": 13643,
+        "early_pct": 0.6166327683615819
+       },
+       "DEM": {
+        "total": 2715375,
+        "election_day": 495441,
+        "early": 2219934,
+        "early_pct": 0.8175423284076785
+       }
+      }
+     },
+     "NC GOVERNOR": {
+      "total": 5591547,
+      "election_day": 1146595,
+      "early": 4444952,
+      "early_pct": 0.79494136416988,
+      "by_mode": {
+       "Election Day": 1146595,
+       "Early Voting": 4133041,
+       "Absentee by Mail": 287381,
+       "Provisional": 24530
+      },
+      "by_party": {
+       "GRE": {
+        "total": 49612,
+        "election_day": 16345,
+        "early": 33267,
+        "early_pct": 0.6705434169152624
+       },
+       "CST": {
+        "total": 54738,
+        "election_day": 15054,
+        "early": 39684,
+        "early_pct": 0.7249808177134714
+       },
+       "LIB": {
+        "total": 176392,
+        "election_day": 50923,
+        "early": 125469,
+        "early_pct": 0.7113077690598213
+       },
+       "REP": {
+        "total": 2241309,
+        "election_day": 473830,
+        "early": 1767479,
+        "early_pct": 0.788592291379725
+       },
+       "DEM": {
+        "total": 3069496,
+        "election_day": 590443,
+        "early": 2479053,
+        "early_pct": 0.807641710560952
+       }
+      }
+     }
     }
    },
    "race": {

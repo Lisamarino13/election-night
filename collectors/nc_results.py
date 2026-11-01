@@ -52,8 +52,8 @@ PARTY = {"DEM": "D", "REP": "R", "LIB": "O", "GRE": "O", "CST": "O", "UNA": "O"}
 MODES = ["Election Day", "Early Voting", "Absentee by Mail", "Provisional"]
 
 
-def fetch(filename, timeout=180):
-    url = BASE.format(ELECTION[0], filename)
+def fetch(filename, timeout=180, election=None):
+    url = BASE.format((election or ELECTION)[0], filename)
     req = urllib.request.Request(url, headers=UA)
     with urllib.request.urlopen(req, timeout=timeout) as r:
         if r.status != 200:
@@ -166,7 +166,37 @@ def early_cast():
     return out, d.get("as_of")
 
 
+def proof(tag, stamp):
+    """Parse a PAST North Carolina election and report its mode split. Writes nothing.
+
+    North Carolina reports every contest split by mode, so a completed cycle gives a
+    COUNTED early share rather than the cast figure the early-vote archive carries -
+    the difference Texas showed to be twelve points in 2024.
+    """
+    el = (tag, stamp)
+    results, _rows = parse_results(fetch(f"results_pct_{stamp}.zip", election=el))
+    modes = collections.defaultdict(collections.Counter)
+    for _cty, races in results.items():
+        for race, r in races.items():
+            for mode, v in (r.get("modes") or {}).items():
+                modes[race][mode] += v
+    print(f"NC proof via {tag}: {len(results)} counties")
+    for race, m in sorted(modes.items()):
+        tot = sum(m.values())
+        if not tot:
+            continue
+        eday = m.get("election_day", 0)
+        early = tot - eday
+        print(f"   {race}: total {tot:,}  early+mail {early:,} = {100*early/tot:.1f}%  "
+              f"election day {eday:,}")
+        print(f"      by mode: " + ", ".join(f"{k} {v:,}" for k, v in sorted(m.items())))
+    return 0
+
+
 def main():
+    if "--proof" in sys.argv:
+        i = sys.argv.index("--proof")
+        return proof(sys.argv[i + 1], sys.argv[i + 2])
     res_body = fetch(f"results_pct_{ELECTION[1]}.zip")
     out_body = fetch(f"absentee_spoiled_outstanding_{ELECTION[1]}.zip", timeout=60)
     results, rows = parse_results(res_body)

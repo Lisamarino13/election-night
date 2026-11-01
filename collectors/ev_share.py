@@ -133,6 +133,58 @@ def turnout_by_year():
     return out
 
 
+# North Carolina publishes every contest split by mode AND by party, so a completed
+# cycle there gives a COUNTED early share with a partisan breakdown - the only state
+# where both are available for a past election. Its file layout changed after 2022, so
+# only 2024 onward parses.
+NC_PRIOR = {"2024": ("2024_11_05", "20241105", ("US PRESIDENT", "NC GOVERNOR"))}
+NC_MODES = ["Election Day", "Early Voting", "Absentee by Mail", "Provisional"]
+
+
+def nc_prior(year):
+    import csv, io, zipfile, urllib.request, collections
+    tag, stamp, contests = NC_PRIOR[year]
+    url = f"https://s3.amazonaws.com/dl.ncsbe.gov/ENRS/{tag}/results_pct_{stamp}.zip"
+    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=180) as r:
+        blob = r.read()
+    z = zipfile.ZipFile(io.BytesIO(blob))
+    rows = list(csv.DictReader(
+        io.StringIO(z.read(z.namelist()[0]).decode("utf-8", "ignore")), delimiter="\t"))
+    def num(v):
+        try:
+            return int(str(v).replace(",", "").strip() or 0)
+        except ValueError:
+            return 0
+    out = {}
+    for contest in contests:
+        modes = collections.Counter()
+        party = collections.defaultdict(collections.Counter)
+        for row in rows:
+            if row.get("Contest Name") != contest:
+                continue
+            pk = (row.get("Choice Party") or "").strip() or "OTH"
+            for m in NC_MODES:
+                v = num(row.get(m))
+                modes[m] += v
+                party[pk][m] += v
+        tot = sum(modes.values())
+        if not tot:
+            continue
+        eday = modes.get("Election Day", 0)
+        out[contest] = {
+            "total": tot, "election_day": eday, "early": tot - eday,
+            "early_pct": (tot - eday) / tot,
+            "by_mode": dict(modes),
+            "by_party": {pk: {"total": sum(mm.values()),
+                              "election_day": mm.get("Election Day", 0),
+                              "early": sum(mm.values()) - mm.get("Election Day", 0),
+                              "early_pct": (sum(mm.values()) - mm.get("Election Day", 0))
+                                           / max(sum(mm.values()), 1)}
+                         for pk, mm in party.items() if sum(mm.values())},
+        }
+    return out
+
+
 def total_vote(st, eid):
     """Total votes and, where the feed labels it, the early vote counted."""
     sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -170,6 +222,23 @@ def main():
                              "early_pct": ev / tv, "basis": "cast"}
         if split:
             row["by_year"] = split
+        if st == "NC":
+            for yr in NC_PRIOR:
+                try:
+                    got = nc_prior(yr)
+                except Exception as e:
+                    row.setdefault("notes", {})[yr] = f"{type(e).__name__}: {e}"
+                    continue
+                if not got:
+                    continue
+                row.setdefault("counted_by_contest", {})[yr] = got
+                first = list(got.values())[0]
+                # A counted figure replaces a cast one for the same year: it is the
+                # measured early vote rather than ballots received.
+                row.setdefault("by_year", {})[yr] = {
+                    "total_vote": first["total"], "early": first["early"],
+                    "election_day": first["election_day"],
+                    "early_pct": first["early_pct"], "basis": "counted"}
         demo = demographics(st)
         if demo:
             row["race"] = demo

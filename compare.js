@@ -273,6 +273,32 @@ const LEGEND = key("mid","2022 midterm") + key("pres","presidential (2020 / 2024
 // The board opens on the vote tables, so a chart that lives only behind a tab is a
 // chart nobody sees. This draws the same figure with no panel chrome so each card
 // can carry its own.
+// Early vote as a share of the TOTAL vote, for the cycles where both numbers exist.
+// The early-vote files have no turnout denominator, so this comes from prior
+// election-night feeds and is only populated for the states whose results collector
+// takes a year.
+let _share = null;
+async function evShare(){
+  if (_share) return _share;
+  try { _share = await J("data/ev-share.json"); }
+  catch(e){ _share = {states:{}}; }
+  return _share;
+}
+// A COUNTED early vote is measured by the feed; a CAST one is ballots received, which is
+// a different quantity. Texas 2024 was 80.4% counted against 68.2% cast - twelve points
+// apart - so they are never shown as the same number.
+function shareFor(share, code, year){
+  const races = (((share.states||{})[code]||{}).measured_total_vote||{})[String(year)];
+  if (!races || races.error) return null;
+  const first = Object.values(races)[0];
+  if (!first || !first.total) return null;
+  const counted = first.early_counted, cast = first.early_cast_at_the_time;
+  const ev = counted != null ? counted : cast;
+  if (ev == null) return null;
+  return {total: first.total, ev, pct: ev / first.total,
+          kind: counted != null ? "counted" : "cast"};
+}
+
 const _cache = {};
 // Prefer the payloads the page already captured at load. Re-fetching here meant the
 // charts could read a newer collector run than the cards above them, so one board
@@ -504,6 +530,11 @@ async function renderCharts(panels){
       draw = host => drawLines(host, ser, {aria:`South Carolina cumulative in-person early vote by day of early voting.`});
     } else {
       const pres = rows.filter(r => r.year % 4 === 0).pop();
+      // Declared before the lede and caption, which both read it. Putting it next to the
+      // table left it in the temporal dead zone and the charts tab died on
+      // "Cannot access 'share' before initialization".
+      const share = await evShare();
+      const anyShare = rows.some(r => shareFor(share, code, r.year));
       lede = !now
         ? `No 2026 early-vote file is published yet, so this is the record of earlier
            cycles only.`
@@ -515,14 +546,24 @@ async function renderCharts(panels){
              ${pres.year}, a presidential cycle, which is not comparable`:""}.`;
       caption = `Total early and mail ballots. Every cycle but 2026 is a completed one;
         2026 is a running total and is drawn open for that reason.
-        ${rows.some(r=>r.ip==null)?"A stream this state does not report is left out rather than shown as zero.":""}`;
-      table = `<table><thead><tr><th>Cycle</th><th>Mail</th><th>In person</th><th>Total</th>
+        ${rows.some(r=>r.ip==null)?"A stream this state does not report is left out rather than shown as zero.":""}
+        ${rows.some(r=>shareFor(share, code, r.year))
+          ? `Total vote and early share come from that year's election-night feed, the only
+             place a turnout denominator exists. <b>counted</b> means the feed labelled the
+             mode and the share is exact; <b>cast</b> means it did not, so the numerator is
+             ballots received rather than ballots counted early - a different quantity, and
+             in Texas 2024 twelve points apart.`
+          : "No early share is shown: this state's results collector cannot be pointed at a past election, so there is no turnout denominator for it yet."}`;
+      table = `<table><thead><tr><th>Cycle</th><th>Mail</th><th>In person</th><th>Total early</th>
+        ${anyShare?"<th>Total vote</th><th>Early share</th>":""}
         ${mid?"<th>vs "+mid.year+"</th>":""}</tr></thead><tbody>
-        ${rows.map(r=>`<tr><td>${r.year}${r.year%4===0?' <span class="dim">presidential</span>':""}</td>
+        ${rows.map(r=>{ const sh = shareFor(share, code, r.year); return `<tr><td>${r.year}${r.year%4===0?' <span class="dim">presidential</span>':""}</td>
           <td class="fig">${r.mail==null?'<span class="dim">not reported</span>':n(r.mail)}</td>
           <td class="fig">${r.ip==null?'<span class="dim">not reported</span>':n(r.ip)}</td>
           <td class="fig b">${n(r.total)}</td>
-          ${mid?`<td class="fig">${r.year===mid.year?"—":Math.round(r.total/mid.total*100)+"%"}</td>`:""}</tr>`).join("")}
+          ${anyShare?`<td class="fig">${sh?n(sh.total):'<span class="dim">—</span>'}</td>
+            <td class="fig">${sh?`${Math.round(100*sh.pct)}% <span class="dim">${sh.kind}</span>`:'<span class="dim">—</span>'}</td>`:""}
+          ${mid?`<td class="fig">${r.year===mid.year?"—":Math.round(r.total/mid.total*100)+"%"}</td>`:""}</tr>`;}).join("")}
         </tbody></table>`;
       draw = host => drawBars(host, rows, {aria:`${meta.name} early and mail ballots by cycle.`});
     }

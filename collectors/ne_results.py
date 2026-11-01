@@ -24,6 +24,7 @@ writes nothing.
 """
 import gzip, json, pathlib, re, sys, urllib.request, collections
 from datetime import datetime, timezone
+import early_cast as early_cast_shared
 import election_day
 
 SVC = "https://neresultswebservice.azurewebsites.us/ResultsAjax.svc"
@@ -87,16 +88,14 @@ def county_rows(race_id):
 
 
 def early_cast():
-    p = pathlib.Path(__file__).resolve().parent.parent / "data" / "early-NE.json"
-    if not p.exists():
-        return {}, None
-    d = json.loads(p.read_text())
-    out = {}
-    for cty, b in (d.get("counties") or {}).items():
-        g = lambda k: (b[k].get("total") if isinstance(b.get(k), dict) else b.get(k)) or 0
-        out[cty.title()] = g("by_mail") + g("mail_returned") + g("returned") \
-                           + g("in_person") + g("early_in_person")
-    return out, d.get("as_of")
+    """Early + mail ballots cast per unit, from the shared reader.
+
+    This was a local copy that added up every stream name it knew. Those names
+    are aliases, so a payload carrying two for one stream had it counted twice -
+    Florida writes both early_in_person and in_person and was over by 2,880,909,
+    the whole in-person vote again. early_cast.by_unit takes one stream per mode.
+    """
+    return early_cast_shared.by_unit("NE", key=lambda s: s.title())
 
 
 def main():

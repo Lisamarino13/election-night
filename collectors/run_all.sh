@@ -111,6 +111,7 @@ fi
 # Does this tie out against an independent source? Nothing else asks. Every stale-data
 # failure so far was caught by a person comparing totals by hand, because a collector
 # that writes an OLD number still reports success.
+shr=$("$PY" ev_share.py 2>&1); printf '%s\n' "$shr" >> "$LOG"
 tie=$("$PY" tie_out.py 2>&1); printf '%s\n' "$tie" >> "$LOG"
 say "TIEOUT  $(printf '%s' "$tie" | head -1)"
 

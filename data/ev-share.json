@@ -1,0 +1,379 @@
+{
+ "note": "Early vote as a share of the total vote. The denominator comes from a prior election-night feed, so only states whose results collector takes a year can be measured; the rest carry their early-vote history alone until they run live. Where a feed labels the mode the early vote is COUNTED and exact; where it does not, only ballots CAST are known, and the two are not the same figure.",
+ "states": {
+  "FL": {
+   "ev_history": {
+    "2020": {
+     "cast": 9187898,
+     "mail": 4855677,
+     "in_person": 4332221,
+     "registered": null,
+     "party": {
+      "D": 3591161,
+      "R": 3466098,
+      "NPA": 2000852,
+      "O": 129787
+     }
+    },
+    "2022": {
+     "cast": 5059413,
+     "mail": 2773948,
+     "in_person": 2285465,
+     "registered": null,
+     "party": {
+      "D": 1870486,
+      "R": 2168758,
+      "NPA": 947728,
+      "O": 72441
+     }
+    },
+    "2024": {
+     "cast": 8392165,
+     "mail": 3029152,
+     "in_person": 5363013,
+     "registered": null,
+     "party": {
+      "D": 2772470,
+      "R": 3599175,
+      "NPA": 1817897,
+      "O": 202623
+     }
+    }
+   },
+   "measured_total_vote": {
+    "2024": {
+     "senate": {
+      "total": 10757428,
+      "early_counted": null,
+      "early_cast_at_the_time": 5254007,
+      "precincts": [
+       5448,
+       5612
+      ]
+     }
+    }
+   }
+  },
+  "GA": {
+   "ev_history": {
+    "2024": {
+     "cast": 4031303,
+     "mail": 265648,
+     "in_person": 3765655,
+     "registered": 0
+    }
+   },
+   "race": {
+    "2024": {
+     "counts": {
+      "nh_white": 2327740,
+      "nh_black": 1061803,
+      "hispanic": 127787,
+      "nh_asian": 114091,
+      "nh_native_american": 21965,
+      "nh_other": 377879
+     },
+     "described": 4031265
+    },
+    "2026": {
+     "counts": {
+      "nh_white": 1479747,
+      "nh_black": 915311,
+      "hispanic": 105025,
+      "nh_asian": 82239,
+      "nh_native_american": 19424,
+      "nh_other": 224378
+     },
+     "described": 2826124
+    }
+   }
+  },
+  "IA": {
+   "ev_history": {
+    "2022": {
+     "cast": 371575,
+     "mail": 159408,
+     "in_person": 212167,
+     "registered": null,
+     "party": {
+      "D": 187970,
+      "R": 122586,
+      "NPA": 60005,
+      "O": 1014
+     }
+    },
+    "2024": {
+     "cast": 680296,
+     "mail": 197610,
+     "in_person": 482686,
+     "registered": null,
+     "party": {
+      "D": 257633,
+      "R": 268899,
+      "NPA": 149470,
+      "O": 4294
+     }
+    }
+   }
+  },
+  "KS": {
+   "ev_history": {
+    "2024": {
+     "cast": 653056,
+     "mail": 126623,
+     "in_person": 526433,
+     "registered": 0,
+     "party": {
+      "D": 210857,
+      "R": 330519,
+      "NPA": 111680,
+      "O": 0
+     }
+    }
+   }
+  },
+  "ME": {
+   "ev_history": {
+    "2020": {
+     "cast": 514419,
+     "mail": 362886,
+     "in_person": 151533,
+     "registered": 0,
+     "party": {
+      "D": 242160,
+      "R": 123140,
+      "NPA": 131807,
+      "O": 17312
+     }
+    },
+    "2024": {
+     "cast": 378760,
+     "mail": 221646,
+     "in_person": 157114,
+     "registered": 0,
+     "party": {
+      "D": 157989,
+      "R": 104256,
+      "NPA": 100490,
+      "O": 16025
+     }
+    }
+   }
+  },
+  "MI": {
+   "ev_history": {
+    "2024": {
+     "cast": 3319560,
+     "mail": 3319560,
+     "in_person": 0,
+     "registered": 0
+    }
+   }
+  },
+  "MN": {
+   "ev_history": {
+    "2024": {
+     "cast": 1310773,
+     "mail": 1310773,
+     "in_person": 0,
+     "registered": 0
+    },
+    "2022": {
+     "cast": 673360,
+     "mail": 673360,
+     "in_person": 0,
+     "registered": 0
+    },
+    "2020": {
+     "cast": 1909701,
+     "mail": 1909701,
+     "in_person": 0,
+     "registered": 0
+    },
+    "2018": {
+     "cast": 638581,
+     "mail": 638581,
+     "in_person": 0,
+     "registered": 0
+    },
+    "2016": {
+     "cast": 676722,
+     "mail": 676722,
+     "in_person": 0,
+     "registered": 0
+    },
+    "2014": {
+     "cast": 235212,
+     "mail": 235212,
+     "in_person": 0,
+     "registered": 0
+    }
+   }
+  },
+  "NC": {
+   "ev_history": {
+    "2020": {
+     "cast": 4630259,
+     "mail": 1001596,
+     "in_person": 3628663,
+     "registered": null,
+     "party": {
+      "D": 1726320,
+      "R": 1466387,
+      "NPA": 1411955,
+      "O": 25597
+     }
+    },
+    "2022": {
+     "cast": 2198550,
+     "mail": 187660,
+     "in_person": 2010890,
+     "registered": null,
+     "party": {
+      "D": 840205,
+      "R": 682377,
+      "NPA": 669831,
+      "O": 6137
+     }
+    },
+    "2024": {
+     "cast": 4521943,
+     "mail": 298209,
+     "in_person": 4223734,
+     "registered": null,
+     "party": {
+      "D": 1464193,
+      "R": 1498845,
+      "NPA": 1525609,
+      "O": 33296
+     }
+    }
+   },
+   "race": {
+    "2024": {
+     "counts": {
+      "nh_white": 3068162,
+      "nh_black": 794157,
+      "hispanic": 127609,
+      "nh_asian": 72596,
+      "nh_native_american": 24449,
+      "nh_other": 394201
+     },
+     "described": 4481174
+    },
+    "2026": {
+     "counts": {
+      "nh_white": 1849717,
+      "nh_black": 593810,
+      "hispanic": 96203,
+      "nh_asian": 47458,
+      "nh_native_american": 12530,
+      "nh_other": 216870
+     },
+     "described": 2816588
+    }
+   }
+  },
+  "NE": {
+   "ev_history": {
+    "2024": {
+     "cast": 364260,
+     "mail": 364260,
+     "in_person": 0,
+     "registered": 0,
+     "party": {
+      "D": 121555,
+      "R": 178755,
+      "NPA": 63946,
+      "O": 0
+     }
+    }
+   }
+  },
+  "OH": {
+   "ev_history": {
+    "2024": {
+     "cast": 2532260,
+     "mail": 995482,
+     "in_person": 1536778,
+     "registered": 0
+    }
+   }
+  },
+  "SC": {
+   "ev_history": {
+    "2022": {
+     "cast": 561563,
+     "mail": 0,
+     "in_person": 561563,
+     "registered": 0
+    },
+    "2024": {
+     "cast": 1471663,
+     "mail": 0,
+     "in_person": 1471663,
+     "registered": 0
+    }
+   },
+   "race": {
+    "2024": {
+     "counts": {
+      "nh_white": 75387,
+      "nh_black": 24024,
+      "hispanic": 781,
+      "nh_asian": 1001,
+      "nh_native_american": 175,
+      "nh_other": 1295
+     },
+     "described": 102663
+    },
+    "2026": {
+     "counts": {
+      "nh_white": 26589,
+      "nh_black": 10242,
+      "hispanic": 269,
+      "nh_asian": 291,
+      "nh_native_american": 46,
+      "nh_other": 431
+     },
+     "described": 37868
+    }
+   }
+  },
+  "TX": {
+   "ev_history": {
+    "2020": {
+     "cast": 9702263,
+     "mail": 937878,
+     "in_person": 8764385,
+     "registered": 16955519
+    },
+    "2022": {
+     "cast": 5497027,
+     "mail": 317448,
+     "in_person": 5179579,
+     "registered": 17672143
+    },
+    "2024": {
+     "cast": 9058436,
+     "mail": 342501,
+     "in_person": 8715935,
+     "registered": 18623931
+    }
+   },
+   "measured_total_vote": {
+    "2024": {
+     "senate": {
+      "total": 11291854,
+      "early_counted": 9075933,
+      "early_cast_at_the_time": 7699516,
+      "precincts": [
+       9885,
+       9885
+      ]
+     }
+    }
+   }
+  }
+ }
+}

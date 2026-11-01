@@ -26,6 +26,17 @@ def digest(name):
     return hashlib.sha1((ROOT / name).read_bytes()).hexdigest()[:8]
 
 
+def committed_stamps():
+    """What the COMMITTED index.html asks for, which is what gets served."""
+    import subprocess
+    r = subprocess.run(["git", "-C", str(ROOT), "show", "HEAD:index.html"],
+                       capture_output=True, text=True)
+    if r.returncode != 0:
+        return None
+    return {name: set(re.findall(re.escape(name) + r"\?v=([0-9a-f]{6,40})", r.stdout))
+            for name in ASSETS}
+
+
 def main(argv):
     check = "--check" in argv
     html = PAGE.read_text()
@@ -48,6 +59,25 @@ def main(argv):
         out = pat.sub(f"{name}?v={want}", out)
 
     if not stale:
+        # The working tree agreeing with itself is not enough. index.html is what the
+        # browser asks for, and it is possible to commit a changed compare.js while
+        # leaving index.html's stamp bump unstaged - which happened, and shipped a file
+        # at a URL nobody requests. Check what is actually committed.
+        bad = []
+        com = committed_stamps()
+        if com is not None:
+            for name in ASSETS:
+                want = digest(name)
+                got = com.get(name) or set()
+                if got and want not in got:
+                    bad.append((name, ", ".join(sorted(got)), want))
+        if bad:
+            for name, got, want in bad:
+                print(f"UNCOMMITTED STAMP  {name}: HEAD asks for {got}, the file is {want}",
+                      file=sys.stderr)
+            print("\nindex.html's stamp bump is not committed, so the browser will keep "
+                  "the old file. Stage index.html with it.", file=sys.stderr)
+            return 1
         print("stamps already current: " + ", ".join(f"{n}={digest(n)}" for n in ASSETS))
         return 0
     for name, got, want in stale:

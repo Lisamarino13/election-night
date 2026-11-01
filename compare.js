@@ -57,7 +57,10 @@ function drawBars(host, rows, opts){
   const W = Math.max(280, host.clientWidth), PAD = {t:22, r:10, b:52, l:46};
   const H = Math.min(360, Math.max(240, Math.round(W * 0.62)));
   const plotW = W - PAD.l - PAD.r, plotH = H - PAD.t - PAD.b;
-  const max = Math.max(...rows.filter(r=>r.total!=null).map(r=>r.total), 1);
+  // A bar that carries election day is as tall as the TOTAL vote, so the scale has to
+  // see that or the stacked part runs off the top.
+  const max = Math.max(...rows.filter(r=>r.total!=null)
+    .map(r => r.totalVote != null ? r.totalVote : r.total), 1);
   const {step, top} = scale(max);
   const yOf = v => PAD.t + plotH - (v/top) * plotH;
 
@@ -91,19 +94,33 @@ function drawBars(host, rows, opts){
 
     const y = yOf(r.total), h = plotH - (y - PAD.t);
     const cyc = cycleOf(r.year), fill = PAL[cyc];
+    // Election day sits ON TOP of the early vote, so the bar is the whole turnout and
+    // the solid part is the share that had already voted. Drawn first so the early
+    // block's rounded cap stays on top of it.
+    const hasEday = r.eday != null && r.totalVote != null;
+    if (hasEday){
+      const yTop = yOf(r.totalVote);
+      svg.appendChild(svgEl("path", {
+        d: barPath(x, yTop, bw, y - yTop, 4), fill: fill, "fill-opacity": 0.26,
+        stroke: fill, "stroke-width": 1, "stroke-opacity": 0.5}));
+    }
     const p = svgEl("path", {d:barPath(x, y, bw, h, 4), fill: cyc==="now" ? "none" : fill,
       stroke: fill, "stroke-width": cyc==="now" ? 2 : 0,
       "stroke-dasharray": cyc==="now" ? "5 3" : "none"});
     p.style.cursor = "default";
     svg.appendChild(p);
-    const vl = svgEl("text", {class:"dlab fig", x:x+bw/2, y:y-9, "text-anchor":"middle", fill:"var(--fg)"});
-    vl.textContent = ab(r.total); svg.appendChild(vl);
+    const vl = svgEl("text", {class:"dlab fig",
+      x:x+bw/2, y:(hasEday?yOf(r.totalVote):y)-9, "text-anchor":"middle", fill:"var(--fg)"});
+    vl.textContent = ab(hasEday ? r.totalVote : r.total); svg.appendChild(vl);
     // hit target larger than the mark
     const hit = svgEl("rect", {x:x-7, y:PAD.t, width:bw+14, height:plotH, fill:"transparent"});
     hit.addEventListener("pointerenter", e => showTip(e,
       `<div class="k"><i style="background:${fill}"></i><b>${r.year}</b></div>
        <div class="fig">${n(r.total)} early + mail</div>
        ${r.mail!=null?`<div class="dim fig" style="color:var(--dim)">mail ${n(r.mail)} &middot; in person ${n(r.ip)}</div>`:""}
+       ${r.eday!=null?`<div class="fig">${n(r.eday)} election day</div>
+         <div class="fig"><b>${n(r.totalVote)} total vote</b> &middot;
+           early ${Math.round(100*r.total/r.totalVote)}% <span class="dim">${esc(r.basis||"")}</span></div>`:""}
        <div style="color:var(--dim)">${esc(r.tip||"")}</div>`));
     hit.addEventListener("pointermove", e => showTip(e, tip.innerHTML));
     hit.addEventListener("pointerleave", hideTip);
@@ -288,15 +305,15 @@ async function evShare(){
 // a different quantity. Texas 2024 was 80.4% counted against 68.2% cast - twelve points
 // apart - so they are never shown as the same number.
 function shareFor(share, code, year){
-  const races = (((share.states||{})[code]||{}).measured_total_vote||{})[String(year)];
-  if (!races || races.error) return null;
-  const first = Object.values(races)[0];
-  if (!first || !first.total) return null;
-  const counted = first.early_counted, cast = first.early_cast_at_the_time;
-  const ev = counted != null ? counted : cast;
-  if (ev == null) return null;
-  return {total: first.total, ev, pct: ev / first.total,
-          kind: counted != null ? "counted" : "cast"};
+  // by_year is the assembled answer: every cycle where BOTH a turnout denominator and
+  // an early-vote total exist, whether the denominator came from a prior election-night
+  // feed or from the Lab's turnout column. Reading measured_total_vote instead meant
+  // only the two states with a year-parameterised results collector ever stacked, and
+  // only for 2024.
+  const row = (((share.states||{})[code]||{}).by_year||{})[String(year)];
+  if (!row || !row.total_vote || row.early == null) return null;
+  return {total: row.total_vote, ev: row.early, pct: row.early_pct,
+          kind: row.basis || "cast"};
 }
 
 const _cache = {};
@@ -535,6 +552,25 @@ async function renderCharts(panels){
       // "Cannot access 'share' before initialization".
       const share = await evShare();
       const anyShare = rows.some(r => shareFor(share, code, r.year));
+      // Hang the election-day figure on each row the bars can show it for. A year with
+      // no turnout denominator keeps its early-only bar rather than being given a
+      // guessed one.
+      let anyEday = false;
+      for (const r of rows){
+        const sh = shareFor(share, code, r.year);
+        if (!sh || sh.total <= r.total) continue;
+        r.totalVote = sh.total;
+        r.eday = sh.total - r.total;
+        r.basis = sh.kind;
+        anyEday = true;
+      }
+      if (anyEday){
+        // Not key(): election day is not its own colour, it is each cycle's colour at
+        // low opacity stacked on top, so the swatch has to say that rather than invent
+        // a fourth hue PAL does not have.
+        legend = LEGEND + `<span><i style="background:${PAL.mid};opacity:.26;
+          border:1px solid ${PAL.mid}"></i>election day (stacked on top)</span>`;
+      }
       lede = !now
         ? `No 2026 early-vote file is published yet, so this is the record of earlier
            cycles only.`

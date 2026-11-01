@@ -93,6 +93,46 @@ def demographics(st):
     return out
 
 
+# The Lab keeps a turnout column in each cycle's own national file: the 2026 file
+# carries turn_2022, the 2024 file carries turn_2020. Those two are the only turnout
+# denominators that exist for every state - there is no 2020 or 2022 archive to pull an
+# early-vote total from, so a year is only usable where BOTH numbers exist.
+TURNOUT = [("2022", "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/US.csv",
+            "turn_2022"),
+           ("2020", "https://election.lab.ufl.edu/data-downloads/earlyvote/2024/US.csv",
+            "turn_2020")]
+UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+                    "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+
+
+def turnout_by_year():
+    """{year -> {state -> total votes cast}} from the Lab's own turnout columns."""
+    import csv, io, urllib.request
+    out = {}
+    for year, url, col in TURNOUT:
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=UA),
+                                        timeout=90) as r:
+                text = r.read().decode("utf-8-sig", "ignore")
+            if text.lstrip()[:1] == "<":
+                continue
+            rows = list(csv.DictReader(io.StringIO(text)))
+        except Exception:
+            continue
+        got = {}
+        for row in rows:
+            st = (row.get("state_abbv") or "").strip()
+            try:
+                v = int(float(row.get(col) or 0))
+            except ValueError:
+                v = 0
+            if st and v:
+                got[st] = v
+        if got:
+            out[year] = got
+    return out
+
+
 def total_vote(st, eid):
     """Total votes and, where the feed labels it, the early vote counted."""
     sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -114,9 +154,22 @@ def total_vote(st, eid):
 
 
 def main():
+    turn = turnout_by_year()
     states = {}
     for st in sorted(set(list(PRIOR) + [p.name[11:-5] for p in DATA.glob("ev-history-*.json")])):
-        row = {"ev_history": ev_history(st)}
+        hist = ev_history(st)
+        row = {"ev_history": hist}
+        # Election day is what is left when the early vote is taken off the turnout. It
+        # only exists for a year where BOTH are known, and is never inferred from a
+        # neighbouring cycle.
+        split = {}
+        for yr, totals in turn.items():
+            tv, ev = totals.get(st), (hist.get(yr) or {}).get("cast")
+            if tv and ev is not None:
+                split[yr] = {"total_vote": tv, "early": ev, "election_day": tv - ev,
+                             "early_pct": ev / tv, "basis": "cast"}
+        if split:
+            row["by_year"] = split
         demo = demographics(st)
         if demo:
             row["race"] = demo
@@ -128,6 +181,25 @@ def main():
                 measured[yr] = {"error": f"{type(e).__name__}: {e}"}
         if measured:
             row["measured_total_vote"] = measured
+            for yr, races in measured.items():
+                if "error" in races:
+                    continue
+                first = list(races.values())[0]
+                tv = first.get("total")
+                ev = first.get("early_counted")
+                basis = "counted"
+                if ev is None:
+                    # NOT early_cast_at_the_time. That field is produced by reading the
+                    # CURRENT early-vote file, so on a prior-year run it carries today's
+                    # numbers: Florida's 2024 row came out at 5,254,007, which is its 2026
+                    # early vote, and Texas's at 7,699,516, also 2026. The early vote for
+                    # that year is the one in the archive.
+                    ev = (hist.get(yr) or {}).get("cast")
+                    basis = "cast"
+                if tv and ev is not None:
+                    row.setdefault("by_year", {})[yr] = {
+                        "total_vote": tv, "early": ev, "election_day": tv - ev,
+                        "early_pct": ev / tv, "basis": basis}
         states[st] = row
 
     out = {"note": ("Early vote as a share of the total vote. The denominator comes "

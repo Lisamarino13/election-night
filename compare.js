@@ -316,6 +316,32 @@ function shareFor(share, code, year){
           kind: row.basis || "cast"};
 }
 
+// Both chart renderers need the same election-day stacking, and patching only one of
+// them is how the Charts tab ended up showing it while the cards on the early-vote tab
+// - the ones actually on screen - did not. One function, called by both.
+async function addElectionDay(rows, code){
+  const share = await evShare();
+  let any = false;
+  for (const r of rows){
+    if (r.year === 2020){
+      r.note = "covid cycle";
+      r.tip = (r.tip ? r.tip + " — " : "") +
+        "pandemic rules: expanded mail and early voting";
+    }
+    const sh = shareFor(share, code, r.year);
+    if (!sh || sh.total <= r.total) continue;
+    r.totalVote = sh.total;
+    r.eday = sh.total - r.total;
+    r.basis = sh.kind;
+    any = true;
+  }
+  const legend = any
+    ? LEGEND + `<span><i style="background:${PAL.mid};opacity:.26;
+        border:1px solid ${PAL.mid}"></i>election day (stacked on top)</span>`
+    : LEGEND;
+  return {any, legend};
+}
+
 const _cache = {};
 // Prefer the payloads the page already captured at load. Re-fetching here meant the
 // charts could read a newer collector run than the cards above them, so one board
@@ -368,7 +394,8 @@ async function renderStateChart(host, code){
     rows.push({year:2026, ...now, tip:"as of " + (cur.as_of||"") + " — still voting"});
   }
   if (rows.length < 2) return;            // one bar is a number, not a chart
-  host.innerHTML = `<div class="legend">${LEGEND}</div><div class="plot"></div>`;
+  const {legend: cardLegend} = await addElectionDay(rows, code);
+  host.innerHTML = `<div class="legend">${cardLegend}</div><div class="plot"></div>`;
   const draw = () => drawBars(host.querySelector(".plot"), rows,
     {aria:`${code} early and mail ballots by cycle.`});
   draw(); host._draw = draw;
@@ -555,33 +582,7 @@ async function renderCharts(panels){
       // Hang the election-day figure on each row the bars can show it for. A year with
       // no turnout denominator keeps its early-only bar rather than being given a
       // guessed one.
-      let anyEday = false;
-      for (const r of rows){
-        // 2020 ran under pandemic rules - expanded mail, expanded early voting - so it
-        // is not a normal presidential baseline. Measured against 2024 the early share
-        // was only 4-5 points higher (Florida 82.4 -> 78.0, Texas 85.5 -> 80.4), so the
-        // distortion is real but small; the far bigger gap is midterm against
-        // presidential. Where 2024 exists it is the better comparison, and where it
-        // does not, 2020 is the only presidential figure there is and is labelled.
-        if (r.year === 2020){
-          r.note = "covid cycle";
-          r.tip = (r.tip ? r.tip + " — " : "") +
-            "pandemic rules: expanded mail and early voting";
-        }
-        const sh = shareFor(share, code, r.year);
-        if (!sh || sh.total <= r.total) continue;
-        r.totalVote = sh.total;
-        r.eday = sh.total - r.total;
-        r.basis = sh.kind;
-        anyEday = true;
-      }
-      if (anyEday){
-        // Not key(): election day is not its own colour, it is each cycle's colour at
-        // low opacity stacked on top, so the swatch has to say that rather than invent
-        // a fourth hue PAL does not have.
-        legend = LEGEND + `<span><i style="background:${PAL.mid};opacity:.26;
-          border:1px solid ${PAL.mid}"></i>election day (stacked on top)</span>`;
-      }
+      legend = (await addElectionDay(rows, code)).legend;
       lede = !now
         ? `No 2026 early-vote file is published yet, so this is the record of earlier
            cycles only.`

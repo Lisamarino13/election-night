@@ -268,7 +268,12 @@ def main(argv):
         if "--proof" in argv:
             return proof(b)
 
-        index = b.fetch(INDEX, ready=lambda h: "kssos_ent" in h or "allen.html" in h)
+        # Wait for the RESULTS page, not for a substring a half-rendered or challenge
+        # page can also carry. The run on 11-01 timed out on 1,715,321 bytes that
+        # contained neither the title nor a candidate list, while a clean fetch of the
+        # same URL was 568,816 bytes with both.
+        index = b.fetch(INDEX, ready=lambda h: "Unofficial Kansas Election Results" in h
+                                               and "allen.html" in h, timeout=90)
         slugs = county_slugs(index)
         state_page = parse(b.fetch(f"{BASE}/national.html"), "national")
         sw_page = parse(b.fetch(f"{BASE}/statewide.html"), "statewide")

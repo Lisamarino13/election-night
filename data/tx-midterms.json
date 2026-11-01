@@ -1,0 +1,3098 @@
+{
+ "checks": {
+  "2018": {
+   "D": 3545673,
+   "R": 4655344,
+   "certified_D": 3546615,
+   "certified_R": 4656196,
+   "counties": 254,
+   "delta_D": -942,
+   "delta_D_pct": 0.0266,
+   "delta_R": -852,
+   "delta_R_pct": 0.0183,
+   "exact": false,
+   "within_0.1pct": true
+  },
+  "2022": {
+   "D": 3554772,
+   "R": 4437097,
+   "certified_D": 3553656,
+   "certified_R": 4435558,
+   "counties": 254,
+   "delta_D": 1116,
+   "delta_D_pct": 0.0314,
+   "delta_R": 1539,
+   "delta_R_pct": 0.0347,
+   "exact": false,
+   "within_0.1pct": true
+  }
+ },
+ "source": "https://ted.capitol.texas.gov/api/Offices/{eid}/37/vtd",
+ "state": "TX",
+ "years": {
+  "2018": {
+   "D": 3545673,
+   "R": 4655344,
+   "counties": {
+    "48001": {
+     "D": 2868,
+     "R": 11732,
+     "margin": 60.712,
+     "name": "Anderson County"
+    },
+    "48003": {
+     "D": 687,
+     "R": 3400,
+     "margin": 66.381,
+     "name": "Andrews County"
+    },
+    "48005": {
+     "D": 6406,
+     "R": 19701,
+     "margin": 50.925,
+     "name": "Angelina County"
+    },
+    "48007": {
+     "D": 1797,
+     "R": 7075,
+     "margin": 59.491,
+     "name": "Aransas County"
+    },
+    "48009": {
+     "D": 323,
+     "R": 3259,
+     "margin": 81.965,
+     "name": "Archer County"
+    },
+    "48011": {
+     "D": 59,
+     "R": 822,
+     "margin": 86.606,
+     "name": "Armstrong County"
+    },
+    "48013": {
+     "D": 3655,
+     "R": 8361,
+     "margin": 39.164,
+     "name": "Atascosa County"
+    },
+    "48015": {
+     "D": 1897,
+     "R": 9009,
+     "margin": 65.212,
+     "name": "Austin County"
+    },
+    "48017": {
+     "D": 348,
+     "R": 1239,
+     "margin": 56.144,
+     "name": "Bailey County"
+    },
+    "48019": {
+     "D": 1600,
+     "R": 7866,
+     "margin": 66.195,
+     "name": "Bandera County"
+    },
+    "48021": {
+     "D": 10407,
+     "R": 16351,
+     "margin": 22.214,
+     "name": "Bastrop County"
+    },
+    "48023": {
+     "D": 129,
+     "R": 1092,
+     "margin": 78.87,
+     "name": "Baylor County"
+    },
+    "48025": {
+     "D": 2261,
+     "R": 4827,
+     "margin": 36.202,
+     "name": "Bee County"
+    },
+    "48027": {
+     "D": 33803,
+     "R": 51157,
+     "margin": 20.426,
+     "name": "Bell County"
+    },
+    "48029": {
+     "D": 285026,
+     "R": 250659,
+     "margin": -6.416,
+     "name": "Bexar County"
+    },
+    "48031": {
+     "D": 1349,
+     "R": 4327,
+     "margin": 52.467,
+     "name": "Blanco County"
+    },
+    "48033": {
+     "D": 17,
+     "R": 321,
+     "margin": 89.941,
+     "name": "Borden County"
+    },
+    "48035": {
+     "D": 1104,
+     "R": 5948,
+     "margin": 68.69,
+     "name": "Bosque County"
+    },
+    "48037": {
+     "D": 7336,
+     "R": 20625,
+     "margin": 47.527,
+     "name": "Bowie County"
+    },
+    "48039": {
+     "D": 39536,
+     "R": 70373,
+     "margin": 28.057,
+     "name": "Brazoria County"
+    },
+    "48041": {
+     "D": 23361,
+     "R": 39424,
+     "margin": 25.584,
+     "name": "Brazos County"
+    },
+    "48043": {
+     "D": 1933,
+     "R": 2033,
+     "margin": 2.521,
+     "name": "Brewster County"
+    },
+    "48045": {
+     "D": 58,
+     "R": 556,
+     "margin": 81.107,
+     "name": "Briscoe County"
+    },
+    "48047": {
+     "D": 1198,
+     "R": 658,
+     "margin": -29.095,
+     "name": "Brooks County"
+    },
+    "48049": {
+     "D": 1458,
+     "R": 10640,
+     "margin": 75.897,
+     "name": "Brown County"
+    },
+    "48051": {
+     "D": 1277,
+     "R": 5254,
+     "margin": 60.894,
+     "name": "Burleson County"
+    },
+    "48053": {
+     "D": 3712,
+     "R": 14497,
+     "margin": 59.229,
+     "name": "Burnet County"
+    },
+    "48055": {
+     "D": 4509,
+     "R": 6723,
+     "margin": 19.712,
+     "name": "Caldwell County"
+    },
+    "48057": {
+     "D": 1627,
+     "R": 4409,
+     "margin": 46.09,
+     "name": "Calhoun County"
+    },
+    "48059": {
+     "D": 486,
+     "R": 4475,
+     "margin": 80.407,
+     "name": "Callahan County"
+    },
+    "48061": {
+     "D": 41991,
+     "R": 34407,
+     "margin": -9.927,
+     "name": "Cameron County"
+    },
+    "48063": {
+     "D": 1028,
+     "R": 2816,
+     "margin": 46.514,
+     "name": "Camp County"
+    },
+    "48065": {
+     "D": 207,
+     "R": 2202,
+     "margin": 82.814,
+     "name": "Carson County"
+    },
+    "48067": {
+     "D": 1890,
+     "R": 8323,
+     "margin": 62.988,
+     "name": "Cass County"
+    },
+    "48069": {
+     "D": 371,
+     "R": 1226,
+     "margin": 53.538,
+     "name": "Castro County"
+    },
+    "48071": {
+     "D": 2460,
+     "R": 12505,
+     "margin": 67.123,
+     "name": "Chambers County"
+    },
+    "48073": {
+     "D": 2932,
+     "R": 11933,
+     "margin": 60.552,
+     "name": "Cherokee County"
+    },
+    "48075": {
+     "D": 204,
+     "R": 1545,
+     "margin": 76.672,
+     "name": "Childress County"
+    },
+    "48077": {
+     "D": 449,
+     "R": 3807,
+     "margin": 78.9,
+     "name": "Clay County"
+    },
+    "48079": {
+     "D": 122,
+     "R": 550,
+     "margin": 63.69,
+     "name": "Cochran County"
+    },
+    "48081": {
+     "D": 118,
+     "R": 1187,
+     "margin": 81.916,
+     "name": "Coke County"
+    },
+    "48083": {
+     "D": 328,
+     "R": 2774,
+     "margin": 78.852,
+     "name": "Coleman County"
+    },
+    "48085": {
+     "D": 139175,
+     "R": 208075,
+     "margin": 19.842,
+     "name": "Collin County"
+    },
+    "48087": {
+     "D": 101,
+     "R": 831,
+     "margin": 78.326,
+     "name": "Collingsworth County"
+    },
+    "48089": {
+     "D": 1558,
+     "R": 5992,
+     "margin": 58.728,
+     "name": "Colorado County"
+    },
+    "48091": {
+     "D": 14145,
+     "R": 46635,
+     "margin": 53.455,
+     "name": "Comal County"
+    },
+    "48093": {
+     "D": 657,
+     "R": 3907,
+     "margin": 71.209,
+     "name": "Comanche County"
+    },
+    "48095": {
+     "D": 145,
+     "R": 825,
+     "margin": 70.103,
+     "name": "Concho County"
+    },
+    "48097": {
+     "D": 2049,
+     "R": 12284,
+     "margin": 71.409,
+     "name": "Cooke County"
+    },
+    "48099": {
+     "D": 4392,
+     "R": 11281,
+     "margin": 43.955,
+     "name": "Coryell County"
+    },
+    "48101": {
+     "D": 88,
+     "R": 465,
+     "margin": 68.174,
+     "name": "Cottle County"
+    },
+    "48103": {
+     "D": 197,
+     "R": 842,
+     "margin": 62.079,
+     "name": "Crane County"
+    },
+    "48105": {
+     "D": 333,
+     "R": 921,
+     "margin": 46.89,
+     "name": "Crockett County"
+    },
+    "48107": {
+     "D": 392,
+     "R": 1005,
+     "margin": 43.88,
+     "name": "Crosby County"
+    },
+    "48109": {
+     "D": 422,
+     "R": 324,
+     "margin": -13.137,
+     "name": "Culberson County"
+    },
+    "48111": {
+     "D": 129,
+     "R": 985,
+     "margin": 76.84,
+     "name": "Dallam County"
+    },
+    "48113": {
+     "D": 425208,
+     "R": 283659,
+     "margin": -19.968,
+     "name": "Dallas County"
+    },
+    "48115": {
+     "D": 739,
+     "R": 2240,
+     "margin": 50.386,
+     "name": "Dawson County"
+    },
+    "48117": {
+     "D": 957,
+     "R": 2788,
+     "margin": 48.892,
+     "name": "Deaf Smith County"
+    },
+    "48119": {
+     "D": 301,
+     "R": 1606,
+     "margin": 68.432,
+     "name": "Delta County"
+    },
+    "48121": {
+     "D": 113808,
+     "R": 174472,
+     "margin": 21.043,
+     "name": "Denton County"
+    },
+    "48123": {
+     "D": 942,
+     "R": 5115,
+     "margin": 68.895,
+     "name": "DeWitt County"
+    },
+    "48125": {
+     "D": 96,
+     "R": 656,
+     "margin": 74.468,
+     "name": "Dickens County"
+    },
+    "48127": {
+     "D": 1787,
+     "R": 1041,
+     "margin": -26.379,
+     "name": "Dimmit County"
+    },
+    "48129": {
+     "D": 134,
+     "R": 1130,
+     "margin": 78.797,
+     "name": "Donley County"
+    },
+    "48131": {
+     "D": 2456,
+     "R": 1477,
+     "margin": -24.892,
+     "name": "Duval County"
+    },
+    "48133": {
+     "D": 708,
+     "R": 5434,
+     "margin": 76.946,
+     "name": "Eastland County"
+    },
+    "48135": {
+     "D": 8211,
+     "R": 21934,
+     "margin": 45.523,
+     "name": "Ector County"
+    },
+    "48137": {
+     "D": 100,
+     "R": 635,
+     "margin": 72.789,
+     "name": "Edwards County"
+    },
+    "48139": {
+     "D": 15879,
+     "R": 43647,
+     "margin": 46.649,
+     "name": "Ellis County"
+    },
+    "48141": {
+     "D": 134181,
+     "R": 62749,
+     "margin": -36.273,
+     "name": "El Paso County"
+    },
+    "48143": {
+     "D": 2073,
+     "R": 10356,
+     "margin": 66.643,
+     "name": "Erath County"
+    },
+    "48145": {
+     "D": 1286,
+     "R": 3344,
+     "margin": 44.449,
+     "name": "Falls County"
+    },
+    "48147": {
+     "D": 1767,
+     "R": 8856,
+     "margin": 66.733,
+     "name": "Fannin County"
+    },
+    "48149": {
+     "D": 1777,
+     "R": 8575,
+     "margin": 65.668,
+     "name": "Fayette County"
+    },
+    "48151": {
+     "D": 310,
+     "R": 1161,
+     "margin": 57.852,
+     "name": "Fisher County"
+    },
+    "48153": {
+     "D": 412,
+     "R": 1448,
+     "margin": 55.699,
+     "name": "Floyd County"
+    },
+    "48155": {
+     "D": 101,
+     "R": 331,
+     "margin": 53.241,
+     "name": "Foard County"
+    },
+    "48157": {
+     "D": 125374,
+     "R": 125867,
+     "margin": 0.196,
+     "name": "Fort Bend County"
+    },
+    "48159": {
+     "D": 537,
+     "R": 3359,
+     "margin": 72.433,
+     "name": "Franklin County"
+    },
+    "48161": {
+     "D": 1143,
+     "R": 5336,
+     "margin": 64.717,
+     "name": "Freestone County"
+    },
+    "48163": {
+     "D": 1739,
+     "R": 1844,
+     "margin": 2.931,
+     "name": "Frio County"
+    },
+    "48165": {
+     "D": 475,
+     "R": 3305,
+     "margin": 74.868,
+     "name": "Gaines County"
+    },
+    "48167": {
+     "D": 39314,
+     "R": 72104,
+     "margin": 29.43,
+     "name": "Galveston County"
+    },
+    "48169": {
+     "D": 186,
+     "R": 1078,
+     "margin": 70.57,
+     "name": "Garza County"
+    },
+    "48171": {
+     "D": 2030,
+     "R": 10351,
+     "margin": 67.208,
+     "name": "Gillespie County"
+    },
+    "48173": {
+     "D": 36,
+     "R": 515,
+     "margin": 86.933,
+     "name": "Glasscock County"
+    },
+    "48175": {
+     "D": 617,
+     "R": 2397,
+     "margin": 59.058,
+     "name": "Goliad County"
+    },
+    "48177": {
+     "D": 1170,
+     "R": 4394,
+     "margin": 57.944,
+     "name": "Gonzales County"
+    },
+    "48179": {
+     "D": 551,
+     "R": 5330,
+     "margin": 81.262,
+     "name": "Gray County"
+    },
+    "48181": {
+     "D": 9857,
+     "R": 32562,
+     "margin": 53.526,
+     "name": "Grayson County"
+    },
+    "48183": {
+     "D": 10015,
+     "R": 25558,
+     "margin": 43.693,
+     "name": "Gregg County"
+    },
+    "48185": {
+     "D": 1855,
+     "R": 6674,
+     "margin": 56.501,
+     "name": "Grimes County"
+    },
+    "48187": {
+     "D": 17265,
+     "R": 36284,
+     "margin": 35.517,
+     "name": "Guadalupe County"
+    },
+    "48189": {
+     "D": 1727,
+     "R": 5532,
+     "margin": 52.418,
+     "name": "Hale County"
+    },
+    "48191": {
+     "D": 142,
+     "R": 815,
+     "margin": 70.324,
+     "name": "Hall County"
+    },
+    "48193": {
+     "D": 405,
+     "R": 2903,
+     "margin": 75.514,
+     "name": "Hamilton County"
+    },
+    "48195": {
+     "D": 118,
+     "R": 1548,
+     "margin": 85.834,
+     "name": "Hansford County"
+    },
+    "48197": {
+     "D": 154,
+     "R": 997,
+     "margin": 73.241,
+     "name": "Hardeman County"
+    },
+    "48199": {
+     "D": 2327,
+     "R": 17528,
+     "margin": 76.56,
+     "name": "Hardin County"
+    },
+    "48201": {
+     "D": 628804,
+     "R": 559819,
+     "margin": -5.804,
+     "name": "Harris County"
+    },
+    "48203": {
+     "D": 5562,
+     "R": 16747,
+     "margin": 50.137,
+     "name": "Harrison County"
+    },
+    "48205": {
+     "D": 124,
+     "R": 1474,
+     "margin": 84.481,
+     "name": "Hartley County"
+    },
+    "48207": {
+     "D": 267,
+     "R": 1385,
+     "margin": 67.676,
+     "name": "Haskell County"
+    },
+    "48209": {
+     "D": 39243,
+     "R": 37652,
+     "margin": -2.069,
+     "name": "Hays County"
+    },
+    "48211": {
+     "D": 152,
+     "R": 1199,
+     "margin": 77.498,
+     "name": "Hemphill County"
+    },
+    "48213": {
+     "D": 4622,
+     "R": 21775,
+     "margin": 64.981,
+     "name": "Henderson County"
+    },
+    "48215": {
+     "D": 93935,
+     "R": 55421,
+     "margin": -25.787,
+     "name": "Hidalgo County"
+    },
+    "48217": {
+     "D": 2052,
+     "R": 9262,
+     "margin": 63.726,
+     "name": "Hill County"
+    },
+    "48219": {
+     "D": 1028,
+     "R": 4949,
+     "margin": 65.601,
+     "name": "Hockley County"
+    },
+    "48221": {
+     "D": 3765,
+     "R": 20865,
+     "margin": 69.428,
+     "name": "Hood County"
+    },
+    "48223": {
+     "D": 2218,
+     "R": 9533,
+     "margin": 62.25,
+     "name": "Hopkins County"
+    },
+    "48225": {
+     "D": 1641,
+     "R": 5659,
+     "margin": 55.041,
+     "name": "Houston County"
+    },
+    "48227": {
+     "D": 1542,
+     "R": 5737,
+     "margin": 57.632,
+     "name": "Howard County"
+    },
+    "48229": {
+     "D": 332,
+     "R": 535,
+     "margin": 23.414,
+     "name": "Hudspeth County"
+    },
+    "48231": {
+     "D": 5946,
+     "R": 22078,
+     "margin": 57.565,
+     "name": "Hunt County"
+    },
+    "48233": {
+     "D": 687,
+     "R": 5874,
+     "margin": 79.058,
+     "name": "Hutchinson County"
+    },
+    "48235": {
+     "D": 87,
+     "R": 641,
+     "margin": 76.099,
+     "name": "Irion County"
+    },
+    "48237": {
+     "D": 246,
+     "R": 2539,
+     "margin": 82.334,
+     "name": "Jack County"
+    },
+    "48239": {
+     "D": 715,
+     "R": 4016,
+     "margin": 69.774,
+     "name": "Jackson County"
+    },
+    "48241": {
+     "D": 1990,
+     "R": 9732,
+     "margin": 66.047,
+     "name": "Jasper County"
+    },
+    "48243": {
+     "D": 407,
+     "R": 719,
+     "margin": 27.709,
+     "name": "Jeff Davis County"
+    },
+    "48245": {
+     "D": 34438,
+     "R": 38916,
+     "margin": 6.105,
+     "name": "Jefferson County"
+    },
+    "48247": {
+     "D": 938,
+     "R": 508,
+     "margin": -29.737,
+     "name": "Jim Hogg County"
+    },
+    "48249": {
+     "D": 4616,
+     "R": 5088,
+     "margin": 4.864,
+     "name": "Jim Wells County"
+    },
+    "48251": {
+     "D": 10105,
+     "R": 41485,
+     "margin": 60.826,
+     "name": "Johnson County"
+    },
+    "48253": {
+     "D": 757,
+     "R": 4167,
+     "margin": 69.253,
+     "name": "Jones County"
+    },
+    "48255": {
+     "D": 1054,
+     "R": 3023,
+     "margin": 48.295,
+     "name": "Karnes County"
+    },
+    "48257": {
+     "D": 10294,
+     "R": 27491,
+     "margin": 45.513,
+     "name": "Kaufman County"
+    },
+    "48259": {
+     "D": 3382,
+     "R": 16076,
+     "margin": 65.238,
+     "name": "Kendall County"
+    },
+    "48261": {
+     "D": 57,
+     "R": 111,
+     "margin": 32.143,
+     "name": "Kenedy County"
+    },
+    "48263": {
+     "D": 34,
+     "R": 299,
+     "margin": 79.58,
+     "name": "Kent County"
+    },
+    "48265": {
+     "D": 4268,
+     "R": 17566,
+     "margin": 60.905,
+     "name": "Kerr County"
+    },
+    "48267": {
+     "D": 161,
+     "R": 1529,
+     "margin": 80.947,
+     "name": "Kimble County"
+    },
+    "48269": {
+     "D": 6,
+     "R": 120,
+     "margin": 90.476,
+     "name": "King County"
+    },
+    "48271": {
+     "D": 290,
+     "R": 890,
+     "margin": 50.847,
+     "name": "Kinney County"
+    },
+    "48273": {
+     "D": 3629,
+     "R": 4831,
+     "margin": 14.208,
+     "name": "Kleberg County"
+    },
+    "48275": {
+     "D": 217,
+     "R": 866,
+     "margin": 59.926,
+     "name": "Knox County"
+    },
+    "48277": {
+     "D": 3216,
+     "R": 13079,
+     "margin": 60.528,
+     "name": "Lamar County"
+    },
+    "48279": {
+     "D": 629,
+     "R": 2785,
+     "margin": 63.152,
+     "name": "Lamb County"
+    },
+    "48281": {
+     "D": 1343,
+     "R": 6073,
+     "margin": 63.781,
+     "name": "Lampasas County"
+    },
+    "48283": {
+     "D": 725,
+     "R": 728,
+     "margin": 0.206,
+     "name": "La Salle County"
+    },
+    "48285": {
+     "D": 830,
+     "R": 6856,
+     "margin": 78.402,
+     "name": "Lavaca County"
+    },
+    "48287": {
+     "D": 1129,
+     "R": 4650,
+     "margin": 60.927,
+     "name": "Lee County"
+    },
+    "48289": {
+     "D": 751,
+     "R": 5781,
+     "margin": 77.006,
+     "name": "Leon County"
+    },
+    "48291": {
+     "D": 3816,
+     "R": 16527,
+     "margin": 62.483,
+     "name": "Liberty County"
+    },
+    "48293": {
+     "D": 1535,
+     "R": 5330,
+     "margin": 55.28,
+     "name": "Limestone County"
+    },
+    "48295": {
+     "D": 109,
+     "R": 947,
+     "margin": 79.356,
+     "name": "Lipscomb County"
+    },
+    "48297": {
+     "D": 505,
+     "R": 3117,
+     "margin": 72.115,
+     "name": "Live Oak County"
+    },
+    "48299": {
+     "D": 1751,
+     "R": 8287,
+     "margin": 65.113,
+     "name": "Llano County"
+    },
+    "48301": {
+     "D": 9,
+     "R": 46,
+     "margin": 67.273,
+     "name": "Loving County"
+    },
+    "48303": {
+     "D": 27266,
+     "R": 61775,
+     "margin": 38.756,
+     "name": "Lubbock County"
+    },
+    "48305": {
+     "D": 302,
+     "R": 1380,
+     "margin": 64.09,
+     "name": "Lynn County"
+    },
+    "48307": {
+     "D": 368,
+     "R": 2274,
+     "margin": 72.142,
+     "name": "McCulloch County"
+    },
+    "48309": {
+     "D": 24734,
+     "R": 49195,
+     "margin": 33.087,
+     "name": "McLennan County"
+    },
+    "48311": {
+     "D": 33,
+     "R": 395,
+     "margin": 84.579,
+     "name": "McMullen County"
+    },
+    "48313": {
+     "D": 722,
+     "R": 3081,
+     "margin": 62.03,
+     "name": "Madison County"
+    },
+    "48315": {
+     "D": 939,
+     "R": 2553,
+     "margin": 46.22,
+     "name": "Marion County"
+    },
+    "48317": {
+     "D": 229,
+     "R": 1303,
+     "margin": 70.104,
+     "name": "Martin County"
+    },
+    "48319": {
+     "D": 333,
+     "R": 1605,
+     "margin": 65.635,
+     "name": "Mason County"
+    },
+    "48321": {
+     "D": 2667,
+     "R": 7698,
+     "margin": 48.538,
+     "name": "Matagorda County"
+    },
+    "48323": {
+     "D": 6940,
+     "R": 3495,
+     "margin": -33.014,
+     "name": "Maverick County"
+    },
+    "48325": {
+     "D": 3964,
+     "R": 12057,
+     "margin": 50.515,
+     "name": "Medina County"
+    },
+    "48327": {
+     "D": 130,
+     "R": 646,
+     "margin": 66.495,
+     "name": "Menard County"
+    },
+    "48329": {
+     "D": 8101,
+     "R": 34049,
+     "margin": 61.561,
+     "name": "Midland County"
+    },
+    "48331": {
+     "D": 1795,
+     "R": 6080,
+     "margin": 54.413,
+     "name": "Milam County"
+    },
+    "48333": {
+     "D": 206,
+     "R": 1790,
+     "margin": 79.359,
+     "name": "Mills County"
+    },
+    "48335": {
+     "D": 298,
+     "R": 1595,
+     "margin": 68.516,
+     "name": "Mitchell County"
+    },
+    "48337": {
+     "D": 765,
+     "R": 6563,
+     "margin": 79.121,
+     "name": "Montague County"
+    },
+    "48339": {
+     "D": 43044,
+     "R": 144664,
+     "margin": 54.137,
+     "name": "Montgomery County"
+    },
+    "48341": {
+     "D": 750,
+     "R": 3268,
+     "margin": 62.668,
+     "name": "Moore County"
+    },
+    "48343": {
+     "D": 1157,
+     "R": 3016,
+     "margin": 44.548,
+     "name": "Morris County"
+    },
+    "48345": {
+     "D": 35,
+     "R": 489,
+     "margin": 86.641,
+     "name": "Motley County"
+    },
+    "48347": {
+     "D": 6843,
+     "R": 14411,
+     "margin": 35.607,
+     "name": "Nacogdoches County"
+    },
+    "48349": {
+     "D": 3411,
+     "R": 10818,
+     "margin": 52.056,
+     "name": "Navarro County"
+    },
+    "48351": {
+     "D": 870,
+     "R": 3771,
+     "margin": 62.508,
+     "name": "Newton County"
+    },
+    "48353": {
+     "D": 806,
+     "R": 3196,
+     "margin": 59.72,
+     "name": "Nolan County"
+    },
+    "48355": {
+     "D": 39720,
+     "R": 52918,
+     "margin": 14.247,
+     "name": "Nueces County"
+    },
+    "48357": {
+     "D": 212,
+     "R": 2167,
+     "margin": 82.177,
+     "name": "Ochiltree County"
+    },
+    "48359": {
+     "D": 62,
+     "R": 742,
+     "margin": 84.577,
+     "name": "Oldham County"
+    },
+    "48361": {
+     "D": 4348,
+     "R": 21724,
+     "margin": 66.646,
+     "name": "Orange County"
+    },
+    "48363": {
+     "D": 1529,
+     "R": 7811,
+     "margin": 67.259,
+     "name": "Palo Pinto County"
+    },
+    "48365": {
+     "D": 1494,
+     "R": 7182,
+     "margin": 65.56,
+     "name": "Panola County"
+    },
+    "48367": {
+     "D": 8099,
+     "R": 45981,
+     "margin": 70.048,
+     "name": "Parker County"
+    },
+    "48369": {
+     "D": 352,
+     "R": 1680,
+     "margin": 65.354,
+     "name": "Parmer County"
+    },
+    "48371": {
+     "D": 1167,
+     "R": 2299,
+     "margin": 32.66,
+     "name": "Pecos County"
+    },
+    "48373": {
+     "D": 3378,
+     "R": 13130,
+     "margin": 59.074,
+     "name": "Polk County"
+    },
+    "48375": {
+     "D": 6674,
+     "R": 17299,
+     "margin": 44.321,
+     "name": "Potter County"
+    },
+    "48377": {
+     "D": 1149,
+     "R": 465,
+     "margin": -42.379,
+     "name": "Presidio County"
+    },
+    "48379": {
+     "D": 566,
+     "R": 3810,
+     "margin": 74.132,
+     "name": "Rains County"
+    },
+    "48381": {
+     "D": 8065,
+     "R": 39586,
+     "margin": 66.15,
+     "name": "Randall County"
+    },
+    "48383": {
+     "D": 127,
+     "R": 697,
+     "margin": 69.175,
+     "name": "Reagan County"
+    },
+    "48385": {
+     "D": 213,
+     "R": 1341,
+     "margin": 72.587,
+     "name": "Real County"
+    },
+    "48387": {
+     "D": 904,
+     "R": 3476,
+     "margin": 58.721,
+     "name": "Red River County"
+    },
+    "48389": {
+     "D": 1123,
+     "R": 1204,
+     "margin": 3.481,
+     "name": "Reeves County"
+    },
+    "48391": {
+     "D": 751,
+     "R": 1726,
+     "margin": 39.362,
+     "name": "Refugio County"
+    },
+    "48393": {
+     "D": 16,
+     "R": 448,
+     "margin": 93.103,
+     "name": "Roberts County"
+    },
+    "48395": {
+     "D": 1753,
+     "R": 4445,
+     "margin": 43.433,
+     "name": "Robertson County"
+    },
+    "48397": {
+     "D": 9393,
+     "R": 28556,
+     "margin": 50.497,
+     "name": "Rockwall County"
+    },
+    "48399": {
+     "D": 345,
+     "R": 2885,
+     "margin": 78.638,
+     "name": "Runnels County"
+    },
+    "48401": {
+     "D": 3233,
+     "R": 12862,
+     "margin": 59.826,
+     "name": "Rusk County"
+    },
+    "48403": {
+     "D": 458,
+     "R": 3477,
+     "margin": 76.722,
+     "name": "Sabine County"
+    },
+    "48405": {
+     "D": 684,
+     "R": 2296,
+     "margin": 54.094,
+     "name": "San Augustine County"
+    },
+    "48407": {
+     "D": 1529,
+     "R": 7722,
+     "margin": 66.944,
+     "name": "San Jacinto County"
+    },
+    "48409": {
+     "D": 5842,
+     "R": 12173,
+     "margin": 35.143,
+     "name": "San Patricio County"
+    },
+    "48411": {
+     "D": 211,
+     "R": 1835,
+     "margin": 79.374,
+     "name": "San Saba County"
+    },
+    "48413": {
+     "D": 187,
+     "R": 758,
+     "margin": 60.423,
+     "name": "Schleicher County"
+    },
+    "48415": {
+     "D": 577,
+     "R": 3750,
+     "margin": 73.33,
+     "name": "Scurry County"
+    },
+    "48417": {
+     "D": 87,
+     "R": 1190,
+     "margin": 86.374,
+     "name": "Shackelford County"
+    },
+    "48419": {
+     "D": 1366,
+     "R": 6132,
+     "margin": 63.564,
+     "name": "Shelby County"
+    },
+    "48421": {
+     "D": 74,
+     "R": 701,
+     "margin": 80.903,
+     "name": "Sherman County"
+    },
+    "48423": {
+     "D": 20623,
+     "R": 55708,
+     "margin": 45.964,
+     "name": "Smith County"
+    },
+    "48425": {
+     "D": 499,
+     "R": 3142,
+     "margin": 72.59,
+     "name": "Somervell County"
+    },
+    "48427": {
+     "D": 6941,
+     "R": 3210,
+     "margin": -36.755,
+     "name": "Starr County"
+    },
+    "48429": {
+     "D": 291,
+     "R": 2649,
+     "margin": 80.204,
+     "name": "Stephens County"
+    },
+    "48431": {
+     "D": 39,
+     "R": 445,
+     "margin": 83.884,
+     "name": "Sterling County"
+    },
+    "48433": {
+     "D": 96,
+     "R": 503,
+     "margin": 67.947,
+     "name": "Stonewall County"
+    },
+    "48435": {
+     "D": 248,
+     "R": 939,
+     "margin": 58.214,
+     "name": "Sutton County"
+    },
+    "48437": {
+     "D": 368,
+     "R": 1491,
+     "margin": 60.409,
+     "name": "Swisher County"
+    },
+    "48439": {
+     "D": 273814,
+     "R": 340404,
+     "margin": 10.841,
+     "name": "Tarrant County"
+    },
+    "48441": {
+     "D": 8880,
+     "R": 31152,
+     "margin": 55.635,
+     "name": "Taylor County"
+    },
+    "48443": {
+     "D": 136,
+     "R": 316,
+     "margin": 39.823,
+     "name": "Terrell County"
+    },
+    "48445": {
+     "D": 552,
+     "R": 2221,
+     "margin": 60.188,
+     "name": "Terry County"
+    },
+    "48447": {
+     "D": 63,
+     "R": 625,
+     "margin": 81.686,
+     "name": "Throckmorton County"
+    },
+    "48449": {
+     "D": 2017,
+     "R": 5861,
+     "margin": 48.794,
+     "name": "Titus County"
+    },
+    "48451": {
+     "D": 8373,
+     "R": 25792,
+     "margin": 50.985,
+     "name": "Tom Green County"
+    },
+    "48453": {
+     "D": 320550,
+     "R": 145910,
+     "margin": -37.439,
+     "name": "Travis County"
+    },
+    "48455": {
+     "D": 835,
+     "R": 4293,
+     "margin": 67.434,
+     "name": "Trinity County"
+    },
+    "48457": {
+     "D": 974,
+     "R": 6081,
+     "margin": 72.388,
+     "name": "Tyler County"
+    },
+    "48459": {
+     "D": 2177,
+     "R": 11638,
+     "margin": 68.484,
+     "name": "Upshur County"
+    },
+    "48461": {
+     "D": 148,
+     "R": 860,
+     "margin": 70.635,
+     "name": "Upton County"
+    },
+    "48463": {
+     "D": 3070,
+     "R": 4755,
+     "margin": 21.534,
+     "name": "Uvalde County"
+    },
+    "48465": {
+     "D": 5241,
+     "R": 5993,
+     "margin": 6.694,
+     "name": "Val Verde County"
+    },
+    "48467": {
+     "D": 2150,
+     "R": 15609,
+     "margin": 75.787,
+     "name": "Van Zandt County"
+    },
+    "48469": {
+     "D": 7245,
+     "R": 19599,
+     "margin": 46.021,
+     "name": "Victoria County"
+    },
+    "48471": {
+     "D": 5331,
+     "R": 12199,
+     "margin": 39.179,
+     "name": "Walker County"
+    },
+    "48473": {
+     "D": 5791,
+     "R": 10639,
+     "margin": 29.507,
+     "name": "Waller County"
+    },
+    "48475": {
+     "D": 690,
+     "R": 2201,
+     "margin": 52.266,
+     "name": "Ward County"
+    },
+    "48477": {
+     "D": 2730,
+     "R": 10532,
+     "margin": 58.83,
+     "name": "Washington County"
+    },
+    "48479": {
+     "D": 32055,
+     "R": 16287,
+     "margin": -32.618,
+     "name": "Webb County"
+    },
+    "48481": {
+     "D": 3332,
+     "R": 9472,
+     "margin": 47.954,
+     "name": "Wharton County"
+    },
+    "48483": {
+     "D": 126,
+     "R": 1682,
+     "margin": 86.062,
+     "name": "Wheeler County"
+    },
+    "48485": {
+     "D": 8614,
+     "R": 24817,
+     "margin": 48.467,
+     "name": "Wichita County"
+    },
+    "48487": {
+     "D": 685,
+     "R": 2722,
+     "margin": 59.789,
+     "name": "Wilbarger County"
+    },
+    "48489": {
+     "D": 2257,
+     "R": 1931,
+     "margin": -7.784,
+     "name": "Willacy County"
+    },
+    "48491": {
+     "D": 90002,
+     "R": 112214,
+     "margin": 10.984,
+     "name": "Williamson County"
+    },
+    "48493": {
+     "D": 3800,
+     "R": 13704,
+     "margin": 56.581,
+     "name": "Wilson County"
+    },
+    "48495": {
+     "D": 284,
+     "R": 1150,
+     "margin": 60.391,
+     "name": "Winkler County"
+    },
+    "48497": {
+     "D": 3184,
+     "R": 19633,
+     "margin": 72.091,
+     "name": "Wise County"
+    },
+    "48499": {
+     "D": 2324,
+     "R": 14406,
+     "margin": 72.218,
+     "name": "Wood County"
+    },
+    "48501": {
+     "D": 303,
+     "R": 1558,
+     "margin": 67.437,
+     "name": "Yoakum County"
+    },
+    "48503": {
+     "D": 726,
+     "R": 5579,
+     "margin": 76.971,
+     "name": "Young County"
+    },
+    "48505": {
+     "D": 1292,
+     "R": 861,
+     "margin": -20.019,
+     "name": "Zapata County"
+    },
+    "48507": {
+     "D": 2082,
+     "R": 748,
+     "margin": -47.138,
+     "name": "Zavala County"
+    }
+   },
+   "margin": 13.531,
+   "race": "Governor Abbott/Valdez"
+  },
+  "2022": {
+   "D": 3554772,
+   "R": 4437097,
+   "counties": {
+    "48001": {
+     "D": 2545,
+     "R": 11762,
+     "margin": 64.423,
+     "name": "Anderson County"
+    },
+    "48003": {
+     "D": 479,
+     "R": 3302,
+     "margin": 74.663,
+     "name": "Andrews County"
+    },
+    "48005": {
+     "D": 5174,
+     "R": 19142,
+     "margin": 57.444,
+     "name": "Angelina County"
+    },
+    "48007": {
+     "D": 1924,
+     "R": 7581,
+     "margin": 59.516,
+     "name": "Aransas County"
+    },
+    "48009": {
+     "D": 315,
+     "R": 3498,
+     "margin": 83.478,
+     "name": "Archer County"
+    },
+    "48011": {
+     "D": 60,
+     "R": 831,
+     "margin": 86.532,
+     "name": "Armstrong County"
+    },
+    "48013": {
+     "D": 3708,
+     "R": 8801,
+     "margin": 40.715,
+     "name": "Atascosa County"
+    },
+    "48015": {
+     "D": 1873,
+     "R": 9209,
+     "margin": 66.197,
+     "name": "Austin County"
+    },
+    "48017": {
+     "D": 213,
+     "R": 1105,
+     "margin": 67.678,
+     "name": "Bailey County"
+    },
+    "48019": {
+     "D": 1816,
+     "R": 8527,
+     "margin": 64.884,
+     "name": "Bandera County"
+    },
+    "48021": {
+     "D": 12007,
+     "R": 16707,
+     "margin": 16.368,
+     "name": "Bastrop County"
+    },
+    "48023": {
+     "D": 105,
+     "R": 1183,
+     "margin": 83.696,
+     "name": "Baylor County"
+    },
+    "48025": {
+     "D": 1976,
+     "R": 4347,
+     "margin": 37.498,
+     "name": "Bee County"
+    },
+    "48027": {
+     "D": 34785,
+     "R": 51888,
+     "margin": 19.733,
+     "name": "Bell County"
+    },
+    "48029": {
+     "D": 311023,
+     "R": 221993,
+     "margin": -16.703,
+     "name": "Bexar County"
+    },
+    "48031": {
+     "D": 1522,
+     "R": 5142,
+     "margin": 54.322,
+     "name": "Blanco County"
+    },
+    "48033": {
+     "D": 9,
+     "R": 306,
+     "margin": 94.286,
+     "name": "Borden County"
+    },
+    "48035": {
+     "D": 1094,
+     "R": 6272,
+     "margin": 70.296,
+     "name": "Bosque County"
+    },
+    "48037": {
+     "D": 6060,
+     "R": 20206,
+     "margin": 53.857,
+     "name": "Bowie County"
+    },
+    "48039": {
+     "D": 43364,
+     "R": 64938,
+     "margin": 19.92,
+     "name": "Brazoria County"
+    },
+    "48041": {
+     "D": 23103,
+     "R": 35768,
+     "margin": 21.513,
+     "name": "Brazos County"
+    },
+    "48043": {
+     "D": 1678,
+     "R": 2014,
+     "margin": 9.101,
+     "name": "Brewster County"
+    },
+    "48045": {
+     "D": 49,
+     "R": 539,
+     "margin": 83.333,
+     "name": "Briscoe County"
+    },
+    "48047": {
+     "D": 1204,
+     "R": 785,
+     "margin": -21.066,
+     "name": "Brooks County"
+    },
+    "48049": {
+     "D": 1308,
+     "R": 10853,
+     "margin": 78.489,
+     "name": "Brown County"
+    },
+    "48051": {
+     "D": 1142,
+     "R": 5506,
+     "margin": 65.644,
+     "name": "Burleson County"
+    },
+    "48053": {
+     "D": 4337,
+     "R": 16505,
+     "margin": 58.382,
+     "name": "Burnet County"
+    },
+    "48055": {
+     "D": 4790,
+     "R": 6351,
+     "margin": 14.011,
+     "name": "Caldwell County"
+    },
+    "48057": {
+     "D": 1292,
+     "R": 4228,
+     "margin": 53.188,
+     "name": "Calhoun County"
+    },
+    "48059": {
+     "D": 444,
+     "R": 4770,
+     "margin": 82.969,
+     "name": "Callahan County"
+    },
+    "48061": {
+     "D": 41667,
+     "R": 34290,
+     "margin": -9.712,
+     "name": "Cameron County"
+    },
+    "48063": {
+     "D": 863,
+     "R": 3082,
+     "margin": 56.248,
+     "name": "Camp County"
+    },
+    "48065": {
+     "D": 183,
+     "R": 2177,
+     "margin": 84.492,
+     "name": "Carson County"
+    },
+    "48067": {
+     "D": 1460,
+     "R": 8415,
+     "margin": 70.43,
+     "name": "Cass County"
+    },
+    "48069": {
+     "D": 239,
+     "R": 1226,
+     "margin": 67.372,
+     "name": "Castro County"
+    },
+    "48071": {
+     "D": 2549,
+     "R": 12948,
+     "margin": 67.103,
+     "name": "Chambers County"
+    },
+    "48073": {
+     "D": 2319,
+     "R": 12020,
+     "margin": 67.655,
+     "name": "Cherokee County"
+    },
+    "48075": {
+     "D": 162,
+     "R": 1562,
+     "margin": 81.206,
+     "name": "Childress County"
+    },
+    "48077": {
+     "D": 393,
+     "R": 4052,
+     "margin": 82.317,
+     "name": "Clay County"
+    },
+    "48079": {
+     "D": 95,
+     "R": 506,
+     "margin": 68.386,
+     "name": "Cochran County"
+    },
+    "48081": {
+     "D": 114,
+     "R": 1260,
+     "margin": 83.406,
+     "name": "Coke County"
+    },
+    "48083": {
+     "D": 269,
+     "R": 2942,
+     "margin": 83.245,
+     "name": "Coleman County"
+    },
+    "48085": {
+     "D": 161737,
+     "R": 198236,
+     "margin": 10.139,
+     "name": "Collin County"
+    },
+    "48087": {
+     "D": 75,
+     "R": 845,
+     "margin": 83.696,
+     "name": "Collingsworth County"
+    },
+    "48089": {
+     "D": 1395,
+     "R": 6084,
+     "margin": 62.696,
+     "name": "Colorado County"
+    },
+    "48091": {
+     "D": 19195,
+     "R": 54503,
+     "margin": 47.909,
+     "name": "Comal County"
+    },
+    "48093": {
+     "D": 567,
+     "R": 4203,
+     "margin": 76.226,
+     "name": "Comanche County"
+    },
+    "48095": {
+     "D": 109,
+     "R": 818,
+     "margin": 76.483,
+     "name": "Concho County"
+    },
+    "48097": {
+     "D": 2308,
+     "R": 12815,
+     "margin": 69.477,
+     "name": "Cooke County"
+    },
+    "48099": {
+     "D": 4450,
+     "R": 11652,
+     "margin": 44.727,
+     "name": "Coryell County"
+    },
+    "48101": {
+     "D": 54,
+     "R": 453,
+     "margin": 78.698,
+     "name": "Cottle County"
+    },
+    "48103": {
+     "D": 150,
+     "R": 983,
+     "margin": 73.522,
+     "name": "Crane County"
+    },
+    "48105": {
+     "D": 276,
+     "R": 964,
+     "margin": 55.484,
+     "name": "Crockett County"
+    },
+    "48107": {
+     "D": 255,
+     "R": 990,
+     "margin": 59.036,
+     "name": "Crosby County"
+    },
+    "48109": {
+     "D": 328,
+     "R": 391,
+     "margin": 8.762,
+     "name": "Culberson County"
+    },
+    "48111": {
+     "D": 78,
+     "R": 958,
+     "margin": 84.942,
+     "name": "Dallam County"
+    },
+    "48113": {
+     "D": 392634,
+     "R": 224684,
+     "margin": -27.206,
+     "name": "Dallas County"
+    },
+    "48115": {
+     "D": 402,
+     "R": 2088,
+     "margin": 67.711,
+     "name": "Dawson County"
+    },
+    "48117": {
+     "D": 635,
+     "R": 2281,
+     "margin": 56.447,
+     "name": "Deaf Smith County"
+    },
+    "48119": {
+     "D": 295,
+     "R": 1711,
+     "margin": 70.588,
+     "name": "Delta County"
+    },
+    "48121": {
+     "D": 136388,
+     "R": 177015,
+     "margin": 12.963,
+     "name": "Denton County"
+    },
+    "48123": {
+     "D": 878,
+     "R": 5151,
+     "margin": 70.874,
+     "name": "DeWitt County"
+    },
+    "48125": {
+     "D": 98,
+     "R": 684,
+     "margin": 74.936,
+     "name": "Dickens County"
+    },
+    "48127": {
+     "D": 1757,
+     "R": 1080,
+     "margin": -23.863,
+     "name": "Dimmit County"
+    },
+    "48129": {
+     "D": 97,
+     "R": 1084,
+     "margin": 83.573,
+     "name": "Donley County"
+    },
+    "48131": {
+     "D": 2018,
+     "R": 1600,
+     "margin": -11.553,
+     "name": "Duval County"
+    },
+    "48133": {
+     "D": 634,
+     "R": 5468,
+     "margin": 79.22,
+     "name": "Eastland County"
+    },
+    "48135": {
+     "D": 5950,
+     "R": 19212,
+     "margin": 52.706,
+     "name": "Ector County"
+    },
+    "48137": {
+     "D": 99,
+     "R": 712,
+     "margin": 75.586,
+     "name": "Edwards County"
+    },
+    "48139": {
+     "D": 21338,
+     "R": 45564,
+     "margin": 36.211,
+     "name": "Ellis County"
+    },
+    "48141": {
+     "D": 105156,
+     "R": 57573,
+     "margin": -29.241,
+     "name": "El Paso County"
+    },
+    "48143": {
+     "D": 1976,
+     "R": 10956,
+     "margin": 69.44,
+     "name": "Erath County"
+    },
+    "48145": {
+     "D": 1168,
+     "R": 3480,
+     "margin": 49.742,
+     "name": "Falls County"
+    },
+    "48147": {
+     "D": 1820,
+     "R": 9667,
+     "margin": 68.312,
+     "name": "Fannin County"
+    },
+    "48149": {
+     "D": 1748,
+     "R": 8649,
+     "margin": 66.375,
+     "name": "Fayette County"
+    },
+    "48151": {
+     "D": 210,
+     "R": 1172,
+     "margin": 69.609,
+     "name": "Fisher County"
+    },
+    "48153": {
+     "D": 201,
+     "R": 1250,
+     "margin": 72.295,
+     "name": "Floyd County"
+    },
+    "48155": {
+     "D": 69,
+     "R": 452,
+     "margin": 73.512,
+     "name": "Foard County"
+    },
+    "48157": {
+     "D": 129116,
+     "R": 117249,
+     "margin": -4.817,
+     "name": "Fort Bend County"
+    },
+    "48159": {
+     "D": 512,
+     "R": 3369,
+     "margin": 73.615,
+     "name": "Franklin County"
+    },
+    "48161": {
+     "D": 991,
+     "R": 5600,
+     "margin": 69.929,
+     "name": "Freestone County"
+    },
+    "48163": {
+     "D": 1791,
+     "R": 1872,
+     "margin": 2.211,
+     "name": "Frio County"
+    },
+    "48165": {
+     "D": 311,
+     "R": 3761,
+     "margin": 84.725,
+     "name": "Gaines County"
+    },
+    "48167": {
+     "D": 40229,
+     "R": 68822,
+     "margin": 26.22,
+     "name": "Galveston County"
+    },
+    "48169": {
+     "D": 135,
+     "R": 1056,
+     "margin": 77.33,
+     "name": "Garza County"
+    },
+    "48171": {
+     "D": 2421,
+     "R": 10801,
+     "margin": 63.379,
+     "name": "Gillespie County"
+    },
+    "48173": {
+     "D": 27,
+     "R": 542,
+     "margin": 90.51,
+     "name": "Glasscock County"
+    },
+    "48175": {
+     "D": 663,
+     "R": 2664,
+     "margin": 60.144,
+     "name": "Goliad County"
+    },
+    "48177": {
+     "D": 1129,
+     "R": 4369,
+     "margin": 58.931,
+     "name": "Gonzales County"
+    },
+    "48179": {
+     "D": 478,
+     "R": 5013,
+     "margin": 82.59,
+     "name": "Gray County"
+    },
+    "48181": {
+     "D": 9581,
+     "R": 34948,
+     "margin": 56.967,
+     "name": "Grayson County"
+    },
+    "48183": {
+     "D": 8662,
+     "R": 24223,
+     "margin": 47.319,
+     "name": "Gregg County"
+    },
+    "48185": {
+     "D": 1732,
+     "R": 7607,
+     "margin": 62.908,
+     "name": "Grimes County"
+    },
+    "48187": {
+     "D": 19356,
+     "R": 36882,
+     "margin": 31.164,
+     "name": "Guadalupe County"
+    },
+    "48189": {
+     "D": 1165,
+     "R": 5094,
+     "margin": 62.774,
+     "name": "Hale County"
+    },
+    "48191": {
+     "D": 94,
+     "R": 774,
+     "margin": 78.341,
+     "name": "Hall County"
+    },
+    "48193": {
+     "D": 433,
+     "R": 3006,
+     "margin": 74.818,
+     "name": "Hamilton County"
+    },
+    "48195": {
+     "D": 91,
+     "R": 1419,
+     "margin": 87.947,
+     "name": "Hansford County"
+    },
+    "48197": {
+     "D": 114,
+     "R": 866,
+     "margin": 76.735,
+     "name": "Hardeman County"
+    },
+    "48199": {
+     "D": 2029,
+     "R": 17432,
+     "margin": 79.148,
+     "name": "Hardin County"
+    },
+    "48201": {
+     "D": 595653,
+     "R": 490261,
+     "margin": -9.705,
+     "name": "Harris County"
+    },
+    "48203": {
+     "D": 4688,
+     "R": 16472,
+     "margin": 55.69,
+     "name": "Harrison County"
+    },
+    "48205": {
+     "D": 96,
+     "R": 1463,
+     "margin": 87.684,
+     "name": "Hartley County"
+    },
+    "48207": {
+     "D": 191,
+     "R": 1465,
+     "margin": 76.932,
+     "name": "Haskell County"
+    },
+    "48209": {
+     "D": 48970,
+     "R": 39085,
+     "margin": -11.226,
+     "name": "Hays County"
+    },
+    "48211": {
+     "D": 138,
+     "R": 1198,
+     "margin": 79.341,
+     "name": "Hemphill County"
+    },
+    "48213": {
+     "D": 4798,
+     "R": 22909,
+     "margin": 65.366,
+     "name": "Henderson County"
+    },
+    "48215": {
+     "D": 82671,
+     "R": 56783,
+     "margin": -18.564,
+     "name": "Hidalgo County"
+    },
+    "48217": {
+     "D": 1830,
+     "R": 9418,
+     "margin": 67.461,
+     "name": "Hill County"
+    },
+    "48219": {
+     "D": 786,
+     "R": 4690,
+     "margin": 71.293,
+     "name": "Hockley County"
+    },
+    "48221": {
+     "D": 4301,
+     "R": 22596,
+     "margin": 68.019,
+     "name": "Hood County"
+    },
+    "48223": {
+     "D": 1999,
+     "R": 10223,
+     "margin": 67.288,
+     "name": "Hopkins County"
+    },
+    "48225": {
+     "D": 1399,
+     "R": 5726,
+     "margin": 60.73,
+     "name": "Houston County"
+    },
+    "48227": {
+     "D": 1077,
+     "R": 5367,
+     "margin": 66.574,
+     "name": "Howard County"
+    },
+    "48229": {
+     "D": 260,
+     "R": 588,
+     "margin": 38.679,
+     "name": "Hudspeth County"
+    },
+    "48231": {
+     "D": 6422,
+     "R": 23744,
+     "margin": 57.422,
+     "name": "Hunt County"
+    },
+    "48233": {
+     "D": 540,
+     "R": 5437,
+     "margin": 81.931,
+     "name": "Hutchinson County"
+    },
+    "48235": {
+     "D": 70,
+     "R": 618,
+     "margin": 79.651,
+     "name": "Irion County"
+    },
+    "48237": {
+     "D": 227,
+     "R": 2744,
+     "margin": 84.719,
+     "name": "Jack County"
+    },
+    "48239": {
+     "D": 550,
+     "R": 4013,
+     "margin": 75.893,
+     "name": "Jackson County"
+    },
+    "48241": {
+     "D": 1601,
+     "R": 9701,
+     "margin": 71.669,
+     "name": "Jasper County"
+    },
+    "48243": {
+     "D": 374,
+     "R": 641,
+     "margin": 26.305,
+     "name": "Jeff Davis County"
+    },
+    "48245": {
+     "D": 26617,
+     "R": 34952,
+     "margin": 13.538,
+     "name": "Jefferson County"
+    },
+    "48247": {
+     "D": 876,
+     "R": 650,
+     "margin": -14.81,
+     "name": "Jim Hogg County"
+    },
+    "48249": {
+     "D": 4375,
+     "R": 5063,
+     "margin": 7.29,
+     "name": "Jim Wells County"
+    },
+    "48251": {
+     "D": 12266,
+     "R": 42954,
+     "margin": 55.574,
+     "name": "Johnson County"
+    },
+    "48253": {
+     "D": 581,
+     "R": 4349,
+     "margin": 76.43,
+     "name": "Jones County"
+    },
+    "48255": {
+     "D": 776,
+     "R": 3007,
+     "margin": 58.974,
+     "name": "Karnes County"
+    },
+    "48257": {
+     "D": 14002,
+     "R": 28285,
+     "margin": 33.776,
+     "name": "Kaufman County"
+    },
+    "48259": {
+     "D": 4491,
+     "R": 17684,
+     "margin": 59.495,
+     "name": "Kendall County"
+    },
+    "48261": {
+     "D": 42,
+     "R": 109,
+     "margin": 44.371,
+     "name": "Kenedy County"
+    },
+    "48263": {
+     "D": 34,
+     "R": 312,
+     "margin": 80.347,
+     "name": "Kent County"
+    },
+    "48265": {
+     "D": 4648,
+     "R": 17524,
+     "margin": 58.073,
+     "name": "Kerr County"
+    },
+    "48267": {
+     "D": 188,
+     "R": 1666,
+     "margin": 79.72,
+     "name": "Kimble County"
+    },
+    "48269": {
+     "D": 3,
+     "R": 100,
+     "margin": 94.175,
+     "name": "King County"
+    },
+    "48271": {
+     "D": 258,
+     "R": 907,
+     "margin": 55.708,
+     "name": "Kinney County"
+    },
+    "48273": {
+     "D": 3463,
+     "R": 4074,
+     "margin": 8.107,
+     "name": "Kleberg County"
+    },
+    "48275": {
+     "D": 140,
+     "R": 889,
+     "margin": 72.789,
+     "name": "Knox County"
+    },
+    "48277": {
+     "D": 2665,
+     "R": 12546,
+     "margin": 64.96,
+     "name": "Lamar County"
+    },
+    "48279": {
+     "D": 419,
+     "R": 2628,
+     "margin": 72.498,
+     "name": "Lamb County"
+    },
+    "48281": {
+     "D": 1502,
+     "R": 6625,
+     "margin": 63.037,
+     "name": "Lampasas County"
+    },
+    "48283": {
+     "D": 662,
+     "R": 761,
+     "margin": 6.957,
+     "name": "La Salle County"
+    },
+    "48285": {
+     "D": 759,
+     "R": 7380,
+     "margin": 81.349,
+     "name": "Lavaca County"
+    },
+    "48287": {
+     "D": 1095,
+     "R": 5108,
+     "margin": 64.695,
+     "name": "Lee County"
+    },
+    "48289": {
+     "D": 698,
+     "R": 6082,
+     "margin": 79.41,
+     "name": "Leon County"
+    },
+    "48291": {
+     "D": 3488,
+     "R": 16079,
+     "margin": 64.348,
+     "name": "Liberty County"
+    },
+    "48293": {
+     "D": 1366,
+     "R": 5390,
+     "margin": 59.562,
+     "name": "Limestone County"
+    },
+    "48295": {
+     "D": 69,
+     "R": 894,
+     "margin": 85.67,
+     "name": "Lipscomb County"
+    },
+    "48297": {
+     "D": 545,
+     "R": 3424,
+     "margin": 72.537,
+     "name": "Live Oak County"
+    },
+    "48299": {
+     "D": 1920,
+     "R": 8977,
+     "margin": 64.761,
+     "name": "Llano County"
+    },
+    "48301": {
+     "D": 6,
+     "R": 69,
+     "margin": 84.0,
+     "name": "Loving County"
+    },
+    "48303": {
+     "D": 24497,
+     "R": 58163,
+     "margin": 40.728,
+     "name": "Lubbock County"
+    },
+    "48305": {
+     "D": 196,
+     "R": 1502,
+     "margin": 76.914,
+     "name": "Lynn County"
+    },
+    "48307": {
+     "D": 314,
+     "R": 2221,
+     "margin": 75.227,
+     "name": "McCulloch County"
+    },
+    "48309": {
+     "D": 23765,
+     "R": 47875,
+     "margin": 33.654,
+     "name": "McLennan County"
+    },
+    "48311": {
+     "D": 28,
+     "R": 343,
+     "margin": 84.906,
+     "name": "McMullen County"
+    },
+    "48313": {
+     "D": 595,
+     "R": 3272,
+     "margin": 69.227,
+     "name": "Madison County"
+    },
+    "48315": {
+     "D": 700,
+     "R": 2557,
+     "margin": 57.016,
+     "name": "Marion County"
+    },
+    "48317": {
+     "D": 149,
+     "R": 1341,
+     "margin": 80.0,
+     "name": "Martin County"
+    },
+    "48319": {
+     "D": 339,
+     "R": 1702,
+     "margin": 66.781,
+     "name": "Mason County"
+    },
+    "48321": {
+     "D": 2273,
+     "R": 7350,
+     "margin": 52.759,
+     "name": "Matagorda County"
+    },
+    "48323": {
+     "D": 5555,
+     "R": 3860,
+     "margin": -18.003,
+     "name": "Maverick County"
+    },
+    "48325": {
+     "D": 4591,
+     "R": 12601,
+     "margin": 46.591,
+     "name": "Medina County"
+    },
+    "48327": {
+     "D": 110,
+     "R": 659,
+     "margin": 71.391,
+     "name": "Menard County"
+    },
+    "48329": {
+     "D": 7154,
+     "R": 32389,
+     "margin": 63.817,
+     "name": "Midland County"
+    },
+    "48331": {
+     "D": 1559,
+     "R": 6717,
+     "margin": 62.325,
+     "name": "Milam County"
+    },
+    "48333": {
+     "D": 198,
+     "R": 1894,
+     "margin": 81.071,
+     "name": "Mills County"
+    },
+    "48335": {
+     "D": 185,
+     "R": 1576,
+     "margin": 78.989,
+     "name": "Mitchell County"
+    },
+    "48337": {
+     "D": 765,
+     "R": 7004,
+     "margin": 80.306,
+     "name": "Montague County"
+    },
+    "48339": {
+     "D": 52654,
+     "R": 152694,
+     "margin": 48.717,
+     "name": "Montgomery County"
+    },
+    "48341": {
+     "D": 479,
+     "R": 3081,
+     "margin": 73.09,
+     "name": "Moore County"
+    },
+    "48343": {
+     "D": 921,
+     "R": 3041,
+     "margin": 53.508,
+     "name": "Morris County"
+    },
+    "48345": {
+     "D": 18,
+     "R": 482,
+     "margin": 92.8,
+     "name": "Motley County"
+    },
+    "48347": {
+     "D": 5480,
+     "R": 13248,
+     "margin": 41.478,
+     "name": "Nacogdoches County"
+    },
+    "48349": {
+     "D": 3157,
+     "R": 10829,
+     "margin": 54.855,
+     "name": "Navarro County"
+    },
+    "48351": {
+     "D": 689,
+     "R": 3660,
+     "margin": 68.315,
+     "name": "Newton County"
+    },
+    "48353": {
+     "D": 647,
+     "R": 3093,
+     "margin": 65.401,
+     "name": "Nolan County"
+    },
+    "48355": {
+     "D": 40474,
+     "R": 47567,
+     "margin": 8.056,
+     "name": "Nueces County"
+    },
+    "48357": {
+     "D": 135,
+     "R": 1975,
+     "margin": 87.204,
+     "name": "Ochiltree County"
+    },
+    "48359": {
+     "D": 50,
+     "R": 710,
+     "margin": 86.842,
+     "name": "Oldham County"
+    },
+    "48361": {
+     "D": 3722,
+     "R": 21153,
+     "margin": 70.074,
+     "name": "Orange County"
+    },
+    "48363": {
+     "D": 1486,
+     "R": 7896,
+     "margin": 68.322,
+     "name": "Palo Pinto County"
+    },
+    "48365": {
+     "D": 1213,
+     "R": 7039,
+     "margin": 70.601,
+     "name": "Panola County"
+    },
+    "48367": {
+     "D": 10123,
+     "R": 52523,
+     "margin": 67.682,
+     "name": "Parker County"
+    },
+    "48369": {
+     "D": 202,
+     "R": 1546,
+     "margin": 76.888,
+     "name": "Parmer County"
+    },
+    "48371": {
+     "D": 1043,
+     "R": 2548,
+     "margin": 41.91,
+     "name": "Pecos County"
+    },
+    "48373": {
+     "D": 3229,
+     "R": 13377,
+     "margin": 61.11,
+     "name": "Polk County"
+    },
+    "48375": {
+     "D": 5361,
+     "R": 16082,
+     "margin": 49.998,
+     "name": "Potter County"
+    },
+    "48377": {
+     "D": 1133,
+     "R": 561,
+     "margin": -33.766,
+     "name": "Presidio County"
+    },
+    "48379": {
+     "D": 596,
+     "R": 4339,
+     "margin": 75.846,
+     "name": "Rains County"
+    },
+    "48381": {
+     "D": 8228,
+     "R": 39243,
+     "margin": 65.335,
+     "name": "Randall County"
+    },
+    "48383": {
+     "D": 90,
+     "R": 616,
+     "margin": 74.504,
+     "name": "Reagan County"
+    },
+    "48385": {
+     "D": 218,
+     "R": 1337,
+     "margin": 71.961,
+     "name": "Real County"
+    },
+    "48387": {
+     "D": 764,
+     "R": 3482,
+     "margin": 64.013,
+     "name": "Red River County"
+    },
+    "48389": {
+     "D": 801,
+     "R": 1341,
+     "margin": 25.21,
+     "name": "Reeves County"
+    },
+    "48391": {
+     "D": 639,
+     "R": 1658,
+     "margin": 44.362,
+     "name": "Refugio County"
+    },
+    "48393": {
+     "D": 7,
+     "R": 430,
+     "margin": 96.796,
+     "name": "Roberts County"
+    },
+    "48395": {
+     "D": 1293,
+     "R": 4643,
+     "margin": 56.435,
+     "name": "Robertson County"
+    },
+    "48397": {
+     "D": 12132,
+     "R": 30211,
+     "margin": 42.697,
+     "name": "Rockwall County"
+    },
+    "48399": {
+     "D": 277,
+     "R": 2924,
+     "margin": 82.693,
+     "name": "Runnels County"
+    },
+    "48401": {
+     "D": 2694,
+     "R": 12751,
+     "margin": 65.115,
+     "name": "Rusk County"
+    },
+    "48403": {
+     "D": 385,
+     "R": 3755,
+     "margin": 81.401,
+     "name": "Sabine County"
+    },
+    "48405": {
+     "D": 546,
+     "R": 2288,
+     "margin": 61.468,
+     "name": "San Augustine County"
+    },
+    "48407": {
+     "D": 1540,
+     "R": 7882,
+     "margin": 67.311,
+     "name": "San Jacinto County"
+    },
+    "48409": {
+     "D": 5643,
+     "R": 12028,
+     "margin": 36.133,
+     "name": "San Patricio County"
+    },
+    "48411": {
+     "D": 200,
+     "R": 1947,
+     "margin": 81.369,
+     "name": "San Saba County"
+    },
+    "48413": {
+     "D": 159,
+     "R": 834,
+     "margin": 67.976,
+     "name": "Schleicher County"
+    },
+    "48415": {
+     "D": 480,
+     "R": 3607,
+     "margin": 76.511,
+     "name": "Scurry County"
+    },
+    "48417": {
+     "D": 81,
+     "R": 1148,
+     "margin": 86.819,
+     "name": "Shackelford County"
+    },
+    "48419": {
+     "D": 1045,
+     "R": 5846,
+     "margin": 69.671,
+     "name": "Shelby County"
+    },
+    "48421": {
+     "D": 35,
+     "R": 665,
+     "margin": 90.0,
+     "name": "Sherman County"
+    },
+    "48423": {
+     "D": 18763,
+     "R": 56608,
+     "margin": 50.212,
+     "name": "Smith County"
+    },
+    "48425": {
+     "D": 553,
+     "R": 3430,
+     "margin": 72.232,
+     "name": "Somervell County"
+    },
+    "48427": {
+     "D": 6455,
+     "R": 4460,
+     "margin": -18.278,
+     "name": "Starr County"
+    },
+    "48429": {
+     "D": 217,
+     "R": 2511,
+     "margin": 84.091,
+     "name": "Stephens County"
+    },
+    "48431": {
+     "D": 20,
+     "R": 423,
+     "margin": 90.971,
+     "name": "Sterling County"
+    },
+    "48433": {
+     "D": 70,
+     "R": 492,
+     "margin": 75.089,
+     "name": "Stonewall County"
+    },
+    "48435": {
+     "D": 178,
+     "R": 970,
+     "margin": 68.99,
+     "name": "Sutton County"
+    },
+    "48437": {
+     "D": 238,
+     "R": 1399,
+     "margin": 70.922,
+     "name": "Swisher County"
+    },
+    "48439": {
+     "D": 279423,
+     "R": 303600,
+     "margin": 4.147,
+     "name": "Tarrant County"
+    },
+    "48441": {
+     "D": 8878,
+     "R": 29974,
+     "margin": 54.298,
+     "name": "Taylor County"
+    },
+    "48443": {
+     "D": 94,
+     "R": 326,
+     "margin": 55.238,
+     "name": "Terrell County"
+    },
+    "48445": {
+     "D": 377,
+     "R": 2167,
+     "margin": 70.362,
+     "name": "Terry County"
+    },
+    "48447": {
+     "D": 51,
+     "R": 612,
+     "margin": 84.615,
+     "name": "Throckmorton County"
+    },
+    "48449": {
+     "D": 1535,
+     "R": 5701,
+     "margin": 57.573,
+     "name": "Titus County"
+    },
+    "48451": {
+     "D": 7516,
+     "R": 23873,
+     "margin": 52.111,
+     "name": "Tom Green County"
+    },
+    "48453": {
+     "D": 335810,
+     "R": 119577,
+     "margin": -47.483,
+     "name": "Travis County"
+    },
+    "48455": {
+     "D": 825,
+     "R": 4465,
+     "margin": 68.809,
+     "name": "Trinity County"
+    },
+    "48457": {
+     "D": 816,
+     "R": 6343,
+     "margin": 77.204,
+     "name": "Tyler County"
+    },
+    "48459": {
+     "D": 1856,
+     "R": 12270,
+     "margin": 73.722,
+     "name": "Upshur County"
+    },
+    "48461": {
+     "D": 123,
+     "R": 907,
+     "margin": 76.117,
+     "name": "Upton County"
+    },
+    "48463": {
+     "D": 3048,
+     "R": 4779,
+     "margin": 22.116,
+     "name": "Uvalde County"
+    },
+    "48465": {
+     "D": 3814,
+     "R": 5530,
+     "margin": 18.365,
+     "name": "Val Verde County"
+    },
+    "48467": {
+     "D": 2414,
+     "R": 17698,
+     "margin": 75.994,
+     "name": "Van Zandt County"
+    },
+    "48469": {
+     "D": 6452,
+     "R": 18519,
+     "margin": 48.324,
+     "name": "Victoria County"
+    },
+    "48471": {
+     "D": 4861,
+     "R": 12309,
+     "margin": 43.378,
+     "name": "Walker County"
+    },
+    "48473": {
+     "D": 5100,
+     "R": 11381,
+     "margin": 38.111,
+     "name": "Waller County"
+    },
+    "48475": {
+     "D": 418,
+     "R": 2065,
+     "margin": 66.331,
+     "name": "Ward County"
+    },
+    "48477": {
+     "D": 2824,
+     "R": 10965,
+     "margin": 59.04,
+     "name": "Washington County"
+    },
+    "48479": {
+     "D": 27156,
+     "R": 16409,
+     "margin": -24.669,
+     "name": "Webb County"
+    },
+    "48481": {
+     "D": 2697,
+     "R": 9354,
+     "margin": 55.24,
+     "name": "Wharton County"
+    },
+    "48483": {
+     "D": 103,
+     "R": 1569,
+     "margin": 87.679,
+     "name": "Wheeler County"
+    },
+    "48485": {
+     "D": 7824,
+     "R": 23328,
+     "margin": 49.769,
+     "name": "Wichita County"
+    },
+    "48487": {
+     "D": 517,
+     "R": 2606,
+     "margin": 66.891,
+     "name": "Wilbarger County"
+    },
+    "48489": {
+     "D": 2137,
+     "R": 1656,
+     "margin": -12.681,
+     "name": "Willacy County"
+    },
+    "48491": {
+     "D": 110242,
+     "R": 111488,
+     "margin": 0.562,
+     "name": "Williamson County"
+    },
+    "48493": {
+     "D": 4317,
+     "R": 14952,
+     "margin": 55.192,
+     "name": "Wilson County"
+    },
+    "48495": {
+     "D": 177,
+     "R": 1130,
+     "margin": 72.915,
+     "name": "Winkler County"
+    },
+    "48497": {
+     "D": 3538,
+     "R": 21979,
+     "margin": 72.269,
+     "name": "Wise County"
+    },
+    "48499": {
+     "D": 2331,
+     "R": 15678,
+     "margin": 74.113,
+     "name": "Wood County"
+    },
+    "48501": {
+     "D": 190,
+     "R": 1427,
+     "margin": 76.5,
+     "name": "Yoakum County"
+    },
+    "48503": {
+     "D": 630,
+     "R": 5498,
+     "margin": 79.439,
+     "name": "Young County"
+    },
+    "48505": {
+     "D": 1585,
+     "R": 1817,
+     "margin": 6.82,
+     "name": "Zapata County"
+    },
+    "48507": {
+     "D": 1642,
+     "R": 780,
+     "margin": -35.59,
+     "name": "Zavala County"
+    }
+   },
+   "margin": 11.04,
+   "race": "Governor Abbott/O'Rourke"
+  }
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "method": "Out-of-sample backtest -> data/backtest.json\n\nThe model's output is worthless without a measured error.  So run the exact\nsame machinery on the LAST midterm, where the answer is known, posing the\nidentical forward problem:\n\n    2026 run:  2024 county margins + 2026 early vote  -> predict 2026\n    backtest:  2020 county margins + 2022 early vote  -> predict 2022\n\n2020 margins are all the model would have had in 2022, so nothing here is fit\nto the answer.  The spread of the errors is the only honest range this model\ncan put on a 2026 number.\n\nA second row runs 2024 margins against 2022, which is NOT a forecast test --\nit uses the future to predict the past -- but it isolates whether the error\ncomes from the MECHANISM (county weighting, skew, banked share) or from the\nBASELINE being out of date.  If the 2024-margin row is accurate and the\n2020-margin row is not, the mechanism is fine and the baseline year is the\nproblem, which is exactly the question the reversion knob exists to answer.",
+ "skew": -22.84,
+ "states": {
+  "FL": {
+   "actual": 19.53,
+   "banked_share": 65.0,
+   "eday_2022": 2727051,
+   "ev_2022": 5059413,
+   "race": "Governor  DeSantis/Crist",
+   "runs": {
+    "2020": {
+     "banked_mix": 4.14,
+     "counties": 67,
+     "eday_mix": 4.55,
+     "error": -15.25,
+     "predicted": 4.28
+    },
+    "2024": {
+     "banked_mix": 13.01,
+     "counties": 67,
+     "eday_mix": 13.41,
+     "error": -6.38,
+     "predicted": 13.15
+    }
+   }
+  },
+  "IA": {
+   "actual": 18.98,
+   "banked_share": 30.2,
+   "eday_2022": 859562,
+   "ev_2022": 371575,
+   "race": "Governor  Reynolds/DeJear",
+   "runs": {
+    "2020": {
+     "banked_mix": 5.87,
+     "counties": 99,
+     "eday_mix": 8.84,
+     "error": -11.03,
+     "predicted": 7.94
+    },
+    "2024": {
+     "banked_mix": 11.25,
+     "counties": 99,
+     "eday_mix": 14.09,
+     "error": -5.74,
+     "predicted": 13.23
+    }
+   }
+  },
+  "NC": {
+   "actual": 3.3,
+   "banked_share": 58.2,
+   "eday_2022": 1578581,
+   "ev_2022": 2198550,
+   "race": "US Senate Budd/Beasley",
+   "runs": {
+    "2020": {
+     "banked_mix": 0.12,
+     "counties": 100,
+     "eday_mix": 3.17,
+     "error": -1.9,
+     "predicted": 1.4
+    },
+    "2024": {
+     "banked_mix": 1.29,
+     "counties": 100,
+     "eday_mix": 4.53,
+     "error": -0.66,
+     "predicted": 2.64
+    }
+   }
+  },
+  "TX": {
+   "actual": 11.04,
+   "banked_share": 68.0,
+   "eday_2022": 2590664,
+   "ev_2022": 5497027,
+   "race": "Governor  Abbott/O'Rourke",
+   "runs": {
+    "2020": {
+     "banked_mix": 5.4,
+     "counties": 254,
+     "eday_mix": 8.66,
+     "error": -4.6,
+     "predicted": 6.44
+    },
+    "2024": {
+     "banked_mix": 12.21,
+     "counties": 254,
+     "eday_mix": 15.48,
+     "error": 2.22,
+     "predicted": 13.26
+    }
+   }
+  }
+ },
+ "summary": {
+  "2020": {
+   "mae": 8.2,
+   "max": -1.9,
+   "mean_error": -8.2,
+   "min": -15.25,
+   "n": 4,
+   "sd": 6.07
+  },
+  "2024": {
+   "mae": 3.75,
+   "max": 2.22,
+   "mean_error": -2.64,
+   "min": -6.38,
+   "n": 4,
+   "sd": 4.13
+  }
+ }
+}

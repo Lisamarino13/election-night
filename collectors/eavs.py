@@ -66,7 +66,8 @@ def pull(src):
     for need in [src["state"]] + list(src["cols"].values()):
         if need not in ix:
             raise RuntimeError(f"{src['url']}: column {need!r} missing — layout changed")
-    out = {}
+    cty_col = next((c for c in ("County", "Jurisdiction_Name") if c in ix), None)
+    out, counties = {}, {}
     for row in rows[1:]:
         st = str(row[ix[src["state"]]]).strip().upper()
         yr = (src.get("fixed_year") or str(row[ix[src["year"]]]).strip())
@@ -75,7 +76,18 @@ def pull(src):
         cell = out.setdefault((st, yr), dict.fromkeys(src["cols"], 0))
         for name, col in src["cols"].items():
             cell[name] += num(row[ix[col]])
-    return out
+        # Keep the county rows as well. The state number hides which places are
+        # actually driving a change, and each county set against its own prior cycle
+        # controls for size.
+        if cty_col:
+            nm = "".join(ch for ch in str(row[ix[cty_col]]).upper()
+                         if ch.isalnum() or ch == " ").replace(" COUNTY", "").strip()
+            if nm:
+                ev = num(row[ix[src["cols"]["mail"]]]) + \
+                     num(row[ix[src["cols"]["early_in_person"]]])
+                d = counties.setdefault(yr, {}).setdefault(st, {})
+                d[nm] = d.get(nm, 0) + ev
+    return out, counties
 
 
 def main(argv):
@@ -83,9 +95,12 @@ def main(argv):
         print(f"eavs: {OUT.name} already built (pass --refresh to re-download); "
               f"these are historical surveys and do not change")
         return 0
-    states = {}
+    states, all_cty = {}, {}
     for src in SOURCES:
-        got = pull(src)
+        got, counties = pull(src)
+        for yr, per_state in counties.items():
+            for st, d in per_state.items():
+                all_cty.setdefault(yr, {}).setdefault(st, {}).update(d)
         for (st, yr), cell in got.items():
             parts = cell["election_day"] + cell["mail"] + cell["early_in_person"]
             states.setdefault(st, {})[yr] = {
@@ -105,6 +120,13 @@ def main(argv):
            "sources": [s["url"] for s in SOURCES],
            "states": states}
     OUT.write_text(json.dumps(doc, indent=1) + "\n")
+    # County file keyed on the last completed MIDTERM, which is the comparison a
+    # midterm wants; 2024 is kept alongside it.
+    (DATA / "eavs-counties.json").write_text(json.dumps(
+        {"note": "Early vote (mail + early in person) per county, from the EAC survey.",
+         "basis_year": "2022",
+         "states": all_cty.get("2022", {}),
+         "by_year": all_cty}, indent=1) + "\n")
     yrs = sorted({y for v in states.values() for y in v})
     print(f"eavs: {len(states)} jurisdictions, years {yrs}")
     for st in ("GA", "OH", "MI", "KS", "NE"):

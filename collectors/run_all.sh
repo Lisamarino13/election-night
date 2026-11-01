@@ -113,6 +113,7 @@ fi
 # that writes an OLD number still reports success.
 eav=$("$PY" eavs.py 2>&1); printf '%s\n' "$eav" >> "$LOG"
 shr=$("$PY" ev_share.py 2>&1); printf '%s\n' "$shr" >> "$LOG"
+prj=$("$PY" projection.py 2>&1); printf '%s\n' "$prj" >> "$LOG"
 fac=$("$PY" state_facts.py 2>&1); printf '%s\n' "$fac" >> "$LOG"
 tie=$("$PY" tie_out.py 2>&1); printf '%s\n' "$tie" >> "$LOG"
 say "TIEOUT  $(printf '%s' "$tie" | head -1)"

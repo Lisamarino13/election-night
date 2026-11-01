@@ -112,6 +112,25 @@ function drawBars(host, rows, opts){
     const vl = svgEl("text", {class:"dlab fig",
       x:x+bw/2, y:(hasEday?yOf(r.totalVote):y)-9, "text-anchor":"middle", fill:"var(--fg)"});
     vl.textContent = ab(hasEday ? r.totalVote : r.total); svg.appendChild(vl);
+    // A figure per box, not just the total on top: the stack is two quantities and the
+    // reader should not have to subtract. Each label sits in its own segment, and is
+    // dropped when that segment is too short to hold it rather than overflowing into
+    // the one next to it.
+    if (hasEday){
+      const seg = [
+        {v: r.eday,  y0: yOf(r.totalVote), y1: y,          dark: false},
+        {v: r.total, y0: y,                y1: yOf(0),     dark: true},
+      ];
+      for (const g of seg){
+        const h2 = g.y1 - g.y0;
+        if (h2 < 16) continue;
+        const t = svgEl("text", {class:"fig", x:x+bw/2, y:g.y0 + h2/2 + 4,
+          "text-anchor":"middle",
+          style:`font-size:11.5px;font-weight:600;fill:${g.dark?"#fff":"var(--fg)"}`});
+        t.textContent = ab(g.v);
+        svg.appendChild(t);
+      }
+    }
     // hit target larger than the mark
     const hit = svgEl("rect", {x:x-7, y:PAD.t, width:bw+14, height:plotH, fill:"transparent"});
     hit.addEventListener("pointerenter", e => showTip(e,

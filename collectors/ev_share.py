@@ -93,23 +93,27 @@ def demographics(st):
     return out
 
 
-# The Lab keeps a turnout column in each cycle's own national file: the 2026 file
-# carries turn_2022, the 2024 file carries turn_2020. Those two are the only turnout
-# denominators that exist for every state - there is no 2020 or 2022 archive to pull an
-# early-vote total from, so a year is only usable where BOTH numbers exist.
-TURNOUT = [("2022", "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/US.csv",
-            "turn_2022"),
-           ("2020", "https://election.lab.ufl.edu/data-downloads/earlyvote/2024/US.csv",
-            "turn_2020")]
+# Total ballots counted, every state, every general since 2014. The Lab publishes one
+# turnout file per cycle behind its turnout pages; the schema is identical across all
+# six (STATE_ABV, TOTAL_BALLOTS_COUNTED), and the 2022 figures match the turn_2022
+# column carried in the early-vote national file exactly, so the two agree.
+#
+# This is the denominator for every bar on every card. Without it only the handful of
+# states whose results collector takes a year could show an election-day figure.
+TURNOUT_BASE = ("https://election.lab.ufl.edu/data-downloads/turnoutdata/"
+                "Turnout_{year}G_{ver}.csv")
+TURNOUT_FILES = {"2024": "v0.4", "2022": "v1.0", "2020": "v1.0",
+                 "2018": "v1.0", "2016": "v1.0", "2014": "v1.0"}
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
                     "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
 
 
 def turnout_by_year():
-    """{year -> {state -> total votes cast}} from the Lab's own turnout columns."""
+    """{year -> {state -> total ballots counted}}."""
     import csv, io, urllib.request
     out = {}
-    for year, url, col in TURNOUT:
+    for year, ver in TURNOUT_FILES.items():
+        url = TURNOUT_BASE.format(year=year, ver=ver)
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=UA),
                                         timeout=90) as r:
@@ -121,12 +125,13 @@ def turnout_by_year():
             continue
         got = {}
         for row in rows:
-            st = (row.get("state_abbv") or "").strip()
+            st = (row.get("STATE_ABV") or "").strip()
+            raw = (row.get("TOTAL_BALLOTS_COUNTED") or "").replace(",", "").strip()
             try:
-                v = int(float(row.get(col) or 0))
+                v = int(float(raw))
             except ValueError:
-                v = 0
-            if st and v:
+                continue
+            if st and st != "US" and v:
                 got[st] = v
         if got:
             out[year] = got

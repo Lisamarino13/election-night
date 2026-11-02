@@ -1,11 +1,11 @@
 {
- "checked_at": "2026-11-02T14:37:42+00:00",
- "uf_file_modified": "Mon, 02 Nov 2026 14:35:30 GMT",
- "board_total": 25979334,
- "uf_total": 25523190,
+ "checked_at": "2026-11-02T15:07:50+00:00",
+ "uf_file_modified": "Mon, 02 Nov 2026 14:48:39 GMT",
+ "board_total": 26096263,
+ "uf_total": 25544901,
  "behind_states": [],
  "behind_ballots": 0,
- "ties_out": 12,
+ "ties_out": 11,
  "checked": 13,
  "note": "Each state against the UF Election Lab's national row, which is independent of how this board collects. BEHIND means this board is stale, not that the sources disagree - a count cannot fall as time passes.",
  "states": {
@@ -82,11 +82,11 @@
    "source": "direct"
   },
   "NE": {
-   "board": 215424,
-   "uf": 215424,
+   "board": 237135,
+   "uf": 237135,
    "gap": 0,
    "verdict": "ties out",
-   "as_of": "10/30/2026",
+   "as_of": "11/2/2026",
    "source": "UF"
   },
   "OH": {
@@ -98,11 +98,11 @@
    "source": "UF"
   },
   "SC": {
-   "board": 986460,
+   "board": 1081678,
    "uf": 986460,
-   "gap": 0,
-   "verdict": "ties out",
-   "as_of": "2026-10-30",
+   "gap": -95218,
+   "verdict": "ours is newer",
+   "as_of": "2026-10-31",
    "source": "direct"
   },
   "TX": {
@@ -238,8 +238,8 @@
    "only_on_board": [],
    "only_at_uf": [],
    "worst": [],
-   "board_sum": 215424,
-   "uf_sum": 215424
+   "board_sum": 237135,
+   "uf_sum": 237135
   },
   "OH": {
    "status": "checked",
@@ -261,21 +261,75 @@
    "counties_board": 46,
    "counties_uf": 46,
    "compared": 46,
-   "agree": 45,
-   "differ": 1,
-   "ahead": 0,
-   "behind": 1,
+   "agree": 0,
+   "differ": 46,
+   "ahead": 46,
+   "behind": 0,
    "only_on_board": [],
    "only_at_uf": [],
    "worst": [
     {
-     "county": "MCCORMICK",
-     "board": 3183,
-     "uf": 3279,
-     "gap": -96
+     "county": "GREENVILLE",
+     "board": 108502,
+     "uf": 98085,
+     "gap": 10417
+    },
+    {
+     "county": "CHARLESTON",
+     "board": 103629,
+     "uf": 93598,
+     "gap": 10031
+    },
+    {
+     "county": "RICHLAND",
+     "board": 96057,
+     "uf": 86779,
+     "gap": 9278
+    },
+    {
+     "county": "YORK",
+     "board": 63889,
+     "uf": 56833,
+     "gap": 7056
+    },
+    {
+     "county": "HORRY",
+     "board": 89112,
+     "uf": 83400,
+     "gap": 5712
+    },
+    {
+     "county": "LEXINGTON",
+     "board": 54892,
+     "uf": 49479,
+     "gap": 5413
+    },
+    {
+     "county": "SPARTANBURG",
+     "board": 56875,
+     "uf": 51646,
+     "gap": 5229
+    },
+    {
+     "county": "BERKELEY",
+     "board": 51850,
+     "uf": 46933,
+     "gap": 4917
+    },
+    {
+     "county": "DORCHESTER",
+     "board": 37701,
+     "uf": 33674,
+     "gap": 4027
+    },
+    {
+     "county": "BEAUFORT",
+     "board": 48295,
+     "uf": 44767,
+     "gap": 3528
     }
    ],
-   "board_sum": 986364,
+   "board_sum": 1081582,
    "uf_sum": 986460
   },
   "TX": {

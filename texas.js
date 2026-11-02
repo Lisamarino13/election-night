@@ -1,0 +1,832 @@
+/* The Texas tab: the whole Texas analysis, thesis first.
+ *
+ * Texas is the one state on this board where the early vote is nearly the whole
+ * election, so it gets a tab rather than a card. The argument runs: the 2024 result
+ * carried onto 2026 turnout is R+5.98 and Democrats need ~305k net new votes to erase
+ * it; three countable things say the electorate changed; three ways of pricing that
+ * change land inside two points of even; and the sign is set by one number nobody has
+ * measured - how far Hispanic voters move.
+ *
+ * Two corrections are baked in, both made on 2 November and both against earlier work:
+ *
+ *  1. The early-vote read used a within-county skew of 22.84 points borrowed from North
+ *     Carolina, on the belief that Texas publishes no partisan results by mode. It
+ *     does: County.json carries EV beside V per candidate per county, so every past
+ *     cycle's early and election-day margins are exact. The real Texas skew is between
+ *     -2.4 and +0.8 points, and in 2024 it pointed the OTHER way. The old single tie
+ *     line of D+5.54 is replaced by a band, because a tie can land anywhere in it
+ *     depending on what election day does.
+ *  2. The county model moved the whole non-white bloc +12, Black voters included. They
+ *     were already 91.1% Democratic in 2024, so +12 there is not defensible. Capping it
+ *     costs Democrats 1.62 points and turns D+0.65 into R+0.97. Both are shown.
+ *
+ * Data lives in data/tx/*.csv so the numbers are inspectable rather than inlined.
+ */
+(function () {
+  "use strict";
+
+  var PROJ = {total: 10211996, banked: 7734079};
+  var SHARE = PROJ.banked / PROJ.total;
+  var EDAY_VOTES = PROJ.total - PROJ.banked;
+  // The two election-day margins Texas has actually produced that bound the question:
+  // 2024's R+5.17 and 2022's R+16.00 - the only midterm in the archive.
+  var EDAY_LO = 5.17, EDAY_HI = 16.00;
+  var THR_SAFE_D = -(1 - SHARE) * EDAY_HI / SHARE;   // D+5.13
+  var THR_SAFE_R = -(1 - SHARE) * EDAY_LO / SHARE;   // D+1.66
+
+  var HIST = [
+    {year: 2024, kind: "presidential", race: "U.S. Senate", total: 11291854,
+     earlyShare: 80.4, early: 9.31, eday: 5.17, final: 8.50},
+    {year: 2022, kind: "midterm", race: "Governor", total: 8102908,
+     earlyShare: 68.2, early: 8.53, eday: 16.00, final: 10.90},
+    {year: 2020, kind: "presidential", race: "U.S. Senate", total: 11144040,
+     earlyShare: 86.8, early: 7.74, eday: 22.19, final: 9.64}
+  ];
+
+  /* ---------------------------------------------------------------- utilities */
+  var D = {};                       // dataset cache, filled by load()
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c];
+    });
+  }
+  function n0(v) { return Math.round(v).toLocaleString("en-US"); }
+  function mgn(v, dp) {
+    if (v == null || !isFinite(v)) return "—";
+    return (v < 0 ? "D+" : "R+") + Math.abs(v).toFixed(dp == null ? 2 : dp);
+  }
+  function num(v) { var x = parseFloat(v); return isFinite(x) ? x : null; }
+
+  /* A CSV parser that handles the quoted fields these files carry. */
+  function parseCSV(text) {
+    var rows = [], row = [], cur = "", q = false, i;
+    for (i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (q) {
+        if (c === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else q = false; }
+        else cur += c;
+      } else if (c === '"') q = true;
+      else if (c === ",") { row.push(cur); cur = ""; }
+      else if (c === "\n") { row.push(cur); rows.push(row); row = []; cur = ""; }
+      else if (c !== "\r") cur += c;
+    }
+    if (cur.length || row.length) { row.push(cur); rows.push(row); }
+    var head = rows.shift() || [];
+    return rows.filter(function (r) { return r.length && r.join("").trim(); })
+      .map(function (r) {
+        var o = {};
+        head.forEach(function (h, j) { o[h.trim()] = (r[j] == null ? "" : r[j]).trim(); });
+        return o;
+      });
+  }
+  function load(name) {
+    return fetch("data/tx/" + name + "?t=" + Date.now()).then(function (r) {
+      if (!r.ok) throw new Error(name + ": HTTP " + r.status);
+      return name.slice(-5) === ".json" ? r.json() : r.text().then(parseCSV);
+    });
+  }
+
+  /* --------------------------------------------------------------- svg helpers */
+  var NS = "http://www.w3.org/2000/svg";
+  function svg(w, h, label) {
+    return '<svg viewBox="0 0 ' + w + " " + h + '" width="100%" role="img" '
+         + 'aria-label="' + esc(label) + '" style="max-width:100%;height:auto">';
+  }
+  function txt(x, y, s, cls, anchor) {
+    return '<text x="' + x + '" y="' + y + '"'
+         + (anchor ? ' text-anchor="' + anchor + '"' : "")
+         + ' class="' + (cls || "tk") + '">' + esc(s) + "</text>";
+  }
+  function line(x1, y1, x2, y2, cls) {
+    return '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2
+         + '" class="' + (cls || "gl") + '"/>';
+  }
+  function rect(x, y, w, h, fill, extra) {
+    return '<rect x="' + x + '" y="' + y + '" width="' + Math.max(0, w)
+         + '" height="' + Math.max(0, h) + '" fill="' + fill + '"'
+         + (extra || "") + "/>";
+  }
+  var RC = "var(--rep,#b3443a)", DC = "var(--dem,#2a6ebb)";
+  function sideCol(v) { return v < 0 ? DC : RC; }
+
+  /* ------------------------------------------------------------------- the live read */
+  function live() {
+    var B = window.DATA || {};
+    var tx = (B.states || {}).TX;
+    var r = tx && tx.races && tx.races.senate;
+    if (!r || !r.counted || r.roster_only) return null;
+    var out = {counted: r.counted, isTest: !!r.is_test_data,
+               precReporting: r.precincts_reporting, precTotal: r.precincts_total};
+    var byMode = r.choices_by_mode;
+    if (!byMode) return out;
+    var party = {};
+    (r.candidates || []).forEach(function (c) {
+      party[c.name] = (c.party || "O").toUpperCase();
+    });
+    var e = {R: 0, D: 0, T: 0}, d = {R: 0, D: 0, T: 0};
+    Object.keys(byMode).forEach(function (who) {
+      var m = byMode[who] || {}, p = party[who] || "O";
+      var ev = m.early || 0, dv = m.election_day || 0;
+      e.T += ev; d.T += dv;
+      if (p === "R" || p === "REP") { e.R += ev; d.R += dv; }
+      else if (p === "D" || p === "DEM") { e.D += ev; d.D += dv; }
+    });
+    if (e.T) out.earlyMargin = (e.R - e.D) / e.T * 100;
+    if (d.T) out.edayMargin = (d.R - d.D) / d.T * 100;
+    if (e.T + d.T) out.totalMargin = ((e.R + d.R) - (e.D + d.D)) / (e.T + d.T) * 100;
+    out.earlyVotes = e.T; out.edayVotes = d.T;
+    return out;
+  }
+
+  /* ------------------------------------------------------------------ card chrome */
+  var SECTIONS = [];
+  function card(id, kicker, title, hint, body, note) {
+    SECTIONS.push({id: id, title: title});
+    return '<section class="txcard" id="' + id + '">'
+      + (kicker ? '<p class="txkick">' + esc(kicker) + "</p>" : "")
+      + "<h3>" + esc(title) + "</h3>"
+      + (hint ? '<p class="txhint">' + hint + "</p>" : "")
+      + body
+      + (note ? '<p class="txnote">' + note + "</p>" : "")
+      + "</section>";
+  }
+
+  /* =============================================================== 0. the thesis */
+  function thesis() {
+    return '<section class="txarg" id="tx-thesis">'
+      + '<p class="txkick">The through line</p>'
+      + "<h2>One unmeasured number decides this race</h2>"
+      + "<p>The 2024 Senate result, carried onto 2026&rsquo;s projected turnout, is "
+      + '<b class="nm">R+5.98</b>. Democrats need <b class="nm">' + n0(305279)
+      + "</b> net new votes to erase it.</p>"
+      + "<p>Three things we can count say the electorate did change: <b class=\"nm\">"
+      + n0(PROJ.banked) + "</b> early votes already banked, a March primary that went "
+      + 'Democratic <b class="nm">51.70%</b> &mdash; the first midterm majority on record '
+      + "&mdash; and precinct returns putting Hispanic metro Texas 31 to 46 points left of "
+      + "the border. Three ways of turning that into a margin &mdash; the county model, "
+      + "seven historical baselines, a bloc grid &mdash; all land inside two points of even.</p>"
+      + '<p>But the county model clears the bar by <b class="nm">24,717</b> votes out of '
+      + '<b class="nm">10.2 million</b>. A <b class="nm">0.24%</b> cushion is not a '
+      + "projection, it is a coin flip. And the sign is set by one number nothing here "
+      + 'measures: how far Hispanic voters actually move. Break-even is <b class="nm">+17.6</b>. '
+      + "AtlasIntel&rsquo;s crosstab implies +16.5 and Paxton wins by a hair; Morris&rsquo;s "
+      + "engagement finding implies +27 and Talarico wins by three.</p>"
+      + '<p class="txnote" style="border-top:none;padding-top:0">Every card below is either '
+      + "a way of narrowing that one number, or a reason it cannot be narrowed before the "
+      + "polls close.</p>"
+      + "</section>";
+  }
+
+  /* ======================================================== 1. the read, live or not */
+  function readCard(L) {
+    var band = '<div class="txband">'
+      + '<div class="bandrow"><span class="bl dem">Talarico under every election day Texas has produced</span>'
+      + '<span class="bv">better than ' + mgn(THR_SAFE_D) + "</span></div>"
+      + '<div class="bandrow mid"><span class="bl">Election day genuinely decides it</span>'
+      + '<span class="bv">' + mgn(THR_SAFE_D) + " to " + mgn(THR_SAFE_R) + "</span></div>"
+      + '<div class="bandrow"><span class="bl rep">Paxton under every election day Texas has produced</span>'
+      + '<span class="bv">worse than ' + mgn(THR_SAFE_R) + "</span></div></div>";
+
+    if (L && L.earlyMargin != null) {
+      var verdict, vcls;
+      if (L.earlyMargin < THR_SAFE_D) { verdict = "Talarico under every election day Texas has produced"; vcls = "dem"; }
+      else if (L.earlyMargin > THR_SAFE_R) { verdict = "Paxton under every election day Texas has produced"; vcls = "rep"; }
+      else { verdict = "Inside the band — election day decides it"; vcls = "mid"; }
+      return card("tx-read", "Takeaway 1 · the early vote settles it",
+        "The early vote, as reported",
+        "Texas publishes its early and mail vote almost all at once when polls close. This "
+        + "is that margin, computed from EV beside V per candidate — measured, not assumed."
+        + (L.isTest ? ' <b class="amber">This feed is flagged as test data.</b>' : ""),
+        '<div class="txbig" style="color:' + sideCol(L.earlyMargin) + '">'
+        + mgn(L.earlyMargin) + "</div>"
+        + '<div class="txsub">on ' + n0(L.earlyVotes) + " early and mail ballots"
+        + (L.edayVotes ? ", election day " + mgn(L.edayMargin) + " on " + n0(L.edayVotes) : "")
+        + "</div>"
+        + '<p class="txverdict ' + vcls + '">' + esc(verdict) + "</p>"
+        + band
+        + '<table class="txtbl"><tbody>'
+        + '<tr><td>Early and mail</td><td class="num">' + mgn(L.earlyMargin) + "</td></tr>"
+        + (L.edayMargin != null ? '<tr><td>Election day</td><td class="num">' + mgn(L.edayMargin) + "</td></tr>" : "")
+        + (L.totalMargin != null ? '<tr class="em"><td>Everything counted</td><td class="num">' + mgn(L.totalMargin) + "</td></tr>" : "")
+        + '<tr><td>Precincts</td><td class="num">' + n0(L.precReporting || 0) + " / " + n0(L.precTotal || 0) + "</td></tr>"
+        + "</tbody></table>",
+        "The band is the honest form of this. An earlier version of this read used a single "
+        + "tie line of D+5.54, taken from a North Carolina skew of 22.84 points on the "
+        + "belief that Texas publishes nothing by mode. Texas does, its real skew is under "
+        + "two and a half points, and in 2024 it pointed the other way.");
+    }
+    return card("tx-read", "Takeaway 1 · the early vote settles it",
+      "What to read when polls close",
+      "Nothing published yet. Texas dumps the early and mail vote in one go at 7pm Central, "
+      + "and it is about " + (SHARE * 100).toFixed(1) + "% of the projected electorate "
+      + "— so that first number is very nearly the result.",
+      '<div class="txbig">' + n0(PROJ.banked) + "</div>"
+      + '<div class="txsub">banked of a projected ' + n0(PROJ.total) + " ("
+      + (SHARE * 100).toFixed(1) + "%), leaving " + n0(EDAY_VOTES) + " for election day</div>"
+      + band,
+      "The banked lead is <b>not</b> a measured quantity. Texas has no party registration "
+      + "— you declare at the poll — so nobody, this board included, knows how the "
+      + "banked vote breaks until it is counted. Every banked figure here is a hypothesis.");
+  }
+
+  /* ======================================================= 2. measured mode history */
+  function historyCard() {
+    // R leaves room for the "eday R+22.19" label that sits beyond the rightmost dot.
+    var W = 720, H = 210, L = 118, R = 96, T = 26, Bm = 34;
+    var xs = function (v) { return L + (v - 0) / 24 * (W - L - R); };
+    var s = svg(W, H, "Texas early-vote and election-day margins by cycle, measured");
+    [0, 5, 10, 15, 20].forEach(function (t) {
+      s += line(xs(t), T - 6, xs(t), H - Bm, "gl")
+         + txt(xs(t), H - Bm + 14, "R+" + t, "tk", "middle");
+    });
+    HIST.forEach(function (h, i) {
+      var y = T + 14 + i * 50;
+      s += txt(L - 10, y + 4, h.year + " " + (h.kind === "midterm" ? "midterm" : "pres."), "lb", "end");
+      s += line(xs(h.early), y, xs(h.eday), y, "cn");
+      s += '<circle cx="' + xs(h.final) + '" cy="' + y + '" r="4.5" fill="none" '
+         + 'stroke="currentColor" stroke-width="1.6"/>';
+      s += '<circle cx="' + xs(h.early) + '" cy="' + y + '" r="5" fill="' + DC + '"/>';
+      s += '<circle cx="' + xs(h.eday) + '" cy="' + y + '" r="5" fill="' + RC + '"/>';
+      // In 2024 the two dots nearly touch (R+9.31 against R+5.17), so anchoring the
+      // label to the election-day dot put it on top of the early one. Always place it
+      // clear of whichever dot is furthest right.
+      s += txt(Math.max(xs(h.early), xs(h.eday), xs(h.final)) + 12, y + 4,
+               "eday " + mgn(h.eday), "tk");
+    });
+    s += txt(L, 14, "early vote", "lgd") + txt(L + 80, 14, "election day", "lgd")
+       + txt(L + 180, 14, "○ final result", "lgd");
+    s += "</svg>";
+    var rows = HIST.map(function (h) {
+      var gap = h.eday - h.early;
+      return "<tr><td>" + h.year + ' <span class="dim">' + h.kind + "</span></td><td>"
+        + esc(h.race) + '</td><td class="num">' + h.earlyShare.toFixed(1)
+        + '%</td><td class="num">' + mgn(h.early) + '</td><td class="num">' + mgn(h.eday)
+        + '</td><td class="num">' + mgn(h.final) + '</td><td class="num">'
+        + (gap >= 0 ? "+" : "−") + Math.abs(gap).toFixed(2) + "</td></tr>";
+    }).join("");
+    return card("tx-modes", "Takeaway 2 · the correction that changed the read",
+      "How early vote has actually related to the result",
+      "Measured from Texas&rsquo;s own published results &mdash; County.json carries EV "
+      + "beside V per candidate per county, so these are exact, not inferred.",
+      s + '<div class="scroll"><table class="txtbl"><thead><tr><th>Cycle</th><th>Race</th>'
+      + "<th>Early share</th><th>Early</th><th>Election day</th><th>Final</th>"
+      + "<th>Eday − early</th></tr></thead><tbody>" + rows + "</tbody></table></div>",
+      "<b>Election day stopped being a Republican rescue.</b> Its advantage over the early "
+      + "vote ran +14.45, then +7.47, then −4.14 — Republicans moved their most "
+      + "reliable voters into early voting, which drained election day of its skew. But the "
+      + "only <i>midterm</i> here is 2022, and it still ran election day at R+16.00. The "
+      + "archive starts at 2019, so 2018 — the closest analogue to 2026 — has no "
+      + "mode split available at all. Do not gauge a midterm off 2024.");
+  }
+
+  /* ================================================ 3. what election day would have to do */
+  function bankedCard() {
+    var leads = [100000, 120000, 140000, 160000, 180000, 200000, 250000];
+    var cols = [5, 10, 16, 22];
+    var head = "<tr><th>Banked D lead</th><th>Ties at</th><th>R share needed</th>"
+      + cols.map(function (c) { return "<th>eday R+" + c + "</th>"; }).join("") + "</tr>";
+    var body = leads.map(function (lead) {
+      var tie = lead / EDAY_VOTES * 100;
+      var cells = cols.map(function (c) {
+        var fin = (-lead + EDAY_VOTES * c / 100) / PROJ.total * 100;
+        return '<td class="num ' + (fin < 0 ? "dem" : "rep") + '">' + mgn(fin) + "</td>";
+      }).join("");
+      return "<tr><td>D+" + n0(lead) + '</td><td class="num">' + mgn(tie)
+        + '</td><td class="num">' + (50 + tie / 2).toFixed(2) + "%</td>" + cells + "</tr>";
+    }).join("");
+    return card("tx-banked", "Takeaway 3 · election day can only shade it",
+      "What election day would have to do",
+      "Read down to the banked lead Texas reports, then across to the election-day margin "
+      + "you find plausible. Election day is only " + ((1 - SHARE) * 100).toFixed(1)
+      + "% of the vote, so the banked lead carries " + (SHARE / (1 - SHARE)).toFixed(1)
+      + " times its weight.",
+      '<div class="scroll"><table class="txtbl"><thead>' + head + "</thead><tbody>" + body
+      + "</tbody></table></div>",
+      "The whole R+5 to R+22 range is worth about 4.1 points of final margin. That is why "
+      + "the 7pm number decides this.");
+  }
+
+  /* ================================================= 4. where every estimate lands */
+  function estimatesCard() {
+    var rows = (D.est || []).map(function (r) {
+      return {label: r.label, kind: r.kind, m: num(r.margin_R), note: r.note, n: num(r.n)};
+    }).filter(function (r) { return r.m != null; });
+    // the Black-ceiling correction is a result of today's work, not in the csv
+    rows.push({label: "County model, Black shift at its ceiling", kind: "model", m: 0.97,
+               note: "the same model with Black voters capped at +2 instead of +12"});
+    rows.sort(function (a, b) { return a.m - b.m; });
+    var W = 720, H = 36 + rows.length * 23, L = 300, R = 56;
+    var lo = -8, hi = 3;
+    var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R); };
+    var s = svg(W, H, "Every estimate of the Texas Senate margin");
+    [-8, -6, -4, -2, 0, 2].forEach(function (t) {
+      s += line(xs(t), 16, xs(t), H - 14, t === 0 ? "zl" : "gl")
+         + txt(xs(t), 12, t === 0 ? "even" : mgn(t, 0), "tk", "middle");
+    });
+    rows.forEach(function (r, i) {
+      var y = 26 + i * 23;
+      s += txt(L - 10, y + 4, r.label, "lb", "end");
+      s += rect(Math.min(xs(0), xs(r.m)), y - 6, Math.abs(xs(r.m) - xs(0)), 12,
+                sideCol(r.m), ' rx="2" opacity="0.85"');
+      s += txt(xs(r.m) + (r.m < 0 ? -8 : 8), y + 4, mgn(r.m), "vl", r.m < 0 ? "end" : "start");
+    });
+    s += "</svg>";
+    return card("tx-est", "Takeaway 4 · the race is inside two points",
+      "Where every estimate lands",
+      "Eleven estimates spanning six points and straddling zero. They do not disagree "
+      + "randomly: nearly every one is the same arithmetic with a different assumption "
+      + "about how far Hispanic voters move.",
+      s,
+      "<b>The model&rsquo;s known bias.</b> The county model moved the whole non-white "
+      + "bloc +12, Black voters included. They were already 91.1% Democratic in 2024, so "
+      + "+12 there is not a claim anyone can defend; capping it costs Democrats 1.62 points "
+      + "and turns D+0.65 into R+0.97. Both are plotted. Treat the friendlier one as the "
+      + "optimistic end of its own range, not the centre.");
+  }
+
+  /* ===================================================== 5. the primary flipped */
+  function primaryCard() {
+    var rows = (D.prim || []).map(function (r) {
+      return {y: +r.year, kind: r.kind, rp: num(r.r_primary), dp: num(r.d_primary),
+              sh: num(r.d_share_primary), nov: num(r.november_margin_R)};
+    }).filter(function (r) { return r.rp != null && r.dp != null; })
+      .sort(function (a, b) { return a.y - b.y; });
+    if (!rows.length) return "";
+    rows.forEach(function (r) { r.tot = r.rp + r.dp; });
+    var W = 720, H = 300, L = 54, R = 46, T = 24, Bm = 46;
+    var maxT = Math.max.apply(null, rows.map(function (r) { return r.tot; })) * 1.12;
+    var ys = function (v) { return H - Bm - v / maxT * (H - Bm - T); };
+    var bw = (W - L - R) / rows.length * 0.62;
+    var step = (W - L - R) / rows.length;
+    var s = svg(W, H, "Democratic share of the Texas primary by year, with ballots cast");
+    [0, 2, 4, 6].forEach(function (m) {
+      s += line(L, ys(m * 1e6), W - R, ys(m * 1e6), "gl")
+         + txt(L - 8, ys(m * 1e6) + 4, m + "M", "tk", "end");
+    });
+    rows.forEach(function (r, i) {
+      var x = L + i * step + (step - bw) / 2;
+      s += rect(x, ys(r.dp), bw, ys(0) - ys(r.dp), DC, ' rx="2"');
+      s += rect(x, ys(r.tot), bw, ys(r.dp) - ys(r.tot), RC, ' rx="2"');
+      if (ys(0) - ys(r.dp) > 16)
+        s += txt(x + bw / 2, ys(0) - (ys(0) - ys(r.dp)) / 2 + 4, r.sh.toFixed(1) + "%", "inb", "middle");
+      s += txt(x + bw / 2, ys(r.tot) - 6, (r.tot / 1e6).toFixed(2) + "M", "tk", "middle");
+      s += txt(x + bw / 2, H - Bm + 15, String(r.y),
+               r.kind === "Midterm" ? "lbb" : "tk", "middle");
+      if (r.nov != null)
+        s += txt(x + bw / 2, H - Bm + 30, mgn(r.nov, 1), "tk", "middle");
+    });
+    s += txt(L, H - 6, "Blue = Democratic ballots, red = Republican. Bottom row is the November margin that followed.", "lgd");
+    s += "</svg>";
+    return card("tx-primary", "Takeaway 5 · the primary flipped for the first time",
+      "Democratic share of the Texas primary",
+      "Texas runs an open primary &mdash; you declare at the poll and nothing binds you "
+      + "before or after. In March 2026 Democratic turnout more than doubled from 2022, to "
+      + "2,319,187, and the Democratic share crossed 50% in a midterm for the first time. "
+      + "Republicans had the contested race and still lost the share by 16 points.",
+      s,
+      "This is the strongest single piece of evidence that the electorate changed, and it "
+      + "is the one piece the demographic model does not use. It is also a certified count "
+      + "rather than an inference — unlike almost everything else on this tab.");
+  }
+
+  /* ============================================== 6. seven baselines, each its own swing */
+  function baselineCard() {
+    var rows = (D.base || []).map(function (r) {
+      return {label: r.baseline, year: r.year, then: num(r.margin_then_R),
+              swing: num(r.swing_to_2026), now: num(r.implied_2026_R)};
+    }).filter(function (r) { return r.then != null && r.now != null; })
+      .sort(function (a, b) { return a.now - b.now; });
+    if (!rows.length) return "";
+    var W = 720, H = 36 + rows.length * 26, L = 250, R = 54;
+    var lo = -12, hi = 16;
+    var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R); };
+    var s = svg(W, H, "Seven Texas baselines carried to 2026 by each year's own national swing");
+    [-10, -5, 0, 5, 10, 15].forEach(function (t) {
+      s += line(xs(t), 16, xs(t), H - 14, t === 0 ? "zl" : "gl")
+         + txt(xs(t), 12, t === 0 ? "even" : mgn(t, 0), "tk", "middle");
+    });
+    rows.forEach(function (r, i) {
+      var y = 28 + i * 26;
+      s += txt(L - 10, y + 4, r.label, "lb", "end");
+      s += line(xs(r.then), y, xs(r.now), y, "cn");
+      s += '<circle cx="' + xs(r.then) + '" cy="' + y + '" r="4.5" fill="none" '
+         + 'stroke="currentColor" stroke-width="1.5"/>';
+      s += '<circle cx="' + xs(r.now) + '" cy="' + y + '" r="5" fill="' + sideCol(r.now) + '"/>';
+      s += txt(xs(r.now) + (r.now < 0 ? -9 : 9), y + 4, mgn(r.now, 1), "vl",
+               r.now < 0 ? "end" : "start");
+    });
+    s += "</svg>";
+    return card("tx-base", "Takeaway 6 · the baseline is the whole disagreement",
+      "Seven starting points, each with its own swing",
+      "Take any past Texas result, add the national swing from <i>that</i> year to this "
+      + "year&rsquo;s generic ballot, and see where Texas lands. 2018 was already a strong "
+      + "Democratic national year, so it cannot borrow the 2024 swing. Hollow dot is the "
+      + "result then, filled dot is where it implies 2026 lands.",
+      s,
+      "Which year you start from moves the answer by more than any demographic lever on "
+      + "this tab. Starting from the 2024 Senate is the harshest available choice, and it "
+      + "is the one the county model makes.");
+  }
+
+  /* ================================================== 7. the Paxton drag */
+  function paxtonCard() {
+    var rows = (D.pax || []).map(function (r) {
+      return {p: r.pollster, n: num(r.n), sen: num(r.senate_d_margin),
+              gov: num(r.governor_d_margin), drag: num(r.paxton_drag)};
+    }).filter(function (r) { return r.drag != null; });
+    if (!rows.length) return "";
+    var mean = rows.reduce(function (a, r) { return a + r.drag; }, 0) / rows.length;
+    var body = rows.map(function (r) {
+      return "<tr><td>" + esc(r.p) + (r.n ? ' <span class="dim">n=' + n0(r.n) + "</span>" : "")
+        + '</td><td class="num">' + (r.sen > 0 ? "D+" : "R+") + Math.abs(r.sen).toFixed(1)
+        + '</td><td class="num">' + (r.gov > 0 ? "D+" : "R+") + Math.abs(r.gov).toFixed(1)
+        + '</td><td class="num dem">+' + r.drag.toFixed(2) + "</td></tr>";
+    }).join("");
+    return card("tx-paxton", "Takeaway 7 · about five points are the candidate",
+      "Senate against governor, same pollster",
+      "Four pollsters asked about both races in the same field period with the same "
+      + "sample, so house effects cancel in the difference. What is left is the candidate.",
+      '<table class="txtbl"><thead><tr><th>Pollster</th><th>Senate</th><th>Governor</th>'
+      + "<th>Paxton drag</th></tr></thead><tbody>" + body
+      + '<tr class="em"><td>Mean</td><td class="num">—</td><td class="num">—</td>'
+      + '<td class="num dem">+' + mean.toFixed(2) + "</td></tr></tbody></table>",
+      "This is the part of the Democratic case that is not about the electorate at all, "
+      + "which also means none of it transfers to the governor&rsquo;s race or down-ballot.");
+  }
+
+  /* ========================================== 8. the two sensitivity grids */
+  function gridCard(id, kicker, title, hint, rows, xKey, yKey, vKey, xLab, yLab, note, yFmt) {
+    if (!rows || !rows.length) return "";
+    var xs = [], ys = [];
+    rows.forEach(function (r) {
+      var x = num(r[xKey]), y = num(r[yKey]);
+      if (xs.indexOf(x) < 0) xs.push(x);
+      if (ys.indexOf(y) < 0) ys.push(y);
+    });
+    xs.sort(function (a, b) { return a - b; });
+    ys.sort(function (a, b) { return b - a; });
+    var mx = Math.max.apply(null, rows.map(function (r) { return Math.abs(num(r[vKey])); })) || 1;
+    var cw = 58, ch = 34, L = 92, T = 44, W = L + xs.length * cw + 12, H = T + ys.length * ch + 34;
+    var s = svg(W, H, title);
+    s += txt(L, 16, xLab, "lgd");
+    xs.forEach(function (x, i) {
+      s += txt(L + i * cw + cw / 2, T - 9, (x > 0 && xKey !== "ind_break_D" ? "+" : "") + x
+               + (xKey === "ind_break_D" ? "%" : ""), "tk", "middle");
+    });
+    ys.forEach(function (y, j) {
+      var lab = yFmt ? yFmt(y) : ((y > 0 ? "+" : "") + y);
+      s += txt(L - 8, T + j * ch + ch / 2 + 4, lab, "lb", "end");
+    });
+    rows.forEach(function (r) {
+      var x = xs.indexOf(num(r[xKey])), y = ys.indexOf(num(r[yKey])), v = num(r[vKey]);
+      if (x < 0 || y < 0 || v == null) return;
+      var t = Math.min(1, Math.abs(v) / mx * 1.5);
+      var fill = v < 0 ? DC : RC;
+      s += rect(L + x * cw, T + y * ch, cw - 2, ch - 2, fill,
+                ' rx="3" opacity="' + (0.12 + t * 0.78).toFixed(3) + '"');
+      s += txt(L + x * cw + (cw - 2) / 2, T + y * ch + ch / 2 + 4, mgn(v, 1),
+               t > 0.55 ? "cellw" : "cell", "middle");
+    });
+    s += txt(2, H - 10, yLab, "lgd");
+    s += "</svg>";
+    return card(id, kicker, title, hint, '<div class="scroll">' + s + "</div>", note);
+  }
+
+  /* ================================================= 9. how far each group moved */
+  function ethCard() {
+    var rows = (D.eth || []).map(function (r) {
+      return {g: r.group, a: num(r.margin_2024_R), b: num(r.margin_2026_est_R),
+              sh: num(r.shift_2026_est), d24: num(r.d_share_2024),
+              d26: num(r.d_share_2026_est), why: r.basis};
+    }).filter(function (r) { return r.a != null && r.b != null; });
+    if (!rows.length) return "";
+    var order = ["Hispanic", "Asian", "Black", "White"];
+    rows.sort(function (p, q) { return order.indexOf(p.g) - order.indexOf(q.g); });
+    var W = 720, H = 40 + rows.length * 34, L = 110, R = 62;
+    var lo = -95, hi = 72;
+    var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R); };
+    var s = svg(W, H, "Each group's 2024 measured margin and its 2026 estimate");
+    s += line(xs(0), 20, xs(0), H - 20, "zl") + txt(xs(0), 14, "even", "tk", "middle");
+    s += txt(L, 14, "more Democratic", "lgd")
+       + txt(W - R, 14, "more Republican", "lgd", "end");
+    rows.forEach(function (r, i) {
+      var y = 34 + i * 34, capped = r.g === "Black";
+      s += txt(L - 10, y, r.g, "lb", "end");
+      s += txt(L - 10, y + 12, capped ? "at the ceiling"
+               : r.d24.toFixed(0) + "% → " + r.d26.toFixed(0) + "% D", "sub", "end");
+      s += line(xs(r.a), y, xs(r.b), y, "cn");
+      s += '<circle cx="' + xs(r.a) + '" cy="' + y + '" r="4.5" fill="none" '
+         + 'stroke="currentColor" stroke-width="1.5"/>';
+      s += '<circle cx="' + xs(r.b) + '" cy="' + y + '" r="5" fill="' + DC + '"'
+         + (capped ? ' opacity="0.55"' : "") + "/>";
+      s += txt(Math.min(xs(r.a), xs(r.b)) - 9, y + 4, "+" + r.sh.toFixed(1),
+               capped ? "sub" : "vl", "end");
+    });
+    s += "</svg>";
+    return card("tx-eth", "Sensitivity · how much each group moves",
+      "Where each group is, and where the model needs it",
+      "Hollow dot is 2024 measured — counted ballots in precincts overwhelmingly one "
+      + "group by voting-age population, not a poll. Filled dot is the 2026 estimate.",
+      s,
+      "<b>The row that does not work is Black voters.</b> 2024 already sits at 91.1% "
+      + "Democratic, so the model&rsquo;s +12 for the whole non-white bloc cannot come from "
+      + "there — it has to be carried by Hispanic voters almost alone. That is the "
+      + "weakest joint in the model, and this is the chart where it shows.");
+  }
+
+  /* ============================== 10. why one Hispanic number is not enough + volatility */
+  function precinctCard() {
+    var rows = (D.prec || []).filter(function (r) { return num(r.margin_R) != null; });
+    if (!rows.length) return "";
+    var byWhere = {};
+    rows.forEach(function (r) {
+      (byWhere[r.where] = byWhere[r.where] || []).push(r);
+    });
+    var body = Object.keys(byWhere).map(function (w) {
+      return byWhere[w].map(function (r, i) {
+        return "<tr>" + (i === 0 ? '<td rowspan="' + byWhere[w].length + '">' + esc(w) + "</td>" : "")
+          + "<td>" + esc(r.race) + '</td><td class="num">' + n0(num(r.ballots))
+          + '</td><td class="num ' + (num(r.margin_R) < 0 ? "dem" : "rep") + '">'
+          + mgn(num(r.margin_R)) + "</td></tr>";
+      }).join("");
+    }).join("");
+    return card("tx-prec", "Why one Hispanic number is not enough",
+      "The same group, two different electorates",
+      "Precincts 90% or more Hispanic by voting-age population in 2024, split by where "
+      + "they are. The border and the metros are not the same electorate and are not "
+      + "moving the same way.",
+      '<div class="scroll"><table class="txtbl"><thead><tr><th>Where</th><th>Race</th>'
+      + "<th>Ballots</th><th>Margin</th></tr></thead><tbody>" + body + "</tbody></table></div>",
+      "There is no single Hispanic number to measure, which is why break-even is a range "
+      + "rather than a point: the same group runs 31 to 46 points apart depending on where "
+      + "it lives, and the two halves are moving in opposite directions.");
+  }
+
+  function volCard() {
+    var rows = (D.vol || []).map(function (r) {
+      return {g: r.group, n: num(r.counties), pct: num(r.pct_of_vote),
+              mv: num(r.mean_move_per_cycle)};
+    }).filter(function (r) { return r.mv != null; }).sort(function (a, b) { return b.mv - a.mv; });
+    if (!rows.length) return "";
+    var W = 700, H = 24 + rows.length * 44, L = 190, R = 70;
+    var mx = Math.max.apply(null, rows.map(function (r) { return r.mv; })) * 1.12;
+    var s = svg(W, H, "Average county margin movement per cycle by group");
+    rows.forEach(function (r, i) {
+      var y = 12 + i * 44;
+      s += txt(L - 10, y + 16, r.g, "lb", "end");
+      s += txt(L - 10, y + 29, r.pct.toFixed(1) + "% of the vote, " + r.n + " counties", "sub", "end");
+      var w = r.mv / mx * (W - L - R);
+      s += rect(L, y + 8, w, 16, i === 0 ? DC : "var(--dim,#999)", ' rx="3"');
+      s += txt(L + w + 8, y + 20, r.mv.toFixed(2), "vl");
+    });
+    s += "</svg>";
+    return card("tx-vol", "Sensitivity · what moves and what it weighs",
+      "Why South Texas matters",
+      "Average absolute change in county margin across 2018 to 2020 to 2022 to 2024, "
+      + "weighted by projected 2026 turnout, with each group&rsquo;s share of the vote.",
+      s,
+      "The border swings three times as hard as anywhere else while carrying a twelfth of "
+      + "the ballots: the highest-uncertainty, lowest-weight part of the map. Watch it "
+      + "first for direction, not for votes.");
+  }
+
+  /* ================================= 11. the county watchlist, live, + net D gain */
+  function watchCard(L) {
+    var w = D.watch || [];
+    if (!w.length) return "";
+    var liveBy = {};
+    var B = window.DATA || {};
+    var r = ((B.states || {}).TX || {}).races && B.states.TX.races.senate;
+    if (r && r.counties && r.candidates) {
+      var ri = -1, di = -1;
+      r.candidates.forEach(function (c, i) {
+        var p = (c.party || "").toUpperCase();
+        if (p === "R" || p === "REP") ri = i;
+        if (p === "D" || p === "DEM") di = i;
+      });
+      if (ri >= 0 && di >= 0) {
+        r.counties.forEach(function (row) {
+          var v = row.votes || [], t = v.reduce(function (a, x) { return a + (x || 0); }, 0);
+          if (t > 0) liveBy[row.name] = {m: ((v[ri] || 0) - (v[di] || 0)) / t * 100, t: t,
+                                         pr: row.precincts_reporting, pt: row.precincts_total};
+        });
+      }
+    }
+    var groups = [];
+    w.forEach(function (o) { if (groups.indexOf(o.group) < 0) groups.push(o.group); });
+    var body = groups.map(function (g) {
+      var rows = w.filter(function (o) { return o.group === g; });
+      return '<tr class="grp"><td colspan="6">' + esc(g) + "</td></tr>"
+        + rows.map(function (o) {
+          var lv = liveBy[o.county];
+          var swing = lv ? (lv.m - o.m24) : null;
+          return "<tr><td>" + esc(o.county) + '</td><td class="num">' + n0(o.turnout)
+            + '</td><td class="num">' + mgn(o.m24) + '</td><td class="num dim">'
+            + mgn(o.m26) + "</td>"
+            + '<td class="num ' + (lv ? (lv.m < 0 ? "dem" : "rep") : "") + '">'
+            + (lv ? mgn(lv.m) : "—") + "</td>"
+            + '<td class="num ' + (swing == null ? "" : (swing < 0 ? "dem" : "rep")) + '">'
+            + (swing == null ? "—" : (swing < 0 ? "← " : "→ ")
+               + Math.abs(swing).toFixed(1)) + "</td></tr>";
+        }).join("");
+    }).join("");
+    return card("tx-watch", "Where the votes come from",
+      "The counties that decide it, against their 2024 baseline",
+      "Nineteen counties carrying 67.5% of the projected vote. &ldquo;2024&rdquo; is the "
+      + "actual Senate margin, &ldquo;model&rdquo; is what this projection needs, "
+      + "&ldquo;live&rdquo; fills in as Texas reports, and the last column is the swing "
+      + "from 2024 &mdash; left is toward Democrats.",
+      '<div class="scroll"><table class="txtbl"><thead><tr><th>County</th><th>Proj turnout</th>'
+      + "<th>2024</th><th>Model 2026</th><th>Live</th><th>Swing</th></tr></thead><tbody>"
+      + body + "</tbody></table></div>",
+      "<b>This is the falsification test, instrumented.</b> If Hidalgo, Cameron and Webb "
+      + "swing right while Harris and Dallas swing left, the composition model is the wrong "
+      + "frame entirely &mdash; the electorate would be sorting by education rather than "
+      + "ethnicity, and every Hispanic number on this tab would be measuring the wrong thing.");
+  }
+
+  function countyGainCard() {
+    var rows = (D.cty || []).map(function (r) {
+      return {c: r.county, gain: num(r.net_d_gain), t: num(r.proj_turnout),
+              m24: num(r.margin_2024_sen), m26: num(r.margin_2026)};
+    }).filter(function (r) { return r.gain != null; }).sort(function (a, b) { return b.gain - a.gain; });
+    if (!rows.length) return "";
+    var top = rows.slice(0, 14);
+    var tot = rows.reduce(function (a, r) { return a + r.gain; }, 0);
+    var top5 = rows.slice(0, 5).reduce(function (a, r) { return a + r.gain; }, 0);
+    var top10 = rows.slice(0, 10).reduce(function (a, r) { return a + r.gain; }, 0);
+    var W = 700, H = 20 + top.length * 24, L = 130, R = 74;
+    var mx = top[0].gain * 1.1;
+    var s = svg(W, H, "Net Democratic gain by county, top 14");
+    top.forEach(function (r, i) {
+      var y = 12 + i * 24;
+      s += txt(L - 10, y + 10, r.c, "lb", "end");
+      var w = r.gain / mx * (W - L - R);
+      s += rect(L, y + 2, w, 14, DC, ' rx="2" opacity="0.85"');
+      s += txt(L + w + 8, y + 13, n0(r.gain), "vl");
+    });
+    s += "</svg>";
+    return card("tx-gain", "Where the votes come from",
+      "Net Democratic gain by county",
+      "What the model adds to each county versus its 2024 Senate result. The total needed "
+      + "to erase R+5.98 is " + n0(305279) + "; the model produces " + n0(tot) + ".",
+      s,
+      "<b>Concentration risk.</b> Five counties supply " + (top5 / tot * 100).toFixed(1)
+      + "% of the net gain and ten supply " + (top10 / tot * 100).toFixed(1) + "%. A miss "
+      + "in Harris or Dallas cannot be made up in rural Texas, and the whole cushion is "
+      + n0(tot - 305279) + " votes out of 10.2 million.");
+  }
+
+  /* ================================================================ 12. the conclusion */
+  function conclusionCard() {
+    return '<section class="txarg" id="tx-read-committed">'
+      + '<p class="txkick">Written down before the polls close · 2 November 2026</p>'
+      + "<h2>What I will read into tomorrow night, decided now</h2>"
+      + "<p>Committed in advance so it cannot be rationalised afterward. All three branches "
+      + "turn on the early-vote margin Texas reports when polls close, against the band "
+      + "set by what election day has actually done in Texas.</p>"
+      + "<ol>"
+      + "<li><b>Early vote better than " + mgn(THR_SAFE_D) + ".</b> Talarico wins even if "
+      + "election day looks like 2022, the harshest midterm on record. The Hispanic shift "
+      + "beat break-even and the polls were right.</li>"
+      + "<li><b>Early vote " + mgn(THR_SAFE_D) + " to " + mgn(THR_SAFE_R) + ".</b> "
+      + "Genuinely undecided, and election day decides it. Do not call it until election-day "
+      + "precincts are in.</li>"
+      + "<li><b>Early vote worse than " + mgn(THR_SAFE_R) + ".</b> Paxton wins even if "
+      + "election day is as weak for Republicans as 2024. The polls missed in the familiar "
+      + "Texas direction and the primary signal did not convert.</li>"
+      + "</ol>"
+      + '<p class="txnote"><b>What would discredit the method rather than the result:</b> if '
+      + "Hidalgo, Cameron and Webb come in right of 2024 while Harris and Dallas come in "
+      + "left of it, the electorate is sorting by education rather than ethnicity and every "
+      + "Hispanic number here is measuring the wrong thing. The watchlist above shows this "
+      + "live.</p>"
+      + '<p class="txnote"><b>Least sure of, in order:</b> the Hispanic shift, which sets '
+      + "the sign and is unmeasured; turnout above 10.2 million, which the whole model scales "
+      + "with; and the Black ceiling, corrected today at a cost of 1.62 points, which the "
+      + "county map has still not been re-cut for.</p>"
+      + "</section>";
+  }
+
+  /* ===================================================================== assembly */
+  var CSS = ""
+    + ".txwrap-inner{max-width:860px}"
+    + ".txcard,.txarg{background:var(--card,#fff);border:1px solid var(--line);"
+    + "border-radius:10px;padding:16px 18px;margin:0 0 14px}"
+    + ".txarg{border-left:3px solid var(--fg)}"
+    + ".txarg h2{font-family:var(--display);font-weight:400;font-size:22px;margin:2px 0 10px}"
+    + ".txarg p{margin:0 0 9px;font-size:14px;line-height:1.55;max-width:74ch}"
+    + ".txarg ol{margin:4px 0 0;padding-left:1.2em;font-size:14px;line-height:1.55}"
+    + ".txarg li{margin-bottom:6px}"
+    + ".txarg .nm{font-variant-numeric:tabular-nums}"
+    + ".txcard h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;"
+    + "font-size:13px;margin:0 0 7px}"
+    + ".txkick{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;"
+    + "color:var(--dim);margin:0 0 3px}"
+    + ".txhint{font-size:13px;color:var(--dim);margin:0 0 12px;max-width:74ch;line-height:1.5}"
+    + ".txnote{font-size:12.5px;color:var(--dim);margin:11px 0 0;max-width:74ch;"
+    + "line-height:1.5;border-top:1px solid var(--line);padding-top:9px}"
+    + ".txbig{font-family:var(--display);font-size:40px;line-height:1.1;"
+    + "font-variant-numeric:tabular-nums}"
+    + ".txsub{font-size:13px;color:var(--dim);margin:2px 0 10px}"
+    + ".txverdict{font-size:14px;font-weight:600;margin:0 0 10px;padding:7px 10px;"
+    + "border-radius:6px;background:var(--bg,#f6f6f4)}"
+    + ".txverdict.dem{color:var(--dem,#2a6ebb)}.txverdict.rep{color:var(--rep,#b3443a)}"
+    + ".txband{margin:0 0 12px;border:1px solid var(--line);border-radius:7px;overflow:hidden}"
+    + ".bandrow{display:flex;justify-content:space-between;gap:12px;padding:7px 10px;"
+    + "font-size:12.5px;border-bottom:1px solid var(--line)}"
+    + ".bandrow:last-child{border-bottom:none}.bandrow.mid{background:var(--bg,#f6f6f4)}"
+    + ".bandrow .bl.dem{color:var(--dem,#2a6ebb)}.bandrow .bl.rep{color:var(--rep,#b3443a)}"
+    + ".bandrow .bv{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}"
+    + "table.txtbl{width:100%;border-collapse:collapse;font-size:13px}"
+    + "table.txtbl th{font-family:var(--display);text-transform:uppercase;letter-spacing:.05em;"
+    + "font-size:10px;color:var(--dim);text-align:right;padding:0 0 5px 11px;white-space:nowrap}"
+    + "table.txtbl th:first-child,table.txtbl td:first-child{text-align:left;padding-left:0}"
+    + "table.txtbl td{padding:4px 0 4px 11px;border-top:1px solid var(--line)}"
+    + "table.txtbl td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}"
+    + "table.txtbl tr.em td{font-weight:600}"
+    + "table.txtbl tr.grp td{font-family:var(--display);text-transform:uppercase;"
+    + "letter-spacing:.05em;font-size:10px;color:var(--dim);padding-top:11px}"
+    + "table.txtbl .dem,.txcard .dem{color:var(--dem,#2a6ebb)}"
+    + "table.txtbl .rep,.txcard .rep{color:var(--rep,#b3443a)}"
+    + ".txcard .dim,table.txtbl .dim{color:var(--dim)}"
+    + ".txcard .scroll{overflow-x:auto}"
+    + ".txnav{font-size:12px;margin:0 0 14px;line-height:1.9}"
+    + ".txnav a{margin-right:12px;white-space:nowrap}"
+    + "#txwrap svg{color:var(--fg)}"
+    + "#txwrap .gl{stroke:var(--line);stroke-width:1}"
+    + "#txwrap .zl{stroke:currentColor;stroke-width:1;stroke-dasharray:3 3;opacity:.55}"
+    + "#txwrap .cn{stroke:currentColor;stroke-width:2.5;opacity:.3;stroke-linecap:round}"
+    + "#txwrap text{font-size:11px;fill:var(--fg)}"
+    + "#txwrap .tk{font-size:10px;fill:var(--dim)}"
+    + "#txwrap .lb{font-size:11.5px;fill:var(--fg)}"
+    + "#txwrap .lbb{font-size:11.5px;fill:var(--fg);font-weight:600}"
+    + "#txwrap .sub{font-size:9.5px;fill:var(--dim)}"
+    + "#txwrap .lgd{font-size:10px;fill:var(--dim)}"
+    + "#txwrap .vl{font-size:11px;fill:var(--fg);font-variant-numeric:tabular-nums}"
+    + "#txwrap .inb{font-size:10px;fill:#fff;font-variant-numeric:tabular-nums}"
+    + "#txwrap .cell{font-size:10.5px;fill:var(--fg);font-variant-numeric:tabular-nums}"
+    + "#txwrap .cellw{font-size:10.5px;fill:#fff;font-variant-numeric:tabular-nums}";
+
+  window.renderTexas = function (host) {
+    host.innerHTML = '<div class="txwrap-inner"><p class="txhint">Loading the Texas '
+      + "analysis…</p></div>";
+    var want = [["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"],
+                ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
+                ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"],
+                ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
+                ["watch", "tx_watch.json"]];
+    Promise.all(want.map(function (p) {
+      return load(p[1]).then(function (v) { D[p[0]] = v; })
+        .catch(function (e) { D[p[0]] = []; console.warn("texas:", e.message); });
+    })).then(function () {
+      SECTIONS = [];
+      var L = live();
+      var html = thesis()
+        + readCard(L)
+        + historyCard()
+        + bankedCard()
+        + estimatesCard()
+        + primaryCard()
+        + baselineCard()
+        + paxtonCard()
+        + gridCard("tx-sens", "Sensitivity · the demographic levers",
+            "What it takes to flip Texas",
+            "Statewide margin for each pair of assumed shifts. White applies in the fifteen "
+            + "largest counties only. Across the whole white axis the answer barely moves; "
+            + "across the Hispanic axis it swings the race — which is why one "
+            + "unmeasured number carries the sign.",
+            D.sens, "hispanic_shift", "white_shift", "tx_margin_R",
+            "Hispanic shift toward Democrats →", "↓ White shift",
+            "Black and Asian are held at the values the published model used. The +8 for "
+            + "Black voters is not defensible as a group-level claim and was corrected to "
+            + "+2 today, so read every cell as about 1.6 points friendlier to Democrats "
+            + "than the corrected model gives.")
+        + gridCard("tx-blocs", "Sensitivity · the same question by bloc",
+            "What it takes, by voting bloc",
+            "Independents against the Republican bloc-size edge, with Democrats holding 98% "
+            + "and crossover fixed at 2%. The first version of this grid wanted independents "
+            + "near 68% — but that came from the bloc sizes, not from independents.",
+            D.blocs, "ind_break_D", "r_bloc_edge", "tx_margin_R",
+            "Independents breaking Democratic →", "↓ Republican size edge",
+            "AtlasIntel&rsquo;s own bloc breaks solve to 29/30/41, a twelve-point Republican "
+            + "edge, and that is what forces the 68%. The March primary — Democrats "
+            + "51.70% of 4,479,000 ballots — argues the blocs are near even, where the "
+            + "race turns on independents splitting 50/50.",
+            function (y) { return y === 0 ? "even" : (y > 0 ? "R+" : "D+") + Math.abs(y); })
+        + ethCard()
+        + volCard()
+        + precinctCard()
+        + watchCard(L)
+        + countyGainCard()
+        + conclusionCard();
+      var nav = '<p class="txnav">' + SECTIONS.map(function (s) {
+        return '<a href="#' + s.id + '">' + esc(s.title) + "</a>";
+      }).join("") + "</p>";
+      host.innerHTML = "<style>" + CSS + "</style>"
+        + '<div class="txwrap-inner">' + thesis() + nav
+        + html.slice(html.indexOf("</section>") + 10) + "</div>";
+    });
+  };
+})();

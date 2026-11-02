@@ -39,15 +39,18 @@ UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit
 
 # Several states keep a legacy clarityelections.com entry alongside a branded host and
 # only one of them answers, so each state carries its candidates in preference order.
+# Georgia is deliberately absent. It left Clarity: the legacy host still answers
+# elections.json but its list stops at the June 2024 primary and every detail path under
+# it returns 403, while results.sos.ga.gov carries no Clarity paths at all. Those rows
+# could never find a 2026 election, and a None from find_election is reported as "not
+# staged yet", so the dead path looked exactly like the expected pre-election state.
+# ga_results.py reads the SOS results API the live Georgia site itself uses.
 HOSTS = {
-    "GA": [("results.sos.ga.gov", "GA"),
-           ("results.enr.clarityelections.com", "GA")],
     "IA": [("electionresults.iowa.gov", "IA")],
     "SC": [("www.enr-scvotes.org", "SC")],
 }
 # The contests this board tracks, matched case-insensitively on the contest text.
 WANT = {
-    "GA": {"senate": r"\bUS SENATE\b|UNITED STATES SENAT", "governor": r"\bGOVERNOR\b"},
     "IA": {"senate": r"\bUS SENAT|UNITED STATES SENAT"},
     "SC": {"senate": r"\bUS SENAT|UNITED STATES SENAT"},
 }

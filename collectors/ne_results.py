@@ -65,16 +65,57 @@ def contests():
             out[name] = int(chk.group(1))
     if not out:
         raise RuntimeError("results page carried no contest headings — layout changed")
+    # The display markup is the wrong thing to read. All three of these regexes were
+    # scraping rendered spans and all three returned nothing on 11-02 while the page
+    # plainly carried the figures: "Results last updated:" is followed immediately by
+    # </span>, so [^<] could never match; "Registered Voters" is separated from its
+    # number by exactly 41 characters of markup against a 40-character allowance; and
+    # the "Total" the third one found was an unrelated form value. Because each was
+    # guarded by `if`, the failures were silent and meta came back {}.
+    #
+    # ASP.NET puts the same figures in hidden inputs, which are machine-facing and do
+    # not move when the layout does. Read those instead.
+    def hid(name):
+        m = re.search(rf'id="hid{name}"[^>]*\bvalue="([^"]*)"', html)
+        return m.group(1).strip() if m else None
+
+    def hidint(name):
+        v = hid(name)
+        if v is None:
+            return None
+        v = v.replace(",", "")
+        return int(v) if re.fullmatch(r"-?\d+", v) else None
+
     meta = {}
-    t = re.search(r"Results last updated:\s*([^<]{5,40})", html)
+    t = re.search(r"Results last updated:\s*(?:</span>\s*<span[^>]*>)?\s*([^<]{5,40})", html)
     if t:
         meta["updated"] = re.sub(r"\s+", " ", t.group(1)).strip()
-    reg = re.search(r"Registered Voters[^0-9]{0,40}([\d,]+)", html)
+    reg = re.search(r'class="header-voter-number"[^>]*>\s*([\d,]+)', html) \
+        or re.search(r"Registered Voters(?:(?!\d)[\s\S]){0,80}?([\d,]{4,})", html)
     if reg:
         meta["registered"] = int(reg.group(1).replace(",", ""))
-    pr = re.search(r"Total\s*([\d,]+)\s*</", html)
-    if pr:
-        meta["precincts_total"] = int(pr.group(1).replace(",", ""))
+    # precincts: reported + partial + not-reported is the total, and each part is
+    # useful on its own once counting starts.
+    rep, part, notrep = (hidint("PrecinctsReported"), hidint("PrecinctsPartial"),
+                         hidint("PrecinctsNotReported"))
+    if None not in (rep, part, notrep):
+        meta["precincts_reporting"] = rep
+        meta["precincts_partial"] = part
+        meta["precincts_total"] = rep + part + notrep
+    else:
+        pr = re.search(r'class="header-totalprecincts-text"[^>]*>\s*([\d,]+)', html) \
+            or re.search(r"Precincts Fully:\s*[\d,]+\s*/\s*([\d,]+)", html)
+        if pr:
+            meta["precincts_total"] = int(pr.group(1).replace(",", ""))
+    if hid("ElectionDate"):
+        meta["election_date"] = hid("ElectionDate")
+    if hid("ElectionType"):
+        meta["election_type"] = hid("ElectionType")
+    # A layout change that takes out every field at once is what hid the old bug for
+    # days. One missing field is tolerable; all of them is not.
+    if not meta:
+        raise RuntimeError("results page carried none of the expected header figures - "
+                           "layout changed")
     return out, meta
 
 

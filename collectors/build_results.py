@@ -156,6 +156,39 @@ def main():
     board.setdefault("states", {})
     touched = []
 
+    # Who is on the ballot, before anyone has a result. Every collector already writes
+    # data/candidates-<ST>.json via election_day.record_candidates when it refuses to
+    # publish figures, so the roster is known days early - but nothing read those files,
+    # which is why the board showed "Candidate 1 / Candidate 2" for ten of thirteen
+    # states. A real result below overwrites this, so it only ever fills a gap.
+    rostered = []
+    for f in sorted(glob.glob(str(DATA / "candidates-*.json"))):
+        st = os.path.basename(f)[len("candidates-"):-len(".json")]
+        entry = board["states"].get(st)
+        if entry is None:
+            continue
+        doc = json.loads(pathlib.Path(f).read_text())
+        entry.setdefault("races", {})
+        for race, r in (doc.get("races") or {}).items():
+            names = [c for c in (r.get("candidates") or []) if c.get("name")]
+            if not names:
+                continue
+            blk = entry["races"].setdefault(race, {})
+            if blk.get("counted"):
+                continue        # real results already here; never overwrite them
+            # Put the Republican first and the Democrat second, as the board's columns
+            # assume, and keep everyone else in the order the state listed them.
+            order = {"R": 0, "REP": 0, "D": 1, "DEM": 1}
+            blk["candidates"] = sorted(
+                [{"name": c["name"], "party": c.get("party") or "O"} for c in names],
+                key=lambda c: order.get((c["party"] or "").upper(), 2))
+            blk.setdefault("counties", [])
+            blk["roster_only"] = True
+            blk["roster_source"] = doc.get("source")
+        rostered.append(st)
+    if rostered:
+        print(f"  ballot rosters folded in for {', '.join(rostered)}")
+
     for f in sorted(glob.glob(str(DATA / "results-*.json"))):
         st = os.path.basename(f)[len("results-"):-len(".json")]
         d = json.loads(pathlib.Path(f).read_text())
@@ -189,6 +222,14 @@ def main():
                                         "share of its OWN mode.")
             blk["is_test_data"] = bool(d.get("is_test_data"))
             blk["counted"] = tot.get("total")
+            blk["modes"] = tot.get("modes")
+            # Carried only where the state publishes it per candidate. Texas does (EV
+            # beside V per candidate per county), which is what lets the Texas tab read
+            # the early-vote MARGIN rather than just the early-vote share.
+            if tot.get("choices_by_mode"):
+                blk["choices_by_mode"] = tot["choices_by_mode"]
+            blk.pop("roster_only", None)     # real figures supersede the ballot roster
+            blk.pop("roster_source", None)
         entry["source"] = d.get("source")
         entry["updated"] = d.get("fetched")
         touched.append(st)

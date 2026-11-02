@@ -168,6 +168,15 @@ def build(eid, name, label=""):
             "total": sum(s["choices"].values()),
             "modes": {"early": ce,
                       "election_day": sum(s["choices"].values()) - ce},
+            # Per candidate, not just the aggregate. The aggregate gives the share of
+            # the vote that is early; only the per-candidate split gives the early
+            # MARGIN, which is the number the Texas read turns on: early is about 76%
+            # of the projected vote, so the margin Texas publishes at poll close is
+            # within a couple of points of the final one.
+            "choices_by_mode": {
+                who: {"early": s["early"].get(who, 0),
+                      "election_day": v - s["early"].get(who, 0)}
+                for who, v in s["choices"].items()},
             "precincts_reporting": pr_in, "precincts_total": pr_all,
             "early_and_mail_cast": cast_tot, "early_and_mail_counted": ce,
             "early_and_mail_left": (max(0, cast_tot - ce) if cast_tot is not None else None),

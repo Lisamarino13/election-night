@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-25T22:48:35+00:00",
+ "updated": "2026-11-02T22:52:03+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -18,17 +18,15 @@
        "party": "R"
       },
       {
-       "name": "Candidate 2",
+       "name": "Abdul El-Sayed",
        "party": "D"
-      },
-      {
-       "name": "Other",
-       "party": "O"
       }
      ],
      "counties": [],
      "updated": null,
-     "tier": "tossup"
+     "tier": "tossup",
+     "roster_only": true,
+     "roster_source": "https://ballotpedia.org/United_States_Senate_election_in_Michigan,_2026"
     }
    },
    "unitsExpected": 83
@@ -53,13 +51,46 @@
        "party": "D"
       },
       {
-       "name": "Other",
+       "name": "Marisa Simonetti",
+       "party": "O"
+      },
+      {
+       "name": "Rebecca Whiting",
+       "party": "O"
+      },
+      {
+       "name": "WRITE-IN",
        "party": "O"
       }
      ],
      "counties": [],
      "updated": null,
-     "tier": "tossup"
+     "tier": "tossup",
+     "roster_only": true,
+     "roster_source": "https://electionresultsfiles.sos.mn.gov/20261103/allracesbycounty.txt"
+    },
+    "governor": {
+     "candidates": [
+      {
+       "name": "Lisa Demuth and Ryan Wilson",
+       "party": "R"
+      },
+      {
+       "name": "Amy Klobuchar and Ben Schierer",
+       "party": "D"
+      },
+      {
+       "name": "Steven Young and Jane Kirby",
+       "party": "O"
+      },
+      {
+       "name": "WRITE-IN",
+       "party": "O"
+      }
+     ],
+     "counties": [],
+     "roster_only": true,
+     "roster_source": "https://electionresultsfiles.sos.mn.gov/20261103/allracesbycounty.txt"
     }
    },
    "unitsExpected": 87
@@ -76,21 +107,19 @@
     "senate": {
      "candidates": [
       {
-       "name": "Candidate 1",
+       "name": "Susan Collins",
        "party": "R"
       },
       {
-       "name": "Candidate 2",
+       "name": "Troy Jackson",
        "party": "D"
-      },
-      {
-       "name": "Candidate 3",
-       "party": "O"
       }
      ],
      "counties": [],
      "updated": null,
-     "tier": "tossup"
+     "tier": "tossup",
+     "roster_only": true,
+     "roster_source": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Maine"
     }
    },
    "unitsExpected": 16,
@@ -139,21 +168,19 @@
     "senate": {
      "candidates": [
       {
-       "name": "Candidate 1",
+       "name": "Dan Sullivan",
        "party": "R"
       },
       {
-       "name": "Candidate 2",
+       "name": "Mary Peltola",
        "party": "D"
-      },
-      {
-       "name": "Candidate 3",
-       "party": "O"
       }
      ],
      "counties": [],
      "updated": null,
-     "tier": "watch"
+     "tier": "watch",
+     "roster_only": true,
+     "roster_source": "https://ballotpedia.org/U.S._Senate_battlegrounds,_2026"
     }
    },
    "unitsExpected": 40
@@ -176,15 +203,13 @@
       {
        "name": "Annie Andrews",
        "party": "D"
-      },
-      {
-       "name": "Candidate 3",
-       "party": "O"
       }
      ],
      "counties": [],
      "updated": null,
-     "tier": "tossup"
+     "tier": "tossup",
+     "roster_only": true,
+     "roster_source": "https://ballotpedia.org/U.S._Senate_battlegrounds,_2026"
     }
    },
    "unitsExpected": 46
@@ -6016,21 +6041,27 @@
     "senate": {
      "candidates": [
       {
-       "name": "Candidate 1",
+       "name": "Ashley Hinson",
        "party": "R"
       },
       {
-       "name": "Candidate 2",
+       "name": "Josh Turek",
        "party": "D"
       },
       {
-       "name": "Candidate 3",
+       "name": "Thomas Laehn",
+       "party": "O"
+      },
+      {
+       "name": "Write-in",
        "party": "O"
       }
      ],
      "counties": [],
      "updated": null,
-     "tier": "watch"
+     "tier": "watch",
+     "roster_only": true,
+     "roster_source": "https://electionresults.iowa.gov/IA/127077/383162/reports/detailxml.zip"
     }
    },
    "unitsExpected": 99
@@ -8214,40 +8245,36 @@
     "governor": {
      "candidates": [
       {
-       "name": "Candidate 1",
+       "name": "Rick Jackson",
        "party": "R"
       },
       {
-       "name": "Candidate 2",
+       "name": "Keisha Lance Bottoms",
        "party": "D"
-      },
-      {
-       "name": "Other",
-       "party": "O"
       }
      ],
      "counties": [],
      "updated": null,
-     "tier": "tossup"
+     "tier": "tossup",
+     "roster_only": true,
+     "roster_source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/06162026GeneralPrimaryRunoff/data"
     },
     "senate": {
      "candidates": [
       {
-       "name": "Candidate 1",
+       "name": "Mike Collins",
        "party": "R"
       },
       {
-       "name": "Candidate 2",
+       "name": "Jon Ossoff",
        "party": "D"
-      },
-      {
-       "name": "Other",
-       "party": "O"
       }
      ],
      "counties": [],
      "updated": null,
-     "tier": "safe"
+     "tier": "safe",
+     "roster_only": true,
+     "roster_source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/06162026GeneralPrimaryRunoff/data"
     }
    },
    "unitsExpected": 159
@@ -8264,40 +8291,44 @@
     "senate": {
      "candidates": [
       {
-       "name": "Candidate 1",
+       "name": "Ken Paxton",
        "party": "R"
       },
       {
-       "name": "Candidate 2",
+       "name": "James Talarico",
        "party": "D"
       },
       {
-       "name": "Candidate 3",
-       "party": "O"
+       "name": "Ted Brown",
+       "party": "L"
       }
      ],
      "counties": [],
      "updated": null,
-     "tier": "watch"
+     "tier": "watch",
+     "roster_only": true,
+     "roster_source": "https://www.click2houston.com/enough/2026/11/01/texas-election-2026-where-abbott-hinojosa-paxton-and-talarico-stand/"
     },
     "governor": {
      "candidates": [
       {
-       "name": "Candidate 1",
+       "name": "Greg Abbott",
        "party": "R"
       },
       {
-       "name": "Candidate 2",
+       "name": "Gina Hinojosa",
        "party": "D"
       },
       {
-       "name": "Other",
-       "party": "O"
+       "name": "Pat Dixon",
+       "party": "L"
       }
      ],
      "counties": [],
      "updated": null,
-     "tier": "tossup"
+     "tier": "tossup",
+     "roster_only": true,
+     "roster_source": "https://www.click2houston.com/enough/2026/11/01/texas-election-2026-where-abbott-hinojosa-paxton-and-talarico-stand/"
     }
    },
    "unitsExpected": 254
@@ -8314,24 +8345,100 @@
     "senate": {
      "candidates": [
       {
-       "name": "Candidate 1",
+       "name": "Roger Marshall",
        "party": "R"
       },
       {
-       "name": "Candidate 2",
+       "name": "Adam Hamilton",
        "party": "D"
       },
       {
-       "name": "Candidate 3",
+       "name": "David C Graham",
        "party": "O"
       }
      ],
      "counties": [],
      "updated": null,
-     "tier": "watch"
+     "tier": "watch",
+     "roster_only": true,
+     "roster_source": "https://ent.sos.ks.gov/<county>.html (+ national.html and statewide.html for state totals), read with a real browser"
+    },
+    "governor": {
+     "candidates": [
+      {
+       "name": "Ty Masterson",
+       "party": "R"
+      },
+      {
+       "name": "Cindy Holscher",
+       "party": "D"
+      }
+     ],
+     "counties": [],
+     "roster_only": true,
+     "roster_source": "https://ent.sos.ks.gov/<county>.html (+ national.html and statewide.html for state totals), read with a real browser"
     }
    },
    "unitsExpected": 105
+  },
+  "MS": {
+   "name": "Mississippi",
+   "abbr": "MS",
+   "countsFirst": "election-day",
+   "partyReg": false,
+   "unit": "county",
+   "source": null,
+   "updated": null,
+   "races": {
+    "senate": {
+     "candidates": [
+      {
+       "name": "Cindy Hyde-Smith",
+       "party": "R"
+      },
+      {
+       "name": "Scott Colom",
+       "party": "D"
+      },
+      {
+       "name": "Ty Pinkins",
+       "party": "I"
+      }
+     ],
+     "counties": [],
+     "roster_only": true,
+     "roster_source": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Mississippi"
+    }
+   },
+   "unitsExpected": 82
+  },
+  "LA": {
+   "name": "Louisiana",
+   "abbr": "LA",
+   "countsFirst": "early",
+   "partyReg": true,
+   "unit": "parish",
+   "source": null,
+   "updated": null,
+   "races": {
+    "senate": {
+     "candidates": [
+      {
+       "name": "Julia Letlow",
+       "party": "R"
+      },
+      {
+       "name": "Jamie Davis",
+       "party": "D"
+      }
+     ],
+     "counties": [],
+     "roster_only": true,
+     "roster_source": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Louisiana"
+    }
+   },
+   "unitsExpected": 64,
+   "unitsNote": "64 parishes. First Senate race under the 2024 party-primary law: plurality wins, no December runoff."
   }
  }
 }

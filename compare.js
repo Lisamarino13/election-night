@@ -100,9 +100,13 @@ function drawBars(host, rows, opts){
     const hasEday = r.eday != null && r.totalVote != null;
     if (hasEday){
       const yTop = yOf(r.totalVote);
-      svg.appendChild(svgEl("path", {
-        d: barPath(x, yTop, bw, y - yTop, 4), fill: fill, "fill-opacity": 0.26,
-        stroke: fill, "stroke-width": 1, "stroke-opacity": 0.5}));
+      // a capped 2026 pool is a ceiling, not a count: hollow and dashed so it reads
+      // as the projection it is next to the measured cycles beside it
+      svg.appendChild(svgEl("path", r.capped
+        ? {d: barPath(x, yTop, bw, y - yTop, 4), fill: "none",
+           stroke: PAL.mid, "stroke-width": 1.5, "stroke-dasharray": "4 3"}
+        : {d: barPath(x, yTop, bw, y - yTop, 4), fill: fill, "fill-opacity": 0.26,
+           stroke: fill, "stroke-width": 1, "stroke-opacity": 0.5}));
     }
     const p = svgEl("path", {d:barPath(x, y, bw, h, 4), fill: cyc==="now" ? "none" : fill,
       stroke: fill, "stroke-width": cyc==="now" ? 2 : 0,
@@ -338,6 +342,15 @@ function shareFor(share, code, year){
 // Both chart renderers need the same election-day stacking, and patching only one of
 // them is how the Charts tab ended up showing it while the cards on the early-vote tab
 // - the ones actually on screen - did not. One function, called by both.
+let _caps = null;
+async function edayCaps(){
+  if (_caps !== null) return _caps;
+  try{ const r = await fetch("data/eday-caps.json?t=" + Date.now());
+       _caps = r.ok ? await r.json() : {}; }
+  catch(e){ _caps = {}; }
+  return _caps;
+}
+
 async function addElectionDay(rows, code){
   const share = await evShare();
   // The bars are built from the early-vote archive, which for Georgia, Kansas,
@@ -366,9 +379,31 @@ async function addElectionDay(rows, code){
     r.basis = sh.kind;
     any = true;
   }
+  // 2026 has no finished turnout to divide into, so its bar stops at the early vote
+  // and reads as a shorter election than 2022 when it is nothing of the kind. The
+  // election-day POOL is the one part of a live cycle that can be bounded: its volume
+  // barely moves with the mode mix (Texas counted 2.32M election-day ballots in 2018,
+  // 2.59M in 2022, while its early vote went 5.5M -> 7.7M), and it SHRANK in twelve of
+  // the fourteen states tracked here between those two midterms. So the cap is each
+  // state's own history used as a ceiling. It is drawn hollow, and labelled a cap, so
+  // it cannot be read as a count.
+  const caps = await edayCaps();
+  const cap = (caps[code] || {}).eday_cap;
+  const live = rows.find(r => r.year === 2026);
+  if (cap && live && live.eday == null){
+    live.totalVote = live.total + cap;
+    live.eday = cap;
+    live.basis = "cap";
+    live.capped = true;
+    live.tip = (live.tip ? live.tip + " — " : "") +
+      "election-day pool capped at " + n(cap) + " from this state's own 2018 and 2022 counts";
+    any = true;
+  }
+  const capped = rows.some(r => r.capped);
   const legend = any
     ? LEGEND + `<span><i style="background:${PAL.mid};opacity:.26;
-        border:1px solid ${PAL.mid}"></i>election day (stacked on top)</span>`
+        border:1px solid ${PAL.mid}"></i>election day (stacked on top)</span>` +
+      (capped ? `<span><i style="background:none;border:1.5px dashed ${PAL.mid}"></i>2026 election-day cap</span>` : "")
     : LEGEND;
   return {any, legend};
 }

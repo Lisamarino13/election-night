@@ -857,6 +857,33 @@ function dailyPace(e, k){
     <div class="streamline">${note}</div></div>`;
 }
 
+
+// ---- how much of this state is already decided ------------------------------
+// A card that says "7,699,516 cast" does not say whether that is most of the state or
+// a quarter of it, and the answer differs enormously: Texas banks three quarters of
+// its vote early, Minnesota about a quarter. The election-day POOL is the part of a
+// live cycle that can be bounded - its volume barely moves with the mode mix, and it
+// SHRANK in twelve of the fourteen states here between 2018 and 2022 - so each state
+// carries a cap taken from its own two midterms and the card measures against that.
+let EDAY_CAPS = null;
+async function loadCaps(){
+  try{ const r = await fetch("data/eday-caps.json?t="+Date.now());
+       EDAY_CAPS = r.ok ? await r.json() : {}; }
+  catch(e){ EDAY_CAPS = {}; }
+}
+function leftLine(k, banked){
+  const c = EDAY_CAPS && EDAY_CAPS[k];
+  if (!c || !c.eday_cap || !banked) return "";
+  const proj = banked + c.eday_cap;
+  const pct  = banked / proj * 100;
+  return `<div class="evrow lead"><span class="slab">Already in</span>
+      <span class="fig evtot">${pct.toFixed(0)}%</span>
+      <div class="share ev"><i style="width:${pct.toFixed(2)}%;background:var(--y2026)"></i><i
+        style="width:${(100-pct).toFixed(2)}%;background:var(--y2022);opacity:.3"></i></div>
+      <span class="evpcts"><b class="dim">of about ${n(proj)} &mdash; up to
+        ${n(c.eday_cap)} still to come on election day</b></span></div>`;
+}
+
 function turnoutCard(k, st, e){
   const t = e.totals||{}, reg = t.registered||0;
   const ipRep = e.inPersonReported !== false;
@@ -909,6 +936,7 @@ function turnoutCard(k, st, e){
     ${line("In-person early", t.in_person, pct(t.in_person||0)+" of registered", !ipRep)}
     ${line("By mail", t.by_mail, pct(t.by_mail||0)+" of registered")}
     ${line(ipRep?"Total early":"Mail returned", t.total, reg?pct(t.total||0)+" of "+n(reg)+" registered":"")}
+    ${leftLine(k, t.total||0)}
     ${(() => {
       // "Mail outstanding" is requested minus returned, so it only means anything when
       // the state actually publishes a request count. Texas does not: UF fills its
@@ -1364,6 +1392,7 @@ function renderEV(){
     // the real one buried.
     const totEarly = ["D","R","NPA","O"].reduce((a,p)=>(a[p]=(ret[p]||0)+((ip&&ip[p])||0),a),
                       {total:(ret.total||0)+((ip&&ip.total)||0)});
+    const leftRow = leftLine(k, totEarly.total||0);
     const bar=ps=>{const t=ps.total||1;return parties.map(p=>
       `<i style="width:${((ps[p]||0)/t*100).toFixed(2)}%;background:${PARTY_COL[p]}"></i>`).join("");};
     const row=(lab,ps,lead)=>`<div class="evrow${lead?" lead":""}"><span class="slab">${lab}</span>
@@ -1473,6 +1502,7 @@ function renderEV(){
     card.innerHTML=`<div class="sthd"><span class="stname">${st.name}</span>
         <span class="pin">${Object.keys(e.counties||{}).length} ${UNIT}</span></div>
       ${ip ? row("Total early vote", totEarly, true) : ""}
+      ${leftRow}
       ${row("Mail returned", ret)}
       ${ip ? row("In-person early", ip) : ""}
       ${hasOut ? row("Mail outstanding", out)
@@ -1569,10 +1599,12 @@ async function load(){
     }
     if(fresh.updated) DATA.updated = fresh.updated;
     await loadTrend();
+    await loadCaps();
   await loadEarly();
     s.textContent = ""; render();
     refreshCharts();
   }catch(e){
+    await loadCaps();
     await loadEarly();
     s.textContent = "No results feed yet — early-vote data shown where available.";
     render();
@@ -1633,4 +1665,4 @@ setTab("ev");
 load();
 setInterval(load, 120000);
 </script>
-<script src="compare.js?v=3017af16"></script>
+<script src="compare.js?v=365da337"></script>

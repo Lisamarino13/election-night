@@ -32,10 +32,25 @@ STATES = {"Texas": "TX", "North Carolina": "NC", "Georgia": "GA", "Florida": "FL
           "Michigan": "MI", "Ohio": "OH", "Minnesota": "MN", "Iowa": "IA",
           "Kansas": "KS", "Maine": "ME", "Nebraska": "NE", "South Carolina": "SC",
           "Alaska": "AK", "Louisiana": "LA"}
+# Every race line the file publishes. "Not Hispanic or Latino" is deliberately
+# NOT mapped: it is a SUBTOTAL of the single-race lines, so including it as a group
+# double counts. The single-race lines plus Hispanic cover 97.98% of Texas CVAP;
+# the remaining 2.02% is the four multiracial combinations, carried separately.
 LINES = {"Total": "total", "White Alone": "white",
          "Black or African American Alone": "black", "Asian Alone": "asian",
          "American Indian or Alaska Native Alone": "native",
-         "Hispanic or Latino": "hispanic"}
+         "Native Hawaiian or Other Pacific Islander Alone": "nhpi",
+         "Hispanic or Latino": "hispanic",
+         "American Indian or Alaska Native and White": "mr_aian_white",
+         "Asian and White": "mr_asian_white",
+         "Black or African American and White": "mr_black_white",
+         "American Indian or Alaska Native and Black or African American": "mr_aian_black",
+         "Remainder of Two or More Race Responses": "mr_other"}
+# AAPI is Asian Alone plus Native Hawaiian / Pacific Islander Alone, the standard
+# combination; the file does not publish it as its own line.
+DERIVED = {"aapi": ("asian", "nhpi"),
+           "multiracial": ("mr_aian_white", "mr_asian_white", "mr_black_white",
+                           "mr_aian_black", "mr_other")}
 
 
 def norm(name):
@@ -80,10 +95,13 @@ def main():
                                    {"name": cty.replace(" County", "")})
         rec[field] = v
 
+    groups = [v for v in LINES.values() if v != "total"]
     for code, cties in out.items():
         for rec in cties.values():
+            for name, parts in DERIVED.items():
+                rec[name] = sum(rec.get(p, 0) for p in parts)
             t = rec.get("total") or 0
-            for g in ("white", "black", "asian", "hispanic", "native"):
+            for g in groups + list(DERIVED):
                 rec[g + "_pct"] = round(100 * rec.get(g, 0) / t, 2) if t else None
 
     json.dump({"source": URL,
@@ -92,14 +110,16 @@ def main():
                       "denominator, not adult population",
                "states": out}, open(OUT, "w"), indent=1, sort_keys=True)
 
-    print(f"{'st':4}{'cty':>5}{'CVAP':>13}{'white':>9}{'Black':>9}{'Hisp':>9}{'Asian':>9}")
-    print("-" * 58)
+    print(f"{'st':4}{'cty':>5}{'CVAP':>13}{'white':>8}{'Black':>8}{'Hisp':>8}"
+          f"{'AAPI':>8}{'AIAN':>8}{'multi':>8}")
+    print("-" * 74)
     for code in sorted(out):
         c = out[code]
         t = sum(v.get("total", 0) for v in c.values())
         f = lambda g: 100 * sum(v.get(g, 0) for v in c.values()) / t if t else 0
-        print(f"{code:4}{len(c):>5}{t:>13,}{f('white'):>8.1f}%{f('black'):>8.1f}%"
-              f"{f('hispanic'):>8.1f}%{f('asian'):>8.1f}%")
+        print(f"{code:4}{len(c):>5}{t:>13,}{f('white'):>7.1f}%{f('black'):>7.1f}%"
+              f"{f('hispanic'):>7.1f}%{f('aapi'):>7.1f}%{f('native'):>7.1f}%"
+              f"{f('multiracial'):>7.1f}%")
     return 0
 
 

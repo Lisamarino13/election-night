@@ -641,6 +641,90 @@ async function capsPanel(){
   });
 }
 
+
+// ---- Who is eligible, and who actually turns out -----------------------------
+// Two different denominators get used loosely and they are not interchangeable.
+// CVAP is the CITIZEN voting-age population: the pool allowed to vote. The
+// ELECTORATE is that pool times each group's measured turnout rate. Harris County
+// is 28.8% white by adult population, 36.8% by CVAP -- because only 60% of its
+// Hispanic adults are citizens. Using population where CVAP belongs overstates the
+// Hispanic share of the electorate by about 10 points there, and statewide it
+// forces the implied white Democratic vote to an impossible 19.5%.
+async function electoratePanel(){
+  let d = null;
+  try{ const r = await fetch("data/electorate.json?t=" + Date.now());
+       if (r.ok) d = await r.json(); }catch(e){ return null; }
+  if (!d || !d.states) return null;
+  const rows = Object.entries(d.states)
+    .filter(([c]) => ORDER.includes(c) || c === "AK")
+    .map(([c, v]) => ({code:c, name:(STATES[c]||{}).name || c,
+      cvapW: v.cvap_share.white * 100, elecW: v.electorate_share.white * 100,
+      cvap: v.cvap_total, ratio: v.white_nonwhite_ratio,
+      gapB: v.gap_white_black_pts, gapH: v.gap_white_hispanic_pts,
+      turn: v.turnout_overall * 100}))
+    .sort((a, b) => a.elecW - b.elecW);
+  if (!rows.length) return null;
+
+  const draw = host => {
+    const W = host.clientWidth || 720, rowH = 26, padL = 112, padR = 64;
+    const H = rows.length * rowH + 40;
+    const lo = Math.min(...rows.map(r => Math.min(r.cvapW, r.elecW))) - 4;
+    const hi = Math.max(...rows.map(r => Math.max(r.cvapW, r.elecW))) + 4;
+    const x = v => padL + (W - padL - padR) * (v - lo) / (hi - lo);
+    const ticks = [];
+    for (let t = Math.ceil(lo / 10) * 10; t <= hi; t += 10)
+      ticks.push(`<line x1="${x(t)}" x2="${x(t)}" y1="10" y2="${rows.length*rowH+10}"
+        stroke="var(--grid,#e1e0d9)" stroke-width="1"/>
+        <text x="${x(t)}" y="${rows.length*rowH+28}" text-anchor="middle" class="tick">${t}%</text>`);
+    const parts = rows.map((r, i) => {
+      const y = i * rowH + 10 + rowH/2;
+      return `<text x="${padL-8}" y="${y+4}" text-anchor="end" class="rlab">${esc(r.name)}</text>
+        <line x1="${x(r.cvapW)}" x2="${x(r.elecW)}" y1="${y}" y2="${y}"
+          stroke="${PAL.mid}" stroke-width="2" stroke-opacity=".45"/>
+        <circle cx="${x(r.cvapW)}" cy="${y}" r="5" fill="none" stroke="${PAL.mid}" stroke-width="2">
+          <title>${esc(r.name)}: white is ${r.cvapW.toFixed(1)}% of citizens eligible to vote</title></circle>
+        <circle cx="${x(r.elecW)}" cy="${y}" r="5" fill="${PAL.now}">
+          <title>${esc(r.name)}: white is ${r.elecW.toFixed(1)}% of those who actually voted</title></circle>
+        <text x="${x(Math.max(r.cvapW,r.elecW))+10}" y="${y+4}" class="vlab">+${
+          (r.elecW-r.cvapW).toFixed(1)}</text>`;
+    }).join("");
+    host.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img"
+      aria-label="White share of the eligible citizen population against the white share of actual voters, by state">
+      ${ticks.join("")}${parts}</svg>`;
+  };
+
+  const tx = rows.find(r => r.code === "TX");
+  return panel({
+    title: "Who is eligible, and who turns out",
+    races: "",
+    lede: `Every state's electorate is whiter than the citizens eligible to vote in it,
+      because white turnout runs ahead of everyone else's. ${tx ? `Texas is
+      <b>${tx.cvapW.toFixed(1)}%</b> white among citizens and
+      <b>${tx.elecW.toFixed(1)}%</b> among actual voters &mdash; and its white-Black
+      turnout gap is <b>${tx.gapB.toFixed(1)}</b> points, essentially closed, while its
+      white-Hispanic gap is <b>${tx.gapH.toFixed(1)}</b>. The room for turnout growth
+      there is Hispanic, not Black.` : ""}`,
+    legend: `<span><i style="background:none;border:2px solid ${PAL.mid};border-radius:50%"></i>
+        white share of CITIZENS (CVAP)</span>
+      <span><i style="background:${PAL.now};border-radius:50%"></i>white share of VOTERS</span>`,
+    caption: `CVAP is the citizen voting-age population, Census ACS 2019&ndash;2023 &mdash;
+      not total adults. The gap between the two matters: Harris County is 28.8% white by
+      adult population but 36.8% by CVAP, because only 60% of its Hispanic adults are
+      citizens. Voter shares are CVAP times each group's measured turnout rate from the
+      Census Voting and Registration Supplement, November 2024. The number at the right
+      is how many points whiter the electorate is than the eligible pool.`,
+    table: `<table><thead><tr><th>State</th><th>CVAP</th><th>% white, citizens</th>
+      <th>% white, voters</th><th>Gap</th><th>Turnout</th>
+      <th>White&minus;Black gap</th><th>White&minus;Hispanic gap</th></tr></thead><tbody>
+      ${rows.slice().sort((a,b)=>b.elecW-a.elecW).map(r => `<tr><td>${esc(r.name)}</td>
+        <td>${n(r.cvap)}</td><td>${r.cvapW.toFixed(1)}%</td><td>${r.elecW.toFixed(1)}%</td>
+        <td>+${(r.elecW-r.cvapW).toFixed(1)}</td><td>${r.turn.toFixed(1)}%</td>
+        <td>${r.gapB.toFixed(1)}</td><td>${r.gapH.toFixed(1)}</td></tr>`).join("")}
+      </tbody></table>`,
+    draw
+  });
+}
+
 async function renderCharts(panels){
   if (!panels) return;
   panels.replaceChildren();
@@ -652,6 +736,9 @@ async function renderCharts(panels){
   const caps = await capsPanel();
   if (caps){ sections.push(caps);
     jump.push(`<a href="#p-caps">What is left</a>`); caps.id = "p-caps"; }
+  const elec = await electoratePanel();
+  if (elec){ sections.push(elec);
+    jump.push(`<a href="#p-elec">Eligible vs voting</a>`); elec.id = "p-elec"; }
 
   for (const code of ORDER){
     const meta = STATES[code];

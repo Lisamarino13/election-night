@@ -1,0 +1,410 @@
+{
+ "method": "Texas vote by ethnicity, MEASURED -> data/tx-vote-by-ethnicity.json\n\nTexas has no race on its voter file and no state reports votes by race, so the\nusual answers are exit polls (a survey, and they disagreed by 20 points on Texas\nHispanics in 2024) or ecological regression (which on Texas counties returns an\nimplied Black margin of -131 points, outside the possible range).\n\nThere is a third way that is neither. The Texas Legislative Council publishes\nelection returns AND voting-age population by race on the SAME geography -- the\nvoting district. So in precincts where almost everyone of voting age is a single\ngroup, the counted result IS that group's vote. No model, no survey: ballots.\n\nTHE JOIN. Do not key on the published CNTYVTD column. The returns use county FIPS\n(001-507, odd) while the 2024 population file uses a sequential county number\n(1-254), and the population files drop leading zeros. Keying on CNTYVTD as\npublished matches 243 of 9,712 precincts in 2024 -- and still matched 7,341 in\n2022, which looks like a working join and is not: it silently keeps only the\ncounties with three-digit codes. Build the key from CountyFIPS + VTD instead and\nboth years land above 98%.\n\nWHAT IT CANNOT DO. A 90%-Hispanic precinct is 90% Hispanic by RESIDENTS, not by\nvoters, and such precincts are not a random sample of their group -- Texas's\nare concentrated on the border and in urban cores. Read these as the vote in\nthose places, which is what they are.",
+ "races": {
+  "2018 Governor": {
+   "D_candidate": "Valdez",
+   "R_candidate": "Abbott",
+   "coverage_pct": 95.4,
+   "groups": [
+    {
+     "D": 12313,
+     "D_share": 14.66,
+     "R": 71699,
+     "group": "Anglo (white)",
+     "margin_R": 70.69,
+     "precincts": 192,
+     "threshold": 0.9,
+     "votes": 84012
+    },
+    {
+     "D": 169635,
+     "D_share": 18.79,
+     "R": 733052,
+     "group": "Anglo (white)",
+     "margin_R": 62.42,
+     "precincts": 1195,
+     "threshold": 0.8,
+     "votes": 902687
+    },
+    {
+     "D": 228876,
+     "D_share": 71.1,
+     "R": 93019,
+     "group": "Hispanic",
+     "margin_R": -42.21,
+     "precincts": 582,
+     "threshold": 0.9,
+     "votes": 321895
+    },
+    {
+     "D": 398320,
+     "D_share": 68.81,
+     "R": 180581,
+     "group": "Hispanic",
+     "margin_R": -37.61,
+     "precincts": 1019,
+     "threshold": 0.8,
+     "votes": 578901
+    },
+    {
+     "D": 101513,
+     "D_share": 90.34,
+     "R": 10860,
+     "group": "Black",
+     "margin_R": -80.67,
+     "precincts": 143,
+     "threshold": 0.7,
+     "votes": 112373
+    },
+    {
+     "D": 230582,
+     "D_share": 86.16,
+     "R": 37039,
+     "group": "Black",
+     "margin_R": -72.32,
+     "precincts": 380,
+     "threshold": 0.5,
+     "votes": 267621
+    },
+    {
+     "D": 54314,
+     "D_share": 54.54,
+     "R": 45265,
+     "group": "Asian",
+     "margin_R": -9.09,
+     "precincts": 95,
+     "threshold": 0.4,
+     "votes": 99579
+    }
+   ],
+   "population_year": "2022",
+   "precincts_joined": 9262,
+   "precincts_total": 9712
+  },
+  "2018 US Senate": {
+   "D_candidate": "O'Rourke",
+   "R_candidate": "Cruz",
+   "coverage_pct": 95.4,
+   "groups": [
+    {
+     "D": 15337,
+     "D_share": 18.16,
+     "R": 69108,
+     "group": "Anglo (white)",
+     "margin_R": 63.68,
+     "precincts": 192,
+     "threshold": 0.9,
+     "votes": 84445
+    },
+    {
+     "D": 211334,
+     "D_share": 23.23,
+     "R": 698546,
+     "group": "Anglo (white)",
+     "margin_R": 53.55,
+     "precincts": 1195,
+     "threshold": 0.8,
+     "votes": 909880
+    },
+    {
+     "D": 252448,
+     "D_share": 77.16,
+     "R": 74713,
+     "group": "Hispanic",
+     "margin_R": -54.33,
+     "precincts": 582,
+     "threshold": 0.9,
+     "votes": 327161
+    },
+    {
+     "D": 440736,
+     "D_share": 74.96,
+     "R": 147248,
+     "group": "Hispanic",
+     "margin_R": -49.91,
+     "precincts": 1019,
+     "threshold": 0.8,
+     "votes": 587984
+    },
+    {
+     "D": 107074,
+     "D_share": 94.32,
+     "R": 6453,
+     "group": "Black",
+     "margin_R": -88.63,
+     "precincts": 143,
+     "threshold": 0.7,
+     "votes": 113527
+    },
+    {
+     "D": 243579,
+     "D_share": 90.1,
+     "R": 26750,
+     "group": "Black",
+     "margin_R": -80.21,
+     "precincts": 380,
+     "threshold": 0.5,
+     "votes": 270329
+    },
+    {
+     "D": 62777,
+     "D_share": 62.13,
+     "R": 38266,
+     "group": "Asian",
+     "margin_R": -24.26,
+     "precincts": 95,
+     "threshold": 0.4,
+     "votes": 101043
+    }
+   ],
+   "population_year": "2022",
+   "precincts_joined": 9262,
+   "precincts_total": 9712
+  },
+  "2022 Governor": {
+   "D_candidate": "O'Rourke",
+   "R_candidate": "Abbott",
+   "coverage_pct": 95.4,
+   "groups": [
+    {
+     "D": 14753,
+     "D_share": 16.23,
+     "R": 76167,
+     "group": "Anglo (white)",
+     "margin_R": 67.55,
+     "precincts": 192,
+     "threshold": 0.9,
+     "votes": 90920
+    },
+    {
+     "D": 199127,
+     "D_share": 20.54,
+     "R": 770436,
+     "group": "Anglo (white)",
+     "margin_R": 58.92,
+     "precincts": 1195,
+     "threshold": 0.8,
+     "votes": 969563
+    },
+    {
+     "D": 182610,
+     "D_share": 66.14,
+     "R": 93506,
+     "group": "Hispanic",
+     "margin_R": -32.27,
+     "precincts": 582,
+     "threshold": 0.9,
+     "votes": 276116
+    },
+    {
+     "D": 324053,
+     "D_share": 64.88,
+     "R": 175429,
+     "group": "Hispanic",
+     "margin_R": -29.76,
+     "precincts": 1019,
+     "threshold": 0.8,
+     "votes": 499482
+    },
+    {
+     "D": 81594,
+     "D_share": 92.69,
+     "R": 6432,
+     "group": "Black",
+     "margin_R": -85.39,
+     "precincts": 143,
+     "threshold": 0.7,
+     "votes": 88026
+    },
+    {
+     "D": 187426,
+     "D_share": 87.92,
+     "R": 25751,
+     "group": "Black",
+     "margin_R": -75.84,
+     "precincts": 380,
+     "threshold": 0.5,
+     "votes": 213177
+    },
+    {
+     "D": 55564,
+     "D_share": 58.55,
+     "R": 39337,
+     "group": "Asian",
+     "margin_R": -17.1,
+     "precincts": 95,
+     "threshold": 0.4,
+     "votes": 94901
+    }
+   ],
+   "population_year": "2022",
+   "precincts_joined": 9262,
+   "precincts_total": 9712
+  },
+  "2024 President": {
+   "D_candidate": "Harris",
+   "R_candidate": "Trump",
+   "coverage_pct": 96.5,
+   "groups": [
+    {
+     "D": 20062,
+     "D_share": 17.23,
+     "R": 96373,
+     "group": "Anglo (white)",
+     "margin_R": 65.54,
+     "precincts": 197,
+     "threshold": 0.9,
+     "votes": 116435
+    },
+    {
+     "D": 273236,
+     "D_share": 20.95,
+     "R": 1031265,
+     "group": "Anglo (white)",
+     "margin_R": 58.11,
+     "precincts": 1225,
+     "threshold": 0.8,
+     "votes": 1304501
+    },
+    {
+     "D": 231537,
+     "D_share": 53.39,
+     "R": 202150,
+     "group": "Hispanic",
+     "margin_R": -6.78,
+     "precincts": 582,
+     "threshold": 0.9,
+     "votes": 433687
+    },
+    {
+     "D": 416957,
+     "D_share": 53.98,
+     "R": 355419,
+     "group": "Hispanic",
+     "margin_R": -7.97,
+     "precincts": 1019,
+     "threshold": 0.8,
+     "votes": 772376
+    },
+    {
+     "D": 111785,
+     "D_share": 89.2,
+     "R": 13529,
+     "group": "Black",
+     "margin_R": -78.41,
+     "precincts": 143,
+     "threshold": 0.7,
+     "votes": 125314
+    },
+    {
+     "D": 261223,
+     "D_share": 83.65,
+     "R": 51045,
+     "group": "Black",
+     "margin_R": -67.31,
+     "precincts": 381,
+     "threshold": 0.5,
+     "votes": 312268
+    },
+    {
+     "D": 72593,
+     "D_share": 53.4,
+     "R": 63340,
+     "group": "Asian",
+     "margin_R": -6.81,
+     "precincts": 96,
+     "threshold": 0.4,
+     "votes": 135933
+    }
+   ],
+   "population_year": "2024",
+   "precincts_joined": 9376,
+   "precincts_total": 9712
+  },
+  "2024 US Senate": {
+   "D_candidate": "Allred",
+   "R_candidate": "Cruz",
+   "coverage_pct": 96.5,
+   "groups": [
+    {
+     "D": 20918,
+     "D_share": 18.13,
+     "R": 94458,
+     "group": "Anglo (white)",
+     "margin_R": 63.74,
+     "precincts": 197,
+     "threshold": 0.9,
+     "votes": 115376
+    },
+    {
+     "D": 289633,
+     "D_share": 22.42,
+     "R": 1002067,
+     "group": "Anglo (white)",
+     "margin_R": 55.15,
+     "precincts": 1225,
+     "threshold": 0.8,
+     "votes": 1291700
+    },
+    {
+     "D": 239882,
+     "D_share": 58.93,
+     "R": 167206,
+     "group": "Hispanic",
+     "margin_R": -17.85,
+     "precincts": 582,
+     "threshold": 0.9,
+     "votes": 407088
+    },
+    {
+     "D": 432583,
+     "D_share": 59.21,
+     "R": 298005,
+     "group": "Hispanic",
+     "margin_R": -18.42,
+     "precincts": 1019,
+     "threshold": 0.8,
+     "votes": 730588
+    },
+    {
+     "D": 111849,
+     "D_share": 91.1,
+     "R": 10926,
+     "group": "Black",
+     "margin_R": -82.2,
+     "precincts": 143,
+     "threshold": 0.7,
+     "votes": 122775
+    },
+    {
+     "D": 262655,
+     "D_share": 85.93,
+     "R": 42998,
+     "group": "Black",
+     "margin_R": -71.86,
+     "precincts": 381,
+     "threshold": 0.5,
+     "votes": 305653
+    },
+    {
+     "D": 78544,
+     "D_share": 57.65,
+     "R": 57691,
+     "group": "Asian",
+     "margin_R": -15.31,
+     "precincts": 96,
+     "threshold": 0.4,
+     "votes": 136235
+    }
+   ],
+   "population_year": "2024",
+   "precincts_joined": 9376,
+   "precincts_total": 9712
+  }
+ },
+ "source_population": {
+  "2022": "https://data.capitol.texas.gov/dataset/4d8298d0-d176-4c19-b174-42837027b73e/resource/c2f5a857-0b16-473b-8237-5268c2e25ac2/download/vtds_22g_pop.zip",
+  "2024": "https://data.capitol.texas.gov/dataset/4d8298d0-d176-4c19-b174-42837027b73e/resource/bf9b54a8-090c-41d0-8f00-e263fc1789c5/download/vtds_24pg_pop.zip"
+ },
+ "source_returns": "https://ted.capitol.texas.gov/api/Offices/{eid}/{oid}/vtd"
+}

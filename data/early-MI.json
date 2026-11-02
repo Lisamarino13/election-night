@@ -2,8 +2,8 @@
  "state": "MI",
  "unit": "county",
  "election": "2026 General",
- "as_of": "10/30/2026",
- "fetched": "2026-11-02T14:07:36+00:00",
+ "as_of": "2026-11-02 07:04",
+ "fetched": "2026-11-02T14:37:34+00:00",
  "party_available": false,
  "outstanding_available": false,
  "in_person": true,
@@ -676,18 +676,20 @@
  },
  "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/MI_county.csv",
  "attribution": {
-  "aggregator": "UF Election Lab (election.lab.ufl.edu)",
-  "upstream": "Data provided by Michigan Secretary of State",
+  "aggregator": "state dashboard, read by hand",
+  "upstream": "https://www.michigan.gov/sos/elections/election-results-and-data/voter-participation-dashboard",
   "note": "Michigan does not identify how voters cast their ballots. The in-person numbers differ from the state's dashboard in that in-person reported here is estimated from mail ballot application data."
  },
  "notes": {
-  "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly"
+  "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly",
+  "manual": "Statewide figures read by hand from the state's own dashboard (2026-11-02 07:04). County rows below are the last automated pull (10/30/2026) and are older than the state total above."
  },
  "state_totals": {
-  "registered": 0,
-  "by_mail": 1459825,
-  "in_person": 398906,
-  "total": 1858731,
+  "registered": 7420172,
+  "by_mail": 1569715,
+  "in_person": 743450,
+  "total": 2313165,
   "requested": 2177000
- }
+ },
+ "fallback": false
 }

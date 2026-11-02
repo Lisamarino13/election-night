@@ -1,0 +1,484 @@
+{
+ "cvap_source": "Census CVAP special tabulation, ACS 2019-2023",
+ "incomplete": {},
+ "method": "electorate share = CVAP share x turnout rate, normalised",
+ "states": {
+  "AK": {
+   "cvap_share": {
+    "asian": 0.0519,
+    "black": 0.03174,
+    "hispanic": 0.05862,
+    "other": 0.20896,
+    "white": 0.64878
+   },
+   "cvap_total": 535540,
+   "electorate_share": {
+    "asian": 0.04949,
+    "black": 0.02286,
+    "hispanic": 0.05131,
+    "other": 0.19926,
+    "white": 0.67708
+   },
+   "gap_white_black_pts": 21.9,
+   "gap_white_hispanic_pts": 11.4,
+   "registered_2024": {
+    "asian": 0.776,
+    "black": 0.615,
+    "hispanic": 0.699,
+    "white": 0.839
+   },
+   "turnout_2024": {
+    "asian": 0.646,
+    "black": 0.488,
+    "hispanic": 0.593,
+    "other": 0.646,
+    "white": 0.707
+   },
+   "turnout_overall": 0.6775,
+   "white_nonwhite_ratio": 1.135
+  },
+  "FL": {
+   "cvap_share": {
+    "asian": 0.02393,
+    "black": 0.1434,
+    "hispanic": 0.21442,
+    "other": 0.02092,
+    "white": 0.59733
+   },
+   "cvap_total": 15873205,
+   "electorate_share": {
+    "asian": 0.02209,
+    "black": 0.13534,
+    "hispanic": 0.18763,
+    "other": 0.01931,
+    "white": 0.63563
+   },
+   "gap_white_black_pts": 7.0,
+   "gap_white_hispanic_pts": 11.0,
+   "registered_2024": {
+    "asian": 0.589,
+    "black": 0.619,
+    "hispanic": 0.592,
+    "white": 0.685
+   },
+   "turnout_2024": {
+    "asian": 0.537,
+    "black": 0.549,
+    "hispanic": 0.509,
+    "other": 0.537,
+    "white": 0.619
+   },
+   "turnout_overall": 0.5817,
+   "white_nonwhite_ratio": 1.176
+  },
+  "GA": {
+   "cvap_share": {
+    "asian": 0.03122,
+    "black": 0.32204,
+    "hispanic": 0.06068,
+    "other": 0.02342,
+    "white": 0.56264
+   },
+   "cvap_total": 7737195,
+   "electorate_share": {
+    "asian": 0.02931,
+    "black": 0.30985,
+    "hispanic": 0.04532,
+    "other": 0.02198,
+    "white": 0.59354
+   },
+   "gap_white_black_pts": 5.9,
+   "gap_white_hispanic_pts": 19.6,
+   "registered_2024": {
+    "asian": 0.707,
+    "black": 0.684,
+    "hispanic": 0.623,
+    "white": 0.728
+   },
+   "turnout_2024": {
+    "asian": 0.597,
+    "black": 0.612,
+    "hispanic": 0.475,
+    "other": 0.597,
+    "white": 0.671
+   },
+   "turnout_overall": 0.6361,
+   "white_nonwhite_ratio": 1.135
+  },
+  "IA": {
+   "cvap_share": {
+    "asian": 0.01568,
+    "black": 0.03,
+    "hispanic": 0.04223,
+    "other": 0.01973,
+    "white": 0.89236
+   },
+   "cvap_total": 2370440,
+   "electorate_share": {
+    "asian": 0.01341,
+    "black": 0.02553,
+    "hispanic": 0.03394,
+    "other": 0.01687,
+    "white": 0.91024
+   },
+   "gap_white_black_pts": 12.1,
+   "gap_white_hispanic_pts": 15.5,
+   "registered_2024": {
+    "asian": 0.692,
+    "black": 0.61,
+    "hispanic": 0.699,
+    "white": 0.816
+   },
+   "turnout_2024": {
+    "asian": 0.613,
+    "black": 0.61,
+    "hispanic": 0.576,
+    "other": 0.613,
+    "white": 0.731
+   },
+   "turnout_overall": 0.7166,
+   "white_nonwhite_ratio": 1.223
+  },
+  "KS": {
+   "cvap_share": {
+    "asian": 0.02176,
+    "black": 0.05335,
+    "hispanic": 0.08411,
+    "other": 0.03394,
+    "white": 0.80684
+   },
+   "cvap_total": 2122800,
+   "electorate_share": {
+    "asian": 0.02028,
+    "black": 0.04849,
+    "hispanic": 0.05697,
+    "other": 0.03164,
+    "white": 0.84262
+   },
+   "gap_white_black_pts": 9.3,
+   "gap_white_hispanic_pts": 25.2,
+   "registered_2024": {
+    "asian": 0.752,
+    "black": 0.669,
+    "hispanic": 0.645,
+    "white": 0.808
+   },
+   "turnout_2024": {
+    "asian": 0.64,
+    "black": 0.624,
+    "hispanic": 0.465,
+    "other": 0.64,
+    "white": 0.717
+   },
+   "turnout_overall": 0.6866,
+   "white_nonwhite_ratio": 1.282
+  },
+  "LA": {
+   "cvap_share": {
+    "asian": 0.01338,
+    "black": 0.30923,
+    "hispanic": 0.04276,
+    "other": 0.02522,
+    "white": 0.6094
+   },
+   "cvap_total": 3420775,
+   "electorate_share": {
+    "asian": 0.00887,
+    "black": 0.2894,
+    "hispanic": 0.0314,
+    "other": 0.01671,
+    "white": 0.65362
+   },
+   "gap_white_black_pts": 7.8,
+   "gap_white_hispanic_pts": 19.3,
+   "registered_2024": {
+    "asian": 0.511,
+    "black": 0.617,
+    "hispanic": 0.497,
+    "white": 0.69
+   },
+   "turnout_2024": {
+    "asian": 0.378,
+    "black": 0.534,
+    "hispanic": 0.419,
+    "other": 0.378,
+    "white": 0.612
+   },
+   "turnout_overall": 0.5706,
+   "white_nonwhite_ratio": 1.21
+  },
+  "ME": {
+   "cvap_share": {
+    "asian": 0.00834,
+    "black": 0.00883,
+    "hispanic": 0.01627,
+    "other": 0.02219,
+    "white": 0.94437
+   },
+   "cvap_total": 1104260,
+   "electorate_share": {
+    "asian": 0.00527,
+    "black": 0.00427,
+    "hispanic": 0.01082,
+    "other": 0.01402,
+    "white": 0.96562
+   },
+   "gap_white_black_pts": 35.6,
+   "gap_white_hispanic_pts": 23.6,
+   "registered_2024": {
+    "asian": 0.417,
+    "black": 0.402,
+    "hispanic": 0.563,
+    "white": 0.747
+   },
+   "turnout_2024": {
+    "asian": 0.417,
+    "black": 0.319,
+    "hispanic": 0.439,
+    "other": 0.417,
+    "white": 0.675
+   },
+   "turnout_overall": 0.6601,
+   "white_nonwhite_ratio": 1.655
+  },
+  "MI": {
+   "cvap_share": {
+    "asian": 0.02173,
+    "black": 0.13061,
+    "hispanic": 0.04028,
+    "other": 0.02719,
+    "white": 0.78019
+   },
+   "cvap_total": 7620200,
+   "electorate_share": {
+    "asian": 0.02106,
+    "black": 0.1147,
+    "hispanic": 0.02839,
+    "other": 0.02635,
+    "white": 0.80951
+   },
+   "gap_white_black_pts": 11.4,
+   "gap_white_hispanic_pts": 23.8,
+   "registered_2024": {
+    "asian": 0.821,
+    "black": 0.764,
+    "hispanic": 0.597,
+    "white": 0.814
+   },
+   "turnout_2024": {
+    "asian": 0.693,
+    "black": 0.628,
+    "hispanic": 0.504,
+    "other": 0.693,
+    "white": 0.742
+   },
+   "turnout_overall": 0.7151,
+   "white_nonwhite_ratio": 1.197
+  },
+  "MN": {
+   "cvap_share": {
+    "asian": 0.03895,
+    "black": 0.05164,
+    "hispanic": 0.03755,
+    "other": 0.03044,
+    "white": 0.84143
+   },
+   "cvap_total": 4217850,
+   "electorate_share": {
+    "asian": 0.03626,
+    "black": 0.04236,
+    "hispanic": 0.02753,
+    "other": 0.02834,
+    "white": 0.86551
+   },
+   "gap_white_black_pts": 15.8,
+   "gap_white_hispanic_pts": 22.4,
+   "registered_2024": {
+    "asian": 0.811,
+    "black": 0.757,
+    "hispanic": 0.744,
+    "white": 0.845
+   },
+   "turnout_2024": {
+    "asian": 0.706,
+    "black": 0.622,
+    "hispanic": 0.556,
+    "other": 0.706,
+    "white": 0.78
+   },
+   "turnout_overall": 0.7583,
+   "white_nonwhite_ratio": 1.213
+  },
+  "NC": {
+   "cvap_share": {
+    "asian": 0.02143,
+    "black": 0.21201,
+    "hispanic": 0.05592,
+    "other": 0.03241,
+    "white": 0.67822
+   },
+   "cvap_total": 7783975,
+   "electorate_share": {
+    "asian": 0.01977,
+    "black": 0.20018,
+    "hispanic": 0.04258,
+    "other": 0.0299,
+    "white": 0.70756
+   },
+   "gap_white_black_pts": 6.4,
+   "gap_white_hispanic_pts": 18.2,
+   "registered_2024": {
+    "asian": 0.596,
+    "black": 0.673,
+    "hispanic": 0.537,
+    "white": 0.726
+   },
+   "turnout_2024": {
+    "asian": 0.596,
+    "black": 0.61,
+    "hispanic": 0.492,
+    "other": 0.596,
+    "white": 0.674
+   },
+   "turnout_overall": 0.6461,
+   "white_nonwhite_ratio": 1.148
+  },
+  "NE": {
+   "cvap_share": {
+    "asian": 0.01614,
+    "black": 0.04123,
+    "hispanic": 0.07284,
+    "other": 0.02594,
+    "white": 0.84386
+   },
+   "cvap_total": 1406040,
+   "electorate_share": {
+    "asian": 0.00873,
+    "black": 0.02955,
+    "hispanic": 0.0558,
+    "other": 0.01404,
+    "white": 0.89188
+   },
+   "gap_white_black_pts": 22.7,
+   "gap_white_hispanic_pts": 19.4,
+   "registered_2024": {
+    "asian": 0.394,
+    "black": 0.537,
+    "hispanic": 0.619,
+    "white": 0.77
+   },
+   "turnout_2024": {
+    "asian": 0.361,
+    "black": 0.478,
+    "hispanic": 0.511,
+    "other": 0.361,
+    "white": 0.705
+   },
+   "turnout_overall": 0.667,
+   "white_nonwhite_ratio": 1.526
+  },
+  "OH": {
+   "cvap_share": {
+    "asian": 0.01574,
+    "black": 0.11582,
+    "hispanic": 0.03132,
+    "other": 0.02356,
+    "white": 0.81356
+   },
+   "cvap_total": 8925465,
+   "electorate_share": {
+    "asian": 0.013,
+    "black": 0.11644,
+    "hispanic": 0.02349,
+    "other": 0.01946,
+    "white": 0.82762
+   },
+   "gap_white_black_pts": 0.8,
+   "gap_white_hispanic_pts": 17.9,
+   "registered_2024": {
+    "asian": 0.605,
+    "black": 0.811,
+    "hispanic": 0.6,
+    "white": 0.748
+   },
+   "turnout_2024": {
+    "asian": 0.553,
+    "black": 0.673,
+    "hispanic": 0.502,
+    "other": 0.553,
+    "white": 0.681
+   },
+   "turnout_overall": 0.6694,
+   "white_nonwhite_ratio": 1.1
+  },
+  "SC": {
+   "cvap_share": {
+    "asian": 0.01252,
+    "black": 0.2533,
+    "hispanic": 0.03858,
+    "other": 0.02229,
+    "white": 0.67332
+   },
+   "cvap_total": 3939070,
+   "electorate_share": {
+    "asian": 0.0114,
+    "black": 0.22976,
+    "hispanic": 0.01944,
+    "other": 0.02029,
+    "white": 0.71911
+   },
+   "gap_white_black_pts": 9.9,
+   "gap_white_hispanic_pts": 34.7,
+   "registered_2024": {
+    "asian": 0.696,
+    "black": 0.705,
+    "hispanic": 0.502,
+    "white": 0.748
+   },
+   "turnout_2024": {
+    "asian": 0.56,
+    "black": 0.558,
+    "hispanic": 0.31,
+    "other": 0.56,
+    "white": 0.657
+   },
+   "turnout_overall": 0.6152,
+   "white_nonwhite_ratio": 1.242
+  },
+  "TX": {
+   "cvap_share": {
+    "asian": 0.04217,
+    "black": 0.13155,
+    "hispanic": 0.3127,
+    "other": 0.02296,
+    "white": 0.49062
+   },
+   "cvap_total": 19470090,
+   "electorate_share": {
+    "asian": 0.04129,
+    "black": 0.14209,
+    "hispanic": 0.2605,
+    "other": 0.02248,
+    "white": 0.53363
+   },
+   "gap_white_black_pts": 0.4,
+   "gap_white_hispanic_pts": 13.6,
+   "registered_2024": {
+    "asian": 0.606,
+    "black": 0.715,
+    "hispanic": 0.581,
+    "white": 0.691
+   },
+   "turnout_2024": {
+    "asian": 0.523,
+    "black": 0.577,
+    "hispanic": 0.445,
+    "other": 0.523,
+    "white": 0.581
+   },
+   "turnout_overall": 0.5342,
+   "white_nonwhite_ratio": 1.188
+  }
+ },
+ "turnout_source": "KFF tabulation of the Census Voting and Registration Supplement (CPS), November 2024"
+}

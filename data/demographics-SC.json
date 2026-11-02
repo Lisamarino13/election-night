@@ -1,6 +1,6 @@
 {
  "state": "SC",
- "fetched": "2026-11-02T15:07:37+00:00",
+ "fetched": "2026-11-02T15:37:40+00:00",
  "note": "Who has voted early, not how they voted. No state counts ballots before election day.",
  "stream_labels": {
   "accept": "mail returned",
@@ -72,21 +72,21 @@
    "year": 2026,
    "source": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/US.csv",
    "upstream": "https://scvotes.gov/elections-statistics/voter-participation/",
-   "as_of": "10/31/2026",
+   "as_of": "11/2/2026",
    "turnout_2022": 1718626,
    "streams": {
     "accept": {
-     "total": 37868,
+     "total": 40732,
      "race": {
       "counts": {
-       "nh_white": 26589,
-       "nh_black": 10242,
-       "hispanic": 269,
-       "nh_asian": 291,
-       "nh_native_american": 46,
-       "nh_other": 431
+       "nh_white": 28447,
+       "nh_black": 11143,
+       "hispanic": 304,
+       "nh_asian": 325,
+       "nh_native_american": 51,
+       "nh_other": 462
       },
-      "total": 37868,
+      "total": 40732,
       "labels": {
        "nh_white": "White",
        "nh_black": "Black",
@@ -99,20 +99,20 @@
      }
     },
     "inperson": {
-     "total": 948592
+     "total": 1043810
     },
     "voted": {
-     "total": 986460,
+     "total": 1084542,
      "race": {
       "counts": {
-       "nh_white": 26589,
-       "nh_black": 10242,
-       "hispanic": 269,
-       "nh_asian": 291,
-       "nh_native_american": 46,
-       "nh_other": 431
+       "nh_white": 28447,
+       "nh_black": 11143,
+       "hispanic": 304,
+       "nh_asian": 325,
+       "nh_native_american": 51,
+       "nh_other": 462
       },
-      "total": 37868,
+      "total": 40732,
       "labels": {
        "nh_white": "White",
        "nh_black": "Black",
@@ -121,7 +121,7 @@
        "nh_native_american": "Native American",
        "nh_other": "Other / multiple / unknown"
       },
-      "coverage": 0.0384
+      "coverage": 0.0376
      }
     }
    }

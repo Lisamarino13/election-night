@@ -1550,12 +1550,11 @@
  },
  "election": "2026 General",
  "fallback": true,
- "fetched": "2026-11-02T18:37:28+00:00",
+ "fetched": "2026-11-02T19:07:40+00:00",
  "in_person": true,
  "in_person_reported": true,
  "notes": {
   "fallback": "the direct state parse went stale or is unreachable, so this is the UF Election Lab's copy. It lacks the receipt-method detail the state file carries; the direct parse resumes automatically when the state is reachable again",
-  "fell": "A figure is lower than this board last recorded: early_in_person was 3,467,812, now 3,467,811. Ballots already cast do not un-cast, so the source has restated something or served an older file. The number shown is the one the source gave.",
   "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly"
  },
  "outstanding_available": false,

@@ -588,7 +588,7 @@ async function capsPanel(){
   if (!rows.length) return null;
 
   const draw = host => {
-    const W = host.clientWidth || 720, rowH = 26, padL = 112, padR = 54;
+    const W = host.clientWidth || 720, rowH = 26, padL = 112, padR = 76;
     const H = rows.length * rowH + 34;
     const max = Math.max(...rows.map(r => r.turnout));
     const x = v => padL + (W - padL - padR) * v / max;
@@ -602,7 +602,8 @@ async function capsPanel(){
         <rect x="${padL + evW + 2}" y="${y}" width="${Math.max(edW - 2, 1)}" height="${h}" rx="2"
           fill="none" stroke="${PAL.mid}" stroke-width="1.5" stroke-dasharray="3 2">
           <title>${esc(r.name)}: up to ${n(r.eday_cap)} still to come on election day</title></rect>
-        <text x="${x(r.turnout) + 6}" y="${y + h/2 + 4}" class="vlab">${r.banked_pct}%</text>`;
+        <text x="${x(r.turnout) + 6}" y="${y + h/2 + 4}" class="vlab">${
+          (100 - r.banked_pct).toFixed(0)}% left</text>`;
     }).join("");
     host.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img"
       aria-label="Share of each state's vote already cast, against the election-day pool still to come">
@@ -615,12 +616,13 @@ async function capsPanel(){
     title: "What is left to decide",
     races: "",
     lede: `<b class="fig">${n(tot.ev)}</b> ballots are already cast across these states,
-      against an election-day pool of about <b class="fig">${n(tot.cap)}</b>. In
-      <b>${esc(most.name)}</b> that is <b>${most.banked_pct}%</b> of the vote already in;
-      in <b>${esc(least.name)}</b> only <b>${least.banked_pct}%</b>. The same early-vote
-      lead means very different things in those two states.`,
+      against an election-day pool of about <b class="fig">${n(tot.cap)}</b> still to come.
+      <b>${esc(most.name)}</b> has only <b>${(100 - most.banked_pct).toFixed(0)}%</b> of its
+      vote left to cast; <b>${esc(least.name)}</b> still has
+      <b>${(100 - least.banked_pct).toFixed(0)}%</b>. The same early-vote lead means very
+      different things in those two states. Bars run shortest-remaining first.`,
     legend: key("now", "already cast") +
-      `<span><i style="background:none;border:1.5px dashed ${PAL.mid}"></i>election-day pool</span>`,
+      `<span><i style="background:none;border:1.5px dashed ${PAL.mid}"></i>still to come on election day</span>`,
     caption: `The election-day pool is a CAP taken from each state's own 2018 and 2022
       counts, not a turnout forecast. Election-day volume barely moves with the mode mix:
       Texas counted 2.32M in 2018 and 2.59M in 2022 while its early vote went from 5.5M to
@@ -628,10 +630,11 @@ async function capsPanel(){
       midterms, so the cap is a ceiling rather than an expectation. Percentages are the
       share of the projected vote already in hand.`,
     table: `<table><thead><tr><th>State</th><th>Already cast</th><th>Election-day cap</th>
-      <th>Projected turnout</th><th>Share already in</th>
+      <th>Projected turnout</th><th>Share already in</th><th>Share still to come</th>
       <th>Net lead a side can carry, if it wins election day by 15</th></tr></thead><tbody>
       ${rows.map(r => `<tr><td>${esc(r.name)}</td><td>${n(r.ev)}</td>
         <td>${n(r.eday_cap)}</td><td>${n(r.turnout)}</td><td>${r.banked_pct}%</td>
+        <td>${(100 - r.banked_pct).toFixed(1)}%</td>
         <td>${n(Math.round(r.eday_cap * 0.15))}</td></tr>`).join("")}
       </tbody></table>`,
     draw

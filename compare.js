@@ -496,6 +496,7 @@ window.renderRaceChart = renderRaceChart;
 
 // ---- which contests each state carries, taken from the board's own race list ----
 const STATES = {
+  AK:{name:"Alaska"},
   GA:{name:"Georgia",        races:"Governor · Senate"},
   SC:{name:"South Carolina", races:"Senate"},
   NC:{name:"North Carolina", races:"Senate"},
@@ -529,12 +530,90 @@ function streams(s){
   return {total, mail, ip};
 }
 
+
+// ---- What is left to decide: banked early vote against the election-day pool ----
+// Election-day VOLUME is close to mode-independent. Texas counted 2.32M of them in
+// 2018, 1.71M in 2020, 2.59M in 2022 and 2.33M in 2024 while its early vote swung
+// between 5.5M and 9.6M. Twelve of fourteen states we track saw election day SHRINK
+// from 2018 to 2022 as early voting ate into it; Texas and Iowa are the two where it
+// grew. So each state's election-day pool is set as a CAP from its own history, and
+// what is already banked is measured against that rather than against a turnout
+// forecast the early vote cannot support.
+async function capsPanel(){
+  let caps = null;
+  try{
+    const r = await fetch("data/eday-caps.json?t=" + Date.now());
+    if (r.ok) caps = await r.json();
+  }catch(e){ return null; }
+  if (!caps) return null;
+  const rows = Object.entries(caps)
+    .map(([code, v]) => ({code, name:(STATES[code]||{}).name || code, ...v}))
+    .filter(r => r.ev && r.eday_cap)
+    .sort((a,b) => b.banked_pct - a.banked_pct);
+  if (!rows.length) return null;
+
+  const draw = host => {
+    const W = host.clientWidth || 720, rowH = 26, padL = 112, padR = 54;
+    const H = rows.length * rowH + 34;
+    const max = Math.max(...rows.map(r => r.turnout));
+    const x = v => padL + (W - padL - padR) * v / max;
+    const parts = rows.map((r, i) => {
+      const y = i * rowH + 6, h = rowH - 12;
+      const evW = Math.max(x(r.ev) - padL, 1);
+      const edW = Math.max(x(r.turnout) - x(r.ev), 1);
+      return `<text x="${padL - 8}" y="${y + h/2 + 4}" text-anchor="end" class="rlab">${esc(r.name)}</text>
+        <rect x="${padL}" y="${y}" width="${evW}" height="${h}" rx="2" fill="${PAL.now}">
+          <title>${esc(r.name)}: ${n(r.ev)} already cast</title></rect>
+        <rect x="${padL + evW + 2}" y="${y}" width="${Math.max(edW - 2, 1)}" height="${h}" rx="2"
+          fill="none" stroke="${PAL.mid}" stroke-width="1.5" stroke-dasharray="3 2">
+          <title>${esc(r.name)}: up to ${n(r.eday_cap)} still to come on election day</title></rect>
+        <text x="${x(r.turnout) + 6}" y="${y + h/2 + 4}" class="vlab">${r.banked_pct}%</text>`;
+    }).join("");
+    host.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img"
+      aria-label="Share of each state's vote already cast, against the election-day pool still to come">
+      ${parts}</svg>`;
+  };
+
+  const tot = rows.reduce((a, r) => (a.ev += r.ev, a.cap += r.eday_cap, a), {ev:0, cap:0});
+  const most = rows[0], least = rows[rows.length - 1];
+  return panel({
+    title: "What is left to decide",
+    races: "",
+    lede: `<b class="fig">${n(tot.ev)}</b> ballots are already cast across these states,
+      against an election-day pool of about <b class="fig">${n(tot.cap)}</b>. In
+      <b>${esc(most.name)}</b> that is <b>${most.banked_pct}%</b> of the vote already in;
+      in <b>${esc(least.name)}</b> only <b>${least.banked_pct}%</b>. The same early-vote
+      lead means very different things in those two states.`,
+    legend: key("now", "already cast") +
+      `<span><i style="background:none;border:1.5px dashed ${PAL.mid}"></i>election-day pool</span>`,
+    caption: `The election-day pool is a CAP taken from each state's own 2018 and 2022
+      counts, not a turnout forecast. Election-day volume barely moves with the mode mix:
+      Texas counted 2.32M in 2018 and 2.59M in 2022 while its early vote went from 5.5M to
+      7.7M. Twelve of the fourteen states here saw election day shrink between those two
+      midterms, so the cap is a ceiling rather than an expectation. Percentages are the
+      share of the projected vote already in hand.`,
+    table: `<table><thead><tr><th>State</th><th>Already cast</th><th>Election-day cap</th>
+      <th>Projected turnout</th><th>Share already in</th>
+      <th>Net lead a side can carry, if it wins election day by 15</th></tr></thead><tbody>
+      ${rows.map(r => `<tr><td>${esc(r.name)}</td><td>${n(r.ev)}</td>
+        <td>${n(r.eday_cap)}</td><td>${n(r.turnout)}</td><td>${r.banked_pct}%</td>
+        <td>${n(Math.round(r.eday_cap * 0.15))}</td></tr>`).join("")}
+      </tbody></table>`,
+    draw
+  });
+}
+
 async function renderCharts(panels){
   if (!panels) return;
   panels.replaceChildren();
   const sections = [], jump = [];
   const note = (m) => { const d = document.createElement("div"); d.className = "note";
     d.innerHTML = m; panels.appendChild(d); };
+
+  // the whole-board view first: how much of each state is already decided
+  const caps = await capsPanel();
+  if (caps){ sections.push(caps);
+    jump.push(`<a href="#p-caps">What is left</a>`); caps.id = "p-caps"; }
 
   for (const code of ORDER){
     const meta = STATES[code];

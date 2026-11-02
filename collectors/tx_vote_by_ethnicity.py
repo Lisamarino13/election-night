@@ -38,10 +38,14 @@ RACES = [("2018 Governor",  456, 37, "Abbott", "Valdez",   "2022"),
          ("2022 Governor",  497, 37, "Abbott", "O'Rourke", "2022"),
          ("2024 President", 510,  1, "Trump",  "Harris",   "2024"),
          ("2024 US Senate", 510,  2, "Cruz",   "Allred",   "2024")]
-CUTS = [("anglo", "Anglo (white)", 0.90), ("anglo", "Anglo (white)", 0.80),
-        ("hisp", "Hispanic", 0.90), ("hisp", "Hispanic", 0.80),
-        ("black", "Black", 0.70), ("black", "Black", 0.50),
-        ("asian", "Asian", 0.40)]
+# Two cuts for every group, 90% and 50%, so the trade is visible on the page.
+# 90% is a clean read of a narrow slice; 50% covers far more of the group but
+# half the ballots belong to somebody else. Coverage is reported beside each so
+# neither can be mistaken for a statewide figure for that group.
+CUTS = [("anglo", "Anglo (white)", 0.90), ("anglo", "Anglo (white)", 0.50),
+        ("hisp", "Hispanic", 0.90), ("hisp", "Hispanic", 0.50),
+        ("black", "Black", 0.90), ("black", "Black", 0.50),
+        ("asian", "Asian", 0.90), ("asian", "Asian", 0.50)]
 UA = {"User-Agent": "Mozilla/5.0"}
 
 
@@ -111,10 +115,21 @@ def main():
             R = sum(v[0] for v, _ in sub); D = sum(v[1] for v, _ in sub)
             if len(sub) < 5 or R + D < 1000:
                 continue
+            # COVERAGE: what share of this group statewide lives in these precincts,
+            # and how much of the ballot pile there actually belongs to them. The
+            # first is the binding limit -- only 1.4% of white Texans live in a
+            # 90%+ Anglo precinct -- and without it a tight cut reads as a
+            # statewide figure when it speaks for a sixth of the group at best.
+            allg = sum(p[field] for _, p in joined)
+            ing = sum(p[field] for _, p in sub)
+            vap = sum(p["vap"] for _, p in sub)
             groups.append({"group": name, "threshold": thr, "precincts": len(sub),
                            "R": R, "D": D, "votes": R + D,
                            "D_share": round(100 * D / (R + D), 2),
-                           "margin_R": round(100 * (R - D) / (R + D), 2)})
+                           "margin_R": round(100 * (R - D) / (R + D), 2),
+                           "group_vap_here": ing,
+                           "coverage_pct": round(100 * ing / allg, 1) if allg else None,
+                           "purity_pct": round(100 * ing / vap, 1) if vap else None})
         out[label] = {"R_candidate": rn, "D_candidate": dn,
                       "population_year": pyear,
                       "precincts_joined": len(joined), "precincts_total": len(rr),

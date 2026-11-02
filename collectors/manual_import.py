@@ -139,6 +139,67 @@ def parse_mn(path, as_of):
                                      "does not publish an outstanding figure directly"}}
 
 
+def parse_statewide(path, day):
+    """A hand-typed statewide override: data/manual/<ST>-<YYYY-MM-DD>.json
+
+    Some states publish the figure on a dashboard with no table and no download -
+    Michigan's is a Power BI embed, so there is nothing to save and parse. What there
+    IS, is four numbers on the screen. This takes them.
+
+    The file holds only what the person read off the dashboard:
+
+        {"state":"MI","as_of":"2026-11-02 07:04",
+         "by_mail":1569715,"in_person":743450,"total":2313165,
+         "registered":7420172,
+         "source":"https://www.michigan.gov/sos/.../voter-participation-dashboard"}
+
+    It replaces state_totals and leaves the COUNTY rows alone, because the dashboard
+    gives no county split and scaling counties to hit a new statewide figure would
+    invent 83 numbers nobody published. The card then shows a current state total over
+    county detail that is openly older, and says so, rather than showing a stale total
+    because the county rows are stale.
+
+    total is checked against by_mail + in_person and the file is refused if they
+    disagree - that sum is the one arithmetic check the dashboard itself offers.
+    """
+    import json as _json
+    d = _json.loads(path.read_text())
+    st = (d.get("state") or path.name[:2]).upper()
+    need = ("by_mail", "in_person", "total")
+    miss = [k for k in need if not isinstance(d.get(k), int)]
+    if miss:
+        raise SystemExit(f"{path.name}: missing or non-integer {', '.join(miss)}")
+    if d["by_mail"] + d["in_person"] != d["total"]:
+        raise SystemExit(
+            f"{path.name}: by_mail {d['by_mail']:,} + in_person {d['in_person']:,} "
+            f"= {d['by_mail']+d['in_person']:,}, but total says {d['total']:,}. "
+            f"Refusing to write a figure that does not add up.")
+
+    out = DATA / f"early-{st}.json"
+    if not out.exists():
+        raise SystemExit(f"{path.name}: no {out.name} to override - "
+                         f"the county file has to exist first")
+    pay = _json.loads(out.read_text())
+    prev = pay.get("as_of")
+    pay["state_totals"] = {
+        "registered": d.get("registered") or (pay.get("state_totals") or {}).get("registered") or 0,
+        "by_mail": d["by_mail"], "in_person": d["in_person"], "total": d["total"],
+        "requested": (pay.get("state_totals") or {}).get("requested") or 0,
+    }
+    pay["as_of"] = d.get("as_of") or day
+    pay["in_person_reported"] = True
+    pay["fallback"] = False
+    pay.setdefault("notes", {})["manual"] = (
+        f"Statewide figures read by hand from the state's own dashboard "
+        f"({pay['as_of']}). County rows below are the last automated pull ({prev}) "
+        f"and are older than the state total above.")
+    if d.get("source"):
+        pay.setdefault("attribution", {})["upstream"] = d["source"]
+    pay["attribution"] = pay.get("attribution") or {}
+    pay["attribution"]["aggregator"] = "state dashboard, read by hand"
+    return pay
+
+
 PARSERS = {"MN": parse_mn}
 TODO = {"GA": "send one downloaded file and this gets written",
         "OH": "send one Absentee_Request_Report.txt and this gets written"}
@@ -164,7 +225,20 @@ def main():
         return 0
     wrote = 0
     for st, (path, day) in sorted(found.items()):
-        if st in PARSERS:
+        # A hand-typed .json is a statewide override for ANY state, including ones that
+        # have no per-state parser here, so it is checked before the PARSERS table.
+        if path.suffix == ".json":
+            payload = parse_statewide(path, day)
+            out = DATA / f"early-{st}.json"
+            out.write_text(json.dumps(payload, indent=1))
+            t = payload["state_totals"]
+            print(f"{st} ok: statewide override as of {payload['as_of']}  <- {path.name}")
+            print(f"   by mail   {t['by_mail']:>10,}")
+            print(f"   in person {t['in_person']:>10,}")
+            print(f"   total     {t['total']:>10,}")
+            print(f"   -> {out.name}  (county rows left as they were)")
+            wrote += 1
+        elif st in PARSERS:
             payload = PARSERS[st](path, day)
             out = DATA / f"early-{st}.json"
             # A hand-saved file beats an aggregate only while it is still the fresher

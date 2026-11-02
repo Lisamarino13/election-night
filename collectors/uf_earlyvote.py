@@ -264,16 +264,26 @@ def pull(st, meta):
 
 
 def _date(v):
-    """A loose date -> date, or None."""
-    from datetime import date as _d
-    for fmt in ("%m/%d/%Y", "%Y-%m-%d", "%m-%d-%y", "%m/%d/%y"):
+    """A loose date -> date, or None.
+
+    The fallback search used to recurse on whatever it matched without checking that
+    the match differed from the input. "2026-11-02 07:04" matched "26-11-02" inside
+    itself, which parses as no month, and the search then matched "26-11-02" in THAT -
+    the same string, forever. Any stamp carrying a clock time blew the stack rather
+    than returning None. Recurse only on a strictly shorter string.
+    """
+    txt = str(v or "").strip()
+    if not txt:
+        return None
+    for fmt in ("%m/%d/%Y", "%Y-%m-%d", "%m-%d-%y", "%m/%d/%y",
+                "%Y-%m-%d %H:%M", "%Y-%m-%dT%H:%M", "%m/%d/%Y %H:%M"):
         try:
-            return datetime.strptime(str(v).strip(), fmt).date()
+            return datetime.strptime(txt, fmt).date()
         except (ValueError, TypeError):
             pass
     import re as _re
-    m = _re.search(r"\d{1,2}[/-]\d{1,2}[/-]\d{2,4}", str(v or ""))
-    return _date(m.group(0)) if m else None
+    m = _re.search(r"\d{4}-\d{1,2}-\d{1,2}|\d{1,2}[/-]\d{1,2}[/-]\d{2,4}", txt)
+    return _date(m.group(0)) if m and m.group(0) != txt else None
 
 
 def _cumulative_total(payload):
@@ -293,6 +303,34 @@ def _cumulative_total(payload):
                 got = True
                 break
     return tot if got else None
+
+
+def manual_override_is_newer(path, uf_as_of):
+    """True when early-<ST>.json is a hand-typed statewide override dated after the Lab's.
+
+    Michigan's dashboard is a Power BI embed with no file to download, so its statewide
+    figure is read off the screen into data/manual/<ST>-<date>.json. The Lab froze on
+    2026-10-30 while Michigan kept voting: on the eve of the election the Lab's copy was
+    454,434 ballots - 24% - behind the state's own number. Without this, the half-hourly
+    cron would write that stale copy straight back over the hand-read one.
+
+    Deliberately narrow. It holds ONLY for a file carrying notes.manual and ONLY while
+    that file is the fresher of the two, so an override cannot outlive the day it was
+    typed, and an ordinary UF-written file is never held - including the same-day
+    updates of a few thousand ballots that a general freshness rule would swallow.
+    """
+    if not path.exists():
+        return False
+    try:
+        existing = json.loads(path.read_text())
+    except Exception:
+        return False
+    if not (existing.get("notes") or {}).get("manual"):
+        return False
+    mine, theirs = _date(existing.get("as_of")), _date(uf_as_of)
+    if not mine or not theirs:
+        return False
+    return mine > theirs
 
 
 def direct_is_fresh(path, uf_as_of, st=None, uf_total=None):
@@ -418,6 +456,12 @@ def main(argv):
             skipped += 1
             continue
         target = data / f"early-{st}.json"
+        if manual_override_is_newer(target, payload["as_of"]):
+            print(f"UF {st}: holding — {target.name} is a hand-read state figure dated "
+                  f"{json.loads(target.read_text()).get('as_of')}, newer than the Lab's "
+                  f"{payload['as_of']}. A hand figure wins only while it is the fresher one.")
+            held += 1
+            continue
         if st in FALLBACK:
             if direct_is_fresh(target, payload["as_of"], st, tot.get("total")):
                 print(f"UF {st}: holding — the direct pull is current, and the Lab's copy "

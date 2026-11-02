@@ -165,9 +165,11 @@
       + "&mdash; and precinct returns putting Hispanic metro Texas 31 to 46 points left of "
       + "the border. Three ways of turning that into a margin &mdash; the county model, "
       + "seven historical baselines, a bloc grid &mdash; all land inside two points of even.</p>"
-      + '<p>But the county model clears the bar by <b class="nm">24,717</b> votes out of '
-      + '<b class="nm">10.2 million</b>. A <b class="nm">0.24%</b> cushion is not a '
-      + "projection, it is a coin flip. And the sign is set by one number nothing here "
+      + '<p>But the county model clears that bar by only <b class="nm">24,657</b> net '
+      + "votes. Because flipping a vote closes the gap by two, that cushion is a final "
+      + 'margin of <b class="nm">about half a point</b> &mdash; the model&rsquo;s D+0.65. '
+      + "Half a point is not a projection, it is a coin flip. And the sign is set by one "
+      + "number nothing here "
       + 'measures: how far Hispanic voters actually move. Break-even is <b class="nm">+17.6</b>. '
       + "AtlasIntel&rsquo;s crosstab implies +16.5 and Paxton wins by a hair; Morris&rsquo;s "
       + "engagement finding implies +27 and Talarico wins by three.</p>"
@@ -281,7 +283,11 @@
 
   /* ================================================ 3. what election day would have to do */
   function bankedCard() {
-    var leads = [100000, 120000, 140000, 160000, 180000, 200000, 250000];
+    // 194,486 is what the model itself implies against a 2024-style election day, and is
+    // marked so it is not confused with 140,000 - which is merely where the race ties on
+    // that same assumption.
+    var MODEL_BANKED = 194486;
+    var leads = [100000, 120000, 140000, 160000, 180000, MODEL_BANKED, 250000];
     var cols = [5, 10, 16, 22];
     var head = "<tr><th>Banked D lead</th><th>Ties at</th><th>R share needed</th>"
       + cols.map(function (c) { return "<th>eday R+" + c + "</th>"; }).join("") + "</tr>";
@@ -291,7 +297,9 @@
         var fin = (-lead + EDAY_VOTES * c / 100) / PROJ.total * 100;
         return '<td class="num ' + (fin < 0 ? "dem" : "rep") + '">' + mgn(fin) + "</td>";
       }).join("");
-      return "<tr><td>D+" + n0(lead) + '</td><td class="num">' + mgn(tie)
+      var tag = lead === MODEL_BANKED ? ' <span class="dim">← the model</span>' : "";
+      return '<tr' + (lead === MODEL_BANKED ? ' class="em"' : "") + "><td>D+" + n0(lead)
+        + tag + '</td><td class="num">' + mgn(tie)
         + '</td><td class="num">' + (50 + tie / 2).toFixed(2) + "%</td>" + cells + "</tr>";
     }).join("");
     return card("tx-banked", "Takeaway 3 · election day can only shade it",
@@ -301,9 +309,22 @@
       + "% of the vote, so the banked lead carries " + (SHARE / (1 - SHARE)).toFixed(1)
       + " times its weight.",
       '<div class="scroll"><table class="txtbl"><thead>' + head + "</thead><tbody>" + body
-      + "</tbody></table></div>",
-      "The whole R+5 to R+22 range is worth about 4.1 points of final margin. That is why "
-      + "the 7pm number decides this.");
+      + "</tbody></table></div>"
+      + '<table class="txtbl" style="margin-top:12px"><thead><tr><th>If election day runs</th>'
+      + "<th>the model implies an early margin of</th><th>i.e. a banked lead of</th></tr>"
+      + "</thead><tbody>"
+      + [["2024-like, R+5.17", 5.17], ["midpoint, R+10", 10], ["2022-like, R+16.00", 16]]
+        .map(function (p) {
+          var early = (-0.65 - (1 - SHARE) * p[1]) / SHARE;
+          return "<tr><td>" + p[0] + '</td><td class="num dem">' + mgn(early)
+            + '</td><td class="num dem">D+' + n0(-early / 100 * PROJ.banked) + "</td></tr>";
+        }).join("") + "</tbody></table>",
+      "The whole R+5 to R+22 range is worth about 4.1 points of final margin, which is why "
+      + "the 7pm number decides this. <b>Do not read 140,000 as a prediction.</b> It is "
+      + "roughly the break-even banked lead against a 2024-style election day — the "
+      + "line the model has to beat, not where the model lands. The model itself is asking "
+      + "for about 194,000 banked on that same assumption, and 463,000 if election day "
+      + "looks like the 2022 midterm.");
   }
 
   /* ================================================= 4. where every estimate lands */

@@ -14,7 +14,7 @@
  *     does: County.json carries EV beside V per candidate per county, so every past
  *     cycle's early and election-day margins are exact. The real Texas skew is between
  *     -2.4 and +0.8 points, and in 2024 it pointed the OTHER way. The old single tie
- *     line of D+5.54 is replaced by a band, because a tie can land anywhere in it
+ *     line of D+5.54 is replaced by a band, because a tie in the Senate race can land anywhere in it
  *     depending on what election day does.
  *  2. The county model moved the whole non-white bloc +12, Black voters included. They
  *     were already 91.1% Democratic in 2024, so +12 there is not defensible. Capping it
@@ -220,7 +220,7 @@
       + "a point loses her by four. She needs the Hispanic vote at D+36.15 <i>and</i> "
       + "rural turnout down, together.</li>"
       + "<li><b>The one number that settles it reports first.</b> Texas dumps the early "
-      + 'vote at 7pm Central, and a tie lands between <b class="nm">D+2.27</b> and '
+      + 'vote at 7pm Central, and a tie in the Senate race lands between <b class="nm">D+2.27</b> and '
       + '<b class="nm">R+0.18</b>.</li>'
       + "</ol>"
       + "<p><b>And why.</b> Four things changed, and each one is counted rather than "
@@ -631,7 +631,7 @@
       return "<tr><td>D+" + n0(lead) + '</td><td class="num">' + mgn(tie)
         + '</td><td class="num">' + (50 + tie / 2).toFixed(2) + "%</td>" + cells + "</tr>";
     }).join("");
-    return card("tx-banked", "Section 4 · slide 3 · the banked lead",
+    return card("tx-banked", "Section 5 · slide 3 · the banked lead",
       "What election day would have to do",
       "Read down to the banked lead Texas reports, then across to the election-day margin "
       + "you find plausible. Election day is only " + ((1 - SHARE) * 100).toFixed(1)
@@ -821,7 +821,7 @@
       + "base, which is not defensible, and capping that is the R+0.97 dot."
       + "<br><br><b>The early vote has no dot, on purpose.</b> Every number here is a final "
       + "margin. The early vote produces a tie <i>band</i> on tonight’s early margin "
-      + "— a different axis — and a tie lands between <b>"
+      + "— a different axis — and a tie in the Senate race lands between <b>"
       + mgn(THR_SAFE_D) + "</b> and <b>" + mgn(THR_SAFE_R)
       + "</b>. Putting that on this chart would be the same unit error as reading net votes "
       + "as points of margin. It is also the only route that settles rather than estimates, "
@@ -2631,7 +2631,7 @@
         + n0(PROJ.banked) + " who have already voted. For scale, the whole race needs "
         + n0(305279) + " net new Democratic votes to erase 2024.</p>";
     }
-    return card("tx-watch", "Section 4 · slide 1 · what is already banked",
+    return card("tx-watch", "Section 5 · slide 1 · what is already banked",
       "What we think is already banked, and where it came from",
       "Texas has no party registration, so nobody can count the banked lead \u2014 this "
       + "is an inference. It is built from the one thing that <i>is</i> known: which "
@@ -2676,7 +2676,7 @@
       }
     });
     s += "</svg>";
-    return card("tx-gain", "Section 4 · slide 2 · where the votes have to come from",
+    return card("tx-gain", "Section 5 · slide 2 · where the votes have to come from",
       "Net Democratic gain by county, needed to overcome the rural Republican bias",
       "What the model adds to each county versus its 2024 Senate result. The total needed "
       + "to erase R+5.98 is " + n0(305279) + "; the model produces " + n0(tot) + ". The "
@@ -2831,6 +2831,170 @@
   }
 
 
+  /* ====================== Section 4: the turnout levers, grouped =================== */
+
+  /* The Neither bloc extrapolated from Tarrant to the fifteen largest counties. The
+     licence for doing it is the previous section: Harris and Tarrant agree on the
+     mechanism from two incompatible methods, and they are 21.4% of the electorate
+     between them. What is extrapolated is the SHARE and the BREAK, not the margin. */
+  function neitherBigCard() {
+    var H = (D.nhist || []).map(function (r) {
+      return {c: r.cycle, d: num(r.d_camp), n: num(r.neither_camp), r: num(r.r_camp),
+              res: num(r.county_result_R), broke: num(r.neither_broke_D), note: r.note};
+    }).filter(function (r) { return r.n != null; });
+    if (!H.length) return "";
+    var wide = !NARROW;
+    var W = wide ? 700 : 360, L = wide ? 176 : 8, R = wide ? 150 : 8;
+    var ROW = wide ? 46 : 62, T = 44, Hh = T + H.length * ROW + 14;
+    var xs = function (v) { return L + (v - 40) / 20 * (W - L - R); };
+    var s2 = svg(W, Hh, "How Tarrant's Neither bloc has broken, solved from past results");
+    [40, 45, 50, 55, 60].forEach(function (t) {
+      s2 += line(xs(t), T - 14, xs(t), Hh - 12, t === 50 ? "zl" : "gl")
+         + txt(xs(t), Hh - 2, t + "%", "tk", "middle");
+    });
+    s2 += txt(xs(50), T - 20, "an even split", "lgd", "middle");
+    [[47.2, "var(--hin,#0f8f8f)", "Hinojosa needs"], [41.5, "var(--tal,#6b4fbb)", "Talarico needs"]]
+      .forEach(function (b) {
+        s2 += '<line x1="' + xs(b[0]) + '" y1="' + (T - 8) + '" x2="' + xs(b[0]) + '" y2="'
+           + (Hh - 12) + '" stroke="' + b[1] + '" stroke-width="1.5" '
+           + 'stroke-dasharray="4 3" opacity="0.8"/>'
+           + '<text x="' + xs(b[0]) + '" y="' + (T - 20) + '" text-anchor="middle" '
+           + 'class="vl" fill="' + b[1] + '">' + b[2] + " " + b[0] + "%</text>";
+      });
+    var y = T;
+    H.forEach(function (r) {
+      if (wide) {
+        s2 += txt(L - 14, y + 16, r.c, "lbb", "end")
+           + txt(L - 14, y + 29, "D " + r.d + " / N " + r.n + " / R " + r.r, "sub", "end");
+      } else {
+        s2 += txt(8, y + 10, r.c, "lbb")
+           + txt(8, y + 23, "D " + r.d + " / N " + r.n + " / R " + r.r, "sub");
+      }
+      var cy = y + (wide ? 16 : 36);
+      if (r.broke != null) {
+        s2 += '<circle cx="' + xs(r.broke) + '" cy="' + cy + '" r="6" '
+           + 'fill="currentColor"/>'
+           + txt(xs(r.broke) + 11, cy + 4, r.broke.toFixed(1) + "%", "vl");
+        if (wide) s2 += txt(W - R + 14, cy + 4, "county finished R+" + r.res.toFixed(1), "sub");
+      } else {
+        s2 += txt(xs(50), cy + 4, "not yet resolvable", "sub", "middle");
+      }
+      y += ROW;
+    });
+    s2 += "</svg>";
+    return card("tx-neither-big", "Section 4 · slide 1 · the Neither bloc, extrapolated",
+      "What the Neither bloc has done, and what it is worth across the big fifteen",
+      "<b>Tarrant is the only county that publishes this, so the break has to be solved "
+      + "for rather than read off.</b> Hold both parties at 95% loyalty, take the camp "
+      + "split the file gives for each past cycle, and ask what the Neither bloc must "
+      + "have done to produce the result Tarrant actually got. The two dashed lines are "
+      + "what each 2026 candidate needs from the same bloc.",
+      s2,
+      "<b>It has split down the middle twice running.</b> 49.9% in 2024 and 50.1% in "
+      + "2022 — two cycles, two very different national environments, the same "
+      + "answer to a tenth of a point. That is the most stable number anywhere on this "
+      + "tab."
+      + "<br><br><b>Why it should break better than 50 this time, not worse.</b> The bloc "
+      + "is <b>43.0%</b> of the early vote against 29.5% in 2022, it mirrors the county "
+      + "within 1.5 points on every demographic line, and more than a quarter of it "
+      + "registered after the 2022 midterm against 6% of the Republican camp. And Harris "
+      + "— measured a completely different way, by engagement tier rather than "
+      + "primary camp — finds the Democratic turnout edge <i>widest</i> among exactly "
+      + "these irregular voters, 13.2 points against 5.0 among the most reliable. Two "
+      + "counties, two methods, same direction."
+      + "<br><br><b>Extrapolated to the fifteen largest counties.</b> They are "
+      + "<b>6,868,411</b> projected votes, 67.3% of Texas. Carry Tarrant’s 43% "
+      + "Neither share across them and that is <b>2,953,417</b> ballots with no partisan "
+      + "read on them. Each point that bloc breaks Democratic is worth about "
+      + "<b>0.58 points</b> of statewide margin — 59,068 net votes. Which sets the "
+      + "two thresholds: Talarico is covered at anything above <b>48.3%</b>, and he is "
+      + "already past it on both historical readings. <b>Hinojosa needs 56.8%</b>, which "
+      + "is 6.8 points above anything this bloc has ever done."
+      + "<br><br><b>So the prediction.</b> The bloc breaks close to even again, probably a "
+      + "point or two better than even given its composition and the Harris finding. That "
+      + "carries Talarico comfortably and leaves Hinojosa short — which is the same "
+      + "answer the Tarrant county-level version gave, and the same answer the Hispanic "
+      + "slide gave. <b>Three different levers, one conclusion: the Senate seat holds and "
+      + "the governor’s race needs help from somewhere else.</b>"
+      + "<br><br><b>What the extrapolation assumes.</b> That the other fourteen large "
+      + "counties carry a Neither share like Tarrant’s and break like it. Tarrant is "
+      + "the closest large county to the state on composition, which is the argument for "
+      + "it, but Harris is 31.7% Hispanic against Tarrant’s 21.6% and no other county "
+      + "publishes the camps at all. This is the weakest link in the chain and it is a "
+      + "share, not a margin — the break itself still comes from two measured cycles.");
+  }
+
+  /* The two levers that do NOT overlap, and the combination of them. Rural is the 239
+     counties; the Neither bloc lives in the big fifteen; they are disjoint by
+     construction. The Hispanic lever is NOT a third independent one - Hispanic voters
+     sit inside both - so adding all three at face value double-counts. */
+  function leversCard() {
+    var R = (D.lev || []).map(function (r) {
+      return {cut: num(r.rural_turnout_cut), n: num(r.neither_break_D),
+              v: num(r.votes_found), m: num(r.hinojosa_margin_R)};
+    }).filter(function (r) { return r.m != null; });
+    if (!R.length) return "";
+    var cuts = [], brks = [];
+    R.forEach(function (r) {
+      if (cuts.indexOf(r.cut) < 0) cuts.push(r.cut);
+      if (brks.indexOf(r.n) < 0) brks.push(r.n);
+    });
+    cuts.sort(function (a, b) { return a - b; });
+    brks.sort(function (a, b) { return a - b; });
+    var cw = NARROW ? 54 : 104, ch = NARROW ? 32 : 38;
+    var L = NARROW ? 76 : 150, T = 52;
+    var W = L + brks.length * cw + 12, H = T + cuts.length * ch + 26;
+    var s = svg(W, H, "What rural turnout and the Neither bloc have to do together");
+    s += txt(L, 16, "the Neither bloc in the big fifteen breaks →", "lgd");
+    brks.forEach(function (b, i) {
+      s += txt(L + i * cw + cw / 2, T - 10, b + "%", "tk", "middle");
+    });
+    s += txt(0, 34, NARROW ? "rural" : "rural turnout", "lgd");
+    cuts.forEach(function (c, j) {
+      var y = T + j * ch;
+      s += txt(L - 10, y + ch / 2 + 4, c === 0 ? "unchanged" : "down " + c + "%", "lb", "end");
+      brks.forEach(function (b, i) {
+        var cell = R.filter(function (r) { return r.cut === c && r.n === b; })[0];
+        if (!cell) return;
+        var win = cell.m < 0;
+        s += rect(L + i * cw + 1, y + 1, cw - 2, ch - 2,
+                  win ? DC : RC, ' opacity="' + (Math.min(0.72, 0.1 + Math.abs(cell.m) / 6) ) + '"')
+           + '<text x="' + (L + i * cw + cw / 2) + '" y="' + (y + ch / 2 + 4)
+           + '" text-anchor="middle" class="cellw">' + mgn(cell.m) + "</text>";
+      });
+    });
+    s += "</svg>";
+    return card("tx-levers", "Section 4 · slide 2 · the two levers together",
+      "Neither lever carries her alone. Together they do",
+      "<b>Each cell is the governor&rsquo;s race after the full polling haircut</b>, with "
+      + "rural turnout down the amount on the left and the Neither bloc in the big fifteen "
+      + "breaking the amount along the top. Blue cells are Hinojosa winning. These two "
+      + "levers are <b>disjoint</b>: rural is the 239 smallest counties, the Neither bloc "
+      + "is inside the largest fifteen, and nothing is counted twice.",
+      '<div class="scroll">' + s + "</div>",
+      "<b>Alone, neither works.</b> Rural turnout would have to collapse <b>34%</b> with "
+      + "the Neither bloc at its historical even split — no Texas midterm has ever "
+      + "done that. The Neither bloc would have to break <b>56.8%</b> with rural turnout "
+      + "unchanged — 6.8 points beyond anything it has done in two measured cycles. "
+      + "Both are the top row and the left column of this grid, and both are red."
+      + "<br><br><b>Together they are reachable.</b> Rural turnout down 15% and the "
+      + "Neither bloc at 54% gives her <b>D+0.14</b>. Down 10% and 56% gives D+0.71. "
+      + "Those are two moderate things rather than one enormous one, and that is the "
+      + "whole case for her race being live at all."
+      + "<br><br><b>But the Hispanic vote is not a third lever, and this is the thing "
+      + "most likely to be got wrong.</b> Hispanic voters sit <i>inside</i> the Neither "
+      + "bloc and <i>inside</i> the big fifteen. Adding the Hispanic slide&rsquo;s "
+      + "requirement on top of this grid double-counts the same ballots. The honest way to "
+      + "read the three together: rural and Neither are the two independent levers, and "
+      + "the Hispanic margin is the main <i>mechanism</i> by which the Neither bloc "
+      + "breaks better than even. It is not extra votes, it is the explanation for the "
+      + "same votes."
+      + "<br><br><b>And none of this touches the Senate race.</b> Talarico clears his "
+      + "threshold on the unchanged row at the historical break. Every cell in this grid "
+      + "that is red for Hinojosa is still blue for him, because of the 4.92. The grid is "
+      + "a map of her race only.");
+  }
+
   function conclusionCard() {
     return '<section class="txarg" id="tx-read-committed">'
       + '<p class="txkick">Written down before the polls close · 2 November 2026</p>'
@@ -2974,7 +3138,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["twoc", "tx_two_counties.csv"], ["tsens", "tx_tarrant_sensitivity.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["tsens", "tx_tarrant_sensitivity.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {
@@ -3038,7 +3202,24 @@
         + volCard()
         + hispanicSensCard()
 
-        + framing("tx-frame-outcomes", "Section 4 \u00b7 our model",
+        + framing("tx-frame-levers", "Section 4 \u00b7 the turnout levers",
+            "What would have to happen, and whether it can",
+            ["Section 3 ended on thresholds rather than a number: the Hispanic margin has "
+             + "to reach D+19.66 for Talarico and D+36.19 for Hinojosa. This section asks "
+             + "the same question of the two levers that are <i>independent of each "
+             + "other</i> \u2014 how the unaffiliated bloc in the big metros breaks, and "
+             + "whether rural turnout comes in under.",
+             "They do not overlap: rural is the 239 smallest counties and the unaffiliated "
+             + "bloc lives inside the largest fifteen. The Hispanic margin is not a third "
+             + "lever on top of them \u2014 it is the mechanism by which the second one "
+             + "moves, which is why reading all three additively double-counts the same "
+             + "ballots.",
+             "Where it arrives: alone, neither lever reaches far enough. Together, two "
+             + "moderate moves do it \u2014 and none of it is needed for the Senate seat."])
+        + neitherBigCard()
+        + leversCard()
+
+        + framing("tx-frame-outcomes", "Section 5 \u00b7 our model",
             "And last, our own model",
             ["Our own model goes last, after every outside source, because it is the one thing here nobody else can check. Everything above is evidence and none of it is an answer, since every piece "
              + "stops in the same place: the electorate changed, the banked vote is most "
@@ -3054,7 +3235,7 @@
         + watchCard(L)
         + countyGainCard()
         + bankedCard()
-        + gridCard("tx-sens", "Section 4 · slide 4 · the demographic levers",
+        + gridCard("tx-sens", "Section 5 · slide 4 · the demographic levers",
             "What it takes to flip Texas",
             "Statewide margin for each pair of assumed shifts. White applies in the "
             + "fifteen largest counties only. Across the whole white axis the answer "
@@ -3066,7 +3247,7 @@
             + "Black voters is not defensible as a group-level claim and was corrected to "
             + "+2, so read every cell as about 1.6 points friendlier to Democrats than "
             + "the corrected model gives.")
-        + gridCard("tx-blocs", "Section 4 · slide 5 · the same question by bloc",
+        + gridCard("tx-blocs", "Section 5 · slide 5 · the same question by bloc",
             "What it takes, by voting bloc",
             "Independents against the Republican bloc-size edge, with Democrats holding "
             + "98% and crossover fixed at 2%. <b>Independents are 36% of the electorate</b>, "

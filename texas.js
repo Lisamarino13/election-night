@@ -1229,8 +1229,8 @@
       + "Hinojosa and both lose — roughly what the full haircut describes, D+0.98 and "
       + "R+3.94. <b>The gap is the robust number and the level is the fragile one</b>, "
       + "which is the opposite of how this race is usually discussed."
-      + "<hr style=\"border:none;border-top:1px solid var(--line);margin:14px 0\">"
-      + "<br><br><b>And where the Trump half shows up.</b> The environment is not "
+      + '<span class="txrule"></span>'
+      + "<b>And where the Trump half shows up.</b> The environment is not "
       + "nothing — it is what moved Texas from R+8.50 in the 2024 Senate race to a "
       + "tied governor’s race, which is a swing of about eight points. It is simply "
       + "not <i>extra</i>: it is already inside the D+0.11, and Paxton is what sits on "
@@ -2726,6 +2726,7 @@
     + ".txkick{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;"
     + "color:var(--dim);margin:0 0 3px}"
     + ".txhint{font-size:13px;color:var(--dim);margin:0 0 12px;max-width:74ch;line-height:1.5}"
+    + ".txrule{display:block;border-top:1px solid var(--line);margin:14px 0}"
     + ".txnote{font-size:12.5px;color:var(--dim);margin:11px 0 0;max-width:74ch;"
     + "line-height:1.5;border-top:1px solid var(--line);padding-top:9px}"
     + ".txbig{font-family:var(--display);font-size:40px;line-height:1.1;"

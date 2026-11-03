@@ -361,7 +361,7 @@
       return "<tr><td>D+" + n0(lead) + '</td><td class="num">' + mgn(tie)
         + '</td><td class="num">' + (50 + tie / 2).toFixed(2) + "%</td>" + cells + "</tr>";
     }).join("");
-    return card("tx-banked", "Outcome 1 · the banked lead",
+    return card("tx-banked", "Outcome 2 · the banked lead",
       "What election day would have to do",
       "Read down to the banked lead Texas reports, then across to the election-day margin "
       + "you find plausible. Election day is only " + ((1 - SHARE) * 100).toFixed(1)
@@ -411,7 +411,7 @@
       s += txt(xs(r.m) + (r.m < 0 ? -8 : 8), y + 4, mgn(r.m), "vl", r.m < 0 ? "end" : "start");
     });
     s += "</svg>";
-    return card("tx-est", "Chapter 3 · where it lands",
+    return card("tx-est", "Outcome 1 · where every estimate lands",
       "Where every estimate lands",
       "Eleven estimates spanning six points and straddling zero. They do not disagree "
       + "randomly: nearly every one is the same arithmetic with a different assumption "
@@ -518,7 +518,7 @@
                r.now < 0 ? "end" : "start");
     });
     s += "</svg>";
-    return card("tx-base", "Chapter 2 · where you choose to start from",
+    return card("tx-base", "Chapter 3 · slide 1 · why the methods disagree",
       "Seven starting points, each with its own swing",
       "Take any past Texas result, add the national swing from <i>that</i> year to this "
       + "year&rsquo;s generic ballot, and see where Texas lands. 2018 was already a strong "
@@ -544,7 +544,7 @@
         + '</td><td class="num">' + (r.gov > 0 ? "D+" : "R+") + Math.abs(r.gov).toFixed(1)
         + '</td><td class="num dem">+' + r.drag.toFixed(2) + "</td></tr>";
     }).join("");
-    return card("tx-paxton", "Chapter 3 · the part that is not the electorate",
+    return card("tx-paxton", "Chapter 3 · slide 2 · the part that is not the electorate",
       "Senate against governor, same pollster",
       "Four pollsters asked about both races in the same field period with the same "
       + "sample, so house effects cancel in the difference. What is left is the candidate.",
@@ -909,7 +909,6 @@
         // 2. how a banked vote reaches a result
         + historyCard()
         // 3. where every method lands, and why they disagree
-        + baselineCard()
         + framing("tx-frame-lands", "Chapter 3",
             "So where does it actually land?",
             ["The two chapters above are mechanics. The electorate changed, and three "
@@ -922,17 +921,21 @@
              + "different things.",
              "They are not. Strip each one back and it is the same arithmetic with a "
              + "different answer to a single question: <b>how far Hispanic voters move.</b> "
-             + "The two cards here price that disagreement, and the three after them "
-             + "take it apart."])
-        + estimatesCard()
+             + "The first slide below shows the largest source of it: take any past Texas "
+             + "result, carry it forward, and where you land depends more on WHICH year "
+             + "you start from than on any demographic assumption. The second isolates "
+             + "the part that is not about the electorate at all. The estimates "
+             + "themselves, and the three ways of asking what it would take, follow."])
+        + baselineCard()
         + paxtonCard()
         // 4. the group doing the moving
         + ethCard()
         + precinctCard()
         + volCard()
         // 5. three ways of asking what it would take
+        + estimatesCard()
         + bankedCard()
-        + gridCard("tx-sens", "Outcome 2 \u00b7 the demographic levers",
+        + gridCard("tx-sens", "Outcome 3 \u00b7 the demographic levers",
             "What it takes to flip Texas",
             "Statewide margin for each pair of assumed shifts. White applies in the "
             + "fifteen largest counties only. Across the whole white axis the answer "
@@ -944,7 +947,7 @@
             + "Black voters is not defensible as a group-level claim and was corrected to "
             + "+2, so read every cell as about 1.6 points friendlier to Democrats than "
             + "the corrected model gives.")
-        + gridCard("tx-blocs", "Outcome 3 \u00b7 the same question by bloc",
+        + gridCard("tx-blocs", "Outcome 4 \u00b7 the same question by bloc",
             "What it takes, by voting bloc",
             "Independents against the Republican bloc-size edge, with Democrats holding "
             + "98% and crossover fixed at 2%. <b>Independents are 30% of the electorate "

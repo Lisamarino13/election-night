@@ -29,7 +29,10 @@
      "roster_source": "https://ballotpedia.org/United_States_Senate_election_in_Michigan,_2026"
     }
    },
-   "unitsExpected": 83
+   "unitsExpected": 83,
+   "feed_status": "none",
+   "feed_note": "Michigan's results system sits behind Cloudflare, which refuses every programmatic request, and no 2026 election id exists in it yet. Results here come from the state, not from this board.",
+   "official_url": "https://mvic.sos.state.mi.us/votehistory"
   },
   "MN": {
    "name": "Minnesota",
@@ -93,7 +96,9 @@
      "roster_source": "https://electionresultsfiles.sos.mn.gov/20261103/allracesbycounty.txt"
     }
    },
-   "unitsExpected": 87
+   "unitsExpected": 87,
+   "feed_status": "untested",
+   "feed_note": "reaches the feed and reports correctly, but has never read a real vote"
   },
   "ME": {
    "name": "Maine",
@@ -123,7 +128,9 @@
     }
    },
    "unitsExpected": 16,
-   "unitsNote": "16 counties, ~500 municipalities reporting"
+   "unitsNote": "16 counties, ~500 municipalities reporting",
+   "feed_status": "untested",
+   "feed_note": "reaches the feed and reports correctly, but has never read a real vote"
   },
   "NE": {
    "name": "Nebraska",
@@ -154,7 +161,9 @@
      "tier": "watch"
     }
    },
-   "unitsExpected": 93
+   "unitsExpected": 93,
+   "feed_status": "untested",
+   "feed_note": "reaches the feed and reports correctly, but has never read a real vote"
   },
   "AK": {
    "name": "Alaska",
@@ -183,7 +192,9 @@
      "roster_source": "https://ballotpedia.org/U.S._Senate_battlegrounds,_2026"
     }
    },
-   "unitsExpected": 40
+   "unitsExpected": 40,
+   "feed_status": "proven",
+   "feed_note": "2026 primary: 166,004 votes, mode split ties exactly"
   },
   "SC": {
    "name": "South Carolina",
@@ -212,7 +223,9 @@
      "roster_source": "https://ballotpedia.org/U.S._Senate_battlegrounds,_2026"
     }
    },
-   "unitsExpected": 46
+   "unitsExpected": 46,
+   "feed_status": "untested",
+   "feed_note": "reaches the feed and reports correctly, but has never read a real vote"
   },
   "NC": {
    "name": "North Carolina",
@@ -2159,7 +2172,9 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-10-25T22:48:30+00:00"
+   "updated": "2026-10-25T22:48:30+00:00",
+   "feed_status": "proven",
+   "feed_note": "2024 replay: 100 counties, final margins match"
   },
   "OH": {
    "name": "Ohio",
@@ -6035,7 +6050,9 @@
      "modes": null
     }
    },
-   "unitsExpected": 88
+   "unitsExpected": 88,
+   "feed_status": "untested",
+   "feed_note": "reaches the feed and reports correctly, but has never read a real vote"
   },
   "IA": {
    "name": "Iowa",
@@ -6072,7 +6089,9 @@
      "roster_source": "https://electionresults.iowa.gov/IA/127077/383162/reports/detailxml.zip"
     }
    },
-   "unitsExpected": 99
+   "unitsExpected": 99,
+   "feed_status": "untested",
+   "feed_note": "reaches the feed and reports correctly, but has never read a real vote"
   },
   "FL": {
    "name": "Florida",
@@ -8241,7 +8260,9 @@
      "modes": null
     }
    },
-   "unitsExpected": 67
+   "unitsExpected": 67,
+   "feed_status": "partial",
+   "feed_note": "reads 67/67 counties off the real 2024 file, but that file stops at 5,448/5,612 precincts so it has never tied to a certified total"
   },
   "GA": {
    "name": "Georgia",
@@ -8287,7 +8308,9 @@
      "roster_source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data"
     }
    },
-   "unitsExpected": 159
+   "unitsExpected": 159,
+   "feed_status": "proven",
+   "feed_note": "May 2026 primary: 159/159 counties, full mode split"
   },
   "TX": {
    "name": "Texas",
@@ -8341,7 +8364,9 @@
      "roster_source": "https://www.click2houston.com/enough/2026/11/01/texas-election-2026-where-abbott-hinojosa-paxton-and-talarico-stand/"
     }
    },
-   "unitsExpected": 254
+   "unitsExpected": 254,
+   "feed_status": "proven",
+   "feed_note": "2024 general: 254/254 counties, ties the certified result exactly"
   },
   "KS": {
    "name": "Kansas",
@@ -8389,7 +8414,9 @@
      "roster_source": "https://ent.sos.ks.gov/<county>.html (+ national.html and statewide.html for state totals), read with a real browser"
     }
    },
-   "unitsExpected": 105
+   "unitsExpected": 105,
+   "feed_status": "untested",
+   "feed_note": "reaches the feed and reports correctly, but has never read a real vote"
   },
   "MS": {
    "name": "Mississippi",
@@ -8420,7 +8447,10 @@
      "roster_source": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Mississippi"
     }
    },
-   "unitsExpected": 82
+   "unitsExpected": 82,
+   "feed_status": "none",
+   "feed_note": "Mississippi publishes no election-night feed at all \u2014 the Secretary of State posts certified results weeks later. Mississippi also has no early voting, so there is nothing to bank either.",
+   "official_url": "https://www.sos.ms.gov/elections-voting/election-results"
   },
   "LA": {
    "name": "Louisiana",
@@ -8448,7 +8478,9 @@
     }
    },
    "unitsExpected": 64,
-   "unitsNote": "64 parishes. First Senate race under the 2024 party-primary law: plurality wins, no December runoff."
+   "unitsNote": "64 parishes. First Senate race under the 2024 party-primary law: plurality wins, no December runoff.",
+   "feed_status": "proven",
+   "feed_note": "June 2026: 3,722/3,722 precincts, mode split ties exactly"
   }
  }
 }

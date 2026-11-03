@@ -91,6 +91,10 @@ git reset -q --hard origin/main || { echo "publish: could not match origin" >&2;
 mkdir -p data/snapshots
 cp -R "$tmp"/early-*.json "$tmp"/ev-history-*.json "$tmp"/trend-ev.json \
       "$tmp"/demographics-*.json "$tmp"/last-run.json "$tmp"/tie-out.json data/ 2>/dev/null
+# The results files were added to PATHS, so they are saved to $tmp above - but this
+# restore is by explicit name, and leaving them out meant they were wiped by the reset
+# and never put back. A half-wired PATHS publishes nothing and says nothing.
+cp -R "$tmp"/results.json "$tmp"/results-*.json "$tmp"/candidates-*.json data/ 2>/dev/null
 [ -d "$tmp/snapshots" ] && cp -R "$tmp"/snapshots/. data/snapshots/ 2>/dev/null
 
 # Stage by name, never `git add -A`: nothing outside data/ rides along on a cron run.

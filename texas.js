@@ -211,7 +211,7 @@
       + "somewhere. Only two things on this ballot are big enough: the Hispanic vote "
       + "running better than the polls assume, and rural turnout coming in under. She "
       + "needs both, and neither at full size \u2014 rural down 15% <i>and</i> Hispanic "
-      + "7.3 points better. That is the last slide."
+      + "7.3 points better. Section 4 prices all three levers."
       + "</p>"
       + "<p><b>We have looked at fourteen different paths to a number, and our "
       + "conclusions are these.</b></p>"
@@ -459,62 +459,87 @@
     return {ticket: g, sengov: g2, rows: R, sg: SG};
   }
 
-  /* The extrapolation argument. Harris and Tarrant are the only two Texas counties
-     publishing individual voting histories, they are 21.4% of the projected electorate
-     between them, and they were analysed by different people using different methods -
-     Morris by engagement tier, Tackett by primary camp. Where they agree, the agreement
-     is worth something precisely because they are not the same kind of place: Harris is
-     a Democratic stronghold and Tarrant is the swing county. Where they disagree is
-     listed too, because the Hispanic row does not transfer and that matters. */
+  /* The extrapolation argument, as paired figures rather than a table of sentences.
+     Each row is one claim; each side is the number that county's own instrument gives
+     for it. The units differ by design - Morris measures turnout rates by engagement
+     tier, Tackett measures composition by primary camp - and the point is that two
+     instruments that cannot produce each other's number agree on the direction anyway. */
   function twoCountiesCard() {
     var R = (D.twoc || []).map(function (r) {
-      return {f: r.finding, h: r.harris, t: r.tarrant, same: r.shared === "yes"};
-    }).filter(function (r) { return r.h; });
+      return {c: r.claim, hm: r.harris_metric, hv: num(r.harris_value), hu: r.harris_unit,
+              tm: r.tarrant_metric, tv: num(r.tarrant_value), tu: r.tarrant_unit};
+    }).filter(function (r) { return r.hv != null; });
     if (!R.length) return "";
-    var tbl = '<div class="scroll"><table class="txtbl"><thead><tr><th>&nbsp;</th>'
-      + "<th>Harris — Morris, by engagement tier</th>"
-      + "<th>Tarrant — Tackett, by primary camp</th></tr></thead><tbody>"
-      + R.map(function (r) {
-          return "<tr" + (r.same ? ' class="em"' : "") + "><td><b>" + esc(r.f) + "</b>"
-            + (r.same ? "" : '<br><span class="dim">does not transfer</span>')
-            + "</td><td>" + esc(r.h) + "</td><td>" + esc(r.t) + "</td></tr>";
-        }).join("") + "</tbody></table></div>";
+    var fmt = function (v, u) {
+      return u === "pct" ? v + "%" : (u === "ratio" ? v + " to 1" : "+" + v.toFixed(1));
+    };
+    var wide = !NARROW;
+    var W = wide ? 760 : 360, MID = wide ? 300 : 180, HALF = wide ? 210 : 86;
+    var ROW = wide ? 54 : 74, T = 56, H = T + R.length * ROW + 12;
+    var mx = 55;
+    var s2 = svg(W, H, "Harris and Tarrant on the same claims, each by its own instrument");
+    s2 += txt(MID - HALF - 8, 18, "HARRIS — Morris, turnout by engagement tier",
+              "lgd", "end")
+       + txt(MID + HALF + 8, 18, "TARRANT — Tackett, composition by primary camp",
+             "lgd");
+    s2 += line(MID, T - 14, MID, H - 8, "gl");
+    var y = T;
+    R.forEach(function (r) {
+      s2 += txt(MID, y + 4, r.c, "lbb", "middle");
+      var hw = Math.min(HALF, r.hv / mx * HALF * 1.6);
+      var tw = Math.min(HALF, r.tv / mx * HALF * 1.6);
+      var by = y + 14;
+      s2 += rect(MID - HALF - 8 - hw, by, hw, 13, DC, ' rx="2" opacity="0.7"')
+         + txt(MID - HALF - 14 - hw, by + 11, fmt(r.hv, r.hu), "vl", "end")
+         + rect(MID + HALF + 8, by, tw, 13, DC, ' rx="2" opacity="0.7"')
+         + txt(MID + HALF + 14 + tw, by + 11, fmt(r.tv, r.tu), "vl");
+      if (wide) {
+        s2 += txt(MID - 10, by + 11, r.hm, "sub", "end")
+           + txt(MID + 10, by + 11, r.tm, "sub");
+      }
+      y += ROW;
+    });
+    s2 += "</svg>";
     return card("tx-twocounties", "Section 2 · slide 7 · what the two counties share",
-      "The only two counties we can see agree on four things",
+      "Two counties, two incompatible instruments, one direction",
       "<b>Harris and Tarrant are the only Texas counties that publish individual voting "
-      + "histories</b>, which is why everything else on this tab about <i>who</i> is "
-      + "voting is an inference and these two are counts. Together they are "
-      + "<b>2,182,391</b> projected votes, <b>21.4%</b> of the state. They were analysed "
-      + "by different people, from different files, using different methods — Morris "
-      + "cut Harris by how reliably each voter has turned out before, Tackett cut Tarrant "
-      + "by which primary each voter last chose. Neither method can produce the "
-      + "other’s answer by construction.",
-      tbl,
-      "<b>Four findings survive both cuts.</b> The movement is concentrated among "
-      + "irregular and new voters; the Republican coalition is the high-engagement "
-      + "coalition and is old and long-registered; Democratic primary participation has "
-      + "overtaken Republican in both places for the first time; and all of it is counted "
-      + "from voter files rather than asked of anyone."
-      + "<br><br><b>Why that licenses an extrapolation, within limits.</b> Two "
-      + "independent analysts, two different counties, two incompatible methods, one "
-      + "answer. And the two counties are <i>not the same kind of place</i> — Harris "
-      + "was D+12.89 in the 2024 Senate race and Tarrant D+1.83, a stronghold and the "
-      + "swing county that has backed the statewide winner every cycle. A finding that "
-      + "holds in both is far stronger than the same finding twice in one kind of county. "
-      + "If this pattern is real in 21.4% of the electorate, measured two ways, the prior "
-      + "should be that it is real in the metros generally."
-      + "<br><br><b>What does not transfer, and it is the important one.</b> The Hispanic "
-      + "row. Harris shows Hispanic early voters up 100% and their share of the early "
-      + "vote going 18% to 25%; Tarrant shows Hispanic voters turning out <i>behind</i> "
-      + "the county, 39% against 47%. Harris is 31.7% Hispanic and Tarrant 21.6%, and "
-      + "Section 3 is about why there is no single Hispanic number in Texas. <b>So the "
-      + "engagement finding extrapolates and the Hispanic finding does not</b> — "
-      + "which is exactly the split this whole tab keeps arriving at: what can be counted "
-      + "agrees, and the one thing that decides the race still cannot be counted."
-      + "<br><br><b>And the honest ceiling on it.</b> Two counties are two counties. They "
-      + "are both large metros, so neither says anything about the 239 rural counties "
-      + "that produce 1,199,649 net Republican votes, and nothing here measures election "
-      + "day.");
+      + "histories.</b> Everything else on this tab about <i>who</i> is voting is an "
+      + "inference; these two are counts. Together they are <b>2,182,391</b> projected "
+      + "votes, 21.4% of the state. The bars are not comparable to each other and are not "
+      + "meant to be — Morris measures turnout rates by how reliably a voter has "
+      + "turned out before, Tackett measures composition by which primary a voter last "
+      + "chose. Neither method can produce the other&rsquo;s number. Each row is one "
+      + "claim with each county&rsquo;s own evidence for it beside it.",
+      s2,
+      "<b>Six claims, two instruments, same direction on all six.</b> The movement sits "
+      + "with irregular voters (Harris: a 13.2-point Democratic turnout lead among those "
+      + "who skipped 2022; Tarrant: 48.8% of early voters skipped 2022) and not with "
+      + "regular ones (Harris: the lead collapses to 5.0 among all-three-generals voters). "
+      + "The Republican coalition is the reliable one and is not replenishing (Harris: "
+      + "new primary voters break 5 to 1 Democratic; Tarrant: half of Republican primary "
+      + "voters are 65 or over and 6% registered after 2022). And the two counties grew "
+      + "their early vote by almost exactly the same amount, 44% and 47% — the one "
+      + "row where the units genuinely match."
+      + "<br><br><b>Why that licenses an extrapolation at all.</b> Two independent "
+      + "analysts, two counties, two methods that share no inputs, one answer. And the "
+      + "counties are not the same kind of place — Harris was D+12.89 in the 2024 "
+      + "Senate race and Tarrant D+1.83, a stronghold and the swing county. A finding "
+      + "that holds in both is stronger than the same finding twice in one kind of county."
+      + "<br><br><b>Where it stops, which the next section enforces.</b> It does not "
+      + "license extrapolating to <i>any</i> county. Harris is 63.2% non-white and "
+      + "Tarrant 47.0%, so the measured band is roughly 47% to 63% non-white. The "
+      + "majority-white large counties — Collin, Denton, Williamson, Montgomery, "
+      + "Galveston, Hays, Travis — sit outside it and nothing here measures the bloc "
+      + "in places like those. The two border counties, El Paso at 85.8% and Hidalgo at "
+      + "90.1%, sit outside it the other way and are close to 90% Mexican-American, which "
+      + "is a different electorate again. Section 4 applies the finding only inside the "
+      + "band."
+      + "<br><br><b>And the one claim that does not transfer.</b> Hispanic turnout. Harris "
+      + "has Hispanic early voters up 100% and their share of the early vote going 18% to "
+      + "25%; Tarrant has Hispanic voters turning out <i>behind</i> the county, 39% "
+      + "against 47%. Harris is 31.7% Hispanic and Tarrant 21.6%. So the engagement "
+      + "finding travels and the Hispanic finding does not, which is the split this whole "
+      + "tab keeps arriving at.");
   }
 
   function historyCard() {
@@ -2343,7 +2368,7 @@
       + "moving part is how the 252,913 Neither ballots break. Two lines, because the two "
       + "races are not in the same place: the governor&rsquo;s race is the camps as they "
       + "are, and the Senate race is that plus the <b>4.92</b> Paxton effect measured in "
-      + "Section 1 slide 3. <b>Both lines are Democratic margins</b> \u2014 the two "
+      + "Section 1 slide 4. <b>Both lines are Democratic margins</b> \u2014 the two "
       + "colours are the two candidates, not two parties, so a line below the even rule "
       + "means that Democrat is losing Tarrant.",
       s2 + tbl,
@@ -2596,9 +2621,16 @@
     rows.forEach(function (r) { if (defs.indexOf(r.group) < 0) defs.push(r.group); });
     var body = defs.map(function (dfn) {
       var band = rows.filter(function (r) { return r.group === dfn; });
-      var head = '<tr class="grp"><td colspan="4">' + esc(dfn)
-        + " \u2014 precincts that are " + esc(dfn.replace(/ 90%\+$/, ""))
-        + " by at least 90% of voting-age population</td></tr>";
+      // Say what the block IS, in the header, in words a reader does not have to
+      // reconstruct. "Hispanic 90%+" and "Non-white 90%+" look like variations on one
+      // thing and are not: the second CONTAINS the first.
+      var isH = dfn.indexOf("Hispanic") === 0;
+      var head = '<tr class="grp"><td colspan="4">' + esc(dfn) + " \u2014 "
+        + (isH ? "precincts where at least 90% of voting-age people are HISPANIC"
+               : "precincts where at least 90% are NON-WHITE OF ANY KIND \u2014 Hispanic, "
+                 + "Black, Asian and other together. This block CONTAINS the one above, "
+                 + "plus everything else")
+        + "</td></tr>";
       var byWhere = {};
       band.forEach(function (r) { (byWhere[r.where] = byWhere[r.where] || []).push(r); });
       return head + Object.keys(byWhere).map(function (w) {
@@ -2612,6 +2644,31 @@
         }).join("");
       }).join("");
     }).join("");
+    // The difference between the two blocks, as rows. This was explained in prose
+    // underneath and the question still came back twice, which means it belongs in the
+    // table: subtract the Hispanic block from the non-white block and what is left is
+    // every precinct that is 90% non-white but NOT 90% Hispanic.
+    var hs = {}, ns = {};
+    rows.forEach(function (r) {
+      if (r.race !== "2024 Senate") return;
+      (r.group.indexOf("Hispanic") === 0 ? hs : ns)[r.where] =
+        {b: num(r.ballots), m: num(r.margin_R)};
+    });
+    var diff = Object.keys(ns).filter(function (w) { return hs[w]; }).map(function (w) {
+      var b = ns[w].b - hs[w].b;
+      var m = b ? (ns[w].b * ns[w].m - hs[w].b * hs[w].m) / b : null;
+      return {w: w, b: b, m: m};
+    });
+    if (diff.length) {
+      body += '<tr class="grp"><td colspan="4">The difference between the two blocks '
+        + "\u2014 precincts that are 90% non-white but NOT 90% Hispanic, so "
+        + "overwhelmingly Black. Subtracted, not separately published</td></tr>"
+        + diff.map(function (d) {
+            return "<tr><td>" + esc(d.w) + "</td><td>2024 Senate</td>"
+              + '<td class="num">' + n0(d.b) + '</td><td class="num '
+              + (d.m < 0 ? "dem" : "rep") + '">' + mgn(d.m) + "</td></tr>";
+          }).join("");
+    }
     // the spread that makes the point, computed rather than asserted
     var h = rows.filter(function (r) { return r.group.indexOf("Hispanic") === 0
                                        && r.race === "2024 Senate"; });
@@ -2939,7 +2996,7 @@
             + "</td></tr>";
         }).join("") + "</tbody></table></div>";
 
-    return card("tx-hispsens", "Section 3 · slide 4 · what the Hispanic vote has to do",
+    return card("tx-hispsens", "Section 4 · slide 1 · what the Hispanic vote has to do",
       "What the Hispanic vote has to do to carry each race",
       "<b>The same question the Tarrant card asks of its Neither bloc, asked of the one "
       + "group that decides the state.</b> Everything else is held at what the polls say, "
@@ -3029,7 +3086,7 @@
       y += ROW;
     });
     s2 += "</svg>";
-    return card("tx-neither-big", "Section 4 · slide 1 · the Neither bloc, extrapolated",
+    return card("tx-neither-big", "Section 4 · slide 2 · the Neither bloc, extrapolated",
       "What the Neither bloc has done, and what it is worth across the big fifteen",
       "<b>Tarrant is the only county that publishes this, so the break has to be solved "
       + "for rather than read off.</b> Hold both parties at 95% loyalty, take the camp "
@@ -3049,14 +3106,26 @@
       + "primary camp — finds the Democratic turnout edge <i>widest</i> among exactly "
       + "these irregular voters, 13.2 points against 5.0 among the most reliable. Two "
       + "counties, two methods, same direction."
-      + "<br><br><b>Extrapolated to the fifteen largest counties.</b> They are "
-      + "<b>6,868,411</b> projected votes, 67.3% of Texas. Carry Tarrant’s 43% "
-      + "Neither share across them and that is <b>2,953,417</b> ballots with no partisan "
-      + "read on them. Each point that bloc breaks Democratic is worth about "
-      + "<b>0.58 points</b> of statewide margin — 59,068 net votes. Which sets the "
-      + "two thresholds: Talarico is covered at anything above <b>48.3%</b>, and he is "
-      + "already past it on both historical readings. <b>Hinojosa needs 56.8%</b>, which "
-      + "is 6.8 points above anything this bloc has ever done."
+      + "<br><br><b>Extrapolated only where the measurement licenses it.</b> An earlier "
+      + "version carried this across all fifteen of the largest counties, 6,868,411 "
+      + "votes. That was too generous. The two measured counties sit at <b>63.2%</b> "
+      + "non-white (Harris) and <b>47.0%</b> (Tarrant), and that band is the scope. "
+      + "Seven of the fifteen are majority white — Travis, Collin, Denton, Williamson, "
+      + "Montgomery, Galveston, Hays — and nothing here measures the bloc anywhere "
+      + "like those. Two more sit beyond the band the other way: El Paso at 85.8% and "
+      + "Hidalgo at 90.1%, both close to 90% Mexican-American, which Section 3 shows is a "
+      + "different electorate again and was <i>Republican</i> at the top of the 2024 ticket."
+      + "<br><br><b>In scope: six counties, 4,174,308 votes, 40.9% of Texas</b> — "
+      + "Harris, Dallas, Bexar, Fort Bend, and Tarrant and Brazoria on the cusp at 47.0% "
+      + "and 50.5%. Carry Tarrant’s 43% share across them and that is <b>1,794,952</b> "
+      + "ballots with no partisan read. Each point the bloc breaks Democratic is worth "
+      + "<b>0.352 points</b> statewide, 35,899 net votes — not the 0.58 the wider "
+      + "scope implied."
+      + "<br><br><b>Which moves both thresholds, and costs her more than him.</b> Talarico "
+      + "is covered above <b>47.2%</b>, still below both historical readings, so the "
+      + "correct scoping does not touch his race at all. <b>Hinojosa now needs 61.2%</b> "
+      + "rather than 56.8% — eleven points beyond anything this bloc has done, where "
+      + "before it looked like seven. Scoping it honestly made her lever materially weaker."
       + "<br><br><b>So the prediction.</b> The bloc breaks close to even again, probably a "
       + "point or two better than even given its composition and the Harris finding. That "
       + "carries Talarico comfortably and leaves Hinojosa short — which is the same "
@@ -3069,6 +3138,68 @@
       + "it, but Harris is 31.7% Hispanic against Tarrant’s 21.6% and no other county "
       + "publishes the camps at all. This is the weakest link in the chain and it is a "
       + "share, not a margin — the break itself still comes from two measured cycles.");
+  }
+
+  /* The rural lever on its own. It lived inside the county-gain card, three sections
+     away from the other two, which made it impossible to read the three together. */
+  function ruralCard() {
+    var R = (D.rur || []).map(function (r) {
+      return {cut: num(r.turnout_cut_pct), v: num(r.votes_found),
+              sh: num(r.share_of_need), pts: num(r.statewide_points)};
+    }).filter(function (r) { return r.v != null; });
+    if (!R.length) return "";
+    var wide = !NARROW;
+    var W = wide ? 720 : 360, L = wide ? 120 : 8, RM = wide ? 128 : 56;
+    var ROW = wide ? 30 : 40, T = 46, H = T + R.length * ROW + 14;
+    var mx = 110;
+    var xs = function (v) { return L + v / mx * (W - L - RM); };
+    var s2 = svg(W, H, "What a fall in rural turnout is worth to the governor's race");
+    [0, 25, 50, 75, 100].forEach(function (t) {
+      s2 += line(xs(t), T - 14, xs(t), H - 12, t === 100 ? "zl" : "gl")
+         + txt(xs(t), T - 20, t + "%", "tk", "middle");
+    });
+    s2 += txt(wide ? 0 : 8, 16, "share of the 402,353 votes Hinojosa needs →", "lgd");
+    if (wide) s2 += txt(W - RM + 12, T - 20, "statewide", "lgd");
+    var y = T;
+    R.forEach(function (r) {
+      var lab = r.cut === 0 ? "unchanged" : "down " + r.cut + "%";
+      if (wide) s2 += txt(L - 12, y + 15, lab, "lb", "end");
+      else s2 += txt(8, y + 6, lab, "lb");
+      var by = wide ? y + 4 : y + 12;
+      s2 += rect(L, by, xs(r.sh) - L, 14,
+                 r.sh >= 100 ? DC : "currentColor",
+                 ' rx="2" opacity="' + (r.sh >= 100 ? "0.8" : "0.3") + '"')
+         + txt(xs(r.sh) + 7, by + 12, r.sh.toFixed(0) + "%", "vl");
+      if (wide) s2 += txt(W - RM + 12, by + 12, "+" + r.pts.toFixed(2), "tk");
+      y += ROW;
+    });
+    s2 += "</svg>";
+    return card("tx-rural", "Section 4 · slide 3 · the rural lever",
+      "What rural turnout would have to do",
+      "<b>The 239 counties outside the largest fifteen cast 3,343,577 ballots at R+35.9, "
+      + "a net of 1,199,649 Republican votes.</b> That net is what the metros have to "
+      + "clear before the first statewide vote of margin exists. Each bar is the share of "
+      + "the 402,353 votes Hinojosa needs that a given fall in rural turnout would supply, "
+      + "with everything else held where the polls put it.",
+      s2,
+      "<b>Rural turnout would have to fall by a third.</b> A 34% collapse supplies exactly "
+      + "the 402,353 votes. Down 15% — already a large miss by any historical "
+      + "standard — supplies 44.7% of it, worth 1.76 statewide points. Down 25% "
+      + "supplies three quarters."
+      + "<br><br><b>For scale on how unlikely the full version is.</b> Texas total midterm "
+      + "turnout moved 2.3% between 2018 and 2022. Nothing in the modern record resembles "
+      + "a third of the rural electorate staying home, and the 2026 early vote is running "
+      + "<i>ahead</i> of 2022 statewide, not behind. A partial version is plausible; the "
+      + "full version is not, which is why this lever cannot carry her alone."
+      + "<br><br><b>What would actually produce it.</b> Not persuasion — these "
+      + "counties are R+35.9 and nothing on this tab suggests that margin moves. It would "
+      + "have to be differential turnout: the rural Republican electorate is the "
+      + "high-engagement electorate, and Section 2 slide 6 is the one place anyone has "
+      + "measured whether it is showing up. In Harris the Republican turnout deficit is "
+      + "5.0 points even among the most reliable voters, which is the mechanism by which "
+      + "this lever would move at all."
+      + "<br><br><b>And it does nothing for the Senate race</b>, which is already clear by "
+      + "0.98 at the full polling haircut. Every figure on this card is about her race.");
   }
 
   /* The two levers that do NOT overlap, and the combination of them. Rural is the 239
@@ -3111,7 +3242,7 @@
       });
     });
     s += "</svg>";
-    return card("tx-levers", "Section 4 · slide 2 · the two levers together",
+    return card("tx-levers", "Section 4 · slide 4 · all three together",
       "Neither lever carries her alone. Together they do",
       "<b>Each cell is the governor&rsquo;s race after the full polling haircut</b>, with "
       + "rural turnout down the amount on the left and the Neither bloc in the big fifteen "
@@ -3120,26 +3251,34 @@
       + "is inside the largest fifteen, and nothing is counted twice.",
       '<div class="scroll">' + s + "</div>",
       "<b>Alone, neither works.</b> Rural turnout would have to collapse <b>34%</b> with "
-      + "the Neither bloc at its historical even split — no Texas midterm has ever "
-      + "done that. The Neither bloc would have to break <b>56.8%</b> with rural turnout "
-      + "unchanged — 6.8 points beyond anything it has done in two measured cycles. "
-      + "Both are the top row and the left column of this grid, and both are red."
-      + "<br><br><b>Together they are reachable.</b> Rural turnout down 15% and the "
-      + "Neither bloc at 54% gives her <b>D+0.14</b>. Down 10% and 56% gives D+0.71. "
-      + "Those are two moderate things rather than one enormous one, and that is the "
-      + "whole case for her race being live at all."
-      + "<br><br><b>But the Hispanic vote is not a third lever, and this is the thing "
-      + "most likely to be got wrong.</b> Hispanic voters sit <i>inside</i> the Neither "
-      + "bloc and <i>inside</i> the big fifteen. Adding the Hispanic slide&rsquo;s "
-      + "requirement on top of this grid double-counts the same ballots. The honest way to "
-      + "read the three together: rural and Neither are the two independent levers, and "
-      + "the Hispanic margin is the main <i>mechanism</i> by which the Neither bloc "
-      + "breaks better than even. It is not extra votes, it is the explanation for the "
-      + "same votes."
+      + "the Neither bloc at its historical even split — no Texas midterm has come "
+      + "close. The Neither bloc would have to break <b>61.2%</b> with rural turnout "
+      + "unchanged — eleven points beyond anything it has done in two measured "
+      + "cycles. Both are the edges of this grid and both are red."
+      + "<br><br><b>Together they are reachable, but not comfortably.</b> Rural down 15% "
+      + "and the bloc at 56.2% does it. Rural down 25% and 52.9% does it — and 52.9% "
+      + "is only three points above the historical break, which is the single most "
+      + "plausible cell on this grid. Below that the two have to trade off against each "
+      + "other point for point."
+      + "<br><br><b>These numbers are on the SCOPED extrapolation, which is why they are "
+      + "harder than they were.</b> An earlier version of this grid spread the Neither "
+      + "finding across all fifteen large counties and had her needing 56.8%. Restricting "
+      + "it to the six counties inside the measured non-white band — 4,174,308 votes "
+      + "rather than 6,868,411 — cuts each point of break from 0.58 statewide points "
+      + "to 0.352, and moves her requirement to 61.2%. The correction is the right one "
+      + "and it runs against her."
+      + "<br><br><b>And the Hispanic vote is not a third lever, which is the thing most "
+      + "likely to be got wrong.</b> Hispanic voters sit <i>inside</i> the Neither bloc "
+      + "and <i>inside</i> those six counties. Adding Section 4 slide 1&rsquo;s "
+      + "requirement on top of this grid counts the same ballots twice. The honest "
+      + "reading: rural and Neither are the two independent levers, and the Hispanic "
+      + "margin is the main <i>mechanism</i> by which the Neither bloc breaks above even. "
+      + "The exchange rate between the two ways of saying it: one point of Hispanic "
+      + "margin is worth about <b>0.85 points</b> of Neither break, because 0.2976 "
+      + "divided by 0.352 is 0.845. They are two descriptions of one movement."
       + "<br><br><b>And none of this touches the Senate race.</b> Talarico clears his "
-      + "threshold on the unchanged row at the historical break. Every cell in this grid "
-      + "that is red for Hinojosa is still blue for him, because of the 4.92. The grid is "
-      + "a map of her race only.");
+      + "threshold on the unchanged row at the historical break, and there is no cell on "
+      + "this grid where he loses. It is a map of her race only.");
   }
 
   function conclusionCard() {
@@ -3285,7 +3424,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["tsens", "tx_tarrant_sensitivity.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["tsens", "tx_tarrant_sensitivity.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {
@@ -3348,7 +3487,6 @@
         + ethCard()
         + precinctCard()
         + volCard()
-        + hispanicSensCard()
 
         + framing("tx-frame-levers", "Section 4 \u00b7 the turnout levers",
             "What would have to happen, and whether it can",
@@ -3364,7 +3502,9 @@
              + "ballots.",
              "Where it arrives: alone, neither lever reaches far enough. Together, two "
              + "moderate moves do it \u2014 and none of it is needed for the Senate seat."])
+        + hispanicSensCard()
         + neitherBigCard()
+        + ruralCard()
         + leversCard()
 
         + framing("tx-frame-outcomes", "Section 5 \u00b7 our model",

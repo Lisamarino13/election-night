@@ -1,7 +1,7 @@
-finding,harris,tarrant,shared
-"Who is driving the change","the gap is widest among IRREGULAR voters — D lead 13.2 pts among those who skipped the 2022 midterm, 5.0 among the most reliable","48.8% of early voters did not vote in the 2022 midterm — about 287,000 people",yes
-"Is the Republican coalition the regular-voter coalition","yes — the D turnout advantage shrinks to 5.0 pts among the most engaged, so R depends on high-engagement voters","yes — 50% of R primary voters are 65 or older against 22% of the county, and only 6% registered after 2022",yes
-"Democratic primary participation","among March 2026 primary voters, Democrats outnumber Republicans more than 5 to 1; in 2022 they were about even","the D camp is 29.8% of early voters against the R camp's 27.2% — first time ahead; it was 32.7 to 37.8 in 2022",yes
-"Measured from the voter file, not a poll","individual voting histories, Harris County clerk","individual voting histories, Tarrant County clerk",yes
-"Hispanic turnout","Hispanic share of the early vote 18% to 25%; Hispanic early voters up 100% against white up 24%","Hispanic voters are 18% of ballots against 21% of active registered, at 39% turnout against the county's 47%",no
-"What kind of county","Democratic stronghold — 2024 Senate D+12.89","the swing county — 2024 Senate D+1.83",no
+claim,harris_metric,harris_value,harris_unit,tarrant_metric,tarrant_value,tarrant_unit,shared
+"The movement is in the irregular voters","D turnout lead among those who skipped 2022",13.2,pts,"share of early voters who skipped 2022",48.8,pct,yes
+"...and not in the regular ones","D turnout lead among the most reliable",5.0,pts,"share of early voters who are new registrants",17.9,pct,yes
+"The Republican coalition is the reliable one","D lead collapses to this among all-3-generals voters",5.0,pts,"R primary voters aged 65 or over",50,pct,yes
+"...and it is not replenishing","new primary voters, D per 1 R",5.0,ratio,"R primary voters registered after Nov 2022",6,pct,yes
+"Democratic primary participation overtook Republican","D per 1 R among 2026 primary voters",5.0,ratio,"D camp share minus R camp share",2.6,pts,yes
+"Early vote growth since 2022","county early vote growth",44,pct,"county early vote growth",47,pct,yes

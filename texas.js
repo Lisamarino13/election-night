@@ -1961,44 +1961,6 @@
       mirror += "</svg>";
     }
 
-    /* --- the same table as distance from the county, which is where his finding is:
-       "within a point or two of the county's active voters on almost every line" */
-    var dev = "";
-    if (RW.length) {
-      var wide = !NARROW;
-      var W = wide ? 760 : 360, L = wide ? 186 : 8, R = wide ? 30 : 8;
-      var ROW = wide ? 30 : 46, T = wide ? 44 : 50;
-      var H = T + RW.length * ROW + 16;
-      var mx = 26;
-      var xs = function (v) { return L + (v + mx) / (2 * mx) * (W - L - R); };
-      dev = svg(W, H, "How far each camp sits from Tarrant County's own active voters, "
-                    + "line by line");
-      [-25, -20, -10, 0, 10, 20, 25].forEach(function (t) {
-        dev += line(xs(t), T - 14, xs(t), H - 14, t === 0 ? "zl" : "gl")
-            + txt(xs(t), H - 3, (t > 0 ? "+" : "") + t, "tk", "middle");
-      });
-      dev += txt(xs(0), T - 20, "the county itself", "lgd", "middle");
-      var lgx = wide ? 8 : 8;
-      [[DC, "Democratic primary"], ["currentColor", "Neither"], [RC, "Republican primary"]]
-        .forEach(function (pr) {
-          dev += '<circle cx="' + (lgx + 4) + '" cy="14" r="4.5" fill="' + pr[0] + '"'
-              + (pr[0] === "currentColor" ? ' opacity="0.8"' : "") + "/>"
-              + txt(lgx + 13, 18, pr[1], "lgd");
-          lgx += pr[1].length * 5.9 + 30;
-        });
-      RW.forEach(function (r, i) {
-        var y = T + 12 + i * ROW;
-        if (wide) dev += txt(L - 12, y + 4, r.m, "lb", "end");
-        else dev += txt(8, y - 12, r.m, "lb");
-        [[r.d - r.c, DC], [r.r - r.c, RC], [r.n - r.c, "currentColor"]].forEach(function (q) {
-          dev += '<circle cx="' + xs(Math.max(-mx + 1, Math.min(mx - 1, q[0])))
-             + '" cy="' + y + '" r="4.5" fill="' + q[1] + '"'
-             + (q[1] === "currentColor" ? ' opacity="0.85"' : ' opacity="0.8"') + "/>";
-        });
-      });
-      dev += "</svg>";
-    }
-
     /* --- his sliders, his published answers */
     var slTbl = SL.length ? ('<div class="scroll"><table class="txtbl"><thead><tr>'
       + "<th>What you assume</th><th>Democratic lead in the early vote</th>"
@@ -2020,8 +1982,17 @@
       + "drawn as distance from the county’s own active voters, because that is the "
       + "claim being made: <i>“on age, gender and race, they’re within a point or "
       + "two of the county’s active voters on almost every line.”</i>",
-      tbl + mirror + dev + slTbl,
-      "<b>His reading of the three columns, in his words.</b> <i>“The Neither voters "
+      tbl + mirror + slTbl,
+      "<b>Neither mirrors the county; the Republican camp does not come close.</b> "
+      + "Averaged across the eight lines in the table, the Neither bucket sits "
+      + "<b>1.5 points</b> from Tarrant’s own active voters and the Republican "
+      + "primary camp sits <b>14.4</b> — nearly ten times further. The two lines "
+      + "that carry most of that: 50% of Republican primary voters are 65 or older "
+      + "against 22% of the county, and only <b>6% of them registered after November "
+      + "2022 against 26% of the county</b>. That second one is the whole story of this "
+      + "table in one number: the Republican early electorate is almost entirely "
+      + "long-registered voters, with virtually no new ones in it."
+      + "<br><br><b>His reading of the three columns, in his words.</b> <i>“The Neither voters "
       + "look like Tarrant County. On age, gender and race, they’re within a point or "
       + "two of the county’s active voters on almost every line. They aren’t a "
       + "fringe group or a niche. More than a quarter of them registered after the last "

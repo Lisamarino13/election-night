@@ -150,6 +150,14 @@ def candidates_for(state_totals_race):
     return out
 
 
+# Races this board does not follow. Alaska, Minnesota and Kansas all elect a governor
+# in 2026 and all three publish one, so every source offers it - and this build only
+# ever ADDS to the board it starts from, which made deleting them from results.json
+# useless: the next run put them straight back. Dropping them by name at the end is
+# the only thing that sticks.
+NOT_TRACKED = {("AK", "governor"), ("MN", "governor"), ("KS", "governor")}
+
+
 def main():
     base_path = DATA / "results.json"
     board = json.loads(base_path.read_text()) if base_path.exists() else {"states": {}}
@@ -245,6 +253,10 @@ def main():
                      "county's own outstanding ballots. Outstanding counts only ballots "
                      "already cast and not yet counted - election-day turnout that has "
                      "not happened is not in it, so it is a floor.")
+    for st, race in NOT_TRACKED:
+        ent = board["states"].get(st) or {}
+        if (ent.get("races") or {}).pop(race, None) is not None:
+            print(f"  {st}: dropped {race} - not a race this board follows")
     base_path.write_text(json.dumps(board, indent=1) + "\n")
     print(f"-> results.json ({len(touched)} state(s) with a live feed: {', '.join(touched) or 'none'})")
     return 0

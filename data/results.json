@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-03T21:16:48+00:00",
+ "updated": "2026-11-03T21:18:12+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -8380,21 +8380,6 @@
      "counties": [],
      "updated": null,
      "tier": "watch",
-     "roster_only": true,
-     "roster_source": "https://ent.sos.ks.gov/<county>.html (+ national.html and statewide.html for state totals), read with a real browser"
-    },
-    "governor": {
-     "candidates": [
-      {
-       "name": "Ty Masterson",
-       "party": "R"
-      },
-      {
-       "name": "Cindy Holscher",
-       "party": "D"
-      }
-     ],
-     "counties": [],
      "roster_only": true,
      "roster_source": "https://ent.sos.ks.gov/<county>.html (+ national.html and statewide.html for state totals), read with a real browser"
     }

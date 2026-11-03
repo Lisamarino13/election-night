@@ -39,11 +39,14 @@
   //
   //     final = early + (1 - banked share) * skew
   //
-  // so the tie line is simply early = -(1 - share) * skew. Judicial races are the basis
-  // because nobody runs ahead of the ticket in them: no incumbency, no name recognition,
-  // no candidate effects - the cleanest available read on generic party behaviour.
-  var SKEW_2024 = -1.34;    // median of 6 judicial races
-  var SKEW_2022 = 8.55;     // median of 5 judicial races, the only midterm available
+  // so the tie line is simply early = -(1 - share) * skew. The basis is the major
+  // statewide offices - President, Senate, Governor, Lt Governor, Attorney General.
+  // An earlier version used judicial races on the grounds that nobody runs ahead of the
+  // ticket in them, which is true but produced a near-identical band (D+2.07 to R+0.33
+  // against D+2.27 to R+0.18) while filling the table with Supreme Court places nobody
+  // recognises. The 0.2-point difference is not worth the noise.
+  var SKEW_2024 = -0.75;    // median of President +2.64 and Senate -4.14
+  var SKEW_2022 = 9.36;     // median of Governor, Lt Governor and AG; the only midterm
   var THR_SAFE_D = -(1 - SHARE) * SKEW_2022;   // D+2.07
   var THR_SAFE_R = -(1 - SHARE) * SKEW_2024;   // R+0.33
 
@@ -246,190 +249,86 @@
 
   /* ======================================================= 2. measured mode history */
   function historyCard() {
-    var rows = (D.modes || []).map(function (r) {
+    var all = (D.modes || []).map(function (r) {
       return {y: +r.year, kind: r.kind, c: r.contest, b: r.bucket,
               es: num(r.early_share), e: num(r.early_margin_R),
               d: num(r.eday_margin_R), f: num(r.final_margin_R),
-              k: num(r.skew_eday_minus_early), n: num(r.total_votes),
-              major: r.major === "1"};
+              k: num(r.skew_eday_minus_early), major: r.major === "1"};
     }).filter(function (r) { return r.k != null; });
+    // Judicial seats are dropped: seven Supreme Court places and four CCA seats filled
+    // the table with contests nobody recognises, and using them as the band's basis
+    // moved the answer by 0.2 points against the major offices.
+    var rows = all.filter(function (r) { return r.major; });
     if (!rows.length) return "";
     var years = [2024, 2022, 2020];
-    // dot plot: every statewide race's skew, grouped by cycle
-    var W = 720, H = 44 + years.length * 62, L = 92, R = 28, T = 30;
-    var lo = -6, hi = 19;
+
+    // The chart is the point of this card: where the banked vote lands, and where
+    // election day drags it. One row per race, early dot to election-day dot.
+    var W = 720, H = 56 + rows.length * 30, L = 150, R = 78, T = 34;
+    var lo = -8, hi = 26;
     var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R); };
-    var s2 = svg(W, H, "Election-day minus early-vote margin for every Texas statewide race");
-    [-5, 0, 5, 10, 15].forEach(function (t) {
-      s2 += line(xs(t), T - 8, xs(t), H - 18, t === 0 ? "zl" : "gl")
-         + txt(xs(t), T - 14, (t > 0 ? "+" : "") + t, "tk", "middle");
+    var s2 = svg(W, H, "Where the banked vote lands and where election day drags it");
+    [-5, 0, 5, 10, 15, 20, 25].forEach(function (t) {
+      s2 += line(xs(t), T - 10, xs(t), H - 22, t === 0 ? "zl" : "gl")
+         + txt(xs(t), T - 16, t === 0 ? "even" : (t > 0 ? "R+" : "D+") + Math.abs(t),
+               "tk", "middle");
     });
-    s2 += txt(L, 12, "\u2190 election day better for Democrats", "lgd")
-       + txt(W - R, 12, "better for Republicans \u2192", "lgd", "end");
-    years.forEach(function (y, i) {
-      var band = rows.filter(function (r) { return r.y === y; });
-      if (!band.length) return;
-      var yy = T + 18 + i * 62;
-      var jud = band.filter(function (r) { return r.b === "judicial"; })
-                    .map(function (r) { return r.k; }).sort(function (a, b) { return a - b; });
-      // A true median: with an even count average the middle two, so the figure drawn
-      // here matches the SKEW_* constants the band is built from. Taking the lower-middle
-      // instead labelled 2024 as -1.43 while the threshold used -1.34.
-      var med = null;
-      if (jud.length) {
-        var m = jud.length >> 1;
-        med = jud.length % 2 ? jud[m] : (jud[m - 1] + jud[m]) / 2;
-      }
-      s2 += txt(L - 10, yy + 4, y + (y === 2022 ? " midterm" : " pres."), "lb", "end");
-      s2 += txt(L - 10, yy + 17, band.length + " statewide races", "sub", "end");
-      band.forEach(function (r) {
-        var big = r.b === "president" || r.b === "us senate";
-        s2 += '<circle cx="' + xs(r.k) + '" cy="' + (yy + (big ? 0 : 14))
-           + '" r="' + (big ? 5.5 : 3.5) + '" fill="'
-           + (big ? sideCol(-1) : "var(--dim,#999)") + '" opacity="'
-           + (big ? 0.95 : 0.6) + '"/>';
-        if (big) s2 += txt(xs(r.k), yy - 10,
-          r.b === "president" ? "Pres" : "Senate", "tk", "middle");
+    s2 += txt(L, 14, "\u25cf banked (early + mail)", "lgd")
+       + txt(L + 150, 14, "\u25cf election day", "lgd")
+       + txt(L + 272, 14, "\u25cb where it finished", "lgd");
+    var i = 0;
+    years.forEach(function (y) {
+      rows.filter(function (r) { return r.y === y; }).forEach(function (r, j) {
+        var yy = T + 8 + i * 30; i++;
+        if (j === 0) s2 += txt(10, yy + 4, y + (y === 2022 ? " midterm" : " pres."), "lbb");
+        s2 += txt(L - 12, yy + 4, r.c.replace("President/Vice-President", "President")
+                  .replace("U. S. Senator", "U.S. Senate"), "lb", "end");
+        s2 += line(xs(r.e), yy, xs(r.d), yy, "cn");
+        s2 += '<circle cx="' + xs(r.f) + '" cy="' + yy + '" r="4.5" fill="none" '
+           + 'stroke="currentColor" stroke-width="1.5"/>';
+        s2 += '<circle cx="' + xs(r.e) + '" cy="' + yy + '" r="5.5" fill="' + DC + '"/>';
+        s2 += '<circle cx="' + xs(r.d) + '" cy="' + yy + '" r="5.5" fill="' + RC + '"/>';
+        s2 += txt(W - R + 8, yy + 4, (r.k > 0 ? "+" : "\u2212")
+                  + Math.abs(r.k).toFixed(2), "vl");
       });
-      if (med != null) {
-        s2 += line(xs(med), yy + 7, xs(med), yy + 22, "med");
-        s2 += txt(xs(med), yy + 33, "judicial median " + (med > 0 ? "+" : "") + med.toFixed(2),
-                  "tk", "middle");
-      }
     });
+    s2 += txt(W - R + 8, T - 16, "move", "tk");
     s2 += "</svg>";
-    // The table lists only the offices anyone recognises - President, Senate, Governor,
-    // Lt Governor, Attorney General - and collapses the seven-odd judicial seats into one
-    // composite row per cycle. Listing "Justice, Supreme Court, Place 6" three times is
-    // noise, but the judicial median is what the band rests on, so it stays visible as a
-    // row rather than disappearing. The dot plot above still carries every race, which is
-    // where the outlier is meant to be seen.
-    var skewRow = function (lab, kindLab, y, es, e, d, f2, k, cls) {
-      return "<tr" + (cls ? ' class="' + cls + '"' : "") + "><td>" + y
-        + ' <span class="dim">' + kindLab + "</span></td><td>" + lab
-        + '</td><td class="num">' + (es == null ? "\u2014" : es.toFixed(1) + "%")
-        + '</td><td class="num">' + (e == null ? "\u2014" : mgn(e))
-        + '</td><td class="num">' + (d == null ? "\u2014" : mgn(d))
-        + '</td><td class="num">' + (f2 == null ? "\u2014" : mgn(f2))
-        + '</td><td class="num ' + (k < 0 ? "dem" : "rep") + '">'
-        + (k > 0 ? "+" : "\u2212") + Math.abs(k).toFixed(2) + "</td></tr>";
-    };
+
     var body = years.map(function (y) {
       var band = rows.filter(function (r) { return r.y === y; });
       if (!band.length) return "";
       var kindLab = band[0].kind === "midterm" ? "midterm" : "pres.";
-      var out = band.filter(function (r) { return r.major; })
-        .map(function (r) {
-          return skewRow(esc(r.c), kindLab, r.y, r.es, r.e, r.d, r.f, r.k,
-                         r.b === "us senate" || r.b === "president" ? "em" : "");
-        }).join("");
-      var jud = band.filter(function (r) { return r.b === "judicial"; });
-      if (jud.length) {
-        var ks = jud.map(function (r) { return r.k; }).sort(function (a, b) { return a - b; });
-        var m = ks.length >> 1;
-        var med = ks.length % 2 ? ks[m] : (ks[m - 1] + ks[m]) / 2;
-        out += skewRow('Judicial composite <span class="dim">' + jud.length
-          + " seats, " + (ks[0] > 0 ? "+" : "\u2212") + Math.abs(ks[0]).toFixed(2) + " to "
-          + (ks[ks.length - 1] > 0 ? "+" : "\u2212")
-          + Math.abs(ks[ks.length - 1]).toFixed(2) + "</span>",
-          kindLab, y, null, null, null, null, med, "jud");
-      }
-      return out;
+      return band.map(function (r) {
+        return "<tr" + (r.b === "us senate" ? ' class="em"' : "") + "><td>" + r.y
+          + ' <span class="dim">' + kindLab + "</span></td><td>"
+          + esc(r.c.replace("President/Vice-President", "President")
+                 .replace("U. S. Senator", "U.S. Senate"))
+          + '</td><td class="num">' + r.es.toFixed(1) + '%</td><td class="num">' + mgn(r.e)
+          + '</td><td class="num">' + mgn(r.d) + '</td><td class="num">' + mgn(r.f)
+          + '</td><td class="num ' + (r.k < 0 ? "dem" : "rep") + '">'
+          + (r.k > 0 ? "+" : "\u2212") + Math.abs(r.k).toFixed(2) + "</td></tr>";
+      }).join("");
     }).join("");
-    return card("tx-modes", "Chapter 2 \u00b7 how a banked vote becomes a result",
-      "Every statewide race, not the one that suited the story",
-      "Measured from Texas&rsquo;s own published results &mdash; County.json carries EV "
-      + "beside V per candidate per county, so these are exact. The last column is the "
-      + "<b>skew</b>: election day minus early. Large dots are President and Senate, small "
-      + "dots every other statewide race, and the rule is the judicial median.",
-      s2 + '<div class="scroll"><table class="txtbl"><thead><tr><th>Cycle</th><th>Contest</th>'
-      + "<th>Early share</th><th>Early</th><th>Election day</th><th>Final</th>"
-      + "<th>Skew</th></tr></thead><tbody>" + body + "</tbody></table></div>",
-      "<b>An earlier version of this card showed one race per cycle, and in two of three "
-      + "cycles it was the most Democrat-friendly race available.</b> Cruz&ndash;Allred&rsquo;s "
-      + "\u22124.14 is the biggest outlier of nine statewide races in 2024 &mdash; the "
-      + "judicial median moved about one point, not four, so Allred ran ahead of his party "
-      + "on election day specifically. Abbott&rsquo;s +7.48 was the lowest of twelve in "
-      + "2022, where the typical race skewed about +9. On the judicial medians the trend is "
-      + "+14.08 \u2192 +8.55 \u2192 \u22121.34: the direction survives and is still "
-      + "monotonic, but the size of the 2024 flip does not.");
-  }
 
-  /* =============== 2b. the running number is not the early vote ============== */
-  function orderCard() {
-    var rows = (D.order || []).map(function (r) {
-      return {y: +r.year, race: r.race, p: num(r.pct_of_early_in),
-              big: num(r.big_counties_first), small: num(r.small_counties_first),
-              sw: num(r.statewide_early_margin_R), fin: num(r.final_margin_R)};
-    }).filter(function (r) { return r.big != null; });
-    if (!rows.length) return "";
-    var years = [2024, 2022, 2020];
-    var W = 720, H = 250, L = 52, R = 150, T = 20, Bm = 40;
-    var lo = -25, hi = 60;
-    var xs = function (p) { return L + p / 100 * (W - L - R); };
-    var ys = function (v) { return T + (v - lo) / (hi - lo) * (H - Bm - T); };
-    var s2 = svg(W, H, "How far the running early-vote margin can sit from the final, by how much is in");
-    [-20, 0, 20, 40, 60].forEach(function (v) {
-      s2 += line(L, ys(v), W - R, ys(v), v === 0 ? "zl" : "gl")
-         + txt(L - 8, ys(v) + 4, (v > 0 ? "R+" : v < 0 ? "D+" : "even") + (v ? Math.abs(v) : ""),
-               "tk", "end");
-    });
-    [0, 25, 50, 75, 100].forEach(function (p) {
-      s2 += txt(xs(p), H - Bm + 15, p + "%", "tk", "middle");
-    });
-    s2 += txt((L + W - R) / 2, H - 8, "share of the early vote counted", "lgd", "middle");
-    var cols = {2024: DC, 2022: "var(--dim,#999)", 2020: RC};
-    years.forEach(function (y) {
-      var band = rows.filter(function (r) { return r.y === y; })
-                     .sort(function (a, b) { return a.p - b.p; });
-      if (!band.length) return;
-      // the envelope between the two orderings
-      var top = band.map(function (r) { return xs(r.p) + "," + ys(Math.max(r.big, r.small)); });
-      var bot = band.slice().reverse()
-        .map(function (r) { return xs(r.p) + "," + ys(Math.min(r.big, r.small)); });
-      s2 += '<polygon points="' + top.concat(bot).join(" ") + '" fill="' + cols[y]
-         + '" opacity="0.13"/>';
-      ["big", "small"].forEach(function (k) {
-        s2 += '<polyline points="'
-          + band.map(function (r) { return xs(r.p) + "," + ys(r[k]); }).join(" ")
-          + '" fill="none" stroke="' + cols[y] + '" stroke-width="1.6" opacity="0.8"'
-          + (k === "small" ? ' stroke-dasharray="4 3"' : "") + "/>";
-      });
-      var last = band[band.length - 1];
-      s2 += txt(W - R + 8, ys(last.sw) + 4, y + " \u2014 ends " + mgn(last.sw, 1), "tk");
-    });
-    s2 += "</svg>";
-    var body = [10, 25, 50, 75, 90, 100].map(function (p) {
-      return "<tr><td>" + p + "% of the early vote in</td>"
-        + years.map(function (y) {
-            var r = rows.filter(function (q) { return q.y === y && q.p === p; })[0];
-            if (!r) return '<td class="num">\u2014</td>';
-            var gap = Math.abs(r.big - r.small);
-            return '<td class="num ' + (gap > 20 ? "rep" : gap < 6 ? "dem" : "") + '">'
-              + gap.toFixed(1) + "</td>";
-          }).join("") + "</tr>";
-    }).join("");
-    return card("tx-order", "Chapter 2 \u00b7 and why the first numbers lie",
-      "The running number is not the early vote",
-      "Texas reports early and mail first, but not all at once and not in a published "
-      + "order. Its big metros hold a large Democratic early margin and its rural "
-      + "counties a large Republican one, so a partial count can sit almost anywhere. "
-      + "The shaded band is the gap between two orderings &mdash; biggest counties first "
-      + "(solid) and smallest first (dashed) &mdash; and it is the range the screen can "
-      + "show while the true early margin is the number at the right-hand edge.",
-      s2 + '<div class="scroll"><table class="txtbl"><thead><tr><th>Counted</th>'
-      + years.map(function (y) { return "<th>" + y + "</th>"; }).join("")
-      + "</tr></thead><tbody>" + body + "</tbody></table>"
-      + '<p class="txsub" style="margin-top:6px">Points between the two orderings. '
-      + "Lower is safer to read.</p></div>",
-      "<b>I do not know the real reporting order, and neither does this card.</b> There "
-      + "is no published Texas timeline and small counties often finish before large "
-      + "ones, so the true path could be either line or neither. What holds whatever the "
-      + "order is: at 10% counted the two orderings are 65 points apart, at half still "
-      + "42, and only at <b>90% counted</b> do they converge to about 5 &mdash; the same "
-      + "5 in all three cycles. <b>Do not read the running margin before roughly 90% of "
-      + "the early vote is in.</b> Everything else on this tab refers to the full early "
-      + "vote, not to a partial one.");
+    return card("tx-modes", "Chapter 2 \u00b7 how a banked vote becomes a result",
+      "What election day does to the banked vote",
+      "Texas banks three quarters of its vote before election day, so the question is "
+      + "simply how far the last quarter moves the first three. Blue dot is the banked "
+      + "margin, red dot is election day, hollow ring is where the race finished \u2014 "
+      + "always close to the blue dot, because the banked vote is most of the electorate. "
+      + "The last column is the <b>move</b>: election day minus banked.",
+      s2 + '<div class="scroll"><table class="txtbl"><thead><tr><th>Cycle</th><th>Contest</th>'
+      + "<th>Banked share</th><th>Banked</th><th>Election day</th><th>Finished</th>"
+      + "<th>Move</th></tr></thead><tbody>" + body + "</tbody></table></div>",
+      "<b>Election day used to rescue Republicans and has stopped.</b> The move ran about "
+      + "+15 in 2020, about +9 in 2022, and about \u22121 in 2024 \u2014 Republicans spent "
+      + "those cycles pushing their most reliable voters into early voting, which drained "
+      + "election day of the skew it used to carry. Two cautions. The only <i>midterm</i> "
+      + "here is 2022, and it still moved +9.36. And Cruz\u2013Allred&rsquo;s \u22124.14 is "
+      + "the largest move of any race in its cycle, against Trump&rsquo;s +2.64 on the same "
+      + "ballot, so a Senate candidate can run several points clear of the party on "
+      + "election day in either direction.");
   }
 
   /* ================================================ 3. what election day would have to do */
@@ -519,43 +418,65 @@
       return {y: +r.year, kind: r.kind, rp: num(r.r_primary), dp: num(r.d_primary),
               sh: num(r.d_share_primary), nov: num(r.november_margin_R)};
     }).filter(function (r) { return r.rp != null && r.dp != null; })
-      .sort(function (a, b) { return a.y - b.y; });
+      .sort(function (a2, b2) { return a2.y - b2.y; });
     if (!rows.length) return "";
-    rows.forEach(function (r) { r.tot = r.rp + r.dp; });
-    var W = 720, H = 300, L = 54, R = 46, T = 24, Bm = 46;
-    var maxT = Math.max.apply(null, rows.map(function (r) { return r.tot; })) * 1.12;
+    rows.forEach(function (r) { r.tot = r.rp + r.dp; r.rsh = 100 - r.sh; });
+    var W = 720, H = 320, L = 54, R = 46, T = 26, Bm = 58;
+    var maxT = Math.max.apply(null, rows.map(function (r) { return r.tot; })) * 1.14;
     var ys = function (v) { return H - Bm - v / maxT * (H - Bm - T); };
-    var bw = (W - L - R) / rows.length * 0.62;
-    var step = (W - L - R) / rows.length;
-    var s = svg(W, H, "Democratic share of the Texas primary by year, with ballots cast");
-    [0, 2, 4, 6].forEach(function (m) {
-      s += line(L, ys(m * 1e6), W - R, ys(m * 1e6), "gl")
+    var step = (W - L - R) / rows.length, bw = step * 0.64;
+    var s2 = svg(W, H, "Democratic and Republican share of the Texas primary by year");
+    [0, 1, 2, 3, 4].forEach(function (m) {
+      s2 += line(L, ys(m * 1e6), W - R, ys(m * 1e6), "gl")
          + txt(L - 8, ys(m * 1e6) + 4, m + "M", "tk", "end");
     });
+    // the 50% line, drawn against each bar's own total so it reads against the stack
     rows.forEach(function (r, i) {
       var x = L + i * step + (step - bw) / 2;
-      s += rect(x, ys(r.dp), bw, ys(0) - ys(r.dp), DC, ' rx="2"');
-      s += rect(x, ys(r.tot), bw, ys(r.dp) - ys(r.tot), RC, ' rx="2"');
-      if (ys(0) - ys(r.dp) > 16)
-        s += txt(x + bw / 2, ys(0) - (ys(0) - ys(r.dp)) / 2 + 4, r.sh.toFixed(1) + "%", "inb", "middle");
-      s += txt(x + bw / 2, ys(r.tot) - 6, (r.tot / 1e6).toFixed(2) + "M", "tk", "middle");
-      s += txt(x + bw / 2, H - Bm + 15, String(r.y),
-               r.kind === "Midterm" ? "lbb" : "tk", "middle");
+      s2 += rect(x, ys(r.dp), bw, ys(0) - ys(r.dp), DC, ' rx="2"');
+      s2 += rect(x, ys(r.tot), bw, ys(r.dp) - ys(r.tot), RC, ' rx="2"');
+      var dh = ys(0) - ys(r.dp), rh = ys(r.dp) - ys(r.tot);
+      if (dh > 15) s2 += txt(x + bw / 2, ys(0) - dh / 2 + 4, r.sh.toFixed(1) + "%",
+                             "inb", "middle");
+      if (rh > 15) s2 += txt(x + bw / 2, ys(r.dp) - rh / 2 + 4, r.rsh.toFixed(1) + "%",
+                             "inb", "middle");
+      s2 += txt(x + bw / 2, ys(r.tot) - 6, (r.tot / 1e6).toFixed(2) + "M", "tk", "middle");
+      s2 += txt(x + bw / 2, H - Bm + 15, String(r.y),
+                r.kind === "Midterm" ? "lbb" : "tk", "middle");
+      s2 += txt(x + bw / 2, H - Bm + 28, r.kind === "Midterm" ? "mid" : "pres", "sub", "middle");
       if (r.nov != null)
-        s += txt(x + bw / 2, H - Bm + 30, mgn(r.nov, 1), "tk", "middle");
+        s2 += txt(x + bw / 2, H - Bm + 42, mgn(r.nov, 1), "tk", "middle");
     });
-    s += txt(L, H - 6, "Blue = Democratic ballots, red = Republican. Bottom row is the November margin that followed.", "lgd");
-    s += "</svg>";
-    return card("tx-primary", "Chapter 1 · what actually changed",
+    s2 += txt(L, H - 6, "Blue = Democratic ballots, red = Republican; the two shares sum to "
+              + "100. Bottom row is the November margin that followed.", "lgd");
+    s2 += "</svg>";
+    var hist = (D.phist || []).map(function (r) {
+      return {y: +r.year, sh: num(r.d_share_primary)};
+    }).filter(function (r) { return r.sh != null; });
+    var histNote = "";
+    if (hist.length) {
+      var lowest = hist.reduce(function (a2, b2) { return b2.sh < a2.sh ? b2 : a2; });
+      var last = hist.reduce(function (a2, b2) { return b2.y > a2.y ? b2 : a2; });
+      histNote = "<b>Not the best ever, and the difference matters.</b> Texas ran "
+        + "effectively one-party primaries for decades: the Democratic share was "
+        + hist[0].sh.toFixed(1) + "% in " + hist[0].y + ", peaked above 95%, and was "
+        + "still " + last.sh.toFixed(1) + "% in " + last.y + " \u2014 never below "
+        + lowest.sh.toFixed(1) + "% (" + lowest.y + ") across that whole run. What 2026 "
+        + "is: <b>the best Democratic share since at least " + last.y + "</b>, and the "
+        + "first midterm majority since Republicans became competitive in Texas. The next "
+        + "best midterm in the modern series is 2018 at 40.81%, so 2026 is +10.89 on it.";
+    }
+    return card("tx-primary", "Chapter 1 \u00b7 what actually changed",
       "Democratic share of the Texas primary",
-      "Texas runs an open primary &mdash; you declare at the poll and nothing binds you "
+      "Texas runs an open primary \u2014 you declare at the poll and nothing binds you "
       + "before or after. In March 2026 Democratic turnout more than doubled from 2022, to "
-      + "2,319,187, and the Democratic share crossed 50% in a midterm for the first time. "
-      + "Republicans had the contested race and still lost the share by 16 points.",
-      s,
-      "This is the strongest single piece of evidence that the electorate changed, and it "
-      + "is the one piece the demographic model does not use. It is also a certified count "
-      + "rather than an inference — unlike almost everything else on this tab.");
+      + "2,319,187, and the Democratic share crossed 50% in a midterm for the first time "
+      + "in the modern era. Republicans had the contested Senate race and still lost the "
+      + "share by 3.4 points.",
+      s2,
+      "This is the strongest single piece of evidence that the electorate changed, and the "
+      + "one piece the demographic model does not use. It is also a certified count rather "
+      + "than an inference, unlike almost everything else on this tab. " + histNote);
   }
 
   /* ============================================== 6. seven baselines, each its own swing */
@@ -865,6 +786,13 @@
       + "election day is as weak for Republicans as 2024. The polls missed in the familiar "
       + "Texas direction and the primary signal did not convert.</li>"
       + "</ol>"
+      + '<p class="txnote"><b>Read nothing before about 90% of the early vote is in.</b> '
+      + "Texas reports early and mail first, but not all at once and not in a published "
+      + "order, and its metros hold a large Democratic early margin against a large rural "
+      + "Republican one. Measured across 2020, 2022 and 2024, a partial count can sit 65 "
+      + "points from the true early margin at 10% counted and 42 at half; the orderings "
+      + "converge to about 5 points only at 90% \u2014 the same 5 in all three cycles. "
+      + "Every threshold above refers to the FULL early vote, never to a partial one.</p>"
       + '<p class="txnote"><b>What would discredit the method rather than the result:</b> if '
       + "Hidalgo, Cameron and Webb come in right of 2024 while Harris and Dallas come in "
       + "left of it, the electorate is sorting by education rather than ethnicity and every "
@@ -940,7 +868,7 @@
   window.renderTexas = function (host) {
     host.innerHTML = '<div class="txwrap-inner"><p class="txhint">Loading the Texas '
       + "analysis…</p></div>";
-    var want = [["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"],
+    var want = [["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["phist", "tx_primary_historical.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
                 ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"],
@@ -964,7 +892,6 @@
         + primaryCard()
         // 2. how a banked vote reaches a result
         + historyCard()
-        + orderCard()
         // 3. where every method lands, and why they disagree
         + estimatesCard()
         + baselineCard()

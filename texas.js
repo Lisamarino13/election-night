@@ -422,9 +422,12 @@
     s += "</svg>";
     return card("tx-est", "Chapter 3 · slide 1 · where every estimate lands",
       "Where every estimate lands",
-      "Eleven estimates spanning six points and straddling zero. They do not disagree "
-      + "randomly: nearly every one is the same arithmetic with a different assumption "
-      + "about how far Hispanic voters move.",
+      "Fifteen estimates spanning eleven points and straddling zero. They do not "
+      + "disagree randomly: nearly every one is the same arithmetic with a different "
+      + "assumption about how far Hispanic voters move. Ten of the fifteen are on the "
+      + "Democratic side, the median is D+1.29, and the two built from counted "
+      + "ballots rather than assumptions \u2014 the primary regression and the "
+      + "uniform swing off the 2024 Senate \u2014 sit on opposite sides of even.",
       s,
       "<b>The model&rsquo;s known bias.</b> The county model moved the whole non-white "
       + "bloc +12, Black voters included. They were already 91.1% Democratic in 2024, so "

@@ -500,83 +500,84 @@
               x0: num(r.x_min), x1: num(r.x_max), pred: num(r.pred_2026_at_51_70)};
     });
     if (!done.length || !fits.length) return "";
-    var all = fits.filter(function (f2) { return f2.basis === "all cycles"; })[0];
-    var mid = fits.filter(function (f2) { return f2.basis === "midterms only"; })[0];
+    var all = fits.filter(function (q) { return q.basis === "all cycles"; })[0];
+    var mid = fits.filter(function (q) { return q.basis === "midterms only"; })[0];
     var now = open2.length ? open2[0] : null;
+    if (!now) return "";
 
-    var W = 720, H = 340, L = 62, R = 128, T = 22, Bm = 46;
-    var xlo = 26, xhi = 56, ylo = -16, yhi = 24;
+    var W = 720, H = 330, L = 88, R = 92, T = 40, Bm = 54;
+    var xlo = 26, xhi = 56, ylo = -8, yhi = 24;
     var xs = function (v) { return L + (v - xlo) / (xhi - xlo) * (W - L - R); };
     var ys = function (v) { return T + (v - ylo) / (yhi - ylo) * (H - Bm - T); };
-    var s2 = svg(W, H, "Democratic share of the Texas primary against the November margin");
-    [-10, 0, 10, 20].forEach(function (v) {
+    var s2 = svg(W, H, "Democratic share of the Texas primary against the November margin that followed");
+    // axes, spelled out
+    [-5, 0, 5, 10, 15, 20].forEach(function (v) {
       s2 += line(L, ys(v), W - R, ys(v), v === 0 ? "zl" : "gl")
-         + txt(L - 8, ys(v) + 4, v === 0 ? "even" : (v > 0 ? "R+" : "D+") + Math.abs(v),
+         + txt(L - 10, ys(v) + 4, v === 0 ? "tied" : (v > 0 ? "R+" : "D+") + Math.abs(v),
                "tk", "end");
     });
     [30, 35, 40, 45, 50, 55].forEach(function (v) {
-      s2 += txt(xs(v), H - Bm + 15, v + "%", "tk", "middle");
+      s2 += txt(xs(v), H - Bm + 16, v + "%", "tk", "middle");
     });
-    s2 += txt((L + W - R) / 2, H - 8, "Democratic share of the primary \u2192", "lgd", "middle");
-    // the +/- one residual sd band on the all-cycle fit
-    var bandTop = [], bandBot = [];
+    s2 += txt((L + W - R) / 2, H - 30,
+              "how Democratic the PRIMARY was \u2192", "lgd", "middle");
+    s2 += txt(14, T - 16, "how the NOVEMBER", "lgd")
+       + txt(14, T - 4, "race finished \u2193", "lgd");
+    // the fitted relationship, with its uncertainty
+    var top = [], bot = [];
     for (var v = xlo; v <= xhi; v += 2) {
-      bandTop.push(xs(v) + "," + ys(all.a + all.b * v - all.sd));
-      bandBot.unshift(xs(v) + "," + ys(all.a + all.b * v + all.sd));
+      top.push(xs(v) + "," + ys(all.a + all.b * v - all.sd));
+      bot.unshift(xs(v) + "," + ys(all.a + all.b * v + all.sd));
     }
-    s2 += '<polygon points="' + bandTop.concat(bandBot).join(" ")
+    s2 += '<polygon points="' + top.concat(bot).join(" ")
        + '" fill="currentColor" opacity="0.07"/>';
     s2 += '<line x1="' + xs(xlo) + '" y1="' + ys(all.a + all.b * xlo) + '" x2="' + xs(xhi)
        + '" y2="' + ys(all.a + all.b * xhi) + '" stroke="currentColor" stroke-width="2"/>';
-    s2 += '<line x1="' + xs(xlo) + '" y1="' + ys(mid.a + mid.b * xlo) + '" x2="' + xs(xhi)
-       + '" y2="' + ys(mid.a + mid.b * xhi) + '" stroke="' + DC
-       + '" stroke-width="1.6" stroke-dasharray="5 4" opacity="0.75"/>';
-    // the data
+    // every past cycle
     done.forEach(function (r) {
       var midt = r.kind === "Midterm";
       s2 += '<circle cx="' + xs(r.x) + '" cy="' + ys(r.m) + '" r="' + (midt ? 6 : 5)
          + '" fill="' + (midt ? "currentColor" : "none")
          + '" stroke="currentColor" stroke-width="1.6"/>';
-      s2 += txt(xs(r.x), ys(r.m) - 11, String(r.y), "tk", "middle");
+      s2 += txt(xs(r.x), ys(r.m) - 12, String(r.y), "tk", "middle");
     });
-    if (now) {
-      s2 += '<line x1="' + xs(now.x) + '" y1="' + T + '" x2="' + xs(now.x) + '" y2="'
-         + (H - Bm) + '" stroke="' + RC + '" stroke-width="1.2" stroke-dasharray="3 3"/>';
-      s2 += txt(xs(now.x), T - 6, now.y + " \u2014 " + now.x.toFixed(2) + "%", "tk", "middle");
-      [[all, "currentColor", "all cycles"], [mid, DC, "midterms only"]].forEach(function (q) {
-        var pv = q[0].a + q[0].b * now.x;
-        s2 += '<circle cx="' + xs(now.x) + '" cy="' + ys(pv) + '" r="5.5" fill="' + q[1] + '"/>';
-        s2 += txt(W - R + 8, ys(pv) + 4, mgn(pv, 1) + "  " + q[2], "tk");
-      });
-    }
-    // bottom of the right gutter: the top of it is where the midterm fit's own
-    // prediction label lands, and the two collided there.
-    s2 += txt(W - R + 8, H - Bm - 14, "\u25cf midterm", "lgd")
-       + txt(W - R + 8, H - Bm, "\u25cb presidential", "lgd");
+    // 2026
+    var pv = all.a + all.b * now.x;
+    s2 += '<line x1="' + xs(now.x) + '" y1="' + T + '" x2="' + xs(now.x) + '" y2="'
+       + (H - Bm) + '" stroke="' + RC + '" stroke-width="1.2" stroke-dasharray="3 3"/>';
+    s2 += txt(xs(now.x), T - 8, "2026 primary: " + now.x.toFixed(1) + "%", "lbb", "middle");
+    s2 += '<circle cx="' + xs(now.x) + '" cy="' + ys(pv) + '" r="7" fill="' + RC + '"/>';
+    s2 += txt(W - R + 10, ys(pv) - 4, "so November", "tk");
+    s2 += txt(W - R + 10, ys(pv) + 10, "lands near " + mgn(pv, 1), "lbb");
+    s2 += txt(L, H - 8, "\u25cf midterm    \u25cb presidential", "lgd");
     s2 += "</svg>";
+
     return card("tx-primfit", "Chapter 1 \u00b7 what the primary implies",
-      "Extrapolating the one certified count",
-      "Every other number on this tab is an inference. The primary is a count, so it is "
-      + "the only input that can be regressed against what actually happened afterwards. "
-      + "Each dot is a Texas cycle: its Democratic primary share against the November "
-      + "margin that followed. The solid line fits all seven, the shaded band is one "
-      + "residual standard deviation, and the dashed line fits the four midterms alone.",
+      "Primaries have predicted Novembers in Texas",
+      "<b>Read it like this.</b> Each dot is one past Texas election. How far RIGHT a dot "
+      + "sits is how Democratic that year&rsquo;s primary was. How far DOWN it sits is how "
+      + "Republican the November race turned out. The dots fall from top-left to "
+      + "bottom-right, which is the whole point: <b>the better Democrats did in the "
+      + "primary, the better they did in November.</b> The line is that relationship "
+      + "fitted, and the grey band is how wrong it has typically been.",
       s2,
-      "<b>Take the solid line: " + mgn(all.pred, 2) + ", inside about "
-      + all.sd.toFixed(1) + " points.</b> That is an independent route to roughly where "
-      + "everything else on this tab lands, built from a certified count rather than from "
-      + "any assumption about who turns out. It explains "
-      + (all.r2 * 100).toFixed(0) + "% of the variance across " + all.n + " cycles."
-      + "<br><br><b>The dashed line is the warning.</b> Fit the midterms alone and you get "
-      + "a tighter relationship \u2014 " + (mid.r2 * 100).toFixed(0) + "% of the variance "
-      + "\u2014 and a prediction of " + mgn(mid.pred, 1) + ", which nobody believes. It "
-      + "rests on four points and 2026&rsquo;s " + (now ? now.x.toFixed(2) : "51.70")
-      + "% sits " + (now ? (now.x - mid.x1).toFixed(1) : "10.9") + " points beyond the "
-      + "highest primary share it has ever seen. The all-cycle fit keeps 2026 inside its "
-      + "range, which is the only reason to prefer it.");
+      "<b>2026&rsquo;s primary was " + now.x.toFixed(2) + "% Democratic, the furthest "
+      + "right any dot has ever sat. Run it through the line and November lands near "
+      + mgn(all.pred, 2) + ", give or take " + all.sd.toFixed(1) + ".</b> That is an "
+      + "independent route to roughly where the rest of this tab lands, and the only one "
+      + "built from counted ballots rather than from an assumption about who turns out. "
+      + "The relationship explains " + (all.r2 * 100).toFixed(0) + "% of the variation "
+      + "across " + all.n + " cycles, which is strong but not decisive \u2014 2018 and "
+      + "2014 both missed it by more than five points."
+      + "<br><br><b>One trap worth naming.</b> Fit only the four midterms and the "
+      + "relationship looks tighter, " + (mid.r2 * 100).toFixed(0) + "% of the variation, "
+      + "and it predicts " + mgn(mid.pred, 1) + ". Nobody believes that. It rests on four "
+      + "points, and 2026&rsquo;s primary share sits " + (now.x - mid.x1).toFixed(1)
+      + " points beyond the highest one it has ever seen, so it is extrapolating far "
+      + "outside its own evidence. The line drawn above keeps 2026 inside the range it "
+      + "was fitted on, which is the only reason to trust it over the tighter one.");
   }
 
-  /* ============================================== 6. seven baselines, each its own swing */
   function baselineCard() {
     var rows = (D.base || []).map(function (r) {
       return {label: r.baseline, year: r.year, then: num(r.margin_then_R),

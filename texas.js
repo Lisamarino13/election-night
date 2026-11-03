@@ -860,6 +860,64 @@
   /* The 2024 Texas exit poll. It is the only measurement on this tab of the SAME
      groups the model reasons about, in the SAME state, in a race whose answer is known -
      which makes it the right baseline to test the model's starting points against. */
+  /* How much the polls on this tab are worth: what they have been worth in Texas
+     before, and whether they are moving. Both questions belong together because both
+     are about weighting the poll evidence rather than adding to it. */
+  function pollTrustCard() {
+    var E = (D.perr || []).map(function (r) {
+      return {c: r.cycle, k: r.kind, p: r.poll, pm: num(r.poll_margin_R),
+              am: num(r.actual_margin_R), err: num(r.error)};
+    }).filter(function (r) { return r.err != null; });
+    var P = (D.pdate || []).map(function (r) {
+      return {n: r.pollster, s: r.start, e: r.end, nn: num(r.n), sc: r.screen,
+              m: num(r.margin_R), part: r.partisan === "1", d: num(r.days_to_election)};
+    }).filter(function (r) { return r.m != null; }).sort(function (a, b) { return b.d - a.d; });
+    if (!E.length && !P.length) return "";
+    var errTbl = E.length ? ('<table class="txtbl"><thead><tr><th>Cycle</th><th>Type</th>'
+      + "<th>Final poll</th><th>Actual</th><th>Poll was</th></tr></thead><tbody>"
+      + E.map(function (r) {
+          return "<tr" + (r.k === "midterm" ? ' class="em"' : "") + "><td>" + esc(r.c)
+            + '</td><td class="dim">' + esc(r.k) + '</td><td class="num">' + mgn(r.pm, 1)
+            + '</td><td class="num">' + mgn(r.am, 1) + '</td><td class="num rep">'
+            + r.err.toFixed(1) + " too D</td></tr>";
+        }).join("") + "</tbody></table>") : "";
+    var dateTbl = P.length ? ('<table class="txtbl" style="margin-top:14px"><thead><tr>'
+      + "<th>Pollster</th><th>Field dates</th><th>Sample</th><th>Margin</th>"
+      + "</tr></thead><tbody>"
+      + P.map(function (r) {
+          return "<tr><td>" + esc(r.n) + (r.part ? ' <span class="dim">partisan house</span>' : "")
+            + '</td><td class="num dim">' + esc(r.s.slice(5)) + " to " + esc(r.e.slice(5))
+            + '</td><td class="num">' + n0(r.nn) + " " + esc(r.sc)
+            + '</td><td class="num ' + (r.m < 0 ? "dem" : "rep") + '">' + mgn(r.m, 0)
+            + "</td></tr>";
+        }).join("") + "</tbody></table>") : "";
+    return card("tx-polltrust", "Chapter 3 \u00b7 slide 7 \u00b7 how much the polls are worth",
+      "What Texas polls have been worth, and whether they are moving",
+      "Two questions about weighting the poll evidence rather than adding to it: how "
+      + "wrong final Texas polls have been before, and whether these five are drifting.",
+      errTbl + dateTbl,
+      "<b>The famous Texas polling miss is a PRESIDENTIAL-year pattern, not a Texas "
+      + "one.</b> Final polls understated Republicans by 4.5 points in 2020 and 4.5 again "
+      + "in 2024 \u2014 both with Trump on the ballot. In 2022, the one midterm available "
+      + "to check, the final average missed the margin by <b>half a point</b>. 2026 is a "
+      + "midterm with no Trump on the ballot. If it behaves like 2022, today\u2019s polls "
+      + "are roughly right and NYT/Siena\u2019s D+7 means D+6.5. If it behaves like the "
+      + "Trump years, subtract four and a half and D+7 becomes D+2.5. That single choice "
+      + "is worth more than every demographic assumption on this tab combined."
+      + "<br><br><b>On the drift: it depends entirely on Trafalgar.</b> Across all five "
+      + "polls the trend runs 0.7 points per day toward Paxton. Drop the one partisan "
+      + "house and it reverses to 1.0 points per day toward Talarico, r = \u22120.71. "
+      + "The only poll showing Paxton ahead is also the latest-finishing one, so "
+      + "\u201clate movement\u201d and \u201chouse effect\u201d are the same data point "
+      + "and five polls cannot separate them."
+      + "<br><br><b>And these are not five independent readings.</b> The estimates card "
+      + "lists fifteen numbers, but the poll averages are built from these same five "
+      + "polls, and Morris\u2019s forecast is a poll-of-polls built on them again. Counted "
+      + "honestly there are five polls, three models and two priors \u2014 not fifteen "
+      + "estimates \u2014 and NYT/Siena carries more weight than its single row suggests, "
+      + "being the largest-sample live-caller in the set.");
+  }
+
   function exitCard() {
     var E = (D.exit || []).map(function (r) {
       return {c: r.category, g: r.group, t: num(r.trump), h: num(r.harris),
@@ -1483,7 +1541,7 @@
     var want = [["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["meng", "tx_morris_engagement.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["meng", "tx_morris_engagement.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {
@@ -1525,6 +1583,7 @@
         + tarrantCard()
         + crosstabCard()
         + exitCard()
+        + pollTrustCard()
         // 4. the group doing the moving
         + framing("tx-frame-hisp", "Chapter 4",
             "The one question nobody has measured",

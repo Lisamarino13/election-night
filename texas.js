@@ -179,12 +179,26 @@
     return '<section class="txarg" id="tx-thesis">'
       + '<p class="txkick">The question</p>'
       + "<h2>Will we win Texas?</h2>"
-      + '<p><b>Probably, and narrowly.</b> Fourteen routes to a number, built from four '
-      + 'sources that share no inputs, have a median of <b class="nm">D+0.65</b> and a '
-      + "spread from D+7 to R+1.7. In a state whose last three statewide cycles averaged "
-      + 'R+10.09, every method available lands within a few points of even. That is the '
-      + "finding. It is not a comfortable win and it is not a projection &mdash; a "
-      + "half-point median is a coin flip &mdash; but the coin is weighted Democratic.</p>"
+      + "<p><b>The Senate seat: yes, and with more confidence than the margin suggests."
+      + "</b> Not because the polls are generous \u2014 they are not, and this tab prices "
+      + "them at three to four points too Democratic \u2014 but because of what is left "
+      + "after that is taken off. The same four polls asked about the governor&rsquo;s "
+      + 'race too, and Talarico runs <b class="nm">4.92</b> points ahead of Hinojosa on '
+      + "the same questionnaires. A polling error hits both races equally and subtracts "
+      + "out of the difference, so <b>the Paxton effect is larger than the polling miss "
+      + "and cannot be erased by it</b>. Take the full haircut and the Senate race is "
+      + 'still <b class="nm">D+0.98</b>.</p>'
+      + "<p><b>The governor&rsquo;s race is a different question with a different "
+      + "answer.</b> There is no Paxton in it. At the same haircut Abbott against "
+      + 'Hinojosa is <b class="nm">R+3.94</b>, and she has to find 402,353 votes '
+      + "somewhere. Only two things on this ballot are big enough: the Hispanic vote "
+      + "running better than the polls assume, and rural turnout coming in under. She "
+      + "needs both, and neither at full size \u2014 rural down 15% <i>and</i> Hispanic "
+      + "7.3 points better. That is the last slide."
+      + "<br><br>Fourteen routes to a number, from four sources that share no inputs, "
+      + 'have a median of <b class="nm">D+0.65</b> in a state whose last three statewide '
+      + "cycles averaged R+10.09. That agreement is why the race is close at all. The "
+      + "candidate is why one of the two is not.</p>"
       + "<p><b>And why.</b> Four things changed, and each one is counted rather than "
       + "assumed:</p>"
       + "<ol>"
@@ -418,11 +432,14 @@
     // and the legend gets a bottom gutter rather than sitting two pixels under the
     // axis ticks.
     var YR = 78;
-    var W = 720, H = 72 + rows.length * 30, L = YR + 150, R = 78, T = 38;
+    var wide = !NARROW;
+    var W = wide ? 720 : 360, L = wide ? YR + 150 : 8, R = wide ? 78 : 10;
+    var ROW = wide ? 30 : 44, T = wide ? 38 : 46;
+    var H = T + rows.length * ROW + 34;
     var lo = -8, hi = 26;
     var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R); };
     var s2 = svg(W, H, "Where the banked vote lands and where election day drags it");
-    [-5, 0, 5, 10, 15, 20, 25].forEach(function (t) {
+    (wide ? [-5, 0, 5, 10, 15, 20, 25] : [-5, 0, 10, 20]).forEach(function (t) {
       s2 += line(xs(t), T - 10, xs(t), H - 22, t === 0 ? "zl" : "gl")
          + txt(xs(t), T - 16, t === 0 ? "even" : (t > 0 ? "R+" : "D+") + Math.abs(t),
                "tk", "middle");
@@ -430,19 +447,27 @@
     s2 += '<defs><marker id="txar" viewBox="0 0 8 8" refX="7" refY="4" '
        + 'markerWidth="6" markerHeight="6" orient="auto-start-reverse">'
        + '<path d="M0,0 L8,4 L0,8 z" fill="context-stroke"/></marker></defs>';
-    s2 += txt(YR, H - 10, "\u25cf banked    \u25cb where it finished", "lgd")
-       + txt(YR + 190, H - 10, "arrow shows where election day took it \u2014 "
-              + "red toward Republicans, blue toward Democrats", "lgd");
+    s2 += txt(wide ? YR : 8, H - 10,
+              "\u25cf banked    \u25cb where it finished", "lgd")
+       + txt(wide ? YR + 190 : 8, H - (wide ? 10 : 0),
+             wide ? "arrow shows where election day took it \u2014 red toward "
+                    + "Republicans, blue toward Democrats"
+                  : "arrow: where election day took it", "lgd");
     var i = 0;
     years.forEach(function (y) {
       rows.filter(function (r) { return r.y === y; }).forEach(function (r, j) {
-        var yy = T + 8 + i * 30; i++;
-        if (j === 0) {
-          s2 += txt(8, yy + 4, String(y), "lbb");
-          s2 += txt(8, yy + 16, y === 2022 ? "midterm" : "presidential", "sub");
+        var yy = T + 8 + i * ROW; i++;
+        var cname = r.c.replace("President/Vice-President", "President")
+                       .replace("U. S. Senator", "U.S. Senate");
+        if (wide) {
+          if (j === 0) {
+            s2 += txt(8, yy + 4, String(y), "lbb")
+               + txt(8, yy + 16, y === 2022 ? "midterm" : "presidential", "sub");
+          }
+          s2 += txt(L - 12, yy + 4, cname, "lb", "end");
+        } else {
+          s2 += txt(8, yy - 14, y + "  " + cname, "lbb");
         }
-        s2 += txt(L - 12, yy + 4, r.c.replace("President/Vice-President", "President")
-                  .replace("U. S. Senator", "U.S. Senate"), "lb", "end");
         // The arrow carries the direction, so red and blue keep meaning Republican and
         // Democratic. Colouring the DOTS by mode made the 2024 Senate row read as a
         // contradiction: a blue "banked" dot sitting at the most Republican point.
@@ -726,20 +751,36 @@
       return {label: r.label, kind: r.kind, m: num(r.margin_R), note: r.note, n: num(r.n)};
     }).filter(function (r) { return r.m != null; });
     rows.sort(function (a, b) { return a.m - b.m; });
-    var W = 720, H = 36 + rows.length * 23, L = 300, R = 56;
+    var wide = !NARROW;
+    var W = wide ? 720 : 360, L = wide ? 300 : 8, R = wide ? 56 : 16;
+    var ROW = wide ? 23 : 34, T = wide ? 26 : 32;
+    var H = T + rows.length * ROW + 12;
     var lo = -8, hi = 3;
     var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R); };
     var s = svg(W, H, "Every estimate of the Texas Senate margin");
-    [-8, -6, -4, -2, 0, 2].forEach(function (t) {
+    (wide ? [-8, -6, -4, -2, 0, 2] : [-8, -4, 0, 2]).forEach(function (t) {
       s += line(xs(t), 16, xs(t), H - 14, t === 0 ? "zl" : "gl")
          + txt(xs(t), 12, t === 0 ? "even" : mgn(t, 0), "tk", "middle");
     });
     rows.forEach(function (r, i) {
-      var y = 26 + i * 23;
-      s += txt(L - 10, y + 4, r.label, "lb", "end");
-      s += rect(Math.min(xs(0), xs(r.m)), y - 6, Math.abs(xs(r.m) - xs(0)), 12,
-                sideCol(r.m), ' rx="2" opacity="0.85"');
-      s += txt(xs(r.m) + (r.m < 0 ? -8 : 8), y + 4, mgn(r.m), "vl", r.m < 0 ? "end" : "start");
+      var y = T + i * ROW;
+      // on a phone the label goes on its own line: a 300px gutter inside 375px of
+      // screen shrinks every label to about six pixels
+      var by = wide ? y - 6 : y + 2;
+      if (wide) {
+        s += txt(L - 10, y + 4, r.label, "lb", "end")
+           + rect(Math.min(xs(0), xs(r.m)), by, Math.abs(xs(r.m) - xs(0)), 12,
+                  sideCol(r.m), ' rx="2" opacity="0.85"')
+           + txt(xs(r.m) + (r.m < 0 ? -8 : 8), by + 10, mgn(r.m), "vl",
+                 r.m < 0 ? "end" : "start");
+      } else {
+        // the value shares the label's line: at the left end of the axis a value drawn
+        // beside the bar runs off the edge of the screen
+        s += txt(8, y - 6, r.label, "lb")
+           + txt(W - 6, y - 6, mgn(r.m), "vl", "end")
+           + rect(Math.min(xs(0), xs(r.m)), by, Math.abs(xs(r.m) - xs(0)), 12,
+                  sideCol(r.m), ' rx="2" opacity="0.85"');
+      }
     });
     s += "</svg>";
     return card("tx-est", "Section 1 · slide 1 · where every poll lands",
@@ -775,7 +816,9 @@
       .sort(function (a2, b2) { return a2.y - b2.y; });
     if (!rows.length) return "";
     rows.forEach(function (r) { r.tot = r.rp + r.dp; r.rsh = 100 - r.sh; });
-    var W = 720, H = 320, L = 54, R = 46, T = 26, Bm = 58;
+    var W = NARROW ? 360 : 720, H = NARROW ? 260 : 320,
+        L = NARROW ? 40 : 54, R = NARROW ? 20 : 46,
+        T = NARROW ? 20 : 26, Bm = NARROW ? 50 : 58;
     var maxT = Math.max.apply(null, rows.map(function (r) { return r.tot; })) * 1.14;
     var ys = function (v) { return H - Bm - v / maxT * (H - Bm - T); };
     var step = (W - L - R) / rows.length, bw = step * 0.64;
@@ -846,7 +889,9 @@
     var now = open2.length ? open2[0] : null;
     if (!now) return "";
 
-    var W = 720, H = 330, L = 88, R = 92, T = 40, Bm = 54;
+    var W = NARROW ? 360 : 720, H = NARROW ? 280 : 330,
+        L = NARROW ? 46 : 88, R = NARROW ? 24 : 92,
+        T = NARROW ? 30 : 40, Bm = NARROW ? 48 : 54;
     var xlo = 26, xhi = 56, ylo = -8, yhi = 24;
     var xs = function (v) { return L + (v - xlo) / (xhi - xlo) * (W - L - R); };
     var ys = function (v) { return T + (v - ylo) / (yhi - ylo) * (H - Bm - T); };
@@ -901,7 +946,9 @@
     var gdone = gpts.filter(function (r) { return r.m != null; });
     var s3 = "";
     if (gro && gdone.length) {
-      var W2 = 720, H3 = 280, L2 = 88, R2 = 92, T2 = 34, B2 = 54;
+      var W2 = NARROW ? 360 : 720, H3 = NARROW ? 250 : 280,
+          L2 = NARROW ? 46 : 88, R2 = NARROW ? 24 : 92,
+          T2 = NARROW ? 26 : 34, B2 = NARROW ? 48 : 54;
       var gxlo = -60, gxhi = 130, gylo = -8, gyhi = 24;
       var gx = function (v) { return L2 + (v - gxlo) / (gxhi - gxlo) * (W2 - L2 - R2); };
       var gy = function (v) { return T2 + (v - gylo) / (gyhi - gylo) * (H3 - B2 - T2); };
@@ -1232,8 +1279,9 @@
     // AX is the gutter the rotated y-axis label sits in, to the left of the row
     // labels. Without it the label was parked at the bottom-left corner, reading as
     // a footnote rather than as the axis it names.
-    var AX = 22;
-    var cw = 58, ch = 34, L = 92 + AX, T = 44,
+    var AX = NARROW ? 16 : 22;
+    var cw = NARROW ? 46 : 58, ch = NARROW ? 30 : 34,
+        L = (NARROW ? 66 : 92) + AX, T = NARROW ? 38 : 44,
         W = L + xs.length * cw + 12, H = T + ys.length * ch + 22;
     var s = svg(W, H, title);
     s += txt(L, 16, xLab, "lgd");
@@ -1274,19 +1322,27 @@
     if (!rows.length) return "";
     var order = ["Hispanic", "Asian", "Black", "White"];
     rows.sort(function (p, q) { return order.indexOf(p.g) - order.indexOf(q.g); });
-    var W = 720, H = 40 + rows.length * 34, L = 110, R = 62;
+    var wide = !NARROW;
+    var W = wide ? 720 : 360, L = wide ? 110 : 8, R = wide ? 62 : 8;
+    var ROW = wide ? 34 : 50, T = wide ? 34 : 44;
+    var H = T + rows.length * ROW + 12;
     var lo = -95, hi = 72;
     var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R); };
     var s = svg(W, H, "Each group's 2024 measured margin and its 2026 estimate");
-    s += line(xs(0), 20, xs(0), H - 20, "zl") + txt(xs(0), 14, "even", "tk", "middle");
-    s += txt(L, 14, "more Democratic", "lgd")
-       + txt(W - R, 14, "more Republican", "lgd", "end");
+    s += line(xs(0), T - 18, xs(0), H - 14, "zl")
+       + txt(xs(0), T - 24, "even", "tk", "middle");
+    s += txt(wide ? L : 8, 14, "\u2190 more Democratic", "lgd")
+       + txt(W - R, 14, "more Republican \u2192", "lgd", "end");
     rows.forEach(function (r, i) {
-      var y = 34 + i * 34, capped = r.g === "Black";
-      s += txt(L - 10, y, r.g, "lb", "end");
-      s += txt(L - 10, y + 12, capped ? "at the ceiling"
-               : (Math.abs(r.sh) < 0.005 ? "nothing measures 2026"
-                  : r.d24.toFixed(0) + "% → " + r.d26.toFixed(0) + "% D"), "sub", "end");
+      var y = T + i * ROW, capped = r.g === "Black";
+      var sub = capped ? "at the ceiling"
+              : (Math.abs(r.sh) < 0.005 ? "nothing measures 2026"
+                 : r.d24.toFixed(0) + "% → " + r.d26.toFixed(0) + "% D");
+      if (wide) {
+        s += txt(L - 10, y, r.g, "lb", "end") + txt(L - 10, y + 12, sub, "sub", "end");
+      } else {
+        s += txt(8, y - 20, r.g, "lb") + txt(W - 8, y - 20, sub, "sub", "end");
+      }
       // Direction is no longer always Democratic: anchoring Asian voters at the generic
       // ballot moves them TOWARD Republicans, because D+8.5 sits below the D+15.31 they
       // already gave in 2024. Colour the end dot by which way the row actually travels
@@ -2209,16 +2265,25 @@
               mv: num(r.mean_move_per_cycle)};
     }).filter(function (r) { return r.mv != null; }).sort(function (a, b) { return b.mv - a.mv; });
     if (!rows.length) return "";
-    var W = 700, H = 24 + rows.length * 44, L = 190, R = 70;
+    var wide = !NARROW;
+    var W = wide ? 700 : 360, L = wide ? 190 : 8, R = wide ? 70 : 52;
+    var ROW = wide ? 44 : 52;
+    var H = 24 + rows.length * ROW;
     var mx = Math.max.apply(null, rows.map(function (r) { return r.mv; })) * 1.12;
     var s = svg(W, H, "Average county margin movement per cycle by group");
     rows.forEach(function (r, i) {
-      var y = 12 + i * 44;
-      s += txt(L - 10, y + 16, r.g, "lb", "end");
-      s += txt(L - 10, y + 29, r.pct.toFixed(1) + "% of the vote, " + r.n + " counties", "sub", "end");
+      var y = 12 + i * ROW;
       var w = r.mv / mx * (W - L - R);
-      s += rect(L, y + 8, w, 16, i === 0 ? DC : "var(--dim,#999)", ' rx="3"');
-      s += txt(L + w + 8, y + 20, r.mv.toFixed(2), "vl");
+      var sub = r.pct.toFixed(1) + "% of the vote, " + r.n + " counties";
+      if (wide) {
+        s += txt(L - 10, y + 16, r.g, "lb", "end")
+           + txt(L - 10, y + 29, sub, "sub", "end");
+      } else {
+        s += txt(8, y + 6, r.g, "lb") + txt(8, y + 18, sub, "sub");
+      }
+      var by = wide ? y + 8 : y + 24;
+      s += rect(L, by, w, 16, i === 0 ? DC : "var(--dim,#999)", ' rx="3"')
+         + txt(L + w + 8, by + 12, r.mv.toFixed(2), "vl");
     });
     s += "</svg>";
     return card("tx-vol", "Section 3 · slide 3 · what moves, and what it weighs",
@@ -2341,15 +2406,24 @@
     var tot = rows.reduce(function (a, r) { return a + r.gain; }, 0);
     var top5 = rows.slice(0, 5).reduce(function (a, r) { return a + r.gain; }, 0);
     var top10 = rows.slice(0, 10).reduce(function (a, r) { return a + r.gain; }, 0);
-    var W = 700, H = 20 + top.length * 24, L = 130, R = 74;
+    var wide = !NARROW;
+    var W = wide ? 700 : 360, L = wide ? 130 : 8, R = wide ? 74 : 8;
+    var ROW = wide ? 24 : 30;
+    var H = 20 + top.length * ROW;
     var mx = top[0].gain * 1.1;
     var s = svg(W, H, "Net Democratic gain by county, top 14");
     top.forEach(function (r, i) {
-      var y = 12 + i * 24;
-      s += txt(L - 10, y + 10, r.c, "lb", "end");
+      var y = 12 + i * ROW;
       var w = r.gain / mx * (W - L - R);
-      s += rect(L, y + 2, w, 14, DC, ' rx="2" opacity="0.85"');
-      s += txt(L + w + 8, y + 13, n0(r.gain), "vl");
+      if (wide) {
+        s += txt(L - 10, y + 10, r.c, "lb", "end")
+           + rect(L, y + 2, w, 14, DC, ' rx="2" opacity="0.85"')
+           + txt(L + w + 8, y + 13, n0(r.gain), "vl");
+      } else {
+        // county name and figure share one line above the bar
+        s += txt(8, y + 6, r.c, "lb") + txt(W - 8, y + 6, n0(r.gain), "vl", "end")
+           + rect(L, y + 11, w, 11, DC, ' rx="2" opacity="0.85"');
+      }
     });
     s += "</svg>";
     return card("tx-gain", "Section 4 · slide 2 · where the votes have to come from",
@@ -2374,6 +2448,61 @@
   }
 
   /* ================================================================ 12. the conclusion */
+  /* What the governor's race needs, which is a different question from the Senate race
+     and gets a different answer. The Paxton effect is 4.92 and the polling miss is 3.34
+     to 4.05, so the Senate race survives its own worst case. The governor's race has no
+     Paxton in it: at the full haircut it is R+3.94, and Hinojosa has to find those points
+     somewhere. There are only two places big enough. */
+  function hinojosaCard() {
+    var R = (D.hino || []).map(function (r) {
+      return {l: r.lever, w: r.what_has_to_happen, h: r.how_far, v: r.in_votes,
+              n: r.note};
+    }).filter(function (r) { return r.h; });
+    if (!R.length) return "";
+    var tbl = '<div class="scroll"><table class="txtbl"><thead><tr>'
+      + "<th>Lever</th><th>What has to happen</th><th>How far</th><th>Worth</th>"
+      + "</tr></thead><tbody>"
+      + R.map(function (r) {
+          return "<tr" + (/Both/.test(r.l) ? ' class="em"' : "") + "><td><b>"
+            + esc(r.l) + '</b><br><span class="dim">' + esc(r.n) + "</span></td><td>"
+            + esc(r.w) + '</td><td class="num"><b>' + esc(r.h)
+            + '</b></td><td class="num dim">' + esc(r.v) + "</td></tr>";
+        }).join("")
+      + "</tbody></table></div>";
+    return card("tx-hinojosa", "Section 4 · slide 6 · what the governor’s race needs",
+      "Talarico survives the polling miss. Hinojosa does not, on her own",
+      "<b>The two races on this ballot are not in the same position, and the difference "
+      + "is arithmetic rather than opinion.</b> Apply the full presidential-year polling "
+      + "haircut of 4.05 points to both: Paxton against Talarico goes D+5.03 to "
+      + "<b>D+0.98</b> and holds, because the 4.92 Talarico runs ahead of his own ticket "
+      + "is larger than the miss and cannot be erased by it. Abbott against Hinojosa goes "
+      + "D+0.11 to <b>R+3.94</b>, because there is no Paxton in that race. She has to "
+      + "find 3.94 points, or 402,353 votes, somewhere else.",
+      tbl,
+      "<b>Why only two levers.</b> Nothing else on this ballot is big enough. Hispanic "
+      + "voters are 29.76% of the projected electorate, so each point of Hispanic margin "
+      + "is worth 0.30 statewide — which means she needs them <b>13.2 points</b> "
+      + "better than the polls already assume. The 239 smallest counties cast 3,343,577 "
+      + "ballots at R+35.9, a net of 1,199,649 Republican votes; she needs that net cut "
+      + "by a third."
+      + "<br><br><b>Neither is plausible at full size, which is the point.</b> A 34% "
+      + "collapse in rural turnout has no precedent, and a 13-point Hispanic surprise is "
+      + "larger than the entire disagreement between the two final polls on that group "
+      + "(11.5). The combination is the realistic version: rural turnout down 15% and the "
+      + "Hispanic margin 7.3 points better than assumed. Both of those are inside the "
+      + "range of things this tab has already measured, and both have to happen."
+      + "<br><br><b>And this is the honest shape of the night.</b> The Senate race is a "
+      + "confident call because its margin rests on a candidate effect that a polling "
+      + "error cannot touch. The governor’s race is a genuine coin flip that needs "
+      + "two things to break the same way. Anyone reading a single Texas number tonight "
+      + "is averaging two races that are not in the same position."
+      + "<br><br><b>What would falsify this.</b> If the polls are right rather than three "
+      + "to four points too Democratic — the 2018 case, where they missed 4.23 the "
+      + "other way — Hinojosa needs none of it and wins outright. The haircut is the "
+      + "assumption doing all the work here, and it rests on four presidential years and "
+      + "one midterm.");
+  }
+
   function conclusionCard() {
     return '<section class="txarg" id="tx-read-committed">'
       + '<p class="txkick">Written down before the polls close · 2 November 2026</p>'
@@ -2512,7 +2641,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hino", "tx_hinojosa.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {
@@ -2625,12 +2754,13 @@
             + "ballots \u2014 argues the blocs are nearer even, where the race turns on "
             + "independents splitting 50/50.",
             function (y) { return y === 0 ? "even" : (y > 0 ? "R+" : "D+") + Math.abs(y); })
+        + hinojosaCard()
         + conclusionCard();
       var nav = '<p class="txnav">' + SECTIONS.map(function (s) {
         return '<a href="#' + s.id + '">' + esc(s.title) + "</a>";
       }).join("") + "</p>";
       host.innerHTML = "<style>" + CSS + "</style>"
-        + '<div class="txwrap-inner">' + thesis() + nav
+        + '<div class="txwrap-inner">' + nav + thesis()
         + html.slice(html.indexOf("</section>") + 10) + "</div>";
   }
 })();

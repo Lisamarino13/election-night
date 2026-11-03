@@ -1127,40 +1127,82 @@
   }
 
   function baselineCard() {
+    /* The old version drew a hollow dot and a filled dot and explained which was which
+       only in the prose below, labelled the value of one of them and not the other, and
+       never showed the swing it had applied - so the reader could see the answer but not
+       the arithmetic that produced it. Every quantity is now on the chart: the result
+       then, the swing added, and where that lands in 2026. */
     var rows = (D.base || []).map(function (r) {
       return {label: r.baseline, year: r.year, then: num(r.margin_then_R),
-              swing: num(r.swing_to_2026), now: num(r.implied_2026_R)};
+              nat: num(r.national_then_R), swing: num(r.swing_to_2026),
+              now: num(r.implied_2026_R)};
     }).filter(function (r) { return r.then != null && r.now != null; })
       .sort(function (a, b) { return a.now - b.now; });
     if (!rows.length) return "";
-    var W = 720, H = 36 + rows.length * 26, L = 250, R = 54;
+    var wide = !NARROW;
+    var W = wide ? 760 : 360, L = wide ? 244 : 8, R = wide ? 118 : 8;
+    var ROW = wide ? 34 : 56, T = 54;
+    var H = T + rows.length * ROW + 18;
     var lo = -12, hi = 16;
     var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R); };
-    var s = svg(W, H, "Seven Texas baselines carried to 2026 by each year's own national swing");
+    var s = svg(W, H, "Seven past Texas results, each carried to 2026 by the national "
+                    + "swing from its own year");
     [-10, -5, 0, 5, 10, 15].forEach(function (t) {
-      s += line(xs(t), 16, xs(t), H - 14, t === 0 ? "zl" : "gl")
-         + txt(xs(t), 12, t === 0 ? "even" : mgn(t, 0), "tk", "middle");
+      s += line(xs(t), T - 16, xs(t), H - 15, t === 0 ? "zl" : "gl")
+         + txt(xs(t), H - 4, t === 0 ? "even" : mgn(t, 0), "tk", "middle");
     });
+    // an on-chart legend, in words, instead of a sentence underneath
+    var lx = wide ? L : 8;
+    s += '<circle cx="' + (lx + 5) + '" cy="14" r="4.5" fill="var(--card,#fff)" '
+       + 'stroke="currentColor" stroke-width="1.5"/>'
+       + txt(lx + 15, 18, "what Texas actually did that year", "lgd");
+    s += '<circle cx="' + (lx + 213) + '" cy="14" r="5" fill="currentColor"/>'
+       + txt(lx + 223, 18, "what it implies for 2026", "lgd");
+    s += txt(lx, 34, "→ the arrow is the national swing from that year to this one",
+             "lgd");
+    if (wide) s += txt(W - R + 12, 18, "swing added", "lgd");
+    s += '<defs><marker id="baseArr" viewBox="0 0 10 10" refX="9" refY="5" '
+       + 'markerWidth="5" markerHeight="5" orient="auto-start-reverse">'
+       + '<path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" opacity="0.45"/>'
+       + "</marker></defs>";
     rows.forEach(function (r, i) {
-      var y = 28 + i * 26;
-      s += txt(L - 10, y + 4, r.label, "lb", "end");
-      s += line(xs(r.then), y, xs(r.now), y, "cn");
-      s += '<circle cx="' + xs(r.then) + '" cy="' + y + '" r="4.5" fill="none" '
+      var y = T + (wide ? 12 : 26) + i * ROW;
+      if (wide) s += txt(L - 14, y + 4, r.label, "lb", "end");
+      else s += txt(8, y - 14, r.label, "lb");
+      s += '<line x1="' + xs(r.then) + '" y1="' + y + '" x2="' + xs(r.now) + '" y2="' + y
+         + '" stroke="currentColor" stroke-width="1.5" opacity="0.45" '
+         + 'marker-end="url(#baseArr)"/>';
+      s += '<circle cx="' + xs(r.then) + '" cy="' + y + '" r="4.5" fill="var(--card,#fff)" '
          + 'stroke="currentColor" stroke-width="1.5"/>';
-      s += '<circle cx="' + xs(r.now) + '" cy="' + y + '" r="5" fill="' + sideCol(r.now) + '"/>';
-      s += txt(xs(r.now) + (r.now < 0 ? -9 : 9), y + 4, mgn(r.now, 1), "vl",
-               r.now < 0 ? "end" : "start");
+      s += '<circle cx="' + xs(r.now) + '" cy="' + y + '" r="5.5" fill="'
+         + sideCol(r.now) + '"/>';
+      // BOTH ends carry their number now, not just the filled one
+      s += txt(xs(r.then) + (r.then > r.now ? 10 : -10), y - 8, mgn(r.then, 2), "tk",
+               r.then > r.now ? "start" : "end");
+      s += '<text x="' + (xs(r.now) + (r.now < r.then ? -10 : 10)) + '" y="' + (y + 4)
+         + '" text-anchor="' + (r.now < r.then ? "end" : "start") + '" class="vl" fill="'
+         + sideCol(r.now) + '">' + mgn(r.now, 2) + "</text>";
+      if (wide && r.swing != null) {
+        s += txt(W - R + 12, y + 4, (r.swing > 0 ? "D+" : "R+")
+                 + Math.abs(r.swing).toFixed(1), "tk");
+      } else if (r.swing != null) {
+        s += txt(W - 8, y - 14, "swing " + (r.swing > 0 ? "D+" : "R+")
+                 + Math.abs(r.swing).toFixed(1), "sub", "end");
+      }
     });
     s += "</svg>";
     return card("tx-base", "Section 1 · slide 6 · why the methods disagree",
-      "Seven starting points, each with its own swing",
-      "Take any past Texas result, add the national swing from <i>that</i> year to this "
-      + "year&rsquo;s generic ballot of <b>D+8.5</b>, and see where Texas lands. The "
-      + "generic ballot is the median of seven aggregators the night before, spanning "
-      + "D+7.0 to D+10.8, and every point of it moves every baseline here one for one. "
-      + "2018 was already a strong "
-      + "Democratic national year, so it cannot borrow the 2024 swing. Hollow dot is the "
-      + "result then, filled dot is where it implies 2026 lands.",
+      "Where Texas lands depends on which past race you start from",
+      "<b>How to read each row.</b> The hollow dot is what Texas actually did in that "
+      + "race. The arrow adds the national swing between <i>that</i> year and this one. "
+      + "The filled dot is where that lands in 2026, and it is the only number here that "
+      + "is a prediction \u2014 the other two are arithmetic."
+      + "<br><br>This year\u2019s generic ballot is <b>D+8.5</b>, the median of seven "
+      + "aggregators the night before, spanning D+7.0 to D+10.8; every point of it moves "
+      + "every row one for one. The swings differ by row because each year had its own "
+      + "national environment to swing <i>from</i>: 2018 was already a strong Democratic "
+      + "year nationally, so it barely moves, while 2024 was a Republican one and moves "
+      + "ten points.",
       s,
       "Which year you start from moves the answer by more than any demographic lever on "
       + "this tab. Starting from the 2024 Senate is the harshest available choice, and it "

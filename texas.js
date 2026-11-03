@@ -805,20 +805,15 @@
 
     return card("tx-tarrant", "Chapter 4 \u00b7 slide 1 \u00b7 the one county we can actually see",
       "Tarrant County, where the 2026 electorate is visible",
-      "Everything else on this tab infers the 2026 electorate. Tarrant publishes it: "
-      + n0(tot) + " early and mail voters through 30 October, matched to the voter file, "
-      + "with each precinct&rsquo;s lean beside what the same precinct&rsquo;s early vote "
-      + "looked like in 2022. Tarrant is also the state&rsquo;s bellwether \u2014 Allred "
-      + "carried it by 0.22 in 2024 while Texas went R+8.71.",
+      "<b>Source: the Tarrant County early-vote file, through Friday 30 October.</b> "
+      + "Everything else on this tab infers the 2026 electorate; this county publishes "
+      + "it. 592,912 voters on the lists of returned mail ballots and early voters, "
+      + "588,653 of them matched to the voter file by state voter ID \u2014 21,014 mail "
+      + "and 571,900 early in person. The chart and the table below are its figures. "
+      + "The one number here from elsewhere: Allred carried Tarrant by 0.22 in 2024 "
+      + "while Texas went R+8.71, which is from the certified county returns.",
       s2 + hist,
-      "<b>It is compression, not a uniform swing.</b> The three Republican precincts each "
-      + "moved 8 to 10 points toward Democrats while the most Democratic precinct moved 5 "
-      + "points the other way. County-wide the early electorate is "
-      + Math.abs(w26 - w22).toFixed(1) + " points more Democratic than 2022&rsquo;s was, "
-      + "at " + mgn(w26, 1) + " against " + mgn(w22, 1) + ". That is what a county "
-      + "flipping looks like from the inside, and it is the opposite of the uniform shift "
-      + "the county model applies."
-      + "<br><br><b>The caution is the source&rsquo;s own.</b> The lean here is by the last "
+      "<b>What the file reports.</b> Precinct by precinct, 2026 against the same precinct\u2019s 2022 early vote: precinct 1 moved 5.0 points toward Republicans, and precincts 2, 3 and 4 moved 8.0, 8.8 and 9.9 toward Democrats. Weighting those four by their own turnout gives a county early electorate of D+2.6 against R+3.6 in 2022, and that D+2.6 reproduces the county\u2019s own published figure exactly \u2014 which is the check that the precinct rows and the county total agree.<br><br><b>What I read into it, which the file does not say.</b> This is compression rather than a uniform swing: the ground that was most Republican moved furthest, and the most Democratic precinct moved the other way. If that pattern holds beyond Tarrant it cuts against the county model on this same tab, which applies one shift to a whole county rather than concentrating it where Republicans were strongest. Tarrant is one county of 254 and the inference is mine, not the source\u2019s.<br><br><b>The caution is the source&rsquo;s own.</b> The lean here is by the last "
       + "party primary each voter chose, which is not a vote. The unusually large 2026 "
       + "Democratic primary makes every group on this measure look more Democratic than it "
       + "will vote, and 43% of these voters chose neither primary at all.");

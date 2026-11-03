@@ -2361,8 +2361,8 @@
             + "</td></tr>";
         }).join("") + "</tbody></table></div>";
 
-    return card("tx-tarrant-sens", "Section 4 · slide 2 · Tarrant, where the bloc can be seen",
-      "What the Neither bloc has to do to carry both races",
+    return card("tx-tarrant-sens", "Section 4 · slide 3 · Tarrant, the county underneath it",
+      "The county underneath it: what Tarrant alone says",
       "<b>Both parties&rsquo; primary voters are held at 95% loyalty</b> — the "
       + "file&rsquo;s own default, and the thing this question fixes — so the only "
       + "moving part is how the 252,913 Neither ballots break. Two lines, because the two "
@@ -3165,8 +3165,28 @@
       + '<td class="num">1,794,952</td><td class="num">61.1%</td>'
       + '<td class="num dem">62.5%</td></tr>'
       + "</tbody></table></div>") : "";
-    return card("tx-neither-big", "Section 4 · slide 3 · the Neither bloc, extrapolated",
-      "What the Neither bloc has done, and what it is worth across the big fifteen",
+    /* The third leg. Tarrant is a voter file and Harris is a voter file; AtlasIntel's
+       independents crosstab is a POLL, measuring essentially the same population from a
+       completely different instrument. Poll "independents" and "no recent primary
+       ballot" are not the same definition - that caveat stands - but as a directional
+       check it is the only one available, and it lands ABOVE the mirror rather than
+       below it. */
+    var TRI = (D.tri || []).map(function (r) {
+      return {e: r.estimate, i: r.instrument, b: num(r.break_D)};
+    }).filter(function (r) { return r.b != null; });
+    var triTbl = TRI.length ? ('<div class="scroll"><table class="txtbl" '
+      + 'style="margin-top:14px"><thead><tr><th>How the unaffiliated bloc breaks</th>'
+      + "<th>Instrument</th><th>Break</th><th>Against Hinojosa\u2019s 61.2%</th>"
+      + "</tr></thead><tbody>"
+      + TRI.map(function (r) {
+          var clears = r.b >= 61.2;
+          return "<tr><td>" + esc(r.e) + '</td><td class="dim">' + esc(r.i)
+            + '</td><td class="num"><b>' + r.b.toFixed(1) + '%</b></td><td class="'
+            + (clears ? "dem" : "dim") + '">' + (clears ? "clears it" : "short")
+            + "</td></tr>";
+        }).join("") + "</tbody></table></div>") : "";
+    return card("tx-neither-big", "Section 4 · slide 2 · the Neither bloc across the big fifteen",
+      "The Neither bloc across the big fifteen, and what it is worth",
       "<b>The licence for projecting this out is the previous section.</b> Harris and "
       + "Tarrant agree on the mechanism — the movement sits with irregular and new "
       + "voters, the Republican coalition is the reliable one and is not replenishing "
@@ -3182,7 +3202,7 @@
       + "camp split the file gives for each past cycle, and ask what the Neither bloc must "
       + "have done to produce the result Tarrant actually got. The two dashed lines are "
       + "what each 2026 candidate needs from the same bloc.",
-      s2 + scopeFig + mirTbl + shTbl,
+      s2 + scopeFig + mirTbl + triTbl + shTbl,
       "<b>It has split down the middle twice running.</b> 49.9% in 2024 and 50.1% in "
       + "2022 — two cycles, two very different national environments, the same "
       + "answer to a tenth of a point. That is the most stable number anywhere on this "
@@ -3241,6 +3261,17 @@
       + "is 111% of the 402,353 Hinojosa needs. The same evidence produces “her "
       + "lever falls eleven points short” or “her lever clears on its own” "
       + "depending on one assumption about a bloc nobody polls."
+      + "<br><br><b>And a third instrument, which is a poll rather than a voter file.</b> "
+      + "AtlasIntel asked Texas independents directly: <b>64.5 to 28.0</b>, which is "
+      + "<b>69.7%</b> two-way. The 2024 exit poll had the same group at 49.5% two-way, so "
+      + "that is a 20-point shift measured by survey rather than by file. Poll "
+      + "\u201cindependents\u201d and \u201cno recent primary ballot\u201d are not the "
+      + "same definition and that caveat stands \u2014 but it is the only check available "
+      + "from outside the voter files, and <b>it lands above the mirror, not below it</b>. "
+      + "Three instruments: a one-county file carried flat says 50%, the same file "
+      + "mirrored and validated says 62.5%, and a statewide poll says 69.7%. Two of the "
+      + "three clear Hinojosa\u2019s 61.2%, and the one that does not is the one with the "
+      + "least information in it."
       + "<br><br><b>Which is why the tab does not pick the friendly one.</b> The mirror is "
       + "tested at R+1.0 and R+4.4 — a near-even county. Applying it to Dallas at "
       + "D+38.9 extrapolates the relationship forty points past anything it has been "
@@ -3557,7 +3588,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["nmirror", "tx_neither_mirror.csv"], ["nscope", "tx_neither_scope.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["tsens", "tx_tarrant_sensitivity.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["tri", "tx_triangulate.csv"], ["nmirror", "tx_neither_mirror.csv"], ["nscope", "tx_neither_scope.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["tsens", "tx_tarrant_sensitivity.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {
@@ -3635,8 +3666,8 @@
              "Where it arrives: alone, neither lever reaches far enough. Together, two "
              + "moderate moves do it \u2014 and none of it is needed for the Senate seat."])
         + hispanicSensCard()
-        + tarrantSensCard()
         + neitherBigCard()
+        + tarrantSensCard()
         + ruralCard()
         + leversCard()
 

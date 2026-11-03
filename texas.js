@@ -492,9 +492,16 @@
      worth, including the version of it that goes wrong. */
   function primaryFitCard() {
     var pts = (D.prim || []).map(function (r) {
-      return {y: +r.year, kind: r.kind, x: num(r.d_share_primary),
+      return {y: +r.year, kind: r.kind, x: num(r.d_share_primary), d: num(r.d_primary),
               m: r.november_margin_R === "" ? null : num(r.november_margin_R)};
-    }).filter(function (r) { return r.x != null; });
+    }).filter(function (r) { return r.x != null; }).sort(function (a, b) { return a.y - b.y; });
+    // growth against the previous election OF THE SAME TYPE, which is the comparison the
+    // midterm/presidential cycle makes meaningful
+    var seen = {};
+    pts.forEach(function (r) {
+      if (seen[r.kind] != null && seen[r.kind] > 0) r.g = (r.d / seen[r.kind] - 1) * 100;
+      seen[r.kind] = r.d;
+    });
     var done = pts.filter(function (r) { return r.m != null; });
     var open2 = pts.filter(function (r) { return r.m == null; });
     var fits = (D.fit || []).map(function (r) {
@@ -556,6 +563,61 @@
     s2 += txt(L, H - 8, "\u25cf midterm    \u25cb presidential", "lgd");
     s2 += "</svg>";
 
+    // Second panel: the same question asked of GROWTH rather than share, because share
+    // cannot see that Democratic primary votes more than doubled. This is the better
+    // predictor of the two and it is the one that moves the answer, so it gets drawn
+    // rather than left in a table.
+    var gpts = pts.filter(function (r) { return r.g != null; });
+    var gdone = gpts.filter(function (r) { return r.m != null; });
+    var s3 = "";
+    if (gro && gdone.length) {
+      var W2 = 720, H3 = 280, L2 = 88, R2 = 92, T2 = 34, B2 = 54;
+      var gxlo = -60, gxhi = 130, gylo = -8, gyhi = 24;
+      var gx = function (v) { return L2 + (v - gxlo) / (gxhi - gxlo) * (W2 - L2 - R2); };
+      var gy = function (v) { return T2 + (v - gylo) / (gyhi - gylo) * (H3 - B2 - T2); };
+      s3 = svg(W2, H3, "Democratic primary growth against the November margin that followed");
+      [-5, 0, 5, 10, 15, 20].forEach(function (v) {
+        s3 += line(L2, gy(v), W2 - R2, gy(v), v === 0 ? "zl" : "gl")
+           + txt(L2 - 10, gy(v) + 4, v === 0 ? "tied" : (v > 0 ? "R+" : "D+") + Math.abs(v),
+                 "tk", "end");
+      });
+      [-50, 0, 50, 100].forEach(function (v) {
+        s3 += line(gx(v), T2 - 6, gx(v), H3 - B2, "gl")
+           + txt(gx(v), H3 - B2 + 16, (v > 0 ? "+" : "") + v + "%", "tk", "middle");
+      });
+      s3 += txt((L2 + W2 - R2) / 2, H3 - 30,
+                "change in DEMOCRATIC primary votes since the last like election \u2192",
+                "lgd", "middle");
+      s3 += '<line x1="' + gx(gxlo) + '" y1="' + gy(gro.a + gro.b * gxlo) + '" x2="'
+         + gx(gxhi) + '" y2="' + gy(gro.a + gro.b * gxhi)
+         + '" stroke="currentColor" stroke-width="2"/>';
+      if (mid) {
+        s3 += '<line x1="' + gx(gxlo) + '" y1="' + gy(mid.a + mid.b * gxlo) + '" x2="'
+           + gx(gxhi) + '" y2="' + gy(mid.a + mid.b * gxhi) + '" stroke="' + DC
+           + '" stroke-width="1.6" stroke-dasharray="5 4" opacity="0.8"/>';
+      }
+      gdone.forEach(function (r) {
+        var midt = r.kind === "Midterm";
+        s3 += '<circle cx="' + gx(r.g) + '" cy="' + gy(r.m) + '" r="' + (midt ? 6 : 5)
+           + '" fill="' + (midt ? "currentColor" : "none")
+           + '" stroke="currentColor" stroke-width="1.6"/>';
+        s3 += txt(gx(r.g), gy(r.m) - 12, String(r.y), "tk", "middle");
+      });
+      s3 += '<line x1="' + gx(now.g) + '" y1="' + T2 + '" x2="' + gx(now.g) + '" y2="'
+         + (H3 - B2) + '" stroke="' + RC + '" stroke-width="1.2" stroke-dasharray="3 3"/>';
+      s3 += txt(gx(now.g), T2 - 8, "2026: +" + now.g.toFixed(0) + "%", "lbb", "middle");
+      [[gro, "currentColor", "all cycles"], [mid, DC, "midterms only"]].forEach(function (q) {
+        if (!q[0]) return;
+        var pv2 = q[0].a + q[0].b * now.g;
+        s3 += '<circle cx="' + gx(now.g) + '" cy="' + gy(pv2) + '" r="6" fill="' + q[1] + '"/>';
+        // the two predictions are 1.7 points apart, which is ~12px here, so stack their
+        // labels rather than letting them print over each other
+        s3 += txt(W2 - R2 + 10, gy(pv2) + (q[1] === DC ? -5 : 11),
+                  mgn(pv2, 1) + "  " + q[2], "tk");
+      });
+      s3 += "</svg>";
+    }
+
     return card("tx-primfit", "Chapter 1 \u00b7 what the primary implies",
       "Primaries have predicted Novembers in Texas",
       "<b>Read it like this.</b> Each dot is one past Texas election. How far RIGHT a dot "
@@ -564,7 +626,7 @@
       + "bottom-right, which is the whole point: <b>the better Democrats did in the "
       + "primary, the better they did in November.</b> The line is that relationship "
       + "fitted, and the grey band is how wrong it has typically been.",
-      s2,
+      s2 + s3,
       "<b>Three ways to ask the same question, and they do not agree.</b> The chart above uses the Democratic SHARE of the primary, which cannot see that Democratic primary votes more than doubled. Fitting the GROWTH instead predicts better, and more Democratically:" 
       + '<table class="txtbl" style="margin:10px 0"><thead><tr><th>What you regress on</th>'
       + "<th>Cycles</th><th>Explains</th><th>2026</th></tr></thead><tbody>"
@@ -817,10 +879,30 @@
       + "The one number here from elsewhere: Allred carried Tarrant by 0.22 in 2024 "
       + "while Texas went R+8.71, which is from the certified county returns.",
       s2 + hist,
-      "<b>What the file reports.</b> Precinct by precinct, 2026 against the same precinct\u2019s 2022 early vote: precinct 1 moved 5.0 points toward Republicans, and precincts 2, 3 and 4 moved 8.0, 8.8 and 9.9 toward Democrats. Weighting those four by their own turnout gives a county early electorate of D+2.6 against R+3.6 in 2022, and that D+2.6 reproduces the county\u2019s own published figure exactly \u2014 which is the check that the precinct rows and the county total agree.<br><br><b>What I read into it, which the file does not say.</b> This is compression rather than a uniform swing: the ground that was most Republican moved furthest, and the most Democratic precinct moved the other way. If that pattern holds beyond Tarrant it cuts against the county model on this same tab, which applies one shift to a whole county rather than concentrating it where Republicans were strongest. Tarrant is one county of 254 and the inference is mine, not the source\u2019s.<br><br><b>The caution is the source&rsquo;s own.</b> The lean here is by the last "
-      + "party primary each voter chose, which is not a vote. The unusually large 2026 "
-      + "Democratic primary makes every group on this measure look more Democratic than it "
-      + "will vote, and 43% of these voters chose neither primary at all.");
+      "<b>Read the raw swings with care \u2014 most of them are the measure moving, not "
+      + "the voters.</b> The lean here is the share whose last primary was Democratic "
+      + "minus the share whose last primary was Republican. County-wide, voters who chose "
+      + "EITHER primary fell from 71% of this electorate in 2022 to 57% in 2026, as the "
+      + "share choosing neither went 30% to 43%. That alone shrinks every precinct\u2019s "
+      + "gap by a factor of 0.80, pulling Democratic precincts toward Republicans and "
+      + "Republican precincts toward Democrats with nobody changing their mind."
+      + "<br><br><b>Taking that drift out, all four precincts moved toward Democrats, "
+      + "precinct 1 included.</b> Its raw lean fell 5.0 points, but dilution alone "
+      + "predicted a fall of 7.4 \u2014 so it landed 2.4 points MORE Democratic than the "
+      + "measure\u2019s own drift would have produced. Adjusted, the four moved 2.4, 6.8, "
+      + "4.7 and 7.4 points toward Democrats, and the county 5.4. The raw county figure of "
+      + "6.1 slightly overstates it; the raw precinct 1 figure has the sign wrong."
+      + "<br><br><b>What I read into it, which the file does not say.</b> The gain is real "
+      + "but fairly even across the county rather than concentrated \u2014 between 2.4 and "
+      + "7.4 points once the measure is held constant. The adjustment applies the "
+      + "county-wide change in primary-chooser share to every precinct, which is an "
+      + "approximation: the file does not publish those shares precinct by precinct, so a "
+      + "precinct whose neither-share moved differently from the county would be off. "
+      + "Tarrant is also one county of 254."
+      + "<br><br><b>The caution is the source\u2019s own.</b> The lean is by last primary "
+      + "chosen, which is not a vote. The unusually large 2026 Democratic primary makes "
+      + "every group on this measure look more Democratic than it will vote, and 43% of "
+      + "these voters chose neither primary at all.");
   }
 
   /* The Morris gradient is the single biggest external input to this model: it is what

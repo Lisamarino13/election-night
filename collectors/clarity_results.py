@@ -52,7 +52,7 @@ HOSTS = {
 # The contests this board tracks, matched case-insensitively on the contest text.
 WANT = {
     "IA": {"senate": r"\bUS SENAT|UNITED STATES SENAT"},
-    "SC": {"senate": r"\bUS SENAT|UNITED STATES SENAT"},
+    "SC": {"senate": r"\bUS SENAT|UNITED STATES SENAT|U\.\s*S\.\s*SENAT"},
 }
 PARTY = {"DEM": "D", "D": "D", "REP": "R", "R": "R"}
 # Clarity names its modes differently state to state; these are folded into the three
@@ -66,7 +66,8 @@ MODE_MAP = {
     "in person early": "early", "early in person": "early", "one stop": "early",
     "provisional": "provisional", "provisional votes": "provisional",
     "absentee by mail - uocava": "mail", "uocava": "mail", "overseas": "mail",
-    "failsafe": "provisional", "curbside": "election_day",
+    "failsafe": "provisional", "failsafe provisional": "provisional",
+    "curbside": "election_day",
 }
 EARLY_MODES = ("early", "mail")
 

@@ -500,7 +500,7 @@
       y += ROW;
     });
     s2 += "</svg>";
-    return card("tx-twocounties", "Section 2 · slide 7 · what the two counties share",
+    return card("tx-twocounties", "Section 2 · slide 6 · what the two counties share",
       "Two counties, two incompatible instruments, one direction",
       "<b>Harris and Tarrant are the only Texas counties that publish individual voting "
       + "histories.</b> Everything else on this tab about <i>who</i> is voting is an "
@@ -510,7 +510,7 @@
       + "turned out before, Tackett measures composition by which primary a voter last "
       + "chose. Neither method can produce the other&rsquo;s number. Each row is one "
       + "claim with each county&rsquo;s own evidence for it beside it.",
-      s2 + scopeFig + shTbl,
+      s2,
       "<b>Six claims, two instruments, same direction on all six.</b> The movement sits "
       + "with irregular voters (Harris: a 13.2-point Democratic turnout lead among those "
       + "who skipped 2022; Tarrant: 48.8% of early voters skipped 2022) and not with "
@@ -633,7 +633,7 @@
       }).join("");
     }).join("");
 
-    return card("tx-modes", "Section 2 · slide 8 · what election day does to it",
+    return card("tx-modes", "Section 2 · slide 7 · what election day does to it",
       "What election day does to the banked vote",
       "Texas banks three quarters of its vote before election day, so the question is "
       + "simply how far the last quarter moves the first three. Blue dot is the banked "
@@ -2361,7 +2361,7 @@
             + "</td></tr>";
         }).join("") + "</tbody></table></div>";
 
-    return card("tx-tarrant-sens", "Section 2 · slide 5 · what the Neither bloc has to do",
+    return card("tx-tarrant-sens", "Section 4 · slide 2 · Tarrant, where the bloc can be seen",
       "What the Neither bloc has to do to carry both races",
       "<b>Both parties&rsquo; primary voters are held at 95% loyalty</b> — the "
       + "file&rsquo;s own default, and the thing this question fixes — so the only "
@@ -2543,7 +2543,7 @@
             + "%</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
 
-    return card("tx-morris", "Section 2 · slide 6 · the engagement gap",
+    return card("tx-morris", "Section 2 · slide 5 · the engagement gap",
       "What Morris found in Harris County",
       "<b>Source: G.&nbsp;Elliott Morris, Strength In Numbers \u2014 his chart, his "
       + "tiers.</b> <i>\u201cShare of 2024 early in-person voters who have voted early or "
@@ -3140,7 +3140,32 @@
             + r.pp.toFixed(3) + ' pts</td><td class="num rep">' + r.h
             + '%</td><td class="num dem">' + r.t + "%</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
-    return card("tx-neither-big", "Section 4 · slide 2 · the Neither bloc, extrapolated",
+    /* The flat 50% was Tarrant's number, and Tarrant is the least Democratic county in
+       the in-scope set. If the bloc mirrors its OWN county - which is the property
+       Tackett measures and which these two cycles let us test - the break is different
+       in every county and the whole thing moves. */
+    var MR = (D.nmirror || []).map(function (r) {
+      return {c: r.county, t: num(r.proj_turnout), m: num(r.margin_2026_R),
+              nb: num(r.neither_ballots), mir: num(r.mirror_break_D),
+              adj: num(r.mirror_plus_bias_D)};
+    }).filter(function (r) { return r.mir != null; });
+    var mirTbl = MR.length ? ('<div class="scroll"><table class="txtbl" '
+      + 'style="margin-top:14px"><thead><tr><th>County</th><th>2026 margin</th>'
+      + "<th>Neither ballots</th><th>Mirror implies</th><th>Plus the measured bias</th>"
+      + "</tr></thead><tbody>"
+      + MR.map(function (r) {
+          return "<tr" + (r.c === "Tarrant" ? ' class="em"' : "") + "><td>" + esc(r.c)
+            + (r.c === "Tarrant" ? " \u2014 where the 50% came from" : "")
+            + '</td><td class="num ' + (r.m < 0 ? "dem" : "rep") + '">' + mgn(r.m, 1)
+            + '</td><td class="num">' + n0(r.nb) + '</td><td class="num">'
+            + r.mir.toFixed(1) + '%</td><td class="num dem">' + r.adj.toFixed(1)
+            + "%</td></tr>";
+        }).join("")
+      + '<tr class="em"><td>Turnout-weighted</td><td class="num">\u2014</td>'
+      + '<td class="num">1,794,952</td><td class="num">61.1%</td>'
+      + '<td class="num dem">62.5%</td></tr>'
+      + "</tbody></table></div>") : "";
+    return card("tx-neither-big", "Section 4 · slide 3 · the Neither bloc, extrapolated",
       "What the Neither bloc has done, and what it is worth across the big fifteen",
       "<b>The licence for projecting this out is the previous section.</b> Harris and "
       + "Tarrant agree on the mechanism — the movement sits with irregular and new "
@@ -3157,7 +3182,7 @@
       + "camp split the file gives for each past cycle, and ask what the Neither bloc must "
       + "have done to produce the result Tarrant actually got. The two dashed lines are "
       + "what each 2026 candidate needs from the same bloc.",
-      s2,
+      s2 + scopeFig + mirTbl + shTbl,
       "<b>It has split down the middle twice running.</b> 49.9% in 2024 and 50.1% in "
       + "2022 — two cycles, two very different national environments, the same "
       + "answer to a tenth of a point. That is the most stable number anywhere on this "
@@ -3198,18 +3223,54 @@
       + "correct scoping does not touch his race at all. <b>Hinojosa now needs 61.2%</b> "
       + "rather than 56.8% — eleven points beyond anything this bloc has done, where "
       + "before it looked like seven. Scoping it honestly made her lever materially weaker."
-      + "<br><br><b>So the prediction.</b> The bloc breaks close to even again, probably a "
-      + "point or two better than even given its composition and the Harris finding. That "
-      + "carries Talarico comfortably and leaves Hinojosa short — which is the same "
-      + "answer the Tarrant county-level version gave, and the same answer the Hispanic "
+      + "<br><br><b>And the flat 50% was Tarrant’s number, which is the wrong number "
+      + "for the other five.</b> The property Tackett measures is that the bloc mirrors "
+      + "<i>its own county</i>. Tarrant is near even, so its bloc breaking 50/50 is the "
+      + "mirror working — not a universal constant. Harris is D+21.5 and Dallas "
+      + "D+38.9. If the bloc mirrors each of those the way it mirrors Tarrant, the "
+      + "turnout-weighted break across the six is <b>61.1%</b>, not 50%."
+      + "<br><br><b>And the mirror can be tested, on the only two cycles where both sides "
+      + "are known.</b> Tarrant finished R+1.0 in 2024, so the mirror predicts a 49.5% "
+      + "break and the bloc actually broke 49.9%. It finished R+4.4 in 2022, predicting "
+      + "47.8% against an actual 50.1%. The mirror holds, with the bloc running "
+      + "<b>1.35 points more Democratic</b> than its county on both readings. Add that "
+      + "and the six-county figure is <b>62.5%</b>."
+      + "<br><br><b>That is a four-point swing in the statewide margin, and it is the "
+      + "largest single modelling choice on this tab.</b> Flat-50 yields no net votes at "
+      + "all; county-mirroring yields <b>447,576</b>, worth 4.38 statewide points, which "
+      + "is 111% of the 402,353 Hinojosa needs. The same evidence produces “her "
+      + "lever falls eleven points short” or “her lever clears on its own” "
+      + "depending on one assumption about a bloc nobody polls."
+      + "<br><br><b>Which is why the tab does not pick the friendly one.</b> The mirror is "
+      + "tested at R+1.0 and R+4.4 — a near-even county. Applying it to Dallas at "
+      + "D+38.9 extrapolates the relationship forty points past anything it has been "
+      + "checked against, and the implied 69.4% break there is not a number anyone has "
+      + "seen. The flat assumption is too pessimistic and the mirror is too generous; the "
+      + "honest reading is that the truth sits between them, and that this single choice "
+      + "swamps the Hispanic and rural levers combined."
+      + "<br><br><b>So the prediction, with that uncertainty in it.</b> For Talarico it "
+      + "does not matter — his floor is 47.2% and every version of this clears it. "
+      + "For Hinojosa it is the whole race: on the flat assumption she is eleven points "
+      + "short, on the mirror she is already there, and nothing measurable resolves it "
+      + "before the count. <b>Her race is not close because the evidence is balanced, it "
+      + "is close because one unmeasurable choice is worth four points.</b>"
       + "slide gave. <b>Three different levers, one conclusion: the Senate seat holds and "
       + "the governor’s race needs help from somewhere else.</b>"
-      + "<br><br><b>What the extrapolation assumes.</b> That the other fourteen large "
-      + "counties carry a Neither share like Tarrant’s and break like it. Tarrant is "
-      + "the closest large county to the state on composition, which is the argument for "
-      + "it, but Harris is 31.7% Hispanic against Tarrant’s 21.6% and no other county "
-      + "publishes the camps at all. This is the weakest link in the chain and it is a "
-      + "share, not a margin — the break itself still comes from two measured cycles.");
+      + "<br><br><b>The 43% is one assumption, not six measurements — so here is what "
+      + "it is worth being wrong about.</b> An earlier version of this card printed "
+      + "Tarrant’s share as a per-county figure for all six, as though it had been "
+      + "measured in each. It has not: no other Texas county publishes the camps, and no "
+      + "county-level primary data exists to derive it from. The table above runs the "
+      + "whole plausible range instead. <b>Across every share from 30% to 55%, Hinojosa "
+      + "needs between 57.6% and 66.1% and has never reached any of it; Talarico is "
+      + "covered above somewhere between 46.0% and 47.8%, below the measured break at "
+      + "every single share.</b> The conclusion does not depend on the number that cannot "
+      + "be measured, which is the only defence an assumption of this kind has."
+      + "<br><br><b>What is projected and what is measured.</b> The <i>break</i> is "
+      + "measured, twice, from two cycles of real Tarrant results. The <i>mechanism</i> is "
+      + "measured twice more, in two counties by two methods that share no inputs. What is "
+      + "projected is only the <i>share</i> — and the table above shows the answer "
+      + "holds across all of it.");
   }
 
   /* The rural lever on its own. It lived inside the county-gain card, three sections
@@ -3246,7 +3307,7 @@
       y += ROW;
     });
     s2 += "</svg>";
-    return card("tx-rural", "Section 4 · slide 3 · the rural lever",
+    return card("tx-rural", "Section 4 · slide 4 · the rural lever",
       "What rural turnout would have to do",
       "<b>The 239 counties outside the largest fifteen cast 3,343,577 ballots at R+35.9, "
       + "a net of 1,199,649 Republican votes.</b> That net is what the metros have to "
@@ -3314,7 +3375,7 @@
       });
     });
     s += "</svg>";
-    return card("tx-levers", "Section 4 · slide 4 · all three together",
+    return card("tx-levers", "Section 4 · slide 5 · all three together",
       "Neither lever carries her alone. Together they do",
       "<b>Each cell is the governor&rsquo;s race after the full polling haircut</b>, with "
       + "rural turnout down the amount on the left and the Neither bloc in the big fifteen "
@@ -3496,7 +3557,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["nscope", "tx_neither_scope.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["tsens", "tx_tarrant_sensitivity.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["nmirror", "tx_neither_mirror.csv"], ["nscope", "tx_neither_scope.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["tsens", "tx_tarrant_sensitivity.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {
@@ -3546,7 +3607,6 @@
 
         + tarrantCard()
         + tarrantSwingCard()
-        + tarrantSensCard()
         + morrisCard()
         + twoCountiesCard()
         + historyCard()
@@ -3575,6 +3635,7 @@
              "Where it arrives: alone, neither lever reaches far enough. Together, two "
              + "moderate moves do it \u2014 and none of it is needed for the Senate seat."])
         + hispanicSensCard()
+        + tarrantSensCard()
         + neitherBigCard()
         + ruralCard()
         + leversCard()

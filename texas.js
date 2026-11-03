@@ -2691,6 +2691,21 @@
       + "<b>0.65 points</b> \u2014 which is where the model\u2019s D+0.65 comes from. "
       + "Rural Texas is only a third of the ballots and it very nearly erases the metros "
       + "entirely."
+      + "<br><br><b>And this is Hinojosa\u2019s second lever, the one the Hispanic "
+      + "card cannot supply.</b> After the full polling haircut the governor\u2019s race "
+      + "is R+3.94 and she is short <b>402,353 votes</b>. The Hispanic slide shows that "
+      + "lever alone needs Hispanic voters at D+36.15, which no measurement on this tab "
+      + "reaches except the big-metro precincts. The other place 402,353 votes can come "
+      + "from is here \u2014 and it is the same 1,199,649 net Republican votes:"
+      + "<br>&nbsp;&nbsp;\u2022 rural turnout <b>down 34%</b>, which has no precedent, or"
+      + "<br>&nbsp;&nbsp;\u2022 the rural margin <b>down 12.0 points</b> from R+35.9, on "
+      + "the same ballots, or"
+      + "<br>&nbsp;&nbsp;\u2022 the realistic version: rural turnout <b>down 15%</b> "
+      + "<i>and</i> the Hispanic margin <b>7.3 points</b> better than the polls assume, "
+      + "together."
+      + "<br><br>Neither lever is plausible at full size. Both have to move, and they "
+      + "have to move together. That is the whole difference between her race and "
+      + "Talarico\u2019s, where the candidate effect does the work instead."
       + "<br><br><b>Concentration risk.</b> Five counties supply " + (top5 / tot * 100).toFixed(1)
       + "% of the net gain and ten supply " + (top10 / tot * 100).toFixed(1) + "%. A miss "
       + "in Harris or Dallas cannot be made up in rural Texas, and the whole cushion is "
@@ -2959,7 +2974,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["twoc", "tx_two_counties.csv"], ["tsens", "tx_tarrant_sensitivity.csv"], ["hino", "tx_hinojosa.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["twoc", "tx_two_counties.csv"], ["tsens", "tx_tarrant_sensitivity.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {

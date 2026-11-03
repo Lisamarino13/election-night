@@ -1,5 +1,8 @@
-source,measure,tier,dem,rep,gap
-Harris County voter file,turnout so far among 2024 early voters,"Regular voters (2020, 2022, 2024 generals + 2022, 2024 primaries)",91,86,5
-Harris County voter file,turnout so far among 2024 early voters,"Irregular voters (skipped the 2022 midterm, voted early in 2024)",70,57,13
-Wave Polling + SIN/Verasight,say they will definitely vote,Regular 2024 voters,94,88,6
-Wave Polling + SIN/Verasight,say they will definitely vote,Irregular 2024 voters,81,64,17
+tier_no,tier,dem,rep,no_primary,gap
+1,"Presidential only, no primary",,,44.0,
+2,"Presidential only + a primary",70.3,57.1,,13.2
+3,"Last midterm, not all 3, no primary",,,59.3,
+4,"Last midterm, not all 3, + a primary",77.8,69.2,,8.6
+5,"All 3 generals, no primary",,,70.6,
+6,"All 3 generals, 1 of 2 primaries",84.7,76.0,,8.7
+7,"All 3 generals + both primaries",90.7,85.7,,5.0

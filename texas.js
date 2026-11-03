@@ -369,7 +369,7 @@
       }).join("");
     }).join("");
 
-    return card("tx-modes", "Section 3 · slide 3 · what election day does to it",
+    return card("tx-modes", "Section 3 · slide 5 · what election day does to it",
       "What election day does to the banked vote",
       "Texas banks three quarters of its vote before election day, so the question is "
       + "simply how far the last quarter moves the first three. Blue dot is the banked "
@@ -1572,41 +1572,94 @@
      is, split by party, in the one Texas county that publishes individual voting
      histories. The gradient scatter that used to be here was my paraphrase. */
   function morrisCard() {
+    /* Morris's chart, as he draws it: seven turnout-history tiers, least engaged at the
+       top, one dot per party plus a grey dot for voters with no recent primary. An
+       earlier version of this card had only two of the seven tiers, because those were
+       the two he quoted in prose - and the two he quoted are the extremes, which is
+       exactly the shape the middle five are needed to show is monotonic. */
     var E = (D.meng || []).map(function (r) {
-      return {src: r.source, meas: r.measure, tier: r.tier,
-              d: num(r.dem), r: num(r.rep), gap: num(r.gap)};
+      return {no: num(r.tier_no), tier: r.tier, d: num(r.dem), r: num(r.rep),
+              np: num(r.no_primary), gap: num(r.gap)};
+    }).filter(function (r) { return r.d != null || r.np != null; });
+    var PL = (D.mpoll || []).map(function (r) {
+      return {tier: r.tier, d: num(r.dem), r: num(r.rep), gap: num(r.gap)};
     }).filter(function (r) { return r.d != null; });
     var HC = (D.mhar || []).map(function (r) {
       return {m: r.metric, a: r.y2022 === "" ? null : num(r.y2022), b: num(r.y2026)};
     }).filter(function (r) { return r.b != null; });
     if (!E.length) return "";
 
-    var W = 720, H2 = 58 + E.length * 54, L = 196, R = 70, T = 40;
+    var wide = !NARROW;
+    var W = wide ? 760 : 360, L = wide ? 268 : 8, R = wide ? 66 : 52, T = 46;
+    var ROW = wide ? 40 : 56;
+    var H2 = T + E.length * ROW + 18;
     var xs = function (v) { return L + v / 100 * (W - L - R); };
-    var s2 = svg(W, H2, "Turnout by level of past engagement, Democrats against Republicans");
+    var s2 = svg(W, H2, "Share of 2024 early in-person voters in Harris County who have "
+                      + "voted early or by mail in 2026, by turnout history");
     [0, 25, 50, 75, 100].forEach(function (v) {
-      s2 += line(xs(v), T - 12, xs(v), H2 - 24, "gl")
-         + txt(xs(v), T - 18, v + "%", "tk", "middle");
+      s2 += line(xs(v), T - 14, xs(v), H2 - 14, "gl")
+         + txt(xs(v), H2 - 3, v + "%", "tk", "middle");
+    });
+    // legend, in his colours and his order
+    var lg = [[DC, "Democrats"], [RC, "Republicans"], ["currentColor", "No recent primary"]];
+    var lx = wide ? L : 8;
+    lg.forEach(function (p) {
+      s2 += '<circle cx="' + (lx + 4) + '" cy="12" r="4" fill="' + p[0] + '"'
+         + (p[0] === "currentColor" ? ' opacity="0.55"' : "") + "/>"
+         + txt(lx + 13, 16, p[1], "lgd");
+      lx += (wide ? 1 : 1) * (p[1].length * 5.8 + 26);
     });
     E.forEach(function (r, i) {
-      var y = T + 4 + i * 54;
-      if (i > 0 && E[i - 1].src !== r.src) s2 += line(8, y - 16, W - 8, y - 16, "gl");
-      var words = r.tier.split(" ");
-      var l1 = [], l2 = [];
-      words.forEach(function (w) { (l1.join(" ").length < 26 ? l1 : l2).push(w); });
-      s2 += txt(L - 12, y + 6, l1.join(" "), "lb", "end");
-      if (l2.length) s2 += txt(L - 12, y + 19, l2.join(" "), "sub", "end");
-      s2 += rect(xs(0), y - 2, xs(r.d) - xs(0), 11, DC, ' rx="2"');
-      s2 += rect(xs(0), y + 12, xs(r.r) - xs(0), 11, RC, ' rx="2"');
-      s2 += txt(xs(r.d) + 7, y + 7, r.d + "%", "vl");
-      s2 += txt(xs(r.r) + 7, y + 21, r.r + "%", "vl");
-      s2 += txt(W - R + 8, y + 14, "D+" + r.gap, "lbb");
+      var y = T + (wide ? 10 : 22) + i * ROW;
+      var head = r.no + ". " + r.tier;
+      if (wide) s2 += txt(L - 14, y + 4, head, "lbb", "end");
+      else s2 += txt(8, y - 12, head, "lbb");
+      var put = function (v, col, dy, nm) {
+        if (v == null) return "";
+        return '<circle cx="' + xs(v) + '" cy="' + (y + dy) + '" r="5" fill="' + col + '"'
+             + (col === "currentColor" ? ' opacity="0.55"' : "") + "/>"
+             + txt(W - R + 8, y + dy + 4, v.toFixed(1) + "%", "vl");
+      };
+      if (r.np != null) {
+        s2 += put(r.np, "currentColor", 0);
+        if (wide) s2 += txt(L - 14, y + 17, "no recent primary", "sub", "end");
+      } else {
+        s2 += put(r.d, DC, -8) + put(r.r, RC, 11);
+        if (wide) {
+          s2 += txt(L - 14, y - 4, "Democrats", "sub", "end")
+             + txt(L - 14, y + 23, "Republicans", "sub", "end");
+        }
+        if (r.gap != null) {
+          s2 += '<line x1="' + xs(r.r) + '" y1="' + (y + 11) + '" x2="' + xs(r.d)
+             + '" y2="' + (y - 8) + '" class="cn"/>';
+        }
+      }
+      y += ROW;
     });
-    s2 += txt(L, 16, "\u25a0 Democrats", "lgd") + txt(L + 86, 16, "\u25a0 Republicans", "lgd");
-    s2 += txt(W - R + 8, 16, "gap", "lgd");
-    s2 += txt(L, H2 - 8, E[0].meas + "  (top pair)   \u00b7   " + E[E.length - 1].meas
-              + "  (bottom pair)", "lgd");
     s2 += "</svg>";
+
+    // his second chart: the same question asked of people rather than of the voter file
+    var s3 = "";
+    if (PL.length) {
+      var W3 = wide ? 760 : 360, L3 = wide ? 208 : 8, R3 = wide ? 66 : 52;
+      var H3 = 34 + PL.length * 46;
+      var x3 = function (v) { return L3 + v / 100 * (W3 - L3 - R3); };
+      s3 = svg(W3, H3, "Share who say they will definitely vote, by how regularly they voted");
+      [0, 25, 50, 75, 100].forEach(function (v) {
+        s3 += line(x3(v), 20, x3(v), H3 - 14, "gl") + txt(x3(v), H3 - 3, v + "%", "tk", "middle");
+      });
+      PL.forEach(function (r, i) {
+        var y = 32 + i * 46;
+        if (wide) s3 += txt(L3 - 14, y + 8, r.tier, "lbb", "end");
+        else s3 += txt(8, y - 10, r.tier, "lbb");
+        s3 += '<line x1="' + x3(r.r) + '" y1="' + (y + 11) + '" x2="' + x3(r.d)
+           + '" y2="' + (y - 4) + '" class="cn"/>'
+           + '<circle cx="' + x3(r.d) + '" cy="' + (y - 4) + '" r="5" fill="' + DC + '"/>'
+           + '<circle cx="' + x3(r.r) + '" cy="' + (y + 11) + '" r="5" fill="' + RC + '"/>'
+           + txt(W3 - R3 + 8, y, r.d + "%", "vl") + txt(W3 - R3 + 8, y + 15, r.r + "%", "vl");
+      });
+      s3 += "</svg>";
+    }
 
     var hc = HC.length ? ('<div class="scroll"><table class="txtbl" style="margin-top:14px"><thead><tr>'
       + "<th>Harris County early vote</th><th>2022</th><th>2026</th></tr></thead><tbody>"
@@ -1616,24 +1669,56 @@
             + "%</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
 
-    return card("tx-morris", "Section 3 · slide 2 · the engagement gap",
+    return card("tx-morris", "Section 3 · slide 3 · the engagement gap",
       "What Morris found in Harris County",
-      "<b>Source: G.&nbsp;Elliott Morris, Strength In Numbers.</b> Harris County publishes "
-      + "individual voting histories, which no other large Texas county does, so this is "
-      + "the only place anyone can measure <i>which kind</i> of voter is turning out "
-      + "rather than just how many. The top pair is the share of 2024 early voters who "
-      + "have voted again this year, by how reliably they have voted before. The bottom "
-      + "pair is two polls asking the same people whether they will definitely vote.",
-      s2 + hc,
-      "<b>The gap widens as the voters get less reliable, and that is the finding.</b> In "
+      "<b>Source: G.&nbsp;Elliott Morris, Strength In Numbers \u2014 his chart, his "
+      + "tiers.</b> <i>\u201cShare of 2024 early in-person voters who have voted early or "
+      + "by mail in 2026, by turnout history.\u201d</i> Everyone in it voted early in "
+      + "person in Harris County in the 2024 general. The tiers come from their history "
+      + "<i>before</i> this cycle: how many of the last three generals they voted in "
+      + "(2020, 2022, 2024), whether one of them was the 2022 midterm, and how many of the "
+      + "two previous March primaries they voted in (2022, 2024). <i>\u201cPresidential "
+      + "only\u201d</i> means they skipped the 2022 midterm. Texas has no party "
+      + "registration, so party is the primary ballot they chose in 2022 or 2024; voters "
+      + "with no recent primary ballot have no party and are shown in grey. The March 2026 "
+      + "primary is deliberately left out of the tiers. The dot is the share who had voted "
+      + "early or by mail by the end of early voting on 30 October. Harris is the only "
+      + "large Texas county that publishes individual voting histories, so this is the one "
+      + "place anyone can measure <i>which kind</i> of voter is turning out rather than "
+      + "just how many.",
+      s2 + s3 + hc,
+      "<b>His conclusion, in his headline:</b> <i>\u201cEarly voting data suggests blue "
+      + "wave, Dems could exceed 2018 turnout advantage \u2014 final early voting records "
+      + "from Texas, Georgia, and now North Carolina show Democrats benefiting from an "
+      + "\u2018engagement gap\u2019 that exceeds the party\u2019s advantage in "
+      + "2018.\u201d</i> And at the end: <i>\u201cIf these patterns hold, Democrats may "
+      + "even have a better turnout environment than 2018.\u201d</i> 2018 is the "
+      + "comparison that matters for Texas: it is the year Beto held Cruz to R+2.57."
+      + "<br><br><b>These are turnout rates, not vote shares.</b> Every number in the top "
+      + "chart is the share of a group that has already voted \u2014 not how it voted. In "
       + "Morris&rsquo;s words: <i>\u201cAmong Houstonians who regularly turn out for "
       + "elections, Democrats (91% turnout) are out-voting Republicans (86%) by a modest "
       + "but still sizable 5 points. But among irregular voters \u2014 those who skipped "
       + "the 2022 midterm but voted early in 2024 \u2014 Republicans (57%) have fallen 13 "
-      + "points behind Democrats (70%).\u201d</i> The polls say the same thing "
-      + "independently: a 6-point gap among regular 2024 voters, 17 among irregular ones. "
+      + "points behind Democrats (70%).\u201d</i> Those are his bottom and second rows "
+      + "(90.7 against 85.7, and 70.3 against 57.1)."
+      + "<br><br><b>The five tiers in between are why it is a finding and not an "
+      + "anecdote.</b> The gap closes monotonically as voters get more reliable: 13.2 "
+      + "points among presidential-only voters, 8.6 among those who made the last midterm "
+      + "but not all three generals, 8.7 among all-three-generals voters with one primary, "
+      + "and 5.0 among the most engaged of all. Every tier runs the same direction, so "
+      + "this is a gradient rather than one loose group. The three grey dots \u2014 voters "
+      + "with no recent primary at all, and so no party \u2014 run 44.0%, 59.3% and 70.6% "
+      + "up the same ladder, which says the tiers are measuring engagement and not just "
+      + "partisanship."
+      + "<br><br><b>Asking people instead of the file gives the same answer.</b> A 6-point "
+      + "gap among regular 2024 voters, 17 among irregular ones. "
       + "<i>\u201cIrregular Trump voters are the least sure of any 2024 voters that "
-      + "they\u2019ll turn out.\u201d</i>"
+      + "they\u2019ll turn out.\u201d</i> He puts the whole-electorate version at ten "
+      + "points: <i>\u201cFor months, Republicans have been telling pollsters they\u2019re "
+      + "less likely to vote this year than Democrats \u2014 by about 10 percentage points "
+      + "across firms. But that gap is concentrated among the least reliable Trump "
+      + "voters.\u201d</i>"
       + "<br><br><b>New voters are the sharpest version of it.</b> <i>\u201cAmong those "
       + "who voted in the primary this March, Democrats outnumber Republicans more than 5 "
       + "to 1. In 2022, they were split about evenly.\u201d</i>"
@@ -2004,7 +2089,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["meng", "tx_morris_engagement.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {

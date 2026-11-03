@@ -1,19 +1,19 @@
 {
  "state": "GA",
- "note": "Who is on the ballot. No vote counts: this is written before polls close, when the results themselves are withheld. Nominees read from Georgia's certified primary and runoff: Collins beat Dooley 390,174-312,339 and Jackson beat Burt Jones 373,543-336,011; Ossoff was unopposed and Bottoms won outright with 59%.",
- "election": "November 3, 2026 General Election",
- "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/06162026GeneralPrimaryRunoff/data",
+ "note": "Who is on the ballot. No vote counts: this is written before polls close, when the results themselves are withheld.",
+ "election": "November 3, 2026 - General & Special Elections",
+ "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
  "races": {
   "senate": {
    "contest_name": "US Senate",
    "candidates": [
     {
-     "name": "Mike Collins",
-     "party": "R"
+     "name": "Jon Ossoff (I) (Dem)",
+     "party": "D"
     },
     {
-     "name": "Jon Ossoff",
-     "party": "D"
+     "name": "Mike Collins (Rep)",
+     "party": "R"
     }
    ]
   },
@@ -21,12 +21,12 @@
    "contest_name": "Governor",
    "candidates": [
     {
-     "name": "Rick Jackson",
-     "party": "R"
+     "name": "Keisha Lance Bottoms (Dem)",
+     "party": "D"
     },
     {
-     "name": "Keisha Lance Bottoms",
-     "party": "D"
+     "name": "Rick Jackson (Rep)",
+     "party": "R"
     }
    ]
   }

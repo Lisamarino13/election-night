@@ -2948,48 +2948,6 @@
               res: num(r.county_result_R), broke: num(r.neither_broke_D), note: r.note};
     }).filter(function (r) { return r.n != null; });
     if (!H.length) return "";
-    var wide = !NARROW;
-    var W = wide ? 700 : 360, L = wide ? 176 : 8, R = wide ? 150 : 8;
-    var ROW = wide ? 46 : 62, T = 44, Hh = T + H.length * ROW + 14;
-    var xs = function (v) { return L + (v - 40) / 20 * (W - L - R); };
-    var s2 = svg(W, Hh, "How Tarrant's Neither bloc has broken, solved from past results");
-    [40, 45, 50, 55, 60].forEach(function (t) {
-      s2 += line(xs(t), T - 14, xs(t), Hh - 12, t === 50 ? "zl" : "gl")
-         + txt(xs(t), Hh - 2, t + "%", "tk", "middle");
-    });
-    s2 += txt(xs(50), T - 20, "an even split", "lgd", "middle");
-    // No candidate threshold lines here. They were Tarrant COUNTY thresholds - 47.2%
-    // and 41.5% - and on a card about the big fifteen they read as the statewide ones,
-    // where 47.2% means something completely different (Talarico's floor, not
-    // Hinojosa's). This chart is only the measured history.
-    [].forEach(function (b) {
-        s2 += '<line x1="' + xs(b[0]) + '" y1="' + (T - 8) + '" x2="' + xs(b[0]) + '" y2="'
-           + (Hh - 12) + '" stroke="' + b[1] + '" stroke-width="1.5" '
-           + 'stroke-dasharray="4 3" opacity="0.8"/>'
-           + '<text x="' + xs(b[0]) + '" y="' + (T - 20) + '" text-anchor="middle" '
-           + 'class="vl" fill="' + b[1] + '">' + b[2] + " " + b[0] + "%</text>";
-      });
-    var y = T;
-    H.forEach(function (r) {
-      if (wide) {
-        s2 += txt(L - 14, y + 16, r.c, "lbb", "end")
-           + txt(L - 14, y + 29, "D " + r.d + " / N " + r.n + " / R " + r.r, "sub", "end");
-      } else {
-        s2 += txt(8, y + 10, r.c, "lbb")
-           + txt(8, y + 23, "D " + r.d + " / N " + r.n + " / R " + r.r, "sub");
-      }
-      var cy = y + (wide ? 16 : 36);
-      if (r.broke != null) {
-        s2 += '<circle cx="' + xs(r.broke) + '" cy="' + cy + '" r="6" '
-           + 'fill="currentColor"/>'
-           + txt(xs(r.broke) + 11, cy + 4, r.broke.toFixed(1) + "%", "vl");
-        if (wide) s2 += txt(W - R + 14, cy + 4, "county finished R+" + r.res.toFixed(1), "sub");
-      } else {
-        s2 += txt(xs(50), cy + 4, "not yet resolvable", "sub", "middle");
-      }
-      y += ROW;
-    });
-    s2 += "</svg>";
 
     /* The lead figure has to be the per-county breaks, not Tarrant's. An earlier version
        opened with the Tarrant history - 49.9% and 50.1% - which reads as THE number, and
@@ -3061,8 +3019,9 @@
           return "<tr" + (r.s === 43 ? ' class="em"' : "") + "><td>" + r.s + "%"
             + (r.s === 43 ? " \u2014 Tarrant\u2019s measured share" : "")
             + '</td><td class="num">' + n0(r.nb) + '</td><td class="num">'
-            + r.pp.toFixed(3) + ' pts</td><td class="num rep">' + r.h
-            + '%</td><td class="num dem">' + r.t + "%</td></tr>";
+            + r.pp.toFixed(3) + ' pts</td><td class="num" style="color:var(--hin,#0f8f8f)">' + r.h
+            + '%</td><td class="num" style="color:var(--tal,#6b4fbb)">' + r.t
+            + "%</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
     /* The flat 50% was Tarrant's number, and Tarrant is the least Democratic county in
        the in-scope set. If the bloc mirrors its OWN county - which is the property
@@ -3105,8 +3064,9 @@
       + TRI.map(function (r) {
           var clears = r.b >= 61.2;
           return "<tr><td>" + esc(r.e) + '</td><td class="dim">' + esc(r.i)
-            + '</td><td class="num"><b>' + r.b.toFixed(1) + '%</b></td><td class="'
-            + (clears ? "dem" : "dim") + '">' + (clears ? "clears it" : "short")
+            + '</td><td class="num"><b>' + r.b.toFixed(1) + '%</b></td><td class="dim" '
+            + 'style="' + (clears ? "color:var(--hin,#0f8f8f);font-weight:600" : "") + '">'
+            + (clears ? "clears it" : "short")
             + "</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
     return card("tx-neither-big", "Section 4 · slide 1 · the Neither bloc across the big fifteen",
@@ -3134,7 +3094,7 @@
       + "camp split the file gives for each past cycle, and ask what the Neither bloc must "
       + "have done to produce the result Tarrant actually got. The two dashed lines are "
       + "what each 2026 candidate needs from the same bloc.",
-      perCounty + s2 + mirTbl + triTbl + shTbl,
+      perCounty + mirTbl + triTbl + shTbl,
       "<b>The break is different in every county, and that is the finding.</b> Dallas "
       + "69.4%, Bexar 63.5%, Harris 60.8%, Fort Bend 58.5%, Tarrant 54.5%, Brazoria "
       + "46.2% — turnout-weighted, <b>61.1%</b>. Each is simply that county’s "
@@ -3348,7 +3308,9 @@
           var ok = r.verdict === "yes";
           return "<tr><td><b>" + esc(r.v) + '</b></td><td class="num"><b>' + esc(r.n)
             + '</b></td><td class="dim">' + esc(r.o) + '</td><td class="'
-            + (ok ? "dem" : "rep") + '"><b>' + esc(r.verdict) + "</b></td></tr>";
+            + (ok ? "" : "dim") + '" style="'
+            + (ok ? "color:var(--hin,#0f8f8f);font-weight:600" : "") + '">'
+            + esc(r.verdict) + "</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
     return card("tx-levers", "Section 4 · slide 4 · all three together",
       "Three vectors, one of which can carry her alone",

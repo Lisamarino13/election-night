@@ -1396,13 +1396,39 @@
       + '%</td><td class="num dim">'
       + HD.reduce(function (a2, r) { return a2 + r.reg; }, 0).toFixed(1) + "%</td></tr>") : "";
 
+    var H = (D.tarrh || []).map(function (r) {
+      return {g: r.group, n: num(r.voters), lean: num(r.lean_R), d: num(r.pct_d_primary),
+              nei: num(r.pct_neither), rr: num(r.pct_r_primary)};
+    }).filter(function (r) { return r.lean != null; });
+    var CS = (D.cshare || []).map(function (r) {
+      return {c: r.camp, a: num(r.y2026), b: num(r.y2022)};
+    }).filter(function (r) { return r.a != null; });
+    var camps = H.length ? stackedPrimary(H, "Tarrant County by the most recent party "
+      + "primary each voter chose since 2022: Democratic, neither, Republican") : "";
+    var csTbl = CS.length ? ('<div class="scroll"><table class="txtbl"><thead><tr>'
+      + "<th>Every early voter falls into one of three camps</th><th>2026 early vote</th>"
+      + "<th>2022 early vote</th></tr></thead><tbody>"
+      + CS.map(function (r) {
+          return "<tr><td>" + esc(r.c) + '</td><td class="num">' + r.a.toFixed(1)
+            + '%</td><td class="num dim">' + r.b.toFixed(1) + "%</td></tr>";
+        }).join("")
+      + '<tr class="em"><td>Margin</td><td class="num dem">D+2.6</td>'
+      + '<td class="num rep">R+5.1</td></tr>'
+      + "</tbody></table></div>") : "";
+
     return card("tx-tarrant", "Section 3 · slide 1 · the one county we can see",
       "Tarrant County, the only place we can see the 2026 electorate",
-      "<b>Source: the Tarrant County early-vote file, through Friday 30 October.</b> "
-      + "588,653 early and mail voters matched to the voter file by state voter ID. No "
-      + "other Texas county publishes who is voting, so every composition assumption "
-      + "elsewhere on this tab is an inference and this one is a count.",
-      pairedBars(HD.map(function (r) {
+      "<b>Source: Chris Tackett, See It. Name It. Fight It., 31 October, on the Tarrant "
+      + "County early-vote file.</b> <i>\u201cOver twelve days, 571,950 Tarrant County "
+      + "voters cast a ballot in person, and 21,122 more have voted by mail. That\u2019s "
+      + "593,072 ballots. In the entire 2022 midterm, early voting and Election Day "
+      + "together, 593,172 people voted. We are 100 votes short of all of 2022, and "
+      + "Election Day hasn\u2019t happened yet.\u201d</i> The early vote beat 2018 by 32% "
+      + "and 2022 by 47%, and reached 90% of a presidential early vote. No other Texas "
+      + "county publishes who is voting, so every composition figure elsewhere on this tab "
+      + "is an inference and this one is a count.",
+      csTbl + camps
+      + pairedBars(HD.map(function (r) {
         return {g: r.g.replace("Sat out the 2022 midterm, then voted in 2024",
                                "Sat out 2022, then voted in 2024"),
                 reg: r.reg, vot: r.vot};
@@ -1410,7 +1436,13 @@
          + "of the people who have already voted",
          "share of all registered", "share of the voters who have voted")
       + histTbl + s2,
-      "<b>Nearly half of this electorate did not vote in the 2022 midterm.</b> The file "
+      "<b>An eight-point swing, in the part of the electorate that leans most "
+      + "Republican.</b> In his words: <i>\u201cThat\u2019s a swing of nearly 8 points "
+      + "toward Democrats since 2022, in the most Republican-leaning part of the "
+      + "electorate, the people who vote early.\u201d</i> The Neither camp went from 29.5% "
+      + "of the 2022 early vote to 43.0% of this one, and the Republican camp fell from "
+      + "37.8% to 27.2%."
+      + "<br><br><b>Nearly half of this electorate did not vote in the 2022 midterm.</b> The file "
       + "opens with it: <i>\u201c13.1% sat out the 2022 midterm, then voted in 2024, and "
       + "17.9% registered since 2022\u201d</i>, and a further 17.8% were on the rolls in "
       + "2022 and did not vote. Together that is 48.8% \u2014 about 287,000 people in one "
@@ -1446,135 +1478,153 @@
      Holding its two loyalty figures and solving for the third gives the break-even, and
      feeding 37% back in reproduces its published output to a tenth of a point, which is
      what says the arithmetic is the file's and not mine. */
+  /* Tackett's second chart - "Who is in each camp" - and the words around it. This is
+     the chart the card was missing: his first chart shows the three camps SIZES, this one
+     shows who is IN them, and his finding lives entirely in the second. The Neither
+     column sits on the county column line by line; the Republican column does not.
+
+     His slider arithmetic replaces mine. An earlier version of this card computed a
+     break-even of 44.3% using 95% Democratic and 91% Republican loyalty, which were not
+     his assumptions. His defaults are 95/95 and he publishes the answer himself. Running
+     his camp counts at 95/95 reproduces every figure he prints - 13,985 against "about
+     14,000", 47.2/52.8 against "about 53 to 47", +28,036 and D+4.8, +24,102, +38,153 -
+     which is what says the model here is his and not a lookalike. */
   function tarrantSwingCard() {
+    var C = (D.camps || []).map(function (r) {
+      return {m: r.metric, u: r.unit, c: num(r.county), d: num(r.dem),
+              n: num(r.neither), r: num(r.rep)};
+    }).filter(function (r) { return r.c != null; });
+    var SL = (D.tsl || []).map(function (r) {
+      return {s: r.scenario, lead: num(r.d_lead_votes), m: r.margin, pub: r.published};
+    }).filter(function (r) { return r.lead != null; });
     var P = (D.tarr || []).map(function (r) {
       return {p: r.precinct, n: num(r.voted_2026), now: num(r.lean_2026_R),
-              then: num(r.lean_2022_R), sw: num(r.swing_to_D)};
+              then: num(r.lean_2022_R)};
     }).filter(function (r) { return r.now != null && r.then != null; });
-    var H = (D.tarrh || []).map(function (r) {
-      return {g: r.group, n: num(r.voters), lean: num(r.lean_R), d: num(r.pct_d_primary),
-              nei: num(r.pct_neither), rr: num(r.pct_r_primary)};
-    }).filter(function (r) { return r.lean != null; });
-    if (!P.length && !H.length) return "";
+    if (!C.length) return "";
 
-    /* --- the precinct swing. Neutral dots, the ARROW carries the direction, because a
-       blue dot that has moved Republican is the thing she caught on the banked card. */
-    var s1 = "";
-    if (P.length) {
-      var lo = -40, hi = 25;
+    /* --- his table, as he prints it */
+    var fmt = function (v, u) {
+      return u === "count" ? n0(v) : (u === "years" ? v + "" : v + "%");
+    };
+    var tbl = '<div class="scroll"><table class="txtbl"><thead><tr><th>&nbsp;</th>'
+      + "<th>Tarrant County<br>(active voters)</th><th>Democratic<br>primary voters</th>"
+      + "<th>Neither</th><th>Republican<br>primary voters</th></tr></thead><tbody>"
+      + C.map(function (r) {
+          return "<tr><td>" + esc(r.m) + '</td><td class="num dim">' + fmt(r.c, r.u)
+            + (r.m === "Early voters" ? " registered" : "")
+            + '</td><td class="num">' + fmt(r.d, r.u)
+            + '</td><td class="num"><b>' + fmt(r.n, r.u) + "</b></td>"
+            + '<td class="num">' + fmt(r.r, r.u) + "</td></tr>";
+        }).join("")
+      + "</tbody></table></div>";
+
+    /* --- the same table as distance from the county, which is where his finding is:
+       "within a point or two of the county's active voters on almost every line" */
+    var RW = C.filter(function (r) { return r.u === "pct"; });
+    var dev = "";
+    if (RW.length) {
       var wide = !NARROW;
-      var W = wide ? 760 : 360, L = wide ? 150 : 8, R = wide ? 92 : 8;
-      var ROW = wide ? 34 : 46, T = 52;
-      var Hh = T + P.length * ROW + (wide ? 10 : 16);
-      var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R); };
-      s1 = svg(W, Hh, "Tarrant County: every commissioner precinct moved toward the "
-                    + "Democrats between 2022 and 2026");
-      [-40, -30, -20, -10, 0, 10, 20].forEach(function (t) {
-        s1 += line(xs(t), T - 14, xs(t), Hh - 8, t === 0 ? "zl" : "gl")
-           + txt(xs(t), T - 19, t === 0 ? "even" : mgn(t, 0), "tk", "middle");
+      var W = wide ? 760 : 360, L = wide ? 186 : 8, R = wide ? 30 : 8;
+      var ROW = wide ? 30 : 46, T = wide ? 44 : 50;
+      var H = T + RW.length * ROW + 16;
+      var mx = 26;
+      var xs = function (v) { return L + (v + mx) / (2 * mx) * (W - L - R); };
+      dev = svg(W, H, "How far each camp sits from Tarrant County's own active voters, "
+                    + "line by line");
+      [-25, -20, -10, 0, 10, 20, 25].forEach(function (t) {
+        dev += line(xs(t), T - 14, xs(t), H - 14, t === 0 ? "zl" : "gl")
+            + txt(xs(t), H - 3, (t > 0 ? "+" : "") + t, "tk", "middle");
       });
-      s1 += '<defs>'
-         + ['<marker id="tarrwD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" '
-            + 'markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" '
-            + 'fill="' + DC + '"/></marker>',
-            '<marker id="tarrwR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" '
-            + 'markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" '
-            + 'fill="' + RC + '"/></marker>'].join("")
-         + "</defs>";
-      P.forEach(function (r, i) {
-        var y = T + (wide ? 16 : 24) + i * ROW;
-        var lab = "Precinct " + r.p;
-        if (wide) s1 += txt(L - 12, y + 4, lab, "lb", "end");
-        else s1 += txt(8, y - 13, lab + " · " + n0(r.n) + " voters", "lb");
-        // 2022 where it was, hollow; 2026 where it is, solid; the arrow between them
-        // direction is the sign of the move in margin_R terms, not an assumption
-        var mv = r.now - r.then;
-        s1 += '<line x1="' + xs(r.then) + '" y1="' + y + '" x2="' + xs(r.now) + '" y2="'
-           + y + '" stroke="' + sideCol(mv) + '" stroke-width="2" opacity="0.75" '
-           + 'marker-end="url(#tarrw' + (mv < 0 ? "D" : "R") + ')"/>'
-           + '<circle cx="' + xs(r.then) + '" cy="' + y + '" r="4" fill="var(--card,#fff)" '
-           + 'stroke="currentColor" stroke-width="1.5" opacity="0.65"/>'
-           + '<circle cx="' + xs(r.now) + '" cy="' + y + '" r="4.5" fill="currentColor"/>';
-        s1 += txt(xs(r.then) + 9, y - 7, mgn(r.then, 1), "tk", "start")
-           + txt(xs(r.now) - 9, y + 14, mgn(r.now, 1), "vl", "end");
-        if (wide) {
-          s1 += '<text x="' + (W - R + 10) + '" y="' + (y + 4) + '" class="vl" fill="'
-             + sideCol(mv) + '">' + mgn(mv, 1) + "</text>";
-        } else {
-          s1 += txt(W - 8, y + 14, "moved " + mgn(mv, 1), "tk", "end");
-        }
+      dev += txt(xs(0), T - 20, "the county itself", "lgd", "middle");
+      var lgx = wide ? 8 : 8;
+      [[DC, "Democratic primary"], ["currentColor", "Neither"], [RC, "Republican primary"]]
+        .forEach(function (pr) {
+          dev += '<circle cx="' + (lgx + 4) + '" cy="14" r="4.5" fill="' + pr[0] + '"'
+              + (pr[0] === "currentColor" ? ' opacity="0.8"' : "") + "/>"
+              + txt(lgx + 13, 18, pr[1], "lgd");
+          lgx += pr[1].length * 5.9 + 30;
+        });
+      RW.forEach(function (r, i) {
+        var y = T + 12 + i * ROW;
+        if (wide) dev += txt(L - 12, y + 4, r.m, "lb", "end");
+        else dev += txt(8, y - 12, r.m, "lb");
+        [[r.d - r.c, DC], [r.r - r.c, RC], [r.n - r.c, "currentColor"]].forEach(function (q) {
+          dev += '<circle cx="' + xs(Math.max(-mx + 1, Math.min(mx - 1, q[0])))
+             + '" cy="' + y + '" r="4.5" fill="' + q[1] + '"'
+             + (q[1] === "currentColor" ? ' opacity="0.85"' : ' opacity="0.8"') + "/>";
+        });
       });
-      s1 += txt(L, 14, "hollow dot: 2022 early and mail", "lgd")
-          + txt(W - R, 14, "solid dot: 2026 so far", "lgd", "end");
-      s1 += "</svg>";
+      dev += "</svg>";
     }
 
-    /* --- the primary-history cut, and the break-even that follows from it */
-    var now = H.filter(function (r) { return r.g === "2026 so far"; })[0];
-    var then = H.filter(function (r) { return r.g === "2022 early and mail"; })[0];
-    var brk = null, dflt = null;
-    if (now && now.n && now.d != null) {
-      var N = now.n, dv = now.d / 100 * N, nv = now.nei / 100 * N, rv = now.rr / 100 * N;
-      var DLOY = 0.95, RLOY = 0.91;            // the file's own slider defaults
-      var baseD = DLOY * dv + (1 - RLOY) * rv, baseR = (1 - DLOY) * dv + RLOY * rv;
-      brk = {x: (baseR - baseD + nv) / (2 * nv), nv: nv, baseD: baseD, baseR: baseR, N: N};
-      var t = 0.37, d = baseD + t * nv, r2 = baseR + (1 - t) * nv;
-      dflt = {d: d / N * 100, r: r2 / N * 100};
-    }
-    var histTbl = H.length ? stackedPrimary(H, "Tarrant County by the most recent party "
-      + "primary each voter chose since 2022: Democratic, neither, Republican") : "";
+    /* --- his sliders, his published answers */
+    var slTbl = SL.length ? ('<div class="scroll"><table class="txtbl"><thead><tr>'
+      + "<th>What you assume</th><th>Democratic lead in the early vote</th>"
+      + "<th>Margin</th><th>He prints</th></tr></thead><tbody>"
+      + SL.map(function (r) {
+          var em = /Break-even/.test(r.s);
+          return '<tr' + (em ? ' class="em"' : "") + "><td>" + esc(r.s)
+            + '</td><td class="num">' + (r.lead ? n0(r.lead) + " votes" : "—")
+            + '</td><td class="num ' + (/^D/.test(r.m) ? "dem" : "") + '">' + esc(r.m)
+            + '</td><td class="dim">' + esc(r.pub) + "</td></tr>";
+        }).join("")
+      + "</tbody></table></div>") : "";
 
-    var brkHtml = brk ? ('<div class="txband">'
-      + '<div class="bandrow"><span class="bl">The neither-primary bloc</span>'
-      + '<span class="bv">' + n0(brk.nv) + " ballots, " + now.nei + "% of the county"
-      + "</span></div>"
-      + '<div class="bandrow mid"><span class="bl dem">Ties Tarrant if they break</span>'
-      + '<span class="bv">' + (brk.x * 100).toFixed(1) + "% Democratic</span></div>"
-      + '<div class="bandrow"><span class="bl">The file’s own default, 37%</span>'
-      + '<span class="bv">D ' + dflt.d.toFixed(1) + "% / R " + dflt.r.toFixed(1)
-      + "% — it prints D 46.7 / R 53.3</span></div>"
-      + "</div>") : "";
-
-    return card("tx-tarrant-swing", "Section 3 · slide 2 · what Tarrant is worth",
-      "All four Tarrant precincts moved the same way, and one bloc decides the county",
-      "<b>Source: the same Tarrant County early-vote file, through Friday 30 October.</b> "
-      + "Two things it publishes that the composition table does not: where each "
-      + "commissioner precinct sits against where it sat in 2022, and how the electorate "
-      + "splits by the most recent party primary each voter chose.",
-      s1 + histTbl + brkHtml,
-      "<b>Every precinct moved toward the Democrats, and not by a little.</b> Precinct 2 "
-      + "went from R+6.1 to D+1.9, a swing of 8.0; Precinct 3 from R+20.6 to R+11.8, a "
-      + "swing of 8.8; Precinct 4 from R+12.6 to R+2.7, a swing of 9.9. Even Precinct 1, "
-      + "already D+37.5, is still D+32.5 — the one precinct that moved the other way, "
-      + "and it moved because it had the least room left. Three of four moving 8 to 10 "
-      + "points in the same direction is not noise in a county of 588,653 early voters."
-      + "<br><br><b>On the same measure the county flipped sides.</b> Tarrant’s 2022 "
-      + "early and mail voters were R+5.1 by the primary they had chosen; the 2026 early "
-      + "electorate is D+2.6. That is a 7.7-point shift on an identical cut of an "
-      + "identical file."
-      + "<br><br><b>Why one bloc decides it.</b> Nearly half this electorate — 48.8%, "
-      + "about 287,000 people — did not vote in the 2022 midterm, and they are not a "
-      + "demographically exotic sliver: the file does not break race out for the newcomers "
-      + "alone, but the electorate they are inside tracks the county’s own registered "
-      + "pool within five points on every racial group (white 58% of voters against 53% of "
-      + "active registered, Hispanic 18% against 21%, Black 16% against 17%, Asian and "
-      + "Pacific Islander 5% against 5%, other 4% against 4%). What they are instead is "
-      + "unaffiliated: the share choosing <i>neither</i> primary since 2022 has gone from "
-      + "30% of 2022’s early voters to 43% of this one’s. At "
-      + n0(brk ? brk.nv : 0) + " ballots that bloc is larger than either party’s "
-      + "primary electorate, so the county turns entirely on how it breaks."
-      + "<br><br><b>And the break-even is reachable.</b> Holding the file’s own "
-      + "loyalty assumptions — 95% of Democratic primary voters voting Democratic, "
-      + "91% of Republican ones voting Republican — Tarrant ties when "
-      + (brk ? (brk.x * 100).toFixed(1) : "—") + "% of the neither-primary bloc votes "
-      + "Democratic. The file’s default of 37% gives R+6.4, which is close to "
-      + "Tarrant’s actual 2022 result; 2024’s county result was R+1.0 with that "
-      + "bloc at 51%. The whole question is whether a group that has grown by thirteen "
-      + "points votes like the group it replaced."
-      + "<br><br><b>The file declines to forecast, and so does this.</b> <i>“A primary "
-      + "ballot is not a November vote, and the large 2026 Democratic primary makes every "
-      + "2026 group look more Democratic on this measure.”</i> The lean column above "
-      + "is a primary-registration lean, not a vote.");
+    return card("tx-tarrant-swing", "Section 3 · slide 2 · who is in each camp",
+      "The Neither voters look like Tarrant County",
+      "<b>Source: Chris Tackett, See It. Name It. Fight It., 31 October — his table.</b> "
+      + "The first chart showed how big the three camps are. This one shows who is in "
+      + "them, and his finding lives entirely here. The second figure is the same table "
+      + "drawn as distance from the county’s own active voters, because that is the "
+      + "claim being made: <i>“on age, gender and race, they’re within a point or "
+      + "two of the county’s active voters on almost every line.”</i>",
+      tbl + dev + slTbl,
+      "<b>His reading of the three columns, in his words.</b> <i>“The Neither voters "
+      + "look like Tarrant County. On age, gender and race, they’re within a point or "
+      + "two of the county’s active voters on almost every line. They aren’t a "
+      + "fringe group or a niche. More than a quarter of them registered after the last "
+      + "midterm. They’re the county as it is now.”</i>"
+      + "<br><br><i>“Democratic primary voters look like the county with a few "
+      + "differences. They’re about as Hispanic as the county and close to it on age. "
+      + "They’re more female (61%) and more Black (26%) than the county, which "
+      + "reflects the party’s most loyal voters.”</i>"
+      + "<br><br><i>“Republican primary voters don’t look like the county. Half "
+      + "of them are 65 or older, in a county where about one in five voters is. Only 3% "
+      + "are under 30. Three in four are white, in a county where barely half of voters "
+      + "are. Only 6% have registered since 2022.”</i>"
+      + "<br><br><b>And his conclusion:</b> <i>“That’s the electorate in one "
+      + "table. One camp is the county’s past, one is a big part of its present, and "
+      + "the largest one, Neither, looks like the county itself. They will decide its "
+      + "future.”</i> Earlier in the same piece: <i>“The Neither voters are the "
+      + "election. 253,000 of them have already voted. They’re younger than the rest "
+      + "of the early vote, more diverse, and newer to voting. On Friday, half of the "
+      + "day’s voters were under 45.”</i>"
+      + "<br><br><b>What that is worth, by his own calculator.</b> At his defaults — "
+      + "95% of each party’s primary voters sticking with their party, Neither "
+      + "splitting evenly — the early vote is already Democratic by about 14,000. "
+      + "<i>“For Republicans to erase it, the Neither voters would have to break "
+      + "about 53 to 47 their way.”</i> Running his camp counts at those assumptions "
+      + "reproduces all five of his published figures, which is what says this is his "
+      + "arithmetic and not a lookalike."
+      + "<br><br><b>Both bases are nearly spent, and the remainder leans Republican.</b> "
+      + "<i>“86% of active Democratic primary voters in Tarrant County voted early, "
+      + "and 79% of Republican primary voters did. About 29,000 Democratic base voters are "
+      + "left for Election Day, compared with about 42,000 Republican ones.”</i> That "
+      + "13,000-vote edge is almost exactly the Democratic early-vote lead, which is why "
+      + "he says the race is not won. But the people actually left are mostly in neither "
+      + "camp: <i>“78% of the 2024 voters who haven’t voted yet have never "
+      + "picked a primary.”</i>"
+      + (P.length ? "<br><br><b>Every race moved the same way.</b> <i>“Every one of "
+         + "these races moved 6 to 10 points toward Democrats compared with the 2022 early "
+         + "vote … In every race, the Neither share of the early vote grew by 11 to 17 "
+         + "points from 2022. How the Neithers break will dictate outcomes.”</i> On "
+         + "the commissioner precincts: Precinct 2 went R+6.1 to D+1.9, Precinct 3 R+20.6 "
+         + "to R+11.8, Precinct 4 R+12.6 to R+2.7. Precinct 1 was already D+37.5 and is "
+         + "D+32.5." : "")
+      + "<br><br><b>His caution, kept.</b> <i>“The sliders count only ballots already "
+      + "cast. They aren’t a forecast, and they aren’t how anyone actually "
+      + "voted. Ballots are secret.”</i>");
   }
 
   /* The out-of-state check on the whole mechanism, from Sam Atwood's The Midterm Exam
@@ -2160,7 +2210,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["prop", "tx_propensity.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["prop", "tx_propensity.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {

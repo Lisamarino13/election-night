@@ -41,6 +41,16 @@ _CLOSE = {
     "NE": (3, 0),    # panhandle counties close 8:00pm MST
     "AK": (5, 0),    # 8:00pm AKST
 }
+# Counties whose polls close AFTER the rest of their state, because they sit in the
+# next time zone west, and when the REST of that state closed. Gating a state on its
+# LAST close held the whole state back for the sake of two counties; gating per county
+# applies the same rule - no result before that unit's polls shut - where it bites.
+# A state listed here MUST have a collector that drops these units during the window;
+# write_or_hold refuses the file otherwise rather than publishing an open county.
+_LATE_UNITS = {
+    "TX": ({"EL PASO", "HUDSPETH"}, (1, 0)),   # Mountain; the other 252 close 7:00pm CST
+}
+
 OVERRIDE = "RESULTS_IGNORE_POLL_CLOSE"
 
 
@@ -56,10 +66,39 @@ def overridden():
     return os.environ.get(OVERRIDE) == "1"
 
 
+def late_units(state):
+    """(unit names that close last, (h, m) the rest of the state closed), or (set(), None)."""
+    names, bulk = _LATE_UNITS.get(state, (frozenset(), None))
+    return set(names), bulk
+
+
+def bulk_close(state):
+    """When the state's FIRST wave of polls shuts - the whole state, unless it is split."""
+    names, bulk = late_units(state)
+    if not names or bulk is None:
+        return polls_close(state)
+    return datetime(2026, 11, 4, bulk[0], bulk[1], tzinfo=timezone.utc)
+
+
+def held_units(state, now=None):
+    """Units that may not publish yet although the rest of the state may.
+
+    Empty when the whole state is still shut (nothing publishes) and empty again once
+    the last poll closes (everything does) - it is only the window between.
+    """
+    names, bulk = late_units(state)
+    if not names or bulk is None:
+        return set()
+    now = now or datetime.now(timezone.utc)
+    if now < bulk_close(state) or now >= polls_close(state):
+        return set()
+    return names
+
+
 def before_close(state, now=None):
     """None once the state may publish; otherwise why it may not, for the caller to print."""
     now = now or datetime.now(timezone.utc)
-    close = polls_close(state)
+    close = bulk_close(state)
     if now >= close:
         return None
     left = close - now
@@ -152,6 +191,17 @@ def write_or_hold(state, path, payload, totals=None):
         else:
             print(shut)
         return 2
+    # A state publishing in its first wave must have dropped the counties still voting.
+    # Refusing here, rather than trusting each collector, means adding a state to
+    # _LATE_UNITS can never quietly publish an open county's returns.
+    held = held_units(state)
+    if held:
+        present = {str(n).strip().upper() for n in (payload.get("counties") or {})}
+        still = sorted(held & present)
+        if still:
+            raise RuntimeError(
+                f"{state}: {', '.join(still)} have not closed yet but are in the payload — "
+                f"the collector must drop them until {polls_close(state):%H:%MZ}")
     for flag in test_data_signature(totals):
         print(f"{state} WARNING — looks like test data: {flag}", flush=True)
     path.write_text(json.dumps(payload, indent=1) + "\n")

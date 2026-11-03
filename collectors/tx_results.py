@@ -106,6 +106,15 @@ def early_cast():
 
 def build(eid, name, label=""):
     ver, elec_date, raw = load_counties(eid)
+    # El Paso and Hudspeth are Mountain time and close an hour after the other 252.
+    # Drop them while they are still voting so the rest of Texas can publish at 7pm
+    # Central; everything downstream - totals, precinct counts, the early margin - is
+    # then computed from the counties that are actually shut.
+    held, dropped = election_day.held_units("TX"), []
+    if held:
+        for fips in [f for f, c in raw.items()
+                     if (c.get("N") or "").strip().upper() in held]:
+            dropped.append((raw.pop(fips).get("N") or "").strip().title())
     cast, cast_as_of = early_cast()
     counties, state = {}, collections.defaultdict(
         lambda: {"choices": collections.Counter(), "early": collections.Counter(),
@@ -187,6 +196,11 @@ def build(eid, name, label=""):
         "fetched": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "early_cast_as_of": cast_as_of,
         "counties": counties, "state_totals": totals,
+        "partial": ({"held": sorted(dropped),
+                     "until": election_day.polls_close("TX").isoformat(),
+                     "why": "These counties are in Mountain time and are still voting. "
+                            "Every figure here is the other "
+                            f"{len(counties)} counties only."} if dropped else None),
         "source": f"{BASE}/election/{eid}/{ver}/County.json",
         "notes": {
             "modes": "Texas publishes EV (early) alongside V (total) per candidate per "

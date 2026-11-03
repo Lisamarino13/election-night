@@ -2906,8 +2906,11 @@
          + txt(xs(t), Hh - 2, t + "%", "tk", "middle");
     });
     s2 += txt(xs(50), T - 20, "an even split", "lgd", "middle");
-    [[47.2, "var(--hin,#0f8f8f)", "Hinojosa needs"], [41.5, "var(--tal,#6b4fbb)", "Talarico needs"]]
-      .forEach(function (b) {
+    // No candidate threshold lines here. They were Tarrant COUNTY thresholds - 47.2%
+    // and 41.5% - and on a card about the big fifteen they read as the statewide ones,
+    // where 47.2% means something completely different (Talarico's floor, not
+    // Hinojosa's). This chart is only the measured history.
+    [].forEach(function (b) {
         s2 += '<line x1="' + xs(b[0]) + '" y1="' + (T - 8) + '" x2="' + xs(b[0]) + '" y2="'
            + (Hh - 12) + '" stroke="' + b[1] + '" stroke-width="1.5" '
            + 'stroke-dasharray="4 3" opacity="0.8"/>'
@@ -2943,7 +2946,7 @@
     var MRC = (D.nmirror || []).map(function (r) {
       return {c: r.county, t: num(r.proj_turnout), m: num(r.margin_2026_R),
               nb: num(r.neither_ballots), mir: num(r.mirror_break_D),
-              adj: num(r.mirror_plus_bias_D)};
+              adj: num(r.mirror_plus_bias_D), net: num(r.net_d_votes)};
     }).filter(function (r) { return r.mir != null; })
       .sort(function (a, b) { return b.mir - a.mir; });
     var perCounty = "";
@@ -2983,7 +2986,12 @@
         perCounty += '<circle cx="' + x4(r.mir) + '" cy="' + (y + 8) + '" r="'
           + (h / 2 + 2) + '" fill="' + sideCol(-1) + '" opacity="0.8"/>'
           + txt(x4(r.mir) + h / 2 + 8, y + 12, r.mir.toFixed(1) + "%", "vl");
-        if (wq) perCounty += txt(W4 - R4 + 12, y + 12, n0(r.nb) + " ballots", "sub");
+        if (wq) {
+          perCounty += txt(W4 - R4 + 12, y + 7, n0(r.nb) + " ballots", "sub")
+            + '<text x="' + (W4 - R4 + 12) + '" y="' + (y + 19) + '" class="vl" fill="'
+            + sideCol(-r.net) + '">' + (r.net > 0 ? "+" : "\u2212")
+            + n0(Math.abs(r.net)) + " net</text>";
+        }
       });
       perCounty += "</svg>";
     }
@@ -3086,7 +3094,7 @@
             + "</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
     return card("tx-neither-big", "Section 4 · slide 1 · the Neither bloc across the big fifteen",
-      "The Neither bloc across the big fifteen, and what it is worth",
+      "The \u201cNeither\u201d bloc from Tarrant County, across the big fifteen, and what it is worth",
       "<b>The break is not one number \u2014 it is a different number in every "
       + "county, because these counties are not alike.</b> The property Tackett measures "
       + "in Tarrant is that the unaffiliated bloc mirrors <i>its own county</i> on age, "
@@ -3163,6 +3171,26 @@
       + "47.8% against an actual 50.1%. The mirror holds, with the bloc running "
       + "<b>1.35 points more Democratic</b> than its county on both readings. Add that "
       + "and the six-county figure is <b>62.5%</b>."
+      + "<br><br><b>What it is worth, county by county, in votes.</b> Measured against a "
+      + "flat 50/50 break, which by construction produces none:"
+      + "<br>&nbsp;&nbsp;Dallas <b>+138,719</b> \u00b7 Harris <b>+131,499</b> \u00b7 "
+      + "Bexar <b>+79,234</b> \u00b7 Tarrant <b>+29,543</b> \u00b7 Fort Bend "
+      + "<b>+24,763</b> \u00b7 Brazoria <b>\u22124,711</b>"
+      + "<br>Total <b>+399,047</b>, or <b>+447,576</b> once the measured Tarrant bias is "
+      + "added. She needs 402,353."
+      + "<br><br><b>Two things that figure is not.</b> The <b>1,794,952</b> is the count "
+      + "of unaffiliated <i>ballots</i> in those six counties \u2014 43% of their "
+      + "4,174,308 projected votes \u2014 not a break and not a margin. And it is the "
+      + "<i>whole</i> bloc, not the growth in it: this is a decomposition of the 2026 "
+      + "margin, not a change from 2024. The bloc existed in 2024 too and broke about "
+      + "evenly then, which is precisely why the flat-50 assumption looked reasonable "
+      + "until it was applied to counties unlike Tarrant."
+      + "<br><br><b>And yes, Harris and Dallas dominate it \u2014 correctly.</b> They are "
+      + "968,410 of the 1,794,952 ballots, 54% of the bloc, so they carry 54% of the "
+      + "weight. Dropping them entirely moves the weighted break from 61.1% to 57.8%, a "
+      + "shift of 3.3 points. That is the right arithmetic rather than a distortion: a "
+      + "simple average across the six would give 58.8% and would be wrong, because it "
+      + "would weight Brazoria\u2019s 61,824 ballots the same as Harris\u2019s 611,623."
       + "<br><br><b>That is a four-point swing in the statewide margin, and it is the "
       + "largest single modelling choice on this tab.</b> Flat-50 yields no net votes at "
       + "all; county-mirroring yields <b>447,576</b>, worth 4.38 statewide points, which "

@@ -1,34 +1,27 @@
 #!/bin/bash
-# Election-night runner, as a detached loop rather than cron.
+# Main election-night runner: the twelve states plus Georgia, then publish.
 #
 # cron cannot be used: macOS TCC blocks /usr/sbin/cron from anything under ~/Desktop,
-# so every tick died with "Operation not permitted" before running a line. A process
-# started from an app that already has disk access inherits it, so this is launched
-# once with nohup and keeps going on its own. (setsid does not exist on macOS.)
+# so every tick died with "Operation not permitted". A process started from an app that
+# already has disk access inherits it, so this is launched once with nohup.
 #
-# Kansas is on its own cadence. It is 105 sequential renders through a Cloudflare
-# browser challenge - about 177s, more than the other twelve states and Georgia put
-# together - and it is the least time-critical race on the board. Running it every
-# pass made the cycle ~10 minutes; running it every fourth keeps the rest at ~4.
+# Kansas is NOT here - it runs as its own process (ks_loop.sh) because it is 105
+# sequential renders through a Cloudflare challenge, longer than everything else put
+# together, and it must not hold up Georgia or Texas.
 #
 #   start:  nohup ./night_loop.sh >> ~/election-night-loop.log 2>&1 &
 #   stop:   touch /tmp/election-night-STOP
-#   watch:  tail -f ~/election-night-loop.log
 cd "$(dirname "$0")" || exit 1
 INTERVAL=${INTERVAL:-120}
-KS_EVERY=${KS_EVERY:-4}
+PUBLOCK=/tmp/election-night-publishing
 tick=0
 while true; do
-  if [ -f /tmp/election-night-STOP ]; then
-    echo "$(date -u '+%Y-%m-%dT%H:%M:%SZ') STOP file present - exiting"; exit 0
-  fi
+  [ -f /tmp/election-night-STOP ] && { echo "$(date -u '+%FT%TZ') STOP - exiting"; exit 0; }
   tick=$((tick+1))
-  echo "$(date -u '+%Y-%m-%dT%H:%M:%SZ') --- tick $tick ---"
+  echo "$(date -u '+%FT%TZ') --- tick $tick ---"
   ./run_results.sh main
-  if [ $((tick % KS_EVERY)) -eq 1 ]; then
-    echo "$(date -u '+%Y-%m-%dT%H:%M:%SZ') --- kansas sweep ---"
-    ./run_results.sh ks
-  fi
-  ./publish.sh
+  # publish.sh force-resets the tree to origin/main, so nothing else may be writing
+  # into data/ while it runs. ks_loop.sh waits on this same marker.
+  touch "$PUBLOCK"; ./publish.sh; rm -f "$PUBLOCK"
   sleep "$INTERVAL"
 done

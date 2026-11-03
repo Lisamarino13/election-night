@@ -457,8 +457,11 @@ def main(argv):
         # page can also carry. The run on 11-01 timed out on 1,715,321 bytes that
         # contained neither the title nor a candidate list, while a clean fetch of the
         # same URL was 568,816 bytes with both.
+        # 90s was enough when this page was ~569KB. On election night it is 1.8MB and
+        # growing as counties attach, and the fetch began timing out before the county
+        # dropdown had settled. The readiness condition is unchanged - only the patience.
         index = b.fetch(INDEX, ready=lambda h: "Unofficial Kansas Election Results" in h
-                                               and "allen.html" in h, timeout=90)
+                                               and "allen.html" in h, timeout=240)
         slugs = county_slugs(index)
         state_page = parse(b.fetch(f"{BASE}/national.html"), "national")
         sw_page = parse(b.fetch(f"{BASE}/statewide.html"), "statewide")

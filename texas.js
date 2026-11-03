@@ -820,6 +820,74 @@
   /* Tarrant publishes who is voting, which no other Texas county does. The precinct
      leans were the weakest thing in it - a primary-history proxy, not a vote - so the
      card is built on the composition tables instead. */
+  /* The two final polls' own crosstabs, read off the released PDFs. This is the only
+     place on the tab where two independent instruments measure the SAME groups, so the
+     places they agree and disagree are worth more than either topline. */
+  function crosstabCard() {
+    var R = (D.xtab || []).map(function (r) {
+      return {g: r.group, ym: r.yougov_margin_R === "" ? null : num(r.yougov_margin_R),
+              am: num(r.atlas_margin_R), ad: num(r.atlas_d), ar: num(r.atlas_r)};
+    }).filter(function (r) { return r.am != null; });
+    if (!R.length) return "";
+    var W = 720, H2 = 48 + R.length * 25, L = 162, R2 = 96, T = 34;
+    var lo = -95, hi = 95;
+    var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R2); };
+    var s2 = svg(W, H2, "Texas Senate crosstabs from the two final polls");
+    s2 += line(xs(0), T - 12, xs(0), H2 - 14, "zl");
+    s2 += txt(xs(0), T - 18, "even", "tk", "middle");
+    s2 += txt(L, T - 18, "Talarico", "lgd") + txt(W - R2, T - 18, "Paxton", "lgd", "end");
+    R.forEach(function (r, i) {
+      var y = T + 6 + i * 25;
+      s2 += txt(L - 10, y + 4, r.g, r.g === "Total" ? "lbb" : "lb", "end");
+      if (r.ym != null) {
+        s2 += line(xs(r.ym), y, xs(r.am), y, "cn");
+        s2 += '<circle cx="' + xs(r.ym) + '" cy="' + y + '" r="4" fill="none" '
+           + 'stroke="currentColor" stroke-width="1.5"/>';
+      }
+      s2 += '<circle cx="' + xs(r.am) + '" cy="' + y + '" r="5" fill="'
+         + sideCol(r.am) + '"/>';
+      s2 += txt(W - R2 + 8, y + 4,
+                (r.ym != null ? mgn(r.ym, 0) + " / " : "") + mgn(r.am, 0), "tk");
+    });
+    s2 += txt(L, 16, "\u25cb YouGov, 2,141 likely voters, 26\u201329 Oct", "lgd")
+       + txt(L + 250, 16, "\u25cf AtlasIntel, 1,678, 28 Oct\u20131 Nov", "lgd");
+    s2 += "</svg>";
+    var ind = R.filter(function (r) { return r.g === "Independents"; })[0];
+    var nv = R.filter(function (r) { return /NOT vote/.test(r.g); })[0];
+    var hisp = R.filter(function (r) { return r.g === "Hispanic"; })[0];
+    var twoWay = ind ? (ind.ad / (ind.ad + ind.ar) * 100) : null;
+    return card("tx-xtab", "Chapter 3 \u00b7 slide 5 \u00b7 what the crosstabs say",
+      "The two final polls, group by group",
+      "<b>Sources: the released YouGov and AtlasIntel toppers.</b> Hollow dot is YouGov "
+      + "(2,141 likely voters, 26\u201329 October), filled dot is AtlasIntel (1,678, "
+      + "28 October\u20131 November). Where a group has only a filled dot, only AtlasIntel "
+      + "published it. This is the one place on this tab where two independent instruments "
+      + "measure the same groups.",
+      s2,
+      "<b>The two numbers that answer open questions on this tab.</b> First, "
+      + "<b>independents: AtlasIntel has them " + ind.ad.toFixed(1) + "\u2013"
+      + ind.ar.toFixed(1) + " for Talarico</b>, which is "
+      + twoWay.toFixed(1) + "% two-way. The bloc grid later in this deck asks what "
+      + "independents would have to do at AtlasIntel\u2019s own bloc sizes, and the answer "
+      + "is 69.2%. Its own crosstab lands within half a point of its own requirement."
+      + "<br><br>Second, <b>people who did not vote in 2024 break "
+      + nv.ad.toFixed(1) + "\u2013" + nv.ar.toFixed(1) + " for Talarico.</b> That is the "
+      + "new-voter question measured directly rather than inferred from primary ballots, "
+      + "and it is more lopsided than Morris\u2019s five-to-one finding in Harris County."
+      + "<br><br><b>Where they agree and where they do not is the useful part.</b> The two "
+      + "polls land within a tenth of a point on Black voters (D+69 and D+68.6), on 30\u201344 "
+      + "(D+22 and D+22.1) and on 45\u201364 (D+2 and D+2.0). They are 30 points apart on "
+      + "18\u201329, 17 on women, 14 on men, and <b>11.5 apart on Hispanic voters "
+      + "\u2014 D+28 against D+16.5</b>. That last one is the number this whole model turns "
+      + "on: the county model assumes Hispanic voters land at D+29.85, which YouGov "
+      + "supports and AtlasIntel does not."
+      + "<br><br><b>One caution on the poll \u201cwhite\u201d and \u201cHispanic\u201d "
+      + "rows.</b> They are self-identified respondents statewide. The precinct figures "
+      + "elsewhere on this tab are counted ballots in precincts that are 90% one group, "
+      + "which is a different and more geographically concentrated population. The two are "
+      + "not interchangeable and the gap between them is composition, not disagreement.");
+  }
+
   function tarrantCard() {
     var HD = (D.tarrhd || []).map(function (r) {
       return {g: r.group, reg: num(r.share_of_registered), vot: num(r.share_of_voters),
@@ -1321,7 +1389,7 @@
     var want = [["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["meng", "tx_morris_engagement.csv"], ["mhar", "tx_morris_harris.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["meng", "tx_morris_engagement.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {
@@ -1361,6 +1429,7 @@
         + paxtonCard()
         + baselineCard()
         + tarrantCard()
+        + crosstabCard()
         // 4. the group doing the moving
         + framing("tx-frame-hisp", "Chapter 4",
             "The one question nobody has measured",

@@ -619,46 +619,44 @@
     }
 
     return card("tx-primfit", "Chapter 1 \u00b7 what the primary implies",
-      "Primaries have predicted Novembers in Texas",
-      "<b>Read it like this.</b> Each dot is one past Texas election. How far RIGHT a dot "
-      + "sits is how Democratic that year&rsquo;s primary was. How far DOWN it sits is how "
-      + "Republican the November race turned out. The dots fall from top-left to "
-      + "bottom-right, which is the whole point: <b>the better Democrats did in the "
-      + "primary, the better they did in November.</b> The line is that relationship "
-      + "fitted, and the grey band is how wrong it has typically been.",
+      "The primary says Texas is competitive",
+      "<b>Here is the argument.</b> A Texas statewide race normally ends R+10 \u2014 that "
+      + "is the mean of the last three cycles, and the last four midterms average R+11.7. "
+      + "The 2024 Senate race on this same ballot line was R+8.50. <b>Run March\u2019s "
+      + "primary through the relationship that has held for seven cycles and it does not "
+      + "predict R+10. It predicts roughly even.</b> That is a nine-to-ten point statement "
+      + "about this race, made in March, by a certified count rather than a poll."
+      + "<br><br>Each dot below is one past Texas election. The first chart plots the "
+      + "change in Democratic primary votes since the last like election, the second the "
+      + "Democratic share of that primary. Down the page is how Republican November turned "
+      + "out. Both slope the same way, and 2026 sits off the right-hand end of both.",
       s3 + s2,
-      "<b>The primary signal and the banked vote agree, which is the point.</b> These "
-      + "lines regress November on PRIMARY turnout, measured in March. Texas has since "
-      + "banked 7,734,079 early votes. Those are different electorates, eight months "
-      + "apart, measured by different mechanisms \u2014 and they moved by almost the same "
-      + "amount: primary turnout is up <b>48.1%</b> on 2022 and early voting is up "
-      + "<b>40.0%</b>. The March surge was not a primary-only artefact; it is still "
-      + "showing up in real ballots in November."
-      + "<br><br>The asymmetry sits inside the primary half: Democratic primary votes rose "
-      + "115.6% while Republican ones rose 10.9%. The banked vote cannot be split that way "
-      + "\u2014 Texas records no party \u2014 so the two measures corroborate each "
-      + "other on SIZE, and only the primary speaks to direction."
-      + "<br><br><b>What would make this much stronger is a number Texas does not "
-      + "publish.</b> The claim worth testing is first-time primary participation: how "
-      + "many of those 4.5 million March voters had never taken a primary ballot before, "
-      + "and whether they are now in the early vote. That needs individual voting "
-      + "histories, which only a few counties release \u2014 Harris and Tarrant do, the "
-      + "state does not. Both of those counties show it pointing the same way, and "
-      + "neither can be scaled to 254."
-      + "<br><br><b>Three ways to ask the question, and they do not agree.</b> The second chart uses the Democratic SHARE of the primary, which cannot see that Democratic primary votes more than doubled. Fitting the GROWTH instead predicts better, and more Democratically:"
+      "<b>Three ways to ask it, all landing near zero.</b> Growth is the better predictor "
+      + "and leads; share is the version that cannot see that Democratic primary votes "
+      + "more than doubled:"
       + '<table class="txtbl" style="margin:10px 0"><thead><tr><th>What you regress on</th>'
       + "<th>Cycles</th><th>Explains</th><th>2026</th></tr></thead><tbody>"
       + fits.map(function (q) {
-          return "<tr" + (q === all ? ' class="em"' : "") + "><td>" + esc(q.basis)
+          return "<tr" + (q === gro ? ' class="em"' : "") + "><td>" + esc(q.basis)
             + '</td><td class="num">' + q.n + '</td><td class="num">'
             + (q.r2 * 100).toFixed(0) + '%</td><td class="num '
             + (q.pred < 0 ? "dem" : "rep") + '">' + mgn(q.pred, 2) + "</td></tr>";
         }).join("") + "</tbody></table>"
-      + "<b>So the primary does not give a number. It says this race is "
-      + "a coin flip</b> \u2014 the three readings span " + mgn(mid.pred, 2) + " to "
-      + mgn(all.pred, 2) + ", a little over three points, centred near even, which is "
-      + "where every other method on this tab also lands."
-      + "<br><br><b>Two reasons not to take the friendliest one.</b> The midterm growth fit has three points, and 2026\u2019s +115.6% sits 24.8 points beyond the highest it has ever seen, so it is extrapolating hard; its residual spread is 4.82 points, WIDER than the share model\u2019s 4.11, which is what three points always buy you. And \u201cDemocrats won the primary\u201d has happened before: in 2020 they took it 2,094,428 to 2,017,167 and then lost November by 5.58. Republicans did not collapse this year either \u2014 their primary grew 10.9%. Both sides grew and Democrats grew faster, which is a different fact from Republicans staying home.");
+      + "<b>The spread is three points and it straddles even.</b> Against a state that "
+      + "has not had a competitive statewide race since 2018, that is the finding \u2014 "
+      + "not the precision."
+      + "<br><br><b>It is corroborated by the banked vote.</b> Primary turnout is up 48.1% "
+      + "on 2022 and early voting is up 40.0% \u2014 different electorates, eight months "
+      + "apart, different mechanisms, almost the same number. The March surge was not a "
+      + "primary-only artefact. The direction only the primary can speak to: Democratic "
+      + "primary votes rose 115.6% against Republican 10.9%, and Texas records no party on "
+      + "the banked vote."
+      + "<br><br><b>Two things that should stop you taking the friendliest number.</b> The "
+      + "midterm-growth fit rests on three points and 2026 sits 24.8 beyond the highest it "
+      + "has seen, so it extrapolates hard; its residual spread is 4.82, wider than the "
+      + "share model\u2019s 4.11. And Democrats winning a Texas primary is not sufficient "
+      + "on its own \u2014 they won it in 2020 too, 2,094,428 to 2,017,167, and lost "
+      + "November by 5.58.");
   }
 
   function baselineCard() {

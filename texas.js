@@ -527,7 +527,7 @@
                r.now < 0 ? "end" : "start");
     });
     s += "</svg>";
-    return card("tx-base", "Chapter 3 · slide 1 · why the methods disagree",
+    return card("tx-base", "Chapter 3 · slide 2 · why the methods disagree",
       "Seven starting points, each with its own swing",
       "Take any past Texas result, add the national swing from <i>that</i> year to this "
       + "year&rsquo;s generic ballot, and see where Texas lands. 2018 was already a strong "
@@ -553,7 +553,7 @@
         + '</td><td class="num">' + (r.gov > 0 ? "D+" : "R+") + Math.abs(r.gov).toFixed(1)
         + '</td><td class="num dem">+' + r.drag.toFixed(2) + "</td></tr>";
     }).join("");
-    return card("tx-paxton", "Chapter 3 · slide 2 · the part that is not the electorate",
+    return card("tx-paxton", "Chapter 3 · slide 1 · the part that is not the electorate",
       "Senate against governor, same pollster",
       "Four pollsters asked about both races in the same field period with the same "
       + "sample, so house effects cancel in the difference. What is left is the candidate.",
@@ -661,7 +661,7 @@
           + mgn(num(r.margin_R)) + "</td></tr>";
       }).join("");
     }).join("");
-    return card("tx-prec", "Chapter 4 \u00b7 why one Hispanic number is not enough",
+    return card("tx-prec", "Chapter 4 \u00b7 impact of the Hispanic vote",
       "The same group, two different electorates",
       "Precincts 90% or more Hispanic by voting-age population in 2024, split by where "
       + "they are. The border and the metros are not the same electorate and are not "
@@ -930,13 +930,16 @@
              + "different things.",
              "They are not. Strip each one back and it is the same arithmetic with a "
              + "different answer to a single question: <b>how far Hispanic voters move.</b> "
-             + "The first slide below shows the largest source of it: take any past Texas "
-             + "result, carry it forward, and where you land depends more on WHICH year "
-             + "you start from than on any demographic assumption. The second isolates "
-             + "the part that is not about the electorate at all. The estimates "
-             + "themselves, and the three ways of asking what it would take, follow."])
-        + baselineCard()
+             + "The first slide below strips out the part that is not about the electorate at "
+             + "all: four pollsters asked about the Senate and the governor\u2019s race in "
+             + "the same field period with the same sample, and the gap between the two is "
+             + "the candidate rather than the voters. The second shows the largest "
+             + "remaining source of disagreement \u2014 take any past Texas result, carry "
+             + "it forward, and where you land depends more on WHICH year you start from "
+             + "than on any demographic assumption. The estimates themselves, and the three "
+             + "ways of asking what it would take, follow."])
         + paxtonCard()
+        + baselineCard()
         // 4. the group doing the moving
         + ethCard()
         + precinctCard()

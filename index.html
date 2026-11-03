@@ -96,6 +96,13 @@ button:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px sol
   font-size:15px;color:var(--fg);border-bottom:2px solid var(--fg);padding-bottom:5px;margin-top:16px;
   display:flex;justify-content:space-between;align-items:baseline}
 .tierhd .cnt{font-size:11px;color:var(--dim);letter-spacing:.07em}
+.wavehd{grid-column:1/-1;font-family:var(--display);text-transform:uppercase;letter-spacing:.08em;
+  font-size:12px;color:var(--dim);border-bottom:1px solid var(--line);padding-bottom:4px;
+  margin-top:14px;display:flex;justify-content:space-between;align-items:baseline}
+.wavehd .cnt{font-size:10.5px;letter-spacing:.07em}
+.boardnote{grid-column:1/-1;font-size:14px;line-height:1.55;color:var(--dim);
+  border-left:3px solid var(--line);padding:2px 0 2px 12px;margin-bottom:2px}
+.boardnote b{color:var(--fg);font-weight:600}
 .st.t-tossup{border-left:3px solid var(--flag)}
 .st.t-safe{opacity:.72}
 .states[hidden],#evwrap[hidden]{display:none!important}
@@ -118,8 +125,6 @@ button:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px sol
 .st.open{grid-column:1/-1}
 .sthd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;cursor:pointer}
 .stname{font-family:var(--display);font-size:23px;font-weight:600;letter-spacing:-.005em}
-.stoffice{display:block;font-family:var(--display);font-size:11.5px;font-weight:600;
-  text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-top:1px}
 .pin{font-family:var(--display);font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim)}
 
 table.cand{width:100%;border-collapse:collapse;margin-top:11px;font-size:14.5px}
@@ -490,7 +495,7 @@ const closeLabel = m => m >= 99999 ? "Poll close not recorded"
 
 function card(key, st, rk, tier){
   const race = st.races[rk];
-  const view = {name: st.name, office: rk, unitsExpected: st.unitsExpected, unitsNote: st.unitsNote,
+  const view = {name: st.name, unitsExpected: st.unitsExpected, unitsNote: st.unitsNote,
                 unit: st.unit, countsFirst: st.countsFirst,
                 candidates: race.candidates, counties: race.counties || []};
   return cardFor(key, view, st.abbr, tier);
@@ -615,8 +620,7 @@ function cardFor(key, st, abbr, tier){
   }
 
   el.innerHTML = `
-    <div class="sthd"><span class="stname">${st.name}<span class="stoffice">${
-      st.office==="governor"?"Governor":"Senate"}</span></span>
+    <div class="sthd"><span class="stname">${st.name}</span>
       <span class="pin"><span class="evtag ${(EVORDER[st.countsFirst]||{}).when==="LAST"?"last":""}">EV ${(EVORDER[st.countsFirst]||{when:"?"}).when.toLowerCase()}</span> ${p.pctIn==null?"no data":"<b>"+pct(1-p.pctIn)+"</b> out"} ${open?"&#9662;":"&#9656;"}</span></div>
     <div class="share">${bars}</div>
     ${ledger}
@@ -680,26 +684,40 @@ function render(){
 
   OPEN=null;
   const RANK={tossup:0,watch:1,safe:2};
-  // Grouped by when the state's LAST poll closes, so the board reads top to bottom in
-  // the order results can actually arrive. Inside a wave, closest race first.
-  const waves = new Map();
+  // Senate, then Governor. Inside each office the races are grouped by when that state's
+  // LAST poll closes, so a section reads top to bottom in the order results can arrive.
+  const note = document.createElement("div"); note.className = "boardnote";
+  note.innerHTML = "<b>Senate first, then Governor.</b> Inside each, races are grouped by "
+    + "<b>when that state's last poll closes</b> &mdash; the order results can actually "
+    + "arrive. All times ET.";
+  b.appendChild(note);
+  const groups = {senate: new Map(), governor: new Map()};
   for (const [k,st] of Object.entries(DATA.states)){
     if(!st || !st.races) continue;
     for (const rk of ["senate","governor"]) if(st.races[rk]){
-      const m = closeMin(st.abbr);
-      if(!waves.has(m)) waves.set(m, []);
-      waves.get(m).push([k,st,rk,st.races[rk].tier||"watch"]);
+      const m = closeMin(st.abbr), w = groups[rk];
+      if(!w.has(m)) w.set(m, []);
+      w.get(m).push([k,st,rk,st.races[rk].tier||"watch"]);
     }
   }
-  for (const m of [...waves.keys()].sort((a,b2)=>a-b2)){
-    const rows = waves.get(m);
-    rows.sort((a,b2)=>(RANK[a[3]]??1)-(RANK[b2[3]]??1)
-      || a[1].name.localeCompare(b2[1].name) || a[2].localeCompare(b2[2]));
+  for (const rk of ["senate","governor"]){
+    const waves = groups[rk];
+    const n = [...waves.values()].reduce((a,r)=>a+r.length, 0);
+    if(!n) continue;
     const h=document.createElement("div"); h.className="tierhd";
-    h.innerHTML = closeLabel(m) + ' <span class="cnt">' + rows.length
-      + (rows.length===1?' race':' races') + '</span>';
+    h.innerHTML = (rk==="governor"?"Governor":"Senate")
+      + ' <span class="cnt">' + n + (n===1?' race':' races') + '</span>';
     b.appendChild(h);
-    for (const [k,st,r,tier] of rows) b.appendChild(card(k+":"+r, st, r, tier));
+    for (const m of [...waves.keys()].sort((a,b2)=>a-b2)){
+      const rows = waves.get(m);
+      rows.sort((a,b2)=>(RANK[a[3]]??1)-(RANK[b2[3]]??1)
+        || a[1].name.localeCompare(b2[1].name));
+      const w=document.createElement("div"); w.className="wavehd";
+      w.innerHTML = closeLabel(m) + ' <span class="cnt">' + rows.length
+        + (rows.length===1?' race':' races') + '</span>';
+      b.appendChild(w);
+      for (const [k,st,r,tier] of rows) b.appendChild(card(k+":"+r, st, r, tier));
+    }
   }
   renderLastRun();
   if(TAB==="ev") renderEV();

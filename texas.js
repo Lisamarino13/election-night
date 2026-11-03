@@ -725,9 +725,6 @@
     var rows = (D.est || []).map(function (r) {
       return {label: r.label, kind: r.kind, m: num(r.margin_R), note: r.note, n: num(r.n)};
     }).filter(function (r) { return r.m != null; });
-    // the Black-ceiling correction is a result of today's work, not in the csv
-    rows.push({label: "County model, Black shift at its ceiling", kind: "model", m: 0.97,
-               note: "the same model with Black voters capped at +2 instead of +12"});
     rows.sort(function (a, b) { return a.m - b.m; });
     var W = 720, H = 36 + rows.length * 23, L = 300, R = 56;
     var lo = -8, hi = 3;
@@ -745,20 +742,28 @@
       s += txt(xs(r.m) + (r.m < 0 ? -8 : 8), y + 4, mgn(r.m), "vl", r.m < 0 ? "end" : "start");
     });
     s += "</svg>";
-    return card("tx-est", "Section 1 · slide 1 · where every estimate lands",
-      "Where every estimate lands",
-      "Fifteen estimates spanning eleven points and straddling zero. They do not "
-      + "disagree randomly: nearly every one is the same arithmetic with a different "
-      + "assumption about how far Hispanic voters move. Ten of the fifteen are on the "
-      + "Democratic side, the median is D+1.29, and the two built from counted "
-      + "ballots rather than assumptions \u2014 the primary regression and the "
-      + "uniform swing off the 2024 Senate \u2014 sit on opposite sides of even.",
+    return card("tx-est", "Section 1 · slide 1 · where every poll lands",
+      "Where every poll lands",
+      "Every public poll of this race, its two averages, and the one outside forecast "
+      + "built on them. Nothing of ours is in here \u2014 the regression, the uniform "
+      + "swings and the county model each have their own section, and all of them appear "
+      + "together in the summary chart at the top. Five of the six houses have Talarico "
+      + "ahead; the sixth is the only partisan house in the set.",
       s,
-      "<b>The model&rsquo;s known bias.</b> The county model moved the whole non-white "
+      "<b>What the spread is and is not.</b> Six houses across seven points is an "
+      + "ordinary amount of poll disagreement, not a sign that one of them is broken. The "
+      + "sample-weighted average of all five non-partisan polls is D+4.09; dropping "
+      + "Trafalgar moves it to D+5.03, and the next card is about whether Texas polls "
+      + "have earned that benefit of the doubt."
+      + "<br><br><b>Where our own numbers went.</b> They are not here on purpose: this is "
+      + "the section about what people say they will do. The county model is section 4, "
+      + "the primary regression is section 2 slide 2, and the summary chart at the top "
+      + "puts all four sources on one axis."
+      + "<br><br><b>The model&rsquo;s known bias, for when you reach it.</b> The county model moved the whole non-white "
       + "bloc +12, Black voters included. They were already 91.1% Democratic in 2024, so "
-      + "+12 there is not a claim anyone can defend; capping it costs Democrats 1.62 points "
-      + "and turns D+0.65 into R+0.97. Both are plotted. Treat the friendlier one as the "
-      + "optimistic end of its own range, not the centre.");
+      + "+12 there is not a claim anyone can defend; capping it costs Democrats 1.62 "
+      + "points and turns D+0.65 into R+0.97. Only the published figure is plotted here, "
+      + "so read it as the optimistic end of its own range rather than the centre.");
   }
 
   /* ===================================================== 5. the primary flipped */

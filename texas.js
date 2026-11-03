@@ -2115,7 +2115,7 @@
 
     return card("tx-tarrant", "Section 2 · slide 3 · the one county we can see",
       "Tarrant County, the only place we can see the 2026 electorate",
-      "<b>Source: Chris Tackett, See It. Name It. Fight It., 31 October, on the Tarrant "
+      "<b>Source: Chris Tackett, " + '<a class="src" href="https://christackett.substack.com/p/early-voting-is-over" target="_blank" rel="noopener">See It. Name It. Fight It.</a>' + ", 31 October, on the Tarrant "
       + "County early-vote file.</b> <i>\u201cOver twelve days, 571,950 Tarrant County "
       + "voters cast a ballot in person, and 21,122 more have voted by mail. That\u2019s "
       + "593,072 ballots. In the entire 2022 midterm, early voting and Election Day "
@@ -2275,7 +2275,7 @@
 
     return card("tx-tarrant-swing", "Section 2 · slide 4 · who is in each camp",
       "The Neither voters look like Tarrant County",
-      "<b>Source: Chris Tackett, See It. Name It. Fight It., 31 October — his table.</b> "
+      "<b>Source: Chris Tackett, " + '<a class="src" href="https://christackett.substack.com/p/early-voting-is-over" target="_blank" rel="noopener">See It. Name It. Fight It.</a>' + ", 31 October — his table.</b> "
       + "The previous card showed how big the three camps are. This one shows who is "
       + "in them. Below the table, his headline claim on its own — the county’s "
       + "active voters against the Neither bucket, line by line — because it is "
@@ -2446,7 +2446,7 @@
 
     return card("tx-morris", "Section 2 · slide 5 · the engagement gap",
       "What Morris found in Harris County",
-      "<b>Source: G.&nbsp;Elliott Morris, Strength In Numbers \u2014 his chart, his "
+      "<b>Source: G.&nbsp;Elliott Morris, " + '<a class="src" href="https://www.gelliottmorris.com/p/2026-11-01-gop-early-vote-dropoff" target="_blank" rel="noopener">Strength In Numbers</a>' + " \u2014 his chart, his "
       + "tiers.</b> <i>\u201cShare of 2024 early in-person voters who have voted early or "
       + "by mail in 2026, by turnout history.\u201d</i> Everyone in it voted early in "
       + "person in Harris County in the 2024 general. The tiers come from their history "
@@ -3508,6 +3508,8 @@
     + "color:var(--dim);margin:0 0 3px}"
     + ".txhint{font-size:13px;color:var(--dim);margin:0 0 12px;max-width:74ch;line-height:1.5}"
     + ".txrule{display:block;border-top:1px solid var(--line);margin:14px 0}"
+    + "a.src{color:inherit;text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px;text-decoration-color:var(--dim)}"
+    + "a.src:hover{text-decoration-color:currentColor}"
     + ".txnote{font-size:12.5px;color:var(--dim);margin:11px 0 0;max-width:74ch;"
     + "line-height:1.5;border-top:1px solid var(--line);padding-top:9px}"
     + ".txbig{font-family:var(--display);font-size:40px;line-height:1.1;"

@@ -2247,11 +2247,28 @@
       + "the border run "
       + (spread ? "<b>" + spread + " points</b> " : "")
       + "away from Hispanic precincts in the big metros, in the same race on the same "
-      + "day. The second block widens the definition to any 90% non-white precinct, "
-      + "which is a different and more Democratic set.",
+      + "day."
+      + "<br><br><b>The two blocks are not the same measurement.</b> The first is precincts that are at least 90% <i>Hispanic</i>. The second is precincts that are at least 90% <i>non-white of any kind</i> \u2014 Hispanic, Black, Asian and other together \u2014 so it contains the first block plus everything else. Subtract one from the other and what is left is the part that is non-white but not Hispanic.",
       '<div class="scroll"><table class="txtbl"><thead><tr><th>Where</th><th>Race</th>'
       + "<th>Ballots</th><th>Margin</th></tr></thead><tbody>" + body + "</tbody></table></div>",
-      "There is no single Hispanic number to measure, which is why break-even is a range "
+      "<b>What the difference between the two blocks actually is.</b> Subtracting the "
+      + "Hispanic block from the non-white block leaves, in the 2024 Senate race:"
+      + "<br>&nbsp;&nbsp;\u2022 Border / South Texas: <b>53,233</b> ballots at D+8.28 "
+      + "\u2014 tiny, and it votes like its Hispanic neighbours."
+      + "<br>&nbsp;&nbsp;\u2022 El Paso: <b>47,335</b> ballots at D+22.39."
+      + "<br>&nbsp;&nbsp;\u2022 Big metro: <b>454,064</b> ballots at <b>D+57.83</b> "
+      + "\u2014 seven times the size of the Hispanic-only group in the same place."
+      + "<br><br><b>So in the metros, \u201cnon-white\u201d is almost entirely not "
+      + "Hispanic.</b> Of the 519,792 ballots in 90% non-white metro precincts, 87% are "
+      + "in the remainder, and that remainder is overwhelmingly Black. This is the "
+      + "Black-ceiling problem seen geographically rather than in a table: the model "
+      + "moves the whole non-white bloc +12, and in the metros that +12 lands almost "
+      + "entirely on precincts already voting D+57.8. There is no room there, and it is "
+      + "why the Hispanic figure has to carry the swing alone."
+      + "<br><br><b>And the blocks are not even parallel.</b> The Hispanic block has both "
+      + "2024 races; the non-white block has only the Senate. They cannot be read "
+      + "row-against-row."
+      + "<br><br>There is no single Hispanic number to measure, which is why break-even is a range "
       + "rather than a point: the same group runs tens of points apart depending on where "
       + "it lives, and the two halves have been moving in opposite directions. Note also "
       + "that the border's 2024 <i>presidential</i> margin is Republican while its Senate "

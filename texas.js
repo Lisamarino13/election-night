@@ -333,14 +333,23 @@
       s2 + '<div class="scroll"><table class="txtbl"><thead><tr><th>Cycle</th><th>Contest</th>'
       + "<th>Banked share</th><th>Banked</th><th>Election day</th><th>Finished</th>"
       + "<th>Move</th></tr></thead><tbody>" + body + "</tbody></table></div>",
-      "<b>Election day used to rescue Republicans and has stopped.</b> The move ran about "
-      + "+15 in 2020, about +9 in 2022, and about \u22121 in 2024 \u2014 Republicans spent "
-      + "those cycles pushing their most reliable voters into early voting, which drained "
-      + "election day of the skew it used to carry. Two cautions. The only <i>midterm</i> "
-      + "here is 2022, and it still moved +9.36. And Cruz\u2013Allred&rsquo;s \u22124.14 is "
-      + "the largest move of any race in its cycle, against Trump&rsquo;s +2.64 on the same "
-      + "ballot, so a Senate candidate can run several points clear of the party on "
-      + "election day in either direction.");
+      "<b>Election day used to rescue Republicans and has mostly stopped.</b> The move ran "
+      + "about +15.8 in 2020, +9.4 in 2022 and \u22120.8 in 2024. <b>The reason is not that "
+      + "Texans are voting early more \u2014 they are voting early less.</b> The early share "
+      + "went 86.8% \u2192 68.3% \u2192 80.3%, and 2020 had the highest early share of the "
+      + "three alongside the largest Republican election-day rescue, which is backwards for "
+      + "that story. What changed is WHO votes early. As COVID-era early voting receded, "
+      + "Republican counties gave it up far less than Democratic ones: early share fell 8.9 "
+      + "points in counties that went D+20 or better and only 3.7 points in counties that "
+      + "went R+20 or worse, a correlation of +0.51 between a county\u2019s Republican margin "
+      + "and its change in early share. Election day lost its Republican skew because "
+      + "Republicans were relatively more likely to have already voted."
+      + "<br><br><b>Three cautions.</b> That is an ecological result \u2014 county-level, not "
+      + "voter-level \u2014 and Texas has no party registration, so a voter-level version of "
+      + "it cannot be computed by anyone. The only <i>midterm</i> here is 2022, which still "
+      + "moved +9.36. And Cruz\u2013Allred\u2019s \u22124.14 is the largest move of any race "
+      + "in its cycle against Trump\u2019s +2.64 on the same ballot, so a Senate candidate can "
+      + "run several points clear of the party on election day in either direction.");
   }
 
   /* ================================================ 3. what election day would have to do */

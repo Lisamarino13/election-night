@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-02T22:52:03+00:00",
+ "updated": "2026-11-03T16:31:31+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -2149,7 +2149,13 @@
      "precincts_total": 2626,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 0
+     "counted": 0,
+     "modes": {
+      "Election Day": 0,
+      "Early Voting": 0,
+      "Absentee by Mail": 0,
+      "Provisional": 0
+     }
     }
    },
    "unitsExpected": 100,
@@ -4139,7 +4145,8 @@
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": true,
-     "counted": 0
+     "counted": 0,
+     "modes": null
     },
     "governor": {
      "candidates": [
@@ -6024,7 +6031,8 @@
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": true,
-     "counted": 0
+     "counted": 0,
+     "modes": null
     }
    },
    "unitsExpected": 88
@@ -6902,7 +6910,8 @@
      "precincts_total": 5626,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 0
+     "counted": 0,
+     "modes": null
     },
     "governor": {
      "candidates": [
@@ -8228,7 +8237,8 @@
      "precincts_total": 5626,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 0
+     "counted": 0,
+     "modes": null
     }
    },
    "unitsExpected": 67
@@ -8245,11 +8255,11 @@
     "governor": {
      "candidates": [
       {
-       "name": "Rick Jackson",
+       "name": "Rick Jackson (Rep)",
        "party": "R"
       },
       {
-       "name": "Keisha Lance Bottoms",
+       "name": "Keisha Lance Bottoms (Dem)",
        "party": "D"
       }
      ],
@@ -8257,16 +8267,16 @@
      "updated": null,
      "tier": "tossup",
      "roster_only": true,
-     "roster_source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/06162026GeneralPrimaryRunoff/data"
+     "roster_source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data"
     },
     "senate": {
      "candidates": [
       {
-       "name": "Mike Collins",
+       "name": "Mike Collins (Rep)",
        "party": "R"
       },
       {
-       "name": "Jon Ossoff",
+       "name": "Jon Ossoff (I) (Dem)",
        "party": "D"
       }
      ],
@@ -8274,7 +8284,7 @@
      "updated": null,
      "tier": "safe",
      "roster_only": true,
-     "roster_source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/06162026GeneralPrimaryRunoff/data"
+     "roster_source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data"
     }
    },
    "unitsExpected": 159

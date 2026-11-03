@@ -35,7 +35,7 @@ ok=0; pending=0; failed=0
 # the cron host hasn't got: maine.gov refuses its datacenter IP, and Kansas sits behind
 # a Cloudflare browser challenge that only a real windowed Chrome clears. Both exit 2
 # there and are run from the laptop instead.
-for c in nc_results.py oh_results.py fl_results.py tx_results.py ne_results.py mn_results.py ga_results.py clarity_results.py me_results.py ks_results.py; do
+for c in nc_results.py oh_results.py fl_results.py tx_results.py la_results.py ne_results.py mn_results.py ga_results.py clarity_results.py me_results.py ks_results.py; do
   [ -f "$c" ] || { say "SKIP $c"; continue; }
   out=$("$PY" "$c" 2>&1); rc=$?
   printf '%s\n' "$out" >> "$LOG"

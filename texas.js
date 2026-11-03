@@ -886,17 +886,35 @@
     if (ev > 0) {
       var ground = evGround / ev, shift = evShift / ev, est = ground - shift;
       var lead = -est / 100 * PROJ.banked;
+      // Margins are the unit the rest of the tab uses, but the thing being counted
+      // tomorrow is votes, so give both. A margin of X points on N ballots is X% of N
+      // votes of margin, which is half that many voters changing sides.
+      var vGround = ground / 100 * PROJ.banked;
+      var vShift = shift / 100 * PROJ.banked;
+      var vEst = est / 100 * PROJ.banked;
+      var sideV = function (v) {
+        return (v < 0 ? "D+" : "R+") + n0(Math.abs(v));
+      };
       head = '<div class="txbig" style="color:' + sideCol(est) + '">' + mgn(est) + "</div>"
         + '<div class="txsub">what this model has banked: a lead of about <b>'
-        + (lead > 0 ? "D+" : "R+") + n0(Math.abs(lead)) + "</b> on "
-        + n0(PROJ.banked) + " early and mail ballots</div>"
-        + '<table class="txtbl" style="margin-bottom:12px"><tbody>'
+        + sideV(vEst) + "</b> votes on " + n0(PROJ.banked)
+        + " early and mail ballots</div>"
+        + '<table class="txtbl" style="margin-bottom:12px"><thead><tr><th>&nbsp;</th>'
+        + "<th>as a margin</th><th>in votes</th></tr></thead><tbody>"
         + "<tr><td>Ground the early vote was drawn from, at 2024 margins</td>"
-        + '<td class="num">' + mgn(ground) + "</td></tr>"
+        + '<td class="num">' + mgn(ground) + '</td>'
+        + '<td class="num rep">' + sideV(vGround) + "</td></tr>"
         + "<tr><td>Shift the model assumes on top, weighted by early vote</td>"
-        + '<td class="num dem">\u2212' + shift.toFixed(2) + "</td></tr>"
-        + '<tr class="em"><td>Estimated banked margin</td><td class="num">' + mgn(est)
-        + "</td></tr></tbody></table>";
+        + '<td class="num dem">\u2212' + shift.toFixed(2) + '</td>'
+        + '<td class="num dem">' + n0(Math.abs(vShift)) + " moved</td></tr>"
+        + '<tr class="em"><td>Estimated banked margin</td>'
+        + '<td class="num">' + mgn(est) + '</td>'
+        + '<td class="num">' + sideV(vEst) + "</td></tr></tbody></table>"
+        + '<p class="txsub" style="margin:-4px 0 12px">That '
+        + n0(Math.abs(vShift)) + " votes of margin is about "
+        + n0(Math.abs(vShift) / 2) + " voters changing sides, out of "
+        + n0(PROJ.banked) + " who have already voted. For scale, the whole race needs "
+        + n0(305279) + " net new Democratic votes to erase 2024.</p>";
     }
     return card("tx-watch", "Section 5 · slide 1 · what is already banked",
       "What we think is already banked, and where it came from",

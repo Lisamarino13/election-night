@@ -25,7 +25,7 @@ else PY=$(command -v python3) || { echo "no python3" >&2; exit 1; }; fi
 say(){ printf '%s %s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$*" | tee -a "$LOG"; }
 
 say "=== results pull starting ==="
-ok=0; pending=0; failed=0
+ok=0; failed_names=""; pending=0; failed=0
 # No collector may publish before its state's polls close - see election_day.py.
 # Minnesota's 2026 file is live eight days early and already full of its accuracy test
 # (write-in second statewide), so "the feed has numbers" is not the same as "there are
@@ -61,7 +61,7 @@ for c in $SET; do
   case $rc in
     0) ok=$((ok+1));      say "OK      $c -- $(printf '%s' "$out" | tail -1)";;
     2) pending=$((pending+1)); say "PENDING $c -- not staged yet";;
-    *) failed=$((failed+1)); say "FAILED  $c -- $(printf '%s' "$out" | tail -1) (previous data left in place)";;
+    *) failed=$((failed+1)); failed_names="$failed_names $c"; say "FAILED  $c -- $(printf '%s' "$out" | tail -1) (previous data left in place)";;
   esac
 done
 bld=$("$PY" build_results.py 2>&1); brc=$?
@@ -69,4 +69,13 @@ printf '%s\n' "$bld" >> "$LOG"
 [ $brc -eq 0 ] && say "BUILD   $(printf '%s' "$bld" | tail -1)" \
                || { failed=$((failed+1)); say "FAILED  build_results.py -- $(printf '%s' "$bld" | tail -1)"; }
 say "=== done: $ok ok, $pending pending, $failed failed ==="
+# Hand the outcome to publish.sh, which writes it into data/last-run.json and pushes it.
+# run_all.sh has always done this; run_results.sh never did, so a results collector
+# could fail every tick all night and the board would show a clean heartbeat. The board
+# reads this file to say WHY a run was unhappy, not just that it happened.
+if [ "$failed" -gt 0 ]; then
+  printf '%s' "$failed_names" > "${TMPDIR:-/tmp}/election-night-failed"
+else
+  rm -f "${TMPDIR:-/tmp}/election-night-failed"
+fi
 [ "$failed" -eq 0 ]

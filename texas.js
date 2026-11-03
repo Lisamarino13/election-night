@@ -195,6 +195,18 @@
       + "</section>";
   }
 
+  /* A framing block. Chapters 1 and 2 are mechanics; Chapter 3 is where the argument
+     turns into a number, and the reader needs telling that the disagreement ahead is
+     one disagreement wearing eleven hats rather than eleven separate opinions. */
+  function framing(id, kicker, title, paras) {
+    SECTIONS.push({id: id, title: title});
+    return '<section class="txframe" id="' + id + '">'
+      + '<p class="txkick">' + esc(kicker) + "</p>"
+      + "<h2>" + esc(title) + "</h2>"
+      + paras.map(function (t) { return "<p>" + t + "</p>"; }).join("")
+      + "</section>";
+  }
+
   /* ======================================================== 1. the read, live or not */
   function readCard(L) {
     var band = '<div class="txband">'
@@ -506,7 +518,7 @@
                r.now < 0 ? "end" : "start");
     });
     s += "</svg>";
-    return card("tx-base", "Chapter 3 · why the methods disagree",
+    return card("tx-base", "Chapter 2 · where you choose to start from",
       "Seven starting points, each with its own swing",
       "Take any past Texas result, add the national swing from <i>that</i> year to this "
       + "year&rsquo;s generic ballot, and see where Texas lands. 2018 was already a strong "
@@ -811,6 +823,10 @@
     + ".txcard,.txarg{background:var(--card,#fff);border:1px solid var(--line);"
     + "border-radius:10px;padding:16px 18px;margin:0 0 14px}"
     + ".txarg{border-left:3px solid var(--fg)}"
+    + ".txframe{padding:4px 0 10px;margin:22px 0 14px;border-top:2px solid var(--fg)}"
+    + ".txframe h2{font-family:var(--display);font-weight:400;font-size:21px;margin:3px 0 9px}"
+    + ".txframe p{margin:0 0 8px;font-size:14px;line-height:1.55;max-width:74ch;color:var(--dim)}"
+    + ".txframe p:first-of-type{color:var(--fg)}"
     + ".txarg h2{font-family:var(--display);font-weight:400;font-size:22px;margin:2px 0 10px}"
     + ".txarg p{margin:0 0 9px;font-size:14px;line-height:1.55;max-width:74ch}"
     + ".txarg ol{margin:4px 0 0;padding-left:1.2em;font-size:14px;line-height:1.55}"
@@ -893,8 +909,22 @@
         // 2. how a banked vote reaches a result
         + historyCard()
         // 3. where every method lands, and why they disagree
-        + estimatesCard()
         + baselineCard()
+        + framing("tx-frame-lands", "Chapter 3",
+            "So where does it actually land?",
+            ["The two chapters above are mechanics. The electorate changed, and three "
+             + "quarters of the vote is already cast so election day can only shade it. "
+             + "Neither tells you who wins.",
+             "For that you need a number, and this is where the agreement ends. What "
+             + "follows is every estimate anyone has published alongside the ones this "
+             + "model produces \u2014 eleven of them, spanning six points and straddling "
+             + "zero. A spread that wide usually means the methods are measuring "
+             + "different things.",
+             "They are not. Strip each one back and it is the same arithmetic with a "
+             + "different answer to a single question: <b>how far Hispanic voters move.</b> "
+             + "The two cards here price that disagreement, and the three after them "
+             + "take it apart."])
+        + estimatesCard()
         + paxtonCard()
         // 4. the group doing the moving
         + ethCard()

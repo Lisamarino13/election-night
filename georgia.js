@@ -31,7 +31,14 @@
   // Bottoms' banked lead, both ends measured the same way: each past race's county-level
   // early+mail margin applied to that county's 2026 early turnout. 2024 president and
   // 2018 governor; both source files tie out to the certified statewide result.
-  var BANK_LO = 95199, BANK_HI = 106570;   // 2024 president / 2018 governor
+  // FLOOR - county reweighting only. Each past race's county-level early margin applied
+  // to that county's 2026 early turnout. Composition-BLIND: it freezes each county's
+  // internal margin at the baseline year, so the measured race shift is absent from it.
+  var FLOOR_LO = 95199, FLOOR_HI = 106570;   // 2024 president / 2018 governor
+  // HEADLINE - calibrated to 2024's ACTUAL early+mail margin (R+0.68, certified county
+  // file), then ONLY the measured racial composition changed to 2026's counts. Black
+  // share of the early electorate 26.34% -> 32.38%. Black-D support 86% to 92%.
+  var BANK_LO = 161272, BANK_HI = 190201;
   var TOT = EV + EDAY;
   function bar(net) { return (net / EDAY * 100).toFixed(2); }
   var MAIL26 = 129773, INPERSON26 = 2705120;
@@ -39,7 +46,7 @@
   function card(id, kicker, title, hint, body, note) {
     SECTIONS.push({id: id, title: title});
     return '<section class="gacard" id="' + id + '">'
-      + (kicker ? '<p class="gakick">' + esc(kicker) + "</p>" : "")
+      + (kicker ? '<p class="gakick">' + kicker + "</p>" : "")
       + "<h3>" + esc(title) + "</h3>"
       + (hint ? '<p class="gahint">' + hint + "</p>" : "")
       + body
@@ -148,34 +155,36 @@
   /* =============================================================== 2. composition */
   function compCard() {
     var rows = [
-      {c: ["Atlanta metro (29 counties)", n0(1793044), "63.2%", "D+18.4 to D+19.3",
-           "<b>+" + n0(330639) + " to +" + n0(346459) + "</b>"]},
-      {c: ["Rural outside metro (120)", n0(673833), "23.8%", "R+40.8 to R+40.9",
-           "<b>&minus;" + n0(274622) + " to &minus;" + n0(275667) + "</b>"]},
+      {c: ["<b>Atlanta core (10)</b>", "<b>" + n0(1358943) + "</b>", "<b>47.9%</b>",
+           "<b>D+38.0 to D+38.5</b>",
+           "<b>+" + n0(516860) + " to +" + n0(523588) + "</b>"]},
+      {c: ["Exurban ring (19)", n0(434101), "15.3%", "R+39.3 to R+44.5",
+           "&minus;" + n0(170401) + " to &minus;" + n0(192949)]},
       {c: ["Other big counties (10)", n0(368015), "13.0%", "D+6.6 to D+13.7",
            "+" + n0(24407) + " to +" + n0(50553)]},
-      {em: 1, c: ["<b>Banked</b>", "<b>" + n0(EV) + "</b>", "<b>100%</b>", "",
-                  "<b>+" + n0(BANK_LO) + " to +" + n0(BANK_HI) + "</b>"]}
+      {c: ["Rural rest (120)", n0(673833), "23.8%", "R+40.8 to R+40.9",
+           "&minus;" + n0(274622) + " to &minus;" + n0(275667)]},
+      {em: 1, c: ["<b>Floor, geography only</b>", "<b>" + n0(EV) + "</b>", "<b>100%</b>",
+                  "", "<b>+" + n0(FLOOR_LO) + " to +" + n0(FLOOR_HI) + "</b>"]}
     ];
     return card("ga-comp", "Section 2 &middot; what the composition is worth",
-      "Bottoms is banked ahead by 95,199 to 106,570 votes",
+      "Atlanta's core has banked her over half a million votes",
       "Not a share, not a shift &mdash; the actual lead sitting in the counted ballots.",
       tbl(["group", "banked ballots", "of banked", "early lean, 2024 / 2018",
            "net D banked"], rows)
-      + '<p class="gainline"><b>Atlanta has banked her roughly a 330,000&ndash;346,000 '
-      + "vote lead. Rural Georgia has banked Jackson about <b>275,000</b> back. She nets "
-      + "<b class='nm'>+" + n0(BANK_LO) + " to +" + n0(BANK_HI) + "</b>, and that is the "
-      + "hole he has to climb out of today.</b></p>"
-      + '<p class="gainline"><b>Why rural does so much damage with so few ballots.</b> '
-      + "673,833 rural votes produce about 275,000 net because they run R+40.9. "
-      + "Atlanta&rsquo;s 1,793,044 produce 346,459 at D+19.3 &mdash; two and a half "
-      + "times the ballots for only a quarter more margin. <b>Rural is 23.8% of the "
-      + "banked vote and carries nearly all of the Republican margin</b>, which is why "
-      + "its turnout mattered more than Atlanta&rsquo;s.</p>"
-      + '<p class="gainline"><b>The two baselines barely disagree, and that is the '
-      + "point.</b> 2024 and 2018 are eight years and two very different electorates "
-      + "apart, and they land 11,371 votes apart on the same ballots &mdash; because "
-      + "Georgia&rsquo;s county geography is stable even when its politics are not.</p>",
+      + '<p class="gainline"><b>The core ten counties are 47.9% of every ballot banked '
+      + "and carry <b class='nm'>+516,860 to +523,588</b> net Democratic votes.</b> The "
+      + "exurban ring, rural Georgia and the mid-size cities claw back about 420,000 to "
+      + "445,000 of it, which is what leaves the geography-only floor near 100,000.</p>"
+      + '<p class="gainline"><b>This card used to bury that.</b> It reported a single '
+      + "&ldquo;Atlanta metro&rdquo; of 29 counties at D+18.4, which averaged DeKalb "
+      + "(D+68.8) and Clayton (D+71.4) together with Cherokee (R+39.5), Forsyth (R+34.0) "
+      + "and Paulding (R+25.2). That average is not a place, and it penalised the core. "
+      + "<b>The ring is now separated from the counties it was dragging down.</b></p>"
+      + '<p class="gainline"><b>The inner suburbs moved, and 2018 cannot see it.</b> '
+      + "Henry went D+17.9 in 2018 to <b>D+31.1</b> in 2024; Douglas D+21.3 to "
+      + "<b>D+32.5</b>. Cherokee and Forsyth both got less Republican, not more. "
+      + "A baseline year freezes all of that.</p>",
       "<b>This card used to show the wrong thing.</b> It compared each group&rsquo;s "
       + "share of tonight&rsquo;s early vote against its share in 2022 and reported the "
       + "difference &mdash; which made Atlanta look like it had contributed +6,813 votes, "
@@ -234,26 +243,31 @@
       {c: ["2022 governor &mdash; Kemp", "R+25.34", "<b>yes</b>"]}
     ];
     return card("ga-bar", "Section 4 &middot; what Jackson needs",
-      "He has to win election day by 7.3 to 8.2 points",
+      "He has to win election day by 7.3 to 14.6 points",
       "Bottoms&rsquo; banked lead, spread across a projected 1.3M election day.",
-      '<div class="gabig">R+' + bar(BANK_LO) + " to R+" + bar(BANK_HI) + "</div>"
-      + '<div class="gasub">the 2024 and 2018 baselines, each applied county by county '
-      + "to tonight&rsquo;s ballots</div>"
+      '<div class="gabig">R+' + bar(FLOOR_LO) + " to R+" + bar(BANK_HI) + "</div>"
+      + '<div class="gasub">R+' + bar(FLOOR_LO) + " to R+" + bar(FLOOR_HI)
+      + " on geography alone, which is a floor; R+" + bar(BANK_LO) + " to R+"
+      + bar(BANK_HI) + " once the measured race shift is counted</div>"
       + tbl(["every Georgia election day since 2014", "margin",
-             "clears R+" + bar(BANK_LO) + " to R+" + bar(BANK_HI) + "?"], rows)
-      + '<p class="gainline"><b>Georgia&rsquo;s 2024 election day ran R+7.34 &mdash; '
-      + "two hundredths of a point above the bottom of the bar.</b> That is the whole "
-      + "race in one number. Repeat 2024&rsquo;s election day and this is a tie; run "
-      + "2018&rsquo;s (R+5.25) and Bottoms holds; run anything resembling 2020 or 2022 "
-      + "and Jackson wins comfortably.</p>",
-      "<b>Where the range comes from, and what is still an assumption.</b> The two ends "
-      + "are 2024 president (R+0.68 early statewide) and 2018 governor (D+1.61 early "
-      + "statewide), each reweighted to tonight&rsquo;s county turnout; both source files "
-      + "tie out to their certified statewide results. <b>What is assumed is that a "
-      + "county&rsquo;s early vote breaks the way it broke in the baseline year</b> "
-      + "&mdash; the method cannot see shifts inside a county, so it is conservative by "
-      + "construction, and the measured composition shift (the Black share of the early "
-      + "electorate rose from 26.34% to 32.38%) points the same way.");
+             "clears R+" + bar(FLOOR_LO) + " to R+" + bar(BANK_HI) + "?"], rows)
+      + '<p class="gainline"><b>Two methods, and they do not agree.</b> On geography '
+      + "alone Jackson needs R+" + bar(FLOOR_LO) + " to R+" + bar(FLOOR_HI)
+      + ", and Georgia&rsquo;s own 2024 election day (R+7.34) sits right on that. "
+      + "Once the measured change in who voted early is counted, he needs <b>R+"
+      + bar(BANK_LO) + " to R+" + bar(BANK_HI) + "</b> &mdash; a bar only 2014, a "
+      + "Kemp-free 2022, the pandemic and Kemp himself have ever cleared.</p>",
+      "<b>Why the second number is the better one.</b> The geography-only figure holds "
+      + "every county&rsquo;s internal margin frozen at a past year, so <b>the one thing "
+      + "that is measurably different about tonight is absent from it</b>: the Black "
+      + "share of Georgia&rsquo;s early electorate rose from 26.34% to 32.38% and the "
+      + "white share fell 5.39 points. Those are counts from the state&rsquo;s own file. "
+      + "The headline range calibrates per-group support so that 2024&rsquo;s "
+      + "composition reproduces 2024&rsquo;s <i>actual</i> early margin of R+0.68, then "
+      + "changes nothing but the composition. <b>What stays assumed is per-group "
+      + "support</b> &mdash; Black-D support of 86% to 92% spans the range, and Georgia "
+      + "publishes who voted, never how. <b>Treat the geography-only number as a floor, "
+      + "not a forecast.</b>");
   }
 
   function turnoutCard() {

@@ -200,8 +200,8 @@
       + "Republicans, but among voters who skipped the 2022 midterm it is 70.3% against "
       + "57.1%. Those are turnout rates, not margins. An electorate this much larger "
       + "than 2022&rsquo;s is drawn from exactly that pool.</li>"
-      + "<li><b>The polls.</b> Five of six final polls have Talarico ahead, averaging "
-      + '<b class="nm">D+4.09</b> across 7,023 interviews. The famous Texas polling misses '
+      + "<li><b>The polls.</b> All four non-partisan final polls have Talarico ahead, "
+      + 'averaging <b class="nm">D+5.03</b> across 5,934 interviews. The famous Texas polling misses '
       + "are a presidential-year pattern; the one midterm available to check, 2022, was "
       + "accurate to half a point.</li>"
       + "<li><b>The composition model.</b> Rebuilding the state county by county from "
@@ -374,7 +374,7 @@
       + "by 2.57 while the rest of the ticket ran R+7.42 — the Senate race was 4.85 "
       + "points friendlier to Democrats than the same voters&rsquo; other choices that "
       + "day. In 2024 Cruz beat Allred by 8.50 against a ticket median of R+16.37, a gap "
-      + "of 7.87. And 2026 is the same shape: the Senate race polls at D+4.09 in a state "
+      + "of 7.87. And 2026 is the same shape: the Senate race polls at D+5.03 in a state "
       + "whose last three statewide cycles averaged R+10.09."
       + "<br><br><b>And the one that doesn&rsquo;t fit.</b> 2020, Cornyn against Hegar: "
       + "R+9.64 against a ticket median of R+9.32, so the Senate race ran 0.32 points "
@@ -744,17 +744,17 @@
     s += "</svg>";
     return card("tx-est", "Section 1 · slide 1 · where every poll lands",
       "Where every poll lands",
-      "Every public poll of this race, its two averages, and the one outside forecast "
-      + "built on them. Nothing of ours is in here \u2014 the regression, the uniform "
+      "Every non-partisan public poll of this race, their sample-weighted average, and the "
+      + "one outside forecast built on them. Nothing of ours is in here \u2014 the regression, the uniform "
       + "swings and the county model each have their own section, and all of them appear "
-      + "together in the summary chart at the top. Five of the six houses have Talarico "
-      + "ahead; the sixth is the only partisan house in the set.",
+      + "together in the summary chart at the top. Trafalgar is not here: it is an R-aligned "
+      + "house, and a partisan poll does not belong in a dataset and then get argued "
+      + "around in a footnote.",
       s,
-      "<b>What the spread is and is not.</b> Six houses across seven points is an "
+      "<b>What the spread is and is not.</b> Four houses across four points is an "
       + "ordinary amount of poll disagreement, not a sign that one of them is broken. The "
-      + "sample-weighted average of all five non-partisan polls is D+4.09; dropping "
-      + "Trafalgar moves it to D+5.03, and the next card is about whether Texas polls "
-      + "have earned that benefit of the doubt."
+      + "sample-weighted average is <b>D+5.03</b> across 5,934 interviews, and the next "
+      + "card is about whether Texas polls have earned that benefit of the doubt."
       + "<br><br><b>Where our own numbers went.</b> They are not here on purpose: this is "
       + "the section about what people say they will do. The county model is section 4, "
       + "the primary regression is section 2 slide 2, and the summary chart at the top "
@@ -1237,7 +1237,7 @@
      are about weighting the poll evidence rather than adding to it. */
   function pollTrustCard() {
     var E = (D.perr || []).map(function (r) {
-      return {c: r.cycle, k: r.kind, p: r.poll, pm: num(r.poll_margin_R),
+      return {c: r.cycle, k: r.kind, race: r.race, p: r.poll, pm: num(r.poll_margin_R),
               am: num(r.actual_margin_R), err: num(r.error)};
     }).filter(function (r) { return r.err != null; });
     var P = (D.pdate || []).map(function (r) {
@@ -1245,13 +1245,19 @@
               m: num(r.margin_R), part: r.partisan === "1", d: num(r.days_to_election)};
     }).filter(function (r) { return r.m != null; }).sort(function (a, b) { return b.d - a.d; });
     if (!E.length && !P.length) return "";
-    var errTbl = E.length ? ('<div class="scroll"><table class="txtbl"><thead><tr><th>Cycle</th><th>Type</th>'
-      + "<th>Final poll</th><th>Actual</th><th>Poll was</th></tr></thead><tbody>"
+    var errTbl = E.length ? ('<div class="scroll"><table class="txtbl"><thead><tr>'
+      + "<th>Texas race</th><th>Type</th><th>Final poll</th><th>Actual</th>"
+      + "<th>The poll was</th></tr></thead><tbody>"
       + E.map(function (r) {
+          // positive error = the poll was friendlier to Democrats than the result.
+          // 2018 is negative and the old table would have printed it as "too D".
+          var tooD = r.err > 0;
           return "<tr" + (r.k === "midterm" ? ' class="em"' : "") + "><td>" + esc(r.c)
+            + '<br><span class="dim">' + esc(r.race || "") + "</span>"
             + '</td><td class="dim">' + esc(r.k) + '</td><td class="num">' + mgn(r.pm, 1)
-            + '</td><td class="num">' + mgn(r.am, 1) + '</td><td class="num rep">'
-            + r.err.toFixed(1) + " too D</td></tr>";
+            + '</td><td class="num">' + mgn(r.am, 1) + '</td><td class="num '
+            + (tooD ? "rep" : "dem") + '">' + Math.abs(r.err).toFixed(2)
+            + (tooD ? " too D" : " too R") + "</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
     var dateTbl = P.length ? ('<div class="scroll"><table class="txtbl" style="margin-top:14px"><thead><tr>'
       + "<th>Pollster</th><th>Field dates</th><th>Sample</th><th>Margin</th>"
@@ -1269,25 +1275,33 @@
       + "wrong final Texas polls have been before, and whether these five are drifting.",
       errTbl + dateTbl,
       "<b>The famous Texas polling miss is a PRESIDENTIAL-year pattern, not a Texas "
-      + "one.</b> Final polls understated Republicans by 4.5 points in 2020 and 4.5 again "
-      + "in 2024 \u2014 both with Trump on the ballot. In 2022, the one midterm available "
-      + "to check, the final average missed the margin by <b>half a point</b>. 2026 is a "
-      + "midterm with no Trump on the ballot. If it behaves like 2022, today\u2019s polls "
-      + "are roughly right and NYT/Siena\u2019s D+7 means D+6.5. If it behaves like the "
-      + "Trump years, subtract four and a half and D+7 becomes D+2.5. That single choice "
-      + "is worth more than every demographic assumption on this tab combined."
-      + "<br><br><b>On the drift: it depends entirely on Trafalgar.</b> Across all five "
-      + "polls the trend runs 0.7 points per day toward Paxton. Drop the one partisan "
-      + "house and it reverses to 1.0 points per day toward Talarico, r = \u22120.71. "
-      + "The only poll showing Paxton ahead is also the latest-finishing one, so "
-      + "\u201clate movement\u201d and \u201chouse effect\u201d are the same data point "
-      + "and five polls cannot separate them."
-      + "<br><br><b>And these are not five independent readings.</b> The estimates card "
-      + "lists fifteen numbers, but the poll averages are built from these same five "
-      + "polls, and Morris\u2019s forecast is a poll-of-polls built on them again. Counted "
-      + "honestly there are five polls, three models and two priors \u2014 not fifteen "
-      + "estimates \u2014 and NYT/Siena carries more weight than its single row suggests, "
-      + "being the largest-sample live-caller in the set.");
+      + "one.</b> Every one of the four presidential-year races runs the same way, and "
+      + "none by less than three points: 2020 President 4.28 too Democratic, 2020 Senate "
+      + "3.14, 2024 Senate 4.10, 2024 President 4.68 \u2014 a mean of <b>4.05</b>, four "
+      + "times out of four, every one with Trump on the ballot."
+      + "<br><br><b>The two midterms do not.</b> 2022 missed by <b>half a point</b>. And "
+      + "2018 \u2014 the closest thing on this list to 2026, a Democrat running a serious "
+      + "Senate race in a midterm \u2014 missed by <b>4.23 in the opposite direction</b>: "
+      + "the final RCP average had Cruz by 6.8 and he won by 2.57. The midterm mean is "
+      + "\u22121.87, which is to say there is no midterm pattern at all, only two "
+      + "observations pointing opposite ways."
+      + "<br><br><b>What that does to today\u2019s D+5.03.</b> If 2026 behaves like the "
+      + "presidential years, subtract four and it is D+1. If it behaves like 2022 it is "
+      + "D+4.5. If it behaves like 2018 it is D+9.3. That single choice is worth more "
+      + "than every demographic assumption on this tab combined \u2014 and the honest "
+      + "answer is that the midterm evidence is two data points and cannot settle it. "
+      + "What it does settle is that the reflex \u201cTexas polls always overstate "
+      + "Democrats\u201d is a claim about presidential years."
+      + "<br><br><b>What the four non-partisan polls show over time.</b> They run about "
+      + "1.0 points per day toward Talarico, r = \u22120.71 \u2014 NYT/Siena and "
+      + "AtlasIntel, the two that finished last, are also the two best for him. Four polls "
+      + "cannot prove late movement, and the houses differ in method as well as in date, "
+      + "so read it as consistent with a late drift rather than as evidence of one."
+      + "<br><br><b>And they are not four independent readings either.</b> The average is "
+      + "built from these same four polls and Morris\u2019s forecast is a poll-of-polls "
+      + "built on them again, so the polls card\u2019s six rows are four readings. "
+      + "NYT/Siena carries more weight than its single row suggests, being the "
+      + "largest-sample live-caller in the set.");
   }
 
   function exitCard() {
@@ -2402,8 +2416,8 @@
 
         + framing("tx-frame-polls", "Section 1 \u00b7 what the polls tell us",
             "The best guess anyone has today",
-            ["Five final polls put Talarico ahead by between one point and seven, with a sixth \u2014 the only partisan house in the set \u2014 putting Paxton up one. That is where the public conversation sits, so it is where this starts.",
-             "But they are not six independent readings, and Texas polls have a record worth knowing before leaning on them: the famous misses are a presidential-year pattern, and the one midterm available to check was accurate to half a point."])
+            ["All four non-partisan final polls put Talarico ahead, by between three points and seven, averaging <b>D+5.03</b> across 5,934 interviews. That is where the public conversation sits, so it is where this starts. Trafalgar, an R-aligned house and the only poll showing Paxton ahead, is not in this dataset at all.",
+             "But they are not four independent readings, and Texas polls have a record worth knowing before leaning on them: the famous misses are a presidential-year pattern, and the two midterms available to check missed by half a point and by four in the OTHER direction."])
         + estimatesCard()
         + pollTrustCard()
         + crosstabCard()

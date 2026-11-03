@@ -2620,11 +2620,12 @@
         + gridCard("tx-blocs", "Section 4 · slide 5 · the same question by bloc",
             "What it takes, by voting bloc",
             "Independents against the Republican bloc-size edge, with Democrats holding "
-            + "98% and crossover fixed at 2%. <b>Independents are 30% of the electorate, "
-            + "from AtlasIntel</b> \u2014 solving its published bloc breaks to return its "
-            + "own D+6 topline gives 29% Democrat, 30% independent, 41% Republican. Texas "
-            + "has no party registration, so a poll is the only place a bloc size can come "
-            + "from.",
+            + "98% and crossover fixed at 2%. <b>Independents are 36% of the electorate</b>, "
+            + "the figure the 2024 Texas exit poll measured rather than one a poll "
+            + "self-reported. Texas has no party registration, so there is no other place a "
+            + "bloc size can come from. The Republican edge runs from even to R+12 in "
+            + "two-point steps \u2014 the old grid ran from D+4 in fours, and a Democratic "
+            + "bloc advantage in Texas is not a state anyone claims it is in.",
             D.blocs, "ind_break_D", "r_bloc_edge", "tx_margin_R",
             "Independents breaking Democratic \u2192", "\u2193 Republican size edge",
             "<b>The independent share is a lever-length assumption, not a level one.</b> "

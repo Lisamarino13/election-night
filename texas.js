@@ -1116,7 +1116,7 @@
       }
     });
     s += "</svg>";
-    return card("tx-base", "Section 1 · slide 6 · why the methods disagree",
+    return card("tx-base", "Section 1 · slide 5 · why the methods disagree",
       "Where Texas lands depends on which past race you start from",
       "<b>How to read each row.</b> The hollow dot is what Texas actually did in that "
       + "race. The arrow adds the national swing between <i>that</i> year and this one. "
@@ -1135,30 +1135,87 @@
   }
 
   /* ================================================== 7. the Paxton drag */
+  /* The Paxton-Trump effect. Two things are inside Talarico's lead and they come from
+     opposite places, which is why the card exists: the ENVIRONMENT, which is national and
+     is Trump, and the CANDIDATE, which is local and is Paxton. The governor's race
+     separates them. Abbott against Hinojosa is a generic Texas Republican against a
+     generic Texas Democrat on the same questionnaires - and it is D+0.11, dead even. Of
+     Talarico's 5.03 points, 4.92 is the gap to his own ticket.
+
+     It also carries the haircut table, because this is the only part of the poll evidence
+     the three-to-four point miss cannot reach. */
   function paxtonCard() {
-    var rows = (D.pax || []).map(function (r) {
-      return {p: r.pollster, n: num(r.n), sen: num(r.senate_d_margin),
-              gov: num(r.governor_d_margin), drag: num(r.paxton_drag)};
-    }).filter(function (r) { return r.drag != null; });
-    if (!rows.length) return "";
-    var mean = rows.reduce(function (a, r) { return a + r.drag; }, 0) / rows.length;
-    var body = rows.map(function (r) {
-      return "<tr><td>" + esc(r.p) + (r.n ? ' <span class="dim">n=' + n0(r.n) + "</span>" : "")
-        + '</td><td class="num">' + (r.sen > 0 ? "D+" : "R+") + Math.abs(r.sen).toFixed(1)
-        + '</td><td class="num">' + (r.gov > 0 ? "D+" : "R+") + Math.abs(r.gov).toFixed(1)
-        + '</td><td class="num dem">+' + r.drag.toFixed(2) + "</td></tr>";
-    }).join("");
-    return card("tx-paxton", "Section 1 · slide 5 · the part that is not the electorate",
-      "Senate against governor, same pollster",
-      "Four pollsters asked about both races in the same field period with the same "
-      + "sample, so house effects cancel in the difference. What is left is the candidate.",
-      '<div class="scroll"><table class="txtbl"><thead><tr><th>Pollster</th><th>Senate</th><th>Governor</th>'
-      + "<th>Paxton drag</th></tr></thead><tbody>" + body
-      + '<tr class="em"><td>Mean</td><td class="num">—</td><td class="num">—</td>'
-      + '<td class="num dem">+' + mean.toFixed(2) + "</td></tr></tbody></table></div>",
-      "This is the part of the Democratic case that is not about the electorate at all, "
-      + "which also means none of it transfers to the governor&rsquo;s race or down-ballot.");
+    var SC = senateCharts();
+    var SEN = -5.03, GOV = -0.11;
+    var CUTS = [["No haircut — the polls as published", 0],
+                ["2022-like, the friendliest midterm miss", 0.50],
+                ["All six races, mean", 2.08],
+                ["The five that missed toward Democrats, mean", 3.34],
+                ["Presidential years, 4-for-4 mean", 4.05]];
+    var hairTbl = '<div class="scroll"><table class="txtbl" style="margin-top:14px">'
+      + "<thead><tr><th>Haircut applied to BOTH races</th><th>Paxton / Talarico</th>"
+      + "<th>Abbott / Hinojosa</th><th>Talarico runs ahead by</th></tr></thead><tbody>"
+      + CUTS.map(function (c) {
+          var sv = SEN + c[1], gv = GOV + c[1];
+          return "<tr" + (c[1] === 4.05 ? ' class="em"' : "") + "><td>" + esc(c[0])
+            + '</td><td class="num ' + (sv < 0 ? "dem" : "rep") + '">' + mgn(sv)
+            + '</td><td class="num ' + (gv < 0 ? "dem" : "rep") + '">' + mgn(gv)
+            + '</td><td class="num"><b>' + (GOV - SEN).toFixed(2) + "</b></td></tr>";
+        }).join("")
+      + "</tbody></table></div>";
+
+    return card("tx-paxton", "Section 1 · slide 3 · the Paxton–Trump effect",
+      "Almost all of Talarico’s lead is Paxton",
+      "<b>The same four polls asked about the governor’s race too</b> — same "
+      + "questionnaires, same 5,934 respondents, same field period. Abbott against "
+      + "Hinojosa is a generic Texas Republican against a generic Texas Democrat, so it "
+      + "measures the national environment landing in Texas. Paxton against Talarico "
+      + "measures that plus the two candidates. The difference between them is the part "
+      + "that is about the people on the ballot and nothing else.",
+      SC.sengov + hairTbl + SC.ticket,
+      "<b>The decomposition.</b> Abbott against Hinojosa is <b>D+0.11</b> — dead "
+      + "even. Paxton against Talarico is <b>D+5.03</b>. So of Talarico’s five "
+      + "points, <b>4.92 of them are the gap to his own ticket</b>, and the Trump "
+      + "environment in Texas, measured by the race that has no Paxton in it, is a tie. "
+      + "Talarico runs ahead of Hinojosa in all four polls — YouGov +5.0, Kreate "
+      + "+5.0, NYT/Siena +6.0, AtlasIntel +4.0 — and in two of them Abbott leads "
+      + "while Talarico leads, the same respondents splitting their ticket on the same "
+      + "page."
+      + "<br><br><b>The polling miss cancels in that difference.</b> A systematic error "
+      + "is a property of who answers a poll, not of which race they are asked about, so "
+      + "it hits both questions by the same amount and subtracts out. The table above is "
+      + "the proof: apply the full presidential-year haircut and the Senate race falls "
+      + "from D+5.03 to D+0.98 and the Governor’s from D+0.11 to R+3.94 — but the "
+      + "gap between them is <b>4.92 on every single row</b>. It is the one number on "
+      + "this tab that a polling error cannot touch."
+      + "<br><br><b>And it is bigger than either thing that could undo it.</b> The "
+      + "candidate effect is 4.92. The polling miss is 3.34 to 4.05. The entire "
+      + "election-day tie band — everything the un-banked quarter of the vote can do "
+      + "to the result — is 2.27."
+      + "<br><br><b>Texas has done this before, which is the fourth figure.</b> In 2018 "
+      + "Cruz beat O’Rourke by 2.57 while the rest of the statewide ticket ran R+7.42 "
+      + "— the Senate race was <b>4.85</b> points friendlier to Democrats than the "
+      + "same voters’ other choices that day. In 2024 Cruz beat Allred by 8.50 against "
+      + "a ticket median of R+16.37, a gap of <b>7.87</b>. 2020 is the exception, 0.32 "
+      + "the other way. Three of four — and 2026’s 4.92 lands within a tenth of a "
+      + "point of 2018’s 4.85."
+      + "<br><br><b>What none of this says.</b> The gap fixes where Talarico sits "
+      + "relative to his ticket, not where the ticket sits. He can run 4.92 ahead of "
+      + "Hinojosa and both lose — roughly what the full haircut describes, D+0.98 and "
+      + "R+3.94. <b>The gap is the robust number and the level is the fragile one</b>, "
+      + "which is the opposite of how this race is usually discussed."
+      + "<hr style=\"border:none;border-top:1px solid var(--line);margin:14px 0\">"
+      + "<br><br><b>And where the Trump half shows up.</b> The environment is not "
+      + "nothing — it is what moved Texas from R+8.50 in the 2024 Senate race to a "
+      + "tied governor’s race, which is a swing of about eight points. It is simply "
+      + "not <i>extra</i>: it is already inside the D+0.11, and Paxton is what sits on "
+      + "top of it. The four conditions it rests on are in Section 2 slide 3."
+      + "<br><br><b>What this costs the rest of the ballot.</b> None of the 4.92 "
+      + "transfers. Hinojosa does not get it, and neither does anyone down-ballot. On "
+      + "these polls the governor’s race is a coin flip and the Senate race is not, "
+      + "for reasons that have nothing to do with the electorate.");
   }
+
 
   /* ========================================== 8. the two sensitivity grids */
   function gridCard(id, kicker, title, hint, rows, xKey, yKey, vKey, xLab, yLab, note, yFmt) {
@@ -1361,16 +1418,13 @@
         }).join("")
       + "</tbody></table></div>";
 
-    return card("tx-polltrust", "Section 1 · slide 2 · the miss, and why it does not decide this",
-      "The polls are wrong by three to four points \u2014 and it does not matter",
-      "<b>One argument, in four figures.</b> First, how wrong final Texas polls have been "
-      + "before: six races, one basis, and a miss that is large and one-directional. "
-      + "Second, that miss applied to today\u2019s D+5.03, which very nearly erases it. "
-      + "Third, the same four polls on the Governor\u2019s race \u2014 where Talarico "
-      + "runs ahead of Hinojosa by 4.92, and where the <i>haircut cancels</i>, because a "
-      + "systematic error hits both races on one questionnaire equally. Fourth, that the "
-      + "same ticket-splitting shows up in Texas results going back to 2018.",
-      errTbl + hairTbl + SC.sengov + SC.ticket + dateTbl,
+    return card("tx-polltrust", "Section 1 · slide 2 · how much the polls are worth",
+      "The polls are wrong by three to four points",
+      "<b>Two questions about how much to trust the polls above.</b> How wrong final Texas polls have been "
+      + "before \u2014 six races, one basis, and a miss that is large and "
+      + "one-directional \u2014 and whether these four are drifting. What that miss does NOT "
+      + "touch is the next slide.",
+      errTbl + dateTbl,
       "<b>THE TAKEAWAY: Texas polls overstate Democrats, and by three to four points.</b> "
       + "Five of these six races missed in the same direction, and the mean of those five "
       + "is <b>3.34 points too Democratic</b>. Narrow it to the four presidential years "
@@ -1396,39 +1450,6 @@
       + "midterms it has two observations pointing opposite ways, 0.50 one direction and "
       + "4.23 the other. 2026 is a midterm with no Trump on the ballot. The rule says "
       + "D+1; the one comparable race says D+9; there is no third midterm to break it."
-      + "<hr style=\"border:none;border-top:1px solid var(--line);margin:14px 0\">"
-      + "<b>AND NOW THE PART THAT SURVIVES ALL OF IT.</b> Everything above argues about "
-      + "a <i>level</i>, and the level is fragile: four points of assumed error move it "
-      + "from D+5 to D+1. But the same four polls asked a second question. Abbott against "
-      + "Hinojosa sits on the same questionnaires, answered by the same 5,934 people, and "
-      + "Talarico runs ahead of Hinojosa in every one — YouGov +5.0, Kreate +5.0, "
-      + "NYT/Siena +6.0, AtlasIntel +4.0, sample-weighted <b>+4.92</b>. In two of the "
-      + "four, Abbott <i>leads</i> while Talarico leads: the same respondents, splitting "
-      + "their ticket on the same page."
-      + "<br><br><b>The polling miss cancels in that difference.</b> A systematic error "
-      + "is a property of who answers a poll, not of which race they are asked about, so "
-      + "it hits both questions by the same amount and subtracts out. The table above is "
-      + "the proof: apply the full presidential-year haircut and the Senate race falls "
-      + "from D+5.03 to D+0.98 and the Governor’s from D+0.11 to R+3.94 — but the "
-      + "gap between them is <b>4.92 on every single row</b>. It is the one number on "
-      + "this tab that a polling error cannot touch."
-      + "<br><br><b>And it is bigger than either thing that could undo it.</b> The "
-      + "candidate effect is 4.92. The polling miss is 3.34 to 4.05. The entire "
-      + "election-day tie band — everything the un-banked quarter of the vote can do "
-      + "to the result — is 2.27."
-      + "<br><br><b>Texas has done this before, which is the fourth figure.</b> In 2018 "
-      + "Cruz beat O’Rourke by 2.57 while the rest of the statewide ticket ran R+7.42 "
-      + "— the Senate race was <b>4.85</b> points friendlier to Democrats than the "
-      + "same voters’ other choices that day. In 2024 Cruz beat Allred by 8.50 against "
-      + "a ticket median of R+16.37, a gap of <b>7.87</b>. 2020 is the exception, 0.32 "
-      + "the other way. Three of four — and 2026’s 4.92 lands within a tenth of a "
-      + "point of 2018’s 4.85."
-      + "<br><br><b>What none of this says.</b> The gap fixes where Talarico sits "
-      + "relative to his ticket, not where the ticket sits. He can run 4.92 ahead of "
-      + "Hinojosa and both lose — roughly what the full haircut describes, D+0.98 and "
-      + "R+3.94. <b>The gap is the robust number and the level is the fragile one</b>, "
-      + "which is the opposite of how this race is usually discussed."
-      + "<hr style=\"border:none;border-top:1px solid var(--line);margin:14px 0\">"
       + "<br><br><b>What the four non-partisan polls show over time.</b> They run about "
       + "1.0 points per day toward Talarico, r = \u22120.71 \u2014 NYT/Siena and "
       + "AtlasIntel, the two that finished last, are also the two best for him. Four polls "
@@ -1441,62 +1462,6 @@
       + "largest-sample live-caller in the set.");
   }
 
-  function exitCard() {
-    var E = (D.exit || []).map(function (r) {
-      return {c: r.category, g: r.group, t: num(r.trump), h: num(r.harris),
-              s: num(r.share_of_electorate), m: num(r.margin_R)};
-    }).filter(function (r) { return r.m != null; });
-    if (!E.length) return "";
-    var W = 720, H2 = 44 + E.length * 23, L = 150, R2 = 104, T = 32;
-    var lo = -95, hi = 95;
-    var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R2); };
-    var s2 = svg(W, H2, "2024 Texas exit poll by group");
-    s2 += line(xs(0), T - 10, xs(0), H2 - 14, "zl");
-    s2 += txt(xs(0), T - 16, "even", "tk", "middle");
-    s2 += txt(L, T - 16, "Harris", "lgd") + txt(W - R2, T - 16, "Trump", "lgd", "end");
-    var cur = null;
-    E.forEach(function (r, i) {
-      var y = T + 6 + i * 23;
-      if (r.c !== cur) { cur = r.c; s2 += line(8, y - 12, W - 8, y - 12, "gl"); }
-      s2 += txt(L - 10, y + 4, r.g, "lb", "end");
-      s2 += rect(Math.min(xs(0), xs(r.m)), y - 5, Math.abs(xs(r.m) - xs(0)), 11,
-                 sideCol(r.m), ' rx="2" opacity="0.85"');
-      s2 += txt(W - R2 + 8, y + 4, mgn(r.m, 0) + "   " + r.s + "% of voters", "tk");
-    });
-    s2 += "</svg>";
-    var lat = E.filter(function (r) { return r.g === "Latino"; })[0];
-    var ind = E.filter(function (r) { return r.g === "Independents"; })[0];
-    var lm = E.filter(function (r) { return r.g === "Latino men"; })[0];
-    var lw = E.filter(function (r) { return r.g === "Latina women"; })[0];
-    return card("tx-exit", "Section 1 · slide 4 · the 2024 baseline, measured",
-      "What the 2024 Texas exit poll actually found",
-      "<b>Source: the 2024 Texas presidential exit poll.</b> Every assumption on this tab "
-      + "is a claim about how some group moves from 2024. This is the only measurement of "
-      + "where those same groups actually <i>were</i> in 2024, in this state, in a race "
-      + "whose answer is known. Bars are the margin; the figure beside each is that "
-      + "group&rsquo;s share of the electorate.",
-      s2,
-      "<b>It contradicts the model\u2019s Hispanic starting point.</b> The exit poll has "
-      + "Latinos going Trump " + lat.t + "\u2013" + lat.h + ", <b>" + mgn(lat.m, 0)
-      + "</b>, at " + lat.s + "% of the electorate. The county model\u2019s displayed 2024 "
-      + "Hispanic baseline is D+17.85, read off precincts that are 90%+ Hispanic. Those "
-      + "two cannot both describe the same voters, and they are nearly 28 points apart. "
-      + "Neither is authoritative: 90%-Hispanic precincts capture only about a sixth of "
-      + "Texas Hispanics and skew to the border and El Paso, while exit polls are the "
-      + "least reliable instrument there is for Latino subsamples. But if the exit poll is "
-      + "nearer the truth, the model is starting the largest swing group almost 28 points "
-      + "too far left."
-      + "<br><br><b>And the gender split inside it is larger than the group gap.</b> Latino "
-      + "men went " + mgn(lm.m, 0) + " while Latina women went " + mgn(lw.m, 0)
-      + " \u2014 47 points apart, in the same ethnicity, in the same election. Any single "
-      + "Hispanic number on this tab is averaging across that."
-      + "<br><br><b>It also repairs the bloc grid.</b> Independents were <b>" + ind.s
-      + "% of the Texas electorate</b> and split " + ind.t + "\u2013" + ind.h + ", "
-      + mgn(ind.m, 0) + ". The grid in Section 5 had been built on 30% from a poll\u2019s "
-      + "self-identification; it now uses this measured 36%, which lengthens the lever "
-      + "again \u2014 a ten-point move among independents is worth 3.6 points of statewide "
-      + "margin, not 3.0.");
-  }
 
   function crosstabCard() {
     /* Eighteen rows in one undifferentiated stack was unreadable, and the right-hand
@@ -1504,7 +1469,7 @@
        voted in 2024, party, where they live - with each poll's number in its own column
        and a phone layout that puts the label on its own line instead of in a gutter. */
     var R = (D.xtab || []).map(function (r) {
-      return {grp: r.group || "", g: r.bloc,
+      return {grp: r.group || "", g: r.bloc, sh: num(r.share_pct),
               ym: r.yougov_margin_R === "" ? null : num(r.yougov_margin_R),
               am: num(r.atlas_margin_R), ad: num(r.atlas_d), ar: num(r.atlas_r)};
     }).filter(function (r) { return r.am != null; });
@@ -1517,7 +1482,7 @@
     });
 
     var wide = !NARROW;
-    var W = wide ? 760 : 360, L = wide ? 178 : 8, RM = wide ? 128 : 74, T = 58;
+    var W = wide ? 760 : 360, L = wide ? 236 : 8, RM = wide ? 128 : 74, T = 58;
     var ROW = wide ? 25 : 34, HDR = wide ? 26 : 24, GAP = wide ? 8 : 10;
     var H2 = T + groups.reduce(function (a2, f) {
       return a2 + (f.name ? HDR : 4) + f.rows.length * ROW + GAP;
@@ -1539,7 +1504,8 @@
        + txt((wide ? L : 8) + 221, 16,
              "AtlasIntel · 1,678 · 28 Oct–1 Nov", "lgd");
     if (wide) {
-      s2 += txt(W - RM + 10, 16, "YouGov", "lgd") + txt(W - 6, 16, "Atlas", "lgd", "end");
+      s2 += txt(L - 12, 16, "% of voters", "lgd", "end")
+         + txt(W - RM + 10, 16, "YouGov", "lgd") + txt(W - 6, 16, "Atlas", "lgd", "end");
     }
     var y = T;
     groups.forEach(function (f) {
@@ -1549,8 +1515,18 @@
       } else { y += 4; }
       f.rows.forEach(function (r) {
         var cy = y + (wide ? 10 : 20);
-        if (wide) s2 += txt(L - 12, cy + 4, r.g, r.g === "Total" ? "lbb" : "lb", "end");
-        else s2 += txt(8, y + 9, r.g, r.g === "Total" ? "lbb" : "lb");
+        // a margin with no idea how many people it covers says nothing: D+88 among a
+        // group that is 2% of voters and D+88 among a group that is 20% are different
+        // facts. The share goes next to the label, and is blank where none is published.
+        var shTxt = r.sh != null ? r.sh + "%" : "\u2014";
+        if (wide) {
+          s2 += txt(L - 56, cy + 4, r.g, r.g === "Total" ? "lbb" : "lb", "end")
+             + '<text x="' + (L - 12) + '" y="' + (cy + 4) + '" text-anchor="end" '
+             + 'class="' + (r.sh != null ? "vl" : "sub") + '">' + shTxt + "</text>";
+        } else {
+          s2 += txt(8, y + 9, r.g + (r.sh != null ? "  \u00b7  " + r.sh + "% of voters" : ""),
+                    r.g === "Total" ? "lbb" : "lb");
+        }
         if (r.ym != null) {
           s2 += line(xs(r.ym), cy, xs(r.am), cy, "cn")
              + '<circle cx="' + xs(r.ym) + '" cy="' + cy + '" r="4.5" fill="var(--card,#fff)" '
@@ -1576,7 +1552,7 @@
     var nv = R.filter(function (r) { return /not vote/i.test(r.g); })[0];
     var hisp = R.filter(function (r) { return r.g === "Hispanic"; })[0];
     var twoWay = ind ? (ind.ad / (ind.ad + ind.ar) * 100) : null;
-    return card("tx-xtab", "Section 1 · slide 3 · what the crosstabs say",
+    return card("tx-xtab", "Section 1 · slide 4 · what the crosstabs say",
       "The two final polls, group by group",
       "<b>Sources: the released YouGov and AtlasIntel toppers.</b> Hollow dot is YouGov "
       + "(2,141 likely voters, 26\u201329 October), filled dot is AtlasIntel (1,678, "
@@ -2561,9 +2537,8 @@
              "But they are not four independent readings, and Texas polls have a record worth knowing before leaning on them: the famous misses are a presidential-year pattern, and the two midterms available to check missed by half a point and by four in the OTHER direction."])
         + estimatesCard()
         + pollTrustCard()
-        + crosstabCard()
-        + exitCard()
         + paxtonCard()
+        + crosstabCard()
         + baselineCard()
 
         + framing("tx-frame-primary", "Section 2 \u00b7 what the 2026 data says",

@@ -825,6 +825,66 @@
   /* The two final polls' own crosstabs, read off the released PDFs. This is the only
      place on the tab where two independent instruments measure the SAME groups, so the
      places they agree and disagree are worth more than either topline. */
+  /* The 2024 Texas exit poll. It is the only measurement on this tab of the SAME
+     groups the model reasons about, in the SAME state, in a race whose answer is known -
+     which makes it the right baseline to test the model's starting points against. */
+  function exitCard() {
+    var E = (D.exit || []).map(function (r) {
+      return {c: r.category, g: r.group, t: num(r.trump), h: num(r.harris),
+              s: num(r.share_of_electorate), m: num(r.margin_R)};
+    }).filter(function (r) { return r.m != null; });
+    if (!E.length) return "";
+    var W = 720, H2 = 44 + E.length * 23, L = 150, R2 = 104, T = 32;
+    var lo = -95, hi = 95;
+    var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R2); };
+    var s2 = svg(W, H2, "2024 Texas exit poll by group");
+    s2 += line(xs(0), T - 10, xs(0), H2 - 14, "zl");
+    s2 += txt(xs(0), T - 16, "even", "tk", "middle");
+    s2 += txt(L, T - 16, "Harris", "lgd") + txt(W - R2, T - 16, "Trump", "lgd", "end");
+    var cur = null;
+    E.forEach(function (r, i) {
+      var y = T + 6 + i * 23;
+      if (r.c !== cur) { cur = r.c; s2 += line(8, y - 12, W - 8, y - 12, "gl"); }
+      s2 += txt(L - 10, y + 4, r.g, "lb", "end");
+      s2 += rect(Math.min(xs(0), xs(r.m)), y - 5, Math.abs(xs(r.m) - xs(0)), 11,
+                 sideCol(r.m), ' rx="2" opacity="0.85"');
+      s2 += txt(W - R2 + 8, y + 4, mgn(r.m, 0) + "   " + r.s + "% of voters", "tk");
+    });
+    s2 += "</svg>";
+    var lat = E.filter(function (r) { return r.g === "Latino"; })[0];
+    var ind = E.filter(function (r) { return r.g === "Independents"; })[0];
+    var lm = E.filter(function (r) { return r.g === "Latino men"; })[0];
+    var lw = E.filter(function (r) { return r.g === "Latina women"; })[0];
+    return card("tx-exit", "Chapter 3 \u00b7 slide 6 \u00b7 the 2024 baseline, measured",
+      "What the 2024 Texas exit poll actually found",
+      "<b>Source: the 2024 Texas presidential exit poll.</b> Every assumption on this tab "
+      + "is a claim about how some group moves from 2024. This is the only measurement of "
+      + "where those same groups actually <i>were</i> in 2024, in this state, in a race "
+      + "whose answer is known. Bars are the margin; the figure beside each is that "
+      + "group&rsquo;s share of the electorate.",
+      s2,
+      "<b>It contradicts the model\u2019s Hispanic starting point.</b> The exit poll has "
+      + "Latinos going Trump " + lat.t + "\u2013" + lat.h + ", <b>" + mgn(lat.m, 0)
+      + "</b>, at " + lat.s + "% of the electorate. The county model\u2019s displayed 2024 "
+      + "Hispanic baseline is D+17.85, read off precincts that are 90%+ Hispanic. Those "
+      + "two cannot both describe the same voters, and they are nearly 28 points apart. "
+      + "Neither is authoritative: 90%-Hispanic precincts capture only about a sixth of "
+      + "Texas Hispanics and skew to the border and El Paso, while exit polls are the "
+      + "least reliable instrument there is for Latino subsamples. But if the exit poll is "
+      + "nearer the truth, the model is starting the largest swing group almost 28 points "
+      + "too far left."
+      + "<br><br><b>And the gender split inside it is larger than the group gap.</b> Latino "
+      + "men went " + mgn(lm.m, 0) + " while Latina women went " + mgn(lw.m, 0)
+      + " \u2014 47 points apart, in the same ethnicity, in the same election. Any single "
+      + "Hispanic number on this tab is averaging across that."
+      + "<br><br><b>It also repairs the bloc grid.</b> Independents were <b>" + ind.s
+      + "% of the Texas electorate</b> and split " + ind.t + "\u2013" + ind.h + ", "
+      + mgn(ind.m, 0) + ". The grid in Section 5 had been built on 30% from a poll\u2019s "
+      + "self-identification; it now uses this measured 36%, which lengthens the lever "
+      + "again \u2014 a ten-point move among independents is worth 3.6 points of statewide "
+      + "margin, not 3.0.");
+  }
+
   function crosstabCard() {
     var R = (D.xtab || []).map(function (r) {
       return {g: r.group, ym: r.yougov_margin_R === "" ? null : num(r.yougov_margin_R),
@@ -1391,7 +1451,7 @@
     var want = [["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["meng", "tx_morris_engagement.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["meng", "tx_morris_engagement.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {
@@ -1432,6 +1492,7 @@
         + baselineCard()
         + tarrantCard()
         + crosstabCard()
+        + exitCard()
         // 4. the group doing the moving
         + framing("tx-frame-hisp", "Chapter 4",
             "The one question nobody has measured",

@@ -2284,157 +2284,6 @@
          + "D+32.5." : ""));
   }
 
-  /* The Tarrant sensitivity. Both parties' primary voters are held at 95% loyalty - the
-     file's own default and the thing the question says to hold fixed - and the only
-     moving part is how the Neither bloc breaks. Two lines, because the two races on this
-     ballot are not in the same place: the governor's race is the camps as they are, and
-     the Senate race is that plus the 4.92 Paxton effect.
-
-     The assumption worth naming: 4.92 is a STATEWIDE poll figure applied to one county.
-     Tarrant is close to the state on composition, which is part of why it is the county
-     worth watching, but this still assumes the candidate effect lands evenly. */
-  function tarrantSensCard() {
-    var R = (D.tsens || []).map(function (r) {
-      return {x: num(r.neither_break_D), g: num(r.governor_margin_R),
-              s: num(r.senate_margin_R), w: r.carries};
-    }).filter(function (r) { return r.g != null; });
-    if (!R.length) return "";
-    var wide = !NARROW;
-    var W = wide ? 760 : 360, L = wide ? 58 : 40, R2 = wide ? 120 : 16;
-    var T = 42, Bm = 52, H = wide ? 340 : 300;
-    var lo = R[0].x, hi = R[R.length - 1].x;
-    var vlo = -16, vhi = 10;
-    var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R2); };
-    var ys = function (v) { return T + (v - vlo) / (vhi - vlo) * (H - T - Bm); };
-    var s2 = svg(W, H, "Tarrant County: what the Neither bloc has to do to carry each race");
-    [-15, -10, -5, 0, 5, 10].forEach(function (v) {
-      s2 += line(L, ys(v), W - R2, ys(v), v === 0 ? "zl" : "gl")
-         + txt(L - 6, ys(v) + 4, v === 0 ? "even" : mgn(v, 0), "tk", "end");
-    });
-    for (var t = lo; t <= hi; t += 4) {
-      s2 += txt(xs(t), H - Bm + 18, t + "%", "tk", "middle");
-    }
-    s2 += txt(L, H - 14, "how the Neither bloc breaks Democratic →", "lgd");
-    s2 += txt(0, T - 16, "Tarrant margin", "lgd");
-    // Both candidates are Democrats, so neither line can be red: drawing Hinojosa in
-    // the Republican colour said she was the Republican. Two series colours that are
-    // not party colours, legible on both grounds.
-    var TAL = "var(--tal,#6b4fbb)", HIN = "var(--hin,#0f8f8f)";
-    var path = function (key, col) {
-      return '<polyline points="' + R.map(function (r) {
-        return xs(r.x) + "," + ys(r[key]);
-      }).join(" ") + '" fill="none" stroke="' + col + '" stroke-width="2.5" '
-        + 'opacity="0.9"/>';
-    };
-    s2 += path("g", HIN) + path("s", TAL);
-    // where each line crosses even
-    [[41.5, TAL, "Talarico carries Tarrant"], [47.2, HIN, "Hinojosa carries Tarrant"]]
-      .forEach(function (b) {
-        s2 += '<line x1="' + xs(b[0]) + '" y1="' + T + '" x2="' + xs(b[0]) + '" y2="'
-           + ys(0) + '" stroke="' + b[1] + '" stroke-width="1" stroke-dasharray="3 3" '
-           + 'opacity="0.7"/>'
-           + '<circle cx="' + xs(b[0]) + '" cy="' + ys(0) + '" r="4.5" fill="' + b[1] + '"/>'
-           + '<text x="' + xs(b[0]) + '" y="' + (T - 4) + '" text-anchor="middle" '
-           + 'class="vl" fill="' + b[1] + '">' + b[0] + "%</text>";
-      });
-    if (wide) {
-      s2 += '<text x="' + (W - R2 + 10) + '" y="' + (ys(R[R.length - 1].s) + 4)
-         + '" class="lbb" fill="' + TAL + '">Paxton / Talarico</text>'
-         + '<text x="' + (W - R2 + 10) + '" y="' + (ys(R[R.length - 1].g) + 4)
-         + '" class="lbb" fill="' + HIN + '">Abbott / Hinojosa</text>';
-    } else {
-      s2 += '<circle cx="' + (L + 6) + '" cy="16" r="4" fill="' + TAL + '"/>'
-         + txt(L + 15, 20, "Talarico", "lgd")
-         + '<circle cx="' + (L + 92) + '" cy="16" r="4" fill="' + HIN + '"/>'
-         + txt(L + 101, 20, "Hinojosa", "lgd");
-    }
-    s2 += "</svg>";
-    var tbl = '<div class="scroll"><table class="txtbl" style="margin-top:12px"><thead>'
-      + "<tr><th>Neither breaks Democratic</th><th>Abbott / Hinojosa</th>"
-      + "<th>Paxton / Talarico</th><th>Carries Tarrant</th></tr></thead><tbody>"
-      + R.filter(function (r) { return r.x % 4 === 0 || r.x === 42 || r.x === 46; })
-         .map(function (r) {
-          return "<tr" + (r.x === 48 ? ' class="em"' : "") + "><td>" + r.x
-            + '%</td><td class="num ' + (r.g < 0 ? "dem" : "rep") + '">' + mgn(r.g)
-            + '</td><td class="num ' + (r.s < 0 ? "dem" : "rep") + '">' + mgn(r.s)
-            + '</td><td class="' + (r.w === "both" ? "dem" : "dim") + '">' + esc(r.w)
-            + "</td></tr>";
-        }).join("") + "</tbody></table></div>";
-
-    return card("tx-tarrant-sens", "Section 4 · slide 3 · Tarrant, the county underneath it",
-      "The county underneath it: what Tarrant alone says",
-      "<b>Both parties&rsquo; primary voters are held at 95% loyalty</b> — the "
-      + "file&rsquo;s own default, and the thing this question fixes — so the only "
-      + "moving part is how the 252,913 Neither ballots break. Two lines, because the two "
-      + "races are not in the same place: the governor&rsquo;s race is the camps as they "
-      + "are, and the Senate race is that plus the <b>4.92</b> Paxton effect measured in "
-      + "Section 1 slide 4. <b>Both lines are Democratic margins</b> \u2014 the two "
-      + "colours are the two candidates, not two parties, so a line below the even rule "
-      + "means that Democrat is losing Tarrant.",
-      s2 + tbl,
-      "<b>The answer is 47.2%, and Hinojosa sets it.</b> Talarico carries Tarrant once "
-      + "the Neither bloc breaks <b>41.5%</b> Democratic — he can lose it 58–42 "
-      + "and still win the county. Hinojosa needs <b>47.2%</b>, which is Tackett&rsquo;s "
-      + "own published break-even of <i>“about 53 to 47 their way”</i>. So to "
-      + "carry <b>both</b>, the Neither bloc has to break no worse than 53–47 "
-      + "Republican."
-      + "<br><br><b>What the Paxton effect is worth in this currency.</b> Neither is 43% "
-      + "of these ballots, so one point of Neither break moves the county margin 0.86 "
-      + "points. The 4.92-point candidate effect is therefore worth <b>5.7 points of "
-      + "Neither break</b> — which is the entire distance between the two "
-      + "break-evens. Everything separating these two races on this chart is Paxton."
-      + "<br><br><b>How this bloc has actually broken, which is measurable.</b> The same "
-      + "file gives the camp split for past cycles alongside the county\u2019s real "
-      + "result, so the break can be solved for rather than guessed. Hold the same 95% "
-      + "loyalty and ask what the Neither bloc must have done to produce the result "
-      + "Tarrant actually got:"
-      + "<br>&nbsp;&nbsp;\u2022 <b>2024</b> \u2014 D 24% / Neither 51% / R 25%, county "
-      + "finished R+1.0 \u2192 Neither broke <b>49.9%</b> Democratic."
-      + "<br>&nbsp;&nbsp;\u2022 <b>2022</b> \u2014 D 29% / Neither 37% / R 34%, county "
-      + "finished R+4.4 \u2192 Neither broke <b>50.1%</b> Democratic."
-      + "<br><br><b>Both of the last two cycles, almost exactly down the middle.</b> "
-      + "Hinojosa needs 47.2%. That is <b>2.8 points worse</b> than this bloc has broken "
-      + "in either of its last two outings \u2014 and it would have to happen in a year "
-      + "where the bloc is bigger, younger, newer and more diverse than the one that "
-      + "split 50\u201350, in a county whose early vote has already moved eight points "
-      + "toward Democrats."
-      + "<br><br><b>So why 53\u201347 Republican is the worst case rather than the "
-      + "expectation.</b> Four things would all have to be wrong at once. The bloc "
-      + "split 49.9% and 50.1% in its last two outings, so 47.2% is outside both. It "
-      + "mirrors the county within 1.5 points on every demographic line, and the county "
-      + "itself was R+1.0 in 2024 \u2014 a bloc that looks like a county that close "
-      + "does not break 53\u201347 one way. It is disproportionately new: more than a "
-      + "quarter registered after the 2022 midterm, against 6% of the Republican camp. "
-      + "And the one place anyone has measured which <i>kind</i> of voter is turning "
-      + "out \u2014 Harris, next slide but one \u2014 finds the Democratic edge "
-      + "<i>widest</i> among exactly these irregular voters, 13.2 points against 5.0 "
-      + "among the most reliable."
-      + "<br><br><b>It is still the worst case and it is still possible.</b> These are "
-      + "people with no recent primary ballot, which is the definition of voters nobody "
-      + "has a partisan read on; the inference runs through demographics and turnout "
-      + "history, not through anything they have said. If they break 53\u201347 "
-      + "Republican, Tarrant carries Talarico and loses Hinojosa, and the statewide "
-      + "version of that is the governor\u2019s race going down while the Senate seat "
-      + "holds. That is the single most likely way tonight splits."
-      + "<br><br><b>And why Tarrant has to over-deliver for Hinojosa.</b> Talarico "
-      + "carries this county with room to spare and would carry it even on a bad night "
-      + "for the ticket. Hinojosa does not have that cushion anywhere \u2014 and Tarrant "
-      + "is one of the <i>friendlier</i> places she has to win. She has to make up "
-      + "402,353 votes statewide, and the counties where that can come from are the ones "
-      + "that look like this one. Every point the Neither bloc here breaks beyond 47.2% "
-      + "is compensating for the 239 rural counties that will not move at all."
-      + "<br><br><b>Where that leaves it.</b> Tackett&rsquo;s own default assumption is "
-      + "an even split, 50–50, which carries both: Hinojosa by 2.38 and Talarico by "
-      + "7.30. The Neither bloc would have to break <i>against</i> Democrats by more than "
-      + "53–47 before Tarrant stops carrying both, and this is a bloc that is "
-      + "younger, newer and more diverse than the county, in a county whose early vote "
-      + "already moved eight points toward Democrats."
-      + "<br><br><b>Two assumptions, named.</b> The 4.92 is a statewide poll figure "
-      + "applied to one county: Tarrant sits close to the state on composition, which is "
-      + "part of why it is the county worth watching, but this still assumes the candidate "
-      + "effect lands evenly. And these are early ballots only — election day is "
-      + "still to come, and the base left over leans Republican by about 13,000.");
-  }
 
   /* The Morris gradient is the single biggest external input to this model: it is what
      reweights precincts inside every county. It has never been shown on its own, and the
@@ -3338,7 +3187,7 @@
       y += ROW;
     });
     s2 += "</svg>";
-    return card("tx-rural", "Section 4 · slide 4 · the rural lever",
+    return card("tx-rural", "Section 4 · slide 3 · the rural lever",
       "What rural turnout would have to do",
       "<b>The 239 counties outside the largest fifteen cast 3,343,577 ballots at R+35.9, "
       + "a net of 1,199,649 Republican votes.</b> That net is what the metros have to "
@@ -3406,7 +3255,7 @@
       });
     });
     s += "</svg>";
-    return card("tx-levers", "Section 4 · slide 5 · all three together",
+    return card("tx-levers", "Section 4 · slide 4 · all three together",
       "Neither lever carries her alone. Together they do",
       "<b>Each cell is the governor&rsquo;s race after the full polling haircut</b>, with "
       + "rural turnout down the amount on the left and the Neither bloc in the big fifteen "
@@ -3449,9 +3298,33 @@
     return '<section class="txarg" id="tx-read-committed">'
       + '<p class="txkick">Written down before the polls close · 2 November 2026</p>'
       + "<h2>What I will read into tomorrow night, decided now</h2>"
-      + "<p>Committed in advance so it cannot be rationalised afterward. All three branches "
-      + "turn on the early-vote margin Texas reports when polls close, against the band "
-      + "set by what election day has actually done in Texas.</p>"
+      + "<p><b>Why the Senate seat is the confident call, stated as floors.</b> Not "
+      + "because the polls are generous \u2014 this tab prices them at three to four "
+      + "points too Democratic \u2014 but because <b>every path to beating Talarico "
+      + "requires something no Texas election has produced</b>:</p>"
+      + "<ul>"
+      + "<li>He loses only if the polling haircut exceeds <b>5.03</b>. The worst miss "
+      + "ever measured in Texas is <b>4.68</b>, and that was a presidential year with "
+      + "Trump on the ballot.</li>"
+      + "<li>He loses only if the generic Texas Democrat loses by more than <b>4.92</b>. "
+      + "An R+4 night \u2014 a bad evening for Democrats everywhere else on the ballot "
+      + "\u2014 still elects him.</li>"
+      + "<li>His unaffiliated-bloc floor is <b>47.2%</b>. That bloc has broken 49.9% and "
+      + "50.1% in its two measured cycles, and all three triangulated estimates "
+      + "\u2014 61.1%, 62.5% and AtlasIntel\u2019s 69.7% \u2014 sit above it.</li>"
+      + "<li>His Hispanic floor is <b>D+19.66</b>, cleared by the four-poll average, by "
+      + "YouGov, by the El Paso precincts and by the county model.</li>"
+      + "</ul>"
+      + "<p><b>No single lever on this tab, at any value it has ever taken, beats him.</b> "
+      + "That is a different claim from \u201che is ahead by five\u201d, and it is the "
+      + "reason the Senate call is made with confidence while the governor&rsquo;s race "
+      + "is not. Two qualifiers kept: the 4.92 is one week of polling from four houses "
+      + "\u2014 measured well but measured once \u2014 and Texas has historically broken "
+      + "Democratic hearts by beating its polls, with 2018 the counter-case where that ran "
+      + "the other way.</p>"
+      + "<p>What follows was committed in advance so it cannot be rationalised afterward. "
+      + "All three branches turn on the early-vote margin Texas reports when polls close, "
+      + "against the band set by what election day has actually done in Texas.</p>"
       + "<ol>"
       + "<li><b>Early vote better than " + mgn(THR_SAFE_D) + ".</b> Talarico wins even if "
       + "election day looks like 2022, the harshest midterm on record. The Hispanic shift "
@@ -3494,7 +3367,7 @@
     + ".txframe p:first-of-type{color:var(--fg)}"
     + ".txarg h2{font-family:var(--display);font-weight:400;font-size:22px;margin:2px 0 10px}"
     + ".txarg p{margin:0 0 9px;font-size:14px;line-height:1.55;max-width:74ch}"
-    + ".txarg ol{margin:4px 0 0;padding-left:1.2em;font-size:14px;line-height:1.55}"
+    + ".txarg ol,.txarg ul{margin:4px 0 10px;padding-left:1.2em;font-size:14px;line-height:1.55}"
     + ".txarg li{margin-bottom:6px}"
     + ".txarg .nm{font-variant-numeric:tabular-nums}"
     + ".txcard h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;"
@@ -3588,7 +3461,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["tri", "tx_triangulate.csv"], ["nmirror", "tx_neither_mirror.csv"], ["nscope", "tx_neither_scope.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["tsens", "tx_tarrant_sensitivity.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["tri", "tx_triangulate.csv"], ["nmirror", "tx_neither_mirror.csv"], ["nscope", "tx_neither_scope.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {
@@ -3667,7 +3540,6 @@
              + "moderate moves do it \u2014 and none of it is needed for the Senate seat."])
         + hispanicSensCard()
         + neitherBigCard()
-        + tarrantSensCard()
         + ruralCard()
         + leversCard()
 

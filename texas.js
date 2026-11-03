@@ -190,6 +190,35 @@
       + 'still <b class="nm">D+0.98</b> \u2014 and in fact there is no haircut that '
       + "beats him: he only loses once the correction exceeds 5.03 points, which is "
       + "larger than any polling miss ever measured in Texas.</p>"
+      + "<p><b>Which is a confident call, not a lean, because it rests on five floors "
+      + "and none of them has ever been breached in Texas:</b></p>"
+      + "<ol>"
+      + '<li><b>The polling miss would have to exceed <span class="nm">5.03</span>.</b> '
+      + "Six Texas races checked; the worst miss ever measured is <b>4.68</b>, and that "
+      + "was a presidential year with Trump on the ballot. None of the six reaches his "
+      + "floor.</li>"
+      + '<li><b>The rest of the ticket would have to lose by more than <span class="nm">'
+      + "4.92</span>.</b> An R+4 night — a bad evening for Democrats everywhere else "
+      + "on the ballot, and four points worse than the 2024 Senate result — still "
+      + "elects him.</li>"
+      + '<li><b>The unaffiliated bloc would have to break below <span class="nm">47.2%'
+      + "</span>.</b> It broke 49.9% and 50.1% in its two measured cycles, and all three "
+      + "projections of it — 61.1%, 62.5%, 69.7% — sit well above. It clears at "
+      + "every assumed bloc size from 30% to 55%.</li>"
+      + '<li><b>Hispanic voters would have to land below <span class="nm">D+19.66</span>.'
+      + "</b> Cleared by the four-poll average at D+22.95, by YouGov at D+28, by the El "
+      + "Paso precincts at D+28.67 and by the county model at D+29.85.</li>"
+      + '<li><b>And the <span class="nm">4.92</span> cannot be argued away by the polling '
+      + "error</b>, because a systematic miss hits both races on the same questionnaire "
+      + "equally and subtracts out of the difference. It is 4.92 at every haircut from "
+      + "zero to 4.68.</li>"
+      + "</ol>"
+      + "<p><b>No single lever on this tab, at any value it has ever taken, beats him.</b> "
+      + "That is a different claim from “ahead by five”, and it is why this one "
+      + "is called with confidence while the governor’s race is not. Two caveats kept "
+      + "rather than dropped: the 4.92 is one week of polling from four houses — "
+      + "measured well, measured once — and Texas has a history of beating its polls, "
+      + "with 2018 the counter-case where that ran the other way.</p>"
       + "<p><b>And that haircut is itself conservative.</b> All four of the big Texas "
       + "polling misses are presidential years with Trump <i>on the ballot</i>; the two "
       + "midterms without him average <b>\u22121.87</b>, meaning the polls understated "

@@ -1,5 +1,5 @@
 {
- "checked_at": "2026-11-03T11:37:56+00:00",
+ "checked_at": "2026-11-03T12:07:39+00:00",
  "uf_file_modified": "Tue, 03 Nov 2026 04:30:55 GMT",
  "board_total": 26439680,
  "uf_total": 26432008,
@@ -261,21 +261,75 @@
    "counties_board": 46,
    "counties_uf": 46,
    "compared": 46,
-   "agree": 45,
-   "differ": 1,
+   "agree": 0,
+   "differ": 46,
    "ahead": 0,
-   "behind": 1,
+   "behind": 46,
    "only_on_board": [],
    "only_at_uf": [],
    "worst": [
     {
-     "county": "MCCORMICK",
-     "board": 3373,
-     "uf": 3479,
-     "gap": -106
+     "county": "GREENVILLE",
+     "board": 98275,
+     "uf": 108692,
+     "gap": -10417
+    },
+    {
+     "county": "CHARLESTON",
+     "board": 94129,
+     "uf": 104160,
+     "gap": -10031
+    },
+    {
+     "county": "RICHLAND",
+     "board": 86966,
+     "uf": 96244,
+     "gap": -9278
+    },
+    {
+     "county": "YORK",
+     "board": 57009,
+     "uf": 64065,
+     "gap": -7056
+    },
+    {
+     "county": "HORRY",
+     "board": 83620,
+     "uf": 89332,
+     "gap": -5712
+    },
+    {
+     "county": "LEXINGTON",
+     "board": 49691,
+     "uf": 55104,
+     "gap": -5413
+    },
+    {
+     "county": "SPARTANBURG",
+     "board": 51774,
+     "uf": 57003,
+     "gap": -5229
+    },
+    {
+     "county": "BERKELEY",
+     "board": 47046,
+     "uf": 51963,
+     "gap": -4917
+    },
+    {
+     "county": "DORCHESTER",
+     "board": 33789,
+     "uf": 37816,
+     "gap": -4027
+    },
+    {
+     "county": "BEAUFORT",
+     "board": 44956,
+     "uf": 48484,
+     "gap": -3528
     }
    ],
-   "board_sum": 1084436,
+   "board_sum": 989218,
    "uf_sum": 1084542
   },
   "TX": {

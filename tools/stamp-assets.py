@@ -19,7 +19,11 @@ import hashlib, pathlib, re, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 PAGE = ROOT / "index.html"
-ASSETS = ["charts.css", "compare.js"]
+# texas.js was added with a hardcoded "?v=1" and left out of this list, so every
+# browser that had once loaded it kept that copy forever - the exact failure this
+# script exists to prevent, repeated on a new file. Anything index.html loads with a
+# ?v= stamp belongs here.
+ASSETS = ["charts.css", "compare.js", "texas.js"]
 
 
 def digest(name):

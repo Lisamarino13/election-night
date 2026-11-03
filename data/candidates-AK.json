@@ -1,19 +1,48 @@
 {
  "state": "AK",
- "note": "Who is on the ballot. No vote counts: this is written before polls close. These names come from secondary aggregators rather than the state's own feed, so the state collector overwrites them with certified names the moment its results feed carries the contest. Sullivan is the incumbent; Cook rates this a toss-up.",
- "election": "November 3, 2026 General Election",
- "source": "https://ballotpedia.org/U.S._Senate_battlegrounds,_2026",
+ "note": "Who is on the ballot. No vote counts: this is written before polls close, when the results themselves are withheld.",
+ "election": "Alaska 26GENR",
+ "source": "https://www.elections.alaska.gov/enr/26GENR/results/GA_ENR_Precinct_State_of_Alaska.csv",
  "races": {
   "senate": {
-   "contest_name": "United States Senator",
+   "contest_name": "U.S. Senator",
    "candidates": [
     {
-     "name": "Dan Sullivan",
+     "name": "Heikes, Gerald L.",
      "party": "R"
     },
     {
-     "name": "Mary Peltola",
+     "name": "Peltola, Mary",
      "party": "D"
+    },
+    {
+     "name": "Sullivan, Dan S.",
+     "party": "R"
+    },
+    {
+     "name": "Sullivan, Daniel J. Jr.",
+     "party": "O"
+    }
+   ]
+  },
+  "governor": {
+   "contest_name": "Governor / Lieutenant Governor",
+   "candidates": [
+    {
+     "name": "Bronson/Church",
+     "party": "R"
+    },
+    {
+     "name": "Kreiss-Tomkins/Johnson",
+     "party": "O"
+    },
+    {
+     "name": "Taylor/English",
+     "party": "R"
+    },
+    {
+     "name": "Wilson/Shower",
+     "party": "R"
     }
    ]
   }

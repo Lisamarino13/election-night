@@ -626,8 +626,10 @@
       + "bottom-right, which is the whole point: <b>the better Democrats did in the "
       + "primary, the better they did in November.</b> The line is that relationship "
       + "fitted, and the grey band is how wrong it has typically been.",
-      s2 + s3,
-      "<b>Three ways to ask the same question, and they do not agree.</b> The chart above uses the Democratic SHARE of the primary, which cannot see that Democratic primary votes more than doubled. Fitting the GROWTH instead predicts better, and more Democratically:" 
+      s3 + s2,
+      "<b>The biggest thing on the ballot today is not in any of these lines.</b> Texas has already banked 7,734,079 early votes, which is <b>40% more than the entire 2022 midterm early vote</b> and within 15% of a presidential year. Every specification here regresses November on PRIMARY turnout, measured back in March. A 40% early-vote surge is outside all of them."
+      + "<br><br>It cannot be fixed with this data either: to regress November on early-vote growth you need early-vote volumes for prior midterms, and the Texas archive starts at 2019, so 2022 has no growth figure. One point is not a regression. What can be said is the DIRECTION of the omission \u2014 it is turnout these lines cannot see, in a year when both the AtlasIntel crosstab (91\u20133 among 2024 non-voters) and Morris\u2019s Harris data say the marginal voter breaks heavily Democratic. <b>So read these three estimates as more likely too Republican than too Democratic.</b>"
+      + "<br><br><b>Three ways to ask the question, and they do not agree.</b> The second chart uses the Democratic SHARE of the primary, which cannot see that Democratic primary votes more than doubled. Fitting the GROWTH instead predicts better, and more Democratically:"
       + '<table class="txtbl" style="margin:10px 0"><thead><tr><th>What you regress on</th>'
       + "<th>Cycles</th><th>Explains</th><th>2026</th></tr></thead><tbody>"
       + fits.map(function (q) {
@@ -636,7 +638,7 @@
             + (q.r2 * 100).toFixed(0) + '%</td><td class="num '
             + (q.pred < 0 ? "dem" : "rep") + '">' + mgn(q.pred, 2) + "</td></tr>";
         }).join("") + "</tbody></table>"
-      + "<b>So the primary does not say " + mgn(all.pred, 0) + ". It says this race is "
+      + "<b>So the primary does not give a number. It says this race is "
       + "a coin flip</b> \u2014 the three readings span " + mgn(mid.pred, 2) + " to "
       + mgn(all.pred, 2) + ", a little over three points, centred near even, which is "
       + "where every other method on this tab also lands."

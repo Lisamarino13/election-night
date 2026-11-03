@@ -2845,7 +2845,7 @@
             + "</td></tr>";
         }).join("") + "</tbody></table></div>";
 
-    return card("tx-hispsens", "Section 4 · slide 1 · what the Hispanic vote has to do",
+    return card("tx-hispsens", "Section 4 · slide 2 · what the Hispanic vote has to do",
       "What the Hispanic vote has to do to carry each race",
       "<b>The same question the Tarrant card asks of its Neither bloc, asked of the one "
       + "group that decides the state.</b> Everything else is held at what the polls say, "
@@ -2936,6 +2936,57 @@
     });
     s2 += "</svg>";
 
+    /* The lead figure has to be the per-county breaks, not Tarrant's. An earlier version
+       opened with the Tarrant history - 49.9% and 50.1% - which reads as THE number, and
+       the whole finding of this card is that it is not: these counties differ in their
+       make-up, so the bloc that mirrors each of them breaks differently in each. */
+    var MRC = (D.nmirror || []).map(function (r) {
+      return {c: r.county, t: num(r.proj_turnout), m: num(r.margin_2026_R),
+              nb: num(r.neither_ballots), mir: num(r.mirror_break_D),
+              adj: num(r.mirror_plus_bias_D)};
+    }).filter(function (r) { return r.mir != null; })
+      .sort(function (a, b) { return b.mir - a.mir; });
+    var perCounty = "";
+    if (MRC.length) {
+      var wq = !NARROW;
+      var W4 = wq ? 760 : 360, L4 = wq ? 118 : 8, R4 = wq ? 120 : 10;
+      var RW4 = wq ? 34 : 46, T4 = 62, H4 = T4 + MRC.length * RW4 + 22;
+      var lo4 = 40, hi4 = 74;
+      var x4 = function (v) { return L4 + (v - lo4) / (hi4 - lo4) * (W4 - L4 - R4); };
+      perCounty = svg(W4, H4, "What the unaffiliated bloc breaks in each in-scope county "
+                            + "if it mirrors that county");
+      [40, 45, 50, 55, 60, 65, 70].forEach(function (t) {
+        perCounty += line(x4(t), T4 - 16, x4(t), H4 - 16, t === 50 ? "zl" : "gl")
+                   + txt(x4(t), H4 - 4, t + "%", "tk", "middle");
+      });
+      perCounty += txt(x4(50), T4 - 22, "an even split", "lgd", "middle");
+      [[47.2, "var(--tal,#6b4fbb)", "Talarico needs"],
+       [61.2, "var(--hin,#0f8f8f)", "Hinojosa needs"]].forEach(function (b) {
+        perCounty += '<line x1="' + x4(b[0]) + '" y1="' + (T4 - 10) + '" x2="' + x4(b[0])
+          + '" y2="' + (H4 - 16) + '" stroke="' + b[1] + '" stroke-width="1.5" '
+          + 'stroke-dasharray="4 3" opacity="0.85"/>'
+          + '<text x="' + x4(b[0]) + '" y="' + (T4 - 24) + '" text-anchor="middle" '
+          + 'class="vl" fill="' + b[1] + '">' + b[2] + " " + b[0] + "%</text>";
+      });
+      perCounty += txt(wq ? 0 : 8, 18, "each county's bloc, if it mirrors that county "
+                       + "— bar width is how many ballots", "lgd");
+      MRC.forEach(function (r, i) {
+        var y = T4 + 6 + i * RW4;
+        var f = (r.m < 0 ? "D+" : "R+") + Math.abs(r.m).toFixed(1);
+        if (wq) {
+          perCounty += txt(L4 - 12, y + 8, r.c, "lbb", "end")
+                     + txt(L4 - 12, y + 20, "county " + f, "sub", "end");
+        } else {
+          perCounty += txt(8, y - 8, r.c + "  ·  county " + f, "lb");
+        }
+        var h = Math.max(6, Math.min(18, r.nb / 611623 * 18));
+        perCounty += '<circle cx="' + x4(r.mir) + '" cy="' + (y + 8) + '" r="'
+          + (h / 2 + 2) + '" fill="' + sideCol(-1) + '" opacity="0.8"/>'
+          + txt(x4(r.mir) + h / 2 + 8, y + 12, r.mir.toFixed(1) + "%", "vl");
+        if (wq) perCounty += txt(W4 - R4 + 12, y + 12, n0(r.nb) + " ballots", "sub");
+      });
+      perCounty += "</svg>";
+    }
     /* The scope, drawn: which of the fifteen are in and why. And then the share
        sensitivity, because applying Tarrant's 43% to five other counties is one
        assumption, not six measurements, and an earlier version of this card printed it
@@ -3034,9 +3085,17 @@
             + (clears ? "dem" : "dim") + '">' + (clears ? "clears it" : "short")
             + "</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
-    return card("tx-neither-big", "Section 4 · slide 2 · the Neither bloc across the big fifteen",
+    return card("tx-neither-big", "Section 4 · slide 1 · the Neither bloc across the big fifteen",
       "The Neither bloc across the big fifteen, and what it is worth",
-      "<b>The licence for projecting this out is the previous section.</b> Harris and "
+      "<b>The break is not one number \u2014 it is a different number in every "
+      + "county, because these counties are not alike.</b> The property Tackett measures "
+      + "in Tarrant is that the unaffiliated bloc mirrors <i>its own county</i> on age, "
+      + "sex, race and registration. Tarrant is close to even, so its bloc splitting "
+      + "50/50 is that property working, not a constant. Harris is D+21.5 and Dallas "
+      + "D+38.9. The first chart is what the mirror implies in each of the six in-scope "
+      + "counties, sized by how many ballots each contributes, against what each "
+      + "candidate needs."
+      + "<br><br><b>The licence for projecting it at all is the previous section.</b> Harris and "
       + "Tarrant agree on the mechanism — the movement sits with irregular and new "
       + "voters, the Republican coalition is the reliable one and is not replenishing "
       + "— and they agree on it from two instruments that cannot produce each "
@@ -3051,7 +3110,7 @@
       + "camp split the file gives for each past cycle, and ask what the Neither bloc must "
       + "have done to produce the result Tarrant actually got. The two dashed lines are "
       + "what each 2026 candidate needs from the same bloc.",
-      s2 + scopeFig + mirTbl + triTbl + shTbl,
+      perCounty + scopeFig + s2 + mirTbl + triTbl + shTbl,
       "<b>It has split down the middle twice running.</b> 49.9% in 2024 and 50.1% in "
       + "2022 — two cycles, two very different national environments, the same "
       + "answer to a tenth of a point. That is the most stable number anywhere on this "
@@ -3538,8 +3597,8 @@
              + "ballots.",
              "Where it arrives: alone, neither lever reaches far enough. Together, two "
              + "moderate moves do it \u2014 and none of it is needed for the Senate seat."])
-        + hispanicSensCard()
         + neitherBigCard()
+        + hispanicSensCard()
         + ruralCard()
         + leversCard()
 

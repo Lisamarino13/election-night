@@ -31,11 +31,13 @@ _CLOSE = {
     "OH": (0, 30),   # 7:30pm EST
     "ME": (1, 0),    # 8:00pm EST
     "FL": (1, 0),    # panhandle counties close 7:00pm CST
+    "MS": (1, 0),    # 7:00pm CST (MS SOS: polls 7am-7pm)
     "MI": (2, 0),    # four western UP counties close 8:00pm CST
     "TX": (2, 0),    # El Paso / Hudspeth close 7:00pm MST
     "KS": (2, 0),    # four western counties close 7:00pm MST
     "IA": (2, 0),    # 8:00pm CST
     "MN": (2, 0),    # 8:00pm CST
+    "LA": (2, 0),    # 8:00pm CST (La. R.S. 18:541: polls close 8:00pm)
     "NE": (3, 0),    # panhandle counties close 8:00pm MST
     "AK": (5, 0),    # 8:00pm AKST
 }

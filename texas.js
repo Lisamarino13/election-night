@@ -725,13 +725,14 @@
                capped ? "sub" : "vl", "end");
     });
     s += "</svg>";
-    return card("tx-eth", "Chapter 4 · the group doing the moving",
-      "Where each group is, and where the model needs it",
+    return card("tx-eth", "Chapter 4 · the demographic doing the moving",
+      "Where each demographic is, and where the model needs it",
       "Hollow dot is 2024 measured — counted ballots in precincts overwhelmingly one "
-      + "group by voting-age population, not a poll. Filled dot is the 2026 estimate, "
-      + "blue where the group moves toward Democrats and red where it moves away.",
+      + "demographic by voting-age population, not a poll. Filled dot is the 2026 "
+      + "estimate, blue where the demographic moves toward Democrats and red where it "
+      + "moves away.",
       s,
-      "<b>Asian voters sit at the generic ballot.</b> Nothing in 2026 measures Texas Asian voters, so rather than assume a group-specific shift they are placed at the October generic ballot, D+12. Note which way that points: D+12 is BELOW the D+15.31 they gave in 2024, so it moves them 3.31 points toward Republicans. Statewide that is worth 0.15 points, but they are 34% of Collin’s non-white bloc and 31% of Fort Bend’s, which is why those counties carry a smaller shift than the rest of the map."
+      "<b>Asian voters sit at the generic ballot.</b> Nothing in 2026 measures Texas Asian voters, so rather than assume a demographic-specific shift they are placed at the October generic ballot, D+12. Note which way that points: D+12 is BELOW the D+15.31 they gave in 2024, so it moves them 3.31 points toward Republicans. Statewide that is worth 0.15 points, but they are 34% of Collin’s non-white bloc and 31% of Fort Bend’s, which is why those counties carry a smaller shift than the rest of the map."
       + "<br><br>" + "<b>The row that does not work is Black voters.</b> 2024 already sits at 91.1% "
       + "Democratic, so the model&rsquo;s +12 for the whole non-white bloc cannot come from "
       + "there — it has to be carried by Hispanic voters almost alone. That is the "

@@ -1162,15 +1162,14 @@
     // to be a slide of its own in section 2, which put the environment half of this
     // argument three slides away from the candidate half.
     var CO = (D.only || []).map(function (r) {
-      return {c: r.condition, w: r.what_2026_has, src: r.source, as: r.as_of};
+      return {c: r.condition, w: r.what_2026_has, src: r.source};
     }).filter(function (r) { return r.w; });
     var coTbl = CO.length ? ('<div class="scroll"><table class="txtbl" '
       + 'style="margin-top:14px"><thead><tr><th>What 2018 did not have</th><th>2026</th>'
       + "<th>Source</th></tr></thead><tbody>"
       + CO.map(function (r) {
           return "<tr><td><b>" + esc(r.c) + "</b></td><td>" + esc(r.w)
-            + '</td><td class="dim">' + esc(r.src) + (r.as ? "<br>" + esc(r.as) : "")
-            + "</td></tr>";
+            + '</td><td class="dim">' + esc(r.src) + "</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
     var SEN = -5.03, GOV = -0.11;
     var CUTS = [["No haircut — the polls as published", 0],
@@ -1235,13 +1234,28 @@
       + "nothing — it is what moved Texas from R+8.50 in the 2024 Senate race to a "
       + "tied governor’s race, which is a swing of about eight points. It is simply "
       + "not <i>extra</i>: it is already inside the D+0.11, and Paxton is what sits on "
-      + "top of it. The four conditions it rests on are in the last table above: a "
-      + "Republican nominee the Texas House impeached, the most expensive October on "
-      + "record at the pump, a war 73% of voters oppose sending ground troops to, and "
-      + "an ICE shooting in Houston. None can be priced into a margin on its own, and "
-      + "they are listed rather than modelled for that reason \u2014 but every one "
-      + "runs the same direction, which is why 2018\u2019s R+2.57 is read here as a "
-      + "floor rather than a match."
+      + "top of it. The four conditions it rests on are the last table above. None can "
+      + "be priced into a margin on its own, which is why they are listed rather than "
+      + "modelled \u2014 but every one of them runs the same direction, which is why "
+      + "2018\u2019s R+2.57 is read here as a floor rather than a match."
+      + "<br><br><b>One thing that row does not say, because it is not true.</b> Paxton "
+      + "is not under indictment and has not been since June 2025, when the "
+      + "securities-fraud charges that hung over him from 2015 were dismissed after he "
+      + "completed a pretrial-diversion agreement \u2014 no plea, no admission of guilt. "
+      + "The impeachment is the part that is true, and the 9.15 points he ran behind his "
+      + "own ticket in March is the part that is measured."
+      + "<br><br><b>The rule it gives you for tonight.</b> Talarico is the generic Texas "
+      + "Democrat plus 4.92, so he is level when the generic Democrat loses by 4.92. "
+      + "That means <b>Talarico wins any night where a generic Texas Democrat loses by "
+      + "less than about five points</b>:"
+      + "<br>&nbsp;&nbsp;\u2022 a night at R+3 for the ticket \u2192 Talarico <b>D+1.92</b>"
+      + "<br>&nbsp;&nbsp;\u2022 a night at R+4 \u2192 Talarico <b>D+0.92</b>"
+      + "<br>&nbsp;&nbsp;\u2022 a night at R+4.92 \u2192 Talarico exactly even"
+      + "<br>&nbsp;&nbsp;\u2022 a night at R+6 \u2192 Talarico R+1.08, and it is gone"
+      + "<br><br>So an R+3 or R+4 night in Texas \u2014 which would read as a bad night "
+      + "for Democrats everywhere else on the ballot, and would beat the 2024 Senate "
+      + "result by four to five points \u2014 still elects Talarico, on the lag alone. "
+      + "That is the single most useful number to hold while the returns come in."
       + "<br><br><b>What this costs the rest of the ballot.</b> None of the 4.92 "
       + "transfers. Hinojosa does not get it, and neither does anyone down-ballot. On "
       + "these polls the governor’s race is a coin flip and the Senate race is not, "
@@ -2048,15 +2062,19 @@
     }
     s2 += txt(L, H - 14, "how the Neither bloc breaks Democratic →", "lgd");
     s2 += txt(0, T - 16, "Tarrant margin", "lgd");
+    // Both candidates are Democrats, so neither line can be red: drawing Hinojosa in
+    // the Republican colour said she was the Republican. Two series colours that are
+    // not party colours, legible on both grounds.
+    var TAL = "var(--tal,#6b4fbb)", HIN = "var(--hin,#0f8f8f)";
     var path = function (key, col) {
       return '<polyline points="' + R.map(function (r) {
         return xs(r.x) + "," + ys(r[key]);
       }).join(" ") + '" fill="none" stroke="' + col + '" stroke-width="2.5" '
         + 'opacity="0.9"/>';
     };
-    s2 += path("g", RC) + path("s", DC);
+    s2 += path("g", HIN) + path("s", TAL);
     // where each line crosses even
-    [[41.5, DC, "Talarico carries Tarrant"], [47.2, RC, "Hinojosa carries Tarrant"]]
+    [[41.5, TAL, "Talarico carries Tarrant"], [47.2, HIN, "Hinojosa carries Tarrant"]]
       .forEach(function (b) {
         s2 += '<line x1="' + xs(b[0]) + '" y1="' + T + '" x2="' + xs(b[0]) + '" y2="'
            + ys(0) + '" stroke="' + b[1] + '" stroke-width="1" stroke-dasharray="3 3" '
@@ -2066,13 +2084,15 @@
            + 'class="vl" fill="' + b[1] + '">' + b[0] + "%</text>";
       });
     if (wide) {
-      s2 += txt(W - R2 + 10, ys(R[R.length - 1].s) + 4, "Paxton / Talarico", "lgd")
-         + txt(W - R2 + 10, ys(R[R.length - 1].g) + 4, "Abbott / Hinojosa", "lgd");
+      s2 += '<text x="' + (W - R2 + 10) + '" y="' + (ys(R[R.length - 1].s) + 4)
+         + '" class="lbb" fill="' + TAL + '">Paxton / Talarico</text>'
+         + '<text x="' + (W - R2 + 10) + '" y="' + (ys(R[R.length - 1].g) + 4)
+         + '" class="lbb" fill="' + HIN + '">Abbott / Hinojosa</text>';
     } else {
-      s2 += '<circle cx="' + (L + 6) + '" cy="16" r="4" fill="' + DC + '"/>'
+      s2 += '<circle cx="' + (L + 6) + '" cy="16" r="4" fill="' + TAL + '"/>'
          + txt(L + 15, 20, "Talarico", "lgd")
-         + '<circle cx="' + (L + 86) + '" cy="16" r="4" fill="' + RC + '"/>'
-         + txt(L + 95, 20, "Hinojosa", "lgd");
+         + '<circle cx="' + (L + 92) + '" cy="16" r="4" fill="' + HIN + '"/>'
+         + txt(L + 101, 20, "Hinojosa", "lgd");
     }
     s2 += "</svg>";
     var tbl = '<div class="scroll"><table class="txtbl" style="margin-top:12px"><thead>'
@@ -2094,7 +2114,9 @@
       + "moving part is how the 252,913 Neither ballots break. Two lines, because the two "
       + "races are not in the same place: the governor&rsquo;s race is the camps as they "
       + "are, and the Senate race is that plus the <b>4.92</b> Paxton effect measured in "
-      + "Section 1 slide 3.",
+      + "Section 1 slide 3. <b>Both lines are Democratic margins</b> \u2014 the two "
+      + "colours are the two candidates, not two parties, so a line below the even rule "
+      + "means that Democrat is losing Tarrant.",
       s2 + tbl,
       "<b>The answer is 47.2%, and Hinojosa sets it.</b> Talarico carries Tarrant once "
       + "the Neither bloc breaks <b>41.5%</b> Democratic — he can lose it 58–42 "
@@ -2107,6 +2129,30 @@
       + "points. The 4.92-point candidate effect is therefore worth <b>5.7 points of "
       + "Neither break</b> — which is the entire distance between the two "
       + "break-evens. Everything separating these two races on this chart is Paxton."
+      + "<br><br><b>How this bloc has actually broken, which is measurable.</b> The same "
+      + "file gives the camp split for past cycles alongside the county\u2019s real "
+      + "result, so the break can be solved for rather than guessed. Hold the same 95% "
+      + "loyalty and ask what the Neither bloc must have done to produce the result "
+      + "Tarrant actually got:"
+      + "<br>&nbsp;&nbsp;\u2022 <b>2024</b> \u2014 D 24% / Neither 51% / R 25%, county "
+      + "finished R+1.0 \u2192 Neither broke <b>49.9%</b> Democratic."
+      + "<br>&nbsp;&nbsp;\u2022 <b>2022</b> \u2014 D 29% / Neither 37% / R 34%, county "
+      + "finished R+4.4 \u2192 Neither broke <b>50.1%</b> Democratic."
+      + "<br><br><b>Both of the last two cycles, almost exactly down the middle.</b> "
+      + "Hinojosa needs 47.2%. That is <b>2.8 points worse</b> than this bloc has broken "
+      + "in either of its last two outings \u2014 and it would have to happen in a year "
+      + "where the bloc is bigger, younger, newer and more diverse than the one that "
+      + "split 50\u201350, in a county whose early vote has already moved eight points "
+      + "toward Democrats. <b>A 53\u201347 Republican break is possible but it is not "
+      + "the way to bet.</b> The honest expectation is another coin-flip split, which "
+      + "carries both."
+      + "<br><br><b>And why Tarrant has to over-deliver for Hinojosa.</b> Talarico "
+      + "carries this county with room to spare and would carry it even on a bad night "
+      + "for the ticket. Hinojosa does not have that cushion anywhere \u2014 and Tarrant "
+      + "is one of the <i>friendlier</i> places she has to win. She has to make up "
+      + "402,353 votes statewide, and the counties where that can come from are the ones "
+      + "that look like this one. Every point the Neither bloc here breaks beyond 47.2% "
+      + "is compensating for the 239 rural counties that will not move at all."
       + "<br><br><b>Where that leaves it.</b> Tackett&rsquo;s own default assumption is "
       + "an even split, 50–50, which carries both: Hinojosa by 2.38 and Talarico by "
       + "7.30. The Neither bloc would have to break <i>against</i> Democrats by more than "
@@ -2585,7 +2631,21 @@
       + "D+0.11 to <b>R+3.94</b>, because there is no Paxton in that race. She has to "
       + "find 3.94 points, or 402,353 votes, somewhere else.",
       tbl,
-      "<b>Why only two levers.</b> Nothing else on this ballot is big enough. Hispanic "
+      "<b>What the Hispanic vote has to do, as a level rather than a shift.</b> The two "
+      + "final polls imply Hispanic voters at D+16.5 (AtlasIntel) and D+28.0 (YouGov), "
+      + "sample-weighted <b>D+22.95</b>. Hinojosa needs it <b>13.2 points better than "
+      + "that \u2014 D+36.15</b>. Set against every Hispanic figure measured on this tab: "
+      + "the 2024 exit poll had Latinos at <b>R+10</b>, 90%-Hispanic border precincts "
+      + "were D+10.09, El Paso D+28.67, and the county model assumes D+29.85. The only "
+      + "number on the tab higher than what she needs is <b>D+41.15</b>, the "
+      + "90%-Hispanic precincts in the big metros."
+      + "<br><br>So on this lever alone she needs the <i>entire state\u2019s</i> Hispanic "
+      + "vote to behave like Hispanic voters in Houston and Dallas \u2014 better than "
+      + "either final poll, better than the model assumes, and 46 points better than the "
+      + "last measurement of the group. The border is a twelfth of the ballots and the "
+      + "most volatile ground in Texas, and it was <i>Republican</i> at the top of the "
+      + "2024 ticket."
+      + "<br><br><b>Why only two levers.</b> Nothing else on this ballot is big enough. Hispanic "
       + "voters are 29.76% of the projected electorate, so each point of Hispanic margin "
       + "is worth 0.30 statewide — which means she needs them <b>13.2 points</b> "
       + "better than the polls already assume. The 239 smallest counties cast 3,343,577 "
@@ -2709,6 +2769,10 @@
     + ".bandrow{font-size:12px;padding:6px 8px}"
     + ".txcard .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}"
     + "}"
+    + ":root{--tal:#6b4fbb;--hin:#0f8f8f}"
+    + "@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"])"
+    + "{--tal:#a78bfa;--hin:#2dd4bf}}"
+    + ":root[data-theme=\"dark\"]{--tal:#a78bfa;--hin:#2dd4bf}"
     + "#txwrap svg{color:var(--fg)}"
     + "#txwrap .gl{stroke:var(--line);stroke-width:1}"
     + "#txwrap .zl{stroke:currentColor;stroke-width:1;stroke-dasharray:3 3;opacity:.55}"

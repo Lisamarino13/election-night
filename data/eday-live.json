@@ -9,11 +9,24 @@
    "projected_high": 1500000,
    "source": "Secretary of State Brad Raffensperger",
    "trail": [
-    {"at": "10:00am ET", "ballots": 300000},
-    {"at": "1:30pm ET", "ballots": 650000},
-    {"at": "2:45pm ET", "ballots": 775000}
+    {
+     "at": "10:00am ET",
+     "ballots": 300000
+    },
+    {
+     "at": "1:30pm ET",
+     "ballots": 650000
+    },
+    {
+     "at": "2:45pm ET",
+     "ballots": 775000
+    }
    ],
-   "compare": {"2022 midterm": 1417799, "2018 midterm": 1788425, "2024 presidential": 1221257}
+   "compare": {
+    "2022 midterm": 1417799,
+    "2018 midterm": 1788425,
+    "2024 presidential": 1221257
+   }
   },
   "TX": {
    "reported": null,
@@ -31,12 +44,25 @@
    "as_of": "1:15pm CT",
    "source": "Harris County Clerk / Houston Chronicle",
    "trail": [
-    {"at": "midmorning", "ballots": 88000},
-    {"at": "11:00am CT", "ballots": 100000},
-    {"at": "1:15pm CT", "ballots": 143000}
+    {
+     "at": "midmorning",
+     "ballots": 88000
+    },
+    {
+     "at": "11:00am CT",
+     "ballots": 100000
+    },
+    {
+     "at": "1:15pm CT",
+     "ballots": 143000
+    }
    ],
-   "early_banked": 1036349,
-   "compare": {"2022 midterm eday": 349927, "2024 presidential eday": 315077}
+   "early_banked": 1081010,
+   "compare": {
+    "2022 midterm eday": 349927,
+    "2024 presidential eday": 315077
+   },
+   "early_note": "1,036,349 early in person plus about 45,000 mail. The Houston Chronicle's cumulative 1,224,000 minus the 143,000 cast today reconciles to the same figure."
   }
  }
 }

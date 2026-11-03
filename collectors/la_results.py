@@ -54,6 +54,9 @@ UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit
                     "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
       "Accept": "application/json,text/plain,*/*"}
 WANT = {"senate": r"U\.?\s*S\.?\s+SENATOR"}
+# --proof against a past election: that election has no Senate race, so the proof
+# run widens the filter to whatever statewide contest it does carry.
+PROOF_WANT = {"contest": r"U\.?\s*S\.?\s+SENATOR\s*--\s*Republican"}
 PARTY = {"REP": "R", "DEM": "D"}
 
 
@@ -118,14 +121,15 @@ def split_name(desc):
     return name.replace('"', "").strip(), party
 
 
-def build(folder):
+def build(folder, want=None):
+    want = want or WANT
     names = parish_names()
     races = get(f"{folder}/RacesCandidates_Multiparish.htm")
     rlist = (races.get("Races") or {}).get("Race") or []
     found = {}
     for r in rlist:
         title = (r.get("SpecificTitle") or "").strip()
-        for key, pat in WANT.items():
+        for key, pat in want.items():
             if re.search(pat, title, re.I):
                 if key in found:
                     raise RuntimeError(f"{key!r} matched twice: "
@@ -137,7 +141,7 @@ def build(folder):
                               "choices": {str(c.get("ID")): split_name(c.get("Desc"))
                                           for c in ch}}
     if not found:
-        raise RuntimeError(f"none of {sorted(WANT)} found among {len(rlist)} Louisiana races")
+        raise RuntimeError(f"none of {sorted(want)} found among {len(rlist)} Louisiana races")
 
     cast, cast_as_of = early_cast_shared.by_unit("LA", key=lambda s: s.upper())
     counties, totals = {}, {}
@@ -231,12 +235,14 @@ def build(folder):
 
 
 def main():
-    folder = find_election(2026)
-    if not folder:
-        print("LA: November 2026 general not staged yet")
-        return 2
-    payload, totals, counties = build(folder)
+    # --proof <yyyymmdd> runs the whole path against a PAST Louisiana election, where
+    # the votes are real. Proving it against tonight's feed proves only that the
+    # structure parses: every total is zero until polls close, so the vote-reading
+    # path would be untested at the moment it matters.
     if "--proof" in sys.argv:
+        i = sys.argv.index("--proof")
+        folder = sys.argv[i + 1] if len(sys.argv) > i + 1 else find_election(2026)
+        payload, totals, counties = build(folder, PROOF_WANT if folder != find_election(2026) else None)
         print(f"LA proof via {folder}: {len(counties)} parishes")
         for race, t in totals.items():
             print(f"   {race}: {t['total']:,} votes  early {t['modes']['early']:,}  "
@@ -244,7 +250,18 @@ def main():
                   f"precincts {t['precincts_reporting']:,}/{t['precincts_total']:,}")
             for c, v in list(t["choices"].items())[:4]:
                 print(f"      {c[:38]:40} {v:>10,}  {t['parties'].get(c)}")
+        big = sorted(counties.items(), key=lambda x: -(x[1]["ballots_cast"] or 0))[:3]
+        for nm, rec in big:
+            r = list(rec["races"].values())[0]
+            print(f"   {nm}: {r['counted']:,} counted, "
+                  f"{r['early_and_mail_counted']:,} early, "
+                  f"{r['precincts_reporting']}/{r['precincts_total']} precincts")
         return 0
+    folder = find_election(2026)
+    if not folder:
+        print("LA: November 2026 general not staged yet")
+        return 2
+    payload, totals, counties = build(folder)
     p = pathlib.Path(__file__).resolve().parent.parent / "data" / "results-LA.json"
     rc = election_day.write_or_hold("LA", p, payload, totals)
     if rc:

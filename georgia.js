@@ -28,7 +28,12 @@
   // Midpoint. He revised UP from 1.2M during the afternoon and we had 1.6M before that.
   // This one input moves Jackson's bar by 1.6 points, so it is named, dated and sourced.
   var EDAY = 1300000;
+  // Bottoms' banked lead, both ends measured the same way: each past race's county-level
+  // early+mail margin applied to that county's 2026 early turnout. 2024 president and
+  // 2018 governor; both source files tie out to the certified statewide result.
+  var BANK_LO = 95199, BANK_HI = 106570;   // 2024 president / 2018 governor
   var TOT = EV + EDAY;
+  function bar(net) { return (net / EDAY * 100).toFixed(2); }
   var MAIL26 = 129773, INPERSON26 = 2705120;
 
   function card(id, kicker, title, hint, body, note) {
@@ -75,16 +80,16 @@
       + "vote can tell us. Georgia publishes who has voted, never how. So this page separates "
       + "the two: the counted facts first, then what has to be assumed to turn them into a "
       + "margin, then what each assumption is worth.</p>"
-      + '<p class="gaflag"><b>The honest summary.</b> Bottoms holds a banked lead on the '
-      + "order of <b>+166,000 to +307,000</b> depending on where the race actually sits. "
-      + "For Jackson to erase it on a 1.3M election day he needs to win today by "
-      + "<b>R+8.9</b>. That is <i>not</i> an extreme ask: 2022&rsquo;s election day ran "
-      + "R+15.95 with Kemp stripped out, and 2014&rsquo;s ran R+11.64. Only 2018 "
-      + "(R+5.25), 2016 (R+6.76) and 2024 (R+7.07) fall short of it. <b>Georgia is a "
-      + "genuine toss-up on this arithmetic, and it got closer this afternoon</b> "
-      + "&mdash; the Secretary of State revised election-day turnout up from 1.2M to "
-      + "1.4&ndash;1.5M, and a bigger election day is more of the mode that leans "
-      + "Republican. At 1.2M his bar was R+9.6.</p>"
+      + '<p class="gaflag"><b>The honest summary.</b> Bottoms holds a banked lead of '
+      + "<b class='nm'>+" + n0(BANK_LO) + " to +" + n0(BANK_HI) + "</b>. Both ends are "
+      + "measured the same way &mdash; a past race&rsquo;s county-level early margin "
+      + "applied to that county&rsquo;s actual 2026 early turnout &mdash; using 2024 and "
+      + "2018. For Jackson to erase it on a 1.3M election day he needs <b>R+"
+      + bar(BANK_LO) + " to R+" + bar(BANK_HI) + "</b>. <b>Georgia&rsquo;s own 2024 "
+      + "election day ran R+7.34, which sits inside that range.</b> On the 2018 analog "
+      + "(R+5.25) Bottoms holds; on anything like 2020 or 2022 Jackson clears it easily. "
+      + "<b>This is a coin flip, and the most recent comparable election day is sitting "
+      + "on the line.</b></p>"
       + "</section>";
   }
 
@@ -143,27 +148,34 @@
   /* =============================================================== 2. composition */
   function compCard() {
     var rows = [
-      {c: ["Atlanta metro (32 counties)", n0(1881574), "66.4%", "D+14.7",
-           "<b>+" + n0(306560) + "</b>"]},
-      {c: ["Rural outside metro (117)", n0(583392), "20.6%", "R+39.8",
-           "<b>&minus;" + n0(218207) + "</b>"]},
-      {c: ["Other big counties (10)", n0(369926), "13.0%", "D+5.6", "+" + n0(26993)]},
+      {c: ["Atlanta metro (29 counties)", n0(1793044), "63.2%", "D+18.4 to D+19.3",
+           "<b>+" + n0(330639) + " to +" + n0(346459) + "</b>"]},
+      {c: ["Rural outside metro (120)", n0(673833), "23.8%", "R+40.8 to R+40.9",
+           "<b>&minus;" + n0(274622) + " to &minus;" + n0(275667) + "</b>"]},
+      {c: ["Other big counties (10)", n0(368015), "13.0%", "D+6.6 to D+13.7",
+           "+" + n0(24407) + " to +" + n0(50553)]},
       {em: 1, c: ["<b>Banked</b>", "<b>" + n0(EV) + "</b>", "<b>100%</b>", "",
-                  "<b>+" + n0(115347) + "</b>"]}
+                  "<b>+" + n0(BANK_LO) + " to +" + n0(BANK_HI) + "</b>"]}
     ];
     return card("ga-comp", "Section 2 &middot; what the composition is worth",
-      "Bottoms is banked ahead by 115,347 votes",
+      "Bottoms is banked ahead by 95,199 to 106,570 votes",
       "Not a share, not a shift &mdash; the actual lead sitting in the counted ballots.",
-      tbl(["group", "banked ballots", "of banked", "2024 lean", "net D banked"], rows)
-      + '<p class="gainline"><b>Atlanta has banked her a 306,560-vote lead. Rural '
-      + "Georgia has banked Jackson <b>218,207</b> back. She nets <b class='nm'>"
-      + "+115,347</b>, and that is the hole he has to climb out of today.</b></p>"
+      tbl(["group", "banked ballots", "of banked", "early lean, 2024 / 2018",
+           "net D banked"], rows)
+      + '<p class="gainline"><b>Atlanta has banked her roughly a 330,000&ndash;346,000 '
+      + "vote lead. Rural Georgia has banked Jackson about <b>275,000</b> back. She nets "
+      + "<b class='nm'>+" + n0(BANK_LO) + " to +" + n0(BANK_HI) + "</b>, and that is the "
+      + "hole he has to climb out of today.</b></p>"
       + '<p class="gainline"><b>Why rural does so much damage with so few ballots.</b> '
-      + "583,392 rural votes produce 218,207 net because they run R+39.8. "
-      + "Atlanta&rsquo;s 1,881,574 produce 306,560 at D+14.7 &mdash; more than three "
-      + "times the ballots for only 40% more margin. <b>Rural is 20.6% of the banked "
-      + "vote and carries 65% of the Republican margin</b>, which is why its turnout "
-      + "mattered more than Atlanta&rsquo;s.</p>",
+      + "673,833 rural votes produce about 275,000 net because they run R+40.9. "
+      + "Atlanta&rsquo;s 1,793,044 produce 346,459 at D+19.3 &mdash; two and a half "
+      + "times the ballots for only a quarter more margin. <b>Rural is 23.8% of the "
+      + "banked vote and carries nearly all of the Republican margin</b>, which is why "
+      + "its turnout mattered more than Atlanta&rsquo;s.</p>"
+      + '<p class="gainline"><b>The two baselines barely disagree, and that is the '
+      + "point.</b> 2024 and 2018 are eight years and two very different electorates "
+      + "apart, and they land 11,371 votes apart on the same ballots &mdash; because "
+      + "Georgia&rsquo;s county geography is stable even when its politics are not.</p>",
       "<b>This card used to show the wrong thing.</b> It compared each group&rsquo;s "
       + "share of tonight&rsquo;s early vote against its share in 2022 and reported the "
       + "difference &mdash; which made Atlanta look like it had contributed +6,813 votes, "
@@ -176,7 +188,7 @@
       + "electorate is about <b>one point</b> bluer than the last midterm&rsquo;s. "
       + "Republican counties grew <b>+9.0%</b> against Democratic counties&rsquo; "
       + "<b>+15.6%</b>, and the R share of the early vote fell from <b>43.0% to "
-      + "41.6%</b>. Real, but small next to the 115,347 already banked.");
+      + "41.6%</b>. Real, but small next to the lead already banked.");
   }
 
   /* =============================================================== 3. the regime */
@@ -188,7 +200,7 @@
       {c: ["2020 president", "R+23.09", "R&minus;0.26", "<b>+23.35</b>"]},
       {c: ["2022 senate (no Kemp)", "R+15.95", "D+0.98", "<b>+16.92</b>"]},
       {c: ["2022 governor (Kemp)", "R+25.34", "R+7.59", "<b>+17.75</b>"]},
-      {em: 1, c: ["<b>2024 president</b>", "<b>R+7.07</b>", "<b>R+2.19</b>", "<b>+4.88</b>"]}
+      {em: 1, c: ["<b>2024 president</b>", "<b>R+7.34</b>", "<b>R+2.19</b>", "<b>+5.15</b>"]}
     ];
     return card("ga-regime", "Section 3 &middot; the mode gap",
       "The huge election-day skew was a two-cycle anomaly, and it has already ended",
@@ -196,10 +208,11 @@
       tbl(["cycle", "election day", "statewide", "skew"], rows)
       + '<p class="gainline"><b>Before 2020 the skew was 1.4 to 3.8. COVID and the '
       + "campaign against early voting drove it to 17&ndash;23. In 2024 it fell back to "
-      + "<b class='nm'>4.88</b>.</b></p>",
-      "<b>Sources: the Georgia SOS results API for 2014&ndash;2022 (it holds 118 elections "
-      + "back to 2012), NBC News for 2024.</b> The 2024 mode split weights to R+2.19 "
-      + "against a certified R+2.21, so it checks out. <b>The skew is structural, not "
+      + "<b class='nm'>5.15</b>.</b></p>",
+      "<b>Source: the Georgia SOS results API, all 159 counties, for every row including "
+      + "2024.</b> The 2024 split is no longer NBC&rsquo;s summary &mdash; it is the "
+      + "state&rsquo;s own certified county file, and it sums to Harris 2,548,017 and "
+      + "Trump 2,663,117, matching the certified result to the vote. <b>The skew is structural, not "
       + "candidate-driven:</b> on the same 2022 ballot Kemp&rsquo;s skew was +17.75 and "
       + "Walker&rsquo;s +16.92 &mdash; nearly identical, even though Kemp ran 8.57 points "
       + "ahead of Walker statewide. Kemp&rsquo;s personal vote was spread evenly across "
@@ -213,50 +226,56 @@
     var rows = [
       {c: ["2018 governor", "R+5.25", "no"]},
       {c: ["2016 president", "R+6.76", "no"]},
-      {c: ["2024 president", "R+7.07", "no, by 0.9"]},
+      {em: 1, c: ["<b>2024 president</b>", "<b>R+7.34</b>",
+                  "<b>on the line &mdash; clears the low end by 0.02</b>"]},
       {c: ["2014 governor", "R+11.64", "<b>yes</b>"]},
       {c: ["2022 senate (no Kemp)", "R+15.95", "<b>yes</b>"]},
       {c: ["2020 president &mdash; pandemic", "R+23.09", "<b>yes</b>"]},
       {c: ["2022 governor &mdash; Kemp", "R+25.34", "<b>yes</b>"]}
     ];
     return card("ga-bar", "Section 4 &middot; what Jackson needs",
-      "He has to win election day by about 9 points",
+      "He has to win election day by 7.3 to 8.2 points",
       "Bottoms&rsquo; banked lead, spread across a projected 1.3M election day.",
-      '<div class="gabig">R+8.88</div>'
-      + '<div class="gasub">to pull even &mdash; it was R+9.6 before the turnout '
-      + "revision, and R+23 when we assumed a 1.2M day and a smaller banked lead</div>"
-      + tbl(["every Georgia election day since 2014", "margin", "clears R+8.88?"], rows)
-      + '<p class="gainline"><b>Four of the last seven clear it.</b> This is no longer '
-      + "a bar only a pandemic or Kemp could reach &mdash; 2014 and a Kemp-free 2022 "
-      + "both clear it comfortably, and 2024 misses by nine tenths of a point. "
-      + "Morris&rsquo;s independent estimate this morning was that Republicans need "
-      + "<b>R+17 to R+23</b>; that was computed against a smaller election day than the "
-      + "state is now projecting.</p>",
-      "<b>The range, not the point estimate.</b> Across the banked estimates on this "
-      + "page &mdash; D+4.07 to D+5.93, or <b>+115,380</b> to <b>+168,109</b> votes "
-      + "&mdash; Jackson&rsquo;s bar runs from <b>R+8.88</b> to <b>R+12.93</b>. "
-      + "<b>Every figure in that range has happened in Georgia before.</b> That is the "
-      + "honest position: this is a toss-up, and it moved toward Jackson this afternoon "
-      + "when the state raised its own turnout projection.");
+      '<div class="gabig">R+' + bar(BANK_LO) + " to R+" + bar(BANK_HI) + "</div>"
+      + '<div class="gasub">the 2024 and 2018 baselines, each applied county by county '
+      + "to tonight&rsquo;s ballots</div>"
+      + tbl(["every Georgia election day since 2014", "margin",
+             "clears R+" + bar(BANK_LO) + " to R+" + bar(BANK_HI) + "?"], rows)
+      + '<p class="gainline"><b>Georgia&rsquo;s 2024 election day ran R+7.34 &mdash; '
+      + "two hundredths of a point above the bottom of the bar.</b> That is the whole "
+      + "race in one number. Repeat 2024&rsquo;s election day and this is a tie; run "
+      + "2018&rsquo;s (R+5.25) and Bottoms holds; run anything resembling 2020 or 2022 "
+      + "and Jackson wins comfortably.</p>",
+      "<b>Where the range comes from, and what is still an assumption.</b> The two ends "
+      + "are 2024 president (R+0.68 early statewide) and 2018 governor (D+1.61 early "
+      + "statewide), each reweighted to tonight&rsquo;s county turnout; both source files "
+      + "tie out to their certified statewide results. <b>What is assumed is that a "
+      + "county&rsquo;s early vote breaks the way it broke in the baseline year</b> "
+      + "&mdash; the method cannot see shifts inside a county, so it is conservative by "
+      + "construction, and the measured composition shift (the Black share of the early "
+      + "electorate rose from 26.34% to 32.38%) points the same way.");
   }
 
   function turnoutCard() {
     var rows = [
-      {c: ["900,000", "24.1%", "R+12.82", "<b>clears</b>"]},
-      {c: ["1,200,000 &mdash; his 1:30pm figure", "29.7%", "R+9.62", "<b>clears</b>"]},
+      {c: ["1,000,000", "26.1%", "R+9.52 to R+10.66", "<b>clears both</b>"]},
+      {c: ["1,200,000 &mdash; his 1:30pm figure", "29.7%", "R+7.93 to R+8.88",
+           "<b>clears both</b>"]},
       {em: 1, c: ["<b>1,300,000 &mdash; our projection</b>", "<b>31.4%</b>",
-                  "<b>R+8.88</b>", "<b>clears</b>"]},
-      {c: ["1,500,000", "34.6%", "R+7.69", "<b>clears</b>"]},
-      {c: ["1,788,425 &mdash; 2018&rsquo;s record", "38.7%", "R+6.45", "<b>clears</b>"]}
+                  "<b>R+7.32 to R+8.20</b>", "<b>clears both</b>"]},
+      {c: ["1,500,000", "34.6%", "R+6.35 to R+7.10", "<b>clears both</b>"]},
+      {c: ["1,788,425 &mdash; 2018&rsquo;s record", "38.7%", "R+5.32 to R+5.96",
+           "<b>clears both</b>"]}
     ];
     return card("ga-turnout", "Section 4 &middot; slide 2",
       "A bigger election day helps him, and the state just raised its estimate",
       "Every ballot cast today is one more of the mode that leans Republican.",
       tbl(["election-day turnout", "% of total", "R needs", "vs a Kemp-free R+15.95"], rows)
       + '<p class="gainline"><b>At every plausible turnout, a 2022-style Kemp-free '
-      + "election day (R+15.95) clears the bar.</b> Only an election day like 2018&rsquo;s "
-      + "(R+5.25) or 2024&rsquo;s (R+7.07) leaves Bottoms ahead. The question is no longer "
-      + "<i>how many</i> vote today but <i>how</i> they vote.</p>",
+      + "election day (R+15.95) clears the bar.</b> Only an election day like "
+      + "2018&rsquo;s (R+5.25) leaves Bottoms clearly ahead, and 2024&rsquo;s (R+7.34) "
+      + "lands on the line at every size. <b>The question is no longer <i>how many</i> "
+      + "vote today but <i>how</i> they vote.</b></p>",
       "<b>This card said the opposite an hour ago, and it was wrong.</b> It was built on "
       + "a 1.2M election day and a smaller banked lead, and concluded Jackson needed a "
       + "turnout Georgia had not produced since 2018. The Secretary of State then revised "
@@ -308,7 +327,9 @@
       {c: ["2018 governor", n0(33814), "R+1.89", "R+5.25", "Kemp won &mdash; correct"]},
       {c: ["2022 senate", n0(258633), "R+18.24", "R+15.95",
            "Warnock led &mdash; correct"]},
-      {em: 1, c: ["<b>2026 governor</b>", "<b>" + n0(278773) + "</b>", "<b>R+21.44</b>",
+      {em: 1, c: ["<b>2026 governor</b>",
+                  "<b>" + n0(BANK_LO) + " to " + n0(BANK_HI) + "</b>",
+                  "<b>R+" + bar(BANK_LO) + " to R+" + bar(BANK_HI) + "</b>",
                   "<b>&mdash;</b>", "<b>?</b>"]}
     ];
     return card("ga-valid", "Section 4 &middot; slide 3",
@@ -318,12 +339,15 @@
       "<b>This is the only part of the method that has been tested rather than asserted.</b> "
       + "Abrams banked too little and Kemp cleared her bar by 3.4 points. Warnock banked "
       + "enough and Walker fell 2.29 short, and Warnock led on the night. Two midterms, "
-      + "two correct calls. Bottoms banks a lead close to Warnock&rsquo;s &mdash; against "
-      + "an election day a couple of points smaller as a share of the electorate. "
-      + "<b>Note the bar moved.</b> At the 1.2M the state was projecting at 1:30pm this "
-      + "read R+23.23; on the 1.3M we now project it reads <b>R+21.44</b>, because the "
-      + "same lead spread over more ballots is a smaller margin per ballot. Walker fell "
-      + "2.29 short of R+18.24 in 2022, and Warnock led on the night.");
+      + "two correct calls. <b>Bottoms banks far less than Warnock did &mdash; about "
+      + "100,000 against his 258,633 &mdash; but faces an election day roughly 120,000 "
+      + "ballots smaller, and a bar less than half his.</b> "
+      + "<b>A correction belongs here.</b> This card previously put her banked lead at "
+      + "278,773 and her bar at R+21.44. That figure could not be reproduced from any "
+      + "source on this page or any file behind it, and it contradicted the 115,347 the "
+      + "rest of the page was using. It has been removed and replaced with the measured "
+      + "range. <b>The 2018 and 2022 rows are unchanged: both are the states own "
+      + "certified early-vote totals and both tie out.</b>");
   }
 
   /* =============================================================== render */

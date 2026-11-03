@@ -1,6 +1,6 @@
 {
- "note": "Election-day turnout as officials report it during the day. These are STATEMENTS to the press, not a feed - each carries the time it was given and who gave it. They move: Georgia's projection went from 1.2M to 1.4-1.5M between 1:30pm and 2:45pm ET.",
- "updated": "2026-11-03T21:55:00Z",
+ "note": "Election-day turnout as officials report it during the day. These are STATEMENTS to the press, not a feed - each carries the time it was given and who gave it. They move: Georgia's projection went from 1.2M to 1.4-1.5M between 1:30pm and 2:45pm ET. Only Georgia (statewide) and Harris County, Texas publish a running same-day count; no other state or county on this board does.",
+ "updated": "2026-11-03T23:30:00Z",
  "states": {
   "GA": {
    "reported": 775000,
@@ -33,20 +33,26 @@
    "as_of": null,
    "projected_low": null,
    "projected_high": null,
-   "source": "Texas does not publish a statewide running count",
+   "source": "Texas publishes no statewide running election-day count. Early vote 7.7M of 19M registered, per Houston Chronicle (Benjamin Wermund); 2018's early vote was about 4.9M, also roughly 40% of registered at the time.",
    "trail": [],
-   "compare": {}
+   "compare": {
+    "2018 early vote": 4900000
+   },
+   "early_banked": 7700000,
+   "registered": 19000000,
+   "early_pct_of_registered": 40,
+   "note": "Early voting is normally 75-85% of Texas turnout, so 7.7M early implies a statewide total around 9.1-10.3M. Polls close 7pm CT."
   }
  },
  "counties": {
   "TX:Harris": {
-   "reported": 143000,
-   "as_of": "1:15pm CT",
-   "source": "Harris County Clerk / Houston Chronicle",
+   "reported": 220000,
+   "as_of": "4:30pm CT",
+   "source": "Harris County Clerk's office, via Houston Chronicle live updates (updated 4:59pm CT)",
    "trail": [
     {
-     "at": "midmorning",
-     "ballots": 88000
+     "at": "midmorning briefing",
+     "ballots": 86000
     },
     {
      "at": "11:00am CT",
@@ -55,6 +61,14 @@
     {
      "at": "1:15pm CT",
      "ballots": 143000
+    },
+    {
+     "at": "3:00pm CT",
+     "ballots": 184000
+    },
+    {
+     "at": "4:30pm CT",
+     "ballots": 220000
     }
    ],
    "early_banked": 1081010,
@@ -62,7 +76,14 @@
     "2022 midterm eday": 349927,
     "2024 presidential eday": 315077
    },
-   "early_note": "1,036,349 early in person plus about 45,000 mail. The Houston Chronicle's cumulative 1,224,000 minus the 143,000 cast today reconciles to the same figure."
+   "early_note": "1,036,349 early in person plus about 45,000 mail. The Houston Chronicle's cumulative 1,224,000 minus the 143,000 cast today reconciles to the same figure.",
+   "cumulative_all_modes": 1300000,
+   "cumulative_as_of": "4:30pm CT",
+   "registered": 2746000,
+   "turnout_pct": 46,
+   "turnout_pct_2018": 43,
+   "record_note": "Harris broke its midterm record at about 1:15pm CT - 1,224,000 against 2018's 1,219,000 - and passed 1.3M by 4:30pm, a ~7% rise over 2018. Registration is up almost 17% from 2018, so the SHARE of registered voters turning out (46%) has not yet passed its own record.",
+   "pace_note": "Election-day pace is ACCELERATING, not fading: 19,111/hr to 1:15pm, 23,429/hr to 3:00pm, 24,000/hr to 4:30pm. Rain cleared mid-afternoon. At 24-30k/hr for the last 2.5 hours Harris lands near 280,000-295,000 election-day ballots."
   }
  }
 }

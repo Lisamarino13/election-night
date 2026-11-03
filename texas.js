@@ -1977,10 +1977,12 @@
     return card("tx-tarrant-swing", "Section 2 · slide 5 · who is in each camp",
       "The Neither voters look like Tarrant County",
       "<b>Source: Chris Tackett, See It. Name It. Fight It., 31 October — his table.</b> "
-      + "The first chart showed how big the three camps are. This one shows who is in "
-      + "them, and his finding lives entirely here. The second figure is the same table "
-      + "drawn as distance from the county’s own active voters, because that is the "
-      + "claim being made: <i>“on age, gender and race, they’re within a point or "
+      + "The previous card showed how big the three camps are. This one shows who is "
+      + "in them. Below the table, his headline claim on its own — the county’s "
+      + "active voters against the Neither bucket, line by line — because it is "
+      + "the claim the rest of the card rests on: <i>“on age, gender and race, "
+      + "they’re within a point or two of the county’s active voters on almost "
+      + "every line.”</i>",
       + "two of the county’s active voters on almost every line.”</i>",
       tbl + mirror + slTbl,
       "<b>Neither mirrors the county; the Republican camp does not come close.</b> "

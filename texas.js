@@ -1471,12 +1471,7 @@
       + "margins, not about who is winning which bloc."
       + "<br><br><b>The one gap that moves the model.</b> Hispanic voters, <b>D+28 "
       + "against D+16.5</b>. The county model assumes they land at D+29.85, which YouGov "
-      + "supports and AtlasIntel does not \u2014 and break-even sits between the two."
-      + "<br><br><b>One caution on the poll \u201cwhite\u201d and \u201cHispanic\u201d "
-      + "rows.</b> They are self-identified respondents statewide. The precinct figures "
-      + "elsewhere on this tab are counted ballots in precincts that are 90% one group, "
-      + "which is a different and more geographically concentrated population. The two are "
-      + "not interchangeable and the gap between them is composition, not disagreement.");
+      + "supports and AtlasIntel does not \u2014 and break-even sits between the two.");
   }
 
   /* The two charts the Tarrant file actually publishes, drawn the way it draws them

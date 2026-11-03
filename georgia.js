@@ -141,30 +141,40 @@
   /* =============================================================== 2. composition */
   function compCard() {
     var rows = [
-      {c: ["Atlanta metro (32 counties)", n0(1881574), n0(1835209), "+" + n0(46365),
-           "D+14.7", "+" + n0(6813)]},
-      {c: ["Rural outside metro (117)", n0(583392), n0(628976), "&minus;" + n0(45584),
-           "R+39.0", "+" + n0(17760)]},
-      {c: ["Other big counties (10)", n0(369926), n0(370707), "&minus;781", "D+5.6", "&minus;44"]},
-      {em: 1, c: ["<b>Net</b>", "", "", "", "", "<b>+" + n0(24529) + "</b>"]}
+      {c: ["Atlanta metro (32 counties)", n0(1881574), "66.4%", "D+14.7",
+           "<b>+" + n0(306560) + "</b>"]},
+      {c: ["Rural outside metro (117)", n0(583392), "20.6%", "R+39.8",
+           "<b>&minus;" + n0(218207) + "</b>"]},
+      {c: ["Other big counties (10)", n0(369926), "13.0%", "D+5.6", "+" + n0(26993)]},
+      {em: 1, c: ["<b>Banked</b>", "<b>" + n0(EV) + "</b>", "<b>100%</b>", "",
+                  "<b>+" + n0(115347) + "</b>"]}
     ];
     return card("ga-comp", "Section 2 &middot; what the composition is worth",
-      "The banked electorate is about one point bluer than the last midterm",
-      "Measured against <i>2022&rsquo;s early vote</i> &mdash; the only honest comparison.",
-      tbl(["group", "2026 early", "at par", "surplus", "2024 lean", "net D votes"], rows)
-      + '<p class="gainline"><b>+' + n0(24529) + " net Democratic votes, or "
-      + "<b class='nm'>+0.61</b> points</b> on a " + n0(TOT) + " electorate. Georgia was "
-      + "decided by 11,779 votes in 2020.</p>",
-      "<b>The baseline matters more than the finding.</b> Comparing tonight&rsquo;s early "
-      + "vote to a past <i>full</i> electorate gives +3.66 points, but that is mostly "
-      + "definitional &mdash; an early vote always looks bluer than a whole electorate. "
-      + "Against 2022&rsquo;s <i>early</i> vote the shift is <b>+0.99 points</b>, and the "
-      + "rural shortfall contributes nearly three times what Atlanta&rsquo;s surplus does, "
-      + "because each missing rural ballot carries 39 points of margin against "
-      + "Atlanta&rsquo;s 15. Republican counties grew their early vote <b>+9.0%</b> over "
-      + "2022 while Democratic counties grew <b>+15.6%</b>; the R share of the early vote "
-      + "fell from <b>43.0% to 41.6%</b>. There is no sign Republicans have returned to "
-      + "early voting &mdash; only that the electorate has drifted slightly.");
+      "Bottoms is banked ahead by 115,347 votes",
+      "Not a share, not a shift &mdash; the actual lead sitting in the counted ballots.",
+      tbl(["group", "banked ballots", "of banked", "2024 lean", "net D banked"], rows)
+      + '<p class="gainline"><b>Atlanta has banked her a 306,560-vote lead. Rural '
+      + "Georgia has banked Jackson <b>218,207</b> back. She nets <b class='nm'>"
+      + "+115,347</b>, and that is the hole he has to climb out of today.</b></p>"
+      + '<p class="gainline"><b>Why rural does so much damage with so few ballots.</b> '
+      + "583,392 rural votes produce 218,207 net because they run R+39.8. "
+      + "Atlanta&rsquo;s 1,881,574 produce 306,560 at D+14.7 &mdash; more than three "
+      + "times the ballots for only 40% more margin. <b>Rural is 20.6% of the banked "
+      + "vote and carries 65% of the Republican margin</b>, which is why its turnout "
+      + "mattered more than Atlanta&rsquo;s.</p>",
+      "<b>This card used to show the wrong thing.</b> It compared each group&rsquo;s "
+      + "share of tonight&rsquo;s early vote against its share in 2022 and reported the "
+      + "difference &mdash; which made Atlanta look like it had contributed +6,813 votes, "
+      + "when it has banked a lead of 306,560. The shift was real but tiny (Atlanta went "
+      + "from 64.7% to 66.4% of the early vote) because Atlanta was already dominant. "
+      + "<b>A change-from-baseline number cannot see a level that was already high.</b>"
+      + "<span class='txrule'></span>"
+      + "<b>The drift, for what it is worth:</b> Atlanta&rsquo;s early vote is up "
+      + "<b>15.3%</b> on 2022 and rural counties grew more slowly, so the banked "
+      + "electorate is about <b>one point</b> bluer than the last midterm&rsquo;s. "
+      + "Republican counties grew <b>+9.0%</b> against Democratic counties&rsquo; "
+      + "<b>+15.6%</b>, and the R share of the early vote fell from <b>43.0% to "
+      + "41.6%</b>. Real, but small next to the 115,347 already banked.");
   }
 
   /* =============================================================== 3. the regime */

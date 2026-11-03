@@ -1862,22 +1862,7 @@
       + "opens with it: <i>\u201c13.1% sat out the 2022 midterm, then voted in 2024, and "
       + "17.9% registered since 2022\u201d</i>, and a further 17.8% were on the rolls in "
       + "2022 and did not vote. Together that is 48.8% \u2014 about 287,000 people in one "
-      + "county who sat out the last midterm and have already voted in this one."
-      + "<br><br><b>They look like the county.</b> The file does not break race out for "
-      + "the newcomers alone, but the electorate they are inside tracks Tarrant\u2019s own "
-      + "registered pool within five points on every racial group: white 58% of voters "
-      + "against 53% of active registered, Hispanic 18% against 21%, Black 16% against "
-      + "17%, Asian and Pacific Islander 5% against 5%, other or multiracial 4% against "
-      + "4%. These are not a demographically exotic sliver arriving at the edges \u2014 "
-      + "they are a cross-section of the county, and at 48.8% of ballots cast they are "
-      + "large enough to decide how it goes on their own. The next card prices that."
-      + "<br><br><b>The second chart is the same comparison across age and race.</b> The "
-      + "file\u2019s rule for reading it: <i>\u201ca group whose share of voters is "
-      + "bigger is turning out ahead of the rest\u201d</i>. On that measure the three "
-      + "newcomer groups are all still turning out behind their registration share \u2014 "
-      + "furthest behind are the 33.0% of registered voters who were on the rolls in 2022 "
-      + "and did not vote, who are 17.8% of ballots so far. That is headroom, not a "
-      + "ceiling: it is the pool election day draws from.");
+      + "county who sat out the last midterm and have already voted in this one.");
   }
 
   /* The two Tarrant findings that were sitting in data/tx unused: the precinct swing and

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-03T21:02:53+00:00",
+ "updated": "2026-11-03T16:31:31+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -69,6 +69,29 @@
      "counties": [],
      "updated": null,
      "tier": "tossup",
+     "roster_only": true,
+     "roster_source": "https://electionresultsfiles.sos.mn.gov/20261103/allracesbycounty.txt"
+    },
+    "governor": {
+     "candidates": [
+      {
+       "name": "Lisa Demuth and Ryan Wilson",
+       "party": "R"
+      },
+      {
+       "name": "Amy Klobuchar and Ben Schierer",
+       "party": "D"
+      },
+      {
+       "name": "Steven Young and Jane Kirby",
+       "party": "O"
+      },
+      {
+       "name": "WRITE-IN",
+       "party": "O"
+      }
+     ],
+     "counties": [],
      "roster_only": true,
      "roster_source": "https://electionresultsfiles.sos.mn.gov/20261103/allracesbycounty.txt"
     }
@@ -154,27 +177,19 @@
     "senate": {
      "candidates": [
       {
-       "name": "Heikes, Gerald L.",
+       "name": "Dan Sullivan",
        "party": "R"
       },
       {
-       "name": "Sullivan, Dan S.",
-       "party": "R"
-      },
-      {
-       "name": "Peltola, Mary",
+       "name": "Mary Peltola",
        "party": "D"
-      },
-      {
-       "name": "Sullivan, Daniel J. Jr.",
-       "party": "O"
       }
      ],
      "counties": [],
      "updated": null,
      "tier": "watch",
      "roster_only": true,
-     "roster_source": "https://www.elections.alaska.gov/enr/26GENR/results/GA_ENR_Precinct_State_of_Alaska.csv"
+     "roster_source": "https://ballotpedia.org/U.S._Senate_battlegrounds,_2026"
     }
    },
    "unitsExpected": 40,
@@ -6071,7 +6086,7 @@
      "updated": null,
      "tier": "watch",
      "roster_only": true,
-     "roster_source": "https://electionresults.iowa.gov/IA/127077/383360/reports/detailxml.zip"
+     "roster_source": "https://electionresults.iowa.gov/IA/127077/383162/reports/detailxml.zip"
     }
    },
    "unitsExpected": 99,
@@ -8382,6 +8397,21 @@
      "tier": "watch",
      "roster_only": true,
      "roster_source": "https://ent.sos.ks.gov/<county>.html (+ national.html and statewide.html for state totals), read with a real browser"
+    },
+    "governor": {
+     "candidates": [
+      {
+       "name": "Ty Masterson",
+       "party": "R"
+      },
+      {
+       "name": "Cindy Holscher",
+       "party": "D"
+      }
+     ],
+     "counties": [],
+     "roster_only": true,
+     "roster_source": "https://ent.sos.ks.gov/<county>.html (+ national.html and statewide.html for state totals), read with a real browser"
     }
    },
    "unitsExpected": 105,
@@ -8444,7 +8474,7 @@
      ],
      "counties": [],
      "roster_only": true,
-     "roster_source": "https://voterportal.sos.la.gov/ElectionResults/ElectionResults/Data?blob=20261103/VotesRaceByParish/Votes_<race>.htm"
+     "roster_source": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Louisiana"
     }
    },
    "unitsExpected": 64,

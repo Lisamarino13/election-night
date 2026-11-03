@@ -649,28 +649,55 @@
   function precinctCard() {
     var rows = (D.prec || []).filter(function (r) { return num(r.margin_R) != null; });
     if (!rows.length) return "";
-    var byWhere = {};
-    rows.forEach(function (r) {
-      (byWhere[r.where] = byWhere[r.where] || []).push(r);
-    });
-    var body = Object.keys(byWhere).map(function (w) {
-      return byWhere[w].map(function (r, i) {
-        return "<tr>" + (i === 0 ? '<td rowspan="' + byWhere[w].length + '">' + esc(w) + "</td>" : "")
-          + "<td>" + esc(r.race) + '</td><td class="num">' + n0(num(r.ballots))
-          + '</td><td class="num ' + (num(r.margin_R) < 0 ? "dem" : "rep") + '">'
-          + mgn(num(r.margin_R)) + "</td></tr>";
+    // The file carries TWO precinct definitions - 90%+ Hispanic and 90%+ non-white -
+    // and an earlier version of this table printed only `where` and `race`, so
+    // "Border / South Texas, 2024 Senate" appeared twice with nothing to tell the two
+    // apart. Group by definition first, and say what each one is.
+    var defs = [];
+    rows.forEach(function (r) { if (defs.indexOf(r.group) < 0) defs.push(r.group); });
+    var body = defs.map(function (dfn) {
+      var band = rows.filter(function (r) { return r.group === dfn; });
+      var head = '<tr class="grp"><td colspan="4">' + esc(dfn)
+        + " \u2014 precincts that are " + esc(dfn.replace(/ 90%\+$/, ""))
+        + " by at least 90% of voting-age population</td></tr>";
+      var byWhere = {};
+      band.forEach(function (r) { (byWhere[r.where] = byWhere[r.where] || []).push(r); });
+      return head + Object.keys(byWhere).map(function (w) {
+        return byWhere[w].map(function (r, i) {
+          var m = num(r.margin_R);
+          return "<tr>"
+            + (i === 0 ? '<td rowspan="' + byWhere[w].length + '">' + esc(w) + "</td>" : "")
+            + "<td>" + esc(r.race) + '</td><td class="num">' + n0(num(r.ballots))
+            + '</td><td class="num ' + (m < 0 ? "dem" : "rep") + '">' + mgn(m)
+            + "</td></tr>";
+        }).join("");
       }).join("");
     }).join("");
+    // the spread that makes the point, computed rather than asserted
+    var h = rows.filter(function (r) { return r.group.indexOf("Hispanic") === 0
+                                       && r.race === "2024 Senate"; });
+    var spread = "";
+    if (h.length > 1) {
+      var ms = h.map(function (r) { return num(r.margin_R); });
+      spread = Math.abs(Math.max.apply(null, ms) - Math.min.apply(null, ms)).toFixed(1);
+    }
     return card("tx-prec", "Chapter 4 \u00b7 impact of the Hispanic vote",
       "The same group, two different electorates",
-      "Precincts 90% or more Hispanic by voting-age population in 2024, split by where "
-      + "they are. The border and the metros are not the same electorate and are not "
-      + "moving the same way.",
+      "Precincts that are overwhelmingly one group in 2024, split by where they are. "
+      + "The first block is the one that matters for this model: Hispanic precincts on "
+      + "the border run "
+      + (spread ? "<b>" + spread + " points</b> " : "")
+      + "away from Hispanic precincts in the big metros, in the same race on the same "
+      + "day. The second block widens the definition to any 90% non-white precinct, "
+      + "which is a different and more Democratic set.",
       '<div class="scroll"><table class="txtbl"><thead><tr><th>Where</th><th>Race</th>'
       + "<th>Ballots</th><th>Margin</th></tr></thead><tbody>" + body + "</tbody></table></div>",
       "There is no single Hispanic number to measure, which is why break-even is a range "
-      + "rather than a point: the same group runs 31 to 46 points apart depending on where "
-      + "it lives, and the two halves are moving in opposite directions.");
+      + "rather than a point: the same group runs tens of points apart depending on where "
+      + "it lives, and the two halves have been moving in opposite directions. Note also "
+      + "that the border's 2024 <i>presidential</i> margin is Republican while its Senate "
+      + "margin is Democratic \u2014 the same voters, the same ballot, a 12-point split "
+      + "between the top of the ticket and the Senate race.");
   }
 
   function volCard() {

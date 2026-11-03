@@ -471,22 +471,6 @@
     s2 += txt(L, H - 6, "Blue = Democratic ballots, red = Republican; the two shares sum to "
               + "100. Bottom row is the November margin that followed.", "lgd");
     s2 += "</svg>";
-    var hist = (D.phist || []).map(function (r) {
-      return {y: +r.year, sh: num(r.d_share_primary)};
-    }).filter(function (r) { return r.sh != null; });
-    var histNote = "";
-    if (hist.length) {
-      var lowest = hist.reduce(function (a2, b2) { return b2.sh < a2.sh ? b2 : a2; });
-      var last = hist.reduce(function (a2, b2) { return b2.y > a2.y ? b2 : a2; });
-      histNote = "<b>Not the best ever, and the difference matters.</b> Texas ran "
-        + "effectively one-party primaries for decades: the Democratic share was "
-        + hist[0].sh.toFixed(1) + "% in " + hist[0].y + ", peaked above 95%, and was "
-        + "still " + last.sh.toFixed(1) + "% in " + last.y + " \u2014 never below "
-        + lowest.sh.toFixed(1) + "% (" + lowest.y + ") across that whole run. What 2026 "
-        + "is: <b>the best Democratic share since at least " + last.y + "</b>, and the "
-        + "first midterm majority since Republicans became competitive in Texas. The next "
-        + "best midterm in the modern series is 2018 at 40.81%, so 2026 is +10.89 on it.";
-    }
     return card("tx-primary", "Chapter 1 \u00b7 what actually changed",
       "Democratic share of the Texas primary",
       "Texas runs an open primary \u2014 you declare at the poll and nothing binds you "
@@ -497,7 +481,99 @@
       s2,
       "This is the strongest single piece of evidence that the electorate changed, and the "
       + "one piece the demographic model does not use. It is also a certified count rather "
-      + "than an inference, unlike almost everything else on this tab. " + histNote);
+      + "than an inference, unlike almost everything else on this tab.");
+  }
+
+  /* The primary is the only certified count on this tab, so it is the only thing that
+     can be regressed rather than assumed. This card does that and shows what the fit is
+     worth, including the version of it that goes wrong. */
+  function primaryFitCard() {
+    var pts = (D.prim || []).map(function (r) {
+      return {y: +r.year, kind: r.kind, x: num(r.d_share_primary),
+              m: r.november_margin_R === "" ? null : num(r.november_margin_R)};
+    }).filter(function (r) { return r.x != null; });
+    var done = pts.filter(function (r) { return r.m != null; });
+    var open2 = pts.filter(function (r) { return r.m == null; });
+    var fits = (D.fit || []).map(function (r) {
+      return {basis: r.basis, n: +r.n, a: num(r.intercept), b: num(r.slope),
+              r2: num(r.r_squared), sd: num(r.residual_sd),
+              x0: num(r.x_min), x1: num(r.x_max), pred: num(r.pred_2026_at_51_70)};
+    });
+    if (!done.length || !fits.length) return "";
+    var all = fits.filter(function (f2) { return f2.basis === "all cycles"; })[0];
+    var mid = fits.filter(function (f2) { return f2.basis === "midterms only"; })[0];
+    var now = open2.length ? open2[0] : null;
+
+    var W = 720, H = 340, L = 62, R = 128, T = 22, Bm = 46;
+    var xlo = 26, xhi = 56, ylo = -16, yhi = 24;
+    var xs = function (v) { return L + (v - xlo) / (xhi - xlo) * (W - L - R); };
+    var ys = function (v) { return T + (v - ylo) / (yhi - ylo) * (H - Bm - T); };
+    var s2 = svg(W, H, "Democratic share of the Texas primary against the November margin");
+    [-10, 0, 10, 20].forEach(function (v) {
+      s2 += line(L, ys(v), W - R, ys(v), v === 0 ? "zl" : "gl")
+         + txt(L - 8, ys(v) + 4, v === 0 ? "even" : (v > 0 ? "R+" : "D+") + Math.abs(v),
+               "tk", "end");
+    });
+    [30, 35, 40, 45, 50, 55].forEach(function (v) {
+      s2 += txt(xs(v), H - Bm + 15, v + "%", "tk", "middle");
+    });
+    s2 += txt((L + W - R) / 2, H - 8, "Democratic share of the primary \u2192", "lgd", "middle");
+    // the +/- one residual sd band on the all-cycle fit
+    var bandTop = [], bandBot = [];
+    for (var v = xlo; v <= xhi; v += 2) {
+      bandTop.push(xs(v) + "," + ys(all.a + all.b * v - all.sd));
+      bandBot.unshift(xs(v) + "," + ys(all.a + all.b * v + all.sd));
+    }
+    s2 += '<polygon points="' + bandTop.concat(bandBot).join(" ")
+       + '" fill="currentColor" opacity="0.07"/>';
+    s2 += '<line x1="' + xs(xlo) + '" y1="' + ys(all.a + all.b * xlo) + '" x2="' + xs(xhi)
+       + '" y2="' + ys(all.a + all.b * xhi) + '" stroke="currentColor" stroke-width="2"/>';
+    s2 += '<line x1="' + xs(xlo) + '" y1="' + ys(mid.a + mid.b * xlo) + '" x2="' + xs(xhi)
+       + '" y2="' + ys(mid.a + mid.b * xhi) + '" stroke="' + DC
+       + '" stroke-width="1.6" stroke-dasharray="5 4" opacity="0.75"/>';
+    // the data
+    done.forEach(function (r) {
+      var midt = r.kind === "Midterm";
+      s2 += '<circle cx="' + xs(r.x) + '" cy="' + ys(r.m) + '" r="' + (midt ? 6 : 5)
+         + '" fill="' + (midt ? "currentColor" : "none")
+         + '" stroke="currentColor" stroke-width="1.6"/>';
+      s2 += txt(xs(r.x), ys(r.m) - 11, String(r.y), "tk", "middle");
+    });
+    if (now) {
+      s2 += '<line x1="' + xs(now.x) + '" y1="' + T + '" x2="' + xs(now.x) + '" y2="'
+         + (H - Bm) + '" stroke="' + RC + '" stroke-width="1.2" stroke-dasharray="3 3"/>';
+      s2 += txt(xs(now.x), T - 6, now.y + " \u2014 " + now.x.toFixed(2) + "%", "tk", "middle");
+      [[all, "currentColor", "all cycles"], [mid, DC, "midterms only"]].forEach(function (q) {
+        var pv = q[0].a + q[0].b * now.x;
+        s2 += '<circle cx="' + xs(now.x) + '" cy="' + ys(pv) + '" r="5.5" fill="' + q[1] + '"/>';
+        s2 += txt(W - R + 8, ys(pv) + 4, mgn(pv, 1) + "  " + q[2], "tk");
+      });
+    }
+    // bottom of the right gutter: the top of it is where the midterm fit's own
+    // prediction label lands, and the two collided there.
+    s2 += txt(W - R + 8, H - Bm - 14, "\u25cf midterm", "lgd")
+       + txt(W - R + 8, H - Bm, "\u25cb presidential", "lgd");
+    s2 += "</svg>";
+    return card("tx-primfit", "Chapter 1 \u00b7 what the primary implies",
+      "Extrapolating the one certified count",
+      "Every other number on this tab is an inference. The primary is a count, so it is "
+      + "the only input that can be regressed against what actually happened afterwards. "
+      + "Each dot is a Texas cycle: its Democratic primary share against the November "
+      + "margin that followed. The solid line fits all seven, the shaded band is one "
+      + "residual standard deviation, and the dashed line fits the four midterms alone.",
+      s2,
+      "<b>Take the solid line: " + mgn(all.pred, 2) + ", inside about "
+      + all.sd.toFixed(1) + " points.</b> That is an independent route to roughly where "
+      + "everything else on this tab lands, built from a certified count rather than from "
+      + "any assumption about who turns out. It explains "
+      + (all.r2 * 100).toFixed(0) + "% of the variance across " + all.n + " cycles."
+      + "<br><br><b>The dashed line is the warning.</b> Fit the midterms alone and you get "
+      + "a tighter relationship \u2014 " + (mid.r2 * 100).toFixed(0) + "% of the variance "
+      + "\u2014 and a prediction of " + mgn(mid.pred, 1) + ", which nobody believes. It "
+      + "rests on four points and 2026&rsquo;s " + (now ? now.x.toFixed(2) : "51.70")
+      + "% sits " + (now ? (now.x - mid.x1).toFixed(1) : "10.9") + " points beyond the "
+      + "highest primary share it has ever seen. The all-cycle fit keeps 2026 inside its "
+      + "range, which is the only reason to prefer it.");
   }
 
   /* ============================================== 6. seven baselines, each its own swing */
@@ -964,7 +1040,7 @@
   window.renderTexas = function (host) {
     host.innerHTML = '<div class="txwrap-inner"><p class="txhint">Loading the Texas '
       + "analysis…</p></div>";
-    var want = [["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["phist", "tx_primary_historical.csv"],
+    var want = [["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
                 ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"],
@@ -986,6 +1062,7 @@
         + readCard(L)
         // 1. what actually changed
         + primaryCard()
+        + primaryFitCard()
         // 2. how a banked vote reaches a result
         + historyCard()
         + estimatesCard()
@@ -1008,6 +1085,22 @@
         + paxtonCard()
         + baselineCard()
         // 4. the group doing the moving
+        + framing("tx-frame-hisp", "Chapter 4",
+            "The one question nobody has measured",
+            ["Chapter 3 strips out the two things that are not about the electorate \u2014 "
+             + "the candidate, worth about five points, and the choice of which past "
+             + "result to carry forward. What is left is a single question, and the whole "
+             + "race turns on it: <b>how far Hispanic voters move.</b>",
+             "Three facts make that harder than it sounds. The group is 29.76% of the "
+             + "projected electorate, so it carries real weight. It is not one electorate "
+             + "but two \u2014 the border and the metros sit tens of points apart and "
+             + "have been moving in opposite directions. And the border is the most "
+             + "volatile ground in Texas, swinging three times as hard per cycle as "
+             + "anywhere else while carrying a twelfth of the ballots.",
+             "So there is no single Hispanic number to put in a model, which is why "
+             + "break-even is a range rather than a point. The three slides here are "
+             + "where each group sits today, why one number cannot describe them, and "
+             + "which parts of the map actually move."])
         + ethCard()
         + precinctCard()
         + volCard()

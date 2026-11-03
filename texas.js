@@ -195,8 +195,10 @@
       + '<li><b>The early vote.</b> <b class="nm">' + n0(PROJ.banked) + "</b> ballots are "
       + "already banked, about 76% of the projected total. In Tarrant County 48.8% of "
       + "early voters did not vote in the 2022 midterm, and Morris&rsquo;s Harris County "
-      + "work found the Democratic edge widening as voters get less regular &mdash; D+5 "
-      + "among reliable voters, D+13 among irregular ones. An electorate this much larger "
+      + "work found the turnout gap widening as voters get less regular: 90.7% of the "
+      + "most reliable Democrats had already voted against 85.7% of the equivalent "
+      + "Republicans, but among voters who skipped the 2022 midterm it is 70.3% against "
+      + "57.1%. Those are turnout rates, not margins. An electorate this much larger "
       + "than 2022&rsquo;s is drawn from exactly that pool.</li>"
       + "<li><b>The polls.</b> Five of six final polls have Talarico ahead, averaging "
       + '<b class="nm">D+4.09</b> across 7,023 interviews. The famous Texas polling misses '
@@ -217,9 +219,8 @@
       + "alone turns D+0.65 into R+0.97.</p>"
       + '<p class="txnote" style="border-top:none;padding-top:0">None of this is the test. '
       + "The early vote reports first tonight, and because it is ~76% of the ballots a tie "
-      + 'lands in a narrow band: an early margin between <b class="nm">D+'
-      + THR_SAFE_D.toFixed(2) + '</b> and <b class="nm">R+'
-      + Math.abs(THR_SAFE_R).toFixed(2) + "</b>. Better than that and this answer is "
+      + 'lands in a narrow band: an early margin between <b class="nm">'
+      + mgn(THR_SAFE_D) + '</b> and <b class="nm">' + mgn(THR_SAFE_R) + "</b>. Better than that and this answer is "
       + "right; worse and it is wrong, in one reading, with nothing left to argue about.</p>"
       + "</section>";
   }
@@ -606,8 +607,8 @@
       + "base, which is not defensible, and capping that is the R+0.97 dot."
       + "<br><br><b>The early vote has no dot, on purpose.</b> Every number here is a final "
       + "margin. The early vote produces a tie <i>band</i> on tonight’s early margin "
-      + "— a different axis — and a tie lands between <b>D+"
-      + THR_SAFE_D.toFixed(2) + "</b> and <b>R+" + Math.abs(THR_SAFE_R).toFixed(2)
+      + "— a different axis — and a tie lands between <b>"
+      + mgn(THR_SAFE_D) + "</b> and <b>" + mgn(THR_SAFE_R)
       + "</b>. Putting that on this chart would be the same unit error as reading net votes "
       + "as points of margin. It is also the only route that settles rather than estimates, "
       + "which is why it is named here and left empty.");
@@ -1472,25 +1473,36 @@
         s1 += line(xs(t), T - 14, xs(t), Hh - 8, t === 0 ? "zl" : "gl")
            + txt(xs(t), T - 19, t === 0 ? "even" : mgn(t, 0), "tk", "middle");
       });
-      s1 += '<defs><marker id="tarrw" viewBox="0 0 10 10" refX="8" refY="5" '
-         + 'markerWidth="5" markerHeight="5" orient="auto-start-reverse">'
-         + '<path d="M 0 0 L 10 5 L 0 10 z" fill="' + DC + '"/></marker></defs>';
+      s1 += '<defs>'
+         + ['<marker id="tarrwD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" '
+            + 'markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" '
+            + 'fill="' + DC + '"/></marker>',
+            '<marker id="tarrwR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" '
+            + 'markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" '
+            + 'fill="' + RC + '"/></marker>'].join("")
+         + "</defs>";
       P.forEach(function (r, i) {
         var y = T + (wide ? 16 : 24) + i * ROW;
         var lab = "Precinct " + r.p;
         if (wide) s1 += txt(L - 12, y + 4, lab, "lb", "end");
         else s1 += txt(8, y - 13, lab + " · " + n0(r.n) + " voters", "lb");
         // 2022 where it was, hollow; 2026 where it is, solid; the arrow between them
+        // direction is the sign of the move in margin_R terms, not an assumption
+        var mv = r.now - r.then;
         s1 += '<line x1="' + xs(r.then) + '" y1="' + y + '" x2="' + xs(r.now) + '" y2="'
-           + y + '" stroke="' + DC + '" stroke-width="2" opacity="0.75" '
-           + 'marker-end="url(#tarrw)"/>'
+           + y + '" stroke="' + sideCol(mv) + '" stroke-width="2" opacity="0.75" '
+           + 'marker-end="url(#tarrw' + (mv < 0 ? "D" : "R") + ')"/>'
            + '<circle cx="' + xs(r.then) + '" cy="' + y + '" r="4" fill="var(--card,#fff)" '
            + 'stroke="currentColor" stroke-width="1.5" opacity="0.65"/>'
            + '<circle cx="' + xs(r.now) + '" cy="' + y + '" r="4.5" fill="currentColor"/>';
         s1 += txt(xs(r.then) + 9, y - 7, mgn(r.then, 1), "tk", "start")
            + txt(xs(r.now) - 9, y + 14, mgn(r.now, 1), "vl", "end");
-        if (wide) s1 += txt(W - R + 10, y + 4, "D+" + r.sw.toFixed(1), "vl");
-        else s1 += txt(W - 8, y + 14, "swing D+" + r.sw.toFixed(1), "tk", "end");
+        if (wide) {
+          s1 += '<text x="' + (W - R + 10) + '" y="' + (y + 4) + '" class="vl" fill="'
+             + sideCol(mv) + '">' + mgn(mv, 1) + "</text>";
+        } else {
+          s1 += txt(W - 8, y + 14, "moved " + mgn(mv, 1), "tk", "end");
+        }
       });
       s1 += txt(L, T - 30, "hollow dot: 2022 early and mail", "lgd")
           + txt(W - R, T - 30, "solid dot: 2026 so far", "lgd", "end");
@@ -1592,49 +1604,45 @@
     var wide = !NARROW;
     var W = wide ? 760 : 360, L = wide ? 268 : 8, R = wide ? 66 : 52, T = 46;
     var ROW = wide ? 40 : 56;
-    var H2 = T + E.length * ROW + 18;
+    // Rows are not a fixed height: a party tier carries two dots and two labels, a
+    // no-primary tier one. A single ROW big enough for both left the party sub-labels
+    // sitting on top of the next tier's heading.
+    var RP = 50, RG = 36;
+    var H2 = T + E.reduce(function (a2, r) { return a2 + (r.np != null ? RG : RP); }, 0) + 20;
     var xs = function (v) { return L + v / 100 * (W - L - R); };
     var s2 = svg(W, H2, "Share of 2024 early in-person voters in Harris County who have "
                       + "voted early or by mail in 2026, by turnout history");
     [0, 25, 50, 75, 100].forEach(function (v) {
-      s2 += line(xs(v), T - 14, xs(v), H2 - 14, "gl")
-         + txt(xs(v), H2 - 3, v + "%", "tk", "middle");
+      s2 += line(xs(v), T - 14, xs(v), H2 - 16, "gl")
+         + txt(xs(v), H2 - 4, v + "%", "tk", "middle");
     });
-    // legend, in his colours and his order
     var lg = [[DC, "Democrats"], [RC, "Republicans"], ["currentColor", "No recent primary"]];
     var lx = wide ? L : 8;
-    lg.forEach(function (p) {
-      s2 += '<circle cx="' + (lx + 4) + '" cy="12" r="4" fill="' + p[0] + '"'
-         + (p[0] === "currentColor" ? ' opacity="0.55"' : "") + "/>"
-         + txt(lx + 13, 16, p[1], "lgd");
-      lx += (wide ? 1 : 1) * (p[1].length * 5.8 + 26);
+    lg.forEach(function (pr) {
+      s2 += '<circle cx="' + (lx + 4) + '" cy="12" r="4" fill="' + pr[0] + '"'
+         + (pr[0] === "currentColor" ? ' opacity="0.55"' : "") + "/>"
+         + txt(lx + 13, 16, pr[1], "lgd");
+      lx += pr[1].length * 5.9 + 28;
     });
-    E.forEach(function (r, i) {
-      var y = T + (wide ? 10 : 22) + i * ROW;
-      var head = r.no + ". " + r.tier;
-      if (wide) s2 += txt(L - 14, y + 4, head, "lbb", "end");
-      else s2 += txt(8, y - 12, head, "lbb");
-      var put = function (v, col, dy, nm) {
-        if (v == null) return "";
-        return '<circle cx="' + xs(v) + '" cy="' + (y + dy) + '" r="5" fill="' + col + '"'
+    var y = T;
+    E.forEach(function (r) {
+      var grey = r.np != null;
+      s2 += txt(wide ? 0 : 8, y + 4, r.no + ". " + r.tier, "lbb");
+      var dot = function (v, col, cy, nm) {
+        return '<circle cx="' + xs(v) + '" cy="' + cy + '" r="5" fill="' + col + '"'
              + (col === "currentColor" ? ' opacity="0.55"' : "") + "/>"
-             + txt(W - R + 8, y + dy + 4, v.toFixed(1) + "%", "vl");
+             + (wide ? txt(L - 14, cy + 4, nm, "sub", "end") : "")
+             + txt(W - R + 8, cy + 4, v.toFixed(1) + "%", "vl");
       };
-      if (r.np != null) {
-        s2 += put(r.np, "currentColor", 0);
-        if (wide) s2 += txt(L - 14, y + 17, "no recent primary", "sub", "end");
+      if (grey) {
+        s2 += dot(r.np, "currentColor", y + 19, "no recent primary");
+        y += RG;
       } else {
-        s2 += put(r.d, DC, -8) + put(r.r, RC, 11);
-        if (wide) {
-          s2 += txt(L - 14, y - 4, "Democrats", "sub", "end")
-             + txt(L - 14, y + 23, "Republicans", "sub", "end");
-        }
-        if (r.gap != null) {
-          s2 += '<line x1="' + xs(r.r) + '" y1="' + (y + 11) + '" x2="' + xs(r.d)
-             + '" y2="' + (y - 8) + '" class="cn"/>';
-        }
+        s2 += '<line x1="' + xs(r.r) + '" y1="' + (y + 36) + '" x2="' + xs(r.d)
+           + '" y2="' + (y + 19) + '" class="cn"/>'
+           + dot(r.d, DC, y + 19, "Democrats") + dot(r.r, RC, y + 36, "Republicans");
+        y += RP;
       }
-      y += ROW;
     });
     s2 += "</svg>";
 
@@ -2035,8 +2043,8 @@
     + "table.txtbl .rep,.txcard .rep{color:var(--rep,#b3443a)}"
     + ".txcard .dim,table.txtbl .dim{color:var(--dim)}"
     + ".txcard .scroll{overflow-x:auto}"
-    + ".txnav{font-size:12px;margin:0 0 14px;line-height:1.9}"
-    + ".txnav a{margin-right:12px;white-space:nowrap}"
+    + ".txnav{font-size:12px;margin:0 0 14px;line-height:1.9;display:flex;flex-wrap:wrap;gap:0 14px;max-width:100%}"
+    + ".txnav a{white-space:nowrap}"
     + "@media (max-width:640px){"
     + ".txcard,.txarg{padding:13px 13px;border-radius:8px;margin:0 0 11px}"
     + ".txarg h2{font-size:19px}.txframe h2{font-size:18px}"
@@ -2044,7 +2052,7 @@
     + ".txhint{font-size:12.5px}.txnote{font-size:12px}"
     + ".txbig{font-size:31px}"
     + ".txnav{line-height:2.1;font-size:11.5px}"
-    + ".txnav a{margin-right:9px}"
+    + ".txnav{gap:0 9px}"
     + "table.txtbl{font-size:12px}"
     + "table.txtbl th{font-size:9.5px;padding-left:8px}"
     + "table.txtbl td{padding-left:8px}"

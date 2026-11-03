@@ -577,7 +577,12 @@
     xs.sort(function (a, b) { return a - b; });
     ys.sort(function (a, b) { return b - a; });
     var mx = Math.max.apply(null, rows.map(function (r) { return Math.abs(num(r[vKey])); })) || 1;
-    var cw = 58, ch = 34, L = 92, T = 44, W = L + xs.length * cw + 12, H = T + ys.length * ch + 34;
+    // AX is the gutter the rotated y-axis label sits in, to the left of the row
+    // labels. Without it the label was parked at the bottom-left corner, reading as
+    // a footnote rather than as the axis it names.
+    var AX = 22;
+    var cw = 58, ch = 34, L = 92 + AX, T = 44,
+        W = L + xs.length * cw + 12, H = T + ys.length * ch + 22;
     var s = svg(W, H, title);
     s += txt(L, 16, xLab, "lgd");
     xs.forEach(function (x, i) {
@@ -598,7 +603,11 @@
       s += txt(L + x * cw + (cw - 2) / 2, T + y * ch + ch / 2 + 4, mgn(v, 1),
                t > 0.55 ? "cellw" : "cell", "middle");
     });
-    s += txt(2, H - 10, yLab, "lgd");
+    // centred on the grid itself, not on the whole svg, so it lines up with the rows
+    var ymid = T + (ys.length * ch) / 2;
+    s += '<text x="' + (AX - 8) + '" y="' + ymid + '" text-anchor="middle" '
+       + 'class="lgd" transform="rotate(-90 ' + (AX - 8) + ' ' + ymid + ')">'
+       + esc(yLab) + "</text>";
     s += "</svg>";
     return card(id, kicker, title, hint, '<div class="scroll">' + s + "</div>", note);
   }

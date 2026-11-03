@@ -769,7 +769,10 @@
     var w26 = P.reduce(function (a, r) { return a + r.n * r.now; }, 0) / tot;
     var w22 = P.reduce(function (a, r) { return a + r.n * r.then; }, 0) / tot;
 
-    var W = 720, H2 = 44 + P.length * 42, L = 104, R = 108, T = 34;
+    // T leaves room for the direction labels; the extra 24 at the bottom is the
+    // legend's own gutter. It used to sit at y=16, two pixels from "more Democratic"
+    // at the same x, so the two printed on top of each other.
+    var W = 720, H2 = 58 + P.length * 42, L = 104, R = 108, T = 34;
     var lo = -42, hi = 26;
     var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R); };
     var s2 = svg(W, H2, "Tarrant County early-vote lean by commissioner precinct, 2022 against 2026");
@@ -789,7 +792,8 @@
                 + Math.abs(r.now - r.then).toFixed(1) + (toD ? " to D" : " to R"),
                 "vl");
     });
-    s2 += txt(L, 16, "\u25cb 2022 early + mail    \u25cf 2026 so far", "lgd");
+    s2 += txt(L - 12, H2 - 12, "\u25cb 2022 early + mail", "lgd", "end")
+       + txt(L + 8, H2 - 12, "\u25cf 2026 so far", "lgd");
     s2 += "</svg>";
 
     var hist = H.length ? ('<table class="txtbl" style="margin-top:12px"><thead><tr>'

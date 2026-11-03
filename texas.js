@@ -3047,42 +3047,6 @@
       });
       perCounty += "</svg>";
     }
-    /* The scope, drawn: which of the fifteen are in and why. And then the share
-       sensitivity, because applying Tarrant's 43% to five other counties is one
-       assumption, not six measurements, and an earlier version of this card printed it
-       as a per-county figure as though it had been measured in each. */
-    var SC = (D.nscope || []).map(function (r) {
-      return {c: r.county, t: num(r.proj_turnout), nw: num(r.pct_nonwhite),
-              sc: r.scope, meas: r.measured === "yes"};
-    }).filter(function (r) { return r.t != null; });
-    var scopeFig = "";
-    if (SC.length) {
-      var wd = !NARROW;
-      var W3 = wd ? 760 : 360, L3 = wd ? 112 : 8, R3 = wd ? 150 : 56;
-      var RW = wd ? 24 : 30, T3 = 46, H3 = T3 + SC.length * RW + 16;
-      var mxv = Math.max.apply(null, SC.map(function (r) { return r.t; })) * 1.06;
-      var COL = {"in": DC, "cusp": DC, "border": RC, "white": "currentColor"};
-      var OP = {"in": "0.75", "cusp": "0.45", "border": "0.4", "white": "0.18"};
-      scopeFig = svg(W3, H3, "Which of the fifteen largest counties the finding travels to");
-      scopeFig += txt(wd ? 0 : 8, 16, "projected turnout \u2014 solid in scope, pale out "
-                      + "of scope", "lgd");
-      if (wd) scopeFig += txt(W3 - R3 + 12, 16, "non-white", "lgd");
-      SC.forEach(function (r, i) {
-        var y = T3 + i * RW;
-        var w = r.t / mxv * (W3 - L3 - R3);
-        if (wd) scopeFig += txt(L3 - 10, y + 12, r.c + (r.meas ? " \u25cf" : ""),
-                                r.meas ? "lbb" : "lb", "end");
-        else scopeFig += txt(8, y + 4, r.c + (r.meas ? " \u25cf" : ""), "lb");
-        scopeFig += rect(L3, y + (wd ? 2 : 7), w, 13, COL[r.sc],
-                         ' rx="2" opacity="' + OP[r.sc] + '"');
-        if (wd) {
-          scopeFig += txt(L3 + w + 7, y + 12, n0(r.t), "tk")
-                   + txt(W3 - R3 + 12, y + 12, r.nw.toFixed(1) + "%  " + r.sc, "sub");
-        }
-      });
-      scopeFig += "</svg>";
-    }
-
     /* the share assumption, sensitised */
     var SH = (D.nshare || []).map(function (r) {
       return {s: num(r.assumed_neither_share), nb: num(r.neither_ballots),
@@ -3170,7 +3134,7 @@
       + "camp split the file gives for each past cycle, and ask what the Neither bloc must "
       + "have done to produce the result Tarrant actually got. The two dashed lines are "
       + "what each 2026 candidate needs from the same bloc.",
-      perCounty + scopeFig + s2 + mirTbl + triTbl + shTbl,
+      perCounty + s2 + mirTbl + triTbl + shTbl,
       "<b>The break is different in every county, and that is the finding.</b> Dallas "
       + "69.4%, Bexar 63.5%, Harris 60.8%, Fort Bend 58.5%, Tarrant 54.5%, Brazoria "
       + "46.2% — turnout-weighted, <b>61.1%</b>. Each is simply that county’s "
@@ -3594,7 +3558,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["bnd", "tx_boundary.csv"], ["vec", "tx_three_vectors.csv"], ["tri", "tx_triangulate.csv"], ["nmirror", "tx_neither_mirror.csv"], ["nscope", "tx_neither_scope.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["bnd", "tx_boundary.csv"], ["vec", "tx_three_vectors.csv"], ["tri", "tx_triangulate.csv"], ["nmirror", "tx_neither_mirror.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {

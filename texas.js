@@ -3105,13 +3105,6 @@
       + "<b>+79,234</b>, Tarrant <b>+29,543</b>, Fort Bend <b>+24,763</b>, Brazoria "
       + "<b>−4,711</b>. Total <b>+399,047</b>, or <b>+447,576</b> with the measured "
       + "bias. Hinojosa needs 402,353."
-      + "<br><br><b>The mirror is tested, once, where both sides are known.</b> Tarrant "
-      + "finished R+1.0 and R+4.4 in its last two cycles, so a bloc mirroring it should "
-      + "have broken 49.5% and 47.8%. It broke 49.9% and 50.1% — the mirror holds, "
-      + "running 1.35 points more Democratic than the county. Harris corroborates the "
-      + "mechanism from a different instrument entirely: the Democratic turnout edge is "
-      + "13.2 points among voters who skipped the 2022 midterm against 5.0 among the most "
-      + "reliable."
       + "<br><br><b>Three instruments, and they do not agree on how much.</b> Tarrant’s "
       + "break carried flat says <b>50%</b>. The same file mirrored and bias-corrected "
       + "says <b>62.5%</b>. AtlasIntel, asking Texas independents directly, says "
@@ -3128,21 +3121,26 @@
       + "share applied uniformly, one assumption rather than six measurements. Across "
       + "every share from 30% to 55% Hinojosa still needs between 57.6% and 66.1%, so the "
       + "answer does not turn on it."
-      + "<br><br><b>The one genuine weakness, stated narrowly.</b> The mirror is "
-      + "validated at R+1.0 and R+4.4 — a near-even county. Applying it to Dallas at "
-      + "D+38.9 extrapolates the relationship forty points past anything it has been "
-      + "checked against, and the 69.4% it implies there is not a number anyone has "
-      + "observed. That is a question about the <i>range</i> of the relationship, and it "
-      + "is the reason the tab does not simply take the friendly reading."
-      + "<br><br><b>What is NOT a weakness: the concentration.</b> Harris and Dallas are "
-      + "54% of the bloc and carry 54% of the weight, which is correct rather than "
-      + "distorting — they genuinely cast that share of the ballots, and a simple "
-      + "average would be the error. Nor are they doing it alone: the in-scope set is "
-      + "four substantial non-white counties — Harris 63.2%, Bexar 67.9%, Fort Bend "
-      + "64.9%, Dallas 61.9% — plus Tarrant and Brazoria on the cusp. Harris is "
-      + "itself one of the two counties the mechanism was <i>measured</i> in. Dropping "
-      + "Harris and Dallas entirely still leaves a weighted break of 57.8%, so the "
-      + "finding does not rest on them."
+      + "<br><br><b>The flat carry is a floor, not a scenario.</b> It assumes the "
+      + "unaffiliated voters of Harris, Dallas and Bexar behave like Tarrant’s "
+      + "— and Tarrant is the <i>least</i> Democratic county in the in-scope set, "
+      + "D+9.1 against Dallas’s D+38.9. There is no argument for that, only the "
+      + "absence of data from the other five. A bloc that demographically <i>is</i> its "
+      + "county, voting unlike its county, needs a reason, and none has been offered. "
+      + "The mirror is the realistic application; the flat carry is the lower bound."
+      + "<br><br><b>Hinojosa’s range, across both unknowns</b> — how the bloc "
+      + "breaks and how big it is:"
+      + "<br>&nbsp;&nbsp;• <b>Floor</b>, the flat carry at any share: <b>R+3.94</b>"
+      + "<br>&nbsp;&nbsp;• <b>Mirror</b>, no bias correction, 43% share: <b>R+0.04</b> "
+      + "— dead even"
+      + "<br>&nbsp;&nbsp;• <b>Central</b>, mirror plus the measured bias at 43%: "
+      + "<b>D+0.45</b>"
+      + "<br>&nbsp;&nbsp;• <b>Ceiling</b>, AtlasIntel’s independents at a 55% "
+      + "share: <b>D+4.92</b>"
+      + "<br><br>Strip Harris and Dallas out altogether and the remaining four counties "
+      + "still give a 57.8% break, which puts her at R+1.20 rather than R+3.94. <b>The "
+      + "flat carry is the only reading that leaves her clearly behind, and it is the "
+      + "one with nothing behind it.</b>"
       + "<br><br><b>So the prediction.</b> For Talarico none of this matters: his floor is "
       + "<b>47.2%</b> and every version clears it, at every share, on every instrument. "
       + "For Hinojosa it is the entire race — flat-50 leaves her eleven points short, "
@@ -3257,10 +3255,9 @@
          // the SAME axis in Hispanic units: one point of break is 1.183 points of
          // Hispanic margin, anchored where both equal the polls' own baseline. The
          // Hispanic lever is not a third axis, it is this one relabelled.
-         + txt(xs(t), H - Bm + 34, "D+" + (22.95 + (t - 50) * 1.183).toFixed(0), "sub",
+         + txt(xs(t), H - Bm + 32, "D+" + (22.95 + (t - 50) * 1.183).toFixed(0), "sub",
                "middle");
     });
-    s += txt(L - 8, H - Bm + 34, "or", "sub", "end");
     // the region she wins, and the boundary itself
     var pts = BD.filter(function (r) { return r.n >= lo && r.n <= hi; });
     var poly = pts.map(function (r) { return xs(r.n) + "," + ys(r.c); }).join(" ");
@@ -3290,8 +3287,7 @@
          + '<line x1="' + xs(m[0]) + '" y1="' + (30 + i * 15) + '" x2="' + xs(m[0])
          + '" y2="' + (T - 6) + '" stroke="' + m[2] + '" stroke-width="1" '
          + 'opacity="0.25"/>';
-      s += '<text x="' + xs(m[0]) + '" y="' + (H - Bm + 32) + '" text-anchor="middle" '
-         + 'class="sub">' + m[1] + "</text>";
+
     });
     s += "</svg>";
     /* Three vectors, each tested on its own before the combination. The grid below is
@@ -3323,7 +3319,8 @@
       + "counties, the bloc lives inside the largest fifteen \u2014 so nothing is "
       + "counted twice.",
       vecTbl + '<div class="scroll">' + s + "</div>",
-      "<b>Three vectors, and the answer differs for each.</b> The table above tests each "
+      "<b>The three markers on the chart,</b> left to right: the flat carry of Tarrant\u2019s own break at 50.0%, the county-mirror corrected for the measured bias at 62.5%, and AtlasIntel\u2019s independents at 69.7%."
+      + "<br><br><b>Three vectors, and the answer differs for each.</b> The table above tests each "
       + "one on its own, which is a fair question even though they cannot be added. "
       + "<b>Rural cannot carry her</b> \u2014 it needs a 34% collapse and nothing in the "
       + "modern record is close. <b>The unaffiliated bloc can</b> \u2014 it needs 61.2% "

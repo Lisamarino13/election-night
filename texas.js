@@ -299,7 +299,7 @@
 
      Unopposed races are excluded: 2018's Court of Criminal Appeals Place 8 had no
      Democrat and came in at R+74.68, which would drag any average it touched. */
-  function senateCard() {
+  function senateCharts() {
     var R = (D.svt || []).map(function (r) {
       return {y: r.year, kind: r.kind, c: r.contest, s: num(r.senate_margin_R),
               t: num(r.ticket_median_R), a: num(r.ahead_of_ticket), n: num(r.n_other)};
@@ -405,73 +405,7 @@
     }
     var hit = R.filter(function (r) { return r.a != null && r.a > 0; }).length;
     var meas = R.filter(function (r) { return r.a != null; });
-    return card("tx-senate", "Section 2 · slide 9 · Texas votes differently for Senate",
-      "Texas will vote for a Democratic senator before it votes for anything else",
-      "Each row is one Texas election. The hollow dot is the median of every other "
-      + "statewide race on that same ballot — same voters, same day, same turnout. "
-      + "The solid dot is the Senate race. The gap between them is ticket-splitting that "
-      + "has nothing to do with how Republican Texas is, because the rest of the ticket "
-      + "controls for exactly that. Unopposed races are left out: 2018&rsquo;s Court of "
-      + "Criminal Appeals Place 8 had no Democrat on the ballot and finished R+74.68.",
-      g + g2,
-      "<b>2026 is not a guess \u2014 the same four polls asked both questions.</b> "
-      + "Abbott against Hinojosa and Paxton against Talarico sit on the same "
-      + "questionnaires, answered by the same 5,934 people. Talarico runs ahead of "
-      + "Hinojosa in every one: YouGov +5.0, Kreate +5.0, NYT/Siena +6.0, AtlasIntel "
-      + "+4.0, sample-weighted <b>+4.92</b>. In two of the four, Abbott leads while "
-      + "Talarico leads \u2014 the same respondents, splitting their ticket on the same "
-      + "page."
-      + "<br><br><b>That is a cleaner test than the three rows above it.</b> Comparing "
-      + "across years means comparing different electorates, different turnout and "
-      + "different house effects. Comparing two races inside one poll cancels all of it: "
-      + "whatever is left is ticket-splitting and nothing else. And the answer it gives "
-      + "\u2014 4.92 \u2014 is within a tenth of a point of what Texas actually did in "
-      + "2018, which was 4.85."
-      + "<br><br><b>AND IT SURVIVES THE POLLING ERROR, WHICH NOTHING ELSE HERE DOES.</b> "
-      + "The previous card establishes that these polls run three to four points too "
-      + "Democratic. That error is systematic \u2014 it is a property of who answers a "
-      + "poll, not of which race they are asked about \u2014 so it hits both questions on "
-      + "the same questionnaire by the same amount and <i>subtracts out of the "
-      + "difference</i>. Apply the full presidential-year haircut of 4.05 and the Senate "
-      + "race goes D+5.03 to D+0.98 and the Governor&rsquo;s race D+0.11 to R+3.94, but "
-      + "the gap between them is still <b>4.92</b>. It is 4.92 at every haircut, because "
-      + "it is arithmetically immune to one."
-      + "<br><br><b>Which makes it bigger than both of the things that could undo "
-      + "it.</b> The candidate effect is 4.92. The polling error is 3.34 to 4.05. The "
-      + "entire election-day tie band \u2014 everything the un-banked quarter of the vote "
-      + "can do to the result \u2014 is 2.27. Talarico running ahead of his own ticket is "
-      + "a larger quantity than the poll miss and larger than election day, and it is the "
-      + "only one of the three measured rather than assumed."
-      + "<br><br><b>What it does not say.</b> It fixes where Talarico sits relative to his "
-      + "ticket, not where the ticket sits. He could run 4.92 ahead of Hinojosa and both "
-      + "lose; that is roughly what the full haircut describes, D+0.98 and R+3.94. The "
-      + "gap is the robust number here and the level is the fragile one, which is the "
-      + "opposite of how this race is usually discussed."
-      + "<br><br><b>Three of the last four, including this one.</b> In 2018 Cruz beat O&rsquo;Rourke "
-      + "by 2.57 while the rest of the ticket ran R+7.42 — the Senate race was 4.85 "
-      + "points friendlier to Democrats than the same voters&rsquo; other choices that "
-      + "day. In 2024 Cruz beat Allred by 8.50 against a ticket median of R+16.37, a gap "
-      + "of 7.87. And 2026 is the same shape: the Senate race polls at D+5.03 in a state "
-      + "whose last three statewide cycles averaged R+10.09."
-      + "<br><br><b>And the one that doesn&rsquo;t fit.</b> 2020, Cornyn against Hegar: "
-      + "R+9.64 against a ticket median of R+9.32, so the Senate race ran 0.32 points "
-      + "<i>more</i> Republican than everything else. It is the exception and it is worth "
-      + "naming rather than dropping — a pattern that holds three times in four is a "
-      + "lean, not a law."
-      + "<br><br><b>Why it changes how to read a poll.</b> The usual objection to D+5 in "
-      + "Texas is that Texas does not vote D+5. That is true of Texas as a whole and it "
-      + "is the wrong comparison: Texas has twice in the last three Senate races voted "
-      + "five to eight points more Democratic for Senate than for the rest of "
-      + "the ballot on the same day. A poll showing the Senate race running well ahead of "
-      + "the state&rsquo;s partisan level is describing the normal behaviour of Texas "
-      + "Senate races, not an outlier."
-      + "<br><br><b>And a caution on the next card.</b> The tie band is built from the "
-      + "major statewide offices, and its midterm leg has to be — 2022 had no Senate "
-      + "race at all, so Governor, Lieutenant Governor and Attorney General are the only "
-      + "midterm evidence that exists. If Senate races split tickets, that band is "
-      + "measured on offices that do not behave quite like the one being predicted. The "
-      + "only Senate skew available for a midterm would be 2018&rsquo;s, and Texas did not "
-      + "publish mode splits that far back.");
+    return {ticket: g, sengov: g2, rows: R, sg: SG};
   }
 
   function historyCard() {
@@ -554,7 +488,7 @@
       }).join("");
     }).join("");
 
-    return card("tx-modes", "Section 2 · slide 10 · what election day does to it",
+    return card("tx-modes", "Section 2 · slide 8 · what election day does to it",
       "What election day does to the banked vote",
       "Texas banks three quarters of its vote before election day, so the question is "
       + "simply how far the last quarter moves the first three. Blue dot is the banked "
@@ -1412,11 +1346,40 @@
             + '</td><td class="num ' + (r.m < 0 ? "dem" : "rep") + '">' + mgn(r.m, 0)
             + "</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
-    return card("tx-polltrust", "Section 1 · slide 2 · how much the polls are worth",
-      "What Texas polls have been worth, and whether they are moving",
-      "Two questions about weighting the poll evidence rather than adding to it: how "
-      + "wrong final Texas polls have been before, and whether these five are drifting.",
-      errTbl + dateTbl,
+    var SC = senateCharts();
+
+    /* The join between the two halves of this card. A systematic poll error is a
+       property of who answers a poll, not of which race they are asked about, so on a
+       questionnaire carrying BOTH races it hits each by the same amount and subtracts
+       out of the difference. The gap column is the point: it is 4.92 on every row. */
+    var SEN = -5.03, GOV = -0.11;
+    var CUTS = [["No haircut — the polls as published", 0],
+                ["2022-like, the friendliest midterm miss", 0.50],
+                ["All six races, mean", 2.08],
+                ["The five that missed toward Democrats, mean", 3.34],
+                ["Presidential years, 4-for-4 mean", 4.05]];
+    var hairTbl = '<div class="scroll"><table class="txtbl" style="margin-top:14px">'
+      + "<thead><tr><th>Haircut applied to BOTH races</th><th>Paxton / Talarico</th>"
+      + "<th>Abbott / Hinojosa</th><th>Talarico runs ahead by</th></tr></thead><tbody>"
+      + CUTS.map(function (c) {
+          var sv = SEN + c[1], gv = GOV + c[1];
+          return "<tr" + (c[1] === 4.05 ? ' class="em"' : "") + "><td>" + esc(c[0])
+            + '</td><td class="num ' + (sv < 0 ? "dem" : "rep") + '">' + mgn(sv)
+            + '</td><td class="num ' + (gv < 0 ? "dem" : "rep") + '">' + mgn(gv)
+            + '</td><td class="num"><b>' + (GOV - SEN).toFixed(2) + "</b></td></tr>";
+        }).join("")
+      + "</tbody></table></div>";
+
+    return card("tx-polltrust", "Section 1 · slide 2 · the miss, and why it does not decide this",
+      "The polls are wrong by three to four points \u2014 and it does not matter",
+      "<b>One argument, in four figures.</b> First, how wrong final Texas polls have been "
+      + "before: six races, one basis, and a miss that is large and one-directional. "
+      + "Second, that miss applied to today\u2019s D+5.03, which very nearly erases it. "
+      + "Third, the same four polls on the Governor\u2019s race \u2014 where Talarico "
+      + "runs ahead of Hinojosa by 4.92, and where the <i>haircut cancels</i>, because a "
+      + "systematic error hits both races on one questionnaire equally. Fourth, that the "
+      + "same ticket-splitting shows up in Texas results going back to 2018.",
+      errTbl + hairTbl + SC.sengov + SC.ticket + dateTbl,
       "<b>THE TAKEAWAY: Texas polls overstate Democrats, and by three to four points.</b> "
       + "Five of these six races missed in the same direction, and the mean of those five "
       + "is <b>3.34 points too Democratic</b>. Narrow it to the four presidential years "
@@ -1437,12 +1400,44 @@
       + "only prior race that matches 2026 on the two things that matter: a midterm, and "
       + "a Democrat running a serious statewide Senate campaign. Apply 2018’s error "
       + "to today and D+5.03 becomes D+9.26."
-      + "<br><br><b>So the honest summary is a split one.</b> The haircut rule is real, "
-      + "it is large, and it is <i>four for four in presidential years</i> — every "
-      + "one of them with Trump on the ballot. In midterms it has two observations and "
-      + "they point opposite ways, 0.50 one direction and 4.23 the other. 2026 is a "
-      + "midterm with no Trump on the ballot. The rule says D+1; the one comparable race "
-      + "says D+9; there is no third midterm to break the tie."
+      + "<br><br><b>So the haircut rule is real, large, and four for four in "
+      + "presidential years</b> — every one of them with Trump on the ballot. In "
+      + "midterms it has two observations pointing opposite ways, 0.50 one direction and "
+      + "4.23 the other. 2026 is a midterm with no Trump on the ballot. The rule says "
+      + "D+1; the one comparable race says D+9; there is no third midterm to break it."
+      + "<hr style=\"border:none;border-top:1px solid var(--line);margin:14px 0\">"
+      + "<b>AND NOW THE PART THAT SURVIVES ALL OF IT.</b> Everything above argues about "
+      + "a <i>level</i>, and the level is fragile: four points of assumed error move it "
+      + "from D+5 to D+1. But the same four polls asked a second question. Abbott against "
+      + "Hinojosa sits on the same questionnaires, answered by the same 5,934 people, and "
+      + "Talarico runs ahead of Hinojosa in every one — YouGov +5.0, Kreate +5.0, "
+      + "NYT/Siena +6.0, AtlasIntel +4.0, sample-weighted <b>+4.92</b>. In two of the "
+      + "four, Abbott <i>leads</i> while Talarico leads: the same respondents, splitting "
+      + "their ticket on the same page."
+      + "<br><br><b>The polling miss cancels in that difference.</b> A systematic error "
+      + "is a property of who answers a poll, not of which race they are asked about, so "
+      + "it hits both questions by the same amount and subtracts out. The table above is "
+      + "the proof: apply the full presidential-year haircut and the Senate race falls "
+      + "from D+5.03 to D+0.98 and the Governor’s from D+0.11 to R+3.94 — but the "
+      + "gap between them is <b>4.92 on every single row</b>. It is the one number on "
+      + "this tab that a polling error cannot touch."
+      + "<br><br><b>And it is bigger than either thing that could undo it.</b> The "
+      + "candidate effect is 4.92. The polling miss is 3.34 to 4.05. The entire "
+      + "election-day tie band — everything the un-banked quarter of the vote can do "
+      + "to the result — is 2.27."
+      + "<br><br><b>Texas has done this before, which is the fourth figure.</b> In 2018 "
+      + "Cruz beat O’Rourke by 2.57 while the rest of the statewide ticket ran R+7.42 "
+      + "— the Senate race was <b>4.85</b> points friendlier to Democrats than the "
+      + "same voters’ other choices that day. In 2024 Cruz beat Allred by 8.50 against "
+      + "a ticket median of R+16.37, a gap of <b>7.87</b>. 2020 is the exception, 0.32 "
+      + "the other way. Three of four — and 2026’s 4.92 lands within a tenth of a "
+      + "point of 2018’s 4.85."
+      + "<br><br><b>What none of this says.</b> The gap fixes where Talarico sits "
+      + "relative to his ticket, not where the ticket sits. He can run 4.92 ahead of "
+      + "Hinojosa and both lose — roughly what the full haircut describes, D+0.98 and "
+      + "R+3.94. <b>The gap is the robust number and the level is the fragile one</b>, "
+      + "which is the opposite of how this race is usually discussed."
+      + "<hr style=\"border:none;border-top:1px solid var(--line);margin:14px 0\">"
       + "<br><br><b>What the four non-partisan polls show over time.</b> They run about "
       + "1.0 points per day toward Talarico, r = \u22120.71 \u2014 NYT/Siena and "
       + "AtlasIntel, the two that finished last, are also the two best for him. Four polls "
@@ -2644,7 +2639,6 @@
         + tarrantSwingCard()
         + morrisCard()
         + propensityCard()
-        + senateCard()
         + historyCard()
 
         + framing("tx-frame-hisp", "Section 3 \u00b7 the Hispanic vote",

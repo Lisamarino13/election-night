@@ -1001,11 +1001,30 @@
       + "R+10.09 and whose last four midterms average R+11.66.</b> They disagree by three "
       + "points, which is the honest uncertainty, and they agree on the thing that matters: "
       + "nothing in this primary looks like a normal Texas midterm."
-      + "<br><br><b>What would break the comparison.</b> 2018 had Beto O\u2019Rourke and a "
-      + "first-term backlash; 2026 has a Republican nominee under indictment and a "
-      + "different opponent. The primary inputs match and improve, the candidates do not "
-      + "transfer, and Democrats won the 2020 primary too \u2014 2,094,428 to 2,017,167 "
-      + "\u2014 then lost that November by 5.58.");
+      + "<br><br><b>What would break the comparison.</b> 2018 had Beto O’Rourke; 2026 "
+      + "has a different opponent, and the candidates do not transfer. The primary inputs "
+      + "match and improve; the people do not."
+      + "<br><br><b>The real counterexample is 2020, and it is already priced in.</b> "
+      + "Democrats won that primary too — 2,094,428 to 2,017,167, a share of "
+      + "<b>50.94%</b>, only 0.76 points below 2026’s 51.70% — and then lost that "
+      + "November by 5.58. That is the strongest argument against this card. It is also "
+      + "one of the five cycles inside the all-cycles fit above, which is why that fit "
+      + "lands at R+0.10 and not somewhere friendlier, and it is the reason the "
+      + "midterm-only fit is a separate row: <b>2020 was a presidential year with Trump on "
+      + "the ballot</b>, not a midterm reacting to him."
+      + "<br><br><b>And 2020 carried none of what 2026 carries</b> — no ICE shooting "
+      + "in Houston, no most-expensive-October-on-record at the pump, no Venezuela, and "
+      + "Trump himself on the ballot rather than being the thing voters are answering. "
+      + "None of those can be priced into a regression, which cuts both ways: these fits "
+      + "are built on primary turnout alone and cannot see them. If they are worth "
+      + "anything, they are worth it on top of a number that already straddles even."
+      + "<br><br><b>One correction.</b> This card used to call Paxton “a Republican "
+      + "nominee under indictment”. He is not, and has not been since June 2025, when "
+      + "the securities-fraud charges that hung over him from 2015 were dismissed after he "
+      + "completed a pretrial-diversion agreement — no plea, no admission of guilt. "
+      + "What is true is the impeachment: the Texas House impeached him in 2023 and the "
+      + "Senate acquitted him. The measured version of the candidate problem is two cards "
+      + "down, where he runs 9.15 points behind his own ticket in the primary.");
   }
 
   /* 2026 has everything 2018 had and then some. The 2018 row in the primary card treats
@@ -1040,24 +1059,7 @@
       + "actual in 2018 against a D+8.5 generic ballot now. That is why 2018&rsquo;s "
       + "R+2.57 is treated as a <b>floor</b> rather than a forecast. Four things sit on "
       + "top of it that Beto never ran against.",
-      tbl,
-      "<b>The honest version of the pump-price point.</b> Texas regular is "
-      + "<b>$3.70</b>, not $5. But the level is the weaker half of it: AAA Texas recorded "
-      + "<b>the most expensive October ever</b> in this state, with prices up close to a "
-      + "dollar year over year, and diesel — which sets freight and therefore grocery "
-      + "prices — is up far more. A number that moved that fast is worth more "
-      + "politically than a number that is merely high."
-      + "<br><br><b>What is measurable and what is not.</b> The Paxton line is measurable "
-      + "and is measured, two cards below: he ran 9.15 points behind the Republican "
-      + "ticket in the primary. The ICE line is measurable in exactly the place this whole "
-      + "tab turns on — Hispanic movement — and the early-vote cards are where "
-      + "it would show up. The gas and Venezuela lines are not separable from everything "
-      + "else in a single statewide margin, and nothing here attempts to price them. They "
-      + "are listed because leaving them out would make 2018 look like a match when it is "
-      + "a floor."
-      + "<br><br><b>And the direction of the error.</b> Every one of the four runs the "
-      + "same way. If they are worth anything at all, 2018’s R+2.57 is the "
-      + "pessimistic end of the range, not the centre of it.");
+      tbl);
   }
 
   function baselineCard() {

@@ -1362,36 +1362,81 @@
   }
 
   function crosstabCard() {
+    /* Eighteen rows in one undifferentiated stack was unreadable, and the right-hand
+       column packed both polls into one string. Now grouped - race, age, sex, how they
+       voted in 2024, party, where they live - with each poll's number in its own column
+       and a phone layout that puts the label on its own line instead of in a gutter. */
     var R = (D.xtab || []).map(function (r) {
-      return {g: r.group, ym: r.yougov_margin_R === "" ? null : num(r.yougov_margin_R),
+      return {grp: r.group || "", g: r.bloc,
+              ym: r.yougov_margin_R === "" ? null : num(r.yougov_margin_R),
               am: num(r.atlas_margin_R), ad: num(r.atlas_d), ar: num(r.atlas_r)};
     }).filter(function (r) { return r.am != null; });
     if (!R.length) return "";
-    var W = 720, H2 = 48 + R.length * 25, L = 162, R2 = 96, T = 34;
-    var lo = -95, hi = 95;
-    var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R2); };
-    var s2 = svg(W, H2, "Texas Senate crosstabs from the two final polls");
-    s2 += line(xs(0), T - 12, xs(0), H2 - 14, "zl");
-    s2 += txt(xs(0), T - 18, "even", "tk", "middle");
-    s2 += txt(L, T - 18, "Talarico", "lgd") + txt(W - R2, T - 18, "Paxton", "lgd", "end");
-    R.forEach(function (r, i) {
-      var y = T + 6 + i * 25;
-      s2 += txt(L - 10, y + 4, r.g, r.g === "Total" ? "lbb" : "lb", "end");
-      if (r.ym != null) {
-        s2 += line(xs(r.ym), y, xs(r.am), y, "cn");
-        s2 += '<circle cx="' + xs(r.ym) + '" cy="' + y + '" r="4" fill="none" '
-           + 'stroke="currentColor" stroke-width="1.5"/>';
-      }
-      s2 += '<circle cx="' + xs(r.am) + '" cy="' + y + '" r="5" fill="'
-         + sideCol(r.am) + '"/>';
-      s2 += txt(W - R2 + 8, y + 4,
-                (r.ym != null ? mgn(r.ym, 0) + " / " : "") + mgn(r.am, 0), "tk");
+    var groups = [];
+    R.forEach(function (r) {
+      var f = groups.filter(function (x) { return x.name === r.grp; })[0];
+      if (!f) { f = {name: r.grp, rows: []}; groups.push(f); }
+      f.rows.push(r);
     });
-    s2 += txt(L, 16, "\u25cb YouGov, 2,141 likely voters, 26\u201329 Oct", "lgd")
-       + txt(L + 250, 16, "\u25cf AtlasIntel, 1,678, 28 Oct\u20131 Nov", "lgd");
+
+    var wide = !NARROW;
+    var W = wide ? 760 : 360, L = wide ? 178 : 8, RM = wide ? 128 : 74, T = 58;
+    var ROW = wide ? 25 : 34, HDR = wide ? 26 : 24, GAP = wide ? 8 : 10;
+    var H2 = T + groups.reduce(function (a2, f) {
+      return a2 + (f.name ? HDR : 4) + f.rows.length * ROW + GAP;
+    }, 0) + 20;
+    var lo = -100, hi = 100;
+    var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - RM); };
+    var s2 = svg(W, H2, "Texas Senate crosstabs from the two final polls, group by group");
+    [-100, -50, 0, 50, 100].forEach(function (t) {
+      s2 += line(xs(t), T - 14, xs(t), H2 - 16, t === 0 ? "zl" : "gl")
+         + txt(xs(t), H2 - 4, t === 0 ? "even" : mgn(t, 0), "tk", "middle");
+    });
+    s2 += txt(L, T - 20, "← Talarico", "lgd")
+       + txt(W - RM, T - 20, "Paxton →", "lgd", "end");
+    // legend
+    s2 += '<circle cx="' + ((wide ? L : 8) + 5) + '" cy="12" r="4.5" fill="none" '
+       + 'stroke="currentColor" stroke-width="1.5"/>'
+       + txt((wide ? L : 8) + 14, 16, "YouGov · 2,141 LV · 26–29 Oct", "lgd")
+       + '<circle cx="' + ((wide ? L : 8) + 212) + '" cy="12" r="5" fill="currentColor"/>'
+       + txt((wide ? L : 8) + 221, 16,
+             "AtlasIntel · 1,678 · 28 Oct–1 Nov", "lgd");
+    if (wide) {
+      s2 += txt(W - RM + 10, 16, "YouGov", "lgd") + txt(W - 6, 16, "Atlas", "lgd", "end");
+    }
+    var y = T;
+    groups.forEach(function (f) {
+      if (f.name) {
+        s2 += txt(wide ? 0 : 8, y + 12, f.name.toUpperCase(), "lgd");
+        y += HDR;
+      } else { y += 4; }
+      f.rows.forEach(function (r) {
+        var cy = y + (wide ? 10 : 20);
+        if (wide) s2 += txt(L - 12, cy + 4, r.g, r.g === "Total" ? "lbb" : "lb", "end");
+        else s2 += txt(8, y + 9, r.g, r.g === "Total" ? "lbb" : "lb");
+        if (r.ym != null) {
+          s2 += line(xs(r.ym), cy, xs(r.am), cy, "cn")
+             + '<circle cx="' + xs(r.ym) + '" cy="' + cy + '" r="4.5" fill="var(--card,#fff)" '
+             + 'stroke="currentColor" stroke-width="1.5"/>';
+        }
+        s2 += '<circle cx="' + xs(r.am) + '" cy="' + cy + '" r="5.5" fill="'
+           + sideCol(r.am) + '"/>';
+        if (wide) {
+          s2 += txt(W - RM + 10, cy + 4, r.ym != null ? mgn(r.ym, 0) : "—", "tk")
+             + '<text x="' + (W - 6) + '" y="' + (cy + 4) + '" text-anchor="end" '
+             + 'class="vl" fill="' + sideCol(r.am) + '">' + mgn(r.am, 0) + "</text>";
+        } else {
+          s2 += '<text x="' + (W - 6) + '" y="' + (y + 9) + '" text-anchor="end" '
+             + 'class="vl" fill="' + sideCol(r.am) + '">' + mgn(r.am, 0)
+             + (r.ym != null ? " / " + mgn(r.ym, 0) : "") + "</text>";
+        }
+        y += ROW;
+      });
+      y += GAP;
+    });
     s2 += "</svg>";
     var ind = R.filter(function (r) { return r.g === "Independents"; })[0];
-    var nv = R.filter(function (r) { return /NOT vote/.test(r.g); })[0];
+    var nv = R.filter(function (r) { return /not vote/i.test(r.g); })[0];
     var hisp = R.filter(function (r) { return r.g === "Hispanic"; })[0];
     var twoWay = ind ? (ind.ad / (ind.ad + ind.ar) * 100) : null;
     return card("tx-xtab", "Section 1 · slide 3 · what the crosstabs say",
@@ -1414,11 +1459,19 @@
       + "and it is more lopsided than Morris\u2019s five-to-one finding in Harris County."
       + "<br><br><b>Where they agree and where they do not is the useful part.</b> The two "
       + "polls land within a tenth of a point on Black voters (D+69 and D+68.6), on 30\u201344 "
-      + "(D+22 and D+22.1) and on 45\u201364 (D+2 and D+2.0). They are 30 points apart on "
-      + "18\u201329, 17 on women, 14 on men, and <b>11.5 apart on Hispanic voters "
-      + "\u2014 D+28 against D+16.5</b>. That last one is the number this whole model turns "
-      + "on: the county model assumes Hispanic voters land at D+29.85, which YouGov "
-      + "supports and AtlasIntel does not."
+      + "(D+22 and D+22.1) and on 45\u201364 (D+2 and D+2.0)."
+      + "<br><br><b>Where they are far apart, they are far apart on size, not side.</b> "
+      + "They differ by 30 points on 18\u201329 \u2014 and both are solidly Democratic, "
+      + "D+46 against D+16. Same on women, 17 apart and both Democratic; same on "
+      + "Hispanic voters, 11.5 apart and both Democratic. There is exactly one group "
+      + "where the two polls disagree about which way it votes, and it is men: YouGov has "
+      + "them R+1, AtlasIntel R+15 \u2014 still the same side, just barely. Across all "
+      + "eighteen rows the polls never put a group on opposite sides of even. That is a "
+      + "much weaker disagreement than the spread suggests: they are arguing about "
+      + "margins, not about who is winning which bloc."
+      + "<br><br><b>The one gap that moves the model.</b> Hispanic voters, <b>D+28 "
+      + "against D+16.5</b>. The county model assumes they land at D+29.85, which YouGov "
+      + "supports and AtlasIntel does not \u2014 and break-even sits between the two."
       + "<br><br><b>One caution on the poll \u201cwhite\u201d and \u201cHispanic\u201d "
       + "rows.</b> They are self-identified respondents statewide. The precinct figures "
       + "elsewhere on this tab are counted ballots in precincts that are 90% one group, "

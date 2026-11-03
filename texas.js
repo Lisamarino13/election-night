@@ -420,7 +420,7 @@
       s += txt(xs(r.m) + (r.m < 0 ? -8 : 8), y + 4, mgn(r.m), "vl", r.m < 0 ? "end" : "start");
     });
     s += "</svg>";
-    return card("tx-est", "Chapter 2 · where every estimate lands",
+    return card("tx-est", "Chapter 3 · slide 1 · where every estimate lands",
       "Where every estimate lands",
       "Eleven estimates spanning six points and straddling zero. They do not disagree "
       + "randomly: nearly every one is the same arithmetic with a different assumption "
@@ -603,7 +603,7 @@
                r.now < 0 ? "end" : "start");
     });
     s += "</svg>";
-    return card("tx-base", "Chapter 3 · slide 2 · why the methods disagree",
+    return card("tx-base", "Chapter 3 · slide 3 · why the methods disagree",
       "Seven starting points, each with its own swing",
       "Take any past Texas result, add the national swing from <i>that</i> year to this "
       + "year&rsquo;s generic ballot, and see where Texas lands. 2018 was already a strong "
@@ -629,7 +629,7 @@
         + '</td><td class="num">' + (r.gov > 0 ? "D+" : "R+") + Math.abs(r.gov).toFixed(1)
         + '</td><td class="num dem">+' + r.drag.toFixed(2) + "</td></tr>";
     }).join("");
-    return card("tx-paxton", "Chapter 3 · slide 1 · the part that is not the electorate",
+    return card("tx-paxton", "Chapter 3 · slide 2 · the part that is not the electorate",
       "Senate against governor, same pollster",
       "Four pollsters asked about both races in the same field period with the same "
       + "sample, so house effects cancel in the difference. What is left is the candidate.",
@@ -1066,23 +1066,21 @@
         + primaryFitCard()
         // 2. how a banked vote reaches a result
         + historyCard()
-        + estimatesCard()
         // 3. where every method lands, and why they disagree
         + framing("tx-frame-lands", "Chapter 3",
-            "Why the estimates disagree",
-            ["Chapter 2 ends with eleven estimates spanning six points and straddling "
-             + "zero. A spread that wide usually means the methods are measuring "
-             + "different things.",
-             "They are not. Two choices account for most of it, and neither is "
-             + "demographic. The first is the candidate: four pollsters asked about the "
-             + "Senate and the governor&rsquo;s race in the same field period with the "
-             + "same sample, and the gap between them is Paxton rather than the voters. "
-             + "The second is where you choose to start \u2014 take any past Texas "
-             + "result, carry it forward on its own year&rsquo;s national swing, and "
-             + "which year you picked moves the answer more than any assumption about "
-             + "who turns out.",
-             "Strip both out and what is left is a single question: <b>how far Hispanic "
-             + "voters move.</b> Chapter 4 is that question."])
+            "So where does it land, and why can nobody agree?",
+            ["Chapter 2 is mechanics: three quarters of the vote is already cast, and "
+             + "election day moves it by a point or by nine depending on the cycle. None "
+             + "of that tells you who wins.",
+             "The first slide below is every attempt at an answer \u2014 eleven of them, "
+             + "spanning six points and straddling zero. A spread that wide usually means "
+             + "the methods are measuring different things. They are not.",
+             "Two choices account for most of it, and neither is demographic. The "
+             + "candidate is worth about five points, measured within-poll so house "
+             + "effects cancel. And which past result you carry forward moves the answer "
+             + "more than any assumption about who turns out. Strip both out and what is "
+             + "left is a single question: <b>how far Hispanic voters move.</b>"])
+        + estimatesCard()
         + paxtonCard()
         + baselineCard()
         // 4. the group doing the moving

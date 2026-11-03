@@ -86,9 +86,13 @@ def xlsx_rows(data):
     return out
 
 
-def find_files():
-    """{race: (url, label)} for the GENERAL election files, if they are posted."""
-    html = get(INDEX, 90).decode("utf-8", "ignore")
+def find_files(index=INDEX):
+    """{race: (url, label)} for the GENERAL election files, if they are posted.
+
+    `index` is only ever passed by --proof, which points it at a past election's own
+    results page so discovery is exercised the same way rather than hand-fed a URL.
+    """
+    html = get(index, 90).decode("utf-8", "ignore")
     found = {}
     for href, _ in re.findall(r'<a[^>]+href="([^"]+)"[^>]*>(.*?)</a>', html, re.S):
         if not href.lower().endswith((".xlsx", ".xls")):
@@ -172,17 +176,71 @@ def early_cast():
 
 
 def main():
+    # --proof <election results page | one .xlsx> runs the whole read against a PAST
+    # Maine election, where the votes are real. Against tonight's index the run only
+    # ever proves that no files are posted: Maine publishes nothing until counting is
+    # under way, so the vote-reading path is untested at the moment it matters.
+    #
+    # Finding the past election. The index this collector polls, /sos/cec/elec/results/
+    # index.html, now 301s to /sos/elections-voting/election-results-data, and the past
+    # generals are one click further on, at .../previous-election-results, which links
+    # each year's own page - November 5, 2024 is
+    #   /sos/elections-voting/election-results-data/election-results-2024
+    # and November 8, 2022 is .../2022-election-results. Those pages carry the same
+    # one-xlsx-per-contest links the live index will carry tonight, so --proof runs
+    # find_files() against one of them and then reads what it finds.
+    #
+    # A bare .xlsx URL skips discovery and reads just that file. That exists because
+    # discovery and reading fail separately here, and a run that stops at discovery
+    # would leave the reading unproven.
     if "--proof" in sys.argv:
         i = sys.argv.index("--proof")
-        rows = xlsx_rows(get(sys.argv[i + 1]))
-        units, county_of, extras = parse(rows)
-        tot = collections.Counter()
-        for t in units.values():
-            tot.update(t)
-        print(f"ME proof: {len(units)} municipalities across "
-              f"{len(set(v for v in county_of.values() if v))} counties")
-        for c, v in tot.most_common(5):
-            print(f"   {c:34} {v:>9,}")
+        target = sys.argv[i + 1] if len(sys.argv) > i + 1 else INDEX
+        if target.lower().endswith((".xlsx", ".xls")):
+            label = urllib.parse.unquote(target.rsplit("/", 1)[-1])
+            files = {"contest": (target, label)}
+            print(f"ME proof: {label} (one file; discovery not exercised)")
+        else:
+            files = find_files(target)
+            print(f"ME proof via {target}")
+            print(f"   find_files matched {len(files)} of {sorted(WANT)}: "
+                  f"{sorted((r, n) for r, (_, n) in files.items())}")
+            if not files:
+                print("   nothing matched — against this page the live run would say "
+                      "'no general-election result files posted yet'")
+                return 2
+        for race, (url, label) in sorted(files.items()):
+            rows = xlsx_rows(get(url, 240))
+            units, county_of, extras = parse(rows)
+            tally, per_unit = collections.Counter(), 0
+            for t in units.values():
+                tally.update(t)
+                per_unit += sum(t.values())
+            ex = collections.Counter()
+            for e in extras.values():
+                ex.update(e)
+            total = sum(tally.values())
+            print(f"   {race}: {total:,} votes across {len(units)} municipalities in "
+                  f"{len(set(v for v in county_of.values() if v))} counties  ({label})")
+            for c, v in tally.most_common(8):
+                print(f"      {c[:40]:42} {v:>9,}")
+            print(f"      TIES: candidate columns sum {total:,} == the municipality "
+                  f"rows' own counted sum {per_unit:,}: {total == per_unit}")
+            print(f"      non-candidate columns, held out of the total: {dict(ex)}")
+            # Rows this read DROPPED although they carry numbers. Maine ends each file
+            # with a UOCAVA block and a formula totals row; the UOCAVA votes are real
+            # votes that no municipality row contains, so they belong in the report
+            # rather than silently outside the total.
+            dropped = [r for r in rows[1:]
+                       if any(re.fullmatch(r"\d+", str(c).strip()) for c in r)
+                       and not (len(r) > 1 and str(r[0]).strip().upper() in COUNTIES)]
+            for r in dropped:
+                nums = [int(c) for c in r if re.fullmatch(r"\d+", str(c).strip())]
+                print(f"      DROPPED row {[str(c) for c in r[:2]]}: {sum(nums):,} votes "
+                      f"not in the total above")
+            print("      no mode split: Maine's result files carry no early or "
+                  "election-day columns, so there is none to tie out")
+        print("   nothing written — this is a parse proof, not a results pull")
         return 0
 
     files = find_files()

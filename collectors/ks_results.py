@@ -37,7 +37,7 @@ data/ks-nominees.json. It is read back on election night and anyone not on it is
 Exit 2 means Kansas has not published general-election results yet. Any other problem
 raises and writes nothing.
 """
-import collections, json, pathlib, re, sys
+import collections, json, pathlib, re, sys, time
 from datetime import datetime, timezone
 import early_cast as early_cast_shared
 import browser_fetch
@@ -45,6 +45,10 @@ import election_day
 
 BASE = "https://ent.sos.ks.gov"
 INDEX = f"{BASE}/kssos_ent.html"
+# Where the PREVIOUS elections' sites are still served, unlinked, in the same layout:
+# https://kssos.org/ent/<Year><Primary|General>/kssos_ent.html, 2012General onward.
+# Read by --proof only; see proof() for how this was found and why it is needed.
+ARCHIVE = "https://kssos.org/ent"
 # pages on the index that are views, not counties
 # Views, not counties. Compared lower-cased because Kansas mixes the casing
 # ("Uncontested.html" next to "allen.html").
@@ -142,6 +146,16 @@ def parse(html, url):
             "stated_total": stated_total,
         }
     if not races:
+        # Distinguish "this county has posted nothing yet" from "the page we are
+        # parsing is not the page we think it is". A real Kansas results page carries
+        # the title and the Last Updated stamp whether or not any race is on it;
+        # Smith County served exactly that tonight, and treating it as a layout change
+        # failed the whole state for one empty county.
+        looks_right = title and "Kansas Election Results" in title and stamps
+        if looks_right:
+            return {"title": title, "last_updated": strip(stamps[0]),
+                    "county_last_reported": strip(stamps[1]) if len(stamps) > 1 else None,
+                    "races": {}}
         raise RuntimeError(f"{url}: no race blocks found — page layout changed")
     return {"title": title, "last_updated": strip(stamps[0]) if stamps else None,
             "county_last_reported": strip(stamps[1]) if len(stamps) > 1 else None,
@@ -149,8 +163,17 @@ def parse(html, url):
 
 
 def county_slugs(index_html):
-    slugs = sorted({m for m in re.findall(r'href="([A-Za-z_]+)\.html', index_html)
-                    if m.lower() not in NOT_COUNTIES})
+    """Every county page the index offers, however the index chooses to offer it.
+
+    Kansas moved its county links out of <a href="allen.html"> and into a dropdown,
+    <select id="county-ddl"><option value="allen.html">Allen</option>. Reading only
+    href= found 98 of the wrong things and none of the counties, and the count check
+    below turned that into a hard failure on election night. Both attributes are read
+    now, so the page can go back to links, stay a dropdown, or carry both.
+    """
+    found = (re.findall(r'href="([A-Za-z_]+)\.html', index_html)
+             + re.findall(r'value="([A-Za-z_]+)\.html', index_html))
+    slugs = sorted({m for m in found if m.lower() not in NOT_COUNTIES})
     if len(slugs) != EXPECT_COUNTIES:
         raise RuntimeError(f"index listed {len(slugs)} county pages, expected "
                            f"{EXPECT_COUNTIES} — Kansas has 105 counties")
@@ -234,35 +257,183 @@ def early_cast():
     return early_cast_shared.by_unit("KS", key=lambda s: s.strip().upper())
 
 
-def proof(b):
-    """Parse every county page against whatever election is staged. Writes nothing.
+def proof(b, election=None):
+    """Run the whole election-night read against a PAST Kansas election. Writes nothing.
 
-    An exit-2 from the real run only proves the general is not up yet. This walks all
-    105 counties so the fetch, the Total Votes cross-check, the percentage check and
-    the county naming are all exercised before election night, against real pages.
+    Pointed at the staged election (no argument) this proves only that the pages parse:
+    every total is zero until polls close, so the VOTE-READING path - the Total Votes
+    cross-check, the printed-percentage check and the county-sum-versus-statewide check,
+    which are the three things that would catch a layout change - is never exercised at
+    all. `--proof <election>` runs it where the votes are real.
+
+    Finding the past election. ent.sos.ks.gov is a flat static site that is replaced
+    each election: it carries only the staged one, with no archive link, no election id
+    and no directory index (probed 2026-11-03), and sos.ks.gov/elections/election-
+    results.html publishes only official-totals PDFs and precinct-level xlsx - a
+    different format this parser cannot read - noting that unofficial results are
+    "available upon request". The previous sites are still served, unlinked, at
+
+        https://kssos.org/ent/<Year><Primary|General>/kssos_ent.html
+
+    in the same layout and with the same county filenames, for 2012General through
+    2026Primary. So `election` is that folder name - 2022General - or a full base URL.
+
+    One archive difference, reported rather than papered over: the staged site has a
+    Statewide tab (statewide.html) and the older ones do not, so statewide totals come
+    from whichever of national.html / statewide.html the election serves plus the
+    index's own All-Races block, which every one of them carries.
+
+    early_cast() is deliberately not read here: it is this board's 2026 early-vote
+    ledger and has nothing to say about a past election's counties.
     """
-    index = b.fetch(INDEX)
+    base = election if (election or "").startswith("http") else (
+        f"{ARCHIVE}/{election}" if election else BASE)
+    # kssos.org sits behind a CloudFront WAF that blocks a burst: walking the county
+    # pages back to back was cut off at the 27th with "Request blocked" and stayed
+    # blocked for about ten minutes. So the archive is read at a crawl, and a block is
+    # waited out rather than reported as a layout change or left as a partial proof.
+    archive = not base.startswith(BASE)
+    # A blocked page is not an empty election. CloudFront's "Request blocked" body and
+    # Chrome's own error document for it both arrive as perfectly loadable HTML, so a
+    # results page only counts as arrived once it carries a race block - otherwise a
+    # block surfaced as "no race blocks found — page layout changed", which is the
+    # message that would be believed on election night.
+    # Wait for race blocks, but accept a fully-rendered page that simply has none:
+    # before polls close that is every county, and waiting the full timeout on each of
+    # 105 would take the better part of an hour.
+    has_races = lambda h: 'class="race"' in h or "Last Updated:" in h
+    key = lambda s: re.sub(r"[^a-z]", "", (s or "").lower().replace("county", ""))
+
+    def page(url, tries=10, **kw):
+        for attempt in range(tries):
+            try:
+                return b.fetch(url, **kw)
+            except RuntimeError as e:
+                if not archive or attempt == tries - 1:
+                    raise
+                print(f"   {url.rsplit('/', 1)[-1]}: blocked or empty "
+                      f"({str(e)[-38:]}) — waiting 180s")
+                time.sleep(180)
+
+    print(f"KS proof: {base}")
+    index = page(f"{base}/kssos_ent.html",
+                 ready=lambda h: "allen.html" in h, timeout=120)
     slugs = county_slugs(index)
-    print(f"KS proof: {len(slugs)} county pages")
-    seen, votes, races = {}, 0, collections.Counter()
+
+    # The statewide documents, read as the live run reads them. A missing one is named
+    # and skipped rather than fatal, because the archived elections predate the
+    # Statewide tab; the index's All-Races block is what they carry instead. tries=2,
+    # since a long retry on a page that is simply absent would stall the proof.
+    pages = {}
+    for nm in ("national", "statewide"):
+        try:
+            pages[nm] = parse(page(f"{base}/{nm}.html", tries=2, timeout=30,
+                                   ready=has_races), nm)
+        except RuntimeError as e:
+            print(f"   no {nm}.html for this election ({str(e)[:58]}…)")
+    pages["kssos_ent"] = parse(index, "kssos_ent")
+    names = [n for p in pages.values() for n in p["races"]]
+    picked = match_races(names, WANT)
+    if not picked:
+        raise RuntimeError(f"none of {sorted(WANT)} is on this election's pages "
+                           f"({len(set(names))} contests). Kansas elects a US Senator "
+                           f"and a Governor in different years, so pick a general that "
+                           f"carries them.")
+    print(f"   {len(slugs)} county pages, feed dated {feed_date(pages['kssos_ent'])}, "
+          f"contests matched: {sorted(picked)}")
+
+    party_of, roster_from = roster()
+    counties = {}
+    empty = 0
     for i, slug in enumerate(slugs, 1):
-        page = parse(b.fetch(f"{BASE}/{slug}.html"), slug)
-        if not page["title"]:
-            raise RuntimeError(f"{slug}.html: no \"Results - <county>\" heading")
-        cname = page["title"].replace(" County", "").strip()
-        if cname in seen:
-            raise RuntimeError(f"two pages both named {cname!r}: {seen[cname]}, {slug}")
-        seen[cname] = slug
-        for name, r in page["races"].items():
-            races[name] += 1
-            votes += r["counted"]
+        if archive and i > 1:
+            time.sleep(3.5)
+        for attempt in range(10):
+            doc = parse(page(f"{base}/{slug}.html", timeout=30, ready=has_races), slug)
+            cname = (doc["title"] or "").replace(" County", "").strip()
+            if key(cname) == key(slug):
+                break
+            # A blocked or stale fetch can hand back a DIFFERENT document that also
+            # carries race blocks - the index's own All-Races page did, twice, on the
+            # first full walk - so a page is accepted only once it names the county
+            # that was asked for. Counting another county's votes as this one's is the
+            # one failure that would still tie out and still be wrong.
+            print(f"   {slug}.html served {cname!r} — refetching")
+            time.sleep(20)
+        else:
+            raise RuntimeError(f"{slug}.html never served its own page "
+                               f"(last title {cname!r})")
+        if cname in counties:
+            raise RuntimeError(f"two pages both named {cname!r}")
+        rec = counties.setdefault(cname, {"races": {}})
+        for race, hits in match_races(doc["races"], WANT).items():
+            r = doc["races"][hits[0][0]]
+            choices = {}
+            for c in r["candidates"]:
+                nm, pk = split_party(c["name"])
+                choices[nm] = {"party": pk or party_of.get((race, nm.strip().lower()), "O"),
+                               "votes": c["votes"]}
+            rec["races"][race] = {
+                "choices": dict(sorted(choices.items(), key=lambda x: -x[1]["votes"])),
+                "counted": r["counted"],
+                "precincts_reporting": r["precincts_reporting"],
+                "precincts_total": r["precincts_total"]}
+        if not rec["races"]:
+            # No tracked contest on this county's page. Before polls close that is every
+            # county; after, it is a county that has not reported. Either way it is not
+            # a reason to throw away the other 104.
+            if not doc["races"]:
+                counties.pop(cname, None)
+                empty += 1
+                continue
+            raise RuntimeError(f"{slug}.html carried none of {sorted(WANT)} "
+                               f"(it did carry {sorted(doc['races'])[:4]})")
         if i % 25 == 0 or i == len(slugs):
             print(f"   {i:3d}/{len(slugs)}  last: {cname} "
-                  f"({len(page['races'])} races, updated {page['last_updated']})")
-    print(f"KS proof: {len(seen)} counties named, {votes:,} votes parsed, "
-          f"{len(races)} distinct contests")
-    top = [n for n, _ in races.most_common(4)]
-    print(f"   contests on every county page: {top}")
+                  f"({len(doc['races'])} races, updated {doc['last_updated']})")
+
+    totals = {}
+    for race, hits in picked.items():
+        name = hits[0][0]
+        src = next(p["races"][name] for p in pages.values() if name in p["races"])
+        totals[race] = {
+            "contest_name": name,
+            "choices": {split_party(c["name"])[0]: c["votes"] for c in src["candidates"]},
+            "parties": {split_party(c["name"])[0]:
+                        (split_party(c["name"])[1]
+                         or party_of.get((race, split_party(c["name"])[0].lower()), "O"))
+                        for c in src["candidates"]},
+            "total": src["counted"], "stated_total": src["stated_total"],
+            "precincts_reporting": src["precincts_reporting"],
+            "precincts_total": src["precincts_total"]}
+
+    # The same two cross-checks the live run makes before it will publish anything.
+    for race, t in totals.items():
+        for who, votes in t["choices"].items():
+            summed = sum((c["races"].get(race, {}).get("choices", {}).get(who, {}) or {})
+                         .get("votes", 0) for c in counties.values())
+            if summed != votes:
+                raise RuntimeError(f"KS {race}: counties sum to {summed:,} for {who} but "
+                                   f"the statewide page says {votes:,}")
+        rep = sum((c["races"].get(race) or {}).get("precincts_reporting") or 0
+                  for c in counties.values())
+        if t["precincts_reporting"] is not None and rep != t["precincts_reporting"]:
+            raise RuntimeError(f"KS {race}: counties report {rep:,} precincts, statewide "
+                               f"page says {t['precincts_reporting']:,}")
+
+    print(f"KS proof: {len(counties)} counties named and read, roster from {roster_from}")
+    for race, t in totals.items():
+        ssum = sum(t["choices"].values())
+        print(f"   {race}: {t['total']:,} votes  precincts "
+              f"{t['precincts_reporting']:,}/{t['precincts_total']:,}  ({t['contest_name']})")
+        for c, v in sorted(t["choices"].items(), key=lambda x: -x[1])[:5]:
+            print(f"      {c[:38]:40} {v:>10,}  {t['parties'].get(c)}")
+        print(f"      TIES: candidates sum {ssum:,} == race total {t['total']:,}: "
+              f"{ssum == t['total']}; == Kansas's own Total Votes line "
+              f"{t['stated_total']:,}: {ssum == t['stated_total']}; "
+              f"105 counties sum to the statewide page: True (checked above)")
+    print("   no mode split: Kansas publishes no early/election-day breakdown on these "
+          "pages, so there is none to tie out")
     print("   nothing written — this is a parse proof, not a results pull")
     return 0
 
@@ -281,7 +452,10 @@ def main(argv):
         if "--nominees" in argv:
             return build_roster(b)
         if "--proof" in argv:
-            return proof(b)
+            # --proof <election> runs the whole read against a PAST election, where the
+            # votes are real; bare --proof still parses whatever is staged.
+            i = argv.index("--proof")
+            return proof(b, argv[i + 1] if len(argv) > i + 1 else None)
 
         # Wait for the RESULTS page, not for a substring a half-rendered or challenge
         # page can also carry. The run on 11-01 timed out on 1,715,321 bytes that

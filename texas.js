@@ -188,6 +188,13 @@
       + "out of the difference, so <b>the Paxton effect is larger than the polling miss "
       + "and cannot be erased by it</b>. Take the full haircut and the Senate race is "
       + 'still <b class="nm">D+0.98</b>.</p>'
+      + "<p><b>Which generalises into the number to hold tonight.</b> Talarico is the "
+      + "generic Texas Democrat plus 4.92, so he is level only when that generic "
+      + 'Democrat loses by <b class="nm">4.92</b>. <b>We think he wins an R+4 night</b> '
+      + "\u2014 a night where the rest of the Texas ticket loses by four, which would "
+      + "read as a bad evening for Democrats everywhere else on the ballot, still "
+      + 'leaves him <b class="nm">D+0.92</b>. R+3 leaves him D+1.92. It is only at '
+      + "about R+5 for the ticket that the lag stops covering him.</p>"
       + "<p><b>The governor&rsquo;s race is a different question with a different "
       + "answer.</b> There is no Paxton in it. At the same haircut Abbott against "
       + 'Hinojosa is <b class="nm">R+3.94</b>, and she has to find 402,353 votes '

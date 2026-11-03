@@ -858,6 +858,20 @@
        + txt(L + 8, H2 - 12, "\u25cf 2026 so far", "lgd");
     s2 += "</svg>";
 
+    var G = (D.tgrp || []).map(function (r) {
+      return {g: r.group, v: num(r.voted), sv: num(r.share_of_voters),
+              sa: num(r.share_of_active), t: num(r.turnout_so_far)};
+    }).filter(function (r) { return r.sv != null; });
+    var grp = G.length ? ('<table class="txtbl" style="margin-top:12px"><thead><tr>'
+      + "<th>Race and ethnicity, estimated</th><th>Voted</th><th>Share of voters</th>"
+      + "<th>Share of active</th><th>Turnout</th></tr></thead><tbody>"
+      + G.map(function (r) {
+          var d = r.sv - r.sa;
+          return "<tr><td>" + esc(r.g) + '</td><td class="num">' + n0(r.v)
+            + '</td><td class="num ' + (d > 0.5 ? "rep" : d < -0.5 ? "dem" : "") + '">'
+            + r.sv + '%</td><td class="num dim">' + r.sa + '%</td><td class="num">'
+            + r.t + "%</td></tr>";
+        }).join("") + "</tbody></table>") : "";
     var hist = H.length ? ('<table class="txtbl" style="margin-top:12px"><thead><tr>'
       + "<th>By the last primary each voter chose</th><th>Voters</th><th>Lean</th>"
       + "<th>D</th><th>Neither</th><th>R</th></tr></thead><tbody>"
@@ -878,31 +892,26 @@
       + "and 571,900 early in person. The chart and the table below are its figures. "
       + "The one number here from elsewhere: Allred carried Tarrant by 0.22 in 2024 "
       + "while Texas went R+8.71, which is from the certified county returns.",
-      s2 + hist,
-      "<b>Read the raw swings with care \u2014 most of them are the measure moving, not "
-      + "the voters.</b> The lean here is the share whose last primary was Democratic "
-      + "minus the share whose last primary was Republican. County-wide, voters who chose "
-      + "EITHER primary fell from 71% of this electorate in 2022 to 57% in 2026, as the "
-      + "share choosing neither went 30% to 43%. That alone shrinks every precinct\u2019s "
-      + "gap by a factor of 0.80, pulling Democratic precincts toward Republicans and "
-      + "Republican precincts toward Democrats with nobody changing their mind."
-      + "<br><br><b>Taking that drift out, all four precincts moved toward Democrats, "
-      + "precinct 1 included.</b> Its raw lean fell 5.0 points, but dilution alone "
-      + "predicted a fall of 7.4 \u2014 so it landed 2.4 points MORE Democratic than the "
-      + "measure\u2019s own drift would have produced. Adjusted, the four moved 2.4, 6.8, "
-      + "4.7 and 7.4 points toward Democrats, and the county 5.4. The raw county figure of "
-      + "6.1 slightly overstates it; the raw precinct 1 figure has the sign wrong."
-      + "<br><br><b>What I read into it, which the file does not say.</b> The gain is real "
-      + "but fairly even across the county rather than concentrated \u2014 between 2.4 and "
-      + "7.4 points once the measure is held constant. The adjustment applies the "
-      + "county-wide change in primary-chooser share to every precinct, which is an "
-      + "approximation: the file does not publish those shares precinct by precinct, so a "
-      + "precinct whose neither-share moved differently from the county would be off. "
-      + "Tarrant is also one county of 254."
-      + "<br><br><b>The caution is the source\u2019s own.</b> The lean is by last primary "
-      + "chosen, which is not a vote. The unusually large 2026 Democratic primary makes "
-      + "every group on this measure look more Democratic than it will vote, and 43% of "
-      + "these voters chose neither primary at all.");
+      s2 + hist + grp,
+      "<b>The file\u2019s own headline is who these voters are.</b> It opens: "
+      + "<i>\u201c13.1% sat out the 2022 midterm, then voted in 2024, and 17.9% "
+      + "registered since 2022.\u201d</i> A further 17.8% were on the rolls in 2022 and "
+      + "did not vote. So roughly half of this early electorate either did not exist as "
+      + "voters in 2022 or sat that year out."
+      + "<br><br><b>Its turnout comparison points the other way from its lean.</b> The "
+      + "file sets each group\u2019s share of voters against its share of active voters, "
+      + "on the rule that <i>\u201ca group whose share of voters is bigger is turning out "
+      + "ahead of the rest\u201d</i>. White voters are 58% of those who have voted against "
+      + "53% of active voters \u2014 ahead. Hispanic voters are 18% against 21% \u2014 "
+      + "behind, with turnout of 39% against 52% for white voters. Black voters are 16% "
+      + "against 17%. The precinct leans above and this table are both from the same file "
+      + "and they do not agree about which way Tarrant is moving."
+      + "<br><br><b>And the file declines to forecast, twice.</b> On the lean: "
+      + "<i>\u201cA primary ballot is not a November vote, and the large 2026 Democratic "
+      + "primary makes every 2026 group look more Democratic on this measure.\u201d</i> "
+      + "43% of these voters chose neither primary. On its own what-if tool: "
+      + "<i>\u201cIt is not a forecast, and it is not how anyone actually voted: ballots "
+      + "are secret.\u201d</i>");
   }
 
   /* The Morris gradient is the single biggest external input to this model: it is what
@@ -1293,7 +1302,7 @@
     var want = [["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {

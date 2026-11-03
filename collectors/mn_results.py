@@ -44,7 +44,8 @@ UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit
                     "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
       "Accept": "text/plain,*/*"}
 # Minnesota names the governor's line for the ticket, and its Democrats are the DFL.
-WANT = {"senate": "U.S. Senator", "governor": "Governor & Lt Governor"}
+# Minnesota also elects a governor in 2026; this board does not track it.
+WANT = {"senate": "U.S. Senator"}
 # --proof against a past election: Minnesota's governor is elected in the midterm and
 # its senators in the presidential years, so no single past general carries both lines
 # in WANT. The 2024 general carries Senator plus President, which is the widest pair of

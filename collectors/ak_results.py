@@ -48,7 +48,8 @@ UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit
 
 # Contest_title is exact in this file, so these are equality matches rather than
 # patterns - a loose pattern would pull in "Supreme Court" retention questions.
-WANT = {"senate": "U.S. Senator", "governor": "Governor / Lieutenant Governor"}
+# Alaska also elects a governor in 2026; this board does not track it.
+WANT = {"senate": "U.S. Senator"}
 PARTY = {"REP": "R", "DEM": "D", "UNA": "I", "NON": "I", "AIP": "O", "LIB": "O", "GRN": "O"}
 
 # The five columns the file splits the vote into, folded into what the board reasons

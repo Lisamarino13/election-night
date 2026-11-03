@@ -56,11 +56,10 @@ NOT_COUNTIES = {"kssos_ent", "statewide", "national", "constitutional", "judicia
                 "democratic", "republican", "daysafterelection", "uncontested"}
 EXPECT_COUNTIES = 105
 # the general drops the (D)/(R) suffix the primary carries
-WANT = {"senate": r"^United States Senate$",
-        "governor": r"^Governor\s*/\s*Lt\.?\s*Governor$"}
+# Kansas also elects a governor in 2026; this board does not track it.
+WANT = {"senate": r"^United States Senate$"}
 # in a primary the suffix IS the party, which is how the roster gets built
-PRIMARY_WANT = {"senate": r"^United States Senate \((D|R)\)$",
-                "governor": r"^Governor\s*/\s*Lt\.?\s*Governor \((D|R)\)$"}
+PRIMARY_WANT = {"senate": r"^United States Senate \((D|R)\)$"}
 DATA = pathlib.Path(__file__).resolve().parent.parent / "data"
 ROSTER = DATA / "ks-nominees.json"
 

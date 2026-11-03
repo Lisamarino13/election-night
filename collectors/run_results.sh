@@ -49,6 +49,7 @@ FAST="nc_results.py oh_results.py fl_results.py tx_results.py la_results.py ak_r
 ALL="$FAST ga_results.py ks_results.py"
 case "${1:-all}" in
   fast) SET="$FAST" ;;
+  main) SET="$FAST ga_results.py" ;;
   ga)   SET="ga_results.py" ;;
   ks)   SET="ks_results.py" ;;
   all)  SET="$ALL" ;;

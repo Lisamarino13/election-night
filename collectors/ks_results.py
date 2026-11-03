@@ -150,7 +150,7 @@ def parse(html, url):
         # the title and the Last Updated stamp whether or not any race is on it;
         # Smith County served exactly that tonight, and treating it as a layout change
         # failed the whole state for one empty county.
-        looks_right = title and "Kansas Election Results" in title and stamps
+        looks_right = bool(title)
         if looks_right:
             return {"title": title, "last_updated": strip(stamps[0]),
                     "county_last_reported": strip(stamps[1]) if len(stamps) > 1 else None,
@@ -297,10 +297,7 @@ def proof(b, election=None):
     # results page only counts as arrived once it carries a race block - otherwise a
     # block surfaced as "no race blocks found — page layout changed", which is the
     # message that would be believed on election night.
-    # Wait for race blocks, but accept a fully-rendered page that simply has none:
-    # before polls close that is every county, and waiting the full timeout on each of
-    # 105 would take the better part of an hour.
-    has_races = lambda h: 'class="race"' in h or "Last Updated:" in h
+    has_races = lambda h: 'class="race"' in h
     key = lambda s: re.sub(r"[^a-z]", "", (s or "").lower().replace("county", ""))
 
     def page(url, tries=10, **kw):

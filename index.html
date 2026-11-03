@@ -521,6 +521,11 @@ const CLOSE = {GA:[0,0], SC:[0,0], NC:[0,30], OH:[0,30], ME:[1,0], FL:[1,0], MS:
                MI:[2,0], TX:[2,0], KS:[2,0], IA:[2,0], MN:[2,0], LA:[2,0],
                NE:[3,0], AK:[5,0]};
 const closeMin = ab => { const c = CLOSE[ab]; return c ? c[0]*60 + c[1] : 99999; };
+// Badge text for each state's feed_status. Referenced by cardFor() - it was used there
+// and never declared, which threw on the FIRST card and killed render() entirely,
+// taking the early-vote tab down with it.
+const FEEDLBL = {proven: "proven", partial: "partial", untested: "untested",
+                 none: "no feed"};
 const closeLabel = m => m >= 99999 ? "Poll close not recorded"
   : "Polls close " + new Date(Date.UTC(2026,10,4,0,m)).toLocaleTimeString("en-US",
       {timeZone:"America/New_York", hour:"numeric", minute:"2-digit"}) + " ET";
@@ -1716,4 +1721,4 @@ setInterval(load, 120000);
 </script>
 <script src="compare.js?v=8f5cbe14"></script>
 <script src="texas.js?v=d99c7d84"></script>
-<script src="georgia.js?v=a4124f43"></script>
+<script src="georgia.js?v=3a6ba344"></script>

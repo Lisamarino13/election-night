@@ -183,7 +183,7 @@
       + "</b> Not because the polls are generous \u2014 they are not, and this tab prices "
       + "them at three to four points too Democratic \u2014 but because of what is left "
       + "after that is taken off. The same four polls asked about the governor&rsquo;s "
-      + 'race too, and Talarico runs <b class="nm">4.92</b> points ahead of Hinojosa on '
+      + 'race too, and Talarico runs <b class="nm">5.20</b> points ahead of Hinojosa on '
       + "the same questionnaires. A polling error hits both races equally and subtracts "
       + "out of the difference, so <b>the Paxton effect is larger than the polling miss "
       + "and cannot be erased by it</b>. Take the full haircut and the Senate race is "
@@ -198,7 +198,7 @@
       + "was a presidential year with Trump on the ballot. None of the six reaches his "
       + "floor.</li>"
       + '<li><b>The rest of the ticket would have to lose by more than <span class="nm">'
-      + "4.92</span>.</b> An R+4 night — a bad evening for Democrats everywhere else "
+      + "5.20</span>.</b> An R+4 night — a bad evening for Democrats everywhere else "
       + "on the ballot, and four points worse than the 2024 Senate result — still "
       + "elects him.</li>"
       + '<li><b>The unaffiliated bloc would have to break below <span class="nm">47.2%'
@@ -208,15 +208,15 @@
       + '<li><b>Hispanic voters would have to land below <span class="nm">D+19.66</span>.'
       + "</b> Cleared by the four-poll average at D+22.95, by YouGov at D+28, by the El "
       + "Paso precincts at D+28.67 and by the county model at D+29.85.</li>"
-      + '<li><b>And the <span class="nm">4.92</span> cannot be argued away by the polling '
+      + '<li><b>And the <span class="nm">5.20</span> cannot be argued away by the polling '
       + "error</b>, because a systematic miss hits both races on the same questionnaire "
-      + "equally and subtracts out of the difference. It is 4.92 at every haircut from "
+      + "equally and subtracts out of the difference. It is 5.20 at every haircut from "
       + "zero to 4.68.</li>"
       + "</ol>"
       + "<p><b>No single lever on this tab, at any value it has ever taken, beats him.</b> "
       + "That is a different claim from “ahead by five”, and it is why this one "
       + "is called with confidence while the governor’s race is not. Two caveats kept "
-      + "rather than dropped: the 4.92 is one week of polling from four houses — "
+      + "rather than dropped: the 5.20 is one week of polling from four houses — "
       + "measured well, measured once — and Texas has a history of beating its polls, "
       + "with 2018 the counter-case where that ran the other way.</p>"
       + "<p><b>And that haircut is itself conservative.</b> All four of the big Texas "
@@ -224,19 +224,19 @@
       + "midterms without him average <b>\u22121.87</b>, meaning the polls understated "
       + "Democrats. 2026 is a midterm with no Trump on the ballot, so the better-reasoned "
       + "prior is the friendly one \u2014 on which Talarico wins by 6.90 and Hinojosa by "
-      + "1.98. This tab quotes the unfriendly figure anyway, because four observations "
+      + "1.69. This tab quotes the unfriendly figure anyway, because four observations "
       + "that agree beat two that contradict each other. Section 1 slide 3 prices "
       + "exactly what that costs.</p>"
       + "<p><b>Which generalises into the number to hold tonight.</b> Talarico is the "
-      + "generic Texas Democrat plus 4.92, so he is level only when that generic "
-      + 'Democrat loses by <b class="nm">4.92</b>. <b>We think he wins an R+4 night</b> '
+      + "generic Texas Democrat plus 5.20, so he is level only when that generic "
+      + 'Democrat loses by <b class="nm">5.20</b>. <b>We think he wins an R+4 night</b> '
       + "\u2014 a night where the rest of the Texas ticket loses by four, which would "
       + "read as a bad evening for Democrats everywhere else on the ballot, still "
       + 'leaves him <b class="nm">D+0.92</b>. R+3 leaves him D+1.92. It is only at '
       + "about R+5 for the ticket that the lag stops covering him.</p>"
       + "<p><b>The governor&rsquo;s race is a different question with a different "
       + "answer.</b> There is no Paxton in it. At the same haircut Abbott against "
-      + 'Hinojosa is <b class="nm">R+3.94</b>, and she has to find 402,353 votes '
+      + 'Hinojosa is <b class="nm">R+4.23</b>, and she has to find 431,638 votes '
       + "somewhere. Only two things on this ballot are big enough: the Hispanic vote "
       + "running better than the polls assume, and rural turnout coming in under. She "
       + "needs both at once. <b>Except on one reading, where she needs neither.</b>"
@@ -254,7 +254,7 @@
       + "licenses it and the bloc does not break 50/50 \u2014 it breaks like each "
       + "county it sits in. Dallas 69.4%, Harris 60.8%, Tarrant 54.5%; weighted, "
       + '<b class="nm">61.1%</b>. That is worth <b>447,576</b> net votes against an '
-      + "even split, and she needs 402,353. <b>On the flat assumption her lever falls "
+      + "even split, and she needs 431,638. <b>On the flat assumption her lever falls "
       + "eleven points short; on the mirror it clears on its own.</b> One unmeasurable "
       + "choice, worth four points of statewide margin \u2014 more than the Hispanic "
       + "and rural levers combined. Section 4 slide 1."
@@ -267,7 +267,7 @@
       + "in a state whose last three statewide cycles averaged R+10.09. A poll can be "
       + "wrong about who turns out and a model can be wrong about how a group shifts, but "
       + "they are not wrong in the same direction for the same reason.</li>"
-      + "<li><b>Talarico wins, and the candidate is why.</b> The 4.92 he runs ahead of "
+      + "<li><b>Talarico wins, and the candidate is why.</b> The 5.20 he runs ahead of "
       + "his own ticket is larger than the three-to-four point polling miss and cancels "
       + "in the difference, so it survives the worst the polls can do. He holds an R+4 "
       + "night for the rest of the ticket.</li>"
@@ -1335,8 +1335,8 @@
      opposite places, which is why the card exists: the ENVIRONMENT, which is national and
      is Trump, and the CANDIDATE, which is local and is Paxton. The governor's race
      separates them. Abbott against Hinojosa is a generic Texas Republican against a
-     generic Texas Democrat on the same questionnaires - and it is D+0.11, dead even. Of
-     Talarico's 5.03 points, 4.92 is the gap to his own ticket.
+     generic Texas Democrat on the same questionnaires - and it is R+0.18, dead even. Of
+     Talarico's 5.03 points, 5.20 is the gap to his own ticket.
 
      It also carries the haircut table, because this is the only part of the poll evidence
      the three-to-four point miss cannot reach. */
@@ -1392,7 +1392,7 @@
         + '" fill="none" stroke="' + col + '" stroke-width="2.5" opacity="0.9"/>';
     };
     s2 += path("g", HIN) + path("t", TAL);
-    [[5.03, TAL, "Talarico"], [0.11, HIN, "Hinojosa"]].forEach(function (b) {
+    [[5.03, TAL, "Talarico"], [-0.18, HIN, "Hinojosa"]].forEach(function (b) {
       if (b[0] > hi) return;
       s2 += '<line x1="' + xs(b[0]) + '" y1="' + T + '" x2="' + xs(b[0]) + '" y2="'
          + ys(0) + '" stroke="' + b[1] + '" stroke-width="1" stroke-dasharray="3 3" '
@@ -1443,10 +1443,11 @@
       + "stronger claim than “he survives the full haircut”, which is what the "
       + "rest of the tab says."
       + "<br><br><b>And what it does to the governor&rsquo;s race: everything.</b> "
-      + "Hinojosa loses once the haircut exceeds <b>0.11</b> — smaller than five of "
-      + "the six. On the Trump-off-ballot prior of −1.87 she wins by 1.98. On 2018, "
-      + "the closest analogue there is, she wins by 4.34. On the Trump-on-ballot prior "
-      + "she loses by 3.94. <b>Her race is not close to a coin flip in any underlying "
+      + "Hinojosa is behind before any haircut at all, at <b>R+0.18</b>, and only a "
+      + "haircut friendlier than −0.18 rescues her — five of the six are not. On the "
+      + "Trump-off-ballot prior of −1.87 she wins by 1.69. On 2018, "
+      + "the closest analogue there is, she wins by 4.05. On the Trump-on-ballot prior "
+      + "she loses by 4.23. <b>Her race is not close to a coin flip in any underlying "
       + "sense — it is a straight bet on which column 2026 belongs in</b>, and every "
       + "lever in Section 4 exists only because the tab assumes the Republican-friendly "
       + "column."
@@ -1478,7 +1479,7 @@
           return "<tr><td><b>" + esc(r.c) + "</b></td><td>" + esc(r.w)
             + '</td><td class="dim">' + esc(r.src) + "</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
-    var SEN = -5.03, GOV = -0.11;
+    var SEN = -5.03, GOV = 0.18;
     var CUTS = [["No haircut — the polls as published", 0],
                 ["2022-like, the friendliest midterm miss", 0.50],
                 ["All six races, mean", 2.08],
@@ -1505,23 +1506,23 @@
       + "measures that plus the two candidates. The difference between them is the part "
       + "that is about the people on the ballot and nothing else.",
       SC.sengov + hairTbl + SC.ticket + coTbl,
-      "<b>The decomposition.</b> Abbott against Hinojosa is <b>D+0.11</b> — dead "
+      "<b>The decomposition.</b> Abbott against Hinojosa is <b>R+0.18</b> — dead "
       + "even. Paxton against Talarico is <b>D+5.03</b>. So of Talarico’s five "
-      + "points, <b>4.92 of them are the gap to his own ticket</b>, and the Trump "
+      + "points, <b>5.20 of them are the gap to his own ticket</b>, and the Trump "
       + "environment in Texas, measured by the race that has no Paxton in it, is a tie. "
       + "Talarico runs ahead of Hinojosa in all four polls — YouGov +5.0, Kreate "
-      + "+5.0, NYT/Siena +6.0, AtlasIntel +4.0 — and in two of them Abbott leads "
+      + "+5.0, NYT/Siena +6.0, AtlasIntel +5.0 — and in two of them Abbott leads "
       + "while Talarico leads, the same respondents splitting their ticket on the same "
       + "page."
       + "<br><br><b>The polling miss cancels in that difference.</b> A systematic error "
       + "is a property of who answers a poll, not of which race they are asked about, so "
       + "it hits both questions by the same amount and subtracts out. The table above is "
       + "the proof: apply the full presidential-year haircut and the Senate race falls "
-      + "from D+5.03 to D+0.98 and the Governor’s from D+0.11 to R+3.94 — but the "
-      + "gap between them is <b>4.92 on every single row</b>. It is the one number on "
+      + "from D+5.03 to D+0.98 and the Governor’s from R+0.18 to R+4.23 — but the "
+      + "gap between them is <b>5.20 on every single row</b>. It is the one number on "
       + "this tab that a polling error cannot touch."
       + "<br><br><b>And it is bigger than either thing that could undo it.</b> The "
-      + "candidate effect is 4.92. The polling miss is 3.34 to 4.05. The entire "
+      + "candidate effect is 5.20. The polling miss is 3.34 to 4.05. The entire "
       + "election-day tie band — everything the un-banked quarter of the vote can do "
       + "to the result — is 2.27."
       + "<br><br><b>Texas has done this before, which is the fourth figure.</b> In 2018 "
@@ -1529,18 +1530,18 @@
       + "— the Senate race was <b>4.85</b> points friendlier to Democrats than the "
       + "same voters’ other choices that day. In 2024 Cruz beat Allred by 8.50 against "
       + "a ticket median of R+16.37, a gap of <b>7.87</b>. 2020 is the exception, 0.32 "
-      + "the other way. Three of four — and 2026’s 4.92 lands within a tenth of a "
-      + "point of 2018’s 4.85."
+      + "the other way. Three of four — and 2026’s 5.20 sits between 2018’s "
+      + "4.85 and 2024’s 7.87."
       + "<br><br><b>What none of this says.</b> The gap fixes where Talarico sits "
-      + "relative to his ticket, not where the ticket sits. He can run 4.92 ahead of "
+      + "relative to his ticket, not where the ticket sits. He can run 5.20 ahead of "
       + "Hinojosa and both lose — roughly what the full haircut describes, D+0.98 and "
-      + "R+3.94. <b>The gap is the robust number and the level is the fragile one</b>, "
+      + "R+4.23. <b>The gap is the robust number and the level is the fragile one</b>, "
       + "which is the opposite of how this race is usually discussed."
       + '<span class="txrule"></span>'
       + "<b>And where the Trump half shows up.</b> The environment is not "
       + "nothing — it is what moved Texas from R+8.50 in the 2024 Senate race to a "
       + "tied governor’s race, which is a swing of about eight points. It is simply "
-      + "not <i>extra</i>: it is already inside the D+0.11, and Paxton is what sits on "
+      + "not <i>extra</i>: it is already inside the R+0.18, and Paxton is what sits on "
       + "top of it. The four conditions it rests on are the last table above. None can "
       + "be priced into a margin on its own, which is why they are listed rather than "
       + "modelled \u2014 but every one of them runs the same direction, which is why "
@@ -1552,18 +1553,18 @@
       + "The impeachment is the part that is true, and the 9.15 points he ran behind his "
       + "own ticket in March is the part that is measured."
       + "<br><br><b>The rule it gives you for tonight.</b> Talarico is the generic Texas "
-      + "Democrat plus 4.92, so he is level when the generic Democrat loses by 4.92. "
+      + "Democrat plus 5.20, so he is level when the generic Democrat loses by 5.20. "
       + "That means <b>Talarico wins any night where a generic Texas Democrat loses by "
       + "less than about five points</b>:"
       + "<br>&nbsp;&nbsp;\u2022 a night at R+3 for the ticket \u2192 Talarico <b>D+1.92</b>"
       + "<br>&nbsp;&nbsp;\u2022 a night at R+4 \u2192 Talarico <b>D+0.92</b>"
-      + "<br>&nbsp;&nbsp;\u2022 a night at R+4.92 \u2192 Talarico exactly even"
+      + "<br>&nbsp;&nbsp;\u2022 a night at R+5.20 \u2192 Talarico exactly even"
       + "<br>&nbsp;&nbsp;\u2022 a night at R+6 \u2192 Talarico R+1.08, and it is gone"
       + "<br><br>So an R+3 or R+4 night in Texas \u2014 which would read as a bad night "
       + "for Democrats everywhere else on the ballot, and would beat the 2024 Senate "
       + "result by four to five points \u2014 still elects Talarico, on the lag alone. "
       + "That is the single most useful number to hold while the returns come in."
-      + "<br><br><b>What this costs the rest of the ballot.</b> None of the 4.92 "
+      + "<br><br><b>What this costs the rest of the ballot.</b> None of the 5.20 "
       + "transfers. Hinojosa does not get it, and neither does anyone down-ballot. On "
       + "these polls the governor’s race is a coin flip and the Senate race is not, "
       + "for reasons that have nothing to do with the electorate.");
@@ -1761,8 +1762,8 @@
     /* The join between the two halves of this card. A systematic poll error is a
        property of who answers a poll, not of which race they are asked about, so on a
        questionnaire carrying BOTH races it hits each by the same amount and subtracts
-       out of the difference. The gap column is the point: it is 4.92 on every row. */
-    var SEN = -5.03, GOV = -0.11;
+       out of the difference. The gap column is the point: it is 5.20 on every row. */
+    var SEN = -5.03, GOV = 0.18;
     var CUTS = [["No haircut — the polls as published", 0],
                 ["2022-like, the friendliest midterm miss", 0.50],
                 ["All six races, mean", 2.08],
@@ -2798,9 +2799,9 @@
       + "entirely."
       + "<br><br><b>And this is Hinojosa\u2019s second lever, the one the Hispanic "
       + "card cannot supply.</b> After the full polling haircut the governor\u2019s race "
-      + "is R+3.94 and she is short <b>402,353 votes</b>. The Hispanic slide shows that "
+      + "is R+4.23 and she is short <b>431,638 votes</b>. The Hispanic slide shows that "
       + "lever alone needs Hispanic voters at D+36.15, which no measurement on this tab "
-      + "reaches except the big-metro precincts. The other place 402,353 votes can come "
+      + "reaches except the big-metro precincts. The other place 431,638 votes can come "
       + "from is here \u2014 and it is the same 1,199,649 net Republican votes:"
       + "<br>&nbsp;&nbsp;\u2022 rural turnout <b>down 34%</b>, which has no precedent, or"
       + "<br>&nbsp;&nbsp;\u2022 the rural margin <b>down 12.0 points</b> from R+35.9, on "
@@ -2822,7 +2823,7 @@
      the state. Hold everything else at what the polls say, apply the full polling
      haircut to both races, and move only the Hispanic margin. Hispanic voters are 29.76%
      of the projected electorate, so each point of their margin is 0.2976 statewide -
-     which means the 4.92 Paxton effect converts to exactly 16.53 points of Hispanic
+     which means the 5.20 Paxton effect converts to exactly 16.53 points of Hispanic
      margin, and that is the entire distance between the two break-evens. */
   function hispanicSensCard() {
     var R = (D.hsens || []).map(function (r) {
@@ -2908,7 +2909,7 @@
       s2 + tbl,
       "<b>The two break-evens.</b> Talarico is level when Hispanic voters land at "
       + "<b>D+19.66</b>. Hinojosa is level at <b>D+36.19</b>. The distance between them "
-      + "is 16.53 points of Hispanic margin — which is the 4.92 Paxton effect "
+      + "is 16.53 points of Hispanic margin — which is the 5.20 Paxton effect "
       + "divided by 0.2976, exactly. As in Tarrant, everything separating these two "
       + "lines is the candidate."
       + "<br><br><b>Where the measured figures fall.</b> Talarico&rsquo;s line is already "
@@ -2974,7 +2975,7 @@
       });
       perCounty += txt(x4(50), T4 - 22, "an even split", "lgd", "middle");
       [[47.2, "var(--tal,#6b4fbb)", "Talarico needs"],
-       [61.2, "var(--hin,#0f8f8f)", "Hinojosa needs"]].forEach(function (b) {
+       [62.0, "var(--hin,#0f8f8f)", "Hinojosa needs"]].forEach(function (b) {
         perCounty += '<line x1="' + x4(b[0]) + '" y1="' + (T4 - 10) + '" x2="' + x4(b[0])
           + '" y2="' + (H4 - 16) + '" stroke="' + b[1] + '" stroke-width="1.5" '
           + 'stroke-dasharray="4 3" opacity="0.85"/>'
@@ -3059,10 +3060,10 @@
     }).filter(function (r) { return r.b != null; });
     var triTbl = TRI.length ? ('<div class="scroll"><table class="txtbl" '
       + 'style="margin-top:14px"><thead><tr><th>How the unaffiliated bloc breaks</th>'
-      + "<th>Instrument</th><th>Break</th><th>Against Hinojosa\u2019s 61.2%</th>"
+      + "<th>Instrument</th><th>Break</th><th>Against Hinojosa\u2019s 62.0%</th>"
       + "</tr></thead><tbody>"
       + TRI.map(function (r) {
-          var clears = r.b >= 61.2;
+          var clears = r.b >= 62.0;
           return "<tr><td>" + esc(r.e) + '</td><td class="dim">' + esc(r.i)
             + '</td><td class="num"><b>' + r.b.toFixed(1) + '%</b></td><td class="dim" '
             + 'style="' + (clears ? "color:var(--hin,#0f8f8f);font-weight:600" : "") + '">'
@@ -3104,12 +3105,12 @@
       + "produces none: Dallas <b>+138,719</b>, Harris <b>+131,499</b>, Bexar "
       + "<b>+79,234</b>, Tarrant <b>+29,543</b>, Fort Bend <b>+24,763</b>, Brazoria "
       + "<b>−4,711</b>. Total <b>+399,047</b>, or <b>+447,576</b> with the measured "
-      + "bias. Hinojosa needs 402,353."
+      + "bias. Hinojosa needs 431,638."
       + "<br><br><b>Three instruments, and they do not agree on how much.</b> Tarrant’s "
       + "break carried flat says <b>50%</b>. The same file mirrored and bias-corrected "
       + "says <b>62.5%</b>. AtlasIntel, asking Texas independents directly, says "
       + "<b>69.7%</b> two-way — against 49.5% for the same group in the 2024 exit "
-      + "poll. Two of the three clear Hinojosa’s 61.2%; the one that does not is the "
+      + "poll. Two of the three clear Hinojosa’s 62.0%; the one that does not is the "
       + "flat carry, which has the least information in it."
       + "<br><br><b>Scope and assumptions, both of which cut against her.</b> The finding "
       + "travels only across the band the two measured counties bracket — 47.0% to "
@@ -3130,15 +3131,15 @@
       + "The mirror is the realistic application; the flat carry is the lower bound."
       + "<br><br><b>Hinojosa’s range, across both unknowns</b> — how the bloc "
       + "breaks and how big it is:"
-      + "<br>&nbsp;&nbsp;• <b>Floor</b>, the flat carry at any share: <b>R+3.94</b>"
+      + "<br>&nbsp;&nbsp;• <b>Floor</b>, the flat carry at any share: <b>R+4.23</b>"
       + "<br>&nbsp;&nbsp;• <b>Mirror</b>, no bias correction, 43% share: <b>R+0.04</b> "
       + "— dead even"
       + "<br>&nbsp;&nbsp;• <b>Central</b>, mirror plus the measured bias at 43%: "
       + "<b>D+0.45</b>"
       + "<br>&nbsp;&nbsp;• <b>Ceiling</b>, AtlasIntel’s independents at a 55% "
-      + "share: <b>D+4.92</b>"
+      + "share: <b>D+5.20</b>"
       + "<br><br>Strip Harris and Dallas out altogether and the remaining four counties "
-      + "still give a 57.8% break, which puts her at R+1.20 rather than R+3.94. <b>The "
+      + "still give a 57.8% break, which puts her at R+1.20 rather than R+4.23. <b>The "
       + "flat carry is the only reading that leaves her clearly behind, and it is the "
       + "one with nothing behind it.</b>"
       + "<br><br><b>So the prediction.</b> For Talarico none of this matters: his floor is "
@@ -3167,7 +3168,7 @@
       s2 += line(xs(t), T - 14, xs(t), H - 12, t === 100 ? "zl" : "gl")
          + txt(xs(t), T - 20, t + "%", "tk", "middle");
     });
-    s2 += txt(wide ? 0 : 8, 16, "share of the 402,353 votes Hinojosa needs →", "lgd");
+    s2 += txt(wide ? 0 : 8, 16, "share of the 431,638 votes Hinojosa needs →", "lgd");
     if (wide) s2 += txt(W - RM + 12, T - 20, "statewide", "lgd");
     var y = T;
     R.forEach(function (r) {
@@ -3188,11 +3189,11 @@
       "<b>The 239 counties outside the largest fifteen cast 3,343,577 ballots at R+35.9, "
       + "a net of 1,199,649 Republican votes.</b> That net is what the metros have to "
       + "clear before the first statewide vote of margin exists. Each bar is the share of "
-      + "the 402,353 votes Hinojosa needs that a given fall in rural turnout would supply, "
+      + "the 431,638 votes Hinojosa needs that a given fall in rural turnout would supply, "
       + "with everything else held where the polls put it.",
       s2,
       "<b>Rural turnout would have to fall by a third.</b> A 34% collapse supplies exactly "
-      + "the 402,353 votes. Down 15% — already a large miss by any historical "
+      + "the 431,638 votes. Down 15% — already a large miss by any historical "
       + "standard — supplies 44.7% of it, worth 1.76 statewide points. Down 25% "
       + "supplies three quarters."
       + "<br><br><b>For scale on how unlikely the full version is.</b> Texas total midterm "
@@ -3273,7 +3274,7 @@
     [[50.0, "the flat carry of Tarrant’s own break", RC],
      [62.5, "county-mirror, bias-corrected", DC],
      [69.7, "AtlasIntel independents", DC]].forEach(function (m, i) {
-      var need = (402353 - (m[0] - 50) * 35899) / 1199649 * 100;
+      var need = (431638 - (m[0] - 50) * 35899) / 1199649 * 100;
       s += '<line x1="' + xs(m[0]) + '" y1="' + (T - 4) + '" x2="' + xs(m[0]) + '" y2="'
          + ys(Math.max(vlo, Math.min(vhi, need))) + '" stroke="' + m[2]
          + '" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.8"/>'
@@ -3346,7 +3347,7 @@
       + "counties, the bloc lives inside the largest fifteen \u2014 so nothing is "
       + "counted twice.",
       vecTbl + '<div class="scroll">' + s + "</div>" + twTbl,
-      "<b>She is 3.94 points short, and there are three places those points can come "
+      "<b>She is 4.23 points short, and there are three places those points can come "
       + "from.</b> They do not overlap, so they can be added:"
       + "<br>&nbsp;&nbsp;<b>1. Rural turnout</b> — the 239 smallest counties, which "
       + "produce 1,199,649 net Republican votes. Every 1% of their turnout that does not "
@@ -3360,7 +3361,7 @@
       + "all Texas Hispanic voters, and every point of margin among them is worth "
       + "<b>0.24</b> points."
       + "<br><br><b>Any one of them could do it alone, but only by moving a long way:</b> "
-      + "rural turnout down <b>34%</b>, or the bloc at <b>61.2%</b>, or Hispanic voters "
+      + "rural turnout down <b>34%</b>, or the bloc at <b>62.0%</b>, or Hispanic voters "
       + "elsewhere <b>16.3 points</b> better than the polls assume. Only the second of "
       + "those is something the evidence actually supports."
       + "<br><br><b>Moving all three a little is far easier than moving one a lot.</b> "
@@ -3383,7 +3384,7 @@
      bloc breaks, and how big that bloc is. 27 cells. It is a robustness check on the
      modelling choices that CAN be enumerated, not a forecast distribution - rural
      turnout, the Hispanic lever outside the bloc, turnout surprises and any error in the
-     4.92 ticket gap are all outside it, and every one of them would widen it. */
+     5.20 ticket gap are all outside it, and every one of them would widen it. */
   function intervalCard() {
     var R = (D.ivl || []).map(function (r) {
       return {m: r.measure, t: r.talarico, h: r.hinojosa};
@@ -3399,7 +3400,7 @@
       + "flat, the floor), 61.1% (county-mirror) or 69.7% (AtlasIntel independents). "
       + "<b>How big that bloc is</b>: 30%, 43% or 55% of those six counties’ vote. "
       + "Three by three by three is 27, starting from the four-poll average of D+5.03 "
-      + "and D+0.11.</p>"
+      + "and R+0.18.</p>"
       + '<div class="scroll"><table class="txtbl"><thead><tr><th>&nbsp;</th>'
       + '<th style="color:var(--tal,#6b4fbb)">Paxton / Talarico</th>'
       + '<th style="color:var(--hin,#0f8f8f)">Abbott / Hinojosa</th>'
@@ -3418,10 +3419,10 @@
       + "is a real loss.</p>"
       + "<p><b>And what the 27 cells cannot see.</b> Rural turnout, the Hispanic lever "
       + "outside the bloc, turnout surprises, late movement, and any error in the "
-      + "<b>4.92</b> ticket gap itself. Every one of those would widen both intervals, so "
+      + "<b>5.20</b> ticket gap itself. Every one of those would widen both intervals, so "
       + "read this as a robustness check on the modelling choices rather than as a "
       + "probability. <b>The thing most likely to break the Senate call is not in this "
-      + "grid at all</b>: the 4.92 rests on one week of four polls, and if it is really "
+      + "grid at all</b>: the 5.20 rests on one week of four polls, and if it is really "
       + "2.5 then Talarico’s floor moves from D+0.98 to about R+1.5.</p>"
       + "</section>";
   }
@@ -3438,7 +3439,7 @@
       + "<li>He loses only if the polling haircut exceeds <b>5.03</b>. The worst miss "
       + "ever measured in Texas is <b>4.68</b>, and that was a presidential year with "
       + "Trump on the ballot.</li>"
-      + "<li>He loses only if the generic Texas Democrat loses by more than <b>4.92</b>. "
+      + "<li>He loses only if the generic Texas Democrat loses by more than <b>5.20</b>. "
       + "An R+4 night \u2014 a bad evening for Democrats everywhere else on the ballot "
       + "\u2014 still elects him.</li>"
       + "<li>His unaffiliated-bloc floor is <b>47.2%</b>. That bloc has broken 49.9% and "
@@ -3450,7 +3451,7 @@
       + "<p><b>No single lever on this tab, at any value it has ever taken, beats him.</b> "
       + "That is a different claim from \u201che is ahead by five\u201d, and it is the "
       + "reason the Senate call is made with confidence while the governor&rsquo;s race "
-      + "is not. Two qualifiers kept: the 4.92 is one week of polling from four houses "
+      + "is not. Two qualifiers kept: the 5.20 is one week of polling from four houses "
       + "\u2014 measured well but measured once \u2014 and Texas has historically broken "
       + "Democratic hearts by beating its polls, with 2018 the counter-case where that ran "
       + "the other way.</p>"

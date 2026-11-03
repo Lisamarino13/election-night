@@ -502,7 +502,7 @@
       }).join("");
     }).join("");
 
-    return card("tx-modes", "Section 2 · slide 6 · what election day does to it",
+    return card("tx-modes", "Section 2 · slide 7 · what election day does to it",
       "What election day does to the banked vote",
       "Texas banks three quarters of its vote before election day, so the question is "
       + "simply how far the last quarter moves the first three. Blue dot is the banked "
@@ -2016,6 +2016,110 @@
          + "D+32.5." : ""));
   }
 
+  /* The Tarrant sensitivity. Both parties' primary voters are held at 95% loyalty - the
+     file's own default and the thing the question says to hold fixed - and the only
+     moving part is how the Neither bloc breaks. Two lines, because the two races on this
+     ballot are not in the same place: the governor's race is the camps as they are, and
+     the Senate race is that plus the 4.92 Paxton effect.
+
+     The assumption worth naming: 4.92 is a STATEWIDE poll figure applied to one county.
+     Tarrant is close to the state on composition, which is part of why it is the county
+     worth watching, but this still assumes the candidate effect lands evenly. */
+  function tarrantSensCard() {
+    var R = (D.tsens || []).map(function (r) {
+      return {x: num(r.neither_break_D), g: num(r.governor_margin_R),
+              s: num(r.senate_margin_R), w: r.carries};
+    }).filter(function (r) { return r.g != null; });
+    if (!R.length) return "";
+    var wide = !NARROW;
+    var W = wide ? 760 : 360, L = wide ? 58 : 40, R2 = wide ? 120 : 16;
+    var T = 42, Bm = 52, H = wide ? 340 : 300;
+    var lo = R[0].x, hi = R[R.length - 1].x;
+    var vlo = -16, vhi = 10;
+    var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R2); };
+    var ys = function (v) { return T + (v - vlo) / (vhi - vlo) * (H - T - Bm); };
+    var s2 = svg(W, H, "Tarrant County: what the Neither bloc has to do to carry each race");
+    [-15, -10, -5, 0, 5, 10].forEach(function (v) {
+      s2 += line(L, ys(v), W - R2, ys(v), v === 0 ? "zl" : "gl")
+         + txt(L - 6, ys(v) + 4, v === 0 ? "even" : mgn(v, 0), "tk", "end");
+    });
+    for (var t = lo; t <= hi; t += 4) {
+      s2 += txt(xs(t), H - Bm + 18, t + "%", "tk", "middle");
+    }
+    s2 += txt(L, H - 14, "how the Neither bloc breaks Democratic →", "lgd");
+    s2 += txt(0, T - 16, "Tarrant margin", "lgd");
+    var path = function (key, col) {
+      return '<polyline points="' + R.map(function (r) {
+        return xs(r.x) + "," + ys(r[key]);
+      }).join(" ") + '" fill="none" stroke="' + col + '" stroke-width="2.5" '
+        + 'opacity="0.9"/>';
+    };
+    s2 += path("g", RC) + path("s", DC);
+    // where each line crosses even
+    [[41.5, DC, "Talarico carries Tarrant"], [47.2, RC, "Hinojosa carries Tarrant"]]
+      .forEach(function (b) {
+        s2 += '<line x1="' + xs(b[0]) + '" y1="' + T + '" x2="' + xs(b[0]) + '" y2="'
+           + ys(0) + '" stroke="' + b[1] + '" stroke-width="1" stroke-dasharray="3 3" '
+           + 'opacity="0.7"/>'
+           + '<circle cx="' + xs(b[0]) + '" cy="' + ys(0) + '" r="4.5" fill="' + b[1] + '"/>'
+           + '<text x="' + xs(b[0]) + '" y="' + (T - 4) + '" text-anchor="middle" '
+           + 'class="vl" fill="' + b[1] + '">' + b[0] + "%</text>";
+      });
+    if (wide) {
+      s2 += txt(W - R2 + 10, ys(R[R.length - 1].s) + 4, "Paxton / Talarico", "lgd")
+         + txt(W - R2 + 10, ys(R[R.length - 1].g) + 4, "Abbott / Hinojosa", "lgd");
+    } else {
+      s2 += '<circle cx="' + (L + 6) + '" cy="16" r="4" fill="' + DC + '"/>'
+         + txt(L + 15, 20, "Talarico", "lgd")
+         + '<circle cx="' + (L + 86) + '" cy="16" r="4" fill="' + RC + '"/>'
+         + txt(L + 95, 20, "Hinojosa", "lgd");
+    }
+    s2 += "</svg>";
+    var tbl = '<div class="scroll"><table class="txtbl" style="margin-top:12px"><thead>'
+      + "<tr><th>Neither breaks Democratic</th><th>Abbott / Hinojosa</th>"
+      + "<th>Paxton / Talarico</th><th>Carries Tarrant</th></tr></thead><tbody>"
+      + R.filter(function (r) { return r.x % 4 === 0 || r.x === 42 || r.x === 46; })
+         .map(function (r) {
+          return "<tr" + (r.x === 48 ? ' class="em"' : "") + "><td>" + r.x
+            + '%</td><td class="num ' + (r.g < 0 ? "dem" : "rep") + '">' + mgn(r.g)
+            + '</td><td class="num ' + (r.s < 0 ? "dem" : "rep") + '">' + mgn(r.s)
+            + '</td><td class="' + (r.w === "both" ? "dem" : "dim") + '">' + esc(r.w)
+            + "</td></tr>";
+        }).join("") + "</tbody></table></div>";
+
+    return card("tx-tarrant-sens", "Section 2 · slide 5 · what the Neither bloc has to do",
+      "What the Neither bloc has to do to carry both races",
+      "<b>Both parties&rsquo; primary voters are held at 95% loyalty</b> — the "
+      + "file&rsquo;s own default, and the thing this question fixes — so the only "
+      + "moving part is how the 252,913 Neither ballots break. Two lines, because the two "
+      + "races are not in the same place: the governor&rsquo;s race is the camps as they "
+      + "are, and the Senate race is that plus the <b>4.92</b> Paxton effect measured in "
+      + "Section 1 slide 3.",
+      s2 + tbl,
+      "<b>The answer is 47.2%, and Hinojosa sets it.</b> Talarico carries Tarrant once "
+      + "the Neither bloc breaks <b>41.5%</b> Democratic — he can lose it 58–42 "
+      + "and still win the county. Hinojosa needs <b>47.2%</b>, which is Tackett&rsquo;s "
+      + "own published break-even of <i>“about 53 to 47 their way”</i>. So to "
+      + "carry <b>both</b>, the Neither bloc has to break no worse than 53–47 "
+      + "Republican."
+      + "<br><br><b>What the Paxton effect is worth in this currency.</b> Neither is 43% "
+      + "of these ballots, so one point of Neither break moves the county margin 0.86 "
+      + "points. The 4.92-point candidate effect is therefore worth <b>5.7 points of "
+      + "Neither break</b> — which is the entire distance between the two "
+      + "break-evens. Everything separating these two races on this chart is Paxton."
+      + "<br><br><b>Where that leaves it.</b> Tackett&rsquo;s own default assumption is "
+      + "an even split, 50–50, which carries both: Hinojosa by 2.38 and Talarico by "
+      + "7.30. The Neither bloc would have to break <i>against</i> Democrats by more than "
+      + "53–47 before Tarrant stops carrying both, and this is a bloc that is "
+      + "younger, newer and more diverse than the county, in a county whose early vote "
+      + "already moved eight points toward Democrats."
+      + "<br><br><b>Two assumptions, named.</b> The 4.92 is a statewide poll figure "
+      + "applied to one county: Tarrant sits close to the state on composition, which is "
+      + "part of why it is the county worth watching, but this still assumes the candidate "
+      + "effect lands evenly. And these are early ballots only — election day is "
+      + "still to come, and the base left over leans Republican by about 13,000.");
+  }
+
   /* The Morris gradient is the single biggest external input to this model: it is what
      reweights precincts inside every county. It has never been shown on its own, and the
      one public test of it is in here too. */
@@ -2123,7 +2227,7 @@
             + "%</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
 
-    return card("tx-morris", "Section 2 · slide 5 · the engagement gap",
+    return card("tx-morris", "Section 2 · slide 6 · the engagement gap",
       "What Morris found in Harris County",
       "<b>Source: G.&nbsp;Elliott Morris, Strength In Numbers \u2014 his chart, his "
       + "tiers.</b> <i>\u201cShare of 2024 early in-person voters who have voted early or "
@@ -2643,7 +2747,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hino", "tx_hinojosa.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["tsens", "tx_tarrant_sensitivity.csv"], ["hino", "tx_hinojosa.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {
@@ -2692,6 +2796,7 @@
 
         + tarrantCard()
         + tarrantSwingCard()
+        + tarrantSensCard()
         + morrisCard()
         + historyCard()
 

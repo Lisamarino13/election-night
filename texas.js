@@ -290,6 +290,113 @@
   }
 
   /* ======================================================= 2. measured mode history */
+  /* Texas votes differently for Senate than it votes for everything else on the same
+     ballot. Three of the last four Senate races show it, and the one that does not is
+     2020. This matters twice over: it is a reason to read a Senate poll against the
+     Senate record rather than against "how Republican Texas is", and it is a caution on
+     the tie band in the next card, whose 2022 leg is built from Governor, Lieutenant
+     Governor and Attorney General because 2022 had no Senate race at all.
+
+     Unopposed races are excluded: 2018's Court of Criminal Appeals Place 8 had no
+     Democrat and came in at R+74.68, which would drag any average it touched. */
+  function senateCard() {
+    var R = (D.svt || []).map(function (r) {
+      return {y: r.year, kind: r.kind, c: r.contest, s: num(r.senate_margin_R),
+              t: num(r.ticket_median_R), a: num(r.ahead_of_ticket), n: num(r.n_other)};
+    }).filter(function (r) { return r.s != null; });
+    if (!R.length) return "";
+    var wide = !NARROW;
+    var W = wide ? 760 : 360, L = wide ? 190 : 8, RM = wide ? 96 : 8;
+    var ROW = wide ? 46 : 62, T = wide ? 46 : 42;
+    var H = T + R.length * ROW + 16;
+    var lo = -6, hi = 18;
+    var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - RM); };
+    var g = svg(W, H, "Texas Senate results against the rest of the statewide ticket in "
+                    + "the same election");
+    [-5, 0, 5, 10, 15].forEach(function (t) {
+      g += line(xs(t), T - 16, xs(t), H - 14, t === 0 ? "zl" : "gl")
+         + txt(xs(t), H - 3, t === 0 ? "even" : mgn(t, 0), "tk", "middle");
+    });
+    g += '<defs><marker id="svtA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" '
+       + 'markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" '
+       + 'fill="' + DC + '"/></marker>'
+       + '<marker id="svtB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" '
+       + 'markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" '
+       + 'fill="' + RC + '"/></marker></defs>';
+    g += txt(wide ? L : 8, 14, "hollow dot: the rest of the statewide ticket, median",
+             "lgd")
+       + txt(W - RM, 14, "solid dot: the Senate race", "lgd", wide ? "end" : "end");
+    R.forEach(function (r, i) {
+      var y = T + (wide ? 12 : 26) + i * ROW;
+      var head = r.y + "  " + r.c;
+      if (wide) {
+        g += txt(L - 14, y + 4, head, "lbb", "end")
+           + txt(L - 14, y + 17, r.kind + (r.n ? ", vs " + r.n + " other races" : ""),
+                 "sub", "end");
+      } else {
+        g += txt(8, y - 14, head, "lbb")
+           + txt(W - 8, y - 14, r.kind, "sub", "end");
+      }
+      if (r.t != null) {
+        g += '<line x1="' + xs(r.t) + '" y1="' + y + '" x2="' + xs(r.s) + '" y2="' + y
+           + '" stroke="' + sideCol(r.s - r.t) + '" stroke-width="2" opacity="0.8" '
+           + 'marker-end="url(#svt' + (r.s < r.t ? "A" : "B") + ')"/>'
+           + '<circle cx="' + xs(r.t) + '" cy="' + y + '" r="4.5" fill="var(--card,#fff)" '
+           + 'stroke="currentColor" stroke-width="1.5" opacity="0.7"/>';
+      }
+      g += '<circle cx="' + xs(r.s) + '" cy="' + y + '" r="5" fill="' + sideCol(r.s) + '"/>';
+      g += txt(xs(r.s) + (r.s < (r.t == null ? 99 : r.t) ? -10 : 10), y + 4, mgn(r.s, 2),
+               "vl", r.s < (r.t == null ? 99 : r.t) ? "end" : "start");
+      if (r.t != null) {
+        g += txt(xs(r.t) + (r.s < r.t ? 10 : -10), y + 4, mgn(r.t, 2), "tk",
+                 r.s < r.t ? "start" : "end");
+        if (wide) {
+          g += '<text x="' + (W - RM + 12) + '" y="' + (y + 4) + '" class="vl" fill="'
+             + sideCol(-r.a) + '">' + (r.a > 0 ? "+" : "") + r.a.toFixed(2) + "</text>";
+        }
+      } else if (wide) {
+        g += txt(W - RM + 12, y + 4, "no ticket yet", "sub");
+      }
+    });
+    g += "</svg>";
+    var hit = R.filter(function (r) { return r.a != null && r.a > 0; }).length;
+    var meas = R.filter(function (r) { return r.a != null; });
+    return card("tx-senate", "Section 2 · slide 9 · Texas votes differently for Senate",
+      "Texas will vote for a Democratic senator before it votes for anything else",
+      "Each row is one Texas election. The hollow dot is the median of every other "
+      + "statewide race on that same ballot — same voters, same day, same turnout. "
+      + "The solid dot is the Senate race. The gap between them is ticket-splitting that "
+      + "has nothing to do with how Republican Texas is, because the rest of the ticket "
+      + "controls for exactly that. Unopposed races are left out: 2018&rsquo;s Court of "
+      + "Criminal Appeals Place 8 had no Democrat on the ballot and finished R+74.68.",
+      g,
+      "<b>Three of the last four, including this one.</b> In 2018 Cruz beat O&rsquo;Rourke "
+      + "by 2.57 while the rest of the ticket ran R+7.42 — the Senate race was 4.85 "
+      + "points friendlier to Democrats than the same voters&rsquo; other choices that "
+      + "day. In 2024 Cruz beat Allred by 8.50 against a ticket median of R+16.37, a gap "
+      + "of 7.87. And 2026 is the same shape: the Senate race polls at D+4.09 in a state "
+      + "whose last three statewide cycles averaged R+10.09."
+      + "<br><br><b>And the one that doesn&rsquo;t fit.</b> 2020, Cornyn against Hegar: "
+      + "R+9.64 against a ticket median of R+9.32, so the Senate race ran 0.32 points "
+      + "<i>more</i> Republican than everything else. It is the exception and it is worth "
+      + "naming rather than dropping — a pattern that holds three times in four is a "
+      + "lean, not a law."
+      + "<br><br><b>Why it changes how to read a poll.</b> The usual objection to D+4 in "
+      + "Texas is that Texas does not vote D+4. That is true of Texas as a whole and it "
+      + "is the wrong comparison: Texas has twice in the last three Senate races voted "
+      + "five to eight points more Democratic for Senate than it voted for the rest of "
+      + "the ballot on the same day. A poll showing the Senate race running well ahead of "
+      + "the state&rsquo;s partisan level is describing the normal behaviour of Texas "
+      + "Senate races, not an outlier."
+      + "<br><br><b>And a caution on the next card.</b> The tie band is built from the "
+      + "major statewide offices, and its midterm leg has to be — 2022 had no Senate "
+      + "race at all, so Governor, Lieutenant Governor and Attorney General are the only "
+      + "midterm evidence that exists. If Senate races split tickets, that band is "
+      + "measured on offices that do not behave quite like the one being predicted. The "
+      + "only Senate skew available for a midterm would be 2018&rsquo;s, and Texas did not "
+      + "publish mode splits that far back.");
+  }
+
   function historyCard() {
     var all = (D.modes || []).map(function (r) {
       return {y: +r.year, kind: r.kind, c: r.contest, b: r.bucket,
@@ -370,7 +477,7 @@
       }).join("");
     }).join("");
 
-    return card("tx-modes", "Section 2 · slide 8 · what election day does to it",
+    return card("tx-modes", "Section 2 · slide 10 · what election day does to it",
       "What election day does to the banked vote",
       "Texas banks three quarters of its vote before election day, so the question is "
       + "simply how far the last quarter moves the first three. Blue dot is the banked "
@@ -2259,7 +2366,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["prop", "tx_propensity.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["prop", "tx_propensity.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {
@@ -2291,7 +2398,7 @@
         + framing("tx-frame-polls", "Section 1 \u00b7 what the polls tell us",
             "The best guess anyone has today",
             ["Five final polls put Talarico ahead by between one point and seven, with a sixth \u2014 the only partisan house in the set \u2014 putting Paxton up one. That is where the public conversation sits, so it is where this starts.",
-             "But they are not six independent readings. The averages are built from those same polls and the forecast is a poll-of-polls built on the averages. And Texas polls have a record worth knowing before leaning on them: the famous misses are a presidential-year pattern, and the one midterm available to check was accurate to half a point."])
+             "But they are not six independent readings, and Texas polls have a record worth knowing before leaning on them: the famous misses are a presidential-year pattern, and the one midterm available to check was accurate to half a point."])
         + estimatesCard()
         + pollTrustCard()
         + crosstabCard()
@@ -2312,6 +2419,7 @@
         + tarrantSwingCard()
         + morrisCard()
         + propensityCard()
+        + senateCard()
         + historyCard()
 
         + framing("tx-frame-hisp", "Section 3 \u00b7 the Hispanic vote",

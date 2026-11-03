@@ -502,7 +502,7 @@
       }).join("");
     }).join("");
 
-    return card("tx-modes", "Section 2 · slide 7 · what election day does to it",
+    return card("tx-modes", "Section 2 · slide 6 · what election day does to it",
       "What election day does to the banked vote",
       "Texas banks three quarters of its vote before election day, so the question is "
       + "simply how far the last quarter moves the first three. Blue dot is the banked "
@@ -1063,41 +1063,6 @@
       + "down, where he runs 9.15 points behind his own ticket in the primary.");
   }
 
-  /* 2026 has everything 2018 had and then some. The 2018 row in the primary card treats
-     the national environment as a tie - D+8.6 actual against a D+8.5 generic ballot -
-     which is right as far as it goes and is why 2018 is used as a FLOOR rather than a
-     match. This card is the "and then some": four conditions 2018 did not carry.
-
-     Every figure here is sourced and dated, because three of the four are claims about
-     the world this week rather than about the voter file. The pump-price figure is the
-     measured one and it is $3.70, not $5 - but the direction is the point and it is
-     sharper than the level: AAA Texas recorded the most expensive October on record in
-     this state, up close to a dollar year over year. */
-  function conditionsCard() {
-    var R = (D.only || []).map(function (r) {
-      return {c: r.condition, w: r.what_2026_has, src: r.source, as: r.as_of};
-    }).filter(function (r) { return r.w; });
-    if (!R.length) return "";
-    var tbl = '<div class="scroll"><table class="txtbl"><thead><tr>'
-      + "<th>What 2018 did not have</th><th>2026</th><th>Source</th>"
-      + "</tr></thead><tbody>"
-      + R.map(function (r) {
-          return "<tr><td><b>" + esc(r.c) + "</b></td><td>" + esc(r.w)
-            + '</td><td class="dim">' + esc(r.src)
-            + (r.as ? "<br>" + esc(r.as) : "") + "</td></tr>";
-        }).join("")
-      + "</tbody></table></div>";
-    return card("tx-2026-only", "Section 2 · slide 3 · why 2018 is a floor",
-      "2018 had the backlash. 2026 has the backlash and then some",
-      "The primary card uses 2018 as the comparison because it is the last Texas midterm "
-      + "run against a Trump backlash, and because 2026 is stronger than it on every "
-      + "primary input while the national environment is near-identical — D+8.6 "
-      + "actual in 2018 against a D+8.5 generic ballot now. That is why 2018&rsquo;s "
-      + "R+2.57 is treated as a <b>floor</b> rather than a forecast. Four things sit on "
-      + "top of it that Beto never ran against.",
-      tbl);
-  }
-
   function baselineCard() {
     /* The old version drew a hollow dot and a filled dot and explained which was which
        only in the prose below, labelled the value of one of them and not the other, and
@@ -1193,6 +1158,20 @@
      the three-to-four point miss cannot reach. */
   function paxtonCard() {
     var SC = senateCharts();
+    // the Trump half: four conditions 2018 did not carry, sourced and dated. This used
+    // to be a slide of its own in section 2, which put the environment half of this
+    // argument three slides away from the candidate half.
+    var CO = (D.only || []).map(function (r) {
+      return {c: r.condition, w: r.what_2026_has, src: r.source, as: r.as_of};
+    }).filter(function (r) { return r.w; });
+    var coTbl = CO.length ? ('<div class="scroll"><table class="txtbl" '
+      + 'style="margin-top:14px"><thead><tr><th>What 2018 did not have</th><th>2026</th>'
+      + "<th>Source</th></tr></thead><tbody>"
+      + CO.map(function (r) {
+          return "<tr><td><b>" + esc(r.c) + "</b></td><td>" + esc(r.w)
+            + '</td><td class="dim">' + esc(r.src) + (r.as ? "<br>" + esc(r.as) : "")
+            + "</td></tr>";
+        }).join("") + "</tbody></table></div>") : "";
     var SEN = -5.03, GOV = -0.11;
     var CUTS = [["No haircut — the polls as published", 0],
                 ["2022-like, the friendliest midterm miss", 0.50],
@@ -1219,7 +1198,7 @@
       + "measures the national environment landing in Texas. Paxton against Talarico "
       + "measures that plus the two candidates. The difference between them is the part "
       + "that is about the people on the ballot and nothing else.",
-      SC.sengov + hairTbl + SC.ticket,
+      SC.sengov + hairTbl + SC.ticket + coTbl,
       "<b>The decomposition.</b> Abbott against Hinojosa is <b>D+0.11</b> — dead "
       + "even. Paxton against Talarico is <b>D+5.03</b>. So of Talarico’s five "
       + "points, <b>4.92 of them are the gap to his own ticket</b>, and the Trump "
@@ -1256,7 +1235,13 @@
       + "nothing — it is what moved Texas from R+8.50 in the 2024 Senate race to a "
       + "tied governor’s race, which is a swing of about eight points. It is simply "
       + "not <i>extra</i>: it is already inside the D+0.11, and Paxton is what sits on "
-      + "top of it. The four conditions it rests on are in Section 2 slide 3."
+      + "top of it. The four conditions it rests on are in the last table above: a "
+      + "Republican nominee the Texas House impeached, the most expensive October on "
+      + "record at the pump, a war 73% of voters oppose sending ground troops to, and "
+      + "an ICE shooting in Houston. None can be priced into a margin on its own, and "
+      + "they are listed rather than modelled for that reason \u2014 but every one "
+      + "runs the same direction, which is why 2018\u2019s R+2.57 is read here as a "
+      + "floor rather than a match."
       + "<br><br><b>What this costs the rest of the ballot.</b> None of the 4.92 "
       + "transfers. Hinojosa does not get it, and neither does anyone down-ballot. On "
       + "these polls the governor’s race is a coin flip and the Senate race is not, "
@@ -1807,7 +1792,7 @@
     var camps = H.length ? stackedPrimary(H, "Tarrant County by the most recent party "
       + "primary each voter chose since 2022: Democratic, neither, Republican") : "";
 
-    return card("tx-tarrant", "Section 2 · slide 4 · the one county we can see",
+    return card("tx-tarrant", "Section 2 · slide 3 · the one county we can see",
       "Tarrant County, the only place we can see the 2026 electorate",
       "<b>Source: Chris Tackett, See It. Name It. Fight It., 31 October, on the Tarrant "
       + "County early-vote file.</b> <i>\u201cOver twelve days, 571,950 Tarrant County "
@@ -1967,7 +1952,7 @@
         }).join("")
       + "</tbody></table></div>") : "";
 
-    return card("tx-tarrant-swing", "Section 2 · slide 5 · who is in each camp",
+    return card("tx-tarrant-swing", "Section 2 · slide 4 · who is in each camp",
       "The Neither voters look like Tarrant County",
       "<b>Source: Chris Tackett, See It. Name It. Fight It., 31 October — his table.</b> "
       + "The previous card showed how big the three camps are. This one shows who is "
@@ -2138,7 +2123,7 @@
             + "%</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
 
-    return card("tx-morris", "Section 2 · slide 6 · the engagement gap",
+    return card("tx-morris", "Section 2 · slide 5 · the engagement gap",
       "What Morris found in Harris County",
       "<b>Source: G.&nbsp;Elliott Morris, Strength In Numbers \u2014 his chart, his "
       + "tiers.</b> <i>\u201cShare of 2024 early in-person voters who have voted early or "
@@ -2704,7 +2689,6 @@
              "<b>Then the early vote</b>, from slide 4. Texas records no party, so nobody can count the banked vote by side \u2014 but Tarrant publishes who is in its electorate, Harris publishes which kind of voter is turning out, and North Carolina registers by party and can check whether the pattern survives outside Texas."])
         + primaryCard()
         + primaryFitCard()
-        + conditionsCard()
 
         + tarrantCard()
         + tarrantSwingCard()

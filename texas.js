@@ -276,7 +276,12 @@
 
     // The chart is the point of this card: where the banked vote lands, and where
     // election day drags it. One row per race, early dot to election-day dot.
-    var W = 720, H = 56 + rows.length * 30, L = 150, R = 78, T = 34;
+    // Two collisions to avoid. The year sits in its own left column, so a long
+    // contest name like "Lieutenant Governor" cannot run back into "2022 midterm";
+    // and the legend gets a bottom gutter rather than sitting two pixels under the
+    // axis ticks.
+    var YR = 78;
+    var W = 720, H = 72 + rows.length * 30, L = YR + 150, R = 78, T = 38;
     var lo = -8, hi = 26;
     var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R); };
     var s2 = svg(W, H, "Where the banked vote lands and where election day drags it");
@@ -285,14 +290,17 @@
          + txt(xs(t), T - 16, t === 0 ? "even" : (t > 0 ? "R+" : "D+") + Math.abs(t),
                "tk", "middle");
     });
-    s2 += txt(L, 14, "\u25cf banked (early + mail)", "lgd")
-       + txt(L + 150, 14, "\u25cf election day", "lgd")
-       + txt(L + 272, 14, "\u25cb where it finished", "lgd");
+    s2 += txt(YR, H - 10, "\u25cf banked (early + mail)", "lgd")
+       + txt(YR + 150, H - 10, "\u25cf election day", "lgd")
+       + txt(YR + 272, H - 10, "\u25cb where it finished", "lgd");
     var i = 0;
     years.forEach(function (y) {
       rows.filter(function (r) { return r.y === y; }).forEach(function (r, j) {
         var yy = T + 8 + i * 30; i++;
-        if (j === 0) s2 += txt(10, yy + 4, y + (y === 2022 ? " midterm" : " pres."), "lbb");
+        if (j === 0) {
+          s2 += txt(8, yy + 4, String(y), "lbb");
+          s2 += txt(8, yy + 16, y === 2022 ? "midterm" : "presidential", "sub");
+        }
         s2 += txt(L - 12, yy + 4, r.c.replace("President/Vice-President", "President")
                   .replace("U. S. Senator", "U.S. Senate"), "lb", "end");
         s2 += line(xs(r.e), yy, xs(r.d), yy, "cn");

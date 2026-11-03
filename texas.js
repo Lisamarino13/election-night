@@ -625,21 +625,29 @@
       s += txt(L - 10, y, r.g, "lb", "end");
       s += txt(L - 10, y + 12, capped ? "at the ceiling"
                : r.d24.toFixed(0) + "% → " + r.d26.toFixed(0) + "% D", "sub", "end");
+      // Direction is no longer always Democratic: anchoring Asian voters at the generic
+      // ballot moves them TOWARD Republicans, because D+12 sits below the D+15.31 they
+      // already gave in 2024. Colour the end dot by which way the row actually travels
+      // and sign the label, instead of hardcoding a blue dot and a "+".
+      var toD = r.sh > 0;
       s += line(xs(r.a), y, xs(r.b), y, "cn");
       s += '<circle cx="' + xs(r.a) + '" cy="' + y + '" r="4.5" fill="none" '
          + 'stroke="currentColor" stroke-width="1.5"/>';
-      s += '<circle cx="' + xs(r.b) + '" cy="' + y + '" r="5" fill="' + DC + '"'
+      s += '<circle cx="' + xs(r.b) + '" cy="' + y + '" r="5" fill="' + (toD ? DC : RC) + '"'
          + (capped ? ' opacity="0.55"' : "") + "/>";
-      s += txt(Math.min(xs(r.a), xs(r.b)) - 9, y + 4, "+" + r.sh.toFixed(1),
+      s += txt(Math.min(xs(r.a), xs(r.b)) - 9, y + 4,
+               (toD ? "+" : "−") + Math.abs(r.sh).toFixed(1),
                capped ? "sub" : "vl", "end");
     });
     s += "</svg>";
     return card("tx-eth", "Chapter 4 · the group doing the moving",
       "Where each group is, and where the model needs it",
       "Hollow dot is 2024 measured — counted ballots in precincts overwhelmingly one "
-      + "group by voting-age population, not a poll. Filled dot is the 2026 estimate.",
+      + "group by voting-age population, not a poll. Filled dot is the 2026 estimate, "
+      + "blue where the group moves toward Democrats and red where it moves away.",
       s,
-      "<b>The row that does not work is Black voters.</b> 2024 already sits at 91.1% "
+      "<b>Asian voters are anchored to the generic ballot, not to a judgment.</b> An earlier version moved them +4 \u2014 my own guess at half the 8.95 points they moved toward Republicans between 2018 and 2024. Nothing in 2026 measures Texas Asian voters, so they now simply sit AT the October generic ballot, D+12. Note what that does: it moves them 3.31 points toward REPUBLICANS, because D+12 is below the D+15.31 they already gave in 2024. Statewide it is worth 0.15 points, but they are 34% of Collin\u2019s non-white bloc and 31% of Fort Bend\u2019s, which is why those two counties carry a smaller shift than the rest."
+      + "<br><br>" + "<b>The row that does not work is Black voters.</b> 2024 already sits at 91.1% "
       + "Democratic, so the model&rsquo;s +12 for the whole non-white bloc cannot come from "
       + "there — it has to be carried by Hispanic voters almost alone. That is the "
       + "weakest joint in the model, and this is the chart where it shows.");
@@ -972,6 +980,21 @@
         + precinctCard()
         + volCard()
         // 5. three ways of asking what it would take
+        + framing("tx-frame-outcomes", "The outcomes",
+            "Four ways of asking the same question",
+            ["Everything above is evidence. None of it is an answer, because every piece "
+             + "stops at the same place: the electorate changed, the banked vote is most "
+             + "of the result, the candidate is worth about five points, and the movement "
+             + "is Hispanic voters \u2014 but nobody has measured how far they move.",
+             "So the honest thing is not to produce one number. It is to ask what would "
+             + "have to be true, from four directions, and see whether the answers agree. "
+             + "The first is a census of everyone else&rsquo;s number. The second asks it "
+             + "in votes: how big a banked lead, against how hard an election day. The "
+             + "third asks it in demographics: how far white and Hispanic voters each "
+             + "move. The fourth asks it in party blocs, with no demographics at all.",
+             "They are built from different data and they land in the same place, which is "
+             + "the strongest thing this tab can say. A coin flip that four independent "
+             + "routes agree on is still a coin flip \u2014 but it is a well-measured one."])
         + estimatesCard()
         + bankedCard()
         + gridCard("tx-sens", "Outcome 3 \u00b7 the demographic levers",

@@ -187,7 +187,17 @@
       + "the same questionnaires. A polling error hits both races equally and subtracts "
       + "out of the difference, so <b>the Paxton effect is larger than the polling miss "
       + "and cannot be erased by it</b>. Take the full haircut and the Senate race is "
-      + 'still <b class="nm">D+0.98</b>.</p>'
+      + 'still <b class="nm">D+0.98</b> \u2014 and in fact there is no haircut that '
+      + "beats him: he only loses once the correction exceeds 5.03 points, which is "
+      + "larger than any polling miss ever measured in Texas.</p>"
+      + "<p><b>And that haircut is itself conservative.</b> All four of the big Texas "
+      + "polling misses are presidential years with Trump <i>on the ballot</i>; the two "
+      + "midterms without him average <b>\u22121.87</b>, meaning the polls understated "
+      + "Democrats. 2026 is a midterm with no Trump on the ballot, so the better-reasoned "
+      + "prior is the friendly one \u2014 on which Talarico wins by 6.90 and Hinojosa by "
+      + "1.98. This tab quotes the unfriendly figure anyway, because four observations "
+      + "that agree beat two that contradict each other. Section 1 slide 3 prices "
+      + "exactly what that costs.</p>"
       + "<p><b>Which generalises into the number to hold tonight.</b> Talarico is the "
       + "generic Texas Democrat plus 4.92, so he is level only when that generic "
       + 'Democrat loses by <b class="nm">4.92</b>. <b>We think he wins an R+4 night</b> '
@@ -1225,7 +1235,7 @@
       }
     });
     s += "</svg>";
-    return card("tx-base", "Section 1 · slide 5 · why the methods disagree",
+    return card("tx-base", "Section 1 · slide 6 · why the methods disagree",
       "Where Texas lands depends on which past race you start from",
       "<b>How to read each row.</b> The hollow dot is what Texas actually did in that "
       + "race. The arrow adds the national swing between <i>that</i> year and this one. "
@@ -1253,6 +1263,129 @@
 
      It also carries the haircut table, because this is the only part of the poll evidence
      the three-to-four point miss cannot reach. */
+  /* Sensitising the one assumption doing the most work. Every figure on the polls
+     cards applies a three-to-four point haircut taken from races with TRUMP ON THE
+     BALLOT to a race where he is not on it. All four of the big misses are
+     presidential years; both of the Trump-off-ballot races are in the other set, and
+     they average -1.87. Conditioning on the thing that is actually true of 2026 is worth
+     5.92 points, and it runs the friendly way - which is why the rest of the tab is
+     conservative rather than neutral. */
+  function haircutCard() {
+    var R = (D.hair || []).map(function (r) {
+      return {s: r.scenario, h: num(r.haircut), on: r.trump_on_ballot,
+              t: num(r.talarico_margin_R), g: num(r.hinojosa_margin_R)};
+    }).filter(function (r) { return r.h != null; });
+    if (!R.length) return "";
+    R.sort(function (a, b) { return a.h - b.h; });
+    var wide = !NARROW;
+    var W = wide ? 760 : 360, L = wide ? 46 : 38, RM = wide ? 104 : 14;
+    var T = wide ? 106 : 130, Bm = 50, H = wide ? 400 : 380;
+    var lo = -5, hi = 5.2, vlo = -10, vhi = 6;
+    var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - RM); };
+    var ys = function (v) { return T + (v - vlo) / (vhi - vlo) * (H - T - Bm); };
+    var TAL = "var(--tal,#6b4fbb)", HIN = "var(--hin,#0f8f8f)";
+    var s2 = svg(W, H, "Both Texas races across every polling haircut ever measured");
+    [-10, -5, 0, 5].forEach(function (v) {
+      s2 += line(L, ys(v), W - RM, ys(v), v === 0 ? "zl" : "gl")
+         + txt(L - 6, ys(v) + 4, v === 0 ? "even" : mgn(v, 0), "tk", "end");
+    });
+    for (var t = -4; t <= 5; t += 2) {
+      s2 += line(xs(t), T, xs(t), H - Bm, "gl")
+         + txt(xs(t), H - Bm + 18, (t > 0 ? "+" : "") + t, "tk", "middle");
+    }
+    s2 += txt(L, H - 12, "the polling haircut applied to BOTH races → "
+              + "more generous to Republicans", "lgd");
+    s2 += txt(0, T - 14, "statewide margin", "lgd");
+    // the six measured misses, marked and split by whether Trump was on the ballot
+    var seen = {};
+    R.filter(function (r) { return r.on; }).forEach(function (r, i) {
+      if (seen[r.h]) return; seen[r.h] = 1;
+      var y = 22 + i * 14;
+      var on = r.on === "yes";
+      s2 += line(xs(r.h), y + 4, xs(r.h), T - 4, "gl")
+         + '<circle cx="' + xs(r.h) + '" cy="' + y + '" r="3.5" fill="'
+         + (on ? RC : DC) + '"/>'
+         + txt(xs(r.h) + (xs(r.h) > W / 2 ? -7 : 7), y + 4,
+               r.s.split(" — ")[0] + (on ? "  Trump ON" : "  Trump off"), "sub",
+               xs(r.h) > W / 2 ? "end" : "start");
+    });
+    var path = function (key, col) {
+      return '<polyline points="' + R.map(function (r) {
+        return xs(r.h) + "," + ys(r[key]); }).join(" ")
+        + '" fill="none" stroke="' + col + '" stroke-width="2.5" opacity="0.9"/>';
+    };
+    s2 += path("g", HIN) + path("t", TAL);
+    [[5.03, TAL, "Talarico"], [0.11, HIN, "Hinojosa"]].forEach(function (b) {
+      if (b[0] > hi) return;
+      s2 += '<line x1="' + xs(b[0]) + '" y1="' + T + '" x2="' + xs(b[0]) + '" y2="'
+         + ys(0) + '" stroke="' + b[1] + '" stroke-width="1" stroke-dasharray="3 3" '
+         + 'opacity="0.75"/>'
+         + '<circle cx="' + xs(b[0]) + '" cy="' + ys(0) + '" r="4.5" fill="' + b[1] + '"/>'
+         + '<text x="' + xs(b[0]) + '" y="' + (T - 8) + '" text-anchor="middle" '
+         + 'class="vl" fill="' + b[1] + '">' + b[2] + " loses past +" + b[0] + "</text>";
+    });
+    if (wide) {
+      s2 += '<text x="' + (W - RM + 10) + '" y="' + (ys(R[R.length - 1].t) + 4)
+         + '" class="lbb" fill="' + TAL + '">Talarico</text>'
+         + '<text x="' + (W - RM + 10) + '" y="' + (ys(R[R.length - 1].g) + 4)
+         + '" class="lbb" fill="' + HIN + '">Hinojosa</text>';
+    }
+    s2 += "</svg>";
+    var tbl = '<div class="scroll"><table class="txtbl" style="margin-top:12px"><thead>'
+      + "<tr><th>Haircut</th><th>Trump on the ballot?</th><th>Talarico</th>"
+      + "<th>Hinojosa</th><th>Carries</th></tr></thead><tbody>"
+      + R.map(function (r) {
+          return "<tr" + (/mean/.test(r.s) ? ' class="em"' : "") + "><td>" + esc(r.s)
+            + '</td><td class="dim">' + (r.on === "yes" ? "yes" : (r.on === "no" ? "no" : "—"))
+            + '</td><td class="num ' + (r.t < 0 ? "dem" : "rep") + '">' + mgn(r.t)
+            + '</td><td class="num ' + (r.g < 0 ? "dem" : "rep") + '">' + mgn(r.g)
+            + '</td><td class="' + (r.carries === "both" ? "dem" : "dim") + '">'
+            + esc(r.carries || (r.t < 0 && r.g < 0 ? "both" : "Talarico only"))
+            + "</td></tr>";
+        }).join("") + "</tbody></table></div>";
+
+    return card("tx-haircut", "Section 1 · slide 3 · how much the haircut is assuming",
+      "The haircut comes from races with Trump on the ballot. This one does not have him",
+      "<b>This is the single assumption doing the most work anywhere on this tab, so it "
+      + "gets its own slide.</b> Every figure on the previous card applies a three-to-four "
+      + "point correction to the polls. That correction is measured almost entirely from "
+      + "races where Trump was <i>on the ballot</i>. 2026 is not one of those. Each line "
+      + "is one race&rsquo;s margin across every haircut; the marks above the plot are the "
+      + "six measured misses, red where Trump was on the ballot and blue where he was not.",
+      s2 + tbl,
+      "<b>The conditioning is worth 5.92 points.</b> The four presidential-year misses "
+      + "average <b>+4.05</b> and every one of them had Trump on the ballot. The two "
+      + "midterm misses average <b>−1.87</b> and neither did. 2026 is a midterm with "
+      + "no Trump on the ballot, so the defensible prior is the second number, not the "
+      + "first. The rest of this tab uses the first anyway, which is a choice to be "
+      + "conservative rather than a reading of the evidence."
+      + "<br><br><b>What that does to the Senate race: nothing, at any value.</b> "
+      + "Talarico only loses once the haircut exceeds <b>5.03</b> — larger than any "
+      + "of the six misses ever measured in Texas, including the worst, 2024&rsquo;s "
+      + "presidential +4.68. There is no haircut on this chart that beats him. That is a "
+      + "stronger claim than “he survives the full haircut”, which is what the "
+      + "rest of the tab says."
+      + "<br><br><b>And what it does to the governor&rsquo;s race: everything.</b> "
+      + "Hinojosa loses once the haircut exceeds <b>0.11</b> — smaller than five of "
+      + "the six. On the Trump-off-ballot prior of −1.87 she wins by 1.98. On 2018, "
+      + "the closest analogue there is, she wins by 4.34. On the Trump-on-ballot prior "
+      + "she loses by 3.94. <b>Her race is not close to a coin flip in any underlying "
+      + "sense — it is a straight bet on which column 2026 belongs in</b>, and every "
+      + "lever in Section 4 exists only because the tab assumes the Republican-friendly "
+      + "column."
+      + "<br><br><b>Why the tab stays conservative anyway.</b> Two observations are not a "
+      + "pattern, they are two observations, and they point opposite ways — 2022 at "
+      + "+0.50 and 2018 at −4.23. Conditioning on Trump-off-ballot is the better "
+      + "theory but it rests on a sample of two, while the Trump-on-ballot figure rests "
+      + "on four that agree to within 1.5 points of each other. The honest position is "
+      + "that the friendly reading is better reasoned and worse evidenced, so the tab "
+      + "quotes the unfriendly one and this slide says what that costs."
+      + "<br><br><b>Read tonight against this.</b> If Texas comes in materially better "
+      + "than the modelled figures, the explanation is most likely here — not in the "
+      + "Hispanic vote, not in rural turnout, but in a four-point correction borrowed "
+      + "from elections Trump was standing in.");
+  }
+
   function paxtonCard() {
     var SC = senateCharts();
     // the Trump half: four conditions 2018 did not carry, sourced and dated. This used
@@ -1286,7 +1419,7 @@
         }).join("")
       + "</tbody></table></div>";
 
-    return card("tx-paxton", "Section 1 · slide 3 · the Paxton–Trump effect",
+    return card("tx-paxton", "Section 1 · slide 4 · the Paxton–Trump effect",
       "Almost all of Talarico’s lead is Paxton",
       "<b>The same four polls asked about the governor’s race too</b> — same "
       + "questionnaires, same 5,934 respondents, same field period. Abbott against "
@@ -1704,7 +1837,7 @@
     var nv = R.filter(function (r) { return /not vote/i.test(r.g); })[0];
     var hisp = R.filter(function (r) { return r.g === "Hispanic"; })[0];
     var twoWay = ind ? (ind.ad / (ind.ad + ind.ar) * 100) : null;
-    return card("tx-xtab", "Section 1 · slide 4 · what the crosstabs say",
+    return card("tx-xtab", "Section 1 · slide 5 · what the crosstabs say",
       "The two final polls, group by group",
       "<b>Sources: the released YouGov and AtlasIntel toppers.</b> Hollow dot is YouGov "
       + "(2,141 likely voters, 26\u201329 October), filled dot is AtlasIntel (1,678, "
@@ -3152,7 +3285,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["tsens", "tx_tarrant_sensitivity.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["tsens", "tx_tarrant_sensitivity.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {
@@ -3187,6 +3320,7 @@
              "But they are not four independent readings, and Texas polls have a record worth knowing before leaning on them: the famous misses are a presidential-year pattern, and the two midterms available to check missed by half a point and by four in the OTHER direction."])
         + estimatesCard()
         + pollTrustCard()
+        + haircutCard()
         + paxtonCard()
         + crosstabCard()
         + baselineCard()

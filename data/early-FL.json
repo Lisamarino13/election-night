@@ -3,7 +3,7 @@
  "unit": "county",
  "election": "2026 General",
  "as_of": "11/3/2026",
- "fetched": "2026-11-03T22:07:33+00:00",
+ "fetched": "2026-11-03T23:37:38+00:00",
  "party_available": true,
  "outstanding_available": false,
  "in_person": true,
@@ -1559,7 +1559,15 @@
  },
  "notes": {
   "outstanding": "derived as mail requested minus mail returned; not a figure the state publishes directly",
+  "mismatch": "This figure is 43,175 BEHIND the Election Lab's own headline for FL: their county file totals 5,475,004, their national file 5,518,179. The county file was last written 9 hours before the national one. A count cannot fall as time passes, so this is staleness and not a disagreement. The county file is kept because a per-county projection needs per-county numbers, and it catches up when the Lab rewrites it.",
   "fallback": "the direct state parse went stale or is unreachable, so this is the UF Election Lab's copy. It lacks the receipt-method detail the state file carries; the direct parse resumes automatically when the state is reachable again"
+ },
+ "source_mismatch": {
+  "county_file": 5475004,
+  "national_file": 5518179,
+  "diff": -43175,
+  "county_file_modified": "2026-11-03T14:19:28+00:00",
+  "national_file_modified": "2026-11-03T23:09:33+00:00"
  },
  "state_totals": {
   "returned": {

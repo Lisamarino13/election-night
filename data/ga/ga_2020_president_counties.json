@@ -1,0 +1,3217 @@
+{
+ "election": "2020 Georgia General Election - President (certified)",
+ "source": "https://results.sos.ga.gov/results/public/api/elections/<county>-county-ga/2020NovGen/data",
+ "source_kind": "ga-sos-api",
+ "office": "President",
+ "election_date": "2020-11-03",
+ "version": "2020NovGen",
+ "tie_out": {
+  "status": "ties to certified",
+  "biden": 2474507,
+  "trump": 2461837,
+  "certified_biden": 2473633,
+  "certified_trump": 2461854
+ },
+ "counties_by_mode": {
+  "APPLING": {
+   "R": {
+    "early": 3874,
+    "mail": 890,
+    "election_day": 1753,
+    "provisional": 9
+   },
+   "D": {
+    "early": 855,
+    "mail": 587,
+    "election_day": 334,
+    "provisional": 3
+   },
+   "other": {
+    "early": 26,
+    "mail": 5,
+    "election_day": 5,
+    "provisional": 0
+   }
+  },
+  "ATKINSON": {
+   "R": {
+    "early": 1419,
+    "mail": 164,
+    "election_day": 716,
+    "provisional": 1
+   },
+   "D": {
+    "early": 445,
+    "mail": 130,
+    "election_day": 250,
+    "provisional": 0
+   },
+   "other": {
+    "early": 13,
+    "mail": 3,
+    "election_day": 14,
+    "provisional": 0
+   }
+  },
+  "BACON": {
+   "R": {
+    "early": 3099,
+    "mail": 487,
+    "election_day": 431,
+    "provisional": 1
+   },
+   "D": {
+    "early": 288,
+    "mail": 196,
+    "election_day": 140,
+    "provisional": 1
+   },
+   "other": {
+    "early": 13,
+    "mail": 4,
+    "election_day": 8,
+    "provisional": 0
+   }
+  },
+  "BAKER": {
+   "R": {
+    "early": 466,
+    "mail": 138,
+    "election_day": 291,
+    "provisional": 2
+   },
+   "D": {
+    "early": 269,
+    "mail": 234,
+    "election_day": 149,
+    "provisional": 0
+   },
+   "other": {
+    "early": 2,
+    "mail": 2,
+    "election_day": 2,
+    "provisional": 0
+   }
+  },
+  "BALDWIN": {
+   "R": {
+    "early": 5736,
+    "mail": 1290,
+    "election_day": 1873,
+    "provisional": 4
+   },
+   "D": {
+    "early": 4612,
+    "mail": 3000,
+    "election_day": 1527,
+    "provisional": 1
+   },
+   "other": {
+    "early": 107,
+    "mail": 38,
+    "election_day": 63,
+    "provisional": 0
+   }
+  },
+  "BANKS": {
+   "R": {
+    "early": 5116,
+    "mail": 1025,
+    "election_day": 1644,
+    "provisional": 10
+   },
+   "D": {
+    "early": 435,
+    "mail": 344,
+    "election_day": 150,
+    "provisional": 3
+   },
+   "other": {
+    "early": 45,
+    "mail": 9,
+    "election_day": 20,
+    "provisional": 0
+   }
+  },
+  "BARROW": {
+   "R": {
+    "early": 16782,
+    "mail": 4134,
+    "election_day": 5885,
+    "provisional": 3
+   },
+   "D": {
+    "early": 5150,
+    "mail": 3583,
+    "election_day": 1717,
+    "provisional": 3
+   },
+   "other": {
+    "early": 307,
+    "mail": 131,
+    "election_day": 226,
+    "provisional": 0
+   }
+  },
+  "BARTOW": {
+   "R": {
+    "early": 21499,
+    "mail": 5976,
+    "election_day": 10179,
+    "provisional": 20
+   },
+   "D": {
+    "early": 5423,
+    "mail": 4486,
+    "election_day": 2175,
+    "provisional": 8
+   },
+   "other": {
+    "early": 275,
+    "mail": 148,
+    "election_day": 276,
+    "provisional": 2
+   }
+  },
+  "BENHILL": {
+   "R": {
+    "early": 3140,
+    "mail": 528,
+    "election_day": 441,
+    "provisional": 1
+   },
+   "D": {
+    "early": 1342,
+    "mail": 714,
+    "election_day": 336,
+    "provisional": 0
+   },
+   "other": {
+    "early": 32,
+    "mail": 8,
+    "election_day": 18,
+    "provisional": 0
+   }
+  },
+  "BERRIEN": {
+   "R": {
+    "early": 3825,
+    "mail": 749,
+    "election_day": 1835,
+    "provisional": 10
+   },
+   "D": {
+    "early": 568,
+    "mail": 367,
+    "election_day": 333,
+    "provisional": 1
+   },
+   "other": {
+    "early": 25,
+    "mail": 9,
+    "election_day": 21,
+    "provisional": 0
+   }
+  },
+  "BIBB": {
+   "R": {
+    "early": 13234,
+    "mail": 5375,
+    "election_day": 7922,
+    "provisional": 54
+   },
+   "D": {
+    "early": 20384,
+    "mail": 14264,
+    "election_day": 8704,
+    "provisional": 116
+   },
+   "other": {
+    "early": 273,
+    "mail": 174,
+    "election_day": 299,
+    "provisional": 3
+   }
+  },
+  "BLECKLEY": {
+   "R": {
+    "early": 2770,
+    "mail": 614,
+    "election_day": 942,
+    "provisional": 2
+   },
+   "D": {
+    "early": 588,
+    "mail": 428,
+    "election_day": 295,
+    "provisional": 0
+   },
+   "other": {
+    "early": 37,
+    "mail": 10,
+    "election_day": 20,
+    "provisional": 0
+   }
+  },
+  "BRANTLEY": {
+   "R": {
+    "early": 4307,
+    "mail": 685,
+    "election_day": 1992,
+    "provisional": 7
+   },
+   "D": {
+    "early": 349,
+    "mail": 204,
+    "election_day": 145,
+    "provisional": 1
+   },
+   "other": {
+    "early": 21,
+    "mail": 11,
+    "election_day": 24,
+    "provisional": 0
+   }
+  },
+  "BROOKS": {
+   "R": {
+    "early": 2312,
+    "mail": 519,
+    "election_day": 1423,
+    "provisional": 6
+   },
+   "D": {
+    "early": 1149,
+    "mail": 1115,
+    "election_day": 522,
+    "provisional": 4
+   },
+   "other": {
+    "early": 25,
+    "mail": 9,
+    "election_day": 16,
+    "provisional": 0
+   }
+  },
+  "BRYAN": {
+   "R": {
+    "early": 10072,
+    "mail": 1588,
+    "election_day": 2579,
+    "provisional": 5
+   },
+   "D": {
+    "early": 3794,
+    "mail": 2105,
+    "election_day": 838,
+    "provisional": 2
+   },
+   "other": {
+    "early": 177,
+    "mail": 72,
+    "election_day": 108,
+    "provisional": 0
+   }
+  },
+  "BULLOCH": {
+   "R": {
+    "early": 8910,
+    "mail": 2800,
+    "election_day": 6653,
+    "provisional": 23
+   },
+   "D": {
+    "early": 5263,
+    "mail": 3530,
+    "election_day": 2415,
+    "provisional": 35
+   },
+   "other": {
+    "early": 175,
+    "mail": 87,
+    "election_day": 192,
+    "provisional": 1
+   }
+  },
+  "BURKE": {
+   "R": {
+    "early": 2802,
+    "mail": 649,
+    "election_day": 1949,
+    "provisional": 0
+   },
+   "D": {
+    "early": 1852,
+    "mail": 1867,
+    "election_day": 1490,
+    "provisional": 0
+   },
+   "other": {
+    "early": 36,
+    "mail": 14,
+    "election_day": 25,
+    "provisional": 0
+   }
+  },
+  "BUTTS": {
+   "R": {
+    "early": 6443,
+    "mail": 1137,
+    "election_day": 824,
+    "provisional": 2
+   },
+   "D": {
+    "early": 1924,
+    "mail": 973,
+    "election_day": 376,
+    "provisional": 1
+   },
+   "other": {
+    "early": 49,
+    "mail": 20,
+    "election_day": 22,
+    "provisional": 0
+   }
+  },
+  "CALHOUN": {
+   "R": {
+    "early": 494,
+    "mail": 150,
+    "election_day": 279,
+    "provisional": 0
+   },
+   "D": {
+    "early": 463,
+    "mail": 436,
+    "election_day": 361,
+    "provisional": 0
+   },
+   "other": {
+    "early": 2,
+    "mail": 3,
+    "election_day": 6,
+    "provisional": 0
+   }
+  },
+  "CAMDEN": {
+   "R": {
+    "early": 9465,
+    "mail": 2161,
+    "election_day": 3621,
+    "provisional": 4
+   },
+   "D": {
+    "early": 4021,
+    "mail": 2777,
+    "election_day": 1166,
+    "provisional": 3
+   },
+   "other": {
+    "early": 205,
+    "mail": 95,
+    "election_day": 170,
+    "provisional": 0
+   }
+  },
+  "CANDLER": {
+   "R": {
+    "early": 2327,
+    "mail": 375,
+    "election_day": 431,
+    "provisional": 0
+   },
+   "D": {
+    "early": 699,
+    "mail": 376,
+    "election_day": 193,
+    "provisional": 1
+   },
+   "other": {
+    "early": 11,
+    "mail": 4,
+    "election_day": 14,
+    "provisional": 0
+   }
+  },
+  "CARROLL": {
+   "R": {
+    "early": 21676,
+    "mail": 4699,
+    "election_day": 11071,
+    "provisional": 30
+   },
+   "D": {
+    "early": 8582,
+    "mail": 4634,
+    "election_day": 3007,
+    "provisional": 15
+   },
+   "other": {
+    "early": 357,
+    "mail": 125,
+    "election_day": 278,
+    "provisional": 0
+   }
+  },
+  "CATOOSA": {
+   "R": {
+    "early": 17025,
+    "mail": 2952,
+    "election_day": 5170,
+    "provisional": 20
+   },
+   "D": {
+    "early": 3823,
+    "mail": 2130,
+    "election_day": 976,
+    "provisional": 3
+   },
+   "other": {
+    "early": 236,
+    "mail": 78,
+    "election_day": 178,
+    "provisional": 2
+   }
+  },
+  "CHARLTON": {
+   "R": {
+    "early": 1896,
+    "mail": 397,
+    "election_day": 1124,
+    "provisional": 2
+   },
+   "D": {
+    "early": 576,
+    "mail": 294,
+    "election_day": 233,
+    "provisional": 0
+   },
+   "other": {
+    "early": 20,
+    "mail": 7,
+    "election_day": 17,
+    "provisional": 0
+   }
+  },
+  "CHATHAM": {
+   "R": {
+    "early": 23014,
+    "mail": 11781,
+    "election_day": 18346,
+    "provisional": 96
+   },
+   "D": {
+    "early": 31085,
+    "mail": 29037,
+    "election_day": 17952,
+    "provisional": 180
+   },
+   "other": {
+    "early": 519,
+    "mail": 506,
+    "election_day": 889,
+    "provisional": 15
+   }
+  },
+  "CHATTAHOOCHEE": {
+   "R": {
+    "early": 455,
+    "mail": 132,
+    "election_day": 291,
+    "provisional": 2
+   },
+   "D": {
+    "early": 350,
+    "mail": 166,
+    "election_day": 150,
+    "provisional": 1
+   },
+   "other": {
+    "early": 8,
+    "mail": 9,
+    "election_day": 17,
+    "provisional": 1
+   }
+  },
+  "CHATTOOGA": {
+   "R": {
+    "early": 4492,
+    "mail": 1102,
+    "election_day": 2464,
+    "provisional": 6
+   },
+   "D": {
+    "early": 837,
+    "mail": 649,
+    "election_day": 366,
+    "provisional": 2
+   },
+   "other": {
+    "early": 57,
+    "mail": 25,
+    "election_day": 50,
+    "provisional": 0
+   }
+  },
+  "CHEROKEE": {
+   "R": {
+    "early": 56171,
+    "mail": 19639,
+    "election_day": 23758,
+    "provisional": 19
+   },
+   "D": {
+    "early": 18929,
+    "mail": 17261,
+    "election_day": 6598,
+    "provisional": 6
+   },
+   "other": {
+    "early": 899,
+    "mail": 628,
+    "election_day": 921,
+    "provisional": 1
+   }
+  },
+  "CLARKE": {
+   "R": {
+    "early": 6974,
+    "mail": 4048,
+    "election_day": 3409,
+    "provisional": 15
+   },
+   "D": {
+    "early": 16357,
+    "mail": 14329,
+    "election_day": 5323,
+    "provisional": 39
+   },
+   "other": {
+    "early": 325,
+    "mail": 243,
+    "election_day": 268,
+    "provisional": 3
+   }
+  },
+  "CLAY": {
+   "R": {
+    "early": 401,
+    "mail": 105,
+    "election_day": 131,
+    "provisional": 0
+   },
+   "D": {
+    "early": 329,
+    "mail": 296,
+    "election_day": 165,
+    "provisional": 0
+   },
+   "other": {
+    "early": 0,
+    "mail": 2,
+    "election_day": 5,
+    "provisional": 0
+   }
+  },
+  "CLAYTON": {
+   "R": {
+    "early": 7988,
+    "mail": 4366,
+    "election_day": 3403,
+    "provisional": 56
+   },
+   "D": {
+    "early": 51347,
+    "mail": 27109,
+    "election_day": 16580,
+    "provisional": 440
+   },
+   "other": {
+    "early": 397,
+    "mail": 312,
+    "election_day": 343,
+    "provisional": 3
+   }
+  },
+  "CLINCH": {
+   "R": {
+    "early": 1277,
+    "mail": 209,
+    "election_day": 618,
+    "provisional": 1
+   },
+   "D": {
+    "early": 356,
+    "mail": 156,
+    "election_day": 235,
+    "provisional": 0
+   },
+   "other": {
+    "early": 8,
+    "mail": 2,
+    "election_day": 2,
+    "provisional": 0
+   }
+  },
+  "COBB": {
+   "R": {
+    "early": 76907,
+    "mail": 50764,
+    "election_day": 37609,
+    "provisional": 179
+   },
+   "D": {
+    "early": 95387,
+    "mail": 95513,
+    "election_day": 30599,
+    "provisional": 347
+   },
+   "other": {
+    "early": 1952,
+    "mail": 2320,
+    "election_day": 2157,
+    "provisional": 12
+   }
+  },
+  "COFFEE": {
+   "R": {
+    "early": 7066,
+    "mail": 917,
+    "election_day": 2587,
+    "provisional": 8
+   },
+   "D": {
+    "early": 2411,
+    "mail": 995,
+    "election_day": 1100,
+    "provisional": 5
+   },
+   "other": {
+    "early": 67,
+    "mail": 17,
+    "election_day": 41,
+    "provisional": 0
+   }
+  },
+  "COLQUITT": {
+   "R": {
+    "early": 6132,
+    "mail": 1365,
+    "election_day": 4270,
+    "provisional": 10
+   },
+   "D": {
+    "early": 1877,
+    "mail": 1199,
+    "election_day": 1108,
+    "provisional": 3
+   },
+   "other": {
+    "early": 49,
+    "mail": 20,
+    "election_day": 50,
+    "provisional": 0
+   }
+  },
+  "COLUMBIA": {
+   "R": {
+    "early": 29643,
+    "mail": 7023,
+    "election_day": 13300,
+    "provisional": 47
+   },
+   "D": {
+    "early": 14648,
+    "mail": 9546,
+    "election_day": 5009,
+    "provisional": 33
+   },
+   "other": {
+    "early": 575,
+    "mail": 241,
+    "election_day": 514,
+    "provisional": 0
+   }
+  },
+  "COOK": {
+   "R": {
+    "early": 3301,
+    "mail": 486,
+    "election_day": 1113,
+    "provisional": 0
+   },
+   "D": {
+    "early": 1008,
+    "mail": 512,
+    "election_day": 538,
+    "provisional": 1
+   },
+   "other": {
+    "early": 36,
+    "mail": 14,
+    "election_day": 26,
+    "provisional": 0
+   }
+  },
+  "COWETA": {
+   "R": {
+    "early": 23824,
+    "mail": 9400,
+    "election_day": 18273,
+    "provisional": 4
+   },
+   "D": {
+    "early": 9578,
+    "mail": 9288,
+    "election_day": 5330,
+    "provisional": 14
+   },
+   "other": {
+    "early": 283,
+    "mail": 304,
+    "election_day": 498,
+    "provisional": 3
+   }
+  },
+  "CRAWFORD": {
+   "R": {
+    "early": 2713,
+    "mail": 562,
+    "election_day": 1152,
+    "provisional": 1
+   },
+   "D": {
+    "early": 827,
+    "mail": 524,
+    "election_day": 263,
+    "provisional": 1
+   },
+   "other": {
+    "early": 28,
+    "mail": 10,
+    "election_day": 21,
+    "provisional": 0
+   }
+  },
+  "CRISP": {
+   "R": {
+    "early": 3227,
+    "mail": 780,
+    "election_day": 977,
+    "provisional": 3
+   },
+   "D": {
+    "early": 1527,
+    "mail": 886,
+    "election_day": 571,
+    "provisional": 2
+   },
+   "other": {
+    "early": 33,
+    "mail": 10,
+    "election_day": 23,
+    "provisional": 0
+   }
+  },
+  "DADE": {
+   "R": {
+    "early": 3414,
+    "mail": 635,
+    "election_day": 2010,
+    "provisional": 7
+   },
+   "D": {
+    "early": 640,
+    "mail": 377,
+    "election_day": 243,
+    "provisional": 1
+   },
+   "other": {
+    "early": 44,
+    "mail": 12,
+    "election_day": 51,
+    "provisional": 0
+   }
+  },
+  "DAWSON": {
+   "R": {
+    "early": 9095,
+    "mail": 1964,
+    "election_day": 2336,
+    "provisional": 3
+   },
+   "D": {
+    "early": 1181,
+    "mail": 1051,
+    "election_day": 254,
+    "provisional": 0
+   },
+   "other": {
+    "early": 90,
+    "mail": 44,
+    "election_day": 62,
+    "provisional": 1
+   }
+  },
+  "DECATUR": {
+   "R": {
+    "early": 4451,
+    "mail": 832,
+    "election_day": 1469,
+    "provisional": 6
+   },
+   "D": {
+    "early": 2512,
+    "mail": 1472,
+    "election_day": 788,
+    "provisional": 8
+   },
+   "other": {
+    "early": 46,
+    "mail": 23,
+    "election_day": 20,
+    "provisional": 0
+   }
+  },
+  "DEKALB": {
+   "R": {
+    "early": 29966,
+    "mail": 16078,
+    "election_day": 12126,
+    "provisional": 203
+   },
+   "D": {
+    "early": 162718,
+    "mail": 110666,
+    "election_day": 33634,
+    "provisional": 1209
+   },
+   "other": {
+    "early": 1707,
+    "mail": 1356,
+    "election_day": 1122,
+    "provisional": 19
+   }
+  },
+  "DODGE": {
+   "R": {
+    "early": 2793,
+    "mail": 711,
+    "election_day": 2335,
+    "provisional": 4
+   },
+   "D": {
+    "early": 1040,
+    "mail": 580,
+    "election_day": 550,
+    "provisional": 1
+   },
+   "other": {
+    "early": 11,
+    "mail": 10,
+    "election_day": 34,
+    "provisional": 1
+   }
+  },
+  "DOOLY": {
+   "R": {
+    "early": 1431,
+    "mail": 259,
+    "election_day": 466,
+    "provisional": 3
+   },
+   "D": {
+    "early": 951,
+    "mail": 476,
+    "election_day": 482,
+    "provisional": 2
+   },
+   "other": {
+    "early": 18,
+    "mail": 7,
+    "election_day": 10,
+    "provisional": 0
+   }
+  },
+  "DOUGHERTY": {
+   "R": {
+    "early": 3818,
+    "mail": 2355,
+    "election_day": 4259,
+    "provisional": 22
+   },
+   "D": {
+    "early": 9124,
+    "mail": 8052,
+    "election_day": 7317,
+    "provisional": 84
+   },
+   "other": {
+    "early": 74,
+    "mail": 70,
+    "election_day": 133,
+    "provisional": 3
+   }
+  },
+  "DOUGLAS": {
+   "R": {
+    "early": 15139,
+    "mail": 5434,
+    "election_day": 4863,
+    "provisional": 15
+   },
+   "D": {
+    "early": 22804,
+    "mail": 13998,
+    "election_day": 5963,
+    "provisional": 44
+   },
+   "other": {
+    "early": 349,
+    "mail": 227,
+    "election_day": 259,
+    "provisional": 2
+   }
+  },
+  "EARLY": {
+   "R": {
+    "early": 1504,
+    "mail": 416,
+    "election_day": 799,
+    "provisional": 3
+   },
+   "D": {
+    "early": 1107,
+    "mail": 684,
+    "election_day": 646,
+    "provisional": 0
+   },
+   "other": {
+    "early": 15,
+    "mail": 6,
+    "election_day": 7,
+    "provisional": 0
+   }
+  },
+  "ECHOLS": {
+   "R": {
+    "early": 909,
+    "mail": 121,
+    "election_day": 226,
+    "provisional": 0
+   },
+   "D": {
+    "early": 102,
+    "mail": 32,
+    "election_day": 33,
+    "provisional": 0
+   },
+   "other": {
+    "early": 11,
+    "mail": 3,
+    "election_day": 4,
+    "provisional": 0
+   }
+  },
+  "EFFINGHAM": {
+   "R": {
+    "early": 13471,
+    "mail": 2520,
+    "election_day": 7350,
+    "provisional": 17
+   },
+   "D": {
+    "early": 3623,
+    "mail": 2333,
+    "election_day": 1752,
+    "provisional": 12
+   },
+   "other": {
+    "early": 167,
+    "mail": 92,
+    "election_day": 233,
+    "provisional": 0
+   }
+  },
+  "ELBERT": {
+   "R": {
+    "early": 3408,
+    "mail": 981,
+    "election_day": 1837,
+    "provisional": 0
+   },
+   "D": {
+    "early": 1268,
+    "mail": 1082,
+    "election_day": 529,
+    "provisional": 0
+   },
+   "other": {
+    "early": 23,
+    "mail": 13,
+    "election_day": 30,
+    "provisional": 0
+   }
+  },
+  "EMANUEL": {
+   "R": {
+    "early": 3126,
+    "mail": 896,
+    "election_day": 2528,
+    "provisional": 1
+   },
+   "D": {
+    "early": 1234,
+    "mail": 808,
+    "election_day": 842,
+    "provisional": 0
+   },
+   "other": {
+    "early": 22,
+    "mail": 7,
+    "election_day": 36,
+    "provisional": 1
+   }
+  },
+  "EVANS": {
+   "R": {
+    "early": 1926,
+    "mail": 491,
+    "election_day": 471,
+    "provisional": 0
+   },
+   "D": {
+    "early": 741,
+    "mail": 347,
+    "election_day": 236,
+    "provisional": 0
+   },
+   "other": {
+    "early": 11,
+    "mail": 12,
+    "election_day": 12,
+    "provisional": 0
+   }
+  },
+  "FANNIN": {
+   "R": {
+    "early": 5730,
+    "mail": 2253,
+    "election_day": 4163,
+    "provisional": 23
+   },
+   "D": {
+    "early": 1028,
+    "mail": 1159,
+    "election_day": 384,
+    "provisional": 0
+   },
+   "other": {
+    "early": 35,
+    "mail": 32,
+    "election_day": 43,
+    "provisional": 0
+   }
+  },
+  "FAYETTE": {
+   "R": {
+    "early": 24162,
+    "mail": 7382,
+    "election_day": 6352,
+    "provisional": 56
+   },
+   "D": {
+    "early": 18443,
+    "mail": 11152,
+    "election_day": 3400,
+    "provisional": 70
+   },
+   "other": {
+    "early": 463,
+    "mail": 232,
+    "election_day": 279,
+    "provisional": 2
+   }
+  },
+  "FLOYD": {
+   "R": {
+    "early": 16678,
+    "mail": 4436,
+    "election_day": 7897,
+    "provisional": 112
+   },
+   "D": {
+    "early": 5820,
+    "mail": 3976,
+    "election_day": 2154,
+    "provisional": 58
+   },
+   "other": {
+    "early": 220,
+    "mail": 98,
+    "election_day": 199,
+    "provisional": 0
+   }
+  },
+  "FORSYTH": {
+   "R": {
+    "early": 60739,
+    "mail": 14612,
+    "election_day": 9740,
+    "provisional": 31
+   },
+   "D": {
+    "early": 23125,
+    "mail": 15682,
+    "election_day": 3375,
+    "provisional": 21
+   },
+   "other": {
+    "early": 1087,
+    "mail": 477,
+    "election_day": 415,
+    "provisional": 1
+   }
+  },
+  "FRANKLIN": {
+   "R": {
+    "early": 5364,
+    "mail": 1404,
+    "election_day": 2299,
+    "provisional": 2
+   },
+   "D": {
+    "early": 647,
+    "mail": 598,
+    "election_day": 348,
+    "provisional": 0
+   },
+   "other": {
+    "early": 47,
+    "mail": 25,
+    "election_day": 31,
+    "provisional": 0
+   }
+  },
+  "FULTON": {
+   "R": {
+    "early": 87293,
+    "mail": 29479,
+    "election_day": 19552,
+    "provisional": 916
+   },
+   "D": {
+    "early": 224688,
+    "mail": 115788,
+    "election_day": 38143,
+    "provisional": 2525
+   },
+   "other": {
+    "early": 3004,
+    "mail": 1727,
+    "election_day": 1448,
+    "provisional": 96
+   }
+  },
+  "GILMER": {
+   "R": {
+    "early": 6863,
+    "mail": 2183,
+    "election_day": 4371,
+    "provisional": 12
+   },
+   "D": {
+    "early": 1209,
+    "mail": 1270,
+    "election_day": 453,
+    "provisional": 0
+   },
+   "other": {
+    "early": 64,
+    "mail": 35,
+    "election_day": 64,
+    "provisional": 1
+   }
+  },
+  "GLASCOCK": {
+   "R": {
+    "early": 795,
+    "mail": 205,
+    "election_day": 403,
+    "provisional": 0
+   },
+   "D": {
+    "early": 62,
+    "mail": 53,
+    "election_day": 40,
+    "provisional": 0
+   },
+   "other": {
+    "early": 4,
+    "mail": 1,
+    "election_day": 3,
+    "provisional": 0
+   }
+  },
+  "GLYNN": {
+   "R": {
+    "early": 16492,
+    "mail": 4388,
+    "election_day": 4701,
+    "provisional": 35
+   },
+   "D": {
+    "early": 7969,
+    "mail": 5735,
+    "election_day": 2153,
+    "provisional": 22
+   },
+   "other": {
+    "early": 234,
+    "mail": 105,
+    "election_day": 149,
+    "provisional": 1
+   }
+  },
+  "GORDON": {
+   "R": {
+    "early": 9866,
+    "mail": 2538,
+    "election_day": 6986,
+    "provisional": 15
+   },
+   "D": {
+    "early": 1916,
+    "mail": 1464,
+    "election_day": 1003,
+    "provisional": 1
+   },
+   "other": {
+    "early": 86,
+    "mail": 51,
+    "election_day": 107,
+    "provisional": 0
+   }
+  },
+  "GRADY": {
+   "R": {
+    "early": 3896,
+    "mail": 1103,
+    "election_day": 2028,
+    "provisional": 7
+   },
+   "D": {
+    "early": 1861,
+    "mail": 1112,
+    "election_day": 635,
+    "provisional": 11
+   },
+   "other": {
+    "early": 18,
+    "mail": 11,
+    "election_day": 25,
+    "provisional": 0
+   }
+  },
+  "GREENE": {
+   "R": {
+    "early": 4947,
+    "mail": 1275,
+    "election_day": 844,
+    "provisional": 2
+   },
+   "D": {
+    "early": 1965,
+    "mail": 1532,
+    "election_day": 583,
+    "provisional": 8
+   },
+   "other": {
+    "early": 51,
+    "mail": 19,
+    "election_day": 21,
+    "provisional": 0
+   }
+  },
+  "GWINNETT": {
+   "R": {
+    "early": 90472,
+    "mail": 40396,
+    "election_day": 35271,
+    "provisional": 274
+   },
+   "D": {
+    "early": 124125,
+    "mail": 81502,
+    "election_day": 35793,
+    "provisional": 407
+   },
+   "other": {
+    "early": 2186,
+    "mail": 1679,
+    "election_day": 1742,
+    "provisional": 18
+   }
+  },
+  "HABERSHAM": {
+   "R": {
+    "early": 11083,
+    "mail": 2905,
+    "election_day": 2628,
+    "provisional": 21
+   },
+   "D": {
+    "early": 1733,
+    "mail": 1315,
+    "election_day": 511,
+    "provisional": 4
+   },
+   "other": {
+    "early": 126,
+    "mail": 42,
+    "election_day": 64,
+    "provisional": 0
+   }
+  },
+  "HALL": {
+   "R": {
+    "early": 40999,
+    "mail": 12005,
+    "election_day": 11111,
+    "provisional": 55
+   },
+   "D": {
+    "early": 11951,
+    "mail": 9215,
+    "election_day": 3847,
+    "provisional": 18
+   },
+   "other": {
+    "early": 611,
+    "mail": 305,
+    "election_day": 402,
+    "provisional": 4
+   }
+  },
+  "HANCOCK": {
+   "R": {
+    "early": 641,
+    "mail": 244,
+    "election_day": 274,
+    "provisional": 0
+   },
+   "D": {
+    "early": 1135,
+    "mail": 1223,
+    "election_day": 624,
+    "provisional": 3
+   },
+   "other": {
+    "early": 4,
+    "mail": 7,
+    "election_day": 10,
+    "provisional": 0
+   }
+  },
+  "HARALSON": {
+   "R": {
+    "early": 6224,
+    "mail": 1786,
+    "election_day": 4317,
+    "provisional": 4
+   },
+   "D": {
+    "early": 746,
+    "mail": 671,
+    "election_day": 375,
+    "provisional": 0
+   },
+   "other": {
+    "early": 40,
+    "mail": 30,
+    "election_day": 55,
+    "provisional": 0
+   }
+  },
+  "HARRIS": {
+   "R": {
+    "early": 6627,
+    "mail": 2087,
+    "election_day": 5592,
+    "provisional": 13
+   },
+   "D": {
+    "early": 2106,
+    "mail": 2067,
+    "election_day": 1278,
+    "provisional": 6
+   },
+   "other": {
+    "early": 50,
+    "mail": 62,
+    "election_day": 103,
+    "provisional": 0
+   }
+  },
+  "HART": {
+   "R": {
+    "early": 5687,
+    "mail": 1437,
+    "election_day": 2338,
+    "provisional": 2
+   },
+   "D": {
+    "early": 1467,
+    "mail": 1128,
+    "election_day": 560,
+    "provisional": 2
+   },
+   "other": {
+    "early": 43,
+    "mail": 20,
+    "election_day": 43,
+    "provisional": 0
+   }
+  },
+  "HEARD": {
+   "R": {
+    "early": 2197,
+    "mail": 677,
+    "election_day": 1641,
+    "provisional": 1
+   },
+   "D": {
+    "early": 343,
+    "mail": 296,
+    "election_day": 184,
+    "provisional": 1
+   },
+   "other": {
+    "early": 19,
+    "mail": 11,
+    "election_day": 21,
+    "provisional": 0
+   }
+  },
+  "HENRY": {
+   "R": {
+    "early": 31879,
+    "mail": 8134,
+    "election_day": 8143,
+    "provisional": 31
+   },
+   "D": {
+    "early": 44156,
+    "mail": 20858,
+    "election_day": 8191,
+    "provisional": 71
+   },
+   "other": {
+    "early": 645,
+    "mail": 310,
+    "election_day": 322,
+    "provisional": 2
+   }
+  },
+  "HOUSTON": {
+   "R": {
+    "early": 21677,
+    "mail": 8163,
+    "election_day": 11644,
+    "provisional": 50
+   },
+   "D": {
+    "early": 13970,
+    "mail": 11867,
+    "election_day": 6349,
+    "provisional": 46
+   },
+   "other": {
+    "early": 339,
+    "mail": 294,
+    "election_day": 422,
+    "provisional": 2
+   }
+  },
+  "IRWIN": {
+   "R": {
+    "early": 2106,
+    "mail": 369,
+    "election_day": 655,
+    "provisional": 4
+   },
+   "D": {
+    "early": 523,
+    "mail": 257,
+    "election_day": 227,
+    "provisional": 1
+   },
+   "other": {
+    "early": 17,
+    "mail": 1,
+    "election_day": 8,
+    "provisional": 0
+   }
+  },
+  "JACKSON": {
+   "R": {
+    "early": 20135,
+    "mail": 4395,
+    "election_day": 4961,
+    "provisional": 6
+   },
+   "D": {
+    "early": 3791,
+    "mail": 2797,
+    "election_day": 1053,
+    "provisional": 1
+   },
+   "other": {
+    "early": 258,
+    "mail": 116,
+    "election_day": 157,
+    "provisional": 0
+   }
+  },
+  "JASPER": {
+   "R": {
+    "early": 3455,
+    "mail": 808,
+    "election_day": 1547,
+    "provisional": 12
+   },
+   "D": {
+    "early": 785,
+    "mail": 680,
+    "election_day": 294,
+    "provisional": 2
+   },
+   "other": {
+    "early": 21,
+    "mail": 18,
+    "election_day": 22,
+    "provisional": 0
+   }
+  },
+  "JEFFDAVIS": {
+   "R": {
+    "early": 2749,
+    "mail": 528,
+    "election_day": 1418,
+    "provisional": 0
+   },
+   "D": {
+    "early": 507,
+    "mail": 273,
+    "election_day": 248,
+    "provisional": 0
+   },
+   "other": {
+    "early": 17,
+    "mail": 13,
+    "election_day": 18,
+    "provisional": 0
+   }
+  },
+  "JEFFERSON": {
+   "R": {
+    "early": 1992,
+    "mail": 446,
+    "election_day": 1096,
+    "provisional": 3
+   },
+   "D": {
+    "early": 1723,
+    "mail": 1274,
+    "election_day": 1056,
+    "provisional": 8
+   },
+   "other": {
+    "early": 20,
+    "mail": 6,
+    "election_day": 18,
+    "provisional": 0
+   }
+  },
+  "JENKINS": {
+   "R": {
+    "early": 1244,
+    "mail": 335,
+    "election_day": 579,
+    "provisional": 3
+   },
+   "D": {
+    "early": 557,
+    "mail": 416,
+    "election_day": 292,
+    "provisional": 1
+   },
+   "other": {
+    "early": 8,
+    "mail": 5,
+    "election_day": 15,
+    "provisional": 0
+   }
+  },
+  "JOHNSON": {
+   "R": {
+    "early": 1748,
+    "mail": 331,
+    "election_day": 771,
+    "provisional": 0
+   },
+   "D": {
+    "early": 593,
+    "mail": 420,
+    "election_day": 209,
+    "provisional": 0
+   },
+   "other": {
+    "early": 13,
+    "mail": 6,
+    "election_day": 9,
+    "provisional": 0
+   }
+  },
+  "JONES": {
+   "R": {
+    "early": 5666,
+    "mail": 1272,
+    "election_day": 3023,
+    "provisional": 4
+   },
+   "D": {
+    "early": 2356,
+    "mail": 1689,
+    "election_day": 841,
+    "provisional": 2
+   },
+   "other": {
+    "early": 47,
+    "mail": 18,
+    "election_day": 47,
+    "provisional": 1
+   }
+  },
+  "LAMAR": {
+   "R": {
+    "early": 3772,
+    "mail": 807,
+    "election_day": 1743,
+    "provisional": 8
+   },
+   "D": {
+    "early": 1204,
+    "mail": 936,
+    "election_day": 472,
+    "provisional": 3
+   },
+   "other": {
+    "early": 40,
+    "mail": 14,
+    "election_day": 40,
+    "provisional": 0
+   }
+  },
+  "LANIER": {
+   "R": {
+    "early": 1778,
+    "mail": 250,
+    "election_day": 481,
+    "provisional": 0
+   },
+   "D": {
+    "early": 517,
+    "mail": 298,
+    "election_day": 204,
+    "provisional": 0
+   },
+   "other": {
+    "early": 25,
+    "mail": 10,
+    "election_day": 13,
+    "provisional": 0
+   }
+  },
+  "LAURENS": {
+   "R": {
+    "early": 6479,
+    "mail": 2351,
+    "election_day": 5660,
+    "provisional": 3
+   },
+   "D": {
+    "early": 3451,
+    "mail": 2735,
+    "election_day": 1884,
+    "provisional": 3
+   },
+   "other": {
+    "early": 63,
+    "mail": 38,
+    "election_day": 62,
+    "provisional": 0
+   }
+  },
+  "LEE": {
+   "R": {
+    "early": 7728,
+    "mail": 1221,
+    "election_day": 3054,
+    "provisional": 4
+   },
+   "D": {
+    "early": 2418,
+    "mail": 1243,
+    "election_day": 895,
+    "provisional": 2
+   },
+   "other": {
+    "early": 68,
+    "mail": 19,
+    "election_day": 62,
+    "provisional": 0
+   }
+  },
+  "LIBERTY": {
+   "R": {
+    "early": 4941,
+    "mail": 1311,
+    "election_day": 1704,
+    "provisional": 3
+   },
+   "D": {
+    "early": 7129,
+    "mail": 4301,
+    "election_day": 1666,
+    "provisional": 3
+   },
+   "other": {
+    "early": 136,
+    "mail": 93,
+    "election_day": 102,
+    "provisional": 0
+   }
+  },
+  "LINCOLN": {
+   "R": {
+    "early": 1832,
+    "mail": 442,
+    "election_day": 904,
+    "provisional": 1
+   },
+   "D": {
+    "early": 540,
+    "mail": 628,
+    "election_day": 265,
+    "provisional": 2
+   },
+   "other": {
+    "early": 13,
+    "mail": 10,
+    "election_day": 13,
+    "provisional": 0
+   }
+  },
+  "LONG": {
+   "R": {
+    "early": 2102,
+    "mail": 290,
+    "election_day": 1126,
+    "provisional": 10
+   },
+   "D": {
+    "early": 1148,
+    "mail": 500,
+    "election_day": 379,
+    "provisional": 6
+   },
+   "other": {
+    "early": 48,
+    "mail": 14,
+    "election_day": 33,
+    "provisional": 0
+   }
+  },
+  "LOWNDES": {
+   "R": {
+    "early": 16795,
+    "mail": 3379,
+    "election_day": 5351,
+    "provisional": 166
+   },
+   "D": {
+    "early": 11017,
+    "mail": 5929,
+    "election_day": 2892,
+    "provisional": 279
+   },
+   "other": {
+    "early": 249,
+    "mail": 122,
+    "election_day": 168,
+    "provisional": 8
+   }
+  },
+  "LUMPKIN": {
+   "R": {
+    "early": 8138,
+    "mail": 2022,
+    "election_day": 2002,
+    "provisional": 1
+   },
+   "D": {
+    "early": 1549,
+    "mail": 1245,
+    "election_day": 332,
+    "provisional": 0
+   },
+   "other": {
+    "early": 131,
+    "mail": 48,
+    "election_day": 63,
+    "provisional": 0
+   }
+  },
+  "MACON": {
+   "R": {
+    "early": 1296,
+    "mail": 139,
+    "election_day": 348,
+    "provisional": 0
+   },
+   "D": {
+    "early": 1459,
+    "mail": 706,
+    "election_day": 692,
+    "provisional": 0
+   },
+   "other": {
+    "early": 10,
+    "mail": 2,
+    "election_day": 10,
+    "provisional": 0
+   }
+  },
+  "MADISON": {
+   "R": {
+    "early": 6103,
+    "mail": 1718,
+    "election_day": 3502,
+    "provisional": 3
+   },
+   "D": {
+    "early": 1478,
+    "mail": 1192,
+    "election_day": 740,
+    "provisional": 1
+   },
+   "other": {
+    "early": 77,
+    "mail": 40,
+    "election_day": 83,
+    "provisional": 0
+   }
+  },
+  "MARION": {
+   "R": {
+    "early": 1221,
+    "mail": 295,
+    "election_day": 759,
+    "provisional": 0
+   },
+   "D": {
+    "early": 620,
+    "mail": 471,
+    "election_day": 220,
+    "provisional": 0
+   },
+   "other": {
+    "early": 20,
+    "mail": 6,
+    "election_day": 12,
+    "provisional": 0
+   }
+  },
+  "MCDUFFIE": {
+   "R": {
+    "early": 4445,
+    "mail": 898,
+    "election_day": 826,
+    "provisional": 0
+   },
+   "D": {
+    "early": 2046,
+    "mail": 1522,
+    "election_day": 600,
+    "provisional": 0
+   },
+   "other": {
+    "early": 55,
+    "mail": 23,
+    "election_day": 40,
+    "provisional": 0
+   }
+  },
+  "MCINTOSH": {
+   "R": {
+    "early": 2371,
+    "mail": 834,
+    "election_day": 810,
+    "provisional": 1
+   },
+   "D": {
+    "early": 1317,
+    "mail": 853,
+    "election_day": 442,
+    "provisional": 0
+   },
+   "other": {
+    "early": 19,
+    "mail": 15,
+    "election_day": 34,
+    "provisional": 0
+   }
+  },
+  "MERIWETHER": {
+   "R": {
+    "early": 3312,
+    "mail": 980,
+    "election_day": 2230,
+    "provisional": 2
+   },
+   "D": {
+    "early": 1604,
+    "mail": 1489,
+    "election_day": 1189,
+    "provisional": 5
+   },
+   "other": {
+    "early": 24,
+    "mail": 17,
+    "election_day": 25,
+    "provisional": 0
+   }
+  },
+  "MILLER": {
+   "R": {
+    "early": 1269,
+    "mail": 264,
+    "election_day": 530,
+    "provisional": 3
+   },
+   "D": {
+    "early": 354,
+    "mail": 221,
+    "election_day": 174,
+    "provisional": 0
+   },
+   "other": {
+    "early": 11,
+    "mail": 2,
+    "election_day": 7,
+    "provisional": 0
+   }
+  },
+  "MITCHELL": {
+   "R": {
+    "early": 2701,
+    "mail": 681,
+    "election_day": 1551,
+    "provisional": 2
+   },
+   "D": {
+    "early": 1673,
+    "mail": 1499,
+    "election_day": 818,
+    "provisional": 5
+   },
+   "other": {
+    "early": 7,
+    "mail": 9,
+    "election_day": 17,
+    "provisional": 0
+   }
+  },
+  "MONROE": {
+   "R": {
+    "early": 6890,
+    "mail": 1062,
+    "election_day": 3102,
+    "provisional": 6
+   },
+   "D": {
+    "early": 2320,
+    "mail": 1372,
+    "election_day": 690,
+    "provisional": 2
+   },
+   "other": {
+    "early": 69,
+    "mail": 27,
+    "election_day": 52,
+    "provisional": 0
+   }
+  },
+  "MONTGOMERY": {
+   "R": {
+    "early": 1495,
+    "mail": 356,
+    "election_day": 1109,
+    "provisional": 0
+   },
+   "D": {
+    "early": 419,
+    "mail": 310,
+    "election_day": 250,
+    "provisional": 0
+   },
+   "other": {
+    "early": 12,
+    "mail": 3,
+    "election_day": 12,
+    "provisional": 0
+   }
+  },
+  "MORGAN": {
+   "R": {
+    "early": 5424,
+    "mail": 938,
+    "election_day": 1865,
+    "provisional": 3
+   },
+   "D": {
+    "early": 1815,
+    "mail": 1042,
+    "election_day": 496,
+    "provisional": 2
+   },
+   "other": {
+    "early": 53,
+    "mail": 19,
+    "election_day": 50,
+    "provisional": 0
+   }
+  },
+  "MURRAY": {
+   "R": {
+    "early": 7689,
+    "mail": 1361,
+    "election_day": 3893,
+    "provisional": 0
+   },
+   "D": {
+    "early": 1093,
+    "mail": 679,
+    "election_day": 530,
+    "provisional": 0
+   },
+   "other": {
+    "early": 72,
+    "mail": 22,
+    "election_day": 50,
+    "provisional": 0
+   }
+  },
+  "MUSCOGEE": {
+   "R": {
+    "early": 17106,
+    "mail": 6399,
+    "election_day": 6527,
+    "provisional": 17
+   },
+   "D": {
+    "early": 25227,
+    "mail": 17690,
+    "election_day": 6579,
+    "provisional": 33
+   },
+   "other": {
+    "early": 397,
+    "mail": 261,
+    "election_day": 305,
+    "provisional": 2
+   }
+  },
+  "NEWTON": {
+   "R": {
+    "early": 8103,
+    "mail": 4860,
+    "election_day": 10888,
+    "provisional": 18
+   },
+   "D": {
+    "early": 12556,
+    "mail": 10471,
+    "election_day": 6745,
+    "provisional": 22
+   },
+   "other": {
+    "early": 129,
+    "mail": 158,
+    "election_day": 289,
+    "provisional": 0
+   }
+  },
+  "OCONEE": {
+   "R": {
+    "early": 11216,
+    "mail": 2696,
+    "election_day": 2680,
+    "provisional": 3
+   },
+   "D": {
+    "early": 4444,
+    "mail": 2993,
+    "election_day": 723,
+    "provisional": 2
+   },
+   "other": {
+    "early": 222,
+    "mail": 76,
+    "election_day": 113,
+    "provisional": 0
+   }
+  },
+  "OGLETHORPE": {
+   "R": {
+    "early": 3584,
+    "mail": 946,
+    "election_day": 1061,
+    "provisional": 2
+   },
+   "D": {
+    "early": 1150,
+    "mail": 868,
+    "election_day": 417,
+    "provisional": 1
+   },
+   "other": {
+    "early": 47,
+    "mail": 28,
+    "election_day": 26,
+    "provisional": 1
+   }
+  },
+  "PAULDING": {
+   "R": {
+    "early": 35174,
+    "mail": 9582,
+    "election_day": 9710,
+    "provisional": 59
+   },
+   "D": {
+    "early": 15376,
+    "mail": 10525,
+    "election_day": 3763,
+    "provisional": 40
+   },
+   "other": {
+    "early": 550,
+    "mail": 278,
+    "election_day": 327,
+    "provisional": 1
+   }
+  },
+  "PEACH": {
+   "R": {
+    "early": 4728,
+    "mail": 810,
+    "election_day": 954,
+    "provisional": 10
+   },
+   "D": {
+    "early": 3364,
+    "mail": 1741,
+    "election_day": 809,
+    "provisional": 6
+   },
+   "other": {
+    "early": 66,
+    "mail": 12,
+    "election_day": 44,
+    "provisional": 1
+   }
+  },
+  "PICKENS": {
+   "R": {
+    "early": 6287,
+    "mail": 1786,
+    "election_day": 5994,
+    "provisional": 8
+   },
+   "D": {
+    "early": 1044,
+    "mail": 1119,
+    "election_day": 645,
+    "provisional": 0
+   },
+   "other": {
+    "early": 64,
+    "mail": 34,
+    "election_day": 135,
+    "provisional": 0
+   }
+  },
+  "PIERCE": {
+   "R": {
+    "early": 5768,
+    "mail": 923,
+    "election_day": 1208,
+    "provisional": 0
+   },
+   "D": {
+    "early": 610,
+    "mail": 368,
+    "election_day": 122,
+    "provisional": 0
+   },
+   "other": {
+    "early": 29,
+    "mail": 6,
+    "election_day": 14,
+    "provisional": 0
+   }
+  },
+  "PIKE": {
+   "R": {
+    "early": 5864,
+    "mail": 919,
+    "election_day": 2341,
+    "provisional": 3
+   },
+   "D": {
+    "early": 695,
+    "mail": 523,
+    "election_day": 285,
+    "provisional": 2
+   },
+   "other": {
+    "early": 41,
+    "mail": 20,
+    "election_day": 27,
+    "provisional": 0
+   }
+  },
+  "POLK": {
+   "R": {
+    "early": 9021,
+    "mail": 1707,
+    "election_day": 2849,
+    "provisional": 12
+   },
+   "D": {
+    "early": 1957,
+    "mail": 1088,
+    "election_day": 607,
+    "provisional": 6
+   },
+   "other": {
+    "early": 67,
+    "mail": 24,
+    "election_day": 58,
+    "provisional": 3
+   }
+  },
+  "PULASKI": {
+   "R": {
+    "early": 2155,
+    "mail": 313,
+    "election_day": 336,
+    "provisional": 1
+   },
+   "D": {
+    "early": 715,
+    "mail": 337,
+    "election_day": 165,
+    "provisional": 0
+   },
+   "other": {
+    "early": 18,
+    "mail": 9,
+    "election_day": 10,
+    "provisional": 0
+   }
+  },
+  "PUTNAM": {
+   "R": {
+    "early": 4983,
+    "mail": 1760,
+    "election_day": 1547,
+    "provisional": 1
+   },
+   "D": {
+    "early": 1500,
+    "mail": 1478,
+    "election_day": 470,
+    "provisional": 0
+   },
+   "other": {
+    "early": 47,
+    "mail": 34,
+    "election_day": 35,
+    "provisional": 0
+   }
+  },
+  "QUITMAN": {
+   "R": {
+    "early": 353,
+    "mail": 88,
+    "election_day": 163,
+    "provisional": 0
+   },
+   "D": {
+    "early": 196,
+    "mail": 137,
+    "election_day": 163,
+    "provisional": 1
+   },
+   "other": {
+    "early": 1,
+    "mail": 1,
+    "election_day": 3,
+    "provisional": 0
+   }
+  },
+  "RABUN": {
+   "R": {
+    "early": 4604,
+    "mail": 1663,
+    "election_day": 1207,
+    "provisional": 0
+   },
+   "D": {
+    "early": 897,
+    "mail": 888,
+    "election_day": 199,
+    "provisional": 0
+   },
+   "other": {
+    "early": 49,
+    "mail": 33,
+    "election_day": 28,
+    "provisional": 0
+   }
+  },
+  "RANDOLPH": {
+   "R": {
+    "early": 856,
+    "mail": 214,
+    "election_day": 321,
+    "provisional": 0
+   },
+   "D": {
+    "early": 802,
+    "mail": 464,
+    "election_day": 402,
+    "provisional": 3
+   },
+   "other": {
+    "early": 4,
+    "mail": 2,
+    "election_day": 6,
+    "provisional": 0
+   }
+  },
+  "RICHMOND": {
+   "R": {
+    "early": 11931,
+    "mail": 6233,
+    "election_day": 8584,
+    "provisional": 33
+   },
+   "D": {
+    "early": 25780,
+    "mail": 21348,
+    "election_day": 11843,
+    "provisional": 153
+   },
+   "other": {
+    "early": 359,
+    "mail": 322,
+    "election_day": 428,
+    "provisional": 2
+   }
+  },
+  "ROCKDALE": {
+   "R": {
+    "early": 7466,
+    "mail": 3005,
+    "election_day": 2526,
+    "provisional": 15
+   },
+   "D": {
+    "early": 18248,
+    "mail": 9429,
+    "election_day": 3543,
+    "provisional": 24
+   },
+   "other": {
+    "early": 189,
+    "mail": 115,
+    "election_day": 126,
+    "provisional": 0
+   }
+  },
+  "SCHLEY": {
+   "R": {
+    "early": 1341,
+    "mail": 154,
+    "election_day": 304,
+    "provisional": 1
+   },
+   "D": {
+    "early": 240,
+    "mail": 157,
+    "election_day": 65,
+    "provisional": 0
+   },
+   "other": {
+    "early": 6,
+    "mail": 3,
+    "election_day": 4,
+    "provisional": 0
+   }
+  },
+  "SCREVEN": {
+   "R": {
+    "early": 2140,
+    "mail": 505,
+    "election_day": 1260,
+    "provisional": 11
+   },
+   "D": {
+    "early": 1264,
+    "mail": 789,
+    "election_day": 601,
+    "provisional": 7
+   },
+   "other": {
+    "early": 22,
+    "mail": 5,
+    "election_day": 24,
+    "provisional": 0
+   }
+  },
+  "SEMINOLE": {
+   "R": {
+    "early": 1390,
+    "mail": 277,
+    "election_day": 944,
+    "provisional": 0
+   },
+   "D": {
+    "early": 691,
+    "mail": 269,
+    "election_day": 294,
+    "provisional": 0
+   },
+   "other": {
+    "early": 3,
+    "mail": 1,
+    "election_day": 15,
+    "provisional": 0
+   }
+  },
+  "SPALDING": {
+   "R": {
+    "early": 8801,
+    "mail": 3490,
+    "election_day": 5234,
+    "provisional": 532
+   },
+   "D": {
+    "early": 4600,
+    "mail": 4264,
+    "election_day": 2554,
+    "provisional": 366
+   },
+   "other": {
+    "early": 78,
+    "mail": 53,
+    "election_day": 132,
+    "provisional": 12
+   }
+  },
+  "STEPHENS": {
+   "R": {
+    "early": 6765,
+    "mail": 1365,
+    "election_day": 1234,
+    "provisional": 4
+   },
+   "D": {
+    "early": 1288,
+    "mail": 806,
+    "election_day": 291,
+    "provisional": 0
+   },
+   "other": {
+    "early": 75,
+    "mail": 24,
+    "election_day": 33,
+    "provisional": 0
+   }
+  },
+  "STEWART": {
+   "R": {
+    "early": 462,
+    "mail": 105,
+    "election_day": 229,
+    "provisional": 5
+   },
+   "D": {
+    "early": 505,
+    "mail": 378,
+    "election_day": 292,
+    "provisional": 7
+   },
+   "other": {
+    "early": 3,
+    "mail": 2,
+    "election_day": 2,
+    "provisional": 0
+   }
+  },
+  "SUMTER": {
+   "R": {
+    "early": 3358,
+    "mail": 837,
+    "election_day": 1524,
+    "provisional": 13
+   },
+   "D": {
+    "early": 3150,
+    "mail": 2023,
+    "election_day": 1139,
+    "provisional": 6
+   },
+   "other": {
+    "early": 56,
+    "mail": 18,
+    "election_day": 26,
+    "provisional": 0
+   }
+  },
+  "TALBOT": {
+   "R": {
+    "early": 686,
+    "mail": 241,
+    "election_day": 464,
+    "provisional": 1
+   },
+   "D": {
+    "early": 618,
+    "mail": 955,
+    "election_day": 541,
+    "provisional": 0
+   },
+   "other": {
+    "early": 5,
+    "mail": 2,
+    "election_day": 9,
+    "provisional": 0
+   }
+  },
+  "TALIAFERRO": {
+   "R": {
+    "early": 200,
+    "mail": 64,
+    "election_day": 96,
+    "provisional": 0
+   },
+   "D": {
+    "early": 223,
+    "mail": 237,
+    "election_day": 100,
+    "provisional": 1
+   },
+   "other": {
+    "early": 2,
+    "mail": 1,
+    "election_day": 4,
+    "provisional": 0
+   }
+  },
+  "TATTNALL": {
+   "R": {
+    "early": 3699,
+    "mail": 818,
+    "election_day": 1536,
+    "provisional": 0
+   },
+   "D": {
+    "early": 1103,
+    "mail": 546,
+    "election_day": 412,
+    "provisional": 0
+   },
+   "other": {
+    "early": 25,
+    "mail": 10,
+    "election_day": 34,
+    "provisional": 0
+   }
+  },
+  "TAYLOR": {
+   "R": {
+    "early": 1764,
+    "mail": 292,
+    "election_day": 349,
+    "provisional": 13
+   },
+   "D": {
+    "early": 624,
+    "mail": 489,
+    "election_day": 272,
+    "provisional": 2
+   },
+   "other": {
+    "early": 18,
+    "mail": 3,
+    "election_day": 13,
+    "provisional": 0
+   }
+  },
+  "TELFAIR": {
+   "R": {
+    "early": 1506,
+    "mail": 358,
+    "election_day": 958,
+    "provisional": 3
+   },
+   "D": {
+    "early": 545,
+    "mail": 618,
+    "election_day": 317,
+    "provisional": 7
+   },
+   "other": {
+    "early": 9,
+    "mail": 2,
+    "election_day": 10,
+    "provisional": 0
+   }
+  },
+  "TERRELL": {
+   "R": {
+    "early": 1069,
+    "mail": 270,
+    "election_day": 665,
+    "provisional": 0
+   },
+   "D": {
+    "early": 969,
+    "mail": 839,
+    "election_day": 567,
+    "provisional": 1
+   },
+   "other": {
+    "early": 9,
+    "mail": 12,
+    "election_day": 15,
+    "provisional": 0
+   }
+  },
+  "THOMAS": {
+   "R": {
+    "early": 8565,
+    "mail": 1670,
+    "election_day": 2718,
+    "provisional": 1
+   },
+   "D": {
+    "early": 4819,
+    "mail": 2412,
+    "election_day": 1473,
+    "provisional": 4
+   },
+   "other": {
+    "early": 91,
+    "mail": 35,
+    "election_day": 65,
+    "provisional": 0
+   }
+  },
+  "TIFT": {
+   "R": {
+    "early": 6833,
+    "mail": 1221,
+    "election_day": 2721,
+    "provisional": 9
+   },
+   "D": {
+    "early": 2732,
+    "mail": 1464,
+    "election_day": 1110,
+    "provisional": 16
+   },
+   "other": {
+    "early": 88,
+    "mail": 33,
+    "election_day": 54,
+    "provisional": 2
+   }
+  },
+  "TOOMBS": {
+   "R": {
+    "early": 4852,
+    "mail": 1217,
+    "election_day": 1797,
+    "provisional": 6
+   },
+   "D": {
+    "early": 1288,
+    "mail": 1078,
+    "election_day": 569,
+    "provisional": 4
+   },
+   "other": {
+    "early": 38,
+    "mail": 16,
+    "election_day": 49,
+    "provisional": 0
+   }
+  },
+  "TOWNS": {
+   "R": {
+    "early": 4165,
+    "mail": 1227,
+    "election_day": 984,
+    "provisional": 8
+   },
+   "D": {
+    "early": 720,
+    "mail": 711,
+    "election_day": 118,
+    "provisional": 1
+   },
+   "other": {
+    "early": 18,
+    "mail": 10,
+    "election_day": 17,
+    "provisional": 0
+   }
+  },
+  "TREUTLEN": {
+   "R": {
+    "early": 1409,
+    "mail": 274,
+    "election_day": 418,
+    "provisional": 0
+   },
+   "D": {
+    "early": 526,
+    "mail": 303,
+    "election_day": 123,
+    "provisional": 0
+   },
+   "other": {
+    "early": 10,
+    "mail": 4,
+    "election_day": 10,
+    "provisional": 0
+   }
+  },
+  "TROUP": {
+   "R": {
+    "early": 10519,
+    "mail": 2905,
+    "election_day": 4673,
+    "provisional": 46
+   },
+   "D": {
+    "early": 5276,
+    "mail": 3459,
+    "election_day": 2809,
+    "provisional": 34
+   },
+   "other": {
+    "early": 129,
+    "mail": 60,
+    "election_day": 139,
+    "provisional": 0
+   }
+  },
+  "TURNER": {
+   "R": {
+    "early": 1738,
+    "mail": 233,
+    "election_day": 377,
+    "provisional": 1
+   },
+   "D": {
+    "early": 788,
+    "mail": 289,
+    "election_day": 332,
+    "provisional": 1
+   },
+   "other": {
+    "early": 22,
+    "mail": 5,
+    "election_day": 6,
+    "provisional": 0
+   }
+  },
+  "TWIGGS": {
+   "R": {
+    "early": 1219,
+    "mail": 310,
+    "election_day": 841,
+    "provisional": 0
+   },
+   "D": {
+    "early": 878,
+    "mail": 736,
+    "election_day": 426,
+    "provisional": 4
+   },
+   "other": {
+    "early": 8,
+    "mail": 7,
+    "election_day": 15,
+    "provisional": 0
+   }
+  },
+  "UNION": {
+   "R": {
+    "early": 7008,
+    "mail": 2232,
+    "election_day": 3400,
+    "provisional": 11
+   },
+   "D": {
+    "early": 1198,
+    "mail": 1303,
+    "election_day": 300,
+    "provisional": 0
+   },
+   "other": {
+    "early": 36,
+    "mail": 23,
+    "election_day": 49,
+    "provisional": 0
+   }
+  },
+  "UPSON": {
+   "R": {
+    "early": 6063,
+    "mail": 1175,
+    "election_day": 1364,
+    "provisional": 6
+   },
+   "D": {
+    "early": 1983,
+    "mail": 1572,
+    "election_day": 646,
+    "provisional": 0
+   },
+   "other": {
+    "early": 48,
+    "mail": 20,
+    "election_day": 28,
+    "provisional": 0
+   }
+  },
+  "WALKER": {
+   "R": {
+    "early": 14089,
+    "mail": 3517,
+    "election_day": 5560,
+    "provisional": 8
+   },
+   "D": {
+    "early": 2567,
+    "mail": 2206,
+    "election_day": 994,
+    "provisional": 2
+   },
+   "other": {
+    "early": 173,
+    "mail": 76,
+    "election_day": 162,
+    "provisional": 0
+   }
+  },
+  "WALTON": {
+   "R": {
+    "early": 22594,
+    "mail": 6031,
+    "election_day": 9202,
+    "provisional": 15
+   },
+   "D": {
+    "early": 6272,
+    "mail": 4254,
+    "election_day": 2145,
+    "provisional": 11
+   },
+   "other": {
+    "early": 235,
+    "mail": 111,
+    "election_day": 225,
+    "provisional": 0
+   }
+  },
+  "WARE": {
+   "R": {
+    "early": 5900,
+    "mail": 1368,
+    "election_day": 2577,
+    "provisional": 20
+   },
+   "D": {
+    "early": 2066,
+    "mail": 1556,
+    "election_day": 563,
+    "provisional": 26
+   },
+   "other": {
+    "early": 52,
+    "mail": 17,
+    "election_day": 46,
+    "provisional": 1
+   }
+  },
+  "WARREN": {
+   "R": {
+    "early": 771,
+    "mail": 205,
+    "election_day": 190,
+    "provisional": 0
+   },
+   "D": {
+    "early": 632,
+    "mail": 540,
+    "election_day": 297,
+    "provisional": 0
+   },
+   "other": {
+    "early": 9,
+    "mail": 1,
+    "election_day": 6,
+    "provisional": 0
+   }
+  },
+  "WASHINGTON": {
+   "R": {
+    "early": 2458,
+    "mail": 719,
+    "election_day": 1481,
+    "provisional": 5
+   },
+   "D": {
+    "early": 1843,
+    "mail": 1811,
+    "election_day": 1071,
+    "provisional": 5
+   },
+   "other": {
+    "early": 27,
+    "mail": 14,
+    "election_day": 25,
+    "provisional": 0
+   }
+  },
+  "WAYNE": {
+   "R": {
+    "early": 6131,
+    "mail": 1354,
+    "election_day": 2495,
+    "provisional": 7
+   },
+   "D": {
+    "early": 1489,
+    "mail": 736,
+    "election_day": 460,
+    "provisional": 2
+   },
+   "other": {
+    "early": 53,
+    "mail": 16,
+    "election_day": 35,
+    "provisional": 0
+   }
+  },
+  "WEBSTER": {
+   "R": {
+    "early": 488,
+    "mail": 121,
+    "election_day": 139,
+    "provisional": 0
+   },
+   "D": {
+    "early": 270,
+    "mail": 227,
+    "election_day": 142,
+    "provisional": 0
+   },
+   "other": {
+    "early": 1,
+    "mail": 2,
+    "election_day": 0,
+    "provisional": 0
+   }
+  },
+  "WHEELER": {
+   "R": {
+    "early": 943,
+    "mail": 202,
+    "election_day": 438,
+    "provisional": 0
+   },
+   "D": {
+    "early": 297,
+    "mail": 195,
+    "election_day": 197,
+    "provisional": 0
+   },
+   "other": {
+    "early": 7,
+    "mail": 1,
+    "election_day": 5,
+    "provisional": 0
+   }
+  },
+  "WHITE": {
+   "R": {
+    "early": 6680,
+    "mail": 2088,
+    "election_day": 3448,
+    "provisional": 6
+   },
+   "D": {
+    "early": 1066,
+    "mail": 973,
+    "election_day": 372,
+    "provisional": 0
+   },
+   "other": {
+    "early": 76,
+    "mail": 27,
+    "election_day": 80,
+    "provisional": 0
+   }
+  },
+  "WHITFIELD": {
+   "R": {
+    "early": 13084,
+    "mail": 3544,
+    "election_day": 8963,
+    "provisional": 45
+   },
+   "D": {
+    "early": 4997,
+    "mail": 2840,
+    "election_day": 2814,
+    "provisional": 19
+   },
+   "other": {
+    "early": 162,
+    "mail": 84,
+    "election_day": 194,
+    "provisional": 0
+   }
+  },
+  "WILCOX": {
+   "R": {
+    "early": 1317,
+    "mail": 343,
+    "election_day": 743,
+    "provisional": 0
+   },
+   "D": {
+    "early": 365,
+    "mail": 212,
+    "election_day": 285,
+    "provisional": 0
+   },
+   "other": {
+    "early": 6,
+    "mail": 2,
+    "election_day": 8,
+    "provisional": 0
+   }
+  },
+  "WILKES": {
+   "R": {
+    "early": 1649,
+    "mail": 467,
+    "election_day": 704,
+    "provisional": 3
+   },
+   "D": {
+    "early": 897,
+    "mail": 755,
+    "election_day": 504,
+    "provisional": 4
+   },
+   "other": {
+    "early": 20,
+    "mail": 10,
+    "election_day": 16,
+    "provisional": 0
+   }
+  },
+  "WILKINSON": {
+   "R": {
+    "early": 1109,
+    "mail": 259,
+    "election_day": 1293,
+    "provisional": 3
+   },
+   "D": {
+    "early": 942,
+    "mail": 602,
+    "election_day": 528,
+    "provisional": 3
+   },
+   "other": {
+    "early": 10,
+    "mail": 4,
+    "election_day": 17,
+    "provisional": 0
+   }
+  },
+  "WORTH": {
+   "R": {
+    "early": 3285,
+    "mail": 766,
+    "election_day": 2779,
+    "provisional": 0
+   },
+   "D": {
+    "early": 994,
+    "mail": 820,
+    "election_day": 581,
+    "provisional": 0
+   },
+   "other": {
+    "early": 28,
+    "mail": 10,
+    "election_day": 22,
+    "provisional": 0
+   }
+  }
+ },
+ "state_totals_by_mode": {
+  "R": {
+   "early": 1419161,
+   "mail": 451157,
+   "election_day": 587697,
+   "provisional": 3822
+  },
+  "D": {
+   "early": 1250509,
+   "mail": 849729,
+   "election_day": 367205,
+   "provisional": 7064
+  },
+  "other": {
+   "early": 25209,
+   "mail": 16057,
+   "election_day": 20638,
+   "provisional": 234
+  }
+ }
+}

@@ -498,13 +498,14 @@
     var done = pts.filter(function (r) { return r.m != null; });
     var open2 = pts.filter(function (r) { return r.m == null; });
     var fits = (D.fit || []).map(function (r) {
-      return {basis: r.basis, n: +r.n, a: num(r.intercept), b: num(r.slope),
+      return {basis: r.basis, n: +r.n, a: num(r.a), b: num(r.b),
               r2: num(r.r_squared), sd: num(r.residual_sd),
-              x0: num(r.x_min), x1: num(r.x_max), pred: num(r.pred_2026_at_51_70)};
+              x0: num(r.x_min), x1: num(r.x_max), pred: num(r.pred), x26: num(r.x_2026)};
     });
     if (!done.length || !fits.length) return "";
-    var all = fits.filter(function (q) { return q.basis === "all cycles"; })[0];
-    var mid = fits.filter(function (q) { return q.basis === "midterms only"; })[0];
+    var all = fits.filter(function (q) { return q.basis === "D share of the primary"; })[0];
+    var mid = fits.filter(function (q) { return /growth, midterms/.test(q.basis); })[0];
+    var gro = fits.filter(function (q) { return /growth, all/.test(q.basis); })[0];
     var now = open2.length ? open2[0] : null;
     if (!now) return "";
 
@@ -564,21 +565,20 @@
       + "primary, the better they did in November.</b> The line is that relationship "
       + "fitted, and the grey band is how wrong it has typically been.",
       s2,
-      "<b>2026&rsquo;s primary was " + now.x.toFixed(2) + "% Democratic, the furthest "
-      + "right any dot has ever sat. Run it through the line and November lands near "
-      + mgn(all.pred, 2) + ", give or take " + all.sd.toFixed(1) + ".</b> That is an "
-      + "independent route to roughly where the rest of this tab lands, and the only one "
-      + "built from counted ballots rather than from an assumption about who turns out. "
-      + "The relationship explains " + (all.r2 * 100).toFixed(0) + "% of the variation "
-      + "across " + all.n + " cycles, which is strong but not decisive \u2014 2018 and "
-      + "2014 both missed it by more than five points."
-      + "<br><br><b>One trap worth naming.</b> Fit only the four midterms and the "
-      + "relationship looks tighter, " + (mid.r2 * 100).toFixed(0) + "% of the variation, "
-      + "and it predicts " + mgn(mid.pred, 1) + ". Nobody believes that. It rests on four "
-      + "points, and 2026&rsquo;s primary share sits " + (now.x - mid.x1).toFixed(1)
-      + " points beyond the highest one it has ever seen, so it is extrapolating far "
-      + "outside its own evidence. The line drawn above keeps 2026 inside the range it "
-      + "was fitted on, which is the only reason to trust it over the tighter one.");
+      "<b>Three ways to ask the same question, and they do not agree.</b> The chart above uses the Democratic SHARE of the primary, which cannot see that Democratic primary votes more than doubled. Fitting the GROWTH instead predicts better, and more Democratically:" 
+      + '<table class="txtbl" style="margin:10px 0"><thead><tr><th>What you regress on</th>'
+      + "<th>Cycles</th><th>Explains</th><th>2026</th></tr></thead><tbody>"
+      + fits.map(function (q) {
+          return "<tr" + (q === all ? ' class="em"' : "") + "><td>" + esc(q.basis)
+            + '</td><td class="num">' + q.n + '</td><td class="num">'
+            + (q.r2 * 100).toFixed(0) + '%</td><td class="num '
+            + (q.pred < 0 ? "dem" : "rep") + '">' + mgn(q.pred, 2) + "</td></tr>";
+        }).join("") + "</tbody></table>"
+      + "<b>So the primary does not say " + mgn(all.pred, 0) + ". It says this race is "
+      + "a coin flip</b> \u2014 the three readings span " + mgn(mid.pred, 2) + " to "
+      + mgn(all.pred, 2) + ", a little over three points, centred near even, which is "
+      + "where every other method on this tab also lands."
+      + "<br><br><b>Two reasons not to take the friendliest one.</b> The midterm growth fit has three points, and 2026\u2019s +115.6% sits 24.8 points beyond the highest it has ever seen, so it is extrapolating hard; its residual spread is 4.82 points, WIDER than the share model\u2019s 4.11, which is what three points always buy you. And \u201cDemocrats won the primary\u201d has happened before: in 2020 they took it 2,094,428 to 2,017,167 and then lost November by 5.58. Republicans did not collapse this year either \u2014 their primary grew 10.9%. Both sides grew and Democrats grew faster, which is a different fact from Republicans staying home.");
   }
 
   function baselineCard() {

@@ -3268,27 +3268,62 @@
     });
     cuts.sort(function (a, b) { return a - b; });
     brks.sort(function (a, b) { return a - b; });
-    var cw = NARROW ? 54 : 104, ch = NARROW ? 32 : 38;
-    var L = NARROW ? 76 : 150, T = 52;
-    var W = L + brks.length * cw + 12, H = T + cuts.length * ch + 26;
-    var s = svg(W, H, "What rural turnout and the Neither bloc have to do together");
-    s += txt(L, 16, "the Neither bloc in the big fifteen breaks →", "lgd");
-    brks.forEach(function (b, i) {
-      s += txt(L + i * cw + cw / 2, T - 10, b + "%", "tk", "middle");
+    /* A heat grid of 35 cells is the wrong form for this: there is one boundary, and
+       everything useful is where the plausible estimates fall relative to it. The line
+       is where she breaks even; the shaded region above it is where she wins; the
+       labelled dots are the three estimates of the bloc break and where they land. */
+    var BD = (D.bnd || []).map(function (r) {
+      return {n: num(r.neither_break_D), c: num(r.rural_cut_needed)};
+    }).filter(function (r) { return r.n != null; })
+      .sort(function (a, b) { return a.n - b.n; });
+    var wideL = !NARROW;
+    var W = wideL ? 760 : 360, L = wideL ? 64 : 44, R = wideL ? 30 : 14;
+    var T = 96, Bm = 56, H = wideL ? 420 : 400;
+    var lo = 46, hi = 72, vlo = -15, vhi = 42;
+    var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R); };
+    var ys = function (v) { return T + (vhi - v) / (vhi - vlo) * (H - T - Bm); };
+    var s = svg(W, H, "Where Hinojosa breaks even: rural turnout against the "
+                    + "unaffiliated bloc's break");
+    [-10, 0, 10, 20, 30, 40].forEach(function (v) {
+      s += line(L, ys(v), W - R, ys(v), v === 0 ? "zl" : "gl")
+         + txt(L - 7, ys(v) + 4, v === 0 ? "no change"
+               : (v > 0 ? "−" + v + "%" : "+" + (-v) + "%"), "tk", "end");
     });
-    s += txt(0, 34, NARROW ? "rural" : "rural turnout", "lgd");
-    cuts.forEach(function (c, j) {
-      var y = T + j * ch;
-      s += txt(L - 10, y + ch / 2 + 4, c === 0 ? "unchanged" : "down " + c + "%", "lb", "end");
-      brks.forEach(function (b, i) {
-        var cell = R.filter(function (r) { return r.cut === c && r.n === b; })[0];
-        if (!cell) return;
-        var win = cell.m < 0;
-        s += rect(L + i * cw + 1, y + 1, cw - 2, ch - 2,
-                  win ? DC : RC, ' opacity="' + (Math.min(0.72, 0.1 + Math.abs(cell.m) / 6) ) + '"')
-           + '<text x="' + (L + i * cw + cw / 2) + '" y="' + (y + ch / 2 + 4)
-           + '" text-anchor="middle" class="cellw">' + mgn(cell.m) + "</text>";
-      });
+    [50, 55, 60, 65, 70].forEach(function (t) {
+      s += line(xs(t), T, xs(t), H - Bm, "gl")
+         + txt(xs(t), H - Bm + 18, t + "%", "tk", "middle");
+    });
+    // the region she wins, and the boundary itself
+    var pts = BD.filter(function (r) { return r.n >= lo && r.n <= hi; });
+    var poly = pts.map(function (r) { return xs(r.n) + "," + ys(r.c); }).join(" ");
+    s += '<polygon points="' + poly + " " + xs(pts[pts.length - 1].n) + "," + ys(vhi)
+       + " " + xs(pts[0].n) + "," + ys(vhi) + '" fill="' + DC + '" opacity="0.1"/>';
+    s += '<polyline points="' + poly + '" fill="none" stroke="' + DC
+       + '" stroke-width="2.5"/>';
+    s += txt(xs(53), ys(34), "Hinojosa wins", "lbb")
+       + txt(xs(64), ys(-9), "Hinojosa loses", "lgd");
+    s += txt(L, H - 12, "how the unaffiliated bloc in the six in-scope counties breaks "
+             + "Democratic →", "lgd");
+    s += txt(0, T - 16, "rural turnout, against 2022", "lgd");
+    // the three estimates, on the axis they belong to
+    [[50.0, "the flat carry of Tarrant’s own break", RC],
+     [62.5, "county-mirror, bias-corrected", DC],
+     [69.7, "AtlasIntel independents", DC]].forEach(function (m, i) {
+      var need = (402353 - (m[0] - 50) * 35899) / 1199649 * 100;
+      s += '<line x1="' + xs(m[0]) + '" y1="' + (T - 4) + '" x2="' + xs(m[0]) + '" y2="'
+         + ys(Math.max(vlo, Math.min(vhi, need))) + '" stroke="' + m[2]
+         + '" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.8"/>'
+         + '<circle cx="' + xs(m[0]) + '" cy="'
+         + ys(Math.max(vlo, Math.min(vhi, need))) + '" r="5" fill="' + m[2] + '"/>'
+         + '<text x="' + xs(m[0]) + '" y="' + (26 + i * 15) + '" text-anchor="middle" '
+         + 'class="vl" fill="' + m[2] + '">' + m[0].toFixed(1) + "% — "
+         + (need > 0.5 ? "needs rural down " + need.toFixed(0) + "%"
+            : "wins with rural unchanged") + "</text>"
+         + '<line x1="' + xs(m[0]) + '" y1="' + (30 + i * 15) + '" x2="' + xs(m[0])
+         + '" y2="' + (T - 6) + '" stroke="' + m[2] + '" stroke-width="1" '
+         + 'opacity="0.25"/>';
+      s += '<text x="' + xs(m[0]) + '" y="' + (H - Bm + 32) + '" text-anchor="middle" '
+         + 'class="sub">' + m[1] + "</text>";
     });
     s += "</svg>";
     /* Three vectors, each tested on its own before the combination. The grid below is
@@ -3311,11 +3346,14 @@
         }).join("") + "</tbody></table></div>") : "";
     return card("tx-levers", "Section 4 · slide 4 · all three together",
       "Three vectors, one of which can carry her alone",
-      "<b>Each cell is the governor&rsquo;s race after the full polling haircut</b>, with "
-      + "rural turnout down the amount on the left and the Neither bloc in the big fifteen "
-      + "breaking the amount along the top. Blue cells are Hinojosa winning. These two "
-      + "levers are <b>disjoint</b>: rural is the 239 smallest counties, the Neither bloc "
-      + "is inside the largest fifteen, and nothing is counted twice.",
+      "<b>One line, not thirty-five cells.</b> The curve is where Hinojosa breaks even "
+      + "after the full polling haircut: everything above it she wins, everything below "
+      + "she does not. The horizontal axis is how the unaffiliated bloc breaks in the six "
+      + "in-scope counties; the vertical is what rural turnout does against 2022. The "
+      + "three dashed markers are the three estimates of that break and where each one "
+      + "lands. These two levers are <b>disjoint</b> \u2014 rural is the 239 smallest "
+      + "counties, the bloc lives inside the largest fifteen \u2014 so nothing is "
+      + "counted twice.",
       vecTbl + '<div class="scroll">' + s + "</div>",
       "<b>Three vectors, and the answer differs for each.</b> The table above tests each "
       + "one on its own, which is a fair question even though they cannot be added. "
@@ -3527,7 +3565,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["vec", "tx_three_vectors.csv"], ["tri", "tx_triangulate.csv"], ["nmirror", "tx_neither_mirror.csv"], ["nscope", "tx_neither_scope.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["bnd", "tx_boundary.csv"], ["vec", "tx_three_vectors.csv"], ["tri", "tx_triangulate.csv"], ["nmirror", "tx_neither_mirror.csv"], ["nscope", "tx_neither_scope.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {

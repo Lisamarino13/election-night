@@ -3378,6 +3378,54 @@
       + "of her race only.");
   }
 
+  /* The interval, at the top of the conclusion because it is the summary of everything
+     under it. Three axes, three values each: the polling haircut, how the unaffiliated
+     bloc breaks, and how big that bloc is. 27 cells. It is a robustness check on the
+     modelling choices that CAN be enumerated, not a forecast distribution - rural
+     turnout, the Hispanic lever outside the bloc, turnout surprises and any error in the
+     4.92 ticket gap are all outside it, and every one of them would widen it. */
+  function intervalCard() {
+    var R = (D.ivl || []).map(function (r) {
+      return {m: r.measure, t: r.talarico, h: r.hinojosa};
+    }).filter(function (r) { return r.t; });
+    if (!R.length) return "";
+    return '<section class="txarg" id="tx-intervals">'
+      + '<p class="txkick">The interval · every combination we can enumerate</p>'
+      + "<h2>Where both races land across 27 versions of the model</h2>"
+      + "<p>Three things are genuinely in doubt, so every combination of them is run. "
+      + "<b>The polling haircut</b>: −1.87 (the two midterms, Trump off the ballot), "
+      + "+2.08 (all six measured Texas races) or +4.05 (the four presidential years, "
+      + "Trump on it). <b>How the unaffiliated bloc breaks</b>: 50.0% (Tarrant carried "
+      + "flat, the floor), 61.1% (county-mirror) or 69.7% (AtlasIntel independents). "
+      + "<b>How big that bloc is</b>: 30%, 43% or 55% of those six counties’ vote. "
+      + "Three by three by three is 27, starting from the four-poll average of D+5.03 "
+      + "and D+0.11.</p>"
+      + '<div class="scroll"><table class="txtbl"><thead><tr><th>&nbsp;</th>'
+      + '<th style="color:var(--tal,#6b4fbb)">Paxton / Talarico</th>'
+      + '<th style="color:var(--hin,#0f8f8f)">Abbott / Hinojosa</th>'
+      + "</tr></thead><tbody>"
+      + R.map(function (r) {
+          var em = /Wins|Median/.test(r.m);
+          return "<tr" + (em ? ' class="em"' : "") + "><td>" + esc(r.m)
+            + '</td><td class="num" style="color:var(--tal,#6b4fbb)">' + esc(r.t)
+            + '</td><td class="num" style="color:var(--hin,#0f8f8f)">' + esc(r.h)
+            + "</td></tr>";
+        }).join("") + "</tbody></table></div>"
+      + "<p><b>The shape is the finding, not the midpoint.</b> Talarico’s worst cell "
+      + "— maximum haircut, the flat carry, the smallest bloc, every assumption "
+      + "against him at once — is still <b>D+0.98</b>. There is no corner of this "
+      + "space where he loses. Hinojosa’s interval straddles zero and her downside "
+      + "is a real loss.</p>"
+      + "<p><b>And what the 27 cells cannot see.</b> Rural turnout, the Hispanic lever "
+      + "outside the bloc, turnout surprises, late movement, and any error in the "
+      + "<b>4.92</b> ticket gap itself. Every one of those would widen both intervals, so "
+      + "read this as a robustness check on the modelling choices rather than as a "
+      + "probability. <b>The thing most likely to break the Senate call is not in this "
+      + "grid at all</b>: the 4.92 rests on one week of four polls, and if it is really "
+      + "2.5 then Talarico’s floor moves from D+0.98 to about R+1.5.</p>"
+      + "</section>";
+  }
+
   function conclusionCard() {
     return '<section class="txarg" id="tx-read-committed">'
       + '<p class="txkick">Written down before the polls close · 2 November 2026</p>'
@@ -3545,7 +3593,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["tw", "tx_three_way.csv"], ["bnd", "tx_boundary.csv"], ["vec", "tx_three_vectors.csv"], ["tri", "tx_triangulate.csv"], ["nmirror", "tx_neither_mirror.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["ivl", "tx_intervals.csv"], ["tw", "tx_three_way.csv"], ["bnd", "tx_boundary.csv"], ["vec", "tx_three_vectors.csv"], ["tri", "tx_triangulate.csv"], ["nmirror", "tx_neither_mirror.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {
@@ -3571,6 +3619,7 @@
       // Open with the polls, because that is the best available guess right now - then
       // turn and ask what the counted data says, which is the primary and the early vote.
       var html = thesis()
+        + intervalCard()
         + readCard(L)
         + methodsCard()
 

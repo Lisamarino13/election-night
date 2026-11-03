@@ -3314,15 +3314,45 @@
       });
     });
     s += "</svg>";
+    /* Three vectors, each tested on its own before the combination. The grid below is
+       the two that are disjoint; this table is all three, because "can this one carry
+       her alone?" is a different question from "do they add up?" and only the second
+       has the overlap problem. */
+    var V = (D.vec || []).map(function (r) {
+      return {v: r.vector, n: r.needs_alone, o: r.observed_range, verdict: r.verdict,
+              why: r.why};
+    }).filter(function (r) { return r.n; });
+    var vecTbl = V.length ? ('<div class="scroll"><table class="txtbl"><thead><tr>'
+      + "<th>Vector</th><th>What it needs on its own</th><th>What has been observed</th>"
+      + "<th>Can it carry her alone?</th></tr></thead><tbody>"
+      + V.map(function (r) {
+          var ok = r.verdict === "yes";
+          return "<tr><td><b>" + esc(r.v) + '</b><br><span class="dim">' + esc(r.why)
+            + '</span></td><td class="num"><b>' + esc(r.n) + '</b></td><td class="dim">'
+            + esc(r.o) + '</td><td class="' + (ok ? "dem" : "rep") + '"><b>'
+            + esc(r.verdict) + "</b></td></tr>";
+        }).join("") + "</tbody></table></div>") : "";
     return card("tx-levers", "Section 4 · slide 4 · all three together",
-      "Neither lever carries her alone. Together they do",
+      "Three vectors, one of which can carry her alone",
       "<b>Each cell is the governor&rsquo;s race after the full polling haircut</b>, with "
       + "rural turnout down the amount on the left and the Neither bloc in the big fifteen "
       + "breaking the amount along the top. Blue cells are Hinojosa winning. These two "
       + "levers are <b>disjoint</b>: rural is the 239 smallest counties, the Neither bloc "
       + "is inside the largest fifteen, and nothing is counted twice.",
-      '<div class="scroll">' + s + "</div>",
-      "<b>Alone, neither works.</b> Rural turnout would have to collapse <b>34%</b> with "
+      vecTbl + '<div class="scroll">' + s + "</div>",
+      "<b>Three vectors, and the answer differs for each.</b> The table above tests each "
+      + "one on its own, which is a fair question even though they cannot be added. "
+      + "<b>Rural cannot carry her</b> \u2014 it needs a 34% collapse and nothing in the "
+      + "modern record is close. <b>The unaffiliated bloc can</b> \u2014 it needs 61.2% "
+      + "and the county-mirror estimate is 62.5% with AtlasIntel\u2019s independents at "
+      + "69.7%. <b>The Hispanic vote can, but only at its ceiling</b> \u2014 it needs "
+      + "D+36.15, which is above every measurement on this tab except the 90%-Hispanic "
+      + "metro precincts at D+41.15."
+      + "<br><br><b>So one of the three does carry her alone, on its most defensible "
+      + "reading.</b> That is a materially different position from the one the rest of "
+      + "this tab describes, and it comes entirely from scoping the extrapolation to the "
+      + "counties where it is licensed and letting the bloc mirror each of them."
+      + "<br><br><b>Alone on the conservative readings, neither of the two in the grid works.</b> Rural turnout would have to collapse <b>34%</b> with "
       + "the Neither bloc at its historical even split — no Texas midterm has come "
       + "close. The Neither bloc would have to break <b>61.2%</b> with rural turnout "
       + "unchanged — eleven points beyond anything it has done in two measured "
@@ -3520,7 +3550,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["tri", "tx_triangulate.csv"], ["nmirror", "tx_neither_mirror.csv"], ["nscope", "tx_neither_scope.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["vec", "tx_three_vectors.csv"], ["tri", "tx_triangulate.csv"], ["nmirror", "tx_neither_mirror.csv"], ["nscope", "tx_neither_scope.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {

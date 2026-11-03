@@ -3255,8 +3255,7 @@
          // the SAME axis in Hispanic units: one point of break is 1.183 points of
          // Hispanic margin, anchored where both equal the polls' own baseline. The
          // Hispanic lever is not a third axis, it is this one relabelled.
-         + txt(xs(t), H - Bm + 32, "D+" + (22.95 + (t - 50) * 1.183).toFixed(0), "sub",
-               "middle");
+
     });
     // the region she wins, and the boundary itself
     var pts = BD.filter(function (r) { return r.n >= lo && r.n <= hi; });
@@ -3290,6 +3289,34 @@
 
     });
     s += "</svg>";
+    /* The genuine three-way. The earlier version said the Hispanic lever could not be
+       added because it overlaps the bloc - true, but that is an argument for
+       partitioning rather than for dropping it. Split the electorate into three pieces
+       that do not intersect: rural (the 239 smallest counties), the unaffiliated bloc in
+       the six in-scope counties, and Hispanic voters EVERYWHERE ELSE - the border, the
+       majority-white metros, rural Hispanic voters, and the Hispanic voters inside the
+       six who do have a primary history. That last group is 2,470,849 voters, 81% of all
+       Texas Hispanic voters, and it is disjoint from the other two by construction. */
+    var TW = (D.tw || []).map(function (r) {
+      return {a: num(r.rural_turnout_down), b: num(r.bloc_break_above_50),
+              c: num(r.hispanic_pts_better), m: num(r.hinojosa_margin_R),
+              s: r.scenario};
+    }).filter(function (r) { return r.m != null; });
+    var twTbl = TW.length ? ('<div class="scroll"><table class="txtbl" '
+      + 'style="margin-top:14px"><thead><tr><th>Scenario</th>'
+      + "<th>Rural turnout</th><th>Bloc break</th><th>Hispanic elsewhere</th>"
+      + "<th>Governor&rsquo;s race</th></tr></thead><tbody>"
+      + TW.map(function (r) {
+          var win = r.m < 0;
+          return "<tr" + (/all three move a little/.test(r.s) ? ' class="em"' : "")
+            + "><td>" + esc(r.s) + '</td><td class="num dim">'
+            + (r.a ? "−" + r.a + "%" : "—") + '</td><td class="num dim">'
+            + (r.b ? "+" + r.b : "—") + '</td><td class="num dim">'
+            + (r.c ? "+" + r.c : "—") + '</td><td class="num" style="color:'
+            + (win ? "var(--hin,#0f8f8f)" : "var(--rep,#b3443a)") + ';font-weight:600">'
+            + mgn(r.m) + "</td></tr>";
+        }).join("") + "</tbody></table></div>") : "";
+
     /* Three vectors, each tested on its own before the combination. The grid below is
        the two that are disjoint; this table is all three, because "can this one carry
        her alone?" is a different question from "do they add up?" and only the second
@@ -3318,49 +3345,37 @@
       + "lands. These two levers are <b>disjoint</b> \u2014 rural is the 239 smallest "
       + "counties, the bloc lives inside the largest fifteen \u2014 so nothing is "
       + "counted twice.",
-      vecTbl + '<div class="scroll">' + s + "</div>",
-      "<b>The three markers on the chart,</b> left to right: the flat carry of Tarrant\u2019s own break at 50.0%, the county-mirror corrected for the measured bias at 62.5%, and AtlasIntel\u2019s independents at 69.7%."
-      + "<br><br><b>Three vectors, and the answer differs for each.</b> The table above tests each "
-      + "one on its own, which is a fair question even though they cannot be added. "
-      + "<b>Rural cannot carry her</b> \u2014 it needs a 34% collapse and nothing in the "
-      + "modern record is close. <b>The unaffiliated bloc can</b> \u2014 it needs 61.2% "
-      + "and the county-mirror estimate is 62.5% with AtlasIntel\u2019s independents at "
-      + "69.7%. <b>The Hispanic vote can, but only at its ceiling</b> \u2014 it needs "
-      + "D+36.15, which is above every measurement on this tab except the 90%-Hispanic "
-      + "metro precincts at D+41.15."
-      + "<br><br><b>So one of the three does carry her alone, on its most defensible "
-      + "reading.</b> That is a materially different position from the one the rest of "
-      + "this tab describes, and it comes entirely from scoping the extrapolation to the "
-      + "counties where it is licensed and letting the bloc mirror each of them."
-      + "<br><br><b>Alone on the conservative readings, neither of the two in the grid works.</b> Rural turnout would have to collapse <b>34%</b> with "
-      + "the Neither bloc at its historical even split — no Texas midterm has come "
-      + "close. The Neither bloc would have to break <b>61.2%</b> with rural turnout "
-      + "unchanged — eleven points beyond anything it has done in two measured "
-      + "cycles. Both are the edges of this grid and both are red."
-      + "<br><br><b>Together they are reachable, but not comfortably.</b> Rural down 15% "
-      + "and the bloc at 56.2% does it. Rural down 25% and 52.9% does it — and 52.9% "
-      + "is only three points above the historical break, which is the single most "
-      + "plausible cell on this grid. Below that the two have to trade off against each "
-      + "other point for point."
-      + "<br><br><b>These numbers are on the SCOPED extrapolation, which is why they are "
-      + "harder than they were.</b> An earlier version of this grid spread the Neither "
-      + "finding across all fifteen large counties and had her needing 56.8%. Restricting "
-      + "it to the six counties inside the measured non-white band — 4,174,308 votes "
-      + "rather than 6,868,411 — cuts each point of break from 0.58 statewide points "
-      + "to 0.352, and moves her requirement to 61.2%. The correction is the right one "
-      + "and it runs against her."
-      + "<br><br><b>And the Hispanic lever is the same axis, relabelled.</b> It is not a "
-      + "third dimension and cannot be added: Hispanic voters sit <i>inside</i> the "
-      + "unaffiliated bloc and inside those six counties. One point of bloc break is "
-      + "worth <b>1.183 points</b> of Hispanic margin, so the bottom row of the "
-      + "horizontal axis is the same line read in Hispanic units. The two meet where you "
-      + "would expect: a 61.2% break and a D+36.2 Hispanic margin are the same point, "
-      + "and D+36.15 is exactly the Hispanic threshold Section 4 slide 2 derives "
-      + "independently. The Hispanic margin is the <i>mechanism</i> by which the bloc "
-      + "breaks above even, not extra votes on top of it."
-      + "<br><br><b>And none of this touches the Senate race.</b> Talarico clears his "
-      + "threshold on the unchanged row at the historical break, and there is no cell on "
-      + "this grid where he loses. It is a map of her race only.");
+      vecTbl + '<div class="scroll">' + s + "</div>" + twTbl,
+      "<b>She is 3.94 points short, and there are three places those points can come "
+      + "from.</b> They do not overlap, so they can be added:"
+      + "<br>&nbsp;&nbsp;<b>1. Rural turnout</b> — the 239 smallest counties, which "
+      + "produce 1,199,649 net Republican votes. Every 1% of their turnout that does not "
+      + "show up is worth <b>0.12</b> statewide points."
+      + "<br>&nbsp;&nbsp;<b>2. The unaffiliated bloc</b> in the six big non-white "
+      + "counties — 1,794,952 ballots. Every point it breaks Democratic above even "
+      + "is worth <b>0.35</b> points."
+      + "<br>&nbsp;&nbsp;<b>3. Hispanic voters everywhere else</b> — the border, the "
+      + "white-majority metros, rural Hispanic voters, and the Hispanic voters in those "
+      + "six counties who <i>do</i> vote in primaries. That is 2,470,849 people, 81% of "
+      + "all Texas Hispanic voters, and every point of margin among them is worth "
+      + "<b>0.24</b> points."
+      + "<br><br><b>Any one of them could do it alone, but only by moving a long way:</b> "
+      + "rural turnout down <b>34%</b>, or the bloc at <b>61.2%</b>, or Hispanic voters "
+      + "elsewhere <b>16.3 points</b> better than the polls assume. Only the second of "
+      + "those is something the evidence actually supports."
+      + "<br><br><b>Moving all three a little is far easier than moving one a lot.</b> "
+      + "Rural down 5%, the bloc at 58%, and Hispanic voters elsewhere 4 points better "
+      + "puts her at <b>D+0.43</b> — and none of those three is a dramatic "
+      + "assumption on its own. That is the realistic path, and it is why her race is "
+      + "live despite needing nearly four points."
+      + "<br><br><b>The single most likely version needs nothing from the other two.</b> "
+      + "If the bloc simply mirrors each county the way it demonstrably mirrors Tarrant, "
+      + "it breaks 61.1% and she is at <b>R+0.04</b> — dead even — with rural "
+      + "turnout unchanged and Hispanic voters exactly where the polls already put them. "
+      + "Add the measured bias correction and she is at D+0.45."
+      + "<br><br><b>And none of it touches the Senate race.</b> Talarico clears his floor "
+      + "in every row of both tables and at every point on the chart. This page is a map "
+      + "of her race only.");
   }
 
   function conclusionCard() {
@@ -3530,7 +3545,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["bnd", "tx_boundary.csv"], ["vec", "tx_three_vectors.csv"], ["tri", "tx_triangulate.csv"], ["nmirror", "tx_neither_mirror.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["tw", "tx_three_way.csv"], ["bnd", "tx_boundary.csv"], ["vec", "tx_three_vectors.csv"], ["tri", "tx_triangulate.csv"], ["nmirror", "tx_neither_mirror.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {

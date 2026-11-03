@@ -1464,7 +1464,7 @@
       var lo = -40, hi = 25;
       var wide = !NARROW;
       var W = wide ? 760 : 360, L = wide ? 150 : 8, R = wide ? 92 : 8;
-      var ROW = wide ? 34 : 46, T = 34;
+      var ROW = wide ? 34 : 46, T = 52;
       var Hh = T + P.length * ROW + (wide ? 10 : 16);
       var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R); };
       s1 = svg(W, Hh, "Tarrant County: every commissioner precinct moved toward the "
@@ -1504,8 +1504,8 @@
           s1 += txt(W - 8, y + 14, "moved " + mgn(mv, 1), "tk", "end");
         }
       });
-      s1 += txt(L, T - 30, "hollow dot: 2022 early and mail", "lgd")
-          + txt(W - R, T - 30, "solid dot: 2026 so far", "lgd", "end");
+      s1 += txt(L, 14, "hollow dot: 2022 early and mail", "lgd")
+          + txt(W - R, 14, "solid dot: 2026 so far", "lgd", "end");
       s1 += "</svg>";
     }
 
@@ -1575,6 +1575,69 @@
       + "ballot is not a November vote, and the large 2026 Democratic primary makes every "
       + "2026 group look more Democratic on this measure.”</i> The lean column above "
       + "is a primary-registration lean, not a vote.");
+  }
+
+  /* The out-of-state check on the whole mechanism, from Sam Atwood's The Midterm Exam
+     (31 October). Everything else in this chapter is Texas looking at itself; this is the
+     same engagement gap measured in a state that publishes party registration, which
+     Texas does not. It is here rather than in the polls chapter because it is turnout
+     data, not opinion data.
+
+     No chart is drawn from it. The piece carries three charts and all three are images
+     whose underlying numbers it does not publish - it states figures in prose instead,
+     and those are what is quoted here. Drawing a bar chart from a partially quoted
+     series would be inventing the parts nobody published. */
+  function propensityCard() {
+    var R = (D.prop || []).map(function (r) {
+      return {f: r.finding, a: r.y2024, b: r.y2026, src: r.source};
+    }).filter(function (r) { return r.b; });
+    if (!R.length) return "";
+    var tbl = '<div class="scroll"><table class="txtbl"><thead><tr>'
+      + "<th>North Carolina, through 30 October</th><th>At this point in 2024</th>"
+      + "<th>2026</th><th>Source</th></tr></thead><tbody>"
+      + R.map(function (r) {
+          return "<tr><td>" + esc(r.f) + '</td><td class="num dim">' + esc(r.a || "—")
+            + '</td><td class="num">' + esc(r.b) + '</td><td class="dim">' + esc(r.src)
+            + "</td></tr>";
+        }).join("")
+      + "</tbody></table></div>";
+    return card("tx-propensity", "Section 3 · slide 4 · the same gap, out of state",
+      "The same engagement gap, in a state that publishes party registration",
+      "<b>Source: Sam Atwood, The Midterm Exam, 31 October, reporting Votehub, Carolina "
+      + "Forward and others.</b> Texas has no party registration, so every Texas number on "
+      + "this tab infers party from a primary ballot. North Carolina registers by party, "
+      + "which makes it the cleanest place to check whether the engagement gap is real or "
+      + "an artefact of how Texas has to be measured. The numbers below are the ones his "
+      + "piece states in prose; its charts are images whose underlying series it does not "
+      + "publish, so none is redrawn here.",
+      tbl,
+      "<b>The 2024 pattern has reversed.</b> His framing: <i>“In 2024, one of the "
+      + "reasons why Trump won was his campaign’s ability to persuade and motivate "
+      + "‘low-propensity voters’ … This year, a problem is emerging for "
+      + "Republicans: the shoe is on the other foot. So far it’s Democrats who are "
+      + "turning out their low-propensity voters at a higher rate than Republicans.”</i>"
+      + "<br><br><b>What 2024 looked like, for scale.</b> <i>“It’s estimated that "
+      + "people who didn’t vote in 2020 voted for Trump over Harris in 2024 by a "
+      + "margin of roughly 55% to 41%. Those voters made up over 10% of the electorate. By "
+      + "comparison, those who voted in 2018, 2020, and 2022 (high-propensity) were split "
+      + "almost evenly (Trump 50%, Harris 48%).”</i> The group that delivered 2024 is "
+      + "the group not showing up now."
+      + "<br><br><b>Why it is not solved by election day.</b> <i>“It’s very "
+      + "likely that both parties’ high-propensity voters are going to end up voting, "
+      + "at some point. But that alone won’t be enough to win. Both parties need "
+      + "lower-propensity voters, too. They’re the ones who may not show up; "
+      + "that’s kind of their thing. Right now, the Democratic ones are showing up "
+      + "more than the Republican ones.”</i>"
+      + "<br><br><b>His own caution, kept.</b> <i>“North Carolina may be an outlier "
+      + "in terms of how dismal these numbers look for Republicans; maybe other states are "
+      + "a bit better. And as is the case with all early vote analysis, there’s still "
+      + "time for Republicans to solve this problem, with Election Day itself still to "
+      + "come.”</i> He opens the piece with <i>“it’s generally a bad idea to "
+      + "over-analyze early voting data”</i>. It is one state, and it is not Texas."
+      + "<br><br><b>Why it belongs on a Texas tab.</b> Morris reaches the same conclusion "
+      + "from Texas, Georgia and North Carolina together, and his comparison is the one "
+      + "that matters here: an engagement gap <i>“that exceeds the party’s "
+      + "advantage in 2018”</i> — the year Texas came within R+2.57.");
   }
 
   /* The Morris gradient is the single biggest external input to this model: it is what
@@ -2097,7 +2160,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["prop", "tx_propensity.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {
@@ -2169,6 +2232,7 @@
         + tarrantCard()
         + tarrantSwingCard()
         + morrisCard()
+        + propensityCard()
         + historyCard()
 
         + framing("tx-frame-hisp", "Section 4 \u00b7 the Hispanic vote",

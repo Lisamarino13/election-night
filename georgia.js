@@ -39,6 +39,8 @@
   // file), then ONLY the measured racial composition changed to 2026's counts. Black
   // share of the early electorate 26.34% -> 32.38%. Black-D support 86% to 92%.
   var BANK_LO = 161272, BANK_HI = 190201;
+  // 2020's early baseline, by a wholly different route, lands at +200,112 - see ga-methods.
+  var BANK_2020 = 200112;
   var TOT = EV + EDAY;
   function bar(net) { return (net / EDAY * 100).toFixed(2); }
   var MAIL26 = 129773, INPERSON26 = 2705120;
@@ -198,6 +200,46 @@
       + "Republican counties grew <b>+9.0%</b> against Democratic counties&rsquo; "
       + "<b>+15.6%</b>, and the R share of the early vote fell from <b>43.0% to "
       + "41.6%</b>. Real, but small next to the lead already banked.");
+  }
+
+  /* =============================================================== 2b. the ladder */
+  function methodsCard() {
+    var rows = [
+      {c: ["2024 president, overall county margin", n0(73391), "R+5.65",
+           "composition-blind"]},
+      {c: ["2020 president, overall county margin", n0(90397), "R+6.95",
+           "composition-blind"]},
+      {c: ["2024 president, early-vote margin", n0(95199), "R+7.32", "<b>floor</b>"]},
+      {c: ["2018 governor, early-vote margin", n0(106570), "R+8.20", "<b>floor</b>"]},
+      {em: 1, c: ["<b>Composition-calibrated to 2024&rsquo;s real margin</b>",
+                  "<b>" + n0(BANK_LO) + "&ndash;" + n0(BANK_HI) + "</b>",
+                  "<b>R+12.41&ndash;14.63</b>", "<b>counts the measured shift</b>"]},
+      {c: ["2020 president, early-vote margin", n0(BANK_2020), "R+15.39",
+           "inflated by pandemic mode-sorting"]}
+    ];
+    return card("ga-methods", "Section 2 &middot; slide 2",
+      "Every way we can measure the banked lead, and what each one misses",
+      "Same 2,834,892 ballots. The spread is the honest uncertainty.",
+      tbl(["method", "net D banked", "R needs on 1.3M", "what it is"], rows)
+      + '<p class="gainline"><b>The four geography-only rows cluster near 100,000 for one '
+      + "reason: they all freeze each county&rsquo;s internal margin at a past year.</b> "
+      + "And the counties barely move &mdash; Fulton ran D+47.3, D+48.9 and D+45.8 in "
+      + "2018, 2020 and 2024; DeKalb D+73.7, D+71.2, D+68.8. <b>Georgia&rsquo;s county "
+      + "geography is not what changed this cycle.</b></p>"
+      + '<p class="gainline"><b>What changed is who turned up inside those counties.</b> '
+      + "The Black share of the early electorate went from 26.34% to 32.38% and the white "
+      + "share fell 5.39 points &mdash; counts from the state&rsquo;s own file. The two "
+      + "rows that price that in, by completely different routes, land at <b class='nm'>"
+      + n0(BANK_LO) + "&ndash;" + n0(BANK_HI) + "</b> and <b class='nm'>" + n0(BANK_2020)
+      + "</b>.</p>",
+      "<b>Why 2020 is listed but not used as the headline.</b> Its early margin ran D+5.79 "
+      + "while its election day ran R+23.09 &mdash; the pandemic sorted Democrats into "
+      + "early voting to a degree no other cycle matches. The size of that distortion is "
+      + "visible in this table: 2020&rsquo;s <i>early</i> margin gives " + n0(BANK_2020)
+      + " but its <i>overall</i> margin gives only " + n0(90397)
+      + ", a gap of about 110,000 votes from mode sorting alone. It corroborates the top "
+      + "of the headline range rather than setting it. <b>All three county files &mdash; "
+      + "2018, 2020, 2024 &mdash; tie out to their certified statewide results.</b>");
   }
 
   /* =============================================================== 3. the regime */
@@ -404,7 +446,7 @@
   window.renderGeorgia = function (host) {
     SECTIONS = [];
     var body = thesis() + bankedCard() + historyCard() + compCard()
-      + regimeCard() + barCard() + validCard() + turnoutCard() + limitsCard();
+      + methodsCard() + regimeCard() + barCard() + validCard() + turnoutCard() + limitsCard();
     var jump = '<div class="gajump">' + SECTIONS.map(function (s) {
       return '<a href="#' + s.id + '">' + esc(s.title) + "</a>";
     }).join("") + "</div>";

@@ -2729,7 +2729,7 @@
       s2 += line(xs(t), T, xs(t), H - Bm, "gl")
          + txt(xs(t), H - Bm + 18, mgn(t, 0), "tk", "middle");
     }
-    s2 += txt(L, H - 12, "the Hispanic margin → more Democratic to the left", "lgd");
+    s2 += txt(L, H - 12, "← less Democratic        the Hispanic margin        more Democratic →", "lgd");
     s2 += txt(0, T - 14, "statewide margin", "lgd");
     // every measured Hispanic figure, stacked above the plot on the same axis
     MK.sort(function (a, b) { return a.v - b.v; });

@@ -65,6 +65,11 @@ fi
 # --- cron -----------------------------------------------------------------------------
 DAILY="12 * * * * $FLOCK $REPO_DIR/collectors/run_all.sh >> $LOG 2>&1; $REPO_DIR/collectors/publish.sh >> $LOG 2>&1"
 NIGHT="#7,37 * * * * $FLOCK $REPO_DIR/collectors/run_all.sh >> $LOG 2>&1; $REPO_DIR/collectors/publish.sh >> $LOG 2>&1   # election night: uncomment Nov 3"
+# The RESULTS collectors had no cron line at all. run_results.sh documents its own
+# cadence in its header and nothing ever installed it, so every results collector
+# could be perfect and the board would still never see a vote. Its own line, because
+# the cadence is minutes rather than hours.
+RESULTS="*/3 * * * * $REPO_DIR/collectors/run_results.sh >> $LOG 2>&1; $REPO_DIR/collectors/publish.sh >> $LOG 2>&1   # election night: uncomment Nov 3"
 # BACK UP FIRST. This box may run other people's jobs — on Lisa's cron VM it runs the
 # Dopple prune / PG-stop / session-sweep lines. Rewriting a crontab without a backup is
 # how you lose them.
@@ -74,7 +79,7 @@ if crontab -l > "$BAK" 2>/dev/null; then
 else
   echo "no existing crontab to back up"; : > "$BAK"
 fi
-( cat "$BAK" | grep -v 'election-night'; echo "$DAILY"; echo "$NIGHT" ) | crontab -
+( cat "$BAK" | grep -v 'election-night'; echo "$DAILY"; echo "$NIGHT"; echo "$RESULTS" ) | crontab -
 
 # Verify nothing else was dropped.
 BEFORE=$(grep -vc 'election-night' "$BAK" 2>/dev/null || echo 0)

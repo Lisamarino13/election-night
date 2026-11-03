@@ -45,6 +45,12 @@ UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit
       "Accept": "text/plain,*/*"}
 # Minnesota names the governor's line for the ticket, and its Democrats are the DFL.
 WANT = {"senate": "U.S. Senator", "governor": "Governor & Lt Governor"}
+# --proof against a past election: Minnesota's governor is elected in the midterm and
+# its senators in the presidential years, so no single past general carries both lines
+# in WANT. The 2024 general carries Senator plus President, which is the widest pair of
+# statewide contests with real votes, so the proof run asks for those.
+PROOF_WANT = {"senate": "U.S. Senator",
+              "president": "U.S. President & Vice President"}
 PARTY = {"DFL": "D", "R": "R", "GOP": "R"}
 NFIELDS = 16
 
@@ -105,14 +111,21 @@ def payload_stub(totals):
             "source": f"{HOST}/{ELECTION_DIR}/allracesbycounty.txt"}
 
 
-def main():
+def build(want=None):
+    """Read ELECTION_DIR and tally it. The live path and --proof both come through here.
+
+    Lifted out of main() unchanged so a proof run can point ELECTION_DIR at a past
+    election and go through exactly the same reader, cross-checks and tally the night
+    uses — a second copy of this would only prove the copy.
+    """
+    want = want or WANT
     cty = counties_table()
     allrows = rows()
     cast, cast_as_of = early_cast()
 
-    picked = {race: name for race, name in WANT.items()
+    picked = {race: name for race, name in want.items()
               if any(r[4] == name for r in allrows)}
-    missing = sorted(set(WANT) - set(picked))
+    missing = sorted(set(want) - set(picked))
     if missing:
         names = sorted({r[4] for r in allrows if "District" not in r[4]})
         raise RuntimeError(f"contest(s) {missing} not in the file; statewide names "
@@ -175,6 +188,42 @@ def main():
             "precincts_total": st_tot,
             "early_and_mail_cast": sum(cast.values()) if cast else None,
         }
+    return counties, totals, any_votes, cast_as_of
+
+
+def main():
+    # --proof <YYYYMMDD> runs the whole build against a PAST Minnesota election, where
+    # the votes are real. Proving it against tonight's directory proves only that the
+    # structure parses: every total is zero until polls close, so the vote-reading path
+    # would be untested at the moment it matters. It returns before write_or_hold, so a
+    # proof run never writes a results file.
+    if "--proof" in sys.argv:
+        global ELECTION_DIR
+        i = sys.argv.index("--proof")
+        if len(sys.argv) <= i + 1:
+            raise RuntimeError("--proof needs an election directory, e.g. --proof 20241105")
+        ELECTION_DIR = sys.argv[i + 1]
+        counties, totals, any_votes, _ = build(PROOF_WANT)
+        print(f"MN proof via {ELECTION_DIR}: {len(counties)} counties")
+        for race, t in totals.items():
+            print(f"   {race}: {t['total']:,} votes  no mode split (Minnesota folds "
+                  f"absentee into the precinct)  precincts "
+                  f"{t['precincts_reporting']:,}/{t['precincts_total']:,}")
+            print(f"      contest {t['contest_name']!r}")
+            for c, v in list(t["choices"].items())[:4]:
+                print(f"      {c[:38]:40} {v:>10,}  {t['parties'].get(c)}")
+            tie = sum(t["choices"].values())
+            print(f"      candidate sum {tie:,} vs race total {t['total']:,} — "
+                  f"{'TIES' if tie == t['total'] else 'DOES NOT TIE'}")
+        big = sorted(counties.items(),
+                     key=lambda x: -max(r["counted"] for r in x[1]["races"].values()))[:3]
+        for nm, rec in big:
+            r = list(rec["races"].values())[0]
+            print(f"   {nm}: {r['counted']:,} counted, "
+                  f"{r['precincts_reporting']}/{r['precincts_total']} precincts")
+        return 0
+
+    counties, totals, any_votes, cast_as_of = build()
 
     if not any_votes:
         # The ballot is known even though the votes are all zero, and the gate never

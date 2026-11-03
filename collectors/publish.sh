@@ -17,7 +17,11 @@ cd "$(dirname "$0")/.." || exit 1
 
 # Everything run_all.sh produces. demographics-*.json was added to the pull on 10-22 and
 # never added here, so it was neither saved before the branch move nor pushed after it.
-PATHS="data/early-*.json data/ev-history-*.json data/trend-ev.json data/snapshots data/demographics-*.json data/last-run.json data/tie-out.json"
+# data/results*.json and data/candidates-*.json were missing from this list, so the
+# election-night collectors could run, write their files, and publish NOTHING. The
+# board reads data/results.json; results-<ST>.json is each collector's own output;
+# candidates-<ST>.json is the ballot, which is written even before polls close.
+PATHS="data/early-*.json data/ev-history-*.json data/trend-ev.json data/snapshots data/demographics-*.json data/last-run.json data/tie-out.json data/results.json data/results-*.json data/candidates-*.json"
 
 # A HEARTBEAT, written every run whether or not the data moved. Without one, a cron
 # that dies is indistinguishable from a cron with nothing new to say: both leave the

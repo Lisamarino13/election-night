@@ -39,10 +39,12 @@ as of writing: the newest election in the list is 25 August 2026. Any other prob
 raises and writes nothing.
 """
 import collections
+import concurrent.futures
 import json
 import pathlib
 import re
 import sys
+import time
 import urllib.request
 from datetime import datetime, timezone
 
@@ -207,12 +209,35 @@ def build():
     elec = state_data.get("election") or {}
     feed_ts = elec.get("asOf") or elec.get("lastUpdated") or ""
 
+    # 159 counties fetched one after another took about 7 minutes - 75% of the whole
+    # election-night run, and it set the cadence for every other state. The requests are
+    # independent, so they go out together. Six at a time is deliberate: enough to turn
+    # 7 minutes into about one, gentle enough not to look like an attack on the
+    # Secretary of State's API on the night it matters most. Any single county failing
+    # still raises exactly as before - a partial Georgia is never published.
+    # One transient reset on one county used to kill the whole Georgia pull, because a
+    # partial Georgia is never published. At six concurrent requests that happened about
+    # one run in three, which on the night would mean Georgia going dark for a tick for
+    # no reason. Three tries with a short backoff; still raises if a county is genuinely
+    # unreachable, so the all-or-nothing guarantee is unchanged.
+    def fetch(cname):
+        last = None
+        for attempt in range(3):
+            try:
+                return cname, get(f"{API}/elections/{county_slug(cname)}/{eid}/data",
+                                  timeout=60)
+            except Exception as exc:
+                last = exc
+                if attempt < 2:
+                    time.sleep(1.5 * (attempt + 1))
+        raise RuntimeError(f"{cname}: {last}") from last
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+        fetched = dict(pool.map(fetch, sorted(roster)))
+
     counties = {}
     for cname in sorted(roster):
-        try:
-            cd = get(f"{API}/elections/{county_slug(cname)}/{eid}/data", timeout=60)
-        except Exception as exc:
-            raise RuntimeError(f"{cname}: {exc}") from exc
+        cd = fetched[cname]
         items, _ = contests_of(cd, cname)
         meta = roster[cname]
         out = {}

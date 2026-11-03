@@ -10,7 +10,7 @@
 # which is the expected answer every day until the feeds go live, not a failure.
 cd "$(dirname "$0")" || exit 1
 LOG="results.log"
-LOCKDIR="${TMPDIR:-/tmp}/election-night-results.lock"
+LOCKDIR="${TMPDIR:-/tmp}/election-night-results-${1:-all}.lock"
 if ! mkdir "$LOCKDIR" 2>/dev/null; then
   if [ -f "$LOCKDIR/pid" ] && ! kill -0 "$(cat "$LOCKDIR/pid" 2>/dev/null)" 2>/dev/null; then
     rm -rf "$LOCKDIR"; mkdir "$LOCKDIR" 2>/dev/null || exit 0
@@ -35,7 +35,26 @@ ok=0; pending=0; failed=0
 # the cron host hasn't got: maine.gov refuses its datacenter IP, and Kansas sits behind
 # a Cloudflare browser challenge that only a real windowed Chrome clears. Both exit 2
 # there and are run from the laptop instead.
-for c in nc_results.py oh_results.py fl_results.py tx_results.py la_results.py ak_results.py ne_results.py mn_results.py ga_results.py clarity_results.py me_results.py ks_results.py; do
+# Georgia costs 160 sequential requests (statewide + all 159 counties) and takes about
+# 7 minutes of a 9-minute run - 75% of it. Kansas sits behind a WAF and takes a minute
+# when it works at all. Both drag the cadence for every other state, so the runner takes
+# an optional list of collectors and the cron gives the slow ones their own line:
+#
+#   */3  * * * *  run_results.sh fast      the ten quick ones, ~140s
+#   */8  * * * *  run_results.sh ga        Georgia alone, ~7min
+#   */15 * * * *  run_results.sh ks        Kansas alone, laptop only
+#
+# No argument runs everything, exactly as before.
+FAST="nc_results.py oh_results.py fl_results.py tx_results.py la_results.py ak_results.py ne_results.py mn_results.py clarity_results.py me_results.py"
+ALL="$FAST ga_results.py ks_results.py"
+case "${1:-all}" in
+  fast) SET="$FAST" ;;
+  ga)   SET="ga_results.py" ;;
+  ks)   SET="ks_results.py" ;;
+  all)  SET="$ALL" ;;
+  *)    SET="$*" ;;
+esac
+for c in $SET; do
   [ -f "$c" ] || { say "SKIP $c"; continue; }
   out=$("$PY" "$c" 2>&1); rc=$?
   printf '%s\n' "$out" >> "$LOG"

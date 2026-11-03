@@ -3284,8 +3284,14 @@
     });
     [50, 55, 60, 65, 70].forEach(function (t) {
       s += line(xs(t), T, xs(t), H - Bm, "gl")
-         + txt(xs(t), H - Bm + 18, t + "%", "tk", "middle");
+         + txt(xs(t), H - Bm + 18, t + "%", "tk", "middle")
+         // the SAME axis in Hispanic units: one point of break is 1.183 points of
+         // Hispanic margin, anchored where both equal the polls' own baseline. The
+         // Hispanic lever is not a third axis, it is this one relabelled.
+         + txt(xs(t), H - Bm + 34, "D+" + (22.95 + (t - 50) * 1.183).toFixed(0), "sub",
+               "middle");
     });
+    s += txt(L - 8, H - Bm + 34, "or", "sub", "end");
     // the region she wins, and the boundary itself
     var pts = BD.filter(function (r) { return r.n >= lo && r.n <= hi; });
     var poly = pts.map(function (r) { return xs(r.n) + "," + ys(r.c); }).join(" ");
@@ -3324,18 +3330,16 @@
        her alone?" is a different question from "do they add up?" and only the second
        has the overlap problem. */
     var V = (D.vec || []).map(function (r) {
-      return {v: r.vector, n: r.needs_alone, o: r.observed_range, verdict: r.verdict,
-              why: r.why};
+      return {v: r.vector, n: r.needs_alone, o: r.observed_range, verdict: r.verdict};
     }).filter(function (r) { return r.n; });
     var vecTbl = V.length ? ('<div class="scroll"><table class="txtbl"><thead><tr>'
-      + "<th>Vector</th><th>What it needs on its own</th><th>What has been observed</th>"
-      + "<th>Can it carry her alone?</th></tr></thead><tbody>"
+      + "<th>Vector</th><th>Needs alone</th><th>Observed</th>"
+      + "<th>Carries her alone?</th></tr></thead><tbody>"
       + V.map(function (r) {
           var ok = r.verdict === "yes";
-          return "<tr><td><b>" + esc(r.v) + '</b><br><span class="dim">' + esc(r.why)
-            + '</span></td><td class="num"><b>' + esc(r.n) + '</b></td><td class="dim">'
-            + esc(r.o) + '</td><td class="' + (ok ? "dem" : "rep") + '"><b>'
-            + esc(r.verdict) + "</b></td></tr>";
+          return "<tr><td><b>" + esc(r.v) + '</b></td><td class="num"><b>' + esc(r.n)
+            + '</b></td><td class="dim">' + esc(r.o) + '</td><td class="'
+            + (ok ? "dem" : "rep") + '"><b>' + esc(r.verdict) + "</b></td></tr>";
         }).join("") + "</tbody></table></div>") : "";
     return card("tx-levers", "Section 4 · slide 4 · all three together",
       "Three vectors, one of which can carry her alone",
@@ -3377,15 +3381,15 @@
       + "rather than 6,868,411 — cuts each point of break from 0.58 statewide points "
       + "to 0.352, and moves her requirement to 61.2%. The correction is the right one "
       + "and it runs against her."
-      + "<br><br><b>And the Hispanic vote is not a third lever, which is the thing most "
-      + "likely to be got wrong.</b> Hispanic voters sit <i>inside</i> the Neither bloc "
-      + "and <i>inside</i> those six counties. Adding Section 4 slide 1&rsquo;s "
-      + "requirement on top of this grid counts the same ballots twice. The honest "
-      + "reading: rural and Neither are the two independent levers, and the Hispanic "
-      + "margin is the main <i>mechanism</i> by which the Neither bloc breaks above even. "
-      + "The exchange rate between the two ways of saying it: one point of Hispanic "
-      + "margin is worth about <b>0.85 points</b> of Neither break, because 0.2976 "
-      + "divided by 0.352 is 0.845. They are two descriptions of one movement."
+      + "<br><br><b>And the Hispanic lever is the same axis, relabelled.</b> It is not a "
+      + "third dimension and cannot be added: Hispanic voters sit <i>inside</i> the "
+      + "unaffiliated bloc and inside those six counties. One point of bloc break is "
+      + "worth <b>1.183 points</b> of Hispanic margin, so the bottom row of the "
+      + "horizontal axis is the same line read in Hispanic units. The two meet where you "
+      + "would expect: a 61.2% break and a D+36.2 Hispanic margin are the same point, "
+      + "and D+36.15 is exactly the Hispanic threshold Section 4 slide 2 derives "
+      + "independently. The Hispanic margin is the <i>mechanism</i> by which the bloc "
+      + "breaks above even, not extra votes on top of it."
       + "<br><br><b>And none of this touches the Senate race.</b> Talarico clears his "
       + "threshold on the unchanged row at the historical break, and there is no cell on "
       + "this grid where he loses. It is a map of her race only.");

@@ -370,7 +370,7 @@
       }).join("");
     }).join("");
 
-    return card("tx-modes", "Section 2 · slide 5 · what election day does to it",
+    return card("tx-modes", "Section 2 · slide 8 · what election day does to it",
       "What election day does to the banked vote",
       "Texas banks three quarters of its vote before election day, so the question is "
       + "simply how far the last quarter moves the first three. Blue dot is the banked "
@@ -417,7 +417,7 @@
       return "<tr><td>D+" + n0(lead) + '</td><td class="num">' + mgn(tie)
         + '</td><td class="num">' + (50 + tie / 2).toFixed(2) + "%</td>" + cells + "</tr>";
     }).join("");
-    return card("tx-banked", "Section 5 · slide 3 · the banked lead",
+    return card("tx-banked", "Section 4 · slide 3 · the banked lead",
       "What election day would have to do",
       "Read down to the banked lead Texas reports, then across to the election-day margin "
       + "you find plausible. Election day is only " + ((1 - SHARE) * 100).toFixed(1)
@@ -638,7 +638,7 @@
       s += txt(xs(r.m) + (r.m < 0 ? -8 : 8), y + 4, mgn(r.m), "vl", r.m < 0 ? "end" : "start");
     });
     s += "</svg>";
-    return card("tx-est", "Section 3 · slide 1 · where every estimate lands",
+    return card("tx-est", "Section 1 · slide 1 · where every estimate lands",
       "Where every estimate lands",
       "Fifteen estimates spanning eleven points and straddling zero. They do not "
       + "disagree randomly: nearly every one is the same arithmetic with a different "
@@ -692,7 +692,7 @@
     s2 += txt(L, H - 6, "Blue = Democratic ballots, red = Republican; the two shares sum to "
               + "100. Bottom row is the November margin that followed.", "lgd");
     s2 += "</svg>";
-    return card("tx-primary", "Section 1 · slide 1 · what actually changed",
+    return card("tx-primary", "Section 2 · slide 1 · what actually changed",
       "Democratic share of the Texas primary",
       "Texas runs an open primary \u2014 you declare at the poll and nothing binds you "
       + "before or after. In March 2026 Democratic turnout more than doubled from 2022, to "
@@ -848,7 +848,7 @@
             + (r.stronger === "2026" ? "2026 higher" : r.stronger === "tie" ? "same" : "")
             + "</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
-    return card("tx-primfit", "Section 1 · slide 2 · what the primary implies",
+    return card("tx-primfit", "Section 2 · slide 2 · what the primary implies",
       "2026 is an outlier, and that is the finding",
       "<b>Do not read this as a line with a dot at the end.</b> 2026 sits outside the "
       + "range of every prior cycle on every primary measure there is \u2014 that is not a "
@@ -909,7 +909,7 @@
             + (r.as ? "<br>" + esc(r.as) : "") + "</td></tr>";
         }).join("")
       + "</tbody></table></div>";
-    return card("tx-2026-only", "Section 1 · slide 3 · why 2018 is a floor",
+    return card("tx-2026-only", "Section 2 · slide 3 · why 2018 is a floor",
       "2018 had the backlash. 2026 has the backlash and then some",
       "The primary card uses 2018 as the comparison because it is the last Texas midterm "
       + "run against a Trump backlash, and because 2026 is stronger than it on every "
@@ -963,7 +963,7 @@
                r.now < 0 ? "end" : "start");
     });
     s += "</svg>";
-    return card("tx-base", "Section 3 · slide 6 · why the methods disagree",
+    return card("tx-base", "Section 1 · slide 6 · why the methods disagree",
       "Seven starting points, each with its own swing",
       "Take any past Texas result, add the national swing from <i>that</i> year to this "
       + "year&rsquo;s generic ballot of <b>D+8.5</b>, and see where Texas lands. The "
@@ -992,7 +992,7 @@
         + '</td><td class="num">' + (r.gov > 0 ? "D+" : "R+") + Math.abs(r.gov).toFixed(1)
         + '</td><td class="num dem">+' + r.drag.toFixed(2) + "</td></tr>";
     }).join("");
-    return card("tx-paxton", "Section 3 · slide 5 · the part that is not the electorate",
+    return card("tx-paxton", "Section 1 · slide 5 · the part that is not the electorate",
       "Senate against governor, same pollster",
       "Four pollsters asked about both races in the same field period with the same "
       + "sample, so house effects cancel in the difference. What is left is the candidate.",
@@ -1093,7 +1093,7 @@
                (capped || none) ? "sub" : "vl", "end");
     });
     s += "</svg>";
-    return card("tx-eth", "Section 4 · slide 1 · where each demographic sits",
+    return card("tx-eth", "Section 3 · slide 1 · where each demographic sits",
       "Where each demographic is, and where the model needs it",
       "Hollow dot is 2024 measured — counted ballots in precincts overwhelmingly one "
       + "demographic by voting-age population, not a poll. Filled dot is the 2026 "
@@ -1151,7 +1151,7 @@
             + '</td><td class="num ' + (r.m < 0 ? "dem" : "rep") + '">' + mgn(r.m, 0)
             + "</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
-    return card("tx-polltrust", "Section 3 · slide 2 · how much the polls are worth",
+    return card("tx-polltrust", "Section 1 · slide 2 · how much the polls are worth",
       "What Texas polls have been worth, and whether they are moving",
       "Two questions about weighting the poll evidence rather than adding to it: how "
       + "wrong final Texas polls have been before, and whether these five are drifting.",
@@ -1205,7 +1205,7 @@
     var ind = E.filter(function (r) { return r.g === "Independents"; })[0];
     var lm = E.filter(function (r) { return r.g === "Latino men"; })[0];
     var lw = E.filter(function (r) { return r.g === "Latina women"; })[0];
-    return card("tx-exit", "Section 3 · slide 4 · the 2024 baseline, measured",
+    return card("tx-exit", "Section 1 · slide 4 · the 2024 baseline, measured",
       "What the 2024 Texas exit poll actually found",
       "<b>Source: the 2024 Texas presidential exit poll.</b> Every assumption on this tab "
       + "is a claim about how some group moves from 2024. This is the only measurement of "
@@ -1268,7 +1268,7 @@
     var nv = R.filter(function (r) { return /NOT vote/.test(r.g); })[0];
     var hisp = R.filter(function (r) { return r.g === "Hispanic"; })[0];
     var twoWay = ind ? (ind.ad / (ind.ad + ind.ar) * 100) : null;
-    return card("tx-xtab", "Section 3 · slide 3 · what the crosstabs say",
+    return card("tx-xtab", "Section 1 · slide 3 · what the crosstabs say",
       "The two final polls, group by group",
       "<b>Sources: the released YouGov and AtlasIntel toppers.</b> Hollow dot is YouGov "
       + "(2,141 likely voters, 26\u201329 October), filled dot is AtlasIntel (1,678, "
@@ -1468,7 +1468,7 @@
       + '<td class="num rep">R+5.1</td></tr>'
       + "</tbody></table></div>") : "";
 
-    return card("tx-tarrant", "Section 2 · slide 1 · the one county we can see",
+    return card("tx-tarrant", "Section 2 · slide 4 · the one county we can see",
       "Tarrant County, the only place we can see the 2026 electorate",
       "<b>Source: Chris Tackett, See It. Name It. Fight It., 31 October, on the Tarrant "
       + "County early-vote file.</b> <i>\u201cOver twelve days, 571,950 Tarrant County "
@@ -1623,7 +1623,7 @@
         }).join("")
       + "</tbody></table></div>") : "";
 
-    return card("tx-tarrant-swing", "Section 2 · slide 2 · who is in each camp",
+    return card("tx-tarrant-swing", "Section 2 · slide 5 · who is in each camp",
       "The Neither voters look like Tarrant County",
       "<b>Source: Chris Tackett, See It. Name It. Fight It., 31 October — his table.</b> "
       + "The first chart showed how big the three camps are. This one shows who is in "
@@ -1700,7 +1700,7 @@
             + "</td></tr>";
         }).join("")
       + "</tbody></table></div>";
-    return card("tx-propensity", "Section 2 · slide 4 · the same gap, out of state",
+    return card("tx-propensity", "Section 2 · slide 7 · the same gap, out of state",
       "The same engagement gap, in a state that publishes party registration",
       "<b>Source: Sam Atwood, The Midterm Exam, 31 October, reporting Votehub, Carolina "
       + "Forward and others.</b> Texas has no party registration, so every Texas number on "
@@ -1839,7 +1839,7 @@
             + "%</td></tr>";
         }).join("") + "</tbody></table></div>") : "";
 
-    return card("tx-morris", "Section 2 · slide 3 · the engagement gap",
+    return card("tx-morris", "Section 2 · slide 6 · the engagement gap",
       "What Morris found in Harris County",
       "<b>Source: G.&nbsp;Elliott Morris, Strength In Numbers \u2014 his chart, his "
       + "tiers.</b> <i>\u201cShare of 2024 early in-person voters who have voted early or "
@@ -1941,7 +1941,7 @@
       var ms = h.map(function (r) { return num(r.margin_R); });
       spread = Math.abs(Math.max.apply(null, ms) - Math.min.apply(null, ms)).toFixed(1);
     }
-    return card("tx-prec", "Section 4 · slide 2 · two different electorates",
+    return card("tx-prec", "Section 3 · slide 2 · two different electorates",
       "The same group, two different electorates",
       "Precincts that are overwhelmingly one group in 2024, split by where they are. "
       + "The first block is the one that matters for this model: Hispanic precincts on "
@@ -1978,7 +1978,7 @@
       s += txt(L + w + 8, y + 20, r.mv.toFixed(2), "vl");
     });
     s += "</svg>";
-    return card("tx-vol", "Section 4 · slide 3 · what moves, and what it weighs",
+    return card("tx-vol", "Section 3 · slide 3 · what moves, and what it weighs",
       "Why South Texas matters",
       "Average absolute change in county margin across 2018 to 2020 to 2022 to 2024, "
       + "weighted by projected 2026 turnout, with each group&rsquo;s share of the vote.",
@@ -2073,7 +2073,7 @@
         + n0(PROJ.banked) + " who have already voted. For scale, the whole race needs "
         + n0(305279) + " net new Democratic votes to erase 2024.</p>";
     }
-    return card("tx-watch", "Section 5 · slide 1 · what is already banked",
+    return card("tx-watch", "Section 4 · slide 1 · what is already banked",
       "What we think is already banked, and where it came from",
       "Texas has no party registration, so nobody can count the banked lead \u2014 this "
       + "is an inference. It is built from the one thing that <i>is</i> known: which "
@@ -2109,7 +2109,7 @@
       s += txt(L + w + 8, y + 13, n0(r.gain), "vl");
     });
     s += "</svg>";
-    return card("tx-gain", "Section 5 · slide 2 · where the votes have to come from",
+    return card("tx-gain", "Section 4 · slide 2 · where the votes have to come from",
       "Net Democratic gain by county",
       "What the model adds to each county versus its 2024 Senate result. The total needed "
       + "to erase R+5.98 is " + n0(305279) + "; the model produces " + n0(tot) + ".",
@@ -2288,28 +2288,10 @@
         + readCard(L)
         + methodsCard()
 
-        + framing("tx-frame-primary", "Section 1 \u00b7 the primary",
-            "Start with what has already been counted",
-            ["Texas runs an open primary, so it is the one measure where a voter declares a side with no pollster in the room \u2014 and it is the first instalment of this election that was actually counted rather than estimated. It went Democratic <b>51.70%</b>, the first midterm majority of the modern era, on turnout up 48.1% from 2022, with the Democratic half of it more than doubling.",
-             "Fitted against seven cycles of Texas Novembers, that figure implies a race between D+1.57 and R+1.66 \u2014 in a state whose last three statewide cycles averaged R+10.09. The nearest analogue is 2018, the last Texas midterm run against a Trump backlash, and 2026 is stronger than it on every primary input."])
-        + primaryCard()
-        + primaryFitCard()
-        + conditionsCard()
-
-        + framing("tx-frame-ev", "Section 2 \u00b7 the early vote",
-            "Then what is already in the box",
-            ["<b>7,734,079</b> Texans have already voted, about three quarters of the projected electorate. Texas records no party, so nobody can count that vote by side \u2014 but two counties publish who turned out, and that is as close as this gets to a measurement of the 2026 electorate rather than an inference about it.",
-             "Tarrant first, because it is the one county that publishes who is in the electorate and what they look like; then Harris, where Morris can measure which <i>kind</i> of voter is turning out; then North Carolina, which registers by party and so can check whether the pattern survives outside Texas. Last, what election day has historically done to a banked vote \u2014 which is what decides how tonight actually unfolds."])
-        + tarrantCard()
-        + tarrantSwingCard()
-        + morrisCard()
-        + propensityCard()
-        + historyCard()
-
-        + framing("tx-frame-polls", "Section 3 \u00b7 the polls",
-            "Only now, what people say they will do",
-            ["Everything above is what people have already done. This is the one section built on what they tell a stranger they intend to do, which is why it comes third rather than first \u2014 and it lands in the same place: five final polls put Talarico ahead by between one and seven, with a sixth, the only partisan house in the set, putting Paxton up one.",
-             "They are not six independent readings. The averages are built from those same polls and the forecast is a poll-of-polls built on the averages. And Texas polls have a record worth knowing before leaning on them: the famous misses are a presidential-year pattern, and the one midterm available to check was accurate to half a point."])
+        + framing("tx-frame-polls", "Section 1 \u00b7 what the polls tell us",
+            "The best guess anyone has today",
+            ["Five final polls put Talarico ahead by between one point and seven, with a sixth \u2014 the only partisan house in the set \u2014 putting Paxton up one. That is where the public conversation sits, so it is where this starts.",
+             "But they are not six independent readings. The averages are built from those same polls and the forecast is a poll-of-polls built on the averages. And Texas polls have a record worth knowing before leaning on them: the famous misses are a presidential-year pattern, and the one midterm available to check was accurate to half a point."])
         + estimatesCard()
         + pollTrustCard()
         + crosstabCard()
@@ -2317,22 +2299,31 @@
         + paxtonCard()
         + baselineCard()
 
-        + framing("tx-frame-hisp", "Section 4 \u00b7 the Hispanic vote",
+        + framing("tx-frame-primary", "Section 2 \u00b7 what the 2026 data says",
+            "But what do the votes already cast say?",
+            ["Everything above is people telling a stranger what they intend to do. The rest of this section is what they have already done \u2014 4.5 million primary ballots in March and 7.7 million early votes since, all of them counted rather than estimated.",
+             "<b>The primary first.</b> Texas runs an open primary, so it is the one measure where a voter declares a side with no pollster in the room. It went Democratic <b>51.70%</b>, the first midterm majority of the modern era, on turnout up 48.1% from 2022 with the Democratic half more than doubling. Fitted against seven cycles of Texas Novembers that implies a race between D+1.57 and R+1.66, in a state whose last three statewide cycles averaged R+10.09.",
+             "<b>Then the early vote</b>, from slide 4. Texas records no party, so nobody can count the banked vote by side \u2014 but Tarrant publishes who is in its electorate, Harris publishes which kind of voter is turning out, and North Carolina registers by party and can check whether the pattern survives outside Texas."])
+        + primaryCard()
+        + primaryFitCard()
+        + conditionsCard()
+
+        + tarrantCard()
+        + tarrantSwingCard()
+        + morrisCard()
+        + propensityCard()
+        + historyCard()
+
+        + framing("tx-frame-hisp", "Section 3 \u00b7 the Hispanic vote",
             "The one question nobody has measured",
-            ["Strip out the candidate and the baseline choice and a single question is "
-             + "left, and the whole race turns on it: <b>how far Hispanic voters move.</b>",
-             "Three facts make it harder than it sounds. The group is 29.76% of the "
-             + "projected electorate. It is not one electorate but two \u2014 the border "
-             + "and the metros sit tens of points apart and have been moving in opposite "
-             + "directions. And the border is the most volatile ground in Texas, swinging "
-             + "three times as hard per cycle as anywhere else on a twelfth of the ballots.",
-             "So there is no single Hispanic number to put in a model, which is why "
-             + "break-even is a range rather than a point."])
+            ["Strip out the candidate and the baseline choice and a single question is left, and the whole race turns on it: <b>how far Hispanic voters move.</b>",
+             "Three facts make it harder than it sounds. The group is 29.76% of the projected electorate. It is not one electorate but two \u2014 the border and the metros sit tens of points apart and have been moving in opposite directions. And the border is the most volatile ground in Texas, swinging three times as hard per cycle as anywhere else on a twelfth of the ballots.",
+             "So there is no single Hispanic number to put in a model, which is why break-even is a range rather than a point."])
         + ethCard()
         + precinctCard()
         + volCard()
 
-        + framing("tx-frame-outcomes", "Section 5 \u00b7 our model",
+        + framing("tx-frame-outcomes", "Section 4 \u00b7 our model",
             "And last, our own model",
             ["Our own model goes last, after every outside source, because it is the one thing here nobody else can check. Everything above is evidence and none of it is an answer, since every piece "
              + "stops in the same place: the electorate changed, the banked vote is most "
@@ -2348,7 +2339,7 @@
         + watchCard(L)
         + countyGainCard()
         + bankedCard()
-        + gridCard("tx-sens", "Section 5 · slide 4 · the demographic levers",
+        + gridCard("tx-sens", "Section 4 · slide 4 · the demographic levers",
             "What it takes to flip Texas",
             "Statewide margin for each pair of assumed shifts. White applies in the "
             + "fifteen largest counties only. Across the whole white axis the answer "
@@ -2360,7 +2351,7 @@
             + "Black voters is not defensible as a group-level claim and was corrected to "
             + "+2, so read every cell as about 1.6 points friendlier to Democrats than "
             + "the corrected model gives.")
-        + gridCard("tx-blocs", "Section 5 · slide 5 · the same question by bloc",
+        + gridCard("tx-blocs", "Section 4 · slide 5 · the same question by bloc",
             "What it takes, by voting bloc",
             "Independents against the Republican bloc-size edge, with Democrats holding "
             + "98% and crossover fixed at 2%. <b>Independents are 30% of the electorate, "

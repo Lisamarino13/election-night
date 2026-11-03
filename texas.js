@@ -202,10 +202,27 @@
       + "running better than the polls assume, and rural turnout coming in under. She "
       + "needs both, and neither at full size \u2014 rural down 15% <i>and</i> Hispanic "
       + "7.3 points better. That is the last slide."
-      + "<br><br>Fourteen routes to a number, from four sources that share no inputs, "
-      + 'have a median of <b class="nm">D+0.65</b> in a state whose last three statewide '
-      + "cycles averaged R+10.09. That agreement is why the race is close at all. The "
-      + "candidate is why one of the two is not.</p>"
+      + "</p>"
+      + "<p><b>We have looked at fourteen different paths to a number, and our "
+      + "conclusions are these.</b></p>"
+      + "<ol>"
+      + "<li><b>The race is close at all because the methods agree.</b> Fourteen routes, "
+      + 'from four sources that share no inputs, have a median of <b class="nm">D+0.65</b> '
+      + "in a state whose last three statewide cycles averaged R+10.09. A poll can be "
+      + "wrong about who turns out and a model can be wrong about how a group shifts, but "
+      + "they are not wrong in the same direction for the same reason.</li>"
+      + "<li><b>Talarico wins, and the candidate is why.</b> The 4.92 he runs ahead of "
+      + "his own ticket is larger than the three-to-four point polling miss and cancels "
+      + "in the difference, so it survives the worst the polls can do. He holds an R+4 "
+      + "night for the rest of the ticket.</li>"
+      + "<li><b>Hinojosa is a genuine coin flip, and the same candidate is why.</b> "
+      + "There is no Paxton in her race, so the identical night that elects Talarico by "
+      + "a point loses her by four. She needs the Hispanic vote at D+36.15 <i>and</i> "
+      + "rural turnout down, together.</li>"
+      + "<li><b>The one number that settles it reports first.</b> Texas dumps the early "
+      + 'vote at 7pm Central, and a tie lands between <b class="nm">D+2.27</b> and '
+      + '<b class="nm">R+0.18</b>.</li>'
+      + "</ol>"
       + "<p><b>And why.</b> Four things changed, and each one is counted rather than "
       + "assumed:</p>"
       + "<ol>"
@@ -1029,9 +1046,10 @@
       + "the Democratic primary votes, faster growth, a share 10.9 points higher. "
       + "<b>2018 produced R+2.57, the closest Texas had come since 1994.</b> So the "
       + "question is whether a matching national year with better primary indicators lands "
-      + "better than R+2.57 \u2014 a comparison, which needs no extrapolation at all.</p>",
-      "<b>The regressions are a check on that, not the argument.</b> Fitted three ways "
-      + "against every past cycle, they give:"
+      + "better than R+2.57 \u2014 a comparison, which needs no extrapolation at all.</p>"
+      + '<p class="txnote" style="border-top:none;padding-top:0">'
+      + "<b>The regressions are a check on that, not the argument.</b> Fitted three ways "
+      + "against every past cycle, they give:</p>"
       + '<div class="scroll"><table class="txtbl" style="margin:10px 0"><thead><tr><th>What you regress on</th>'
       + "<th>Cycles</th><th>Explains</th><th>2026</th></tr></thead><tbody>"
       + fits.map(function (q) {
@@ -1039,8 +1057,8 @@
             + '</td><td class="num">' + q.n + '</td><td class="num">'
             + (q.r2 * 100).toFixed(0) + '%</td><td class="num '
             + (q.pred < 0 ? "dem" : "rep") + '">' + mgn(q.pred, 2) + "</td></tr>";
-        }).join("") + "</tbody></table></div>"
-      + "<b>All three straddle even, against a state whose last three cycles average "
+        }).join("") + "</tbody></table></div>",
+      "<b>All three straddle even, against a state whose last three cycles average "
       + "R+10.09 and whose last four midterms average R+11.66.</b> They disagree by three "
       + "points, which is the honest uncertainty, and they agree on the thing that matters: "
       + "nothing in this primary looks like a normal Texas midterm."
@@ -1982,7 +2000,6 @@
       + "the claim the rest of the card rests on: <i>“on age, gender and race, "
       + "they’re within a point or two of the county’s active voters on almost "
       + "every line.”</i>",
-      + "two of the county’s active voters on almost every line.”</i>",
       tbl + mirror + slTbl,
       "<b>Neither mirrors the county; the Republican camp does not come close.</b> "
       + "Averaged across the eight lines in the table, the Neither bucket sits "

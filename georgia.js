@@ -27,7 +27,7 @@
   // Raffensperger, 2:45pm ET: 775,000 already voted, projecting 1.4-1.5M for the day.
   // Midpoint. He revised UP from 1.2M during the afternoon and we had 1.6M before that.
   // This one input moves Jackson's bar by 1.6 points, so it is named, dated and sourced.
-  var EDAY = 1450000;
+  var EDAY = 1300000;
   var TOT = EV + EDAY;
   var MAIL26 = 129773, INPERSON26 = 2705120;
 
@@ -77,8 +77,8 @@
       + "margin, then what each assumption is worth.</p>"
       + '<p class="gaflag"><b>The honest summary.</b> Bottoms holds a banked lead on the '
       + "order of <b>+166,000 to +307,000</b> depending on where the race actually sits. "
-      + "For Jackson to erase it on a 1.45M election day he needs to win today by "
-      + "<b>R+8.0</b>. That is <i>not</i> an extreme ask: 2022&rsquo;s election day ran "
+      + "For Jackson to erase it on a 1.3M election day he needs to win today by "
+      + "<b>R+8.9</b>. That is <i>not</i> an extreme ask: 2022&rsquo;s election day ran "
       + "R+15.95 with Kemp stripped out, and 2014&rsquo;s ran R+11.64. Only 2018 "
       + "(R+5.25), 2016 (R+6.76) and 2024 (R+7.07) fall short of it. <b>Georgia is a "
       + "genuine toss-up on this arithmetic, and it got closer this afternoon</b> "
@@ -103,12 +103,14 @@
       '<div class="gabig">' + n0(EV) + "</div>"
       + '<div class="gasub">banked of a projected ' + n0(TOT) + "</div>"
       + tbl(["", "ballots", "share"], rows),
-      "<b>Source: data/early-GA.json, all 159 counties, pulled tonight.</b> The 1.45M "
-      + "election-day figure is the Secretary of State&rsquo;s, given at 2:45pm with "
-      + "775,000 already voted and a projection of 1.4&ndash;1.5M; this is the midpoint. "
-      + "He revised up from 1.2M during the afternoon, and we had estimated 1.6M before "
-      + "that. <b>Every share on this page moves with it</b>, and the turnout card prices "
-      + "exactly how much.");
+      "<b>Source: data/early-GA.json, all 159 counties, pulled tonight.</b> The 1.2M "
+      + "election-day figure is projected from the Secretary of State&rsquo;s own hourly "
+      + "trail &mdash; 300k at 10am, 500k at noon, 650k at 1:30pm, 775k at 2:45pm, a flat "
+      + "<b>100,000 per hour</b> &mdash; held at that rate to 5pm and stepped to "
+      + "<b>150,000/hour</b> for the after-work rush. That gives <b>1.3M</b>. A press "
+      + "attribution of 1.4&ndash;1.5M could not be verified against a primary source and "
+      + "is not used. <b>Every share on this page moves with this number</b>, and the "
+      + "turnout card prices exactly how much.");
   }
 
   function historyCard() {
@@ -126,7 +128,7 @@
       tbl(["cycle", "early", "election day", "early %"], rows)
       + '<p class="gainline"><b>Election day is down 31% since 2018</b> '
       + "&mdash; 1,788,425 to 1,417,799 to 1,221,257 &mdash; and the Secretary of State "
-      + "expects about <b>1,450,000</b> tonight, revised up from 1.2M at 2:45pm.</p>",
+      + "is on pace for about <b>1,300,000</b> tonight.</p>",
       "<b>This is a rules change, not a mood change.</b> Georgia&rsquo;s SB 202 (2021) "
       + "expanded early in-person voting &mdash; an extra mandatory Saturday for most "
       + "counties, longer weekday hours &mdash; while sharply restricting absentee: the "
@@ -218,12 +220,12 @@
       {c: ["2022 governor &mdash; Kemp", "R+25.34", "<b>yes</b>"]}
     ];
     return card("ga-bar", "Section 4 &middot; what Jackson needs",
-      "He has to win election day by about 8 points",
-      "Bottoms&rsquo; banked lead, spread across the 1.45M the state now expects.",
-      '<div class="gabig">R+7.96</div>'
+      "He has to win election day by about 9 points",
+      "Bottoms&rsquo; banked lead, spread across a projected 1.3M election day.",
+      '<div class="gabig">R+8.88</div>'
       + '<div class="gasub">to pull even &mdash; it was R+9.6 before the turnout '
       + "revision, and R+23 when we assumed a 1.2M day and a smaller banked lead</div>"
-      + tbl(["every Georgia election day since 2014", "margin", "clears R+7.96?"], rows)
+      + tbl(["every Georgia election day since 2014", "margin", "clears R+8.88?"], rows)
       + '<p class="gainline"><b>Four of the last seven clear it.</b> This is no longer '
       + "a bar only a pandemic or Kemp could reach &mdash; 2014 and a Kemp-free 2022 "
       + "both clear it comfortably, and 2024 misses by nine tenths of a point. "
@@ -232,7 +234,7 @@
       + "state is now projecting.</p>",
       "<b>The range, not the point estimate.</b> Across the banked estimates on this "
       + "page &mdash; D+4.07 to D+5.93, or <b>+115,380</b> to <b>+168,109</b> votes "
-      + "&mdash; Jackson&rsquo;s bar runs from <b>R+7.96</b> to <b>R+11.59</b>. "
+      + "&mdash; Jackson&rsquo;s bar runs from <b>R+8.88</b> to <b>R+12.93</b>. "
       + "<b>Every figure in that range has happened in Georgia before.</b> That is the "
       + "honest position: this is a toss-up, and it moved toward Jackson this afternoon "
       + "when the state raised its own turnout projection.");
@@ -242,8 +244,8 @@
     var rows = [
       {c: ["900,000", "24.1%", "R+12.82", "<b>clears</b>"]},
       {c: ["1,200,000 &mdash; his 1:30pm figure", "29.7%", "R+9.62", "<b>clears</b>"]},
-      {em: 1, c: ["<b>1,450,000 &mdash; his 2:45pm figure</b>", "<b>33.8%</b>",
-                  "<b>R+7.96</b>", "<b>clears</b>"]},
+      {em: 1, c: ["<b>1,300,000 &mdash; our projection</b>", "<b>31.4%</b>",
+                  "<b>R+8.88</b>", "<b>clears</b>"]},
       {c: ["1,500,000", "34.6%", "R+7.69", "<b>clears</b>"]},
       {c: ["1,788,425 &mdash; 2018&rsquo;s record", "38.7%", "R+6.45", "<b>clears</b>"]}
     ];
@@ -288,7 +290,7 @@
       + "<li><b>The election-day figure is an expectation, not a count.</b> It is the "
       + "best-sourced number available &mdash; the Secretary of State&rsquo;s own &mdash; "
       + "but he moved it from 1.2M to 1.4&ndash;1.5M in one afternoon, and that alone "
-      + "swung Jackson&rsquo;s bar from R+9.6 to R+8.0. <b>It is the single most "
+      + "would swing Jackson&rsquo;s bar by 1.6 points. <b>It is the single most "
       + "load-bearing number on this page and it is still a guess, his rather than "
       + "ours.</b></li>"
       + "</ol>"
@@ -319,7 +321,7 @@
       + "two correct calls. Bottoms banks a lead close to Warnock&rsquo;s &mdash; against "
       + "an election day a couple of points smaller as a share of the electorate. "
       + "<b>Note the bar moved.</b> At the 1.2M the state was projecting at 1:30pm this "
-      + "read R+23.23; at the 1.45M it projected at 2:45pm it reads R+19.23, because the "
+      + "read R+23.23; at a 1.45M day it would read R+19.23, because the "
       + "same lead spread over more ballots is a smaller margin per ballot. Walker fell "
       + "2.29 short of R+18.24 in 2022.");
   }

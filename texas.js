@@ -712,20 +712,25 @@
       var y = 34 + i * 34, capped = r.g === "Black";
       s += txt(L - 10, y, r.g, "lb", "end");
       s += txt(L - 10, y + 12, capped ? "at the ceiling"
-               : r.d24.toFixed(0) + "% → " + r.d26.toFixed(0) + "% D", "sub", "end");
+               : (Math.abs(r.sh) < 0.005 ? "nothing measures 2026"
+                  : r.d24.toFixed(0) + "% → " + r.d26.toFixed(0) + "% D"), "sub", "end");
       // Direction is no longer always Democratic: anchoring Asian voters at the generic
       // ballot moves them TOWARD Republicans, because D+8.5 sits below the D+15.31 they
       // already gave in 2024. Colour the end dot by which way the row actually travels
       // and sign the label, instead of hardcoding a blue dot and a "+".
-      var toD = r.sh > 0;
-      s += line(xs(r.a), y, xs(r.b), y, "cn");
+      var toD = r.sh > 0, none = Math.abs(r.sh) < 0.005;
+      if (!none) s += line(xs(r.a), y, xs(r.b), y, "cn");
       s += '<circle cx="' + xs(r.a) + '" cy="' + y + '" r="4.5" fill="none" '
          + 'stroke="currentColor" stroke-width="1.5"/>';
-      s += '<circle cx="' + xs(r.b) + '" cy="' + y + '" r="5" fill="' + (toD ? DC : RC) + '"'
-         + (capped ? ' opacity="0.55"' : "") + "/>";
+      // A row with no 2026 estimate keeps only its measured dot. A filled dot drawn on
+      // top of the hollow one would assert a 2026 position that nothing supports.
+      if (!none) {
+        s += '<circle cx="' + xs(r.b) + '" cy="' + y + '" r="5" fill="' + (toD ? DC : RC) + '"'
+           + (capped ? ' opacity="0.55"' : "") + "/>";
+      }
       s += txt(Math.min(xs(r.a), xs(r.b)) - 9, y + 4,
-               (toD ? "+" : "−") + Math.abs(r.sh).toFixed(1),
-               capped ? "sub" : "vl", "end");
+               none ? "no estimate" : (toD ? "+" : "−") + Math.abs(r.sh).toFixed(1),
+               (capped || none) ? "sub" : "vl", "end");
     });
     s += "</svg>";
     return card("tx-eth", "Section 5 · slide 2 · the demographic doing the moving",
@@ -735,7 +740,7 @@
       + "estimate, blue where the demographic moves toward Democrats and red where it "
       + "moves away.",
       s,
-      "<b>Asian voters sit at the generic ballot.</b> Nothing in 2026 measures Texas Asian voters, so rather than assume a demographic-specific shift they are placed at the October generic ballot, <b>D+8.5</b> — the median of seven aggregators the night before, spanning D+7.0 to D+10.8. Note which way that points: D+8.5 is well below the D+15.31 they gave in 2024, so the anchor moves them 6.81 points TOWARD Republicans. Statewide that is worth 0.31 points, but they are 34% of Collin’s non-white bloc and 31% of Fort Bend’s, which is why those counties carry a smaller shift than the rest of the map."
+      "<b>Asian voters are held where they were last measured.</b> An earlier version anchored them to the October generic ballot, which was wrong: the generic ballot is a national all-voter number and sits well to the right of where Asian voters actually vote, so anchoring to it imported a claim rather than removing one. Nothing in 2026 measures this group in Texas, so the row stops at its 2024 position and says so. The historical trend is real and does point right — they moved 8.95 points toward Republicans between 2018 and 2024 — but whether that continued is unknown, and at 4.57% of the electorate the whole plausible range is under nine tenths of a point statewide."
       + "<br><br>" + "<b>The row that does not work is Black voters.</b> 2024 already sits at 91.1% "
       + "Democratic, so the model&rsquo;s +12 for the whole non-white bloc cannot come from "
       + "there — it has to be carried by Hispanic voters almost alone. That is the "

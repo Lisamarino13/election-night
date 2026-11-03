@@ -1,8 +1,8 @@
-tier_no,tier,dem,rep,no_primary,gap
-1,"Presidential only, no primary",,,44.0,
-2,"Presidential only + a primary",70.3,57.1,,13.2
-3,"Last midterm, not all 3, no primary",,,59.3,
-4,"Last midterm, not all 3, + a primary",77.8,69.2,,8.6
-5,"All 3 generals, no primary",,,70.6,
-6,"All 3 generals, 1 of 2 primaries",84.7,76.0,,8.7
-7,"All 3 generals + both primaries",90.7,85.7,,5.0
+tier_no,tier,plain,dem,rep,no_primary,gap
+1,"Presidential only, no primary","Skipped the 2022 midterm, no primary since",,,44.0,
+2,"Presidential only + a primary","Skipped the 2022 midterm, voted a primary",70.3,57.1,,13.2
+3,"Last midterm, not all 3, no primary","Voted the midterm but missed a general, no primary",,,59.3,
+4,"Last midterm, not all 3, + a primary","Voted the midterm but missed a general, voted a primary",77.8,69.2,,8.6
+5,"All 3 generals, no primary","Voted all three generals, no primary",,,70.6,
+6,"All 3 generals, 1 of 2 primaries","Voted all three generals and one primary",84.7,76.0,,8.7
+7,"All 3 generals + both primaries","Voted all three generals and both primaries",90.7,85.7,,5.0

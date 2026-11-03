@@ -317,12 +317,6 @@
       g += line(xs(t), T - 16, xs(t), H - 14, t === 0 ? "zl" : "gl")
          + txt(xs(t), H - 3, t === 0 ? "even" : mgn(t, 0), "tk", "middle");
     });
-    g += '<defs><marker id="svtA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" '
-       + 'markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" '
-       + 'fill="' + DC + '"/></marker>'
-       + '<marker id="svtB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" '
-       + 'markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" '
-       + 'fill="' + RC + '"/></marker></defs>';
     g += txt(wide ? L : 8, 14, "hollow dot: the rest of the statewide ticket, median",
              "lgd")
        + txt(W - RM, 14, "solid dot: the Senate race", "lgd", wide ? "end" : "end");
@@ -338,10 +332,7 @@
            + txt(W - 8, y - 14, r.kind, "sub", "end");
       }
       if (r.t != null) {
-        g += '<line x1="' + xs(r.t) + '" y1="' + y + '" x2="' + xs(r.s) + '" y2="' + y
-           + '" stroke="' + sideCol(r.s - r.t) + '" stroke-width="2" opacity="0.8" '
-           + 'marker-end="url(#svt' + (r.s < r.t ? "A" : "B") + ')"/>'
-           + '<circle cx="' + xs(r.t) + '" cy="' + y + '" r="4.5" fill="var(--card,#fff)" '
+        g += '<circle cx="' + xs(r.t) + '" cy="' + y + '" r="4.5" fill="var(--card,#fff)" '
            + 'stroke="currentColor" stroke-width="1.5" opacity="0.7"/>';
       }
       g += '<circle cx="' + xs(r.s) + '" cy="' + y + '" r="5" fill="' + sideCol(r.s) + '"/>';
@@ -388,9 +379,7 @@
         } else {
           g2 += txt(8, y - 13, r.n, "lbb") + txt(W2 - 8, y - 13, n0(r.nn), "sub", "end");
         }
-        g2 += '<line x1="' + x2(gm) + '" y1="' + y + '" x2="' + x2(sm) + '" y2="' + y
-           + '" class="cn"/>'
-           + '<circle cx="' + x2(gm) + '" cy="' + y + '" r="4.5" fill="var(--card,#fff)" '
+        g2 += '<circle cx="' + x2(gm) + '" cy="' + y + '" r="4.5" fill="var(--card,#fff)" '
            + 'stroke="currentColor" stroke-width="1.5"/>'
            + '<circle cx="' + x2(sm) + '" cy="' + y + '" r="5.5" fill="' + sideCol(sm) + '"/>';
         if (wide) {
@@ -488,7 +477,7 @@
       }).join("");
     }).join("");
 
-    return card("tx-modes", "Section 2 · slide 8 · what election day does to it",
+    return card("tx-modes", "Section 2 · slide 7 · what election day does to it",
       "What election day does to the banked vote",
       "Texas banks three quarters of its vote before election day, so the question is "
       + "simply how far the last quarter moves the first three. Blue dot is the banked "
@@ -1778,43 +1767,13 @@
     if (wide2) s2 += txt(W - R + 44, T - 26, "voters", "lgd", "end");
     s2 += "</svg>";
 
-    var tbl = function (head, body) {
-      return '<div class="scroll"><table class="txtbl"><thead><tr>' + head
-        + "</tr></thead><tbody>" + body + "</tbody></table></div>";
-    };
-    var histTbl = HD.length ? tbl(
-      "<th>Who these voters are</th><th>Voters</th><th>Share of voters</th>"
-      + "<th>Share of all registered</th>",
-      HD.map(function (r) {
-        return "<tr><td>" + esc(r.g) + '</td><td class="num">' + n0(r.n)
-          + '</td><td class="num">' + r.vot + '%</td><td class="num dim">' + r.reg
-          + "%</td></tr>";
-      }).join("")
-      + '<tr class="em"><td>Did not vote in the 2022 midterm</td><td class="num">'
-      + n0(HD.reduce(function (a2, r) { return a2 + r.n; }, 0)) + '</td><td class="num">'
-      + HD.reduce(function (a2, r) { return a2 + r.vot; }, 0).toFixed(1)
-      + '%</td><td class="num dim">'
-      + HD.reduce(function (a2, r) { return a2 + r.reg; }, 0).toFixed(1) + "%</td></tr>") : "";
 
     var H = (D.tarrh || []).map(function (r) {
       return {g: r.group, n: num(r.voters), lean: num(r.lean_R), d: num(r.pct_d_primary),
               nei: num(r.pct_neither), rr: num(r.pct_r_primary)};
     }).filter(function (r) { return r.lean != null; });
-    var CS = (D.cshare || []).map(function (r) {
-      return {c: r.camp, a: num(r.y2026), b: num(r.y2022)};
-    }).filter(function (r) { return r.a != null; });
     var camps = H.length ? stackedPrimary(H, "Tarrant County by the most recent party "
       + "primary each voter chose since 2022: Democratic, neither, Republican") : "";
-    var csTbl = CS.length ? ('<div class="scroll"><table class="txtbl"><thead><tr>'
-      + "<th>Every early voter falls into one of three camps</th><th>2026 early vote</th>"
-      + "<th>2022 early vote</th></tr></thead><tbody>"
-      + CS.map(function (r) {
-          return "<tr><td>" + esc(r.c) + '</td><td class="num">' + r.a.toFixed(1)
-            + '%</td><td class="num dim">' + r.b.toFixed(1) + "%</td></tr>";
-        }).join("")
-      + '<tr class="em"><td>Margin</td><td class="num dem">D+2.6</td>'
-      + '<td class="num rep">R+5.1</td></tr>'
-      + "</tbody></table></div>") : "";
 
     return card("tx-tarrant", "Section 2 · slide 4 · the one county we can see",
       "Tarrant County, the only place we can see the 2026 electorate",
@@ -1827,7 +1786,10 @@
       + "and 2022 by 47%, and reached 90% of a presidential early vote. No other Texas "
       + "county publishes who is voting, so every composition figure elsewhere on this tab "
       + "is an inference and this one is a count.",
-      csTbl + camps
+      // csTbl and histTbl both went: the stacked bars already carry every share and
+      // margin csTbl showed, and the paired bars already carry the three groups
+      // histTbl listed. Three figures now, each measuring something different.
+      camps
       + pairedBars(HD.map(function (r) {
         return {g: r.g.replace("Sat out the 2022 midterm, then voted in 2024",
                                "Sat out 2022, then voted in 2024"),
@@ -1835,8 +1797,13 @@
       }), "Tarrant County: each group's share of all registered voters against its share "
          + "of the people who have already voted",
          "share of all registered", "share of the voters who have voted")
-      + histTbl + s2,
-      "<b>How the margin on that chart is calculated, because it matters.</b> It is "
+      + s2,
+      "<b>An eight-point swing, in the part of the electorate that leans most "
+      + "Republican.</b> In his words: <i>\u201cThat\u2019s a swing of nearly 8 points "
+      + "toward Democrats since 2022, in the most Republican-leaning part of the "
+      + "electorate, the people who vote early.\u201d</i> The Republican camp fell from "
+      + "37.8% of the early vote to 27.2%."
+      + "<br><br><b>But that margin is D% minus R%, and it matters how.</b> It is "
       + "simply <b>D% minus R%</b>. The Neither column is not allocated, not split, not "
       + "estimated — it is left out. So <i>D+2.6</i> describes 57% of this "
       + "electorate and is silent on the other 43%."
@@ -1852,12 +1819,6 @@
       + "is a fact about the minority of the electorate that has picked a primary since "
       + "2022. The next card is about the other group, because it is bigger than either "
       + "party and it decides the county."
-      + "<br><br><b>An eight-point swing, in the part of the electorate that leans most "
-      + "Republican.</b> In his words: <i>\u201cThat\u2019s a swing of nearly 8 points "
-      + "toward Democrats since 2022, in the most Republican-leaning part of the "
-      + "electorate, the people who vote early.\u201d</i> The Neither camp went from 29.5% "
-      + "of the 2022 early vote to 43.0% of this one, and the Republican camp fell from "
-      + "37.8% to 27.2%."
       + "<br><br><b>Nearly half of this electorate did not vote in the 2022 midterm.</b> The file "
       + "opens with it: <i>\u201c13.1% sat out the 2022 midterm, then voted in 2024, and "
       + "17.9% registered since 2022\u201d</i>, and a further 17.8% were on the rolls in "
@@ -2038,69 +1999,6 @@
          + "D+32.5." : ""));
   }
 
-  /* The out-of-state check on the whole mechanism, from Sam Atwood's The Midterm Exam
-     (31 October). Everything else in this chapter is Texas looking at itself; this is the
-     same engagement gap measured in a state that publishes party registration, which
-     Texas does not. It is here rather than in the polls chapter because it is turnout
-     data, not opinion data.
-
-     No chart is drawn from it. The piece carries three charts and all three are images
-     whose underlying numbers it does not publish - it states figures in prose instead,
-     and those are what is quoted here. Drawing a bar chart from a partially quoted
-     series would be inventing the parts nobody published. */
-  function propensityCard() {
-    var R = (D.prop || []).map(function (r) {
-      return {f: r.finding, a: r.y2024, b: r.y2026, src: r.source};
-    }).filter(function (r) { return r.b; });
-    if (!R.length) return "";
-    var tbl = '<div class="scroll"><table class="txtbl"><thead><tr>'
-      + "<th>North Carolina, through 30 October</th><th>At this point in 2024</th>"
-      + "<th>2026</th><th>Source</th></tr></thead><tbody>"
-      + R.map(function (r) {
-          return "<tr><td>" + esc(r.f) + '</td><td class="num dim">' + esc(r.a || "—")
-            + '</td><td class="num">' + esc(r.b) + '</td><td class="dim">' + esc(r.src)
-            + "</td></tr>";
-        }).join("")
-      + "</tbody></table></div>";
-    return card("tx-propensity", "Section 2 · slide 7 · the same gap, out of state",
-      "The same engagement gap, in a state that publishes party registration",
-      "<b>Source: Sam Atwood, The Midterm Exam, 31 October, reporting Votehub, Carolina "
-      + "Forward and others.</b> Texas has no party registration, so every Texas number on "
-      + "this tab infers party from a primary ballot. North Carolina registers by party, "
-      + "which makes it the cleanest place to check whether the engagement gap is real or "
-      + "an artefact of how Texas has to be measured. The numbers below are the ones his "
-      + "piece states in prose; its charts are images whose underlying series it does not "
-      + "publish, so none is redrawn here.",
-      tbl,
-      "<b>The 2024 pattern has reversed.</b> His framing: <i>“In 2024, one of the "
-      + "reasons why Trump won was his campaign’s ability to persuade and motivate "
-      + "‘low-propensity voters’ … This year, a problem is emerging for "
-      + "Republicans: the shoe is on the other foot. So far it’s Democrats who are "
-      + "turning out their low-propensity voters at a higher rate than Republicans.”</i>"
-      + "<br><br><b>What 2024 looked like, for scale.</b> <i>“It’s estimated that "
-      + "people who didn’t vote in 2020 voted for Trump over Harris in 2024 by a "
-      + "margin of roughly 55% to 41%. Those voters made up over 10% of the electorate. By "
-      + "comparison, those who voted in 2018, 2020, and 2022 (high-propensity) were split "
-      + "almost evenly (Trump 50%, Harris 48%).”</i> The group that delivered 2024 is "
-      + "the group not showing up now."
-      + "<br><br><b>Why it is not solved by election day.</b> <i>“It’s very "
-      + "likely that both parties’ high-propensity voters are going to end up voting, "
-      + "at some point. But that alone won’t be enough to win. Both parties need "
-      + "lower-propensity voters, too. They’re the ones who may not show up; "
-      + "that’s kind of their thing. Right now, the Democratic ones are showing up "
-      + "more than the Republican ones.”</i>"
-      + "<br><br><b>His own caution, kept.</b> <i>“North Carolina may be an outlier "
-      + "in terms of how dismal these numbers look for Republicans; maybe other states are "
-      + "a bit better. And as is the case with all early vote analysis, there’s still "
-      + "time for Republicans to solve this problem, with Election Day itself still to "
-      + "come.”</i> He opens the piece with <i>“it’s generally a bad idea to "
-      + "over-analyze early voting data”</i>. It is one state, and it is not Texas."
-      + "<br><br><b>Why it belongs on a Texas tab.</b> Morris reaches the same conclusion "
-      + "from Texas, Georgia and North Carolina together, and his comparison is the one "
-      + "that matters here: an engagement gap <i>“that exceeds the party’s "
-      + "advantage in 2018”</i> — the year Texas came within R+2.57.");
-  }
-
   /* The Morris gradient is the single biggest external input to this model: it is what
      reweights precincts inside every county. It has never been shown on its own, and the
      one public test of it is in here too. */
@@ -2114,8 +2012,8 @@
        the two he quoted in prose - and the two he quoted are the extremes, which is
        exactly the shape the middle five are needed to show is monotonic. */
     var E = (D.meng || []).map(function (r) {
-      return {no: num(r.tier_no), tier: r.tier, d: num(r.dem), r: num(r.rep),
-              np: num(r.no_primary), gap: num(r.gap)};
+      return {no: num(r.tier_no), tier: r.plain || r.tier, d: num(r.dem),
+              r: num(r.rep), np: num(r.no_primary), gap: num(r.gap)};
     }).filter(function (r) { return r.d != null || r.np != null; });
     var PL = (D.mpoll || []).map(function (r) {
       return {tier: r.tier, d: num(r.dem), r: num(r.rep), gap: num(r.gap)};
@@ -2148,10 +2046,15 @@
          + txt(lx + 13, 16, pr[1], "lgd");
       lx += pr[1].length * 5.9 + 28;
     });
+    // A ladder, least engaged at the top, labelled in plain words rather than his
+    // shorthand: "Presidential only" means they skipped the 2022 midterm, which no
+    // reader can be expected to decode from the phrase.
+    if (wide) s2 += txt(W - R + 8, 16, "turnout", "lgd")
+                 + txt(W - 8, 16, "D lead", "lgd", "end");
     var y = T;
     E.forEach(function (r) {
       var grey = r.np != null;
-      s2 += txt(wide ? 0 : 8, y + 4, r.no + ". " + r.tier, "lbb");
+      s2 += txt(wide ? 0 : 8, y + 4, r.tier, grey ? "lb" : "lbb");
       var dot = function (v, col, cy, nm) {
         return '<circle cx="' + xs(v) + '" cy="' + cy + '" r="5" fill="' + col + '"'
              + (col === "currentColor" ? ' opacity="0.55"' : "") + "/>"
@@ -2159,12 +2062,16 @@
              + txt(W - R + 8, cy + 4, v.toFixed(1) + "%", "vl");
       };
       if (grey) {
-        s2 += dot(r.np, "currentColor", y + 19, "no recent primary");
+        s2 += dot(r.np, "currentColor", y + 19, "no party \u2014 no recent primary");
         y += RG;
       } else {
-        s2 += '<line x1="' + xs(r.r) + '" y1="' + (y + 36) + '" x2="' + xs(r.d)
-           + '" y2="' + (y + 19) + '" class="cn"/>'
-           + dot(r.d, DC, y + 19, "Democrats") + dot(r.r, RC, y + 36, "Republicans");
+        // no connector: two different groups, not one group moving
+        s2 += dot(r.d, DC, y + 19, "Democrats") + dot(r.r, RC, y + 36, "Republicans");
+        // the gap is the finding, so it is a number rather than a line
+        if (r.gap != null) {
+          s2 += '<text x="' + (W - 8) + '" y="' + (y + 32) + '" text-anchor="end" '
+             + 'class="lbb" fill="' + DC + '">+' + r.gap.toFixed(1) + "</text>";
+        }
         y += RP;
       }
     });
@@ -2184,9 +2091,7 @@
         var y = 32 + i * 46;
         if (wide) s3 += txt(L3 - 14, y + 8, r.tier, "lbb", "end");
         else s3 += txt(8, y - 10, r.tier, "lbb");
-        s3 += '<line x1="' + x3(r.r) + '" y1="' + (y + 11) + '" x2="' + x3(r.d)
-           + '" y2="' + (y - 4) + '" class="cn"/>'
-           + '<circle cx="' + x3(r.d) + '" cy="' + (y - 4) + '" r="5" fill="' + DC + '"/>'
+        s3 += '<circle cx="' + x3(r.d) + '" cy="' + (y - 4) + '" r="5" fill="' + DC + '"/>'
            + '<circle cx="' + x3(r.r) + '" cy="' + (y + 11) + '" r="5" fill="' + RC + '"/>'
            + txt(W3 - R3 + 8, y, r.d + "%", "vl") + txt(W3 - R3 + 8, y + 15, r.r + "%", "vl");
       });
@@ -2621,7 +2526,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["prop", "tx_propensity.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {
@@ -2673,7 +2578,6 @@
         + tarrantCard()
         + tarrantSwingCard()
         + morrisCard()
-        + propensityCard()
         + historyCard()
 
         + framing("tx-frame-hisp", "Section 3 \u00b7 the Hispanic vote",

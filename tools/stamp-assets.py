@@ -23,7 +23,7 @@ PAGE = ROOT / "index.html"
 # browser that had once loaded it kept that copy forever - the exact failure this
 # script exists to prevent, repeated on a new file. Anything index.html loads with a
 # ?v= stamp belongs here.
-ASSETS = ["charts.css", "compare.js", "texas.js"]
+ASSETS = ["charts.css", "compare.js", "texas.js", "georgia.js"]
 
 
 def digest(name):

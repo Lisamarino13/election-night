@@ -140,7 +140,7 @@
       {em: 1, c: ["<b>Net</b>", "", "", "", "", "<b>+" + n0(24529) + "</b>"]}
     ];
     return card("ga-comp", "Section 2 &middot; what the composition is worth",
-      "The banked electorate is about one point bluer than the last midterm&rsquo;s",
+      "The banked electorate is about one point bluer than the last midterm",
       "Measured against <i>2022&rsquo;s early vote</i> &mdash; the only honest comparison.",
       tbl(["group", "2026 early", "at par", "surplus", "2024 lean", "net D votes"], rows)
       + '<p class="gainline"><b>+' + n0(24529) + " net Democratic votes, or "

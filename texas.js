@@ -354,11 +354,55 @@
           g += '<text x="' + (W - RM + 12) + '" y="' + (y + 4) + '" class="vl" fill="'
              + sideCol(-r.a) + '">' + (r.a > 0 ? "+" : "") + r.a.toFixed(2) + "</text>";
         }
-      } else if (wide) {
-        g += txt(W - RM + 12, y + 4, "no ticket yet", "sub");
       }
     });
     g += "</svg>";
+
+    /* The 2026 row deserves its own picture, because it is a better test than the three
+       above it: the same respondents answered both questions, so house effects, turnout
+       models and sampling all cancel. Whatever is left is ticket-splitting. */
+    var SG = (D.sg || []).map(function (r) {
+      return {n: r.pollster, nn: num(r.n), sc: r.screen, sen: num(r.senate_d_margin),
+              gov: num(r.governor_d_margin), gap: num(r.talarico_runs_ahead)};
+    }).filter(function (r) { return r.sen != null; });
+    var g2 = "";
+    if (SG.length) {
+      var W2 = wide ? 760 : 360, L2 = wide ? 186 : 8, R2 = wide ? 104 : 8;
+      var ROW2 = wide ? 42 : 58, T2 = 40;
+      var H3 = T2 + SG.length * ROW2 + 18;
+      var lo2 = -9, hi2 = 5;
+      var x2 = function (v) { return L2 + (v - lo2) / (hi2 - lo2) * (W2 - L2 - R2); };
+      g2 = svg(W2, H3, "The same four polls on both Texas races: Senate against Governor");
+      [-8, -6, -4, -2, 0, 2, 4].forEach(function (t) {
+        g2 += line(x2(t), T2 - 14, x2(t), H3 - 14, t === 0 ? "zl" : "gl")
+           + txt(x2(t), H3 - 3, t === 0 ? "even" : mgn(t, 0), "tk", "middle");
+      });
+      g2 += txt(wide ? L2 : 8, 14, "\u25cb Abbott / Hinojosa", "lgd")
+         + txt((wide ? L2 : 8) + 128, 14, "\u25cf Paxton / Talarico", "lgd");
+      SG.forEach(function (r, i) {
+        var y = T2 + (wide ? 12 : 24) + i * ROW2;
+        var sm = -r.sen, gm = -r.gov;              // to margin_R, as the rest of the tab
+        if (wide) {
+          g2 += txt(L2 - 14, y + 4, r.n, "lbb", "end")
+             + txt(L2 - 14, y + 17, n0(r.nn) + " " + r.sc, "sub", "end");
+        } else {
+          g2 += txt(8, y - 13, r.n, "lbb") + txt(W2 - 8, y - 13, n0(r.nn), "sub", "end");
+        }
+        g2 += '<line x1="' + x2(gm) + '" y1="' + y + '" x2="' + x2(sm) + '" y2="' + y
+           + '" class="cn"/>'
+           + '<circle cx="' + x2(gm) + '" cy="' + y + '" r="4.5" fill="var(--card,#fff)" '
+           + 'stroke="currentColor" stroke-width="1.5"/>'
+           + '<circle cx="' + x2(sm) + '" cy="' + y + '" r="5.5" fill="' + sideCol(sm) + '"/>';
+        if (wide) {
+          g2 += '<text x="' + (W2 - R2 + 12) + '" y="' + (y + 4) + '" class="vl" fill="'
+             + DC + '">+' + r.gap.toFixed(1) + "</text>";
+        } else {
+          g2 += txt(W2 - 8, y + 16, "Talarico +" + r.gap.toFixed(1), "tk", "end");
+        }
+      });
+      if (wide) g2 += txt(W2 - R2 + 12, 14, "Talarico ahead", "lgd");
+      g2 += "</svg>";
+    }
     var hit = R.filter(function (r) { return r.a != null && r.a > 0; }).length;
     var meas = R.filter(function (r) { return r.a != null; });
     return card("tx-senate", "Section 2 · slide 9 · Texas votes differently for Senate",
@@ -369,8 +413,21 @@
       + "has nothing to do with how Republican Texas is, because the rest of the ticket "
       + "controls for exactly that. Unopposed races are left out: 2018&rsquo;s Court of "
       + "Criminal Appeals Place 8 had no Democrat on the ballot and finished R+74.68.",
-      g,
-      "<b>Three of the last four, including this one.</b> In 2018 Cruz beat O&rsquo;Rourke "
+      g + g2,
+      "<b>2026 is not a guess \u2014 the same four polls asked both questions.</b> "
+      + "Abbott against Hinojosa and Paxton against Talarico sit on the same "
+      + "questionnaires, answered by the same 5,934 people. Talarico runs ahead of "
+      + "Hinojosa in every one: YouGov +5.0, Kreate +5.0, NYT/Siena +6.0, AtlasIntel "
+      + "+4.0, sample-weighted <b>+4.92</b>. In two of the four, Abbott leads while "
+      + "Talarico leads \u2014 the same respondents, splitting their ticket on the same "
+      + "page."
+      + "<br><br><b>That is a cleaner test than the three rows above it.</b> Comparing "
+      + "across years means comparing different electorates, different turnout and "
+      + "different house effects. Comparing two races inside one poll cancels all of it: "
+      + "whatever is left is ticket-splitting and nothing else. And the answer it gives "
+      + "\u2014 4.92 \u2014 is within a tenth of a point of what Texas actually did in "
+      + "2018, which was 4.85."
+      + "<br><br><b>Three of the last four, including this one.</b> In 2018 Cruz beat O&rsquo;Rourke "
       + "by 2.57 while the rest of the ticket ran R+7.42 — the Senate race was 4.85 "
       + "points friendlier to Democrats than the same voters&rsquo; other choices that "
       + "day. In 2024 Cruz beat Allred by 8.50 against a ticket median of R+16.37, a gap "
@@ -381,10 +438,10 @@
       + "<i>more</i> Republican than everything else. It is the exception and it is worth "
       + "naming rather than dropping — a pattern that holds three times in four is a "
       + "lean, not a law."
-      + "<br><br><b>Why it changes how to read a poll.</b> The usual objection to D+4 in "
-      + "Texas is that Texas does not vote D+4. That is true of Texas as a whole and it "
+      + "<br><br><b>Why it changes how to read a poll.</b> The usual objection to D+5 in "
+      + "Texas is that Texas does not vote D+5. That is true of Texas as a whole and it "
       + "is the wrong comparison: Texas has twice in the last three Senate races voted "
-      + "five to eight points more Democratic for Senate than it voted for the rest of "
+      + "five to eight points more Democratic for Senate than for the rest of "
       + "the ballot on the same day. A poll showing the Senate race running well ahead of "
       + "the state&rsquo;s partisan level is describing the normal behaviour of Texas "
       + "Senate races, not an outlier."
@@ -2472,7 +2529,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["prop", "tx_propensity.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["prop", "tx_propensity.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {

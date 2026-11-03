@@ -749,6 +749,144 @@
   }
 
   /* ============================== 10. why one Hispanic number is not enough + volatility */
+  /* Tarrant is the only Texas county that publishes its early electorate in enough
+     detail to see 2026 rather than infer it: precinct lean against 2022, and every
+     voter's most recent primary. It is also the state's bellwether. */
+  function tarrantCard() {
+    var P = (D.tarr || []).map(function (r) {
+      return {p: +r.precinct, n: num(r.voted_2026), now: num(r.lean_2026_R),
+              then: num(r.lean_2022_R)};
+    }).filter(function (r) { return r.now != null; }).sort(function (a, b) { return a.p - b.p; });
+    var H = (D.tarrh || []).map(function (r) {
+      return {g: r.group, n: num(r.voters), m: num(r.lean_R), d: num(r.pct_d_primary),
+              x: num(r.pct_neither), rr: num(r.pct_r_primary)};
+    }).filter(function (r) { return r.m != null; });
+    if (!P.length) return "";
+    var tot = P.reduce(function (a, r) { return a + r.n; }, 0);
+    var w26 = P.reduce(function (a, r) { return a + r.n * r.now; }, 0) / tot;
+    var w22 = P.reduce(function (a, r) { return a + r.n * r.then; }, 0) / tot;
+
+    var W = 720, H2 = 44 + P.length * 42, L = 104, R = 108, T = 34;
+    var lo = -42, hi = 26;
+    var xs = function (v) { return L + (v - lo) / (hi - lo) * (W - L - R); };
+    var s2 = svg(W, H2, "Tarrant County early-vote lean by commissioner precinct, 2022 against 2026");
+    s2 += line(xs(0), T - 10, xs(0), H2 - 16, "zl") + txt(xs(0), T - 16, "even", "tk", "middle");
+    s2 += txt(L, T - 16, "more Democratic", "lgd")
+       + txt(W - R, T - 16, "more Republican", "lgd", "end");
+    P.forEach(function (r, i) {
+      var y = T + 8 + i * 42, toD = r.now < r.then;
+      s2 += txt(L - 12, y, "Precinct " + r.p, "lb", "end");
+      s2 += txt(L - 12, y + 13, n0(r.n) + " voted", "sub", "end");
+      s2 += line(xs(r.then), y, xs(r.now), y, "cn");
+      s2 += '<circle cx="' + xs(r.then) + '" cy="' + y + '" r="4.5" fill="none" '
+         + 'stroke="currentColor" stroke-width="1.5"/>';
+      s2 += '<circle cx="' + xs(r.now) + '" cy="' + y + '" r="5.5" fill="'
+         + (toD ? DC : RC) + '"/>';
+      s2 += txt(W - R + 10, y + 4, (toD ? "\u2190 " : "\u2192 ")
+                + Math.abs(r.now - r.then).toFixed(1) + (toD ? " to D" : " to R"),
+                "vl");
+    });
+    s2 += txt(L, 16, "\u25cb 2022 early + mail    \u25cf 2026 so far", "lgd");
+    s2 += "</svg>";
+
+    var hist = H.length ? ('<table class="txtbl" style="margin-top:12px"><thead><tr>'
+      + "<th>By the last primary each voter chose</th><th>Voters</th><th>Lean</th>"
+      + "<th>D</th><th>Neither</th><th>R</th></tr></thead><tbody>"
+      + H.map(function (r) {
+          return "<tr" + (r.g === "2026 so far" ? ' class="em"' : "") + "><td>" + esc(r.g)
+            + '</td><td class="num">' + n0(r.n) + '</td><td class="num '
+            + (r.m < 0 ? "dem" : "rep") + '">' + mgn(r.m, 1) + '</td><td class="num">'
+            + r.d + '%</td><td class="num">' + r.x + '%</td><td class="num">' + r.rr
+            + "%</td></tr>";
+        }).join("") + "</tbody></table>") : "";
+
+    return card("tx-tarrant", "Chapter 4 \u00b7 slide 1 \u00b7 the one county we can actually see",
+      "Tarrant County, where the 2026 electorate is visible",
+      "Everything else on this tab infers the 2026 electorate. Tarrant publishes it: "
+      + n0(tot) + " early and mail voters through 30 October, matched to the voter file, "
+      + "with each precinct&rsquo;s lean beside what the same precinct&rsquo;s early vote "
+      + "looked like in 2022. Tarrant is also the state&rsquo;s bellwether \u2014 Allred "
+      + "carried it by 0.22 in 2024 while Texas went R+8.71.",
+      s2 + hist,
+      "<b>It is compression, not a uniform swing.</b> The three Republican precincts each "
+      + "moved 8 to 10 points toward Democrats while the most Democratic precinct moved 5 "
+      + "points the other way. County-wide the early electorate is "
+      + Math.abs(w26 - w22).toFixed(1) + " points more Democratic than 2022&rsquo;s was, "
+      + "at " + mgn(w26, 1) + " against " + mgn(w22, 1) + ". That is what a county "
+      + "flipping looks like from the inside, and it is the opposite of the uniform shift "
+      + "the county model applies."
+      + "<br><br><b>The caution is the source&rsquo;s own.</b> The lean here is by the last "
+      + "party primary each voter chose, which is not a vote. The unusually large 2026 "
+      + "Democratic primary makes every group on this measure look more Democratic than it "
+      + "will vote, and 43% of these voters chose neither primary at all.");
+  }
+
+  /* The Morris gradient is the single biggest external input to this model: it is what
+     reweights precincts inside every county. It has never been shown on its own, and the
+     one public test of it is in here too. */
+  function morrisCard() {
+    var bands = (D.pace || []).map(function (r) {
+      return {b: r.band, n: +r.counties, ev: num(r.early_2026), pace: num(r.pace_vs_2022)};
+    }).filter(function (r) { return r.pace != null; });
+    if (!bands.length) return "";
+    var W = 720, H2 = 250, L = 76, R = 24, T = 26, Bm = 58;
+    var xlo = 0, xhi = 100, ylo = 1.0, yhi = 2.4;
+    var xs = function (v) { return L + (v - xlo) / (xhi - xlo) * (W - L - R); };
+    var ys = function (v) { return T + (yhi - v) / (yhi - ylo) * (H2 - Bm - T); };
+    var s2 = svg(W, H2, "Turnout growth against Hispanic share: what Morris measured in Harris, against the statewide county pace");
+    [1.0, 1.4, 1.8, 2.2].forEach(function (v) {
+      s2 += line(L, ys(v), W - R, ys(v), "gl")
+         + txt(L - 8, ys(v) + 4, v.toFixed(1) + "x", "tk", "end");
+    });
+    [0, 25, 50, 75, 100].forEach(function (v) {
+      s2 += txt(xs(v), H2 - Bm + 16, v + "%", "tk", "middle");
+    });
+    s2 += txt((L + W - R) / 2, H2 - 32, "how Hispanic the precinct or county is \u2192",
+              "lgd", "middle");
+    s2 += txt(14, T - 12, "turnout against 2022 \u2191", "lgd");
+    // Morris's Harris precinct gradient, as the model applies it: +20% at 0%, +125% at 100%
+    s2 += '<line x1="' + xs(0) + '" y1="' + ys(1.20) + '" x2="' + xs(100) + '" y2="'
+       + ys(2.25) + '" stroke="' + DC + '" stroke-width="2.5"/>';
+    s2 += txt(xs(100) - 6, ys(2.25) - 8, "Morris, Harris precincts", "lbb", "end");
+    // what the statewide county data actually shows
+    var tot = bands.reduce(function (a, r) { return a + r.ev; }, 0);
+    bands.forEach(function (r) {
+      var m = r.b.match(/(\d+)\s*-\s*(\d+)/);
+      var lo = m ? +m[1] : 75, hi2 = m ? +m[2] : 100;
+      var mid = (lo + hi2) / 2;
+      var rad = 5 + 13 * Math.sqrt(r.ev / tot);
+      s2 += '<circle cx="' + xs(mid) + '" cy="' + ys(r.pace) + '" r="' + rad.toFixed(1)
+         + '" fill="currentColor" opacity="0.28"/>';
+      s2 += '<circle cx="' + xs(mid) + '" cy="' + ys(r.pace) + '" r="2.5" fill="currentColor"/>';
+      s2 += txt(xs(mid), ys(r.pace) - rad - 5, r.pace.toFixed(2) + "x", "tk", "middle");
+    });
+    s2 += '<line x1="' + xs(0) + '" y1="' + ys(1.363) + '" x2="' + xs(100) + '" y2="'
+       + ys(1.510) + '" stroke="currentColor" stroke-width="1.6" stroke-dasharray="5 4"/>';
+    s2 += txt(xs(100) - 6, ys(1.510) + 16, "actual 2026 county pace", "tk", "end");
+    s2 += txt(L, H2 - 10, "Circle size is each band\u2019s share of the early vote.", "lgd");
+    s2 += "</svg>";
+    return card("tx-morris", "Chapter 4 \u00b7 slide 2 \u00b7 the engagement gradient",
+      "What Morris found in Harris, and whether it shows up statewide",
+      "This is the largest external input to the model. G.&nbsp;Elliott Morris measured "
+      + "turnout growth across Harris County precincts and found it rising with Hispanic "
+      + "share \u2014 about +20% in the least Hispanic precincts to about +125% in the "
+      + "most. That curve is the solid line, and the model applies it inside every county, "
+      + "reweighting precincts before any vote shift is applied.",
+      s2,
+      "<b>The public data cannot confirm the slope.</b> The dashed line is the same "
+      + "relationship measured across the 44 Texas counties with 20,000+ early ballots: "
+      + "1.36x at 0% Hispanic rising to 1.51x at 100%, a correlation of only +0.25 against "
+      + "a curve more than seven times steeper. That is a weak test rather than a "
+      + "refutation \u2014 a county is a blend of precincts, so county data physically "
+      + "cannot see a precinct-level gradient, and only Harris has been measured the right "
+      + "way. But it is the only check the public data allows, and it does not reproduce "
+      + "what the model is assuming."
+      + "<br><br>Morris&rsquo;s other Harris finding is the one that does not depend on the "
+      + "curve at all: among voters new to the electorate, he reports a roughly five-to-one "
+      + "Democratic split. That is a claim about <i>who</i> turned out rather than how "
+      + "many, and nothing in this tab tests it.");
+  }
+
   function precinctCard() {
     var rows = (D.prec || []).filter(function (r) { return num(r.margin_R) != null; });
     if (!rows.length) return "";
@@ -784,7 +922,7 @@
       var ms = h.map(function (r) { return num(r.margin_R); });
       spread = Math.abs(Math.max.apply(null, ms) - Math.min.apply(null, ms)).toFixed(1);
     }
-    return card("tx-prec", "Chapter 4 \u00b7 slide 1 \u00b7 impact of the Hispanic vote",
+    return card("tx-prec", "Chapter 4 \u00b7 slide 3 \u00b7 impact of the Hispanic vote",
       "The same group, two different electorates",
       "Precincts that are overwhelmingly one group in 2024, split by where they are. "
       + "The first block is the one that matters for this model: Hispanic precincts on "
@@ -821,7 +959,7 @@
       s += txt(L + w + 8, y + 20, r.mv.toFixed(2), "vl");
     });
     s += "</svg>";
-    return card("tx-vol", "Chapter 4 · slide 2 · what moves, and what it weighs",
+    return card("tx-vol", "Chapter 4 · slide 4 · what moves, and what it weighs",
       "Why South Texas matters",
       "Average absolute change in county margin across 2018 to 2020 to 2022 to 2024, "
       + "weighted by projected 2026 turnout, with each group&rsquo;s share of the vote.",
@@ -1071,7 +1209,7 @@
     var want = [["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {
@@ -1127,6 +1265,8 @@
              + "break-even is a range rather than a point. The two slides here show "
              + "why one number cannot describe this group, and which parts of the map "
              + "actually move."])
+        + tarrantCard()
+        + morrisCard()
         + precinctCard()
         + volCard()
         // 5. three ways of asking what it would take

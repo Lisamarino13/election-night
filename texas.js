@@ -240,10 +240,10 @@
         + (L.totalMargin != null ? '<tr class="em"><td>Everything counted</td><td class="num">' + mgn(L.totalMargin) + "</td></tr>" : "")
         + '<tr><td>Precincts</td><td class="num">' + n0(L.precReporting || 0) + " / " + n0(L.precTotal || 0) + "</td></tr>"
         + "</tbody></table>",
-        "The band is the honest form of this. An earlier version of this read used a single "
-        + "tie line of D+5.54, taken from a North Carolina skew of 22.84 points on the "
-        + "belief that Texas publishes nothing by mode. Texas does, its real skew is under "
-        + "two and a half points, and in 2024 it pointed the other way.");
+        "The band, rather than a single line, because the answer depends on what election "
+        + "day does and Texas has produced both a +9.4 move and a \u22120.8 one in the last "
+        + "two cycles. Source: Texas\u2019s own County.json, which carries EV beside V per "
+        + "candidate per county, so every past cycle\u2019s split is exact.");
     }
     return card("tx-read", "Start here · the early vote settles it",
       "What to read when polls close",
@@ -370,7 +370,7 @@
       return "<tr><td>D+" + n0(lead) + '</td><td class="num">' + mgn(tie)
         + '</td><td class="num">' + (50 + tie / 2).toFixed(2) + "%</td>" + cells + "</tr>";
     }).join("");
-    return card("tx-banked", "Outcome 2 · the banked lead",
+    return card("tx-banked", "Outcome 1 · the banked lead",
       "What election day would have to do",
       "Read down to the banked lead Texas reports, then across to the election-day margin "
       + "you find plausible. Election day is only " + ((1 - SHARE) * 100).toFixed(1)
@@ -420,7 +420,7 @@
       s += txt(xs(r.m) + (r.m < 0 ? -8 : 8), y + 4, mgn(r.m), "vl", r.m < 0 ? "end" : "start");
     });
     s += "</svg>";
-    return card("tx-est", "Outcome 1 · where every estimate lands",
+    return card("tx-est", "Chapter 2 · where every estimate lands",
       "Where every estimate lands",
       "Eleven estimates spanning six points and straddling zero. They do not disagree "
       + "randomly: nearly every one is the same arithmetic with a different assumption "
@@ -655,7 +655,7 @@
       + "group by voting-age population, not a poll. Filled dot is the 2026 estimate, "
       + "blue where the group moves toward Democrats and red where it moves away.",
       s,
-      "<b>Asian voters are anchored to the generic ballot, not to a judgment.</b> An earlier version moved them +4 \u2014 my own guess at half the 8.95 points they moved toward Republicans between 2018 and 2024. Nothing in 2026 measures Texas Asian voters, so they now simply sit AT the October generic ballot, D+12. Note what that does: it moves them 3.31 points toward REPUBLICANS, because D+12 is below the D+15.31 they already gave in 2024. Statewide it is worth 0.15 points, but they are 34% of Collin\u2019s non-white bloc and 31% of Fort Bend\u2019s, which is why those two counties carry a smaller shift than the rest."
+      "<b>Asian voters sit at the generic ballot.</b> Nothing in 2026 measures Texas Asian voters, so rather than assume a group-specific shift they are placed at the October generic ballot, D+12. Note which way that points: D+12 is BELOW the D+15.31 they gave in 2024, so it moves them 3.31 points toward Republicans. Statewide that is worth 0.15 points, but they are 34% of Collin’s non-white bloc and 31% of Fort Bend’s, which is why those counties carry a smaller shift than the rest of the map."
       + "<br><br>" + "<b>The row that does not work is Black voters.</b> 2024 already sits at 91.1% "
       + "Democratic, so the model&rsquo;s +12 for the whole non-white bloc cannot come from "
       + "there — it has to be carried by Hispanic voters almost alone. That is the "
@@ -785,19 +785,46 @@
                + Math.abs(swing).toFixed(1)) + "</td></tr>";
         }).join("");
     }).join("");
-    return card("tx-watch", "Where the votes come from",
-      "The counties that decide it, against their 2024 baseline",
-      "Nineteen counties carrying 67.5% of the projected vote. &ldquo;2024&rdquo; is the "
-      + "actual Senate margin, &ldquo;model&rdquo; is what this projection needs, "
-      + "&ldquo;live&rdquo; fills in as Texas reports, and the last column is the swing "
-      + "from 2024 &mdash; left is toward Democrats.",
-      '<div class="scroll"><table class="txtbl"><thead><tr><th>County</th><th>Proj turnout</th>'
+    // The headline: what this model thinks is already in the box. Derived from the
+    // county file rather than asserted - every county's 2026 early vote weighted by its
+    // own 2024 Senate margin gives the ground the banked vote was drawn from, and the
+    // same weighting of the model's per-county shift gives what it assumes happened on
+    // top. Texas has no party registration, so this is an inference, never a count.
+    var ev = 0, evGround = 0, evShift = 0;
+    (D.cty || []).forEach(function (r) {
+      var e = num(r.ev_2026), m = num(r.margin_2024_sen), sh = num(r.shift);
+      if (e == null || m == null || sh == null) return;
+      ev += e; evGround += e * m; evShift += e * sh;
+    });
+    var head = "";
+    if (ev > 0) {
+      var ground = evGround / ev, shift = evShift / ev, est = ground - shift;
+      var lead = -est / 100 * PROJ.banked;
+      head = '<div class="txbig" style="color:' + sideCol(est) + '">' + mgn(est) + "</div>"
+        + '<div class="txsub">what this model has banked: a lead of about <b>'
+        + (lead > 0 ? "D+" : "R+") + n0(Math.abs(lead)) + "</b> on "
+        + n0(PROJ.banked) + " early and mail ballots</div>"
+        + '<table class="txtbl" style="margin-bottom:12px"><tbody>'
+        + "<tr><td>Ground the early vote was drawn from, at 2024 margins</td>"
+        + '<td class="num">' + mgn(ground) + "</td></tr>"
+        + "<tr><td>Shift the model assumes on top, weighted by early vote</td>"
+        + '<td class="num dem">\u2212' + shift.toFixed(2) + "</td></tr>"
+        + '<tr class="em"><td>Estimated banked margin</td><td class="num">' + mgn(est)
+        + "</td></tr></tbody></table>";
+    }
+    return card("tx-watch", "Before the outcomes · what is already banked",
+      "What we think is already banked, and where it came from",
+      "Texas has no party registration, so nobody can count the banked lead \u2014 this "
+      + "is an inference. It is built from the one thing that <i>is</i> known: which "
+      + "counties the 7.73M early ballots came from. Weight each county&rsquo;s 2024 "
+      + "Senate margin by its own 2026 early vote and you get the ground the banked vote "
+      + "was drawn from; the model&rsquo;s shift is then applied on top.",
+      head
+      + '<div class="scroll"><table class="txtbl"><thead><tr><th>County</th><th>Proj turnout</th>'
       + "<th>2024</th><th>Model 2026</th><th>Live</th><th>Swing</th></tr></thead><tbody>"
       + body + "</tbody></table></div>",
-      "<b>This is the falsification test, instrumented.</b> If Hidalgo, Cameron and Webb "
-      + "swing right while Harris and Dallas swing left, the composition model is the wrong "
-      + "frame entirely &mdash; the electorate would be sorting by education rather than "
-      + "ethnicity, and every Hispanic number on this tab would be measuring the wrong thing.");
+      "Nineteen counties carry 67.5% of the projected vote, so the outcomes that follow "
+      + "are decided here. The live and swing columns fill in as Texas reports.");
   }
 
   function countyGainCard() {
@@ -821,7 +848,7 @@
       s += txt(L + w + 8, y + 13, n0(r.gain), "vl");
     });
     s += "</svg>";
-    return card("tx-gain", "Where the votes come from",
+    return card("tx-gain", "Outcome 2 · where the votes have to come from",
       "Net Democratic gain by county",
       "What the model adds to each county versus its 2024 Senate result. The total needed "
       + "to erase R+5.98 is " + n0(305279) + "; the model produces " + n0(tot) + ".",
@@ -961,27 +988,23 @@
         + primaryCard()
         // 2. how a banked vote reaches a result
         + historyCard()
+        + estimatesCard()
         // 3. where every method lands, and why they disagree
         + framing("tx-frame-lands", "Chapter 3",
-            "So where does it actually land?",
-            ["The two chapters above are mechanics. The electorate changed, and three "
-             + "quarters of the vote is already cast so election day can only shade it. "
-             + "Neither tells you who wins.",
-             "For that you need a number, and this is where the agreement ends. What "
-             + "follows is every estimate anyone has published alongside the ones this "
-             + "model produces \u2014 eleven of them, spanning six points and straddling "
+            "Why the estimates disagree",
+            ["Chapter 2 ends with eleven estimates spanning six points and straddling "
              + "zero. A spread that wide usually means the methods are measuring "
              + "different things.",
-             "They are not. Strip each one back and it is the same arithmetic with a "
-             + "different answer to a single question: <b>how far Hispanic voters move.</b> "
-             + "The first slide below strips out the part that is not about the electorate at "
-             + "all: four pollsters asked about the Senate and the governor\u2019s race in "
-             + "the same field period with the same sample, and the gap between the two is "
-             + "the candidate rather than the voters. The second shows the largest "
-             + "remaining source of disagreement \u2014 take any past Texas result, carry "
-             + "it forward, and where you land depends more on WHICH year you start from "
-             + "than on any demographic assumption. The estimates themselves, and the three "
-             + "ways of asking what it would take, follow."])
+             "They are not. Two choices account for most of it, and neither is "
+             + "demographic. The first is the candidate: four pollsters asked about the "
+             + "Senate and the governor&rsquo;s race in the same field period with the "
+             + "same sample, and the gap between them is Paxton rather than the voters. "
+             + "The second is where you choose to start \u2014 take any past Texas "
+             + "result, carry it forward on its own year&rsquo;s national swing, and "
+             + "which year you picked moves the answer more than any assumption about "
+             + "who turns out.",
+             "Strip both out and what is left is a single question: <b>how far Hispanic "
+             + "voters move.</b> Chapter 4 is that question."])
         + paxtonCard()
         + baselineCard()
         // 4. the group doing the moving
@@ -989,6 +1012,7 @@
         + precinctCard()
         + volCard()
         // 5. three ways of asking what it would take
+        + watchCard(L)
         + framing("tx-frame-outcomes", "The outcomes",
             "Four ways of asking the same question",
             ["Everything above is evidence. None of it is an answer, because every piece "
@@ -997,15 +1021,16 @@
              + "is Hispanic voters \u2014 but nobody has measured how far they move.",
              "So the honest thing is not to produce one number. It is to ask what would "
              + "have to be true, from four directions, and see whether the answers agree. "
-             + "The first is a census of everyone else&rsquo;s number. The second asks it "
-             + "in votes: how big a banked lead, against how hard an election day. The "
-             + "third asks it in demographics: how far white and Hispanic voters each "
-             + "move. The fourth asks it in party blocs, with no demographics at all.",
+             + "The first asks it in votes: how big a banked lead, against how hard an "
+             + "election day. The second asks where those votes physically have to come "
+             + "from, county by county. The third asks it in demographics: how far "
+             + "white and Hispanic voters each move. The fourth asks it in party blocs, "
+             + "with no demographics in it at all.",
              "They are built from different data and they land in the same place, which is "
              + "the strongest thing this tab can say. A coin flip that four independent "
              + "routes agree on is still a coin flip \u2014 but it is a well-measured one."])
-        + estimatesCard()
         + bankedCard()
+        + countyGainCard()
         + gridCard("tx-sens", "Outcome 3 \u00b7 the demographic levers",
             "What it takes to flip Texas",
             "Statewide margin for each pair of assumed shifts. White applies in the "
@@ -1021,25 +1046,23 @@
         + gridCard("tx-blocs", "Outcome 4 \u00b7 the same question by bloc",
             "What it takes, by voting bloc",
             "Independents against the Republican bloc-size edge, with Democrats holding "
-            + "98% and crossover fixed at 2%. <b>Independents are 30% of the electorate "
-            + "here.</b> An earlier version used 20%, which was inconsistent with this "
-            + "same analysis: solving AtlasIntel&rsquo;s own bloc breaks to return its "
-            + "D+6 topline gives 29/30/41, i.e. 30% independent.",
+            + "98% and crossover fixed at 2%. <b>Independents are 30% of the electorate, "
+            + "from AtlasIntel</b> \u2014 solving its published bloc breaks to return its "
+            + "own D+6 topline gives 29% Democrat, 30% independent, 41% Republican. Texas "
+            + "has no party registration, so a poll is the only place a bloc size can come "
+            + "from.",
             D.blocs, "ind_break_D", "r_bloc_edge", "tx_margin_R",
             "Independents breaking Democratic \u2192", "\u2193 Republican size edge",
             "<b>The independent share is a lever-length assumption, not a level one.</b> "
             + "At even blocs a 50/50 split ties the race at <i>any</i> share \u2014 the "
             + "share only sets how fast the margin moves. A ten-point move among "
-            + "independents is worth 2.0 points of margin at 20%, and 3.0 at 30%, so the "
-            + "old 20% understated their power by a third. It also moves the break-even: "
-            + "AtlasIntel&rsquo;s R+12 blocs needed 78.8% of independents at 20% and need "
-            + "69.2% at 30%. The March primary \u2014 Democrats 51.70% of 4,479,000 "
+            + "independents is worth 2.0 points of margin if they are 20% of the electorate "
+            + "and 3.0 if they are 30%, so how big the bloc is matters as much as how it "
+            + "breaks. On AtlasIntel&rsquo;s own R+12 bloc sizes the race needs 69.2% of "
+            + "independents. The March primary \u2014 Democrats 51.70% of 4,479,000 "
             + "ballots \u2014 argues the blocs are nearer even, where the race turns on "
             + "independents splitting 50/50.",
             function (y) { return y === 0 ? "even" : (y > 0 ? "R+" : "D+") + Math.abs(y); })
-        // 6. where the votes physically come from, and the committed read
-        + watchCard(L)
-        + countyGainCard()
         + conclusionCard();
       var nav = '<p class="txnav">' + SECTIONS.map(function (s) {
         return '<a href="#' + s.id + '">' + esc(s.title) + "</a>";

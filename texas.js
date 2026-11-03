@@ -618,22 +618,37 @@
       s3 += "</svg>";
     }
 
+    var CMP = (D.cmp || []);
+    var cmpTbl = CMP.length ? ('<table class="txtbl" style="margin:12px 0"><thead><tr>'
+      + "<th>What the primary showed</th><th>2018</th><th>2026</th><th></th>"
+      + "</tr></thead><tbody>"
+      + CMP.map(function (r) {
+          var last = /Senate result/.test(r.input);
+          return "<tr" + (last ? ' class="em"' : "") + "><td>" + esc(r.input)
+            + '</td><td class="num dim">' + esc(r.y2018) + '</td><td class="num">'
+            + esc(r.y2026) + '</td><td class="num dem">'
+            + (r.stronger === "2026" ? "2026 higher" : r.stronger === "tie" ? "same" : "")
+            + "</td></tr>";
+        }).join("") + "</tbody></table>") : "";
     return card("tx-primfit", "Chapter 1 \u00b7 what the primary implies",
-      "The primary says Texas is competitive",
-      "<b>Here is the argument.</b> A Texas statewide race normally ends R+10 \u2014 that "
-      + "is the mean of the last three cycles, and the last four midterms average R+11.7. "
-      + "The 2024 Senate race on this same ballot line was R+8.50. <b>Run March\u2019s "
-      + "primary through the relationship that has held for seven cycles and it does not "
-      + "predict R+10. It predicts roughly even.</b> That is a nine-to-ten point statement "
-      + "about this race, made in March, by a certified count rather than a poll."
-      + "<br><br>Each dot below is one past Texas election. The first chart plots the "
-      + "change in Democratic primary votes since the last like election, the second the "
-      + "Democratic share of that primary. Down the page is how Republican November turned "
-      + "out. Both slope the same way, and 2026 sits off the right-hand end of both.",
-      s3 + s2,
-      "<b>Three ways to ask it, all landing near zero.</b> Growth is the better predictor "
-      + "and leads; share is the version that cannot see that Democratic primary votes "
-      + "more than doubled:"
+      "2026 is an outlier, and that is the finding",
+      "<b>Do not read this as a line with a dot at the end.</b> 2026 sits outside the "
+      + "range of every prior cycle on every primary measure there is \u2014 that is not a "
+      + "problem for the analysis, it is the analysis. The useful question is not what a "
+      + "line extrapolates to, but which past cycle 2026 most resembles and whether it "
+      + "beats it. <b>The answer is 2018, and 2026 is stronger on every input.</b>",
+      cmpTbl
+      + "<p class=\"txnote\" style=\"border-top:none;padding-top:0\">"
+      + "<b>2018 and 2026 sit in near-identical national environments</b> \u2014 the 2018 "
+      + "result was D+8.6 and the 2026 generic ballot is D+8.5, a tenth of a point apart. "
+      + "On every Texas primary input that can be measured, 2026 is ahead: more than twice "
+      + "the Democratic primary votes, faster growth, a share 10.9 points higher. "
+      + "<b>2018 produced R+2.57, the closest Texas had come since 1994.</b> So the "
+      + "question is whether a matching national year with better primary indicators lands "
+      + "better than R+2.57 \u2014 a comparison, which needs no extrapolation at all.</p>",
+      "<b>The regressions are a check on that, not the argument.</b> Each dot below is a "
+      + "past cycle; 2026 is the dashed line far to the right of all of them. Fitted three "
+      + "ways they give:"
       + '<table class="txtbl" style="margin:10px 0"><thead><tr><th>What you regress on</th>'
       + "<th>Cycles</th><th>Explains</th><th>2026</th></tr></thead><tbody>"
       + fits.map(function (q) {
@@ -642,21 +657,16 @@
             + (q.r2 * 100).toFixed(0) + '%</td><td class="num '
             + (q.pred < 0 ? "dem" : "rep") + '">' + mgn(q.pred, 2) + "</td></tr>";
         }).join("") + "</tbody></table>"
-      + "<b>The spread is three points and it straddles even.</b> Against a state that "
-      + "has not had a competitive statewide race since 2018, that is the finding \u2014 "
-      + "not the precision."
-      + "<br><br><b>It is corroborated by the banked vote.</b> Primary turnout is up 48.1% "
-      + "on 2022 and early voting is up 40.0% \u2014 different electorates, eight months "
-      + "apart, different mechanisms, almost the same number. The March surge was not a "
-      + "primary-only artefact. The direction only the primary can speak to: Democratic "
-      + "primary votes rose 115.6% against Republican 10.9%, and Texas records no party on "
-      + "the banked vote."
-      + "<br><br><b>Two things that should stop you taking the friendliest number.</b> The "
-      + "midterm-growth fit rests on three points and 2026 sits 24.8 beyond the highest it "
-      + "has seen, so it extrapolates hard; its residual spread is 4.82, wider than the "
-      + "share model\u2019s 4.11. And Democrats winning a Texas primary is not sufficient "
-      + "on its own \u2014 they won it in 2020 too, 2,094,428 to 2,017,167, and lost "
-      + "November by 5.58.");
+      + s3 + s2
+      + "<b>All three straddle even, against a state whose last three cycles average "
+      + "R+10.09 and whose last four midterms average R+11.66.</b> They disagree by three "
+      + "points, which is the honest uncertainty, and they agree on the thing that matters: "
+      + "nothing in this primary looks like a normal Texas midterm."
+      + "<br><br><b>What would break the comparison.</b> 2018 had Beto O\u2019Rourke and a "
+      + "first-term backlash; 2026 has a Republican nominee under indictment and a "
+      + "different opponent. The primary inputs match and improve, the candidates do not "
+      + "transfer, and Democrats won the 2020 primary too \u2014 2,094,428 to 2,017,167 "
+      + "\u2014 then lost that November by 5.58.");
   }
 
   function baselineCard() {
@@ -1462,7 +1472,7 @@
   window.renderTexas = function (host) {
     host.innerHTML = '<div class="txwrap-inner"><p class="txhint">Loading the Texas '
       + "analysis…</p></div>";
-    var want = [["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"],
+    var want = [["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
                 ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["meng", "tx_morris_engagement.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["pace", "tx_pace_gradient.csv"],

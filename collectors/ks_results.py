@@ -345,7 +345,22 @@ def proof(b, election=None):
         if archive and i > 1:
             time.sleep(3.5)
         for attempt in range(10):
-            doc = parse(page(f"{base}/{slug}.html", timeout=30, ready=has_races), slug)
+            # A slow render is not a layout change. page() waits for class="race" and
+            # returns the half-built page anyway when that wait times out; parse() then
+            # raises, and because this retry loop only caught the WRONG-COUNTY case the
+            # exception killed all 105. It failed on smith, then osborne, then geary -
+            # a different county every pass, which is the signature of a timing flake
+            # rather than a broken page. Each of those pages was fine when fetched by
+            # hand. Retry the fetch instead, and only give up after ten tries.
+            try:
+                doc = parse(page(f"{base}/{slug}.html", timeout=30, ready=has_races), slug)
+            except RuntimeError as exc:
+                if "no race blocks found" not in str(exc) or attempt == 9:
+                    raise
+                print(f"   {slug}.html came back unrendered — refetching "
+                      f"({attempt + 1}/10)")
+                time.sleep(4)
+                continue
             cname = (doc["title"] or "").replace(" County", "").strip()
             if key(cname) == key(slug):
                 break
@@ -463,8 +478,24 @@ def main(argv):
         index = b.fetch(INDEX, ready=lambda h: "Unofficial Kansas Election Results" in h
                                                and "allen.html" in h, timeout=240)
         slugs = county_slugs(index)
-        state_page = parse(b.fetch(f"{BASE}/national.html"), "national")
-        sw_page = parse(b.fetch(f"{BASE}/statewide.html"), "statewide")
+        # These two were fetched with no ready-wait and no retry, so the same slow
+        # render that was killing county pages killed these instead once the counties
+        # were protected. Same treatment: wait for the race blocks, retry a few times.
+        def solid(name):
+            for attempt in range(6):
+                try:
+                    return parse(b.fetch(f"{BASE}/{name}.html",
+                                         ready=lambda h: 'class="race"' in h,
+                                         timeout=60), name)
+                except RuntimeError as exc:
+                    if "no race blocks found" not in str(exc) or attempt == 5:
+                        raise
+                    print(f"   {name}.html came back unrendered — refetching "
+                          f"({attempt + 1}/6)")
+                    time.sleep(4)
+
+        state_page = solid("national")
+        sw_page = solid("statewide")
         names = list(state_page["races"]) + list(sw_page["races"])
 
         picked = match_races(names, WANT)

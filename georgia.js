@@ -308,7 +308,7 @@
       {c: ["2018 governor", n0(33814), "R+1.89", "R+5.25", "Kemp won &mdash; correct"]},
       {c: ["2022 senate", n0(258633), "R+18.24", "R+15.95",
            "Warnock led &mdash; correct"]},
-      {em: 1, c: ["<b>2026 governor</b>", "<b>" + n0(278773) + "</b>", "<b>R+19.23</b>",
+      {em: 1, c: ["<b>2026 governor</b>", "<b>" + n0(278773) + "</b>", "<b>R+21.44</b>",
                   "<b>&mdash;</b>", "<b>?</b>"]}
     ];
     return card("ga-valid", "Section 4 &middot; slide 3",
@@ -321,9 +321,9 @@
       + "two correct calls. Bottoms banks a lead close to Warnock&rsquo;s &mdash; against "
       + "an election day a couple of points smaller as a share of the electorate. "
       + "<b>Note the bar moved.</b> At the 1.2M the state was projecting at 1:30pm this "
-      + "read R+23.23; at a 1.45M day it would read R+19.23, because the "
+      + "read R+23.23; on the 1.3M we now project it reads <b>R+21.44</b>, because the "
       + "same lead spread over more ballots is a smaller margin per ballot. Walker fell "
-      + "2.29 short of R+18.24 in 2022.");
+      + "2.29 short of R+18.24 in 2022, and Warnock led on the night.");
   }
 
   /* =============================================================== render */

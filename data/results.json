@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-03T21:12:19+00:00",
+ "updated": "2026-11-03T21:16:32+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -69,29 +69,6 @@
      "counties": [],
      "updated": null,
      "tier": "tossup",
-     "roster_only": true,
-     "roster_source": "https://electionresultsfiles.sos.mn.gov/20261103/allracesbycounty.txt"
-    },
-    "governor": {
-     "candidates": [
-      {
-       "name": "Lisa Demuth and Ryan Wilson",
-       "party": "R"
-      },
-      {
-       "name": "Amy Klobuchar and Ben Schierer",
-       "party": "D"
-      },
-      {
-       "name": "Steven Young and Jane Kirby",
-       "party": "O"
-      },
-      {
-       "name": "WRITE-IN",
-       "party": "O"
-      }
-     ],
-     "counties": [],
      "roster_only": true,
      "roster_source": "https://electionresultsfiles.sos.mn.gov/20261103/allracesbycounty.txt"
     }
@@ -8403,21 +8380,6 @@
      "counties": [],
      "updated": null,
      "tier": "watch",
-     "roster_only": true,
-     "roster_source": "https://ent.sos.ks.gov/<county>.html (+ national.html and statewide.html for state totals), read with a real browser"
-    },
-    "governor": {
-     "candidates": [
-      {
-       "name": "Ty Masterson",
-       "party": "R"
-      },
-      {
-       "name": "Cindy Holscher",
-       "party": "D"
-      }
-     ],
-     "counties": [],
      "roster_only": true,
      "roster_source": "https://ent.sos.ks.gov/<county>.html (+ national.html and statewide.html for state totals), read with a real browser"
     }

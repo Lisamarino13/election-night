@@ -370,7 +370,7 @@
       return "<tr><td>D+" + n0(lead) + '</td><td class="num">' + mgn(tie)
         + '</td><td class="num">' + (50 + tie / 2).toFixed(2) + "%</td>" + cells + "</tr>";
     }).join("");
-    return card("tx-banked", "Section 5 · slide 3 · the banked lead",
+    return card("tx-banked", "Section 5 · slide 4 · the banked lead",
       "What election day would have to do",
       "Read down to the banked lead Texas reports, then across to the election-day margin "
       + "you find plausible. Election day is only " + ((1 - SHARE) * 100).toFixed(1)
@@ -934,7 +934,7 @@
       s += txt(L + w + 8, y + 13, n0(r.gain), "vl");
     });
     s += "</svg>";
-    return card("tx-gain", "Section 5 · slide 4 · where the votes have to come from",
+    return card("tx-gain", "Section 5 · slide 3 · where the votes have to come from",
       "Net Democratic gain by county",
       "What the model adds to each county versus its 2024 Senate result. The total needed "
       + "to erase R+5.98 is " + n0(305279) + "; the model produces " + n0(tot) + ".",
@@ -1131,8 +1131,8 @@
              + "routes agree on is still a coin flip \u2014 but it is a well-measured one."])
         + watchCard(L)
         + ethCard()
-        + bankedCard()
         + countyGainCard()
+        + bankedCard()
         + gridCard("tx-sens", "Section 5 \u00b7 slide 5 \u00b7 the demographic levers",
             "What it takes to flip Texas",
             "Statewide margin for each pair of assumed shifts. White applies in the "

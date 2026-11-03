@@ -1500,7 +1500,9 @@
             + "independents is worth 2.0 points of margin if they are 20% of the electorate "
             + "and 3.0 if they are 30%, so how big the bloc is matters as much as how it "
             + "breaks. On AtlasIntel&rsquo;s own R+12 bloc sizes the race needs 69.2% of "
-            + "independents. The March primary \u2014 Democrats 51.70% of 4,479,000 "
+            + "independents."
+            + "<br><br><b>Where history sits on that axis.</b> Nationally, independents went D+2 in the 2022 midterm and D+4 in 2024 \u2014 51% and 52% voting Democratic. 2026 polling has them near D+20, or 60%. AtlasIntel\u2019s own Texas crosstab has them at 64.5\u201328.0, which is 68.2%. Read the grid against those: at even blocs the 2024 figure is a coin flip, D+20 is a six-point Democratic win, and at AtlasIntel\u2019s R+12 bloc sizes even D+20 still loses by five and a half. The Democratic case in Texas needs independents roughly twice as far from 2024 as the national swing already is."
+            + "<br><br>The March primary \u2014 Democrats 51.70% of 4,479,000 "
             + "ballots \u2014 argues the blocs are nearer even, where the race turns on "
             + "independents splitting 50/50.",
             function (y) { return y === 0 ? "even" : (y > 0 ? "R+" : "D+") + Math.abs(y); })

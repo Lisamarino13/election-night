@@ -1,0 +1,42 @@
+{
+ "note": "Election-day turnout as officials report it during the day. These are STATEMENTS to the press, not a feed - each carries the time it was given and who gave it. They move: Georgia's projection went from 1.2M to 1.4-1.5M between 1:30pm and 2:45pm ET.",
+ "updated": "2026-11-03T21:55:00Z",
+ "states": {
+  "GA": {
+   "reported": 775000,
+   "as_of": "2:45pm ET",
+   "projected_low": 1400000,
+   "projected_high": 1500000,
+   "source": "Secretary of State Brad Raffensperger",
+   "trail": [
+    {"at": "10:00am ET", "ballots": 300000},
+    {"at": "1:30pm ET", "ballots": 650000},
+    {"at": "2:45pm ET", "ballots": 775000}
+   ],
+   "compare": {"2022 midterm": 1417799, "2018 midterm": 1788425, "2024 presidential": 1221257}
+  },
+  "TX": {
+   "reported": null,
+   "as_of": null,
+   "projected_low": null,
+   "projected_high": null,
+   "source": "Texas does not publish a statewide running count",
+   "trail": [],
+   "compare": {}
+  }
+ },
+ "counties": {
+  "TX:Harris": {
+   "reported": 143000,
+   "as_of": "1:15pm CT",
+   "source": "Harris County Clerk / Houston Chronicle",
+   "trail": [
+    {"at": "midmorning", "ballots": 88000},
+    {"at": "11:00am CT", "ballots": 100000},
+    {"at": "1:15pm CT", "ballots": 143000}
+   ],
+   "early_banked": 1036349,
+   "compare": {"2022 midterm eday": 349927, "2024 presidential eday": 315077}
+  }
+ }
+}

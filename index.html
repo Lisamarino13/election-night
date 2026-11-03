@@ -114,6 +114,24 @@ button:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px sol
 .boardnote{grid-column:1/-1;font-size:14px;line-height:1.55;color:var(--dim);
   border-left:3px solid var(--line);padding:2px 0 2px 12px;margin-bottom:2px}
 .boardnote b{color:var(--fg);font-weight:600}
+.edaybox{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--flag);
+  border-radius:0 3px 3px 0;padding:15px 17px;margin-bottom:16px}
+.edayhd{font-family:var(--display);font-size:17px;font-weight:600;margin:0 0 3px;
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.edayhd span{font-size:11px;font-weight:400;color:var(--dim);letter-spacing:.06em;
+  text-transform:uppercase}
+.edaylede{font-size:12.5px;color:var(--dim);margin:0 0 12px;line-height:1.5;max-width:76ch}
+.edaygrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.edaycell{border:1px solid var(--line);border-radius:3px;padding:11px 12px}
+.edayname{font-family:var(--display);font-size:13px;font-weight:600;margin:0 0 5px}
+.edaynum{font-family:var(--display);font-size:27px;line-height:1.1;
+  font-variant-numeric:tabular-nums}
+.edaysub{font-size:11.5px;color:var(--dim);line-height:1.45;margin-top:3px}
+.edaytrail{font-size:11px;color:var(--dim);margin-top:7px;font-variant-numeric:tabular-nums}
+.edaycmp{font-size:11.5px;margin-top:7px;padding-top:6px;border-top:1px solid var(--line);
+  line-height:1.5}
+.edaysrc{font-size:11px;color:var(--dim);margin-top:10px;padding-top:8px;
+  border-top:1px solid var(--line);line-height:1.5}
 .st.t-tossup{border-left:3px solid var(--flag)}
 .st.t-safe{opacity:.72}
 .states[hidden],#evwrap[hidden]{display:none!important}
@@ -374,6 +392,7 @@ FL, 41, 38, 21, 2400000"></textarea>
   <div style="margin-top:10px"><button id="applyEarly">Apply</button></div>
 </div>
 
+<section id="edaylive" class="edaybox" hidden></section>
 <div class="states" id="board"></div>
 <div id="chartwrap" class="chartbox" hidden></div>
 <div id="txwrap" class="chartbox" hidden></div>
@@ -1199,6 +1218,67 @@ async function renderTakeaways(){
 }
 
 
+// Election-day turnout as officials state it during the day. Not a feed and not a
+// projection of ours: each number is something a named official said at a named time,
+// and they move - Georgia's went from 1.2M to 1.4-1.5M between 1:30 and 2:45pm. Shown
+// because turnout is the one thing about election day that is knowable before the
+// count, and the size of election day sets how much the banked vote decides.
+let EDAY = null;
+// index.html has no escaper of its own - esc() lives in texas.js, which is a separate
+// script that may not have run. These strings are hand-written in data/eday-live.json,
+// but a figure typed in during a live night still goes through an escaper.
+const edesc = s => String(s == null ? "" : s)
+  .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+async function renderEdayLive(){
+  const host = document.getElementById("edaylive");
+  if (!host) return;
+  if (TAB !== "en") { host.hidden = true; return; }
+  if (!EDAY){
+    try{ EDAY = await (await fetch("data/eday-live.json?t="+Date.now())).json(); }
+    catch(e){ host.hidden = true; return; }
+  }
+  const nf = v => v==null ? "\u2014" : Number(v).toLocaleString("en-US");
+  const cells = [];
+  for (const [ab, d] of Object.entries(EDAY.states||{})){
+    if (d.reported == null) continue;
+    const st = (DATA.states||{})[ab];
+    const proj = d.projected_low && d.projected_high
+      ? nf(d.projected_low)+"\u2013"+nf(d.projected_high)+" projected" : "";
+    cells.push(`<div class="edaycell">
+      <p class="edayname">${st ? st.name : ab} &middot; statewide</p>
+      <b class="edaynum">${nf(d.reported)}</b>
+      <div class="edaysub">voted today as of ${edesc(d.as_of||"")}${proj ? " &middot; "+proj : ""}</div>
+      ${(d.trail||[]).length ? '<div class="edaytrail">'
+         + d.trail.map(t=>edesc(t.at)+" &middot; "+nf(t.ballots)).join(" &rarr; ") + "</div>" : ""}
+      ${Object.keys(d.compare||{}).length ? '<div class="edaycmp">'
+         + Object.entries(d.compare).map(([k,v])=>edesc(k)+": <b>"+nf(v)+"</b>").join("<br>")
+         + "</div>" : ""}</div>`);
+  }
+  for (const [key, d] of Object.entries(EDAY.counties||{})){
+    const [ab, nm] = key.split(":");
+    cells.push(`<div class="edaycell">
+      <p class="edayname">${edesc(nm)} County, ${edesc(ab)}</p>
+      <b class="edaynum">${nf(d.reported)}</b>
+      <div class="edaysub">voted today as of ${edesc(d.as_of||"")}${
+        d.early_banked ? " &middot; "+nf(d.early_banked)+" already banked early" : ""}</div>
+      ${(d.trail||[]).length ? '<div class="edaytrail">'
+         + d.trail.map(t=>edesc(t.at)+" &middot; "+nf(t.ballots)).join(" &rarr; ") + "</div>" : ""}
+      ${Object.keys(d.compare||{}).length ? '<div class="edaycmp">'
+         + Object.entries(d.compare).map(([k,v])=>edesc(k)+": <b>"+nf(v)+"</b>").join("<br>")
+         + "</div>" : ""}</div>`);
+  }
+  if (!cells.length){ host.hidden = true; return; }
+  host.hidden = false;
+  host.innerHTML = `<div class="edayhd">Voting today<span>${
+      EDAY.updated ? "as of "+new Date(EDAY.updated).toLocaleTimeString([], {hour:"numeric",minute:"2-digit"}) : ""
+    }</span></div>
+    <p class="edaylede">How many people are voting <b>today</b>, as officials report it.
+      Not a result and not our projection &mdash; it says how big election day is, which
+      is what decides how much the banked early vote settles.</p>
+    <div class="edaygrid">${cells.join("")}</div>
+    <p class="edaysrc">${edesc(EDAY.note||"")}</p>`;
+}
+
 function renderLastRun(){
   const el=document.getElementById("lastrun"); if(!el) return;
   let newest=null, states=0;
@@ -1518,6 +1598,7 @@ function setTab(t){
   document.getElementById("tabTX").classList.toggle("on", t==="tx");
   document.getElementById("tabGA").classList.toggle("on", t==="ga");
   document.getElementById("board").hidden = t!=="en";
+  renderEdayLive();
   document.getElementById("evwrap").hidden = t!=="ev";
   const cw = document.getElementById("chartwrap");
   cw.hidden = t!=="ch";

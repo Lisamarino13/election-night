@@ -1717,46 +1717,65 @@
     }).filter(function (r) { return r.sv != null; });
     if (!AG.length && !HD.length) return "";
 
-    // One chart: who is turning out ahead of their registration, and who behind.
-    var rows = HD.map(function (r) {
-      return {lab: r.g.replace("Sat out the 2022 midterm, then voted in 2024",
-                               "Sat out 2022, voted 2024")
-                    .replace("Registered after the 2022 midterm", "Registered after 2022")
-                    .replace("On the rolls in 2022 but did not vote",
-                             "On the rolls in 2022, didn\u2019t vote"),
-              gap: r.gap, t: null, kind: "hist", n: r.n};
-    })
-      .concat(AG.map(function (r) { return {lab: r.a + "", gap: r.gap, t: r.t, kind: "age"}; }))
-      .concat(G.map(function (r) {
-        return {lab: r.g.replace("Asian or Pacific Islander", "Asian / PI")
-                      .replace("Other or multiracial", "Other"),
-                gap: r.sv - r.sa, t: r.t, kind: "race"};
-      }));
-    var W = 760, H2 = 44 + rows.length * 26, L = 196, R = 124, T = 32;
-    var mx = 7;
-    var xs = function (v) { return L + (v + mx) / (2 * mx) * (W - L - R); };
-    var s2 = svg(W, H2, "Tarrant County: which groups are turning out ahead of their registration");
-    s2 += line(xs(0), T - 10, xs(0), H2 - 14, "zl");
-    s2 += txt(xs(0), T - 16, "at their share of registration", "tk", "middle");
-    s2 += txt(L, T - 16, "\u2190 turning out behind it", "lgd");
-    s2 += txt(W - R, T - 16, "ahead of it \u2192", "lgd", "end");
-    // Deliberately not blue and red: this axis is turnout against registration, not
-    // partisanship, and a blue bar on a tab where blue means Democratic reads as a
-    // Democratic margin. Neither end of this axis belongs to a party.
-    rows.forEach(function (r, i) {
-      var y = T + 6 + i * 26;
-      if (i > 0 && rows[i - 1].kind !== r.kind) {
-        s2 += line(8, y - 13, W - 8, y - 13, "gl");
-      }
-      s2 += txt(L - 12, y + 4, r.lab, "lb", "end");
-      s2 += rect(Math.min(xs(0), xs(r.gap)), y - 6, Math.abs(xs(r.gap) - xs(0)), 13,
-                 "currentColor", ' rx="2" opacity="' + (r.gap >= 0 ? "0.5" : "0.22") + '"');
-      s2 += txt(xs(r.gap) + (r.gap >= 0 ? 7 : -7), y + 4,
-                Math.abs(r.gap).toFixed(0) + " pts " + (r.gap >= 0 ? "ahead" : "behind"),
-                "vl", r.gap >= 0 ? "start" : "end");
-      s2 += txt(W - R + 44, y + 4,
-                 r.t == null ? n0(r.n) + " voters" : r.t + "% turnout", "tk");
+    /* This was three different quantities stacked in one column - a gap in points, a
+       voter count, and a turnout rate - across fifteen rows mixing voting history with
+       age with race, and it rounded the gap to whole numbers so several rows read
+       "0 pts ahead". One quantity now: turnout rate. Who is ahead of the county and who
+       is behind is then simply which side of the county line a bar ends on, which needs
+       no second unit and no label to explain it. The voting-history rows are not in it
+       because the file publishes no turnout rate for them - they are the paired bars
+       above, which is where they belong. */
+    var TURN = AG.map(function (r) {
+      return {lab: r.a.replace("-", "–"), t: r.t, n: r.n, kind: "Age"};
+    }).concat(G.map(function (r) {
+      return {lab: r.g.replace("Asian or Pacific Islander", "Asian / Pacific Islander")
+                    .replace("Other or multiracial", "Other or multiracial"),
+              t: r.t, n: r.n, kind: "Race and ethnicity"};
+    })).filter(function (r) { return r.t != null; });
+    var OVERALL = 47.1;
+    var wide2 = !NARROW;
+    var W = wide2 ? 760 : 360, L = wide2 ? 188 : 8, R = wide2 ? 92 : 8;
+    var ROW = wide2 ? 27 : 38, HDR = 26, T = 54;
+    var blocks = [];
+    TURN.forEach(function (r) {
+      var f = blocks.filter(function (x) { return x.name === r.kind; })[0];
+      if (!f) { f = {name: r.kind, rows: []}; blocks.push(f); }
+      f.rows.push(r);
     });
+    var H2 = T + blocks.reduce(function (a2, f) {
+      return a2 + HDR + f.rows.length * ROW + 10;
+    }, 0) + 16;
+    var xs = function (v) { return L + v / 80 * (W - L - R); };
+    var s2 = svg(W, H2, "Tarrant County early turnout rate by age and by race, against "
+                      + "the county's own rate");
+    [0, 20, 40, 60, 80].forEach(function (t) {
+      s2 += line(xs(t), T - 16, xs(t), H2 - 14, "gl")
+         + txt(xs(t), H2 - 3, t + "%", "tk", "middle");
+    });
+    // the county's own rate, which is what "ahead" and "behind" were trying to say
+    s2 += '<line x1="' + xs(OVERALL) + '" y1="' + (T - 20) + '" x2="' + xs(OVERALL)
+       + '" y2="' + (H2 - 14) + '" class="zl"/>'
+       + txt(xs(OVERALL), T - 26, "the county: " + OVERALL + "%", "lgd", "middle");
+    s2 += txt(wide2 ? 0 : 8, 16, "Share of each group's active registered voters who had "
+              + "voted by 30 October", "lgd");
+    var y = T;
+    blocks.forEach(function (f) {
+      s2 += txt(wide2 ? 0 : 8, y + 12, f.name.toUpperCase(), "lgd");
+      y += HDR;
+      f.rows.forEach(function (r) {
+        var top = y + (wide2 ? 4 : 12);
+        if (wide2) s2 += txt(L - 12, top + 10, r.lab, "lb", "end");
+        else s2 += txt(8, y + 9, r.lab, "lb");
+        var ahead = r.t >= OVERALL;
+        s2 += rect(xs(0), top, xs(r.t) - xs(0), 13, "currentColor",
+                   ' rx="2" opacity="' + (ahead ? "0.52" : "0.22") + '"')
+           + txt(xs(r.t) + 8, top + 11, r.t + "%", "vl");
+        if (wide2) s2 += txt(W - R + 44, top + 11, n0(r.n), "tk", "end");
+        y += ROW;
+      });
+      y += 10;
+    });
+    if (wide2) s2 += txt(W - R + 44, T - 26, "voters", "lgd", "end");
     s2 += "</svg>";
 
     var tbl = function (head, body) {
@@ -1817,7 +1836,23 @@
          + "of the people who have already voted",
          "share of all registered", "share of the voters who have voted")
       + histTbl + s2,
-      "<b>An eight-point swing, in the part of the electorate that leans most "
+      "<b>How the margin on that chart is calculated, because it matters.</b> It is "
+      + "simply <b>D% minus R%</b>. The Neither column is not allocated, not split, not "
+      + "estimated — it is left out. So <i>D+2.6</i> describes 57% of this "
+      + "electorate and is silent on the other 43%."
+      + "<br><br><b>Which means the chart understates the shift.</b> Neither grew from "
+      + "29.5% of the 2022 early vote to 43.0% of this one, so the pool that D and R are "
+      + "drawn from shrank from 70.5% to 57.0%. Both shares fall, so the gap between them "
+      + "falls too, <i>with nobody changing their mind</i>. Measure the same thing among "
+      + "voters who actually have a primary history and the move is half again as large: "
+      + "<b>R+7.23 to D+4.56, a swing of 11.8 points</b>, against the 7.7 the headline "
+      + "margin shows."
+      + "<br><br><b>And the 43% is the whole ball game.</b> It is 253,121 ballots already "
+      + "cast that this measure says nothing whatever about. Every number on this chart "
+      + "is a fact about the minority of the electorate that has picked a primary since "
+      + "2022. The next card is about the other group, because it is bigger than either "
+      + "party and it decides the county."
+      + "<br><br><b>An eight-point swing, in the part of the electorate that leans most "
       + "Republican.</b> In his words: <i>\u201cThat\u2019s a swing of nearly 8 points "
       + "toward Democrats since 2022, in the most Republican-leaning part of the "
       + "electorate, the people who vote early.\u201d</i> The Neither camp went from 29.5% "
@@ -1900,9 +1935,49 @@
         }).join("")
       + "</tbody></table></div>";
 
+    var RW = C.filter(function (r) { return r.u === "pct"; });
+    /* The headline claim, on its own, before the three-camp version: the Neither bucket
+       IS Tarrant County. Paired bars rather than deviation dots, because "these two bars
+       are the same length on every line" is the whole point and a dot at zero does not
+       say it as loudly. Largest gap on any line is 3 points; the mean is 1.5. */
+    var mirror = "";
+    if (RW.length) {
+      var wideM = !NARROW;
+      var WM = wideM ? 760 : 360, LM = wideM ? 212 : 8, RMM = wideM ? 92 : 64;
+      var ROWM = wideM ? 42 : 52, TM = 44;
+      var HM = TM + RW.length * ROWM + 14;
+      var mxM = Math.max.apply(null, RW.map(function (r) {
+        return Math.max(r.c, r.n); })) * 1.1;
+      var xm = function (v) { return (v / mxM) * (WM - LM - RMM); };
+      mirror = svg(WM, HM, "Tarrant County's active voters against the Neither bucket, "
+                         + "line by line");
+      mirror += '<rect x="' + (wideM ? LM : 8) + '" y="8" width="11" height="11" '
+             + 'fill="currentColor" opacity="0.22" rx="2"/>'
+             + txt((wideM ? LM : 8) + 17, 18, "Tarrant County, all active voters", "lgd")
+             + '<rect x="' + ((wideM ? LM : 8) + 196) + '" y="8" width="11" height="11" '
+             + 'fill="currentColor" opacity="0.62" rx="2"/>'
+             + txt((wideM ? LM : 8) + 213, 18, "the Neither bucket", "lgd");
+      if (wideM) mirror += txt(WM - RMM + 14, 18, "difference", "lgd");
+      var ym = TM;
+      RW.forEach(function (r) {
+        if (wideM) mirror += txt(LM - 14, ym + 16, r.m, "lb", "end");
+        else mirror += txt(8, ym - 2, r.m, "lb");
+        var top = wideM ? ym : ym + 6;
+        mirror += rect(LM, top, xm(r.c), 12, "currentColor", ' opacity="0.22" rx="2"')
+               + txt(LM + xm(r.c) + 7, top + 10, r.c.toFixed(0) + "%", "tk")
+               + rect(LM, top + 14, xm(r.n), 12, "currentColor", ' opacity="0.62" rx="2"')
+               + txt(LM + xm(r.n) + 7, top + 24, r.n.toFixed(0) + "%", "vl");
+        var d = r.n - r.c;
+        mirror += txt(wideM ? WM - RMM + 14 : WM - 8, top + 17,
+                      (d === 0 ? "same" : (d > 0 ? "+" : "−") + Math.abs(d).toFixed(0)),
+                      "vl", wideM ? "start" : "end");
+        ym += ROWM;
+      });
+      mirror += "</svg>";
+    }
+
     /* --- the same table as distance from the county, which is where his finding is:
        "within a point or two of the county's active voters on almost every line" */
-    var RW = C.filter(function (r) { return r.u === "pct"; });
     var dev = "";
     if (RW.length) {
       var wide = !NARROW;
@@ -1960,7 +2035,7 @@
       + "drawn as distance from the county’s own active voters, because that is the "
       + "claim being made: <i>“on age, gender and race, they’re within a point or "
       + "two of the county’s active voters on almost every line.”</i>",
-      tbl + dev + slTbl,
+      tbl + mirror + dev + slTbl,
       "<b>His reading of the three columns, in his words.</b> <i>“The Neither voters "
       + "look like Tarrant County. On age, gender and race, they’re within a point or "
       + "two of the county’s active voters on almost every line. They aren’t a "

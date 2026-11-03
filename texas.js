@@ -510,7 +510,7 @@
       + "turned out before, Tackett measures composition by which primary a voter last "
       + "chose. Neither method can produce the other&rsquo;s number. Each row is one "
       + "claim with each county&rsquo;s own evidence for it beside it.",
-      s2,
+      s2 + scopeFig + shTbl,
       "<b>Six claims, two instruments, same direction on all six.</b> The movement sits "
       + "with irregular voters (Harris: a 13.2-point Democratic turnout lead among those "
       + "who skipped 2022; Tarrant: 48.8% of early voters skipped 2022) and not with "
@@ -3086,11 +3086,75 @@
       y += ROW;
     });
     s2 += "</svg>";
+
+    /* The scope, drawn: which of the fifteen are in and why. And then the share
+       sensitivity, because applying Tarrant's 43% to five other counties is one
+       assumption, not six measurements, and an earlier version of this card printed it
+       as a per-county figure as though it had been measured in each. */
+    var SC = (D.nscope || []).map(function (r) {
+      return {c: r.county, t: num(r.proj_turnout), nw: num(r.pct_nonwhite),
+              sc: r.scope, meas: r.measured === "yes"};
+    }).filter(function (r) { return r.t != null; });
+    var scopeFig = "";
+    if (SC.length) {
+      var wd = !NARROW;
+      var W3 = wd ? 760 : 360, L3 = wd ? 112 : 8, R3 = wd ? 150 : 56;
+      var RW = wd ? 24 : 30, T3 = 46, H3 = T3 + SC.length * RW + 16;
+      var mxv = Math.max.apply(null, SC.map(function (r) { return r.t; })) * 1.06;
+      var COL = {"in": DC, "cusp": DC, "border": RC, "white": "currentColor"};
+      var OP = {"in": "0.75", "cusp": "0.45", "border": "0.4", "white": "0.18"};
+      scopeFig = svg(W3, H3, "Which of the fifteen largest counties the finding travels to");
+      scopeFig += txt(wd ? 0 : 8, 16, "projected turnout \u2014 solid in scope, pale out "
+                      + "of scope", "lgd");
+      if (wd) scopeFig += txt(W3 - R3 + 12, 16, "non-white", "lgd");
+      SC.forEach(function (r, i) {
+        var y = T3 + i * RW;
+        var w = r.t / mxv * (W3 - L3 - R3);
+        if (wd) scopeFig += txt(L3 - 10, y + 12, r.c + (r.meas ? " \u25cf" : ""),
+                                r.meas ? "lbb" : "lb", "end");
+        else scopeFig += txt(8, y + 4, r.c + (r.meas ? " \u25cf" : ""), "lb");
+        scopeFig += rect(L3, y + (wd ? 2 : 7), w, 13, COL[r.sc],
+                         ' rx="2" opacity="' + OP[r.sc] + '"');
+        if (wd) {
+          scopeFig += txt(L3 + w + 7, y + 12, n0(r.t), "tk")
+                   + txt(W3 - R3 + 12, y + 12, r.nw.toFixed(1) + "%  " + r.sc, "sub");
+        }
+      });
+      scopeFig += "</svg>";
+    }
+
+    /* the share assumption, sensitised */
+    var SH = (D.nshare || []).map(function (r) {
+      return {s: num(r.assumed_neither_share), nb: num(r.neither_ballots),
+              pp: num(r.statewide_points_per_point), h: num(r.hinojosa_needs_pct),
+              t: num(r.talarico_floor_pct)};
+    }).filter(function (r) { return r.s != null; });
+    var shTbl = SH.length ? ('<div class="scroll"><table class="txtbl" '
+      + 'style="margin-top:14px"><thead><tr><th>If the Neither share is</th>'
+      + "<th>Ballots in scope</th><th>Worth per point</th><th>Hinojosa needs</th>"
+      + "<th>Talarico covered above</th></tr></thead><tbody>"
+      + SH.map(function (r) {
+          return "<tr" + (r.s === 43 ? ' class="em"' : "") + "><td>" + r.s + "%"
+            + (r.s === 43 ? " \u2014 Tarrant\u2019s measured share" : "")
+            + '</td><td class="num">' + n0(r.nb) + '</td><td class="num">'
+            + r.pp.toFixed(3) + ' pts</td><td class="num rep">' + r.h
+            + '%</td><td class="num dem">' + r.t + "%</td></tr>";
+        }).join("") + "</tbody></table></div>") : "";
     return card("tx-neither-big", "Section 4 · slide 2 · the Neither bloc, extrapolated",
       "What the Neither bloc has done, and what it is worth across the big fifteen",
-      "<b>Tarrant is the only county that publishes this, so the break has to be solved "
-      + "for rather than read off.</b> Hold both parties at 95% loyalty, take the camp "
-      + "split the file gives for each past cycle, and ask what the Neither bloc must "
+      "<b>The licence for projecting this out is the previous section.</b> Harris and "
+      + "Tarrant agree on the mechanism — the movement sits with irregular and new "
+      + "voters, the Republican coalition is the reliable one and is not replenishing "
+      + "— and they agree on it from two instruments that cannot produce each "
+      + "other&rsquo;s number. Morris measures turnout rates by engagement tier from the "
+      + "Harris voter file; Tackett measures composition by primary camp from the Tarrant "
+      + "one. Two analysts, two counties that are not the same kind of place, one "
+      + "direction. <b>That agreement is what makes this a projection rather than a "
+      + "guess</b>, and it is what sets how far it travels: Section 4 carries it only "
+      + "across the band those two counties bracket."
+      + "<br><br>Tarrant is the one county that publishes the camps, so the break itself "
+      + "is solved for rather than read off. Hold both parties at 95% loyalty, take the "
+      + "camp split the file gives for each past cycle, and ask what the Neither bloc must "
       + "have done to produce the result Tarrant actually got. The two dashed lines are "
       + "what each 2026 candidate needs from the same bloc.",
       s2,
@@ -3098,6 +3162,14 @@
       + "2022 — two cycles, two very different national environments, the same "
       + "answer to a tenth of a point. That is the most stable number anywhere on this "
       + "tab."
+      + "<br><br><b>And Harris says the same thing from the other direction, which is "
+      + "the whole basis for projecting it.</b> Measured by engagement tier rather than "
+      + "primary camp, the Democratic turnout edge is <i>widest</i> among exactly the "
+      + "voters who make up this bloc \u2014 13.2 points among those who skipped the 2022 "
+      + "midterm against 5.0 among the most reliable. Tarrant says the bloc is large, "
+      + "new and looks like the county; Harris says voters of that description are "
+      + "turning out more Democratic than anyone else. Neither county could have produced "
+      + "the other\u2019s evidence, and they point the same way."
       + "<br><br><b>Why it should break better than 50 this time, not worse.</b> The bloc "
       + "is <b>43.0%</b> of the early vote against 29.5% in 2022, it mirrors the county "
       + "within 1.5 points on every demographic line, and more than a quarter of it "
@@ -3424,7 +3496,7 @@
     var want = [["meth", "tx_methods.csv"], ["modes", "tx_modes_statewide.csv"], ["order", "tx_reporting_order.csv"], ["est", "tx_estimates.csv"], ["prim", "tx_primary_series.csv"], ["fit", "tx_primary_fit.csv"], ["cmp", "tx_2018_compare.csv"],
                 ["base", "tx_baseline.csv"], ["pax", "tx_paxton.csv"],
                 ["sens", "tx_sensitivity.csv"], ["blocs", "tx_blocs.csv"],
-                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["tsens", "tx_tarrant_sensitivity.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
+                ["eth", "tx_ethnicity.csv"], ["prec", "tx_precincts.csv"], ["tarr", "tx_tarrant_precincts.csv"], ["tarrh", "tx_tarrant_history.csv"], ["tgrp", "tx_tarrant_groups.csv"], ["tarrhd", "tx_tarrant_history_detail.csv"], ["tage", "tx_tarrant_age.csv"], ["hair", "tx_haircut.csv"], ["hsens", "tx_hispanic_sensitivity.csv"], ["hmark", "tx_hispanic_markers.csv"], ["nscope", "tx_neither_scope.csv"], ["nshare", "tx_neither_share.csv"], ["rur", "tx_rural.csv"], ["nhist", "tx_neither_history.csv"], ["lev", "tx_levers.csv"], ["twoc", "tx_two_counties.csv"], ["tsens", "tx_tarrant_sensitivity.csv"], ["svt", "tx_senate_vs_ticket.csv"], ["sg", "tx_sen_gov_2026.csv"], ["only", "tx_2026_only.csv"], ["camps", "tx_tarrant_camps.csv"], ["tsl", "tx_tarrant_sliders.csv"], ["cshare", "tx_tarrant_camp_shares.csv"], ["meng", "tx_morris_engagement.csv"], ["mpoll", "tx_morris_polls.csv"], ["mhar", "tx_morris_harris.csv"], ["xtab", "tx_crosstabs.csv"], ["exit", "tx_exit_2024.csv"], ["perr", "tx_poll_error.csv"], ["pdate", "tx_polls_dated.csv"], ["pace", "tx_pace_gradient.csv"],
                 ["vol", "tx_volatility.csv"], ["cty", "tx_counties.csv"],
                 ["watch", "tx_watch.json"]];
     Promise.all(want.map(function (p) {

@@ -2353,11 +2353,21 @@
     });
     s += "</svg>";
     return card("tx-gain", "Section 4 · slide 2 · where the votes have to come from",
-      "Net Democratic gain by county",
+      "Net Democratic gain by county, needed to overcome the rural Republican bias",
       "What the model adds to each county versus its 2024 Senate result. The total needed "
-      + "to erase R+5.98 is " + n0(305279) + "; the model produces " + n0(tot) + ".",
+      + "to erase R+5.98 is " + n0(305279) + "; the model produces " + n0(tot) + ". The "
+      + "reason it has to be this large is the shape of the state: Republicans win 225 of "
+      + "the 254 counties, and those 225 produce <b>1,377,318</b> net Republican votes "
+      + "that have to be cleared before a single statewide vote of margin exists.",
       s,
-      "<b>Concentration risk.</b> Five counties supply " + (top5 / tot * 100).toFixed(1)
+      "<b>The rural bias, measured.</b> The 15 largest counties produce <b>1,265,790</b> "
+      + "net Democratic votes on 6.9 million ballots. The other 239 produce "
+      + "<b>1,199,649</b> net Republican votes on 3.3 million. Those two nearly cancel, "
+      + "and what is left over is the entire statewide margin: <b>66,141</b> votes, or "
+      + "<b>0.65 points</b> \u2014 which is where the model\u2019s D+0.65 comes from. "
+      + "Rural Texas is only a third of the ballots and it very nearly erases the metros "
+      + "entirely."
+      + "<br><br><b>Concentration risk.</b> Five counties supply " + (top5 / tot * 100).toFixed(1)
       + "% of the net gain and ten supply " + (top10 / tot * 100).toFixed(1) + "%. A miss "
       + "in Harris or Dallas cannot be made up in rural Texas, and the whole cushion is "
       + n0(tot - 305279) + " votes out of 10.2 million.");

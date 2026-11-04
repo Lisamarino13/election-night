@@ -439,6 +439,12 @@ def proof(b, election=None):
             summed = sum((c["races"].get(race, {}).get("choices", {}).get(who, {}) or {})
                          .get("votes", 0) for c in counties.values())
             if summed != votes:
+                # Counties ABOVE the statewide page means that rollup has not caught up -
+                # normal mid-count, and the county pages are the source. BELOW it means a
+                # county is missing from this run, which IS a fault.
+                if summed > votes:
+                    lag.append(f"{race}/{who}: {summed:,} vs {votes:,}")
+                    continue
                 raise RuntimeError(f"KS {race}: counties sum to {summed:,} for {who} but "
                                    f"the statewide page says {votes:,}")
         rep = sum((c["races"].get(race) or {}).get("precincts_reporting") or 0
@@ -530,8 +536,29 @@ def main(argv):
         cast, cast_as_of = early_cast()
 
         counties, any_votes = {}, False
+        # The LIVE path had no retry and no skip - it raised on the first county whose
+        # page came back unrendered, so one slow render discarded the other 104 and
+        # Kansas published nothing all night. `missing` was declared only in proof(), so
+        # main() then died again with NameError when it tried to report the skips.
+        missing, lag = [], []
         for slug in slugs:
-            page = parse(b.fetch(f"{BASE}/{slug}.html"), slug)
+            page = None
+            for attempt in range(10):
+                try:
+                    page = parse(b.fetch(f"{BASE}/{slug}.html"), slug)
+                    break
+                except RuntimeError as exc:
+                    if "no race blocks found" not in str(exc):
+                        raise
+                    if attempt == 9:
+                        page = None
+                        break
+                    print(f"   {slug}.html came back unrendered — refetching ({attempt+1}/10)")
+                    time.sleep(4)
+            if page is None:
+                missing.append(slug)
+                print(f"   {slug}.html never rendered — skipped ({len(missing)} missing)")
+                continue
             cname = (page["title"] or slug.title()).replace(" County", "").strip()
             rec = counties.setdefault(cname, {"races": {}})
             for race, hits in match_races(page["races"], WANT).items():
@@ -553,7 +580,10 @@ def main(argv):
                     "early_and_mail_cast": cast.get(early_cast_shared.ckey(cname)),
                 }
             if not rec["races"]:
-                raise RuntimeError(f"{slug}.html carried none of {sorted(WANT)}")
+                counties.pop(cname, None)
+                missing.append(slug)
+                print(f"   {slug}.html carried none of {sorted(WANT)} — skipped")
+                continue
 
         totals = {}
         for race, hits in picked.items():

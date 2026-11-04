@@ -3,10 +3,10 @@
  "unit": "county",
  "source_kind": "ohio-enr",
  "election": "2026 General",
- "feed_generated": "2026-11-04T01:15:36Z",
+ "feed_generated": "2026-11-04T01:18:36Z",
  "feed_status": "UnofficialPartial",
  "is_test_data": false,
- "fetched": "2026-11-04T01:18:12+00:00",
+ "fetched": "2026-11-04T01:19:30+00:00",
  "early_cast_as_of": "11/3/2026",
  "counties": {
   "Adams": {
@@ -107,7 +107,7 @@
    "registered": 64090,
    "ballots_cast": 0,
    "precincts_total": 88,
-   "precincts_reporting": 0,
+   "precincts_reporting": 29,
    "count_status": "InProcess",
    "ballots_by_mode": {
     "total": 0,
@@ -121,18 +121,18 @@
    "early_and_mail_left": 0,
    "races": {
     "governor": {
-     "Vivek Ramaswamy": 6197,
-     "Amy Acton": 5081,
-     "Don Kissick": 402,
+     "Vivek Ramaswamy": 10136,
+     "Amy Acton": 7334,
+     "Don Kissick": 801,
      "Timothy Grady": 0,
      "Heather Hill": 0,
      "Renea Turner": 0
     },
     "senate": {
-     "Jon Husted": 6187,
-     "Sherrod Brown": 5034,
-     "William Redpath": 238,
-     "Greg Levy": 208,
+     "Jon Husted": 10117,
+     "Sherrod Brown": 7143,
+     "William Redpath": 571,
+     "Greg Levy": 417,
      "Stephen Faris": 0,
      "Anthony Holliman": 0,
      "Timothy Telymonde": 0
@@ -142,7 +142,7 @@
     "governor": {
      "Amy Acton": {
       "early": 0,
-      "election_day": 5081
+      "election_day": 7334
      },
      "Timothy Grady": {
       "early": 0,
@@ -154,11 +154,11 @@
      },
      "Don Kissick": {
       "early": 0,
-      "election_day": 402
+      "election_day": 801
      },
      "Vivek Ramaswamy": {
       "early": 0,
-      "election_day": 6197
+      "election_day": 10136
      },
      "Renea Turner": {
       "early": 0,
@@ -168,7 +168,7 @@
     "senate": {
      "Sherrod Brown": {
       "early": 0,
-      "election_day": 5034
+      "election_day": 7143
      },
      "Stephen Faris": {
       "early": 0,
@@ -180,15 +180,15 @@
      },
      "Jon Husted": {
       "early": 0,
-      "election_day": 6187
+      "election_day": 10117
      },
      "Greg Levy": {
       "early": 0,
-      "election_day": 208
+      "election_day": 417
      },
      "William Redpath": {
       "early": 0,
-      "election_day": 238
+      "election_day": 571
      },
      "Timothy Telymonde": {
       "early": 0,
@@ -1329,7 +1329,7 @@
    "registered": 63835,
    "ballots_cast": 0,
    "precincts_total": 73,
-   "precincts_reporting": 0,
+   "precincts_reporting": 20,
    "count_status": "InProcess",
    "ballots_by_mode": {
     "total": 0,
@@ -1991,30 +1991,30 @@
    "count_status": "InProcess",
    "ballots_by_mode": {
     "total": 0,
-    "absentee": 0,
+    "absentee": 198467,
     "provisional": 0
    },
    "outstanding_uocava": 30,
    "outstanding_provisional": 0,
    "early_and_mail_cast": 14191,
-   "early_and_mail_counted": 0,
-   "early_and_mail_left": 14191,
+   "early_and_mail_counted": 198467,
+   "early_and_mail_left": 0,
    "races": {
     "governor": {
-     "Amy Acton": 0,
+     "Amy Acton": 8212,
+     "Vivek Ramaswamy": 5537,
+     "Don Kissick": 373,
      "Timothy Grady": 0,
      "Heather Hill": 0,
-     "Don Kissick": 0,
-     "Vivek Ramaswamy": 0,
      "Renea Turner": 0
     },
     "senate": {
-     "Sherrod Brown": 0,
+     "Sherrod Brown": 8043,
+     "Jon Husted": 5664,
+     "William Redpath": 270,
+     "Greg Levy": 200,
      "Stephen Faris": 0,
      "Anthony Holliman": 0,
-     "Jon Husted": 0,
-     "Greg Levy": 0,
-     "William Redpath": 0,
      "Timothy Telymonde": 0
     }
    },
@@ -2022,7 +2022,7 @@
     "governor": {
      "Amy Acton": {
       "early": 0,
-      "election_day": 0
+      "election_day": 8212
      },
      "Timothy Grady": {
       "early": 0,
@@ -2034,11 +2034,11 @@
      },
      "Don Kissick": {
       "early": 0,
-      "election_day": 0
+      "election_day": 373
      },
      "Vivek Ramaswamy": {
       "early": 0,
-      "election_day": 0
+      "election_day": 5537
      },
      "Renea Turner": {
       "early": 0,
@@ -2048,7 +2048,7 @@
     "senate": {
      "Sherrod Brown": {
       "early": 0,
-      "election_day": 0
+      "election_day": 8043
      },
      "Stephen Faris": {
       "early": 0,
@@ -2060,15 +2060,15 @@
      },
      "Jon Husted": {
       "early": 0,
-      "election_day": 0
+      "election_day": 5664
      },
      "Greg Levy": {
       "early": 0,
-      "election_day": 0
+      "election_day": 200
      },
      "William Redpath": {
       "early": 0,
-      "election_day": 0
+      "election_day": 270
      },
      "Timothy Telymonde": {
       "early": 0,
@@ -2269,7 +2269,7 @@
    "registered": 906080,
    "ballots_cast": 0,
    "precincts_total": 889,
-   "precincts_reporting": 0,
+   "precincts_reporting": 3,
    "count_status": "InProcess",
    "ballots_by_mode": {
     "total": 0,
@@ -2555,30 +2555,30 @@
    "count_status": "InProcess",
    "ballots_by_mode": {
     "total": 0,
-    "absentee": 0,
+    "absentee": 138660,
     "provisional": 0
    },
    "outstanding_uocava": 53,
    "outstanding_provisional": 0,
    "early_and_mail_cast": 18815,
-   "early_and_mail_counted": 0,
-   "early_and_mail_left": 18815,
+   "early_and_mail_counted": 138660,
+   "early_and_mail_left": 0,
    "races": {
     "governor": {
-     "Amy Acton": 0,
+     "Amy Acton": 5922,
+     "Vivek Ramaswamy": 4428,
+     "Don Kissick": 156,
      "Timothy Grady": 0,
      "Heather Hill": 0,
-     "Don Kissick": 0,
-     "Vivek Ramaswamy": 0,
      "Renea Turner": 0
     },
     "senate": {
-     "Sherrod Brown": 0,
+     "Sherrod Brown": 5816,
+     "Jon Husted": 4547,
+     "William Redpath": 140,
+     "Greg Levy": 64,
      "Stephen Faris": 0,
      "Anthony Holliman": 0,
-     "Jon Husted": 0,
-     "Greg Levy": 0,
-     "William Redpath": 0,
      "Timothy Telymonde": 0
     }
    },
@@ -2586,7 +2586,7 @@
     "governor": {
      "Amy Acton": {
       "early": 0,
-      "election_day": 0
+      "election_day": 5922
      },
      "Timothy Grady": {
       "early": 0,
@@ -2598,11 +2598,11 @@
      },
      "Don Kissick": {
       "early": 0,
-      "election_day": 0
+      "election_day": 156
      },
      "Vivek Ramaswamy": {
       "early": 0,
-      "election_day": 0
+      "election_day": 4428
      },
      "Renea Turner": {
       "early": 0,
@@ -2612,7 +2612,7 @@
     "senate": {
      "Sherrod Brown": {
       "early": 0,
-      "election_day": 0
+      "election_day": 5816
      },
      "Stephen Faris": {
       "early": 0,
@@ -2624,15 +2624,15 @@
      },
      "Jon Husted": {
       "early": 0,
-      "election_day": 0
+      "election_day": 4547
      },
      "Greg Levy": {
       "early": 0,
-      "election_day": 0
+      "election_day": 64
      },
      "William Redpath": {
       "early": 0,
-      "election_day": 0
+      "election_day": 140
      },
      "Timothy Telymonde": {
       "early": 0,
@@ -2927,7 +2927,7 @@
    "registered": 49936,
    "ballots_cast": 0,
    "precincts_total": 60,
-   "precincts_reporting": 0,
+   "precincts_reporting": 17,
    "count_status": "InProcess",
    "ballots_by_mode": {
     "total": 0,
@@ -4153,30 +4153,30 @@
    "count_status": "InProcess",
    "ballots_by_mode": {
     "total": 0,
-    "absentee": 0,
+    "absentee": 437417,
     "provisional": 0
    },
    "outstanding_uocava": 50,
    "outstanding_provisional": 0,
    "early_and_mail_cast": 30349,
-   "early_and_mail_counted": 0,
-   "early_and_mail_left": 30349,
+   "early_and_mail_counted": 437417,
+   "early_and_mail_left": 0,
    "races": {
     "governor": {
-     "Amy Acton": 0,
+     "Amy Acton": 15597,
+     "Vivek Ramaswamy": 13597,
+     "Don Kissick": 900,
      "Timothy Grady": 0,
      "Heather Hill": 0,
-     "Don Kissick": 0,
-     "Vivek Ramaswamy": 0,
      "Renea Turner": 0
     },
     "senate": {
-     "Sherrod Brown": 0,
+     "Sherrod Brown": 15044,
+     "Jon Husted": 14092,
+     "William Redpath": 626,
+     "Greg Levy": 421,
      "Stephen Faris": 0,
      "Anthony Holliman": 0,
-     "Jon Husted": 0,
-     "Greg Levy": 0,
-     "William Redpath": 0,
      "Timothy Telymonde": 0
     }
    },
@@ -4184,7 +4184,7 @@
     "governor": {
      "Amy Acton": {
       "early": 0,
-      "election_day": 0
+      "election_day": 15597
      },
      "Timothy Grady": {
       "early": 0,
@@ -4196,11 +4196,11 @@
      },
      "Don Kissick": {
       "early": 0,
-      "election_day": 0
+      "election_day": 900
      },
      "Vivek Ramaswamy": {
       "early": 0,
-      "election_day": 0
+      "election_day": 13597
      },
      "Renea Turner": {
       "early": 0,
@@ -4210,7 +4210,7 @@
     "senate": {
      "Sherrod Brown": {
       "early": 0,
-      "election_day": 0
+      "election_day": 15044
      },
      "Stephen Faris": {
       "early": 0,
@@ -4222,15 +4222,15 @@
      },
      "Jon Husted": {
       "early": 0,
-      "election_day": 0
+      "election_day": 14092
      },
      "Greg Levy": {
       "early": 0,
-      "election_day": 0
+      "election_day": 421
      },
      "William Redpath": {
       "early": 0,
-      "election_day": 0
+      "election_day": 626
      },
      "Timothy Telymonde": {
       "early": 0,
@@ -5187,30 +5187,30 @@
    "count_status": "InProcess",
    "ballots_by_mode": {
     "total": 0,
-    "absentee": 0,
+    "absentee": 37658,
     "provisional": 0
    },
    "outstanding_uocava": 3,
    "outstanding_provisional": 0,
    "early_and_mail_cast": 2084,
-   "early_and_mail_counted": 0,
-   "early_and_mail_left": 2084,
+   "early_and_mail_counted": 37658,
+   "early_and_mail_left": 0,
    "races": {
     "governor": {
-     "Amy Acton": 0,
+     "Vivek Ramaswamy": 1467,
+     "Amy Acton": 837,
+     "Don Kissick": 116,
      "Timothy Grady": 0,
      "Heather Hill": 0,
-     "Don Kissick": 0,
-     "Vivek Ramaswamy": 0,
      "Renea Turner": 0
     },
     "senate": {
-     "Sherrod Brown": 0,
+     "Jon Husted": 1486,
+     "Sherrod Brown": 835,
+     "William Redpath": 70,
+     "Greg Levy": 59,
      "Stephen Faris": 0,
      "Anthony Holliman": 0,
-     "Jon Husted": 0,
-     "Greg Levy": 0,
-     "William Redpath": 0,
      "Timothy Telymonde": 0
     }
    },
@@ -5218,7 +5218,7 @@
     "governor": {
      "Amy Acton": {
       "early": 0,
-      "election_day": 0
+      "election_day": 837
      },
      "Timothy Grady": {
       "early": 0,
@@ -5230,11 +5230,11 @@
      },
      "Don Kissick": {
       "early": 0,
-      "election_day": 0
+      "election_day": 116
      },
      "Vivek Ramaswamy": {
       "early": 0,
-      "election_day": 0
+      "election_day": 1467
      },
      "Renea Turner": {
       "early": 0,
@@ -5244,7 +5244,7 @@
     "senate": {
      "Sherrod Brown": {
       "early": 0,
-      "election_day": 0
+      "election_day": 835
      },
      "Stephen Faris": {
       "early": 0,
@@ -5256,15 +5256,15 @@
      },
      "Jon Husted": {
       "early": 0,
-      "election_day": 0
+      "election_day": 1486
      },
      "Greg Levy": {
       "early": 0,
-      "election_day": 0
+      "election_day": 59
      },
      "William Redpath": {
       "early": 0,
-      "election_day": 0
+      "election_day": 70
      },
      "Timothy Telymonde": {
       "early": 0,
@@ -6503,30 +6503,30 @@
    "count_status": "InProcess",
    "ballots_by_mode": {
     "total": 0,
-    "absentee": 0,
+    "absentee": 282624,
     "provisional": 0
    },
    "outstanding_uocava": 37,
    "outstanding_provisional": 0,
    "early_and_mail_cast": 19538,
-   "early_and_mail_counted": 0,
-   "early_and_mail_left": 19538,
+   "early_and_mail_counted": 282624,
+   "early_and_mail_left": 0,
    "races": {
     "governor": {
-     "Amy Acton": 0,
+     "Vivek Ramaswamy": 10216,
+     "Amy Acton": 8635,
+     "Don Kissick": 522,
      "Timothy Grady": 0,
      "Heather Hill": 0,
-     "Don Kissick": 0,
-     "Vivek Ramaswamy": 0,
      "Renea Turner": 0
     },
     "senate": {
-     "Sherrod Brown": 0,
+     "Jon Husted": 10330,
+     "Sherrod Brown": 8487,
+     "William Redpath": 408,
+     "Greg Levy": 235,
      "Stephen Faris": 0,
      "Anthony Holliman": 0,
-     "Jon Husted": 0,
-     "Greg Levy": 0,
-     "William Redpath": 0,
      "Timothy Telymonde": 0
     }
    },
@@ -6534,7 +6534,7 @@
     "governor": {
      "Amy Acton": {
       "early": 0,
-      "election_day": 0
+      "election_day": 8635
      },
      "Timothy Grady": {
       "early": 0,
@@ -6546,11 +6546,11 @@
      },
      "Don Kissick": {
       "early": 0,
-      "election_day": 0
+      "election_day": 522
      },
      "Vivek Ramaswamy": {
       "early": 0,
-      "election_day": 0
+      "election_day": 10216
      },
      "Renea Turner": {
       "early": 0,
@@ -6560,7 +6560,7 @@
     "senate": {
      "Sherrod Brown": {
       "early": 0,
-      "election_day": 0
+      "election_day": 8487
      },
      "Stephen Faris": {
       "early": 0,
@@ -6572,15 +6572,15 @@
      },
      "Jon Husted": {
       "early": 0,
-      "election_day": 0
+      "election_day": 10330
      },
      "Greg Levy": {
       "early": 0,
-      "election_day": 0
+      "election_day": 235
      },
      "William Redpath": {
       "early": 0,
-      "election_day": 0
+      "election_day": 408
      },
      "Timothy Telymonde": {
       "early": 0,
@@ -7251,7 +7251,7 @@
    "registered": 131521,
    "ballots_cast": 0,
    "precincts_total": 158,
-   "precincts_reporting": 0,
+   "precincts_reporting": 26,
    "count_status": "InProcess",
    "ballots_by_mode": {
     "total": 0,
@@ -7265,18 +7265,18 @@
    "early_and_mail_left": 0,
    "races": {
     "governor": {
-     "Amy Acton": 18033,
-     "Vivek Ramaswamy": 10199,
-     "Don Kissick": 728,
+     "Amy Acton": 21262,
+     "Vivek Ramaswamy": 13428,
+     "Don Kissick": 1030,
      "Timothy Grady": 0,
      "Heather Hill": 0,
      "Renea Turner": 0
     },
     "senate": {
-     "Sherrod Brown": 17424,
-     "Jon Husted": 10628,
-     "William Redpath": 566,
-     "Greg Levy": 502,
+     "Sherrod Brown": 20393,
+     "Jon Husted": 13958,
+     "William Redpath": 845,
+     "Greg Levy": 709,
      "Stephen Faris": 0,
      "Anthony Holliman": 0,
      "Timothy Telymonde": 0
@@ -7286,7 +7286,7 @@
     "governor": {
      "Amy Acton": {
       "early": 0,
-      "election_day": 18033
+      "election_day": 21262
      },
      "Timothy Grady": {
       "early": 0,
@@ -7298,11 +7298,11 @@
      },
      "Don Kissick": {
       "early": 0,
-      "election_day": 728
+      "election_day": 1030
      },
      "Vivek Ramaswamy": {
       "early": 0,
-      "election_day": 10199
+      "election_day": 13428
      },
      "Renea Turner": {
       "early": 0,
@@ -7312,7 +7312,7 @@
     "senate": {
      "Sherrod Brown": {
       "early": 0,
-      "election_day": 17424
+      "election_day": 20393
      },
      "Stephen Faris": {
       "early": 0,
@@ -7324,15 +7324,15 @@
      },
      "Jon Husted": {
       "early": 0,
-      "election_day": 10628
+      "election_day": 13958
      },
      "Greg Levy": {
       "early": 0,
-      "election_day": 502
+      "election_day": 709
      },
      "William Redpath": {
       "early": 0,
-      "election_day": 566
+      "election_day": 845
      },
      "Timothy Telymonde": {
       "early": 0,
@@ -8286,9 +8286,9 @@
   "governor": {
    "contest_name": "Governor and Lieutenant Governor",
    "choices": {
-    "Amy Acton": 903435,
-    "Vivek Ramaswamy": 546676,
-    "Don Kissick": 33990,
+    "Amy Acton": 948120,
+    "Vivek Ramaswamy": 589089,
+    "Don Kissick": 36758,
     "Timothy Grady": 0,
     "Heather Hill": 0,
     "Renea Turner": 0
@@ -8301,11 +8301,11 @@
     "Vivek Ramaswamy": "R",
     "Renea Turner": "O"
    },
-   "total": 1484101,
-   "precincts_reporting": 6,
+   "total": 1573967,
+   "precincts_reporting": 101,
    "precincts_total": 8834,
    "early_and_mail_cast": 1753509,
-   "early_and_mail_counted": 25948140,
+   "early_and_mail_counted": 27042966,
    "early_and_mail_left": 0,
    "outstanding_uocava": 4592,
    "outstanding_provisional": 0
@@ -8313,10 +8313,10 @@
   "senate": {
    "contest_name": "U.S. Senator",
    "choices": {
-    "Sherrod Brown": 880779,
-    "Jon Husted": 558757,
-    "William Redpath": 25290,
-    "Greg Levy": 22452,
+    "Sherrod Brown": 924082,
+    "Jon Husted": 602136,
+    "William Redpath": 27416,
+    "Greg Levy": 23847,
     "Stephen Faris": 0,
     "Anthony Holliman": 0,
     "Timothy Telymonde": 0
@@ -8330,11 +8330,11 @@
     "William Redpath": "O",
     "Timothy Telymonde": "O"
    },
-   "total": 1487278,
-   "precincts_reporting": 6,
+   "total": 1577481,
+   "precincts_reporting": 101,
    "precincts_total": 8834,
    "early_and_mail_cast": 1753509,
-   "early_and_mail_counted": 25948140,
+   "early_and_mail_counted": 27042966,
    "early_and_mail_left": 0,
    "outstanding_uocava": 4592,
    "outstanding_provisional": 0

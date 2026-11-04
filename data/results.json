@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T00:47:44+00:00",
+ "updated": "2026-11-04T00:48:54+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -188,7 +188,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/383510/reports/detailxml.zip",
-   "updated": "2026-11-04T00:47:28+00:00",
+   "updated": "2026-11-04T00:48:36+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1230,7 +1230,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T00:47:28+00:00",
+     "updated": "2026-11-04T00:48:36+00:00",
      "tier": "tossup",
      "precincts_reporting": 4,
      "precincts_total": 2312,
@@ -3178,7 +3178,7 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T00:47:10+00:00",
+     "updated": "2026-11-04T00:48:20+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 2626,
@@ -3194,7 +3194,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T00:47:10+00:00",
+   "updated": "2026-11-04T00:48:20+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -3205,7 +3205,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T00:47:11+00:00",
+   "updated": "2026-11-04T00:48:21+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -5192,7 +5192,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:47:11+00:00",
+     "updated": "2026-11-04T00:48:21+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
@@ -7092,7 +7092,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:47:11+00:00",
+     "updated": "2026-11-04T00:48:21+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
@@ -9323,7 +9323,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T00:47:44+00:00",
+   "updated": "2026-11-04T00:48:54+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -9741,7 +9741,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 28,
        "precincts_total": 28
       },
       {
@@ -10531,15 +10531,18 @@
       {
        "name": "Greene County",
        "votes": [
-        0,
-        0
+        2682,
+        5566
        ],
-       "outstanding": 8321,
+       "outstanding": 73,
        "remainder": [
         {
-         "n": 8321,
+         "n": 73,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3251697381183317,
+          0.6748302618816683
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11527,18 +11530,21 @@
       {
        "name": "Randolph County",
        "votes": [
-        0,
-        0
+        1080,
+        861
        ],
-       "outstanding": 1399,
+       "outstanding": 271,
        "remainder": [
         {
-         "n": 1399,
-         "basis": "measured",
-         "share": null
+         "n": 271,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.577490774907749,
+          0.4225092250922509
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 4,
        "precincts_total": 6
       },
       {
@@ -11692,15 +11698,18 @@
       {
        "name": "Sumter County",
        "votes": [
-        0,
-        0
+        3308,
+        2404
        ],
-       "outstanding": 6261,
+       "outstanding": 549,
        "remainder": [
         {
-         "n": 6261,
+         "n": 549,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.5791316526610645,
+          0.4208683473389356
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11709,15 +11718,18 @@
       {
        "name": "Talbot County",
        "votes": [
-        0,
-        0
+        911,
+        545
        ],
-       "outstanding": 1462,
+       "outstanding": 6,
        "remainder": [
         {
-         "n": 1462,
+         "n": 6,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.6256868131868132,
+          0.3743131868131868
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11777,15 +11789,18 @@
       {
        "name": "Telfair County",
        "votes": [
-        0,
-        0
+        636,
+        1142
        ],
-       "outstanding": 1781,
+       "outstanding": 3,
        "remainder": [
         {
-         "n": 1781,
+         "n": 3,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3577052868391451,
+          0.6422947131608548
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11987,15 +12002,18 @@
       {
        "name": "Upson County",
        "votes": [
-        0,
-        0
+        2453,
+        4496
        ],
-       "outstanding": 6982,
+       "outstanding": 33,
        "remainder": [
         {
-         "n": 6982,
+         "n": 33,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3530004317167938,
+          0.6469995682832063
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -12112,17 +12130,11 @@
       {
        "name": "Webster County",
        "votes": [
-        0,
-        0
+        444,
+        610
        ],
-       "outstanding": 655,
-       "remainder": [
-        {
-         "n": 655,
-         "basis": "measured",
-         "share": null
-        }
-       ],
+       "outstanding": null,
+       "remainder": null,
        "precincts_reporting": 1,
        "precincts_total": 1
       },
@@ -12243,7 +12255,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:47:44+00:00",
+     "updated": "2026-11-04T00:48:54+00:00",
      "tier": "tossup",
      "precincts_reporting": 62,
      "precincts_total": 159,
@@ -12673,7 +12685,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 28,
        "precincts_total": 28
       },
       {
@@ -13463,15 +13475,18 @@
       {
        "name": "Greene County",
        "votes": [
-        0,
-        0
+        3171,
+        5068
        ],
-       "outstanding": 8321,
+       "outstanding": 82,
        "remainder": [
         {
-         "n": 8321,
+         "n": 82,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3848768054375531,
+          0.6151231945624469
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -14451,18 +14466,29 @@
       {
        "name": "Randolph County",
        "votes": [
-        0,
-        0
+        1140,
+        791
        ],
-       "outstanding": 1399,
+       "outstanding": 275,
        "remainder": [
         {
-         "n": 1399,
+         "n": 6,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.5850681981335247,
+          0.4149318018664752
+         ]
+        },
+        {
+         "n": 269,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.604089219330855,
+          0.395910780669145
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 4,
        "precincts_total": 6
       },
       {
@@ -14616,15 +14642,18 @@
       {
        "name": "Sumter County",
        "votes": [
-        0,
-        0
+        3477,
+        2226
        ],
-       "outstanding": 6261,
+       "outstanding": 558,
        "remainder": [
         {
-         "n": 6261,
+         "n": 558,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.6096791162546028,
+          0.39032088374539714
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -14633,15 +14662,18 @@
       {
        "name": "Talbot County",
        "votes": [
-        0,
-        0
+        938,
+        515
        ],
-       "outstanding": 1462,
+       "outstanding": 9,
        "remainder": [
         {
-         "n": 1462,
+         "n": 9,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.6455609084652443,
+          0.35443909153475567
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -14701,15 +14733,18 @@
       {
        "name": "Telfair County",
        "votes": [
-        0,
-        0
+        690,
+        1082
        ],
-       "outstanding": 1781,
+       "outstanding": 9,
        "remainder": [
         {
-         "n": 1781,
+         "n": 9,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3893905191873589,
+          0.6106094808126411
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -14911,15 +14946,18 @@
       {
        "name": "Upson County",
        "votes": [
-        0,
-        0
+        2672,
+        4240
        ],
-       "outstanding": 6982,
+       "outstanding": 70,
        "remainder": [
         {
-         "n": 6982,
+         "n": 70,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.38657407407407407,
+          0.6134259259259259
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -15036,17 +15074,11 @@
       {
        "name": "Webster County",
        "votes": [
-        0,
-        0
+        474,
+        576
        ],
-       "outstanding": 655,
-       "remainder": [
-        {
-         "n": 655,
-         "basis": "measured",
-         "share": null
-        }
-       ],
+       "outstanding": null,
+       "remainder": null,
        "precincts_reporting": 1,
        "precincts_total": 1
       },
@@ -15176,7 +15208,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:47:44+00:00",
+     "updated": "2026-11-04T00:48:54+00:00",
      "tier": "safe",
      "precincts_reporting": 62,
      "precincts_total": 159,

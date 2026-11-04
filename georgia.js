@@ -90,15 +90,17 @@
       + "the two: the counted facts first, then what has to be assumed to turn them into a "
       + "margin, then what each assumption is worth.</p>"
       + '<p class="gaflag"><b>The honest summary.</b> Bottoms holds a banked lead of '
-      + "<b class='nm'>+" + n0(BANK_LO) + " to +" + n0(BANK_HI) + "</b>. Both ends are "
-      + "measured the same way &mdash; a past race&rsquo;s county-level early margin "
-      + "applied to that county&rsquo;s actual 2026 early turnout &mdash; using 2024 and "
-      + "2018. For Jackson to erase it on a 1.3M election day he needs <b>R+"
-      + bar(BANK_LO) + " to R+" + bar(BANK_HI) + "</b>. <b>Georgia&rsquo;s own 2024 "
-      + "election day ran R+7.34, which sits inside that range.</b> On the 2018 analog "
-      + "(R+5.25) Bottoms holds; on anything like 2020 or 2022 Jackson clears it easily. "
-      + "<b>This is a coin flip, and the most recent comparable election day is sitting "
-      + "on the line.</b></p>"
+      + "<b class='nm'>+" + n0(BANK_LO) + " to +" + n0(BANK_HI) + "</b>. That range "
+      + "comes from calibrating per-group support so 2024&rsquo;s composition reproduces "
+      + "2024&rsquo;s <i>actual</i> early margin of R+0.68, then changing nothing but the "
+      + "measured composition &mdash; the Black share of the early electorate rose from "
+      + "26.34% to 32.38%. For Jackson to erase it on a 1.3M election day he needs <b>R+"
+      + bar(BANK_LO) + " to R+" + bar(BANK_HI) + "</b>. <b>Only three Georgia election "
+      + "days since 2014 have ever cleared that &mdash; 2020, and both 2022 races &mdash; "
+      + "and all three sit inside the mode-skew anomaly this page argues has ended.</b> "
+      + "Georgia&rsquo;s own 2024 election day ran R+7.34, well short of it. <b>On the "
+      + "measured composition Bottoms is favoured. Only the geography-only floor makes "
+      + "this close, and that floor cannot see what changed.</b></p>"
       + "</section>";
   }
 
@@ -140,8 +142,8 @@
       "A record banked share, and an ordinary election day",
       "Georgia&rsquo;s election-day vote has fallen every cycle while early voting absorbed it.",
       tbl(["cycle", "early", "election day", "early %"], rows)
-      + '<p class="gainline"><b>Election day is down 31% since 2018</b> '
-      + "&mdash; 1,788,425 to 1,417,799 to 1,221,257 &mdash; and the Secretary of State "
+      + '<p class="gainline"><b>Election day is down 32% since 2018</b> '
+      + "&mdash; 1,800,413 to 1,417,799 to 1,221,257 &mdash; and the Secretary of State "
       + "is on pace for about <b>1,300,000</b> tonight.</p>",
       "<b>This is a rules change, not a mood change.</b> Georgia&rsquo;s SB 202 (2021) "
       + "expanded early in-person voting &mdash; an extra mandatory Saturday for most "
@@ -187,12 +189,10 @@
       + "Henry went D+17.9 in 2018 to <b>D+31.1</b> in 2024; Douglas D+21.3 to "
       + "<b>D+32.5</b>. Cherokee and Forsyth both got less Republican, not more. "
       + "A baseline year freezes all of that.</p>",
-      "<b>This card used to show the wrong thing.</b> It compared each group&rsquo;s "
-      + "share of tonight&rsquo;s early vote against its share in 2022 and reported the "
-      + "difference &mdash; which made Atlanta look like it had contributed +6,813 votes, "
-      + "when it has banked a lead of 306,560. The shift was real but tiny (Atlanta went "
-      + "from 64.7% to 66.4% of the early vote) because Atlanta was already dominant. "
-      + "<b>A change-from-baseline number cannot see a level that was already high.</b>"
+      "<b>A change-from-baseline number cannot see a level that was already high.</b> "
+      + "An earlier version of this card reported each group&rsquo;s <i>change</i> in "
+      + "share of the early vote since 2022, which made Atlanta look like it had "
+      + "contributed +6,813 votes when its core has banked over half a million."
       + "<span class='txrule'></span>"
       + "<b>The drift, for what it is worth:</b> Atlanta&rsquo;s early vote is up "
       + "<b>15.3%</b> on 2022 and rural counties grew more slowly, so the banked "
@@ -275,30 +275,30 @@
   /* =============================================================== 4. the bar */
   function barCard() {
     var rows = [
-      {c: ["2018 governor", "R+5.25", "no"]},
-      {c: ["2016 president", "R+6.76", "no"]},
+      {c: ["2018 governor", "R+5.25", "no &mdash; clears neither"]},
+      {c: ["2016 president", "R+6.76", "no &mdash; clears neither"]},
       {em: 1, c: ["<b>2024 president</b>", "<b>R+7.34</b>",
-                  "<b>on the line &mdash; clears the low end by 0.02</b>"]},
-      {c: ["2014 governor", "R+11.64", "<b>yes</b>"]},
-      {c: ["2022 senate (no Kemp)", "R+15.95", "<b>yes</b>"]},
-      {c: ["2020 president &mdash; pandemic", "R+23.09", "<b>yes</b>"]},
-      {c: ["2022 governor &mdash; Kemp", "R+25.34", "<b>yes</b>"]}
+                  "<b>floor only, by 0.02 &mdash; 5.07 short of the headline</b>"]},
+      {c: ["2014 governor", "R+11.64", "floor only &mdash; 0.77 short"]},
+      {c: ["2022 senate (no Kemp)", "R+15.95", "<b>yes, both</b>"]},
+      {c: ["2020 president &mdash; pandemic", "R+23.09", "<b>yes, both</b>"]},
+      {c: ["2022 governor &mdash; Kemp", "R+25.34", "<b>yes, both</b>"]}
     ];
     return card("ga-bar", "Section 4 &middot; what Jackson needs",
-      "He has to win election day by 7.3 to 14.6 points",
+      "He has to win election day by 12.4 to 14.6 points",
       "Bottoms&rsquo; banked lead, spread across a projected 1.3M election day.",
-      '<div class="gabig">R+' + bar(FLOOR_LO) + " to R+" + bar(BANK_HI) + "</div>"
-      + '<div class="gasub">R+' + bar(FLOOR_LO) + " to R+" + bar(FLOOR_HI)
-      + " on geography alone, which is a floor; R+" + bar(BANK_LO) + " to R+"
-      + bar(BANK_HI) + " once the measured race shift is counted</div>"
+      '<div class="gabig">R+' + bar(BANK_LO) + " to R+" + bar(BANK_HI) + "</div>"
+      + '<div class="gasub">once the measured change in who voted early is counted. '
+      + "Geography alone gives R+" + bar(FLOOR_LO) + " to R+" + bar(FLOOR_HI)
+      + ", but that is a floor that cannot see the composition shift</div>"
       + tbl(["every Georgia election day since 2014", "margin",
-             "clears R+" + bar(FLOOR_LO) + " to R+" + bar(BANK_HI) + "?"], rows)
-      + '<p class="gainline"><b>Two methods, and they do not agree.</b> On geography '
-      + "alone Jackson needs R+" + bar(FLOOR_LO) + " to R+" + bar(FLOOR_HI)
-      + ", and Georgia&rsquo;s own 2024 election day (R+7.34) sits right on that. "
-      + "Once the measured change in who voted early is counted, he needs <b>R+"
-      + bar(BANK_LO) + " to R+" + bar(BANK_HI) + "</b> &mdash; a bar only 2014, a "
-      + "Kemp-free 2022, the pandemic and Kemp himself have ever cleared.</p>",
+             "clears the floor / the headline?"], rows)
+      + '<p class="gainline"><b>Only three election days in Georgia since 2014 clear '
+      + "the headline bar</b> &mdash; 2020&rsquo;s pandemic election day, and both 2022 "
+      + "races. <b>All three fall inside the 2020&ndash;2022 mode-skew window of +16.9 "
+      + "to +23.4, which Section 3 shows collapsed to +5.15 by 2024.</b> 2014 (R+11.64) "
+      + "clears the floor but falls 0.77 short of the headline; 2024 (R+7.34) clears the "
+      + "floor by two hundredths and misses the headline by 5.07.</p>",
       "<b>Why the second number is the better one.</b> The geography-only figure holds "
       + "every county&rsquo;s internal margin frozen at a past year, so <b>the one thing "
       + "that is measurably different about tonight is absent from it</b>: the Black "
@@ -314,31 +314,37 @@
 
   function turnoutCard() {
     var rows = [
-      {c: ["1,000,000", "26.1%", "R+9.52 to R+10.66", "<b>clears both</b>"]},
-      {c: ["1,200,000 &mdash; his 1:30pm figure", "29.7%", "R+7.93 to R+8.88",
-           "<b>clears both</b>"]},
+      {c: ["1,000,000", "26.1%", "R+9.52&ndash;10.66", "R+16.13&ndash;19.02",
+           "floor only"]},
+      {c: ["1,200,000 &mdash; his 1:30pm figure", "29.7%", "R+7.93&ndash;8.88",
+           "R+13.44&ndash;15.85", "floor only"]},
       {em: 1, c: ["<b>1,300,000 &mdash; our projection</b>", "<b>31.4%</b>",
-                  "<b>R+7.32 to R+8.20</b>", "<b>clears both</b>"]},
-      {c: ["1,500,000", "34.6%", "R+6.35 to R+7.10", "<b>clears both</b>"]},
-      {c: ["1,788,425 &mdash; 2018&rsquo;s record", "38.7%", "R+5.32 to R+5.96",
-           "<b>clears both</b>"]}
+                  "<b>R+7.32&ndash;8.20</b>", "<b>R+12.41&ndash;14.63</b>",
+                  "<b>floor only</b>"]},
+      {c: ["1,500,000", "34.6%", "R+6.35&ndash;7.10", "R+10.75&ndash;12.68",
+           "<b>clears both</b>"]},
+      {c: ["1,788,425 &mdash; 2018&rsquo;s record", "38.7%", "R+5.32&ndash;5.96",
+           "R+9.02&ndash;10.64", "<b>clears both</b>"]}
     ];
     return card("ga-turnout", "Section 4 &middot; slide 2",
       "A bigger election day helps him, and the state just raised its estimate",
       "Every ballot cast today is one more of the mode that leans Republican.",
-      tbl(["election-day turnout", "% of total", "R needs", "vs a Kemp-free R+15.95"], rows)
-      + '<p class="gainline"><b>At every plausible turnout, a 2022-style Kemp-free '
-      + "election day (R+15.95) clears the bar.</b> Only an election day like "
-      + "2018&rsquo;s (R+5.25) leaves Bottoms clearly ahead, and 2024&rsquo;s (R+7.34) "
-      + "lands on the line at every size. <b>The question is no longer <i>how many</i> "
+      tbl(["election-day turnout", "% of total", "R needs, floor", "R needs, headline",
+           "does a Kemp-free R+15.95 clear it?"], rows)
+      + '<p class="gainline"><b>A bigger election day lowers the bar, but not fast '
+      + "enough to matter below 1.5M.</b> Against the headline range even a 2022-style "
+      + "Kemp-free election day (R+15.95) only clears both ends once turnout reaches "
+      + "about 1.5M &mdash; at the 1.3M we project it clears the floor and lands inside "
+      + "the headline range, not past it. <b>The question is no longer <i>how many</i> "
       + "vote today but <i>how</i> they vote.</b></p>",
-      "<b>This card said the opposite an hour ago, and it was wrong.</b> It was built on "
-      + "a 1.2M election day and a smaller banked lead, and concluded Jackson needed a "
-      + "turnout Georgia had not produced since 2018. The Secretary of State then revised "
-      + "his own projection from 1.2M to 1.4&ndash;1.5M at 2:45pm. A bigger election day "
-      + "does not help Bottoms &mdash; it adds ballots to the mode she loses, and it "
-      + "lowers the margin Jackson needs. <b>The direction of this page changed because "
-      + "an input changed, which is what should happen.</b>");
+      "<b>On the election-day figure, this page uses 1.3M and says why.</b> It is "
+      + "projected from the Secretary of State&rsquo;s own hourly trail &mdash; 300k at "
+      + "10am, 650k at 1:30pm, 775k at 2:45pm &mdash; held at 100,000/hour and stepped to "
+      + "150,000/hour for the after-work rush. <b>A press attribution of 1.4&ndash;1.5M "
+      + "could not be verified against a primary source and is used nowhere on this "
+      + "page</b>, including here; an earlier version of this card asserted that revision "
+      + "as fact, which was wrong. A bigger election day does not help Bottoms &mdash; it "
+      + "adds ballots to the mode she loses and lowers the margin Jackson needs.");
   }
 
   /* =============================================================== 5. the limits */
@@ -395,9 +401,10 @@
       "<b>This is the only part of the method that has been tested rather than asserted.</b> "
       + "Abrams banked too little and Kemp cleared her bar by 3.4 points. Warnock banked "
       + "enough and Walker fell 2.29 short, and Warnock led on the night. Two midterms, "
-      + "two correct calls. <b>Bottoms banks far less than Warnock did &mdash; about "
-      + "100,000 against his 258,633 &mdash; but faces an election day roughly 120,000 "
-      + "ballots smaller, and a bar less than half his.</b> "
+      + "two correct calls. <b>Bottoms banks less than Warnock did &mdash; "
+      + n0(BANK_LO) + " to " + n0(BANK_HI) + " against his 258,633 &mdash; but faces an "
+      + "election day roughly 120,000 ballots smaller, so her bar (R+" + bar(BANK_LO)
+      + " to R+" + bar(BANK_HI) + ") lands below his R+18.24.</b> "
       + "<b>A correction belongs here.</b> This card previously put her banked lead at "
       + "278,773 and her bar at R+21.44. That figure could not be reproduced from any "
       + "source on this page or any file behind it, and it contradicted the 115,347 the "

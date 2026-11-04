@@ -341,9 +341,16 @@ def proof(b, election=None):
     party_of, roster_from = roster()
     counties = {}
     empty = 0
+    # ONE unrendered county used to discard the other 104. Between 23:15Z and 00:22Z on
+    # election night Kansas failed twelve times - finney, marshall, osborne, geary, allen,
+    # statewide - a different county each pass, which is load, not a layout change. The
+    # state would have published nothing all night. Now a county that will not render is
+    # recorded and skipped, and the run still fails loudly if too many are missing.
+    missing = []
     for i, slug in enumerate(slugs, 1):
         if archive and i > 1:
             time.sleep(3.5)
+        doc = None
         for attempt in range(10):
             # A slow render is not a layout change. page() waits for class="race" and
             # returns the half-built page anyway when that wait times out; parse() then
@@ -355,8 +362,11 @@ def proof(b, election=None):
             try:
                 doc = parse(page(f"{base}/{slug}.html", timeout=30, ready=has_races), slug)
             except RuntimeError as exc:
-                if "no race blocks found" not in str(exc) or attempt == 9:
+                if "no race blocks found" not in str(exc):
                     raise
+                if attempt == 9:
+                    doc = None
+                    break
                 print(f"   {slug}.html came back unrendered — refetching "
                       f"({attempt + 1}/10)")
                 time.sleep(4)
@@ -370,10 +380,15 @@ def proof(b, election=None):
             # that was asked for. Counting another county's votes as this one's is the
             # one failure that would still tie out and still be wrong.
             print(f"   {slug}.html served {cname!r} — refetching")
+            doc = None
             time.sleep(20)
         else:
-            raise RuntimeError(f"{slug}.html never served its own page "
-                               f"(last title {cname!r})")
+            doc = None
+        if doc is None:
+            missing.append(slug)
+            print(f"   {slug}.html never rendered — skipped "
+                  f"({len(missing)} missing so far)")
+            continue
         if cname in counties:
             raise RuntimeError(f"two pages both named {cname!r}")
         rec = counties.setdefault(cname, {"races": {}})
@@ -585,6 +600,17 @@ def main(argv):
 
         unlabelled = sorted({c for t in totals.values()
                              for c, p in t["parties"].items() if p == "O"})
+        # Skipping a county is tolerable; skipping a tenth of the state is not. Above
+        # that this is no longer a timing flake and the run must fail rather than
+        # publish a Kansas that quietly omits counties.
+        if missing:
+            cap = max(5, len(slugs) // 10)
+            if len(missing) > cap:
+                raise RuntimeError(
+                    f"{len(missing)} of {len(slugs)} county pages never rendered "
+                    f"(cap {cap}): {', '.join(missing[:10])}")
+            print(f"   PARTIAL: {len(missing)} of {len(slugs)} counties missing — "
+                  f"{', '.join(missing)}")
         payload = {
             "state": "KS", "unit": "county", "source_kind": "ks-sos-enr-html",
             "election": "2026 General",
@@ -593,6 +619,10 @@ def main(argv):
             "early_cast_as_of": cast_as_of,
             "party_roster_from": roster_from,
             "counties": counties, "state_totals": totals,
+            "partial": ({"missing_counties": missing,
+                         "note": f"{len(missing)} of {len(slugs)} county pages did not "
+                                 f"render after 10 attempts each; their votes are NOT in "
+                                 f"these totals."} if missing else None),
             "source": f"{BASE}/<county>.html (+ national.html and statewide.html for "
                       f"state totals), read with a real browser",
             "notes": {

@@ -654,6 +654,16 @@ function cardFor(key, st, abbr, tier){
   // Georgia at 00:20Z had 794,825 counted and every one of them early or mail - a fact
   // the old "counted vote is mostly early vote" wording badly understated.
   const md = st.modes || null;
+  // "Left to count" used only the EARLY ballots still being tallied and omitted every
+  // Election Day ballot not yet counted. South Carolina counts Election Day FIRST, so its
+  // whole ~1.08M early vote sat outside that figure and the card read 915,980 left when
+  // far more was; Georgia showed 1.37M left while 2.65M of the electorate was uncounted.
+  // Remaining = early still to tally + the unreported part of the projected Election Day.
+  const capRecTop = (typeof EDAY_CAPS !== "undefined" && EDAY_CAPS) ? (EDAY_CAPS[abbr] || null) : null;
+  const edCounted = md ? (md.election_day || 0) : 0;
+  const edLeft = capRecTop ? Math.max(0, (capRecTop.eday_cap || 0) - edCounted) : 0;
+  const leftAll = p.outstanding + edLeft;
+  const pctLeftAll = (p.totC + leftAll) > 0 ? leftAll / (p.totC + leftAll) : null;
   const mdEM = md ? (md.early||0)+(md.mail||0) : 0;
   const mdED = md ? (md.election_day||0) : 0;
   const mdTot = md ? mdEM + mdED + (md.provisional||0) : 0;
@@ -784,8 +794,9 @@ function cardFor(key, st, abbr, tier){
     ${p.totC>0 ? `<div class="faceproj">Projected <b style="color:${col(st.candidates[mg.projLead>=0?mg.leader:mg.runner].party)}">${st.candidates[mg.projLead>=0?mg.leader:mg.runner].name}</b> +${n(Math.abs(mg.projLead))}${mg.flips?' <span class="amber">&#9873; flips</span>':''}</div>` : ""}
     <div class="facestats">
       <div><span class="slab">Votes in</span><span class="fig fnum">${n(p.totC)}</span></div>
-      <div><span class="slab">Left to count</span><span class="fig fnum ${p.outstanding?"amber":""}">${p.outstanding?n(p.outstanding):"—"}</span></div>
-      <div><span class="slab">% left</span><span class="fig fnum ${p.pctIn!=null&&(1-p.pctIn)>0?"amber":""}">${p.pctIn==null?"—":pct(1-p.pctIn)}</span></div>
+      <div><span class="slab">Left to count</span><span class="fig fnum ${leftAll?"amber":""}">${leftAll?n(leftAll):"—"}</span>
+        ${edLeft>0?`<span class="slab" style="grid-column:span 2;text-align:left;text-transform:none;letter-spacing:0;font-family:var(--body);font-size:11px">${n(p.outstanding)} ${st.countsFirst==="election-day"?"early/absentee":"early"} + ${n(edLeft)} Election Day</span>`:""}</div>
+      <div><span class="slab">% left</span><span class="fig fnum ${pctLeftAll?"amber":""}">${pctLeftAll==null?"—":pct(pctLeftAll)}</span></div>
     </div>
     <div class="meter"><span>${p.reporting||0} of ${st.unitsExpected||p.counties||0} ${st.unit==="town"?"towns":st.unit==="district"?"districts":"counties"} reporting${p.unknownCty?" · "+p.unknownCty+" without an outstanding count":""}</span>
       <span>${EARLY[abbr]?n((EARLY[abbr].totals&&EARLY[abbr].totals.outstanding&&EARLY[abbr].totals.outstanding.total)||0)+" mail out":""}</span></div>
@@ -1843,7 +1854,7 @@ setInterval(load, 120000);
 // fix was live on the server while the board on screen still read "+1,704,584" against
 // candidate rows summing to 41,912. Poll this file's own build stamp and reload when it
 // changes. Bump BUILD whenever index.html changes.
-const BUILD = "1793754027";
+const BUILD = "1793754312";
 async function checkBuild(){
   try {
     const t = await fetch("index.html?cb=" + Date.now(), {cache: "no-store"}).then(r => r.text());

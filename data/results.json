@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T00:16:48+00:00",
+ "updated": "2026-11-04T00:20:08+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -188,7 +188,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/382659/reports/detailxml.zip",
-   "updated": "2026-11-04T00:16:37+00:00",
+   "updated": "2026-11-04T00:19:53+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1135,7 +1135,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T00:16:37+00:00",
+     "updated": "2026-11-04T00:19:53+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 2312,
@@ -9198,7 +9198,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T00:16:48+00:00",
+   "updated": "2026-11-04T00:20:08+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -9731,15 +9731,18 @@
       {
        "name": "Clayton County",
        "votes": [
-        0,
-        0
+        63890,
+        6751
        ],
-       "outstanding": 71020,
+       "outstanding": 379,
        "remainder": [
         {
-         "n": 71020,
+         "n": 379,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.9044322702113503,
+          0.09556772978864965
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -10051,17 +10054,17 @@
       {
        "name": "Echols County",
        "votes": [
-        1,
-        5
+        79,
+        512
        ],
-       "outstanding": 588,
+       "outstanding": 3,
        "remainder": [
         {
-         "n": 588,
+         "n": 3,
          "basis": "measured",
          "share": [
-          0.16666666666666666,
-          0.8333333333333334
+          0.13367174280879865,
+          0.8663282571912013
          ]
         }
        ],
@@ -10941,15 +10944,18 @@
       {
        "name": "Monroe County",
        "votes": [
-        0,
-        0
+        2859,
+        5493
        ],
-       "outstanding": 8375,
+       "outstanding": 23,
        "remainder": [
         {
-         "n": 8375,
+         "n": 23,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3423132183908046,
+          0.6576867816091954
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11943,7 +11949,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:16:48+00:00",
+     "updated": "2026-11-04T00:20:08+00:00",
      "tier": "tossup",
      "precincts_reporting": 22,
      "precincts_total": 159,
@@ -12488,15 +12494,18 @@
       {
        "name": "Clayton County",
        "votes": [
-        0,
-        0
+        65030,
+        5605
        ],
-       "outstanding": 71020,
+       "outstanding": 385,
        "remainder": [
         {
-         "n": 71020,
+         "n": 385,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.9206484037658385,
+          0.07935159623416153
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -12808,17 +12817,17 @@
       {
        "name": "Echols County",
        "votes": [
-        1,
-        5
+        94,
+        496
        ],
-       "outstanding": 588,
+       "outstanding": 4,
        "remainder": [
         {
-         "n": 588,
+         "n": 4,
          "basis": "measured",
          "share": [
-          0.16666666666666666,
-          0.8333333333333334
+          0.15932203389830507,
+          0.8406779661016949
          ]
         }
        ],
@@ -13698,15 +13707,18 @@
       {
        "name": "Monroe County",
        "votes": [
-        0,
-        0
+        3160,
+        5171
        ],
-       "outstanding": 8375,
+       "outstanding": 44,
        "remainder": [
         {
-         "n": 8375,
+         "n": 44,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.37930620573760654,
+          0.6206937942623935
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -14700,7 +14712,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:16:48+00:00",
+     "updated": "2026-11-04T00:20:08+00:00",
      "tier": "safe",
      "precincts_reporting": 22,
      "precincts_total": 159,

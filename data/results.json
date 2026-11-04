@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T00:41:55+00:00",
+ "updated": "2026-11-04T00:43:09+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -188,7 +188,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/383470/reports/detailxml.zip",
-   "updated": "2026-11-04T00:41:42+00:00",
+   "updated": "2026-11-04T00:42:51+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1158,7 +1158,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T00:41:42+00:00",
+     "updated": "2026-11-04T00:42:51+00:00",
      "tier": "tossup",
      "precincts_reporting": 1,
      "precincts_total": 2312,
@@ -3106,7 +3106,7 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T00:41:27+00:00",
+     "updated": "2026-11-04T00:42:36+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 2626,
@@ -3122,7 +3122,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T00:41:27+00:00",
+   "updated": "2026-11-04T00:42:36+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -3133,7 +3133,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T00:41:28+00:00",
+   "updated": "2026-11-04T00:42:38+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -3258,18 +3258,18 @@
       {
        "name": "Athens",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        6773,
+        1705,
+        169,
+        128,
         0,
         0,
         0
        ],
-       "outstanding": 8871,
+       "outstanding": 64,
        "remainder": [
         {
-         "n": 8871,
+         "n": 64,
          "basis": "measured",
          "share": null
         }
@@ -3588,18 +3588,18 @@
       {
        "name": "Defiance",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        3074,
+        3730,
+        123,
+        178,
         0,
         0,
         0
        ],
-       "outstanding": 7179,
+       "outstanding": 5,
        "remainder": [
         {
-         "n": 7179,
+         "n": 5,
          "basis": "measured",
          "share": null
         }
@@ -4564,18 +4564,18 @@
       {
        "name": "Perry",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        1936,
+        2959,
+        99,
+        146,
         0,
         0,
         0
        ],
-       "outstanding": 5166,
+       "outstanding": 7,
        "remainder": [
         {
-         "n": 5166,
+         "n": 7,
          "basis": "measured",
          "share": null
         }
@@ -4858,18 +4858,18 @@
       {
        "name": "Summit",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        52492,
+        18961,
+        1053,
+        1006,
         0,
         0,
         0
        ],
-       "outstanding": 78186,
+       "outstanding": 213,
        "remainder": [
         {
-         "n": 78186,
+         "n": 213,
          "basis": "measured",
          "share": null
         }
@@ -4880,18 +4880,18 @@
       {
        "name": "Trumbull",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        17424,
+        10628,
+        502,
+        566,
         0,
         0,
         0
        ],
-       "outstanding": 29317,
+       "outstanding": 37,
        "remainder": [
         {
-         "n": 29317,
+         "n": 37,
          "basis": "measured",
          "share": null
         }
@@ -5120,13 +5120,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:41:28+00:00",
+     "updated": "2026-11-04T00:42:38+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 250449,
+     "counted": 374101,
      "modes": null
     },
     "governor": {
@@ -5244,17 +5244,17 @@
       {
        "name": "Athens",
        "votes": [
-        0,
-        0,
-        0,
+        6956,
+        1659,
+        157,
         0,
         0,
         0
        ],
-       "outstanding": 8871,
+       "outstanding": 64,
        "remainder": [
         {
-         "n": 8871,
+         "n": 64,
          "basis": "measured",
          "share": null
         }
@@ -5559,17 +5559,17 @@
       {
        "name": "Defiance",
        "votes": [
-        0,
-        0,
-        0,
+        3226,
+        3645,
+        244,
         0,
         0,
         0
        ],
-       "outstanding": 7179,
+       "outstanding": 5,
        "remainder": [
         {
-         "n": 7179,
+         "n": 5,
          "basis": "measured",
          "share": null
         }
@@ -6490,17 +6490,17 @@
       {
        "name": "Perry",
        "votes": [
-        0,
-        0,
-        0,
+        2046,
+        2895,
+        187,
         0,
         0,
         0
        ],
-       "outstanding": 5166,
+       "outstanding": 7,
        "remainder": [
         {
-         "n": 5166,
+         "n": 7,
          "basis": "measured",
          "share": null
         }
@@ -6770,17 +6770,17 @@
       {
        "name": "Summit",
        "votes": [
-        0,
-        0,
-        0,
+        53590,
+        18506,
+        1352,
         0,
         0,
         0
        ],
-       "outstanding": 78186,
+       "outstanding": 213,
        "remainder": [
         {
-         "n": 78186,
+         "n": 213,
          "basis": "measured",
          "share": null
         }
@@ -6791,17 +6791,17 @@
       {
        "name": "Trumbull",
        "votes": [
-        0,
-        0,
-        0,
+        18033,
+        10199,
+        728,
         0,
         0,
         0
        ],
-       "outstanding": 29317,
+       "outstanding": 37,
        "remainder": [
         {
-         "n": 29317,
+         "n": 37,
          "basis": "measured",
          "share": null
         }
@@ -7020,13 +7020,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:41:28+00:00",
+     "updated": "2026-11-04T00:42:38+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 250120,
+     "counted": 373543,
      "modes": null
     }
    },
@@ -9251,7 +9251,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T00:41:55+00:00",
+   "updated": "2026-11-04T00:43:09+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -12106,7 +12106,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:41:55+00:00",
+     "updated": "2026-11-04T00:43:09+00:00",
      "tier": "tossup",
      "precincts_reporting": 52,
      "precincts_total": 159,
@@ -14974,7 +14974,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:41:55+00:00",
+     "updated": "2026-11-04T00:43:09+00:00",
      "tier": "safe",
      "precincts_reporting": 52,
      "precincts_total": 159,

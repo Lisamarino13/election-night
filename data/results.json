@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T02:36:11+00:00",
+ "updated": "2026-11-04T02:37:39+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -41,7 +41,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://electionresultsfiles.sos.mn.gov/20261103/allracesbycounty.txt (+ Cntytbl.txt for the precinct cross-check)",
-   "updated": "2026-11-04T02:35:52+00:00",
+   "updated": "2026-11-04T02:37:14+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1286,7 +1286,7 @@
        "precincts_total": 30
       }
      ],
-     "updated": "2026-11-04T02:35:52+00:00",
+     "updated": "2026-11-04T02:37:14+00:00",
      "tier": "tossup",
      "precincts_reporting": 40,
      "precincts_total": 4105,
@@ -1420,8 +1420,8 @@
    "countsFirst": "early",
    "partyReg": false,
    "unit": "county",
-   "source": "https://www.enr-scvotes.org/SC/127300/384071/reports/detailxml.zip",
-   "updated": "2026-11-04T02:35:54+00:00",
+   "source": "https://www.enr-scvotes.org/SC/127300/384304/reports/detailxml.zip",
+   "updated": "2026-11-04T02:37:21+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1464,13 +1464,13 @@
       {
        "name": "Aiken",
        "votes": [
-        25511,
-        25877,
-        540,
-        350,
-        84
+        28286,
+        30009,
+        642,
+        427,
+        97
        ],
-       "outstanding": 15271,
+       "outstanding": 8496,
        "remainder": [
         {
          "n": 231,
@@ -1484,18 +1484,18 @@
          ]
         },
         {
-         "n": 15040,
+         "n": 8265,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.36894515968418806,
-          0.5986201010029163,
-          0.017142044242122484,
-          0.012660928942314532,
-          0.0026317661284586385
+          0.3763115606390018,
+          0.5930617260610643,
+          0.016211362132526705,
+          0.012052178844881368,
+          0.0023631723225257585
          ]
         }
        ],
-       "precincts_reporting": 43,
+       "precincts_reporting": 64,
        "precincts_total": 89
       },
       {
@@ -1527,13 +1527,13 @@
       {
        "name": "Anderson",
        "votes": [
-        21318,
-        30628,
-        620,
-        431,
-        161
+        25350,
+        39294,
+        806,
+        631,
+        208
        ],
-       "outstanding": 19892,
+       "outstanding": 6536,
        "remainder": [
         {
          "n": 176,
@@ -1547,18 +1547,18 @@
          ]
         },
         {
-         "n": 19716,
+         "n": 6360,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.3022788203753351,
-          0.6645218945487043,
-          0.016487935656836462,
-          0.012689901697944593,
-          0.004021447721179625
+          0.3040466334375264,
+          0.6628368674495226,
+          0.015628960040550817,
+          0.013629579566894765,
+          0.0038579595055053366
          ]
         }
        ],
-       "precincts_reporting": 42,
+       "precincts_reporting": 67,
        "precincts_total": 79
       },
       {
@@ -1653,38 +1653,38 @@
       {
        "name": "Berkeley",
        "votes": [
-        30998,
-        26413,
-        817,
-        537,
-        111
+        36256,
+        31055,
+        986,
+        657,
+        133
        ],
-       "outstanding": 31115,
+       "outstanding": 20777,
        "remainder": [
         {
-         "n": 20629,
+         "n": 18365,
          "basis": "measured",
          "share": [
-          0.597946011255604,
-          0.3860926520619376,
-          0.009475056436997234,
-          0.004896505675495215,
-          0.0015897745699659789
+          0.5999110188343467,
+          0.3845765979534332,
+          0.009105739285184636,
+          0.004834643333827673,
+          0.001572000593207771
          ]
         },
         {
-         "n": 10486,
+         "n": 2412,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.44455788514129446,
-          0.5203281677301732,
-          0.018924339106654513,
-          0.013965360072926163,
-          0.0022242479489516863
+          0.4531833088318444,
+          0.5113931923555355,
+          0.01919597421689472,
+          0.013965848693882166,
+          0.0022616759018432657
          ]
         }
        ],
-       "precincts_reporting": 68,
+       "precincts_reporting": 88,
        "precincts_total": 94
       },
       {
@@ -1716,13 +1716,13 @@
       {
        "name": "Charleston",
        "votes": [
-        75769,
-        37794,
-        971,
-        421,
-        155
+        82970,
+        42067,
+        1196,
+        524,
+        188
        ],
-       "outstanding": 50325,
+       "outstanding": 35414,
        "remainder": [
         {
          "n": 460,
@@ -1736,30 +1736,30 @@
          ]
         },
         {
-         "n": 49865,
+         "n": 34954,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.5619340818544005,
-          0.4117167692864904,
-          0.016479536399855124,
-          0.007424846070264397,
-          0.0024447663889894966
+          0.5859958914288211,
+          0.38550635954368634,
+          0.01778923904016784,
+          0.008086017745530836,
+          0.002622492241793785
          ]
         }
        ],
-       "precincts_reporting": 33,
+       "precincts_reporting": 72,
        "precincts_total": 182
       },
       {
        "name": "Cherokee",
        "votes": [
-        5490,
-        9492,
-        130,
-        156,
-        64
+        6071,
+        11149,
+        163,
+        185,
+        77
        ],
-       "outstanding": 2174,
+       "outstanding": 66,
        "remainder": [
         {
          "n": 66,
@@ -1771,20 +1771,9 @@
           0.005379310344827587,
           0.0030344827586206895
          ]
-        },
-        {
-         "n": 2108,
-         "basis": "scaled from precincts reporting",
-         "share": [
-          0.27715911902994306,
-          0.692279138827023,
-          0.01088839396189062,
-          0.014476614699331848,
-          0.005196733481811433
-         ]
         }
        ],
-       "precincts_reporting": 23,
+       "precincts_reporting": 29,
        "precincts_total": 29
       },
       {
@@ -1830,13 +1819,13 @@
       {
        "name": "Clarendon",
        "votes": [
-        6570,
-        5028,
-        105,
-        81,
-        14
+        7049,
+        6297,
+        123,
+        101,
+        18
        ],
-       "outstanding": 1919,
+       "outstanding": 24,
        "remainder": [
         {
          "n": 24,
@@ -1848,20 +1837,9 @@
           0.004247411733474914,
           0.0011945845500398195
          ]
-        },
-        {
-         "n": 1895,
-         "basis": "scaled from precincts reporting",
-         "share": [
-          0.4066604127579737,
-          0.5659005628517824,
-          0.01477485928705441,
-          0.01149155722326454,
-          0.0011726078799249532
-         ]
         }
        ],
-       "precincts_reporting": 18,
+       "precincts_reporting": 26,
        "precincts_total": 26
       },
       {
@@ -1945,13 +1923,13 @@
       {
        "name": "Dorchester",
        "votes": [
-        19943,
-        15206,
-        389,
-        259,
-        42
+        24872,
+        20653,
+        617,
+        422,
+        60
        ],
-       "outstanding": 26035,
+       "outstanding": 14963,
        "remainder": [
         {
          "n": 6758,
@@ -1965,18 +1943,18 @@
          ]
         },
         {
-         "n": 19277,
+         "n": 8205,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.4166491043203372,
-          0.547945205479452,
-          0.017492096944151738,
-          0.01559536354056902,
-          0.0023182297154899895
+          0.4446877012234385,
+          0.518158403090792,
+          0.020025756600128782,
+          0.015260785576303927,
+          0.0018673535093367676
          ]
         }
        ],
-       "precincts_reporting": 16,
+       "precincts_reporting": 53,
        "precincts_total": 81
       },
       {
@@ -2008,13 +1986,13 @@
       {
        "name": "Fairfield",
        "votes": [
-        5611,
-        3169,
-        83,
-        69,
-        17
+        6099,
+        3386,
+        91,
+        72,
+        18
        ],
-       "outstanding": 961,
+       "outstanding": 53,
        "remainder": [
         {
          "n": 53,
@@ -2026,32 +2004,21 @@
           0.004937255708701913,
           0.0004114379757251594
          ]
-        },
-        {
-         "n": 908,
-         "basis": "scaled from precincts reporting",
-         "share": [
-          0.5330234833659491,
-          0.4400684931506849,
-          0.01223091976516634,
-          0.011007827788649706,
-          0.003669275929549902
-         ]
         }
        ],
-       "precincts_reporting": 18,
+       "precincts_reporting": 22,
        "precincts_total": 22
       },
       {
        "name": "Florence",
        "votes": [
-        24545,
-        16216,
-        368,
-        273,
-        50
+        25685,
+        17840,
+        399,
+        303,
+        61
        ],
-       "outstanding": 9412,
+       "outstanding": 5315,
        "remainder": [
         {
          "n": 587,
@@ -2065,18 +2032,18 @@
          ]
         },
         {
-         "n": 8825,
+         "n": 4728,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.488369062357464,
-          0.4862188049781716,
-          0.012706066332182185,
-          0.01088160552550987,
-          0.0018244608066723138
+          0.4748941318814277,
+          0.499697519661222,
+          0.012429192102513337,
+          0.0108342957707749,
+          0.002144860584062036
          ]
         }
        ],
-       "precincts_reporting": 40,
+       "precincts_reporting": 50,
        "precincts_total": 63
       },
       {
@@ -2145,13 +2112,13 @@
       {
        "name": "Greenwood",
        "votes": [
-        7823,
-        7606,
-        148,
-        119,
-        24
+        9739,
+        10550,
+        249,
+        196,
+        44
        ],
-       "outstanding": 11831,
+       "outstanding": 4433,
        "remainder": [
         {
          "n": 116,
@@ -2165,18 +2132,18 @@
          ]
         },
         {
-         "n": 11715,
+         "n": 4317,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.32847424684159376,
-          0.640427599611273,
-          0.014820213799805637,
-          0.012876579203109815,
-          0.003401360544217687
+          0.35622411161979506,
+          0.6082406801831263,
+          0.01765860039241334,
+          0.014170481796381078,
+          0.003706126008284282
          ]
         }
        ],
-       "precincts_reporting": 13,
+       "precincts_reporting": 34,
        "precincts_total": 50
       },
       {
@@ -2208,13 +2175,13 @@
       {
        "name": "Horry",
        "votes": [
-        56244,
-        82796,
-        941,
-        740,
-        159
+        60794,
+        92600,
+        1092,
+        849,
+        186
        ],
-       "outstanding": 21542,
+       "outstanding": 8253,
        "remainder": [
         {
          "n": 521,
@@ -2228,56 +2195,56 @@
          ]
         },
         {
-         "n": 21021,
+         "n": 7732,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.31559198753102813,
-          0.6639919952279243,
-          0.00998672285400912,
-          0.008428101368123305,
-          0.0020011930189151226
+          0.3145323524996247,
+          0.6652304458789972,
+          0.010058549767302206,
+          0.008211980183155682,
+          0.001966671670920282
          ]
         }
        ],
-       "precincts_reporting": 89,
+       "precincts_reporting": 112,
        "precincts_total": 125
       },
       {
        "name": "Jasper",
        "votes": [
-        0,
-        0,
-        0,
-        0,
-        0
+        8757,
+        8402,
+        134,
+        107,
+        16
        ],
-       "outstanding": 9293,
+       "outstanding": 84,
        "remainder": [
         {
-         "n": 9293,
+         "n": 84,
          "basis": "measured",
          "share": [
-          0.6334703852550841,
-          0.35295624655416274,
-          0.007535470664426588,
-          0.004463958075886295,
-          0.0015739394504402468
+          0.5926810728635031,
+          0.39754587903138233,
+          0.005320881746117928,
+          0.003909219242045825,
+          0.000542947116950809
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 18,
        "precincts_total": 18
       },
       {
        "name": "Kershaw",
        "votes": [
-        11532,
-        11667,
-        287,
-        260,
-        91
+        12155,
+        12609,
+        316,
+        284,
+        104
        ],
-       "outstanding": 1922,
+       "outstanding": 509,
        "remainder": [
         {
          "n": 509,
@@ -2289,20 +2256,9 @@
           0.006024096385542169,
           0.002653471026965003
          ]
-        },
-        {
-         "n": 1413,
-         "basis": "scaled from precincts reporting",
-         "share": [
-          0.36601637521479835,
-          0.5943596482361265,
-          0.016375214798342263,
-          0.017790356817952088,
-          0.005458404932780754
-         ]
         }
        ],
-       "precincts_reporting": 28,
+       "precincts_reporting": 32,
        "precincts_total": 32
       },
       {
@@ -2334,13 +2290,13 @@
       {
        "name": "Laurens",
        "votes": [
-        7960,
-        10627,
-        226,
-        238,
-        68
+        9454,
+        13267,
+        285,
+        284,
+        90
        ],
-       "outstanding": 2457,
+       "outstanding": 50,
        "remainder": [
         {
          "n": 50,
@@ -2352,20 +2308,9 @@
           0.005310161718561429,
           0.0020516533912623702
          ]
-        },
-        {
-         "n": 2407,
-         "basis": "scaled from precincts reporting",
-         "share": [
-          0.31745592172066833,
-          0.6442352072371458,
-          0.01569279054740146,
-          0.017908243330564018,
-          0.004707837164220438
-         ]
         }
        ],
-       "precincts_reporting": 27,
+       "precincts_reporting": 33,
        "precincts_total": 33
       },
       {
@@ -2397,13 +2342,13 @@
       {
        "name": "Lexington",
        "votes": [
-        24829,
-        26197,
-        542,
-        359,
-        109
+        34068,
+        41099,
+        1046,
+        724,
+        210
        ],
-       "outstanding": 70091,
+       "outstanding": 40989,
        "remainder": [
         {
          "n": 10831,
@@ -2417,18 +2362,18 @@
          ]
         },
         {
-         "n": 59260,
+         "n": 30158,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.3278132742208893,
-          0.6346329378015386,
-          0.017733733211631242,
-          0.016560177337332116,
-          0.003259877428608684
+          0.3585417937766931,
+          0.6030811470408786,
+          0.019524100061012812,
+          0.0150091519219036,
+          0.0038438071995118973
          ]
         }
        ],
-       "precincts_reporting": 11,
+       "precincts_reporting": 50,
        "precincts_total": 96
       },
       {
@@ -2548,13 +2493,13 @@
       {
        "name": "Oconee",
        "votes": [
-        8259,
-        15520,
-        252,
-        186,
-        52
+        10591,
+        20639,
+        381,
+        271,
+        83
        ],
-       "outstanding": 7881,
+       "outstanding": 669,
        "remainder": [
         {
          "n": 97,
@@ -2568,18 +2513,18 @@
          ]
         },
         {
-         "n": 7784,
+         "n": 572,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.23635209479475244,
-          0.732120186203978,
-          0.015446466356326703,
-          0.013224714346170122,
-          0.0028565382987727466
+          0.2662701189643107,
+          0.7020643806857942,
+          0.01603685560998367,
+          0.01224632610216935,
+          0.0033823186377420107
          ]
         }
        ],
-       "precincts_reporting": 17,
+       "precincts_reporting": 30,
        "precincts_total": 31
       },
       {
@@ -2597,11 +2542,11 @@
          "n": 16900,
          "basis": "measured",
          "share": [
-          0.8039159512473986,
-          0.18251068056184844,
-          0.007535470664426588,
-          0.004463958075886295,
-          0.0015739394504402468
+          0.8040498085072155,
+          0.18242177230199924,
+          0.00750641957708738,
+          0.0044571817394774334,
+          0.0015648178742204099
          ]
         }
        ],
@@ -2611,13 +2556,13 @@
       {
        "name": "Pickens",
        "votes": [
-        14955,
-        27688,
-        704,
-        450,
-        181
+        15104,
+        28223,
+        714,
+        459,
+        183
        ],
-       "outstanding": 864,
+       "outstanding": 117,
        "remainder": [
         {
          "n": 117,
@@ -2629,20 +2574,9 @@
           0.005378794785304039,
           0.003145227459203209
          ]
-        },
-        {
-         "n": 747,
-         "basis": "scaled from precincts reporting",
-         "share": [
-          0.25862068965517243,
-          0.7,
-          0.021234119782214157,
-          0.015063520871143375,
-          0.005081669691470054
-         ]
         }
        ],
-       "precincts_reporting": 59,
+       "precincts_reporting": 61,
        "precincts_total": 61
       },
       {
@@ -2711,13 +2645,13 @@
       {
        "name": "Spartanburg",
        "votes": [
-        49959,
-        50380,
-        1281,
-        1123,
-        354
+        53730,
+        57398,
+        1481,
+        1278,
+        408
        ],
-       "outstanding": 14249,
+       "outstanding": 4677,
        "remainder": [
         {
          "n": 255,
@@ -2731,30 +2665,30 @@
          ]
         },
         {
-         "n": 13994,
+         "n": 4422,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.3911296420315842,
-          0.5695953682300331,
-          0.01760677482771285,
-          0.01680744885393938,
-          0.004860766056730541
+          0.38053820863847476,
+          0.5807225981526258,
+          0.017656165741819888,
+          0.016229756292727052,
+          0.004853271174352462
          ]
         }
        ],
-       "precincts_reporting": 86,
+       "precincts_reporting": 104,
        "precincts_total": 112
       },
       {
        "name": "Sumter",
        "votes": [
-        19958,
-        10538,
-        242,
-        214,
-        55
+        22805,
+        13014,
+        306,
+        271,
+        62
        ],
-       "outstanding": 4740,
+       "outstanding": 96,
        "remainder": [
         {
          "n": 96,
@@ -2766,20 +2700,9 @@
           0.0043986852281515856,
           0.0013534416086620263
          ]
-        },
-        {
-         "n": 4644,
-         "basis": "scaled from precincts reporting",
-         "share": [
-          0.5326097490066867,
-          0.4423878282779339,
-          0.010466130438996028,
-          0.011919759666634364,
-          0.002616532609749007
-         ]
         }
        ],
-       "precincts_reporting": 40,
+       "precincts_reporting": 58,
        "precincts_total": 58
       },
       {
@@ -2811,50 +2734,39 @@
       {
        "name": "Williamsburg",
        "votes": [
-        7877,
-        3414,
+        8044,
+        3510,
         67,
         60,
-        12
+        13
        ],
-       "outstanding": 438,
+       "outstanding": 77,
        "remainder": [
         {
-         "n": 233,
+         "n": 77,
          "basis": "measured",
          "share": [
-          0.8109115554049475,
-          0.18112504235852253,
-          0.004066418163334463,
-          0.003727549983056591,
-          0.00016943409013893597
-         ]
-        },
-        {
-         "n": 205,
-         "basis": "scaled from precincts reporting",
-         "share": [
-          0.5591534008683068,
-          0.4242040520984081,
-          0.007778581765557163,
-          0.006874095513748191,
-          0.0019898697539797393
+          0.8121492241663916,
+          0.1799273687685705,
+          0.003961703532518983,
+          0.0036315615714757345,
+          0.0003301419610432486
          ]
         }
        ],
-       "precincts_reporting": 27,
+       "precincts_reporting": 28,
        "precincts_total": 28
       },
       {
        "name": "York",
        "votes": [
-        36330,
-        24322,
-        530,
-        335,
-        195
+        42947,
+        38345,
+        937,
+        689,
+        312
        ],
-       "outstanding": 2445,
+       "outstanding": 34799,
        "remainder": [
         {
          "n": 2445,
@@ -2866,23 +2778,34 @@
           0.005400496261818654,
           0.003162452765929842
          ]
+        },
+        {
+         "n": 32354,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.3083592192498493,
+          0.6507951226297001,
+          0.018916036904817097,
+          0.01650516945616394,
+          0.005424451759469609
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 40,
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T02:35:54+00:00",
+     "updated": "2026-11-04T02:37:21+00:00",
      "tier": "tossup",
-     "precincts_reporting": 1269,
+     "precincts_reporting": 1642,
      "precincts_total": 2312,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1508559,
+     "counted": 1684226,
      "modes": {
-      "election_day": 499281,
-      "early": 977269,
-      "mail": 31029,
+      "election_day": 663319,
+      "early": 986055,
+      "mail": 33872,
       "provisional": 980
      }
     }
@@ -3005,10 +2928,10 @@
          "n": 4529,
          "basis": "measured",
          "share": [
-          0.6449166162703668,
-          0.3384310667325892,
-          0.0094681763040239,
-          0.007184140693020179
+          0.645076361982576,
+          0.33829349577302426,
+          0.009448741581157862,
+          0.007181400663241851
          ]
         }
        ],
@@ -3101,10 +3024,10 @@
          "n": 4276,
          "basis": "measured",
          "share": [
-          0.7349120965173688,
-          0.24843558648558714,
-          0.0094681763040239,
-          0.007184140693020179
+          0.7350738716516717,
+          0.24829598610392858,
+          0.009448741581157862,
+          0.007181400663241851
          ]
         }
        ],
@@ -3326,25 +3249,25 @@
       {
        "name": "Caswell",
        "votes": [
-        0,
-        0,
-        0,
-        0
+        3408,
+        3151,
+        95,
+        52
        ],
-       "outstanding": 5147,
+       "outstanding": 100,
        "remainder": [
         {
-         "n": 5147,
+         "n": 100,
          "basis": "measured",
          "share": [
-          0.5357448609560107,
-          0.4476028220469452,
-          0.0094681763040239,
-          0.007184140693020179
+          0.5383396076877353,
+          0.4434317416286903,
+          0.011293837923518922,
+          0.006934812760055479
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 9,
        "precincts_total": 9
       },
       {
@@ -3379,16 +3302,16 @@
         362,
         216
        ],
-       "outstanding": 761,
+       "outstanding": 805,
        "remainder": [
         {
-         "n": 761,
+         "n": 805,
          "basis": "measured",
          "share": [
-          0.6812313534038513,
-          0.3038242473555736,
-          0.00941144561974505,
-          0.005532953620829943
+          0.7125905423708851,
+          0.2746010246746364,
+          0.007596725752311407,
+          0.005211707202167128
          ]
         }
        ],
@@ -3409,10 +3332,10 @@
          "n": 7092,
          "basis": "measured",
          "share": [
-          0.37195862341966435,
-          0.6113890595832916,
-          0.0094681763040239,
-          0.007184140693020179
+          0.3721122138562997,
+          0.6112576438993005,
+          0.009448741581157862,
+          0.007181400663241851
          ]
         }
        ],
@@ -3672,10 +3595,10 @@
       {
        "name": "Duplin",
        "votes": [
-        4588,
-        4189,
-        92,
-        88
+        5262,
+        5232,
+        130,
+        120
        ],
        "outstanding": 219,
        "remainder": [
@@ -3764,10 +3687,10 @@
       {
        "name": "Forsyth",
        "votes": [
-        83939,
-        35095,
-        1352,
-        939
+        88344,
+        40664,
+        1636,
+        1048
        ],
        "outstanding": 3011,
        "remainder": [
@@ -4073,10 +3996,10 @@
          "n": 4716,
          "basis": "measured",
          "share": [
-          0.7899234561895668,
-          0.19342422681338908,
-          0.0094681763040239,
-          0.007184140693020179
+          0.7900864718447094,
+          0.19328338591089084,
+          0.009448741581157862,
+          0.007181400663241851
          ]
         }
        ],
@@ -4121,10 +4044,10 @@
          "n": 871,
          "basis": "measured",
          "share": [
-          0.5477447257538555,
-          0.43560295724910053,
-          0.0094681763040239,
-          0.007184140693020179
+          0.5479022802140047,
+          0.4354675775415956,
+          0.009448741581157862,
+          0.007181400663241851
          ]
         }
        ],
@@ -4583,10 +4506,10 @@
          "n": 4263,
          "basis": "measured",
          "share": [
-          0.7290541091980965,
-          0.2542935738048594,
-          0.0094681763040239,
-          0.007184140693020179
+          0.7292157522332222,
+          0.254154105522378,
+          0.009448741581157862,
+          0.007181400663241851
          ]
         }
        ],
@@ -4607,10 +4530,10 @@
          "n": 33486,
          "basis": "measured",
          "share": [
-          0.4788336006943588,
-          0.5045140823085972,
-          0.0094681763040239,
-          0.007184140693020179
+          0.4789896011902499,
+          0.5043802565653503,
+          0.009448741581157862,
+          0.007181400663241851
          ]
         }
        ],
@@ -4689,10 +4612,10 @@
          "n": 10023,
          "basis": "measured",
          "share": [
-          0.6331400953388098,
-          0.35020758766414617,
-          0.0094681763040239,
-          0.007184140693020179
+          0.6332995754873296,
+          0.35007028226827064,
+          0.009448741581157862,
+          0.007181400663241851
          ]
         }
        ],
@@ -5328,10 +5251,10 @@
       {
        "name": "Watauga",
        "votes": [
-        13339,
-        7172,
-        300,
-        224
+        14651,
+        8249,
+        364,
+        275
        ],
        "outstanding": 313,
        "remainder": [
@@ -5411,10 +5334,10 @@
          "n": 19102,
          "basis": "measured",
          "share": [
-          0.6592959969953099,
-          0.32405168600764594,
-          0.0094681763040239,
-          0.007184140693020179
+          0.6594560669663916,
+          0.32391379078920873,
+          0.009448741581157862,
+          0.007181400663241851
          ]
         }
        ],
@@ -5470,23 +5393,23 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T02:35:39+00:00",
+     "updated": "2026-11-04T02:36:49+00:00",
      "tier": "safe",
-     "precincts_reporting": 2060,
+     "precincts_reporting": 2069,
      "precincts_total": 2626,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 3419791,
+     "counted": 3441155,
      "modes": {
-      "Election Day": 733228,
-      "Early Voting": 2619559,
-      "Absentee by Mail": 66914,
+      "Election Day": 752453,
+      "Early Voting": 2624484,
+      "Absentee by Mail": 64128,
       "Provisional": 90
      }
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T02:35:39+00:00",
+   "updated": "2026-11-04T02:36:49+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -11668,7 +11591,7 @@
    "partyReg": true,
    "unit": "county",
    "source": "https://electionresults.iowa.gov/IA/127077/384322/reports/detailxml.zip",
-   "updated": "2026-11-04T02:35:53+00:00",
+   "updated": "2026-11-04T02:37:19+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -14077,7 +14000,7 @@
        "precincts_total": 10
       }
      ],
-     "updated": "2026-11-04T02:35:53+00:00",
+     "updated": "2026-11-04T02:37:19+00:00",
      "tier": "watch",
      "precincts_reporting": 130,
      "precincts_total": 1656,
@@ -14101,7 +14024,7 @@
    "partyReg": true,
    "unit": "county",
    "source": "https://flelectionfiles.floridados.gov/enightfilespublic/20261103_ElecResultsFL.txt",
-   "updated": "2026-11-04T02:35:41+00:00",
+   "updated": "2026-11-04T02:36:51+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -14924,7 +14847,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T02:35:41+00:00",
+     "updated": "2026-11-04T02:36:51+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -16251,7 +16174,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T02:35:41+00:00",
+     "updated": "2026-11-04T02:36:51+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -16272,7 +16195,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T02:36:11+00:00",
+   "updated": "2026-11-04T02:37:39+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -16318,8 +16241,8 @@
          "n": 1159,
          "basis": "measured",
          "share": [
-          0.3305375028876037,
-          0.6694624971123964
+          0.33017952317592725,
+          0.6698204768240728
          ]
         }
        ],
@@ -16338,8 +16261,8 @@
          "n": 2551,
          "basis": "measured",
          "share": [
-          0.23454203644987742,
-          0.7654579635501226
+          0.23418405673820097,
+          0.765815943261799
          ]
         }
        ],
@@ -16358,8 +16281,8 @@
          "n": 669,
          "basis": "measured",
          "share": [
-          0.501572415467039,
-          0.498427584532961
+          0.5012144357553625,
+          0.49878556424463744
          ]
         }
        ],
@@ -16409,8 +16332,8 @@
       {
        "name": "Barrow County",
        "votes": [
-        9789,
-        15086
+        12458,
+        20493
        ],
        "outstanding": 86,
        "remainder": [
@@ -16423,7 +16346,7 @@
          ]
         }
        ],
-       "precincts_reporting": 3,
+       "precincts_reporting": 8,
        "precincts_total": 8
       },
       {
@@ -16549,21 +16472,21 @@
       {
        "name": "Brooks County",
        "votes": [
-        0,
-        0
+        2203,
+        3252
        ],
-       "outstanding": 3038,
+       "outstanding": 8,
        "remainder": [
         {
-         "n": 3038,
+         "n": 8,
          "basis": "measured",
          "share": [
-          0.46672689971198705,
-          0.5332731002880129
+          0.4627062706270627,
+          0.5372937293729373
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 7,
        "precincts_total": 7
       },
       {
@@ -16637,17 +16560,17 @@
       {
        "name": "Butts County",
        "votes": [
-        3073,
-        6508
+        3082,
+        6513
        ],
-       "outstanding": 86,
+       "outstanding": 72,
        "remainder": [
         {
-         "n": 86,
+         "n": 72,
          "basis": "measured",
          "share": [
-          0.32061774023231254,
-          0.6793822597676874
+          0.3212121212121212,
+          0.6787878787878788
          ]
         }
        ],
@@ -16666,8 +16589,8 @@
          "n": 915,
          "basis": "measured",
          "share": [
-          0.6626464518068182,
-          0.3373535481931817
+          0.6622884720951419,
+          0.33771152790485814
          ]
         }
        ],
@@ -16677,8 +16600,8 @@
       {
        "name": "Camden County",
        "votes": [
-        5730,
-        9282
+        6873,
+        12104
        ],
        "outstanding": 77,
        "remainder": [
@@ -16766,8 +16689,8 @@
          "n": 1817,
          "basis": "measured",
          "share": [
-          0.3192781141420183,
-          0.6807218858579818
+          0.31892013443034184,
+          0.6810798655696582
          ]
         }
        ],
@@ -16777,29 +16700,29 @@
       {
        "name": "Chatham County",
        "votes": [
-        50143,
-        25566
+        56960,
+        30494
        ],
-       "outstanding": 31114,
+       "outstanding": 21105,
        "remainder": [
         {
-         "n": 530,
+         "n": 311,
          "basis": "measured",
          "share": [
-          0.6687286464682952,
-          0.33127135353170484
+          0.6688718871887188,
+          0.33112811281128113
          ]
         },
         {
-         "n": 30584,
+         "n": 20794,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.6163141993957704,
-          0.38368580060422963
+          0.5950274117533904,
+          0.4049725882466096
          ]
         }
        ],
-       "precincts_reporting": 20,
+       "precincts_reporting": 43,
        "precincts_total": 86
       },
       {
@@ -16814,8 +16737,8 @@
          "n": 623,
          "basis": "measured",
          "share": [
-          0.5182399886588739,
-          0.4817600113411261
+          0.5178820089471974,
+          0.4821179910528026
          ]
         }
        ],
@@ -16961,10 +16884,10 @@
       {
        "name": "Cobb County",
        "votes": [
-        152406,
-        85312
+        170776,
+        103162
        ],
-       "outstanding": 88307,
+       "outstanding": 59657,
        "remainder": [
         {
          "n": 11424,
@@ -16975,15 +16898,15 @@
          ]
         },
         {
-         "n": 76883,
+         "n": 48233,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.456005993507034,
-          0.5439940064929659
+          0.49443327182634295,
+          0.505566728173657
          ]
         }
        ],
-       "precincts_reporting": 20,
+       "precincts_reporting": 74,
        "precincts_total": 148
       },
       {
@@ -16998,8 +16921,8 @@
          "n": 7445,
          "basis": "measured",
          "share": [
-          0.37489272515500616,
-          0.6251072748449938
+          0.37453474544332965,
+          0.6254652545566703
          ]
         }
        ],
@@ -17009,7 +16932,7 @@
       {
        "name": "Colquitt County",
        "votes": [
-        3786,
+        3787,
         8647
        ],
        "outstanding": 27,
@@ -17029,29 +16952,29 @@
       {
        "name": "Columbia County",
        "votes": [
-        20589,
-        27075
+        27358,
+        38604
        ],
-       "outstanding": 15551,
+       "outstanding": 2058,
        "remainder": [
         {
-         "n": 1185,
+         "n": 158,
          "basis": "measured",
          "share": [
-          0.4513696484930253,
-          0.5486303515069747
+          0.4536135797244557,
+          0.5463864202755443
          ]
         },
         {
-         "n": 14366,
+         "n": 1900,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.30112067565372747,
-          0.6988793243462725
+          0.3442035171589551,
+          0.6557964828410449
          ]
         }
        ],
-       "precincts_reporting": 12,
+       "precincts_reporting": 37,
        "precincts_total": 40
       },
       {
@@ -17157,8 +17080,8 @@
       {
        "name": "Dawson County",
        "votes": [
-        2440,
-        9845
+        2882,
+        11546
        ],
        "outstanding": 61,
        "remainder": [
@@ -17171,7 +17094,7 @@
          ]
         }
        ],
-       "precincts_reporting": 2,
+       "precincts_reporting": 4,
        "precincts_total": 4
       },
       {
@@ -17205,8 +17128,8 @@
       {
        "name": "Decatur County",
        "votes": [
-        3015,
-        3809
+        3586,
+        4908
        ],
        "outstanding": 15,
        "remainder": [
@@ -17219,7 +17142,7 @@
          ]
         }
        ],
-       "precincts_reporting": 4,
+       "precincts_reporting": 10,
        "precincts_total": 10
       },
       {
@@ -17265,8 +17188,8 @@
       {
        "name": "Dougherty County",
        "votes": [
-        0,
-        0
+        310,
+        188
        ],
        "outstanding": 15583,
        "remainder": [
@@ -17274,12 +17197,12 @@
          "n": 15583,
          "basis": "measured",
          "share": [
-          0.8074469732776011,
-          0.192553026722399
+          0.8070889935659246,
+          0.19291100643407544
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 23
       },
       {
@@ -17322,8 +17245,8 @@
          "n": 2039,
          "basis": "measured",
          "share": [
-          0.5436051880366778,
-          0.4563948119633222
+          0.5432472083250013,
+          0.45675279167499866
          ]
         }
        ],
@@ -17601,17 +17524,17 @@
       {
        "name": "Glynn County",
        "votes": [
-        11033,
-        16283
+        12927,
+        20185
        ],
-       "outstanding": 187,
+       "outstanding": 171,
        "remainder": [
         {
-         "n": 187,
+         "n": 171,
          "basis": "measured",
          "share": [
-          0.40629230075064604,
-          0.593707699249354
+          0.4064767370362779,
+          0.593523262963722
          ]
         }
        ],
@@ -17621,10 +17544,10 @@
       {
        "name": "Gordon County",
        "votes": [
-        4450,
-        13623
+        4579,
+        14341
        ],
-       "outstanding": 883,
+       "outstanding": 56,
        "remainder": [
         {
          "n": 56,
@@ -17633,17 +17556,9 @@
           0.29333741454953577,
           0.7066625854504642
          ]
-        },
-        {
-         "n": 827,
-         "basis": "scaled from precincts reporting",
-         "share": [
-          0.19040135396518376,
-          0.8095986460348162
-         ]
         }
        ],
-       "precincts_reporting": 10,
+       "precincts_reporting": 11,
        "precincts_total": 11
       },
       {
@@ -17766,8 +17681,8 @@
          "n": 2278,
          "basis": "measured",
          "share": [
-          0.7784181424955259,
-          0.22158185750447407
+          0.7780601627838495,
+          0.22193983721615052
          ]
         }
        ],
@@ -17806,8 +17721,8 @@
          "n": 9481,
          "basis": "measured",
          "share": [
-          0.3695049789278718,
-          0.6304950210721282
+          0.3691469992161953,
+          0.6308530007838047
          ]
         }
        ],
@@ -17857,38 +17772,38 @@
       {
        "name": "Henry County",
        "votes": [
-        72711,
-        27146
+        76909,
+        28782
        ],
-       "outstanding": 10622,
+       "outstanding": 4104,
        "remainder": [
         {
-         "n": 376,
+         "n": 256,
          "basis": "measured",
          "share": [
-          0.7575300832695017,
-          0.2424699167304984
+          0.7575929535417335,
+          0.24240704645826652
          ]
         },
         {
-         "n": 10246,
+         "n": 3848,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.6024319323288395,
-          0.39756806767116043
+          0.6292175890210727,
+          0.3707824109789273
          ]
         }
        ],
-       "precincts_reporting": 24,
+       "precincts_reporting": 32,
        "precincts_total": 37
       },
       {
        "name": "Houston County",
        "votes": [
-        25678,
-        24682
+        28848,
+        29297
        ],
-       "outstanding": 172,
+       "outstanding": 5402,
        "remainder": [
         {
          "n": 172,
@@ -17897,9 +17812,17 @@
           0.5229206878399719,
           0.4770793121600281
          ]
+        },
+        {
+         "n": 5230,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.39886879630367245,
+          0.6011312036963276
+         ]
         }
        ],
-       "precincts_reporting": 6,
+       "precincts_reporting": 12,
        "precincts_total": 17
       },
       {
@@ -17925,21 +17848,21 @@
       {
        "name": "Jackson County",
        "votes": [
-        7079,
-        17713
+        8038,
+        20741
        ],
-       "outstanding": 234,
+       "outstanding": 145,
        "remainder": [
         {
-         "n": 234,
+         "n": 145,
          "basis": "measured",
          "share": [
-          0.28553565666343983,
-          0.7144643433365602
+          0.2863630883003095,
+          0.7136369116996906
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 2,
        "precincts_total": 4
       },
       {
@@ -18087,10 +18010,10 @@
       {
        "name": "Laurens County",
        "votes": [
-        5064,
-        7679
+        5816,
+        10456
        ],
-       "outstanding": 576,
+       "outstanding": 1218,
        "remainder": [
         {
          "n": 27,
@@ -18101,11 +18024,11 @@
          ]
         },
         {
-         "n": 549,
+         "n": 1191,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.2804635761589404,
-          0.7195364238410596
+          0.24415941365093907,
+          0.7558405863490609
          ]
         }
        ],
@@ -18226,8 +18149,8 @@
       {
        "name": "Macon County",
        "votes": [
-        1698,
-        1217
+        2145,
+        1436
        ],
        "outstanding": 181,
        "remainder": [
@@ -18306,8 +18229,8 @@
       {
        "name": "McIntosh County",
        "votes": [
-        0,
-        0
+        419,
+        435
        ],
        "outstanding": 3742,
        "remainder": [
@@ -18315,12 +18238,12 @@
          "n": 3742,
          "basis": "measured",
          "share": [
-          0.45736828921713973,
-          0.5426317107828602
+          0.4570103095054633,
+          0.5429896904945367
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 3,
        "precincts_total": 6
       },
       {
@@ -18355,8 +18278,8 @@
          "n": 1176,
          "basis": "measured",
          "share": [
-          0.34780647007052795,
-          0.6521935299294721
+          0.3474484903588515,
+          0.6525515096411485
          ]
         }
        ],
@@ -18366,21 +18289,12 @@
       {
        "name": "Mitchell County",
        "votes": [
-        0,
-        0
+        2742,
+        3291
        ],
-       "outstanding": 3784,
-       "remainder": [
-        {
-         "n": 3784,
-         "basis": "measured",
-         "share": [
-          0.5191741485569825,
-          0.4808258514430174
-         ]
-        }
-       ],
-       "precincts_reporting": 9,
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": 8,
        "precincts_total": 9
       },
       {
@@ -18406,20 +18320,11 @@
       {
        "name": "Montgomery County",
        "votes": [
-        0,
-        0
+        805,
+        2164
        ],
-       "outstanding": 1499,
-       "remainder": [
-        {
-         "n": 1499,
-         "basis": "measured",
-         "share": [
-          0.3351202152572013,
-          0.6648797847427987
-         ]
-        }
-       ],
+       "outstanding": null,
+       "remainder": null,
        "precincts_reporting": 3,
        "precincts_total": 3
       },
@@ -18582,8 +18487,8 @@
       {
        "name": "Peach County",
        "votes": [
-        4644,
-        4181
+        5585,
+        5069
        ],
        "outstanding": 38,
        "remainder": [
@@ -18596,7 +18501,7 @@
          ]
         }
        ],
-       "precincts_reporting": 3,
+       "precincts_reporting": 4,
        "precincts_total": 4
       },
       {
@@ -18852,8 +18757,8 @@
          "n": 1246,
          "basis": "measured",
          "share": [
-          0.39863050556659213,
-          0.6013694944334078
+          0.3982725258549157,
+          0.6017274741450843
          ]
         }
        ],
@@ -19127,21 +19032,21 @@
       {
        "name": "Troup County",
        "votes": [
-        6068,
-        6890
+        9188,
+        10572
        ],
-       "outstanding": 83,
+       "outstanding": 45,
        "remainder": [
         {
-         "n": 83,
+         "n": 45,
          "basis": "measured",
          "share": [
-          0.4682821423059114,
-          0.5317178576940886
+          0.4687596183441059,
+          0.5312403816558942
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 7,
        "precincts_total": 11
       },
       {
@@ -19207,8 +19112,8 @@
       {
        "name": "Upson County",
        "votes": [
-        3089,
-        5480
+        3321,
+        6472
        ],
        "outstanding": 33,
        "remainder": [
@@ -19221,7 +19126,7 @@
          ]
         }
        ],
-       "precincts_reporting": 3,
+       "precincts_reporting": 4,
        "precincts_total": 4
       },
       {
@@ -19247,10 +19152,10 @@
       {
        "name": "Walton County",
        "votes": [
-        10376,
-        19428
+        12665,
+        25995
        ],
-       "outstanding": 140,
+       "outstanding": 4568,
        "remainder": [
         {
          "n": 140,
@@ -19259,9 +19164,17 @@
           0.34814118910213393,
           0.651858810897866
          ]
+        },
+        {
+         "n": 4428,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.25846883468834686,
+          0.7415311653116531
+         ]
         }
        ],
-       "precincts_reporting": 7,
+       "precincts_reporting": 10,
        "precincts_total": 15
       },
       {
@@ -19478,7 +19391,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T02:36:11+00:00",
+     "updated": "2026-11-04T02:37:39+00:00",
      "tier": "tossup",
      "precincts_reporting": 144,
      "precincts_total": 159,
@@ -19536,8 +19449,8 @@
          "n": 1159,
          "basis": "measured",
          "share": [
-          0.37237401021606253,
-          0.6276259897839375
+          0.3719936631367515,
+          0.6280063368632485
          ]
         }
        ],
@@ -19556,8 +19469,8 @@
          "n": 2551,
          "basis": "measured",
          "share": [
-          0.27637854377833626,
-          0.7236214562216637
+          0.2759981966990252,
+          0.7240018033009747
          ]
         }
        ],
@@ -19576,8 +19489,8 @@
          "n": 669,
          "basis": "measured",
          "share": [
-          0.5434089227954978,
-          0.45659107720450215
+          0.5430285757161868,
+          0.4569714242838132
          ]
         }
        ],
@@ -19627,8 +19540,8 @@
       {
        "name": "Barrow County",
        "votes": [
-        11034,
-        13763
+        14168,
+        18654
        ],
        "outstanding": 143,
        "remainder": [
@@ -19641,7 +19554,7 @@
          ]
         }
        ],
-       "precincts_reporting": 3,
+       "precincts_reporting": 8,
        "precincts_total": 8
       },
       {
@@ -19767,21 +19680,21 @@
       {
        "name": "Brooks County",
        "votes": [
-        0,
-        0
+        2366,
+        3085
        ],
-       "outstanding": 3038,
+       "outstanding": 7,
        "remainder": [
         {
-         "n": 3038,
+         "n": 7,
          "basis": "measured",
          "share": [
-          0.5085634070404459,
-          0.4914365929595541
+          0.4922467832398548,
+          0.5077532167601452
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 7,
        "precincts_total": 7
       },
       {
@@ -19855,17 +19768,17 @@
       {
        "name": "Butts County",
        "votes": [
-        3376,
-        6183
+        3388,
+        6187
        ],
-       "outstanding": 92,
+       "outstanding": 76,
        "remainder": [
         {
-         "n": 92,
+         "n": 76,
          "basis": "measured",
          "share": [
-          0.35178335535006605,
-          0.648216644649934
+          0.35262325336145534,
+          0.6473767466385447
          ]
         }
        ],
@@ -19884,8 +19797,8 @@
          "n": 915,
          "basis": "measured",
          "share": [
-          0.7044829591352771,
-          0.29551704086472286
+          0.7041026120559661,
+          0.2958973879440339
          ]
         }
        ],
@@ -19895,8 +19808,8 @@
       {
        "name": "Camden County",
        "votes": [
-        6280,
-        8759
+        7574,
+        11434
        ],
        "outstanding": 53,
        "remainder": [
@@ -19984,8 +19897,8 @@
          "n": 1817,
          "basis": "measured",
          "share": [
-          0.3611146214704771,
-          0.6388853785295229
+          0.36073427439116607,
+          0.6392657256088339
          ]
         }
        ],
@@ -19995,29 +19908,29 @@
       {
        "name": "Chatham County",
        "votes": [
-        53250,
-        22648
+        60649,
+        27056
        ],
-       "outstanding": 31011,
+       "outstanding": 21018,
        "remainder": [
         {
-         "n": 361,
+         "n": 142,
          "basis": "measured",
          "share": [
-          0.7061552319471551,
-          0.29384476805284493
+          0.7062951712579868,
+          0.2937048287420132
          ]
         },
         {
-         "n": 30650,
+         "n": 20876,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.6689276485788114,
-          0.3310723514211886
+          0.6441847097145047,
+          0.3558152902854953
          ]
         }
        ],
-       "precincts_reporting": 20,
+       "precincts_reporting": 43,
        "precincts_total": 86
       },
       {
@@ -20032,8 +19945,8 @@
          "n": 623,
          "basis": "measured",
          "share": [
-          0.5600764959873327,
-          0.43992350401266733
+          0.5596961489080217,
+          0.44030385109197834
          ]
         }
        ],
@@ -20179,10 +20092,10 @@
       {
        "name": "Cobb County",
        "votes": [
-        164284,
-        73279
+        185660,
+        88021
        ],
-       "outstanding": 88151,
+       "outstanding": 59626,
        "remainder": [
         {
          "n": 11537,
@@ -20193,15 +20106,15 @@
          ]
         },
         {
-         "n": 76614,
+         "n": 48089,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.5567621752568708,
-          0.4432378247431292
+          0.5831063236914887,
+          0.4168936763085113
          ]
         }
        ],
-       "precincts_reporting": 20,
+       "precincts_reporting": 74,
        "precincts_total": 148
       },
       {
@@ -20216,8 +20129,8 @@
          "n": 7445,
          "basis": "measured",
          "share": [
-          0.41672923248346494,
-          0.5832707675165351
+          0.41634888540415393,
+          0.5836511145958461
          ]
         }
        ],
@@ -20227,7 +20140,7 @@
       {
        "name": "Colquitt County",
        "votes": [
-        4211,
+        4212,
         8207
        ],
        "outstanding": 38,
@@ -20247,29 +20160,29 @@
       {
        "name": "Columbia County",
        "votes": [
-        22767,
-        24929
+        30692,
+        35312
        ],
-       "outstanding": 15509,
+       "outstanding": 2012,
        "remainder": [
         {
-         "n": 1150,
+         "n": 113,
          "basis": "measured",
          "share": [
-          0.4953059554186125,
-          0.5046940445813876
+          0.49817985391859837,
+          0.5018201460814016
          ]
         },
         {
-         "n": 14359,
+         "n": 1899,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.3560285992850179,
-          0.6439714007149822
+          0.4046958377801494,
+          0.5953041622198506
          ]
         }
        ],
-       "precincts_reporting": 12,
+       "precincts_reporting": 37,
        "precincts_total": 40
       },
       {
@@ -20375,8 +20288,8 @@
       {
        "name": "Dawson County",
        "votes": [
-        3047,
-        9171
+        3617,
+        10749
        ],
        "outstanding": 117,
        "remainder": [
@@ -20389,7 +20302,7 @@
          ]
         }
        ],
-       "precincts_reporting": 2,
+       "precincts_reporting": 4,
        "precincts_total": 4
       },
       {
@@ -20423,8 +20336,8 @@
       {
        "name": "Decatur County",
        "votes": [
-        3224,
-        3585
+        3837,
+        4636
        ],
        "outstanding": 33,
        "remainder": [
@@ -20437,7 +20350,7 @@
          ]
         }
        ],
-       "precincts_reporting": 4,
+       "precincts_reporting": 10,
        "precincts_total": 10
       },
       {
@@ -20483,8 +20396,8 @@
       {
        "name": "Dougherty County",
        "votes": [
-        0,
-        0
+        330,
+        165
        ],
        "outstanding": 15583,
        "remainder": [
@@ -20492,12 +20405,12 @@
          "n": 15583,
          "basis": "measured",
          "share": [
-          0.8492834806060598,
-          0.15071651939394015
+          0.8489031335267487,
+          0.1510968664732512
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 23
       },
       {
@@ -20540,8 +20453,8 @@
          "n": 2039,
          "basis": "measured",
          "share": [
-          0.5854416953651367,
-          0.4145583046348634
+          0.5850613482858256,
+          0.41493865171417443
          ]
         }
        ],
@@ -20819,17 +20732,17 @@
       {
        "name": "Glynn County",
        "votes": [
-        12313,
-        15030
+        14528,
+        18619
        ],
-       "outstanding": 166,
+       "outstanding": 149,
        "remainder": [
         {
-         "n": 166,
+         "n": 149,
          "basis": "measured",
          "share": [
-          0.4513524590163934,
-          0.5486475409836066
+          0.451529671949871,
+          0.548470328050129
          ]
         }
        ],
@@ -20839,10 +20752,10 @@
       {
        "name": "Gordon County",
        "votes": [
-        5413,
-        12610
+        5584,
+        13283
        ],
-       "outstanding": 894,
+       "outstanding": 70,
        "remainder": [
         {
          "n": 70,
@@ -20851,17 +20764,9 @@
           0.3443343210381118,
           0.6556656789618882
          ]
-        },
-        {
-         "n": 824,
-         "basis": "scaled from precincts reporting",
-         "share": [
-          0.24805730937348228,
-          0.7519426906265178
-         ]
         }
        ],
-       "precincts_reporting": 10,
+       "precincts_reporting": 11,
        "precincts_total": 11
       },
       {
@@ -20984,8 +20889,8 @@
          "n": 2278,
          "basis": "measured",
          "share": [
-          0.8202546498239848,
-          0.17974535017601523
+          0.8198743027446738,
+          0.1801256972553263
          ]
         }
        ],
@@ -21024,8 +20929,8 @@
          "n": 9481,
          "basis": "measured",
          "share": [
-          0.4113414862563306,
-          0.5886585137436694
+          0.4109611391770196,
+          0.5890388608229804
          ]
         }
        ],
@@ -21075,38 +20980,38 @@
       {
        "name": "Henry County",
        "votes": [
-        75540,
-        24218
+        79993,
+        25587
        ],
-       "outstanding": 10659,
+       "outstanding": 4156,
        "remainder": [
         {
-         "n": 435,
+         "n": 316,
          "basis": "measured",
          "share": [
-          0.7841573631047315,
-          0.21584263689526847
+          0.7842152045628503,
+          0.2157847954371497
          ]
         },
         {
-         "n": 10224,
+         "n": 3840,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.6418543046357615,
-          0.3581456953642384
+          0.6701114818130035,
+          0.3298885181869965
          ]
         }
        ],
-       "precincts_reporting": 24,
+       "precincts_reporting": 32,
        "precincts_total": 37
       },
       {
        "name": "Houston County",
        "votes": [
-        27532,
-        22809
+        31142,
+        26995
        ],
-       "outstanding": 180,
+       "outstanding": 5410,
        "remainder": [
         {
          "n": 180,
@@ -21115,9 +21020,17 @@
           0.5591216216216216,
           0.4408783783783784
          ]
+        },
+        {
+         "n": 5230,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.45048992272763483,
+          0.5495100772723652
+         ]
         }
        ],
-       "precincts_reporting": 6,
+       "precincts_reporting": 12,
        "precincts_total": 17
       },
       {
@@ -21143,21 +21056,21 @@
       {
        "name": "Jackson County",
        "votes": [
-        8294,
-        16435
+        9509,
+        19194
        ],
-       "outstanding": 297,
+       "outstanding": 201,
        "remainder": [
         {
-         "n": 297,
+         "n": 201,
          "basis": "measured",
          "share": [
-          0.33539568927170527,
-          0.6646043107282947
+          0.33627391742195367,
+          0.6637260825780463
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 2,
        "precincts_total": 4
       },
       {
@@ -21314,10 +21227,10 @@
       {
        "name": "Laurens County",
        "votes": [
-        5437,
-        7289
+        6291,
+        9953
        ],
-       "outstanding": 582,
+       "outstanding": 1222,
        "remainder": [
         {
          "n": 35,
@@ -21328,11 +21241,11 @@
          ]
         },
         {
-         "n": 547,
+         "n": 1187,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.31052806376619063,
-          0.6894719362338093
+          0.27400827079185175,
+          0.7259917292081483
          ]
         }
        ],
@@ -21453,8 +21366,8 @@
       {
        "name": "Macon County",
        "votes": [
-        1782,
-        1119
+        2235,
+        1327
        ],
        "outstanding": 188,
        "remainder": [
@@ -21533,8 +21446,8 @@
       {
        "name": "McIntosh County",
        "votes": [
-        0,
-        0
+        449,
+        403
        ],
        "outstanding": 3742,
        "remainder": [
@@ -21542,12 +21455,12 @@
          "n": 3742,
          "basis": "measured",
          "share": [
-          0.4992047965455986,
-          0.5007952034544014
+          0.4988244494662875,
+          0.5011755505337125
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 3,
        "precincts_total": 6
       },
       {
@@ -21582,8 +21495,8 @@
          "n": 1176,
          "basis": "measured",
          "share": [
-          0.3896429773989868,
-          0.6103570226010132
+          0.38926263031967573,
+          0.6107373696803242
          ]
         }
        ],
@@ -21593,21 +21506,21 @@
       {
        "name": "Mitchell County",
        "votes": [
-        0,
-        0
+        2917,
+        3091
        ],
-       "outstanding": 3784,
+       "outstanding": 9,
        "remainder": [
         {
-         "n": 3784,
+         "n": 9,
          "basis": "measured",
          "share": [
-          0.5610106558854414,
-          0.4389893441145586
+          0.5719205298013245,
+          0.4280794701986755
          ]
         }
        ],
-       "precincts_reporting": 9,
+       "precincts_reporting": 8,
        "precincts_total": 9
       },
       {
@@ -21633,17 +21546,17 @@
       {
        "name": "Montgomery County",
        "votes": [
-        0,
-        0
+        918,
+        2031
        ],
-       "outstanding": 1499,
+       "outstanding": 4,
        "remainder": [
         {
-         "n": 1499,
+         "n": 4,
          "basis": "measured",
          "share": [
-          0.37695672258566015,
-          0.6230432774143398
+          0.35384615384615387,
+          0.6461538461538462
          ]
         }
        ],
@@ -21809,8 +21722,8 @@
       {
        "name": "Peach County",
        "votes": [
-        4969,
-        3851
+        5980,
+        4656
        ],
        "outstanding": 48,
        "remainder": [
@@ -21823,7 +21736,7 @@
          ]
         }
        ],
-       "precincts_reporting": 3,
+       "precincts_reporting": 4,
        "precincts_total": 4
       },
       {
@@ -22088,8 +22001,8 @@
          "n": 1246,
          "basis": "measured",
          "share": [
-          0.44046701289505097,
-          0.559532987104949
+          0.4400866658157399,
+          0.5599133341842601
          ]
         }
        ],
@@ -22363,21 +22276,21 @@
       {
        "name": "Troup County",
        "votes": [
-        6519,
-        6388
+        9894,
+        9813
        ],
-       "outstanding": 134,
+       "outstanding": 95,
        "remainder": [
         {
-         "n": 134,
+         "n": 95,
          "basis": "measured",
          "share": [
-          0.5050747656310529,
-          0.4949252343689471
+          0.5056388073536228,
+          0.49436119264637723
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 7,
        "precincts_total": 11
       },
       {
@@ -22443,8 +22356,8 @@
       {
        "name": "Upson County",
        "votes": [
-        3359,
-        5161
+        3638,
+        6104
        ],
        "outstanding": 70,
        "remainder": [
@@ -22457,7 +22370,7 @@
          ]
         }
        ],
-       "precincts_reporting": 3,
+       "precincts_reporting": 4,
        "precincts_total": 4
       },
       {
@@ -22483,10 +22396,10 @@
       {
        "name": "Walton County",
        "votes": [
-        11584,
-        18076
+        14356,
+        24119
        ],
-       "outstanding": 284,
+       "outstanding": 4692,
        "remainder": [
         {
          "n": 284,
@@ -22495,9 +22408,17 @@
           0.3905596763317599,
           0.6094403236682401
          ]
+        },
+        {
+         "n": 4408,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.31446398184912083,
+          0.6855360181508792
+         ]
         }
        ],
-       "precincts_reporting": 7,
+       "precincts_reporting": 10,
        "precincts_total": 15
       },
       {
@@ -22732,7 +22653,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T02:36:11+00:00",
+     "updated": "2026-11-04T02:37:39+00:00",
      "tier": "safe",
      "precincts_reporting": 144,
      "precincts_total": 159,
@@ -24148,7 +24069,7 @@
    "partyReg": true,
    "unit": "parish",
    "source": "https://voterportal.sos.la.gov/ElectionResults/ElectionResults/Data?blob=20261103/VotesRaceByParish/Votes_<race>.htm",
-   "updated": "2026-11-04T02:35:43+00:00",
+   "updated": "2026-11-04T02:36:53+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -24220,19 +24141,19 @@
       {
        "name": "Beauregard",
        "votes": [
-        2589,
-        1153
+        2679,
+        1168
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 2,
+       "precincts_reporting": 3,
        "precincts_total": 37
       },
       {
        "name": "Bienville",
        "votes": [
-        0,
-        0
+        624,
+        1175
        ],
        "outstanding": null,
        "remainder": null,
@@ -24275,12 +24196,12 @@
       {
        "name": "Caldwell",
        "votes": [
-        990,
-        266
+        1571,
+        452
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": null,
+       "precincts_reporting": 6,
        "precincts_total": 19
       },
       {
@@ -24418,12 +24339,12 @@
       {
        "name": "Iberville",
        "votes": [
-        1736,
-        2402
+        2068,
+        3434
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 1,
+       "precincts_reporting": 7,
        "precincts_total": 31
       },
       {
@@ -24528,23 +24449,23 @@
       {
        "name": "Morehouse",
        "votes": [
-        1855,
-        1906
+        1972,
+        2205
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": null,
+       "precincts_reporting": 5,
        "precincts_total": 30
       },
       {
        "name": "Natchitoches",
        "votes": [
-        1828,
-        2408
+        2181,
+        2976
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": null,
+       "precincts_reporting": 6,
        "precincts_total": 50
       },
       {
@@ -24583,12 +24504,12 @@
       {
        "name": "Pointe Coupee",
        "votes": [
-        0,
-        0
+        79,
+        39
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 24
       },
       {
@@ -24616,12 +24537,12 @@
       {
        "name": "Richland",
        "votes": [
-        1389,
-        984
+        1574,
+        1008
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 1,
+       "precincts_reporting": 2,
        "precincts_total": 23
       },
       {
@@ -24715,12 +24636,21 @@
       {
        "name": "St. Mary",
        "votes": [
-        3252,
-        2791
+        3626,
+        3437
        ],
-       "outstanding": null,
-       "remainder": null,
-       "precincts_reporting": 7,
+       "outstanding": 5392,
+       "remainder": [
+        {
+         "n": 5392,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.4505649717514124,
+          0.5494350282485876
+         ]
+        }
+       ],
+       "precincts_reporting": 13,
        "precincts_total": 46
       },
       {
@@ -24867,24 +24797,24 @@
        "precincts_total": 26
       }
      ],
-     "updated": "2026-11-04T02:35:43+00:00",
-     "precincts_reporting": 45,
+     "updated": "2026-11-04T02:36:53+00:00",
+     "precincts_reporting": 77,
      "precincts_total": 3722,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 285195,
+     "counted": 291914,
      "modes": {
-      "early": 278395,
-      "election_day": 6800
+      "early": 280194,
+      "election_day": 11720
      },
      "choices_by_mode": {
       "Jamie Davis": {
-       "early": 132049,
-       "election_day": 3457
+       "early": 133224,
+       "election_day": 6266
       },
       "Julia Letlow": {
-       "early": 146346,
-       "election_day": 3343
+       "early": 146970,
+       "election_day": 5454
       }
      }
     }

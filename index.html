@@ -145,7 +145,9 @@ button:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px sol
 .updated .stale{color:var(--flag);font-weight:600}
 .srcnote{font-size:12.5px;color:var(--flag);background:rgba(0,0,0,.025);border-left:3px solid var(--flag);
   padding:8px 10px;margin-top:10px;line-height:1.45;border-radius:0 3px 3px 0}
-.srcnote.warn{border-left-color:var(--r);background:rgba(170,40,40,.05)}
+.srcnote.neednote{margin:8px 0 2px;padding:8px 10px;border-left:3px solid var(--ink);
+  background:rgba(0,0,0,.035);font-size:13px;line-height:1.5}
+.warn{border-left-color:var(--r);background:rgba(170,40,40,.05)}
 .srcnote .srcwho{display:block;color:var(--dim);font-size:11.5px;margin-top:4px}
 .tbd{color:var(--dim);font-style:italic;font-size:12px}
 .cyc{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);font-weight:600}
@@ -693,6 +695,31 @@ function cardFor(key, st, abbr, tier){
       <div class="srow"><span class="slab">Projected margin</span>
         <span class="fig big" style="color:${col(st.candidates[m.projLead>=0?m.leader:m.runner].party)}">${nm(m.projLead>=0?m.leader:m.runner)} +${n(Math.abs(m.projLead))}</span>
         <span class="slab">${m.flips?"Outstanding overturns the lead":""}</span><span></span></div>` : "";
+    // What the trailing side needs on the ballots that have NOT been cast yet. In a
+    // state that counts early first, everything still to come is Election Day, so the
+    // denominator is that state's projected Election Day size from data/eday-caps.json -
+    // not the early vote still being tallied, which is already spoken for. In a state
+    // that counts Election Day first (South Carolina), it is the absentee pile instead.
+    const capRec = (EDAY_CAPS || {})[abbr] || null;
+    const edFirst = st.countsFirst === "election-day";
+    const pool = edFirst ? p.outstanding : (capRec ? capRec.eday_cap : 0);
+    const poolName = edFirst ? "absentee ballots still to count" : "Election Day ballots";
+    let needNote = "";
+    if (projUseful && pool > 0 && p.proj.length > 1){
+      const ord = p.proj.map((v,i)=>[v,i]).sort((a,b)=>b[0]-a[0]);
+      const lead = ord[0], run = ord[1];
+      const gap = lead[0] - run[0];
+      if (gap > 0){
+        const needPct = gap / pool * 100;
+        const who = st.candidates[run[1]], won = st.candidates[lead[1]];
+        const impossible = needPct >= 100;
+        needNote = `<div class="neednote"><b>To win, ${nm(run[1])} needs `
+          + (impossible
+              ? `more than every one of the ${n(pool)} ${poolName}`
+              : `${col(who.party)==="var(--r)"?"R":col(who.party)==="var(--d)"?"D":""}+${needPct.toFixed(1)} on the ${n(pool)} ${poolName} still to come`)
+          + `</b> — a projected deficit of ${n(gap)} against ${nm(lead[1])}.</div>`;
+      }
+    }
     const flipNote = m.flips ? `<div class="flipnote"><b>${nm(m.runner)}</b> projects ahead by ${n(Math.abs(m.projLead))} — the outstanding vote is concentrated where ${nm(m.runner)} is winning, and it is enough to overturn a ${n(m.lead)} deficit.</div>` : "";
     const head2 = `<div class="summary">
       <div class="srow brk"><span class="slab">Total votes in</span><span class="fig">${n(p.totC)}</span>
@@ -700,6 +727,7 @@ function cardFor(key, st, abbr, tier){
       <div class="srow evorder"><span class="slab">Early vote counted</span>
         <span class="fig"><b class="${(EVORDER[st.countsFirst]||{}).when==="LAST"?"amber":""}">${(EVORDER[st.countsFirst]||{when:"?"}).when}</b></span>
         <span class="slab" style="grid-column:span 2;text-align:left;text-transform:none;letter-spacing:0;font-family:var(--body);font-size:12px">${(EVORDER[st.countsFirst]||{note:""}).note}</span></div>
+      ${needNote}
       <div class="srow out"><span class="slab">Votes outstanding</span><span class="fig">${n(p.outstanding)}</span>
         <span class="slab">% votes outstanding</span><span class="fig big">${pctOut==null?"—":pct(pctOut)}</span></div>${marginRows}</div>` + flipNote + epBlock;
 
@@ -1815,7 +1843,7 @@ setInterval(load, 120000);
 // fix was live on the server while the board on screen still read "+1,704,584" against
 // candidate rows summing to 41,912. Poll this file's own build stamp and reload when it
 // changes. Bump BUILD whenever index.html changes.
-const BUILD = "1793753058";
+const BUILD = "1793754027";
 async function checkBuild(){
   try {
     const t = await fetch("index.html?cb=" + Date.now(), {cache: "no-store"}).then(r => r.text());

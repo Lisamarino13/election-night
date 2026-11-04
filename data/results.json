@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T01:24:00+00:00",
+ "updated": "2026-11-04T01:27:28+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -3425,7 +3425,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T01:23:30+00:00",
+   "updated": "2026-11-04T01:26:58+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -3576,23 +3576,36 @@
       {
        "name": "Athens",
        "votes": [
-        6773,
-        1705,
-        128,
-        169,
+        7081,
+        1757,
+        136,
+        185,
         0,
         0,
         0
        ],
-       "outstanding": 64,
+       "outstanding": 143555,
        "remainder": [
         {
          "n": 64,
          "basis": "measured",
          "share": null
+        },
+        {
+         "n": 143491,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.7731193361720712,
+          0.19183316955999563,
+          0.01484878261818976,
+          0.020198711649743423,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 3,
        "precincts_total": 50
       },
       {
@@ -3844,18 +3857,18 @@
       {
        "name": "Coshocton",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        2150,
+        3398,
+        158,
+        112,
         0,
         0,
         0
        ],
-       "outstanding": 5861,
+       "outstanding": 7,
        "remainder": [
         {
-         "n": 5861,
+         "n": 7,
          "basis": "measured",
          "share": null
         }
@@ -4641,15 +4654,28 @@
         0,
         0
        ],
-       "outstanding": 36,
+       "outstanding": 167645,
        "remainder": [
         {
          "n": 36,
          "basis": "measured",
          "share": null
+        },
+        {
+         "n": 167609,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.6462299731466675,
+          0.32172706152128655,
+          0.015930965814802522,
+          0.01611199951724346,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 35,
        "precincts_total": 212
       },
       {
@@ -5143,15 +5169,15 @@
       {
        "name": "Sandusky",
        "votes": [
-        4035,
-        3060,
-        184,
-        130,
+        6661,
+        7715,
+        605,
+        377,
         0,
         0,
         0
        ],
-       "outstanding": 5243,
+       "outstanding": 10854,
        "remainder": [
         {
          "n": 13,
@@ -5159,13 +5185,13 @@
          "share": null
         },
         {
-         "n": 5230,
+         "n": 10841,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.5446079092995006,
-          0.41301120259144286,
-          0.024834660547982185,
-          0.01754622756107437,
+          0.43371532751660374,
+          0.5023440552155228,
+          0.03939315014975908,
+          0.024547467118114338,
           0.0,
           0.0,
           0.0
@@ -5470,10 +5496,10 @@
       {
        "name": "Wayne",
        "votes": [
-        1842,
-        1883,
-        100,
-        79,
+        7874,
+        8108,
+        323,
+        226,
         0,
         0,
         0
@@ -5556,13 +5582,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T01:23:30+00:00",
+     "updated": "2026-11-04T01:26:58+00:00",
      "tier": "tossup",
-     "precincts_reporting": 149,
+     "precincts_reporting": 187,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1613108,
+     "counted": 1639886,
      "modes": null
     },
     "governor": {
@@ -5704,22 +5730,34 @@
       {
        "name": "Athens",
        "votes": [
-        6956,
-        1659,
-        157,
+        7286,
+        1704,
+        164,
         0,
         0,
         0
        ],
-       "outstanding": 64,
+       "outstanding": 143477,
        "remainder": [
         {
          "n": 64,
          "basis": "measured",
          "share": null
+        },
+        {
+         "n": 143413,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.7959362027528949,
+          0.18614813196416866,
+          0.01791566528293642,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 3,
        "precincts_total": 50
       },
       {
@@ -5959,17 +5997,17 @@
       {
        "name": "Coshocton",
        "votes": [
-        0,
-        0,
-        0,
+        2296,
+        3291,
+        208,
         0,
         0,
         0
        ],
-       "outstanding": 5861,
+       "outstanding": 7,
        "remainder": [
         {
-         "n": 5861,
+         "n": 7,
          "basis": "measured",
          "share": null
         }
@@ -6717,15 +6755,27 @@
         0,
         0
        ],
-       "outstanding": 36,
+       "outstanding": 166340,
        "remainder": [
         {
          "n": 36,
          "basis": "measured",
          "share": null
+        },
+        {
+         "n": 166304,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.6689676144138665,
+          0.30825604378896154,
+          0.022776341797171962,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 35,
        "precincts_total": 212
       },
       {
@@ -7196,14 +7246,14 @@
       {
        "name": "Sandusky",
        "votes": [
-        4126,
-        3056,
-        239,
+        6962,
+        7663,
+        724,
         0,
         0,
         0
        ],
-       "outstanding": 5251,
+       "outstanding": 10848,
        "remainder": [
         {
          "n": 13,
@@ -7211,12 +7261,12 @@
          "share": null
         },
         {
-         "n": 5238,
+         "n": 10835,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.5559897587926156,
-          0.4118043390378655,
-          0.032205902169518935,
+          0.453580037787478,
+          0.49925076552218384,
+          0.04716919669033813,
           0.0,
           0.0,
           0.0
@@ -7506,9 +7556,9 @@
       {
        "name": "Wayne",
        "votes": [
-        1922,
-        1808,
-        154,
+        8195,
+        7912,
+        401,
         0,
         0,
         0
@@ -7588,13 +7638,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T01:23:30+00:00",
+     "updated": "2026-11-04T01:26:58+00:00",
      "tier": "tossup",
-     "precincts_reporting": 149,
+     "precincts_reporting": 187,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1609497,
+     "counted": 1636226,
      "modes": null
     }
    },
@@ -7648,7 +7698,7 @@
    "partyReg": true,
    "unit": "county",
    "source": "https://flelectionfiles.floridados.gov/enightfilespublic/20261103_ElecResultsFL.txt",
-   "updated": "2026-11-04T01:23:31+00:00",
+   "updated": "2026-11-04T01:26:59+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -8471,7 +8521,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T01:23:31+00:00",
+     "updated": "2026-11-04T01:26:59+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -9798,7 +9848,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T01:23:31+00:00",
+     "updated": "2026-11-04T01:26:59+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -9819,7 +9869,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T01:24:00+00:00",
+   "updated": "2026-11-04T01:27:28+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -10858,18 +10908,29 @@
       {
        "name": "Elbert County",
        "votes": [
-        0,
-        0
+        2234,
+        4230
        ],
-       "outstanding": 4045,
+       "outstanding": 1384,
        "remainder": [
         {
-         "n": 4045,
+         "n": 1,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3963897131552918,
+          0.6036102868447082
+         ]
+        },
+        {
+         "n": 1383,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.26074380165289257,
+          0.7392561983471074
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 7,
        "precincts_total": 11
       },
       {
@@ -13057,7 +13118,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T01:24:00+00:00",
+     "updated": "2026-11-04T01:27:28+00:00",
      "tier": "tossup",
      "precincts_reporting": 111,
      "precincts_total": 159,
@@ -14108,18 +14169,29 @@
       {
        "name": "Elbert County",
        "votes": [
-        0,
-        0
+        2368,
+        4068
        ],
-       "outstanding": 4045,
+       "outstanding": 1384,
        "remainder": [
         {
-         "n": 4045,
+         "n": 11,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.41695587506197324,
+          0.5830441249380268
+         ]
+        },
+        {
+         "n": 1373,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.28559533721898417,
+          0.7144046627810158
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 7,
        "precincts_total": 11
       },
       {
@@ -16324,7 +16396,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T01:24:00+00:00",
+     "updated": "2026-11-04T01:27:28+00:00",
      "tier": "safe",
      "precincts_reporting": 111,
      "precincts_total": 159,

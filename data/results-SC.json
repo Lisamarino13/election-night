@@ -4,9 +4,9 @@
  "source_kind": "clarity",
  "election": "2026 Statewide General Election",
  "election_date": "11/3/2026",
- "feed_timestamp": "11/3/2026 8:15:51 PM EST",
- "version": "383674",
- "fetched": "2026-11-04T01:23:48+00:00",
+ "feed_timestamp": "11/3/2026 8:23:40 PM EST",
+ "version": "383722",
+ "fetched": "2026-11-04T01:30:50+00:00",
  "early_cast_as_of": "2026-10-31",
  "counties": {
   "Abbeville": {
@@ -84,69 +84,69 @@
     "choices": {
      "DEM Annie Andrews": {
       "party": "D",
-      "votes": 16792,
+      "votes": 21406,
       "by_mode": {
-       "election_day": 0,
-       "early": 16137,
+       "election_day": 1030,
+       "early": 19669,
        "mail": 655,
-       "provisional": 0
+       "provisional": 52
       }
      },
      "REP Darline Graham": {
       "party": "R",
-      "votes": 14373,
+      "votes": 18890,
       "by_mode": {
-       "election_day": 0,
-       "early": 13994,
+       "election_day": 1414,
+       "early": 17082,
        "mail": 379,
-       "provisional": 0
+       "provisional": 15
       }
      },
      "LIB Kasie Whitener": {
       "party": "O",
-      "votes": 248,
+      "votes": 346,
       "by_mode": {
-       "election_day": 0,
-       "early": 237,
+       "election_day": 45,
+       "early": 288,
        "mail": 11,
-       "provisional": 0
+       "provisional": 2
       }
      },
      "CON Mark Hackett": {
       "party": "O",
-      "votes": 138,
+      "votes": 196,
       "by_mode": {
-       "election_day": 0,
-       "early": 135,
+       "election_day": 24,
+       "early": 169,
        "mail": 3,
        "provisional": 0
       }
      },
      "Write-In": {
       "party": "O",
-      "votes": 38,
+      "votes": 56,
       "by_mode": {
-       "election_day": 0,
-       "early": 37,
+       "election_day": 9,
+       "early": 46,
        "mail": 1,
        "provisional": 0
       }
      }
     },
     "modes": {
-     "election_day": 0,
-     "early": 30540,
+     "election_day": 2522,
+     "early": 37254,
      "mail": 1049,
-     "provisional": 0
+     "provisional": 69
     },
-    "counted": 31589,
+    "counted": 40894,
     "precincts_total": 89,
-    "precincts_reporting": 0,
+    "precincts_reporting": 8,
     "registered": 116511,
-    "ballots_cast": 31756,
+    "ballots_cast": 41104,
     "early_and_mail_cast": 38534,
-    "early_and_mail_counted": 31589,
-    "early_and_mail_left": 6945
+    "early_and_mail_counted": 38303,
+    "early_and_mail_left": 231
    }
   },
   "Allendale": {
@@ -364,9 +364,9 @@
     "choices": {
      "DEM Annie Andrews": {
       "party": "D",
-      "votes": 3717,
+      "votes": 3915,
       "by_mode": {
-       "election_day": 1128,
+       "election_day": 1326,
        "early": 2485,
        "mail": 95,
        "provisional": 9
@@ -374,9 +374,9 @@
      },
      "REP Darline Graham": {
       "party": "R",
-      "votes": 3300,
+      "votes": 3631,
       "by_mode": {
-       "election_day": 1763,
+       "election_day": 2094,
        "early": 1514,
        "mail": 18,
        "provisional": 5
@@ -384,9 +384,9 @@
      },
      "LIB Kasie Whitener": {
       "party": "O",
-      "votes": 50,
+      "votes": 57,
       "by_mode": {
-       "election_day": 33,
+       "election_day": 40,
        "early": 16,
        "mail": 1,
        "provisional": 0
@@ -394,9 +394,9 @@
      },
      "CON Mark Hackett": {
       "party": "O",
-      "votes": 48,
+      "votes": 52,
       "by_mode": {
-       "election_day": 32,
+       "election_day": 36,
        "early": 16,
        "mail": 0,
        "provisional": 0
@@ -404,9 +404,9 @@
      },
      "Write-In": {
       "party": "O",
-      "votes": 8,
+      "votes": 9,
       "by_mode": {
-       "election_day": 2,
+       "election_day": 3,
        "early": 6,
        "mail": 0,
        "provisional": 0
@@ -414,16 +414,16 @@
      }
     },
     "modes": {
-     "election_day": 2958,
+     "election_day": 3499,
      "early": 4037,
      "mail": 114,
      "provisional": 14
     },
-    "counted": 7123,
+    "counted": 7664,
     "precincts_total": 15,
-    "precincts_reporting": 13,
+    "precincts_reporting": 15,
     "registered": 12931,
-    "ballots_cast": 7184,
+    "ballots_cast": 7730,
     "early_and_mail_cast": 4189,
     "early_and_mail_counted": 4151,
     "early_and_mail_left": 38
@@ -572,71 +572,71 @@
   "Calhoun": {
    "senate": {
     "choices": {
+     "DEM Annie Andrews": {
+      "party": "D",
+      "votes": 3076,
+      "by_mode": {
+       "election_day": 1260,
+       "early": 1732,
+       "mail": 84,
+       "provisional": 0
+      }
+     },
      "REP Darline Graham": {
       "party": "R",
-      "votes": 0,
+      "votes": 2659,
       "by_mode": {
-       "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "election_day": 1928,
+       "early": 707,
+       "mail": 24,
        "provisional": 0
       }
      },
      "LIB Kasie Whitener": {
       "party": "O",
-      "votes": 0,
+      "votes": 72,
       "by_mode": {
-       "election_day": 0,
-       "early": 0,
-       "mail": 0,
-       "provisional": 0
-      }
-     },
-     "DEM Annie Andrews": {
-      "party": "D",
-      "votes": 0,
-      "by_mode": {
-       "election_day": 0,
-       "early": 0,
+       "election_day": 52,
+       "early": 20,
        "mail": 0,
        "provisional": 0
       }
      },
      "CON Mark Hackett": {
       "party": "O",
-      "votes": 0,
+      "votes": 72,
       "by_mode": {
-       "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "election_day": 58,
+       "early": 13,
+       "mail": 1,
        "provisional": 0
       }
      },
      "Write-In": {
       "party": "O",
-      "votes": 0,
+      "votes": 11,
       "by_mode": {
-       "election_day": 0,
-       "early": 0,
+       "election_day": 7,
+       "early": 4,
        "mail": 0,
        "provisional": 0
       }
      }
     },
     "modes": {
-     "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "election_day": 3305,
+     "early": 2476,
+     "mail": 109,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 5890,
     "precincts_total": 12,
-    "precincts_reporting": 0,
+    "precincts_reporting": 12,
     "registered": 10158,
-    "ballots_cast": 0,
+    "ballots_cast": 5945,
     "early_and_mail_cast": 3200,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 3200
+    "early_and_mail_counted": 2585,
+    "early_and_mail_left": 615
    }
   },
   "Charleston": {
@@ -1552,71 +1552,71 @@
   "Greenville": {
    "senate": {
     "choices": {
-     "REP Darline Graham": {
-      "party": "R",
-      "votes": 0,
+     "DEM Annie Andrews": {
+      "party": "D",
+      "votes": 65691,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 62901,
+       "mail": 2790,
+       "provisional": 0
+      }
+     },
+     "REP Darline Graham": {
+      "party": "R",
+      "votes": 40998,
+      "by_mode": {
+       "election_day": 0,
+       "early": 39424,
+       "mail": 1574,
        "provisional": 0
       }
      },
      "LIB Kasie Whitener": {
       "party": "O",
-      "votes": 0,
+      "votes": 951,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
-       "provisional": 0
-      }
-     },
-     "DEM Annie Andrews": {
-      "party": "D",
-      "votes": 0,
-      "by_mode": {
-       "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 919,
+       "mail": 32,
        "provisional": 0
       }
      },
      "CON Mark Hackett": {
       "party": "O",
-      "votes": 0,
+      "votes": 506,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 475,
+       "mail": 31,
        "provisional": 0
       }
      },
      "Write-In": {
       "party": "O",
-      "votes": 0,
+      "votes": 224,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 213,
+       "mail": 11,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 103932,
+     "mail": 4438,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 108370,
     "precincts_total": 151,
     "precincts_reporting": 0,
     "registered": 348950,
-    "ballots_cast": 0,
+    "ballots_cast": 108987,
     "early_and_mail_cast": 108852,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 108852
+    "early_and_mail_counted": 108370,
+    "early_and_mail_left": 482
    }
   },
   "Greenwood": {
@@ -1972,31 +1972,31 @@
   "Lancaster": {
    "senate": {
     "choices": {
-     "DEM Annie Andrews": {
-      "party": "D",
-      "votes": 14181,
-      "by_mode": {
-       "election_day": 865,
-       "early": 12929,
-       "mail": 363,
-       "provisional": 24
-      }
-     },
      "REP Darline Graham": {
       "party": "R",
-      "votes": 13222,
+      "votes": 16886,
       "by_mode": {
-       "election_day": 1928,
+       "election_day": 5592,
        "early": 11106,
        "mail": 176,
        "provisional": 12
       }
      },
+     "DEM Annie Andrews": {
+      "party": "D",
+      "votes": 16545,
+      "by_mode": {
+       "election_day": 3229,
+       "early": 12929,
+       "mail": 363,
+       "provisional": 24
+      }
+     },
      "LIB Kasie Whitener": {
       "party": "O",
-      "votes": 275,
+      "votes": 395,
       "by_mode": {
-       "election_day": 51,
+       "election_day": 171,
        "early": 221,
        "mail": 1,
        "provisional": 2
@@ -2004,9 +2004,9 @@
      },
      "CON Mark Hackett": {
       "party": "O",
-      "votes": 167,
+      "votes": 231,
       "by_mode": {
-       "election_day": 33,
+       "election_day": 97,
        "early": 131,
        "mail": 3,
        "provisional": 0
@@ -2014,9 +2014,9 @@
      },
      "Write-In": {
       "party": "O",
-      "votes": 55,
+      "votes": 80,
       "by_mode": {
-       "election_day": 6,
+       "election_day": 31,
        "early": 46,
        "mail": 3,
        "provisional": 0
@@ -2024,16 +2024,16 @@
      }
     },
     "modes": {
-     "election_day": 2883,
+     "election_day": 9120,
      "early": 24433,
      "mail": 546,
      "provisional": 38
     },
-    "counted": 27900,
+    "counted": 34137,
     "precincts_total": 31,
-    "precincts_reporting": 6,
+    "precincts_reporting": 18,
     "registered": 71227,
-    "ballots_cast": 28032,
+    "ballots_cast": 34312,
     "early_and_mail_cast": 25087,
     "early_and_mail_counted": 24979,
     "early_and_mail_left": 108
@@ -2042,51 +2042,51 @@
   "Laurens": {
    "senate": {
     "choices": {
-     "DEM Annie Andrews": {
-      "party": "D",
-      "votes": 5064,
-      "by_mode": {
-       "election_day": 543,
-       "early": 4367,
-       "mail": 154,
-       "provisional": 0
-      }
-     },
      "REP Darline Graham": {
       "party": "R",
-      "votes": 4434,
+      "votes": 9004,
       "by_mode": {
-       "election_day": 785,
+       "election_day": 5355,
        "early": 3546,
        "mail": 102,
        "provisional": 1
       }
      },
-     "LIB Kasie Whitener": {
-      "party": "O",
-      "votes": 73,
+     "DEM Annie Andrews": {
+      "party": "D",
+      "votes": 7160,
       "by_mode": {
-       "election_day": 17,
-       "early": 56,
-       "mail": 0,
+       "election_day": 2639,
+       "early": 4367,
+       "mail": 154,
        "provisional": 0
       }
      },
      "CON Mark Hackett": {
       "party": "O",
-      "votes": 61,
+      "votes": 201,
       "by_mode": {
-       "election_day": 17,
+       "election_day": 157,
        "early": 39,
        "mail": 5,
        "provisional": 0
       }
      },
+     "LIB Kasie Whitener": {
+      "party": "O",
+      "votes": 187,
+      "by_mode": {
+       "election_day": 131,
+       "early": 56,
+       "mail": 0,
+       "provisional": 0
+      }
+     },
      "Write-In": {
       "party": "O",
-      "votes": 24,
+      "votes": 56,
       "by_mode": {
-       "election_day": 7,
+       "election_day": 39,
        "early": 14,
        "mail": 3,
        "provisional": 0
@@ -2094,16 +2094,16 @@
      }
     },
     "modes": {
-     "election_day": 1369,
+     "election_day": 8321,
      "early": 8022,
      "mail": 264,
      "provisional": 1
     },
-    "counted": 9656,
+    "counted": 16608,
     "precincts_total": 33,
-    "precincts_reporting": 5,
+    "precincts_reporting": 21,
     "registered": 42014,
-    "ballots_cast": 9724,
+    "ballots_cast": 16723,
     "early_and_mail_cast": 8336,
     "early_and_mail_counted": 8286,
     "early_and_mail_left": 50
@@ -2114,49 +2114,49 @@
     "choices": {
      "DEM Annie Andrews": {
       "party": "D",
-      "votes": 3363,
+      "votes": 4269,
       "by_mode": {
-       "election_day": 902,
+       "election_day": 1730,
        "early": 2461,
-       "mail": 0,
+       "mail": 78,
        "provisional": 0
       }
      },
      "REP Darline Graham": {
       "party": "R",
-      "votes": 1251,
+      "votes": 1957,
       "by_mode": {
-       "election_day": 603,
+       "election_day": 1289,
        "early": 648,
-       "mail": 0,
+       "mail": 20,
        "provisional": 0
       }
      },
      "CON Mark Hackett": {
       "party": "O",
-      "votes": 36,
+      "votes": 52,
       "by_mode": {
-       "election_day": 13,
+       "election_day": 28,
        "early": 23,
-       "mail": 0,
+       "mail": 1,
        "provisional": 0
       }
      },
      "LIB Kasie Whitener": {
       "party": "O",
-      "votes": 21,
+      "votes": 42,
       "by_mode": {
-       "election_day": 8,
+       "election_day": 28,
        "early": 13,
-       "mail": 0,
+       "mail": 1,
        "provisional": 0
       }
      },
      "Write-In": {
       "party": "O",
-      "votes": 8,
+      "votes": 9,
       "by_mode": {
-       "election_day": 6,
+       "election_day": 7,
        "early": 2,
        "mail": 0,
        "provisional": 0
@@ -2164,19 +2164,19 @@
      }
     },
     "modes": {
-     "election_day": 1532,
+     "election_day": 3082,
      "early": 3147,
-     "mail": 0,
+     "mail": 100,
      "provisional": 0
     },
-    "counted": 4679,
+    "counted": 6329,
     "precincts_total": 22,
-    "precincts_reporting": 12,
+    "precincts_reporting": 22,
     "registered": 9934,
-    "ballots_cast": 4739,
+    "ballots_cast": 6405,
     "early_and_mail_cast": 3261,
-    "early_and_mail_counted": 3147,
-    "early_and_mail_left": 114
+    "early_and_mail_counted": 3247,
+    "early_and_mail_left": 14
    }
   },
   "Lexington": {
@@ -2534,9 +2534,9 @@
     "choices": {
      "REP Darline Graham": {
       "party": "R",
-      "votes": 8600,
+      "votes": 15520,
       "by_mode": {
-       "election_day": 0,
+       "election_day": 6920,
        "early": 8227,
        "mail": 373,
        "provisional": 0
@@ -2544,9 +2544,9 @@
      },
      "DEM Annie Andrews": {
       "party": "D",
-      "votes": 6025,
+      "votes": 8259,
       "by_mode": {
-       "election_day": 0,
+       "election_day": 2234,
        "early": 5590,
        "mail": 435,
        "provisional": 0
@@ -2554,9 +2554,9 @@
      },
      "LIB Kasie Whitener": {
       "party": "O",
-      "votes": 106,
+      "votes": 252,
       "by_mode": {
-       "election_day": 0,
+       "election_day": 146,
        "early": 102,
        "mail": 4,
        "provisional": 0
@@ -2564,9 +2564,9 @@
      },
      "CON Mark Hackett": {
       "party": "O",
-      "votes": 61,
+      "votes": 186,
       "by_mode": {
-       "election_day": 0,
+       "election_day": 125,
        "early": 58,
        "mail": 3,
        "provisional": 0
@@ -2574,9 +2574,9 @@
      },
      "Write-In": {
       "party": "O",
-      "votes": 25,
+      "votes": 52,
       "by_mode": {
-       "election_day": 0,
+       "election_day": 27,
        "early": 24,
        "mail": 1,
        "provisional": 0
@@ -2584,16 +2584,16 @@
      }
     },
     "modes": {
-     "election_day": 0,
+     "election_day": 9452,
      "early": 14001,
      "mail": 816,
      "provisional": 0
     },
-    "counted": 14817,
+    "counted": 24269,
     "precincts_total": 31,
-    "precincts_reporting": 0,
+    "precincts_reporting": 17,
     "registered": 54854,
-    "ballots_cast": 14898,
+    "ballots_cast": 24400,
     "early_and_mail_cast": 14914,
     "early_and_mail_counted": 14817,
     "early_and_mail_left": 97
@@ -2674,9 +2674,9 @@
     "choices": {
      "REP Darline Graham": {
       "party": "R",
-      "votes": 17836,
+      "votes": 19226,
       "by_mode": {
-       "election_day": 5552,
+       "election_day": 6942,
        "early": 12008,
        "mail": 252,
        "provisional": 24
@@ -2684,9 +2684,9 @@
      },
      "DEM Annie Andrews": {
       "party": "D",
-      "votes": 10751,
+      "votes": 11307,
       "by_mode": {
-       "election_day": 1486,
+       "election_day": 2042,
        "early": 8900,
        "mail": 355,
        "provisional": 10
@@ -2694,9 +2694,9 @@
      },
      "LIB Kasie Whitener": {
       "party": "O",
-      "votes": 388,
+      "votes": 429,
       "by_mode": {
-       "election_day": 151,
+       "election_day": 192,
        "early": 230,
        "mail": 6,
        "provisional": 1
@@ -2704,9 +2704,9 @@
      },
      "CON Mark Hackett": {
       "party": "O",
-      "votes": 245,
+      "votes": 269,
       "by_mode": {
-       "election_day": 125,
+       "election_day": 149,
        "early": 118,
        "mail": 0,
        "provisional": 2
@@ -2714,9 +2714,9 @@
      },
      "Write-In": {
       "party": "O",
-      "votes": 101,
+      "votes": 110,
       "by_mode": {
-       "election_day": 32,
+       "election_day": 41,
        "early": 67,
        "mail": 2,
        "provisional": 0
@@ -2724,16 +2724,16 @@
      }
     },
     "modes": {
-     "election_day": 7346,
+     "election_day": 9366,
      "early": 21323,
      "mail": 615,
      "provisional": 37
     },
-    "counted": 29321,
+    "counted": 31341,
     "precincts_total": 61,
-    "precincts_reporting": 19,
+    "precincts_reporting": 24,
     "registered": 77872,
-    "ballots_cast": 29476,
+    "ballots_cast": 31510,
     "early_and_mail_cast": 22055,
     "early_and_mail_counted": 21938,
     "early_and_mail_left": 117
@@ -2954,9 +2954,9 @@
     "choices": {
      "DEM Annie Andrews": {
       "party": "D",
-      "votes": 14751,
+      "votes": 15774,
       "by_mode": {
-       "election_day": 289,
+       "election_day": 1312,
        "early": 13429,
        "mail": 1033,
        "provisional": 0
@@ -2964,9 +2964,9 @@
      },
      "REP Darline Graham": {
       "party": "R",
-      "votes": 6570,
+      "votes": 7603,
       "by_mode": {
-       "election_day": 597,
+       "election_day": 1630,
        "early": 5721,
        "mail": 252,
        "provisional": 0
@@ -2974,9 +2974,9 @@
      },
      "LIB Kasie Whitener": {
       "party": "O",
-      "votes": 151,
+      "votes": 177,
       "by_mode": {
-       "election_day": 17,
+       "election_day": 43,
        "early": 128,
        "mail": 6,
        "provisional": 0
@@ -2984,9 +2984,9 @@
      },
      "CON Mark Hackett": {
       "party": "O",
-      "votes": 109,
+      "votes": 137,
       "by_mode": {
-       "election_day": 18,
+       "election_day": 46,
        "early": 86,
        "mail": 5,
        "provisional": 0
@@ -2994,9 +2994,9 @@
      },
      "Write-In": {
       "party": "O",
-      "votes": 31,
+      "votes": 33,
       "by_mode": {
-       "election_day": 3,
+       "election_day": 5,
        "early": 25,
        "mail": 3,
        "provisional": 0
@@ -3004,16 +3004,16 @@
      }
     },
     "modes": {
-     "election_day": 924,
+     "election_day": 3036,
      "early": 19389,
      "mail": 1299,
      "provisional": 0
     },
-    "counted": 21612,
+    "counted": 23724,
     "precincts_total": 58,
-    "precincts_reporting": 3,
+    "precincts_reporting": 11,
     "registered": 61192,
-    "ballots_cast": 21775,
+    "ballots_cast": 23899,
     "early_and_mail_cast": 20784,
     "early_and_mail_counted": 20688,
     "early_and_mail_left": 96
@@ -3234,11 +3234,11 @@
   "senate": {
    "contest_name": "U.S.  Senate",
    "choices": {
-    "DEM Annie Andrews": 229750,
-    "REP Darline Graham": 217436,
-    "LIB Kasie Whitener": 3500,
-    "CON Mark Hackett": 2570,
-    "Write-In": 724
+    "DEM Annie Andrews": 312508,
+    "REP Darline Graham": 284224,
+    "LIB Kasie Whitener": 5096,
+    "CON Mark Hackett": 3607,
+    "Write-In": 1074
    },
    "parties": {
     "REP Darline Graham": "R",
@@ -3247,21 +3247,21 @@
     "CON Mark Hackett": "O",
     "Write-In": "O"
    },
-   "total": 453980,
+   "total": 606509,
    "modes": {
-    "election_day": 63708,
-    "early": 377449,
-    "mail": 12518,
-    "provisional": 305
+    "election_day": 98399,
+    "early": 490571,
+    "mail": 17165,
+    "provisional": 374
    },
-   "precincts_reporting": 181,
+   "precincts_reporting": 271,
    "precincts_total": 2312,
    "early_and_mail_cast": 1086229,
-   "early_and_mail_counted": 389967,
-   "early_and_mail_left": 696262
+   "early_and_mail_counted": 507736,
+   "early_and_mail_left": 578493
   }
  },
- "source": "https://www.enr-scvotes.org/SC/127300/383674/reports/detailxml.zip",
+ "source": "https://www.enr-scvotes.org/SC/127300/383722/reports/detailxml.zip",
  "notes": {
   "modes": "Votes split by mode; early and mail are never pooled with election day, because they break in opposite directions.",
   "left": "early_and_mail_left is measured - ballots recorded cast early or by mail in that county, minus those modes as counted here.",

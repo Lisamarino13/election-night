@@ -550,7 +550,7 @@ function card(key, st, rk, tier){
   const race = st.races[rk];
   const view = {name: st.name, feedStatus: st.feed_status, feedNote: st.feed_note,
                 officialUrl: st.official_url, unitsExpected: st.unitsExpected, unitsNote: st.unitsNote,
-                unit: st.unit, countsFirst: st.countsFirst,
+                unit: st.unit, countsFirst: st.countsFirst, modes: race.modes || null,
                 candidates: race.candidates, counties: race.counties || []};
   return cardFor(key, view, st.abbr, tier);
 }
@@ -594,8 +594,25 @@ function cardFor(key, st, abbr, tier){
            <td class="num cnt">\u2014</td><td class="num outs">\u2014</td>
            <td class="num prj">\u2014</td></tr>`).join("")}</tbody></table>`;
 
-  const skew = p.pctIn!=null && p.pctIn < 0.9 && st.countsFirst!=="mixed"
-    ? `<div class="warn"><b>&#9873;</b><span>Counted vote is mostly <b>${FIRST[st.countsFirst]}</b>. Outstanding ballots are a different mix, so this projection leans the wrong way until more is in.</span></div>` : "";
+  // Say WHICH ballots these are, from the state's own mode split, not a generic label.
+  // Georgia at 00:20Z had 794,825 counted and every one of them early or mail - a fact
+  // the old "counted vote is mostly early vote" wording badly understated.
+  const md = st.modes || null;
+  const mdEM = md ? (md.early||0)+(md.mail||0) : 0;
+  const mdED = md ? (md.election_day||0) : 0;
+  const mdTot = md ? mdEM + mdED + (md.provisional||0) : 0;
+  let skew = "";
+  if (md && mdTot > 0 && mdED === 0){
+    skew = `<div class="warn"><b>&#9873;</b><span><b>All ${n(mdTot)} counted votes are EARLY and mail.</b>`
+         + ` Not one election-day ballot is counted yet. Election day is a different electorate,`
+         + ` so this margin is not where the race finishes.</span></div>`;
+  } else if (md && mdTot > 0 && mdEM > 0){
+    skew = `<div class="warn"><b>&#9873;</b><span>Counted so far: <b>${n(mdEM)} early and mail</b>`
+         + ` (${pct(mdEM/mdTot)}) and <b>${n(mdED)} election day</b> (${pct(mdED/mdTot)}).`
+         + ` The two break differently, so the margin moves as the mix changes.</span></div>`;
+  } else if (p.pctIn!=null && p.pctIn < 0.9 && st.countsFirst!=="mixed"){
+    skew = `<div class="warn"><b>&#9873;</b><span>Counted vote is mostly <b>${FIRST[st.countsFirst]}</b>. Outstanding ballots are a different mix, so this projection leans the wrong way until more is in.</span></div>`;
+  }
 
   const unitName = st.unit==="town"?"towns":st.unit==="district"?"districts":"counties";
   const unalloc = p.unallocated > 0

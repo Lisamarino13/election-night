@@ -1,7 +1,7 @@
 {
- "ran_at": "2026-11-04T01:20:08Z",
+ "ran_at": "2026-11-04T01:21:17Z",
  "host": "Lisas-Laptop",
- "status": "ok",
- "failed": "",
+ "status": "collectors-failed",
+ "failed": " nc_results.py",
  "note": "Written by publish.sh on every run, even when no figure changed. If ran_at stops advancing the collector has stopped, which is not the same as the numbers not moving."
 }

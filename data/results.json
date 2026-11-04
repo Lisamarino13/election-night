@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T01:02:19+00:00",
+ "updated": "2026-11-04T01:03:38+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -188,7 +188,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/383570/reports/detailxml.zip",
-   "updated": "2026-11-04T01:02:06+00:00",
+   "updated": "2026-11-04T01:03:35+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1349,7 +1349,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T01:02:06+00:00",
+     "updated": "2026-11-04T01:03:35+00:00",
      "tier": "tossup",
      "precincts_reporting": 67,
      "precincts_total": 2312,
@@ -3297,7 +3297,7 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T01:01:40+00:00",
+     "updated": "2026-11-04T01:02:56+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 2626,
@@ -3313,7 +3313,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T01:01:40+00:00",
+   "updated": "2026-11-04T01:02:56+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -3324,7 +3324,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T01:01:42+00:00",
+   "updated": "2026-11-04T01:02:58+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -5318,7 +5318,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T01:01:42+00:00",
+     "updated": "2026-11-04T01:02:58+00:00",
      "tier": "tossup",
      "precincts_reporting": 1,
      "precincts_total": 8834,
@@ -7224,7 +7224,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T01:01:42+00:00",
+     "updated": "2026-11-04T01:02:58+00:00",
      "tier": "tossup",
      "precincts_reporting": 1,
      "precincts_total": 8834,
@@ -7284,7 +7284,7 @@
    "partyReg": true,
    "unit": "county",
    "source": "https://flelectionfiles.floridados.gov/enightfilespublic/20261103_ElecResultsFL.txt",
-   "updated": "2026-11-04T01:01:44+00:00",
+   "updated": "2026-11-04T01:03:00+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -8107,7 +8107,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T01:01:44+00:00",
+     "updated": "2026-11-04T01:03:00+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -9434,7 +9434,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T01:01:44+00:00",
+     "updated": "2026-11-04T01:03:00+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -9455,7 +9455,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T01:02:19+00:00",
+   "updated": "2026-11-04T01:03:38+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -10748,15 +10748,18 @@
       {
        "name": "Habersham County",
        "votes": [
-        0,
-        0
+        2756,
+        10384
        ],
-       "outstanding": 13249,
+       "outstanding": 109,
        "remainder": [
         {
-         "n": 13249,
+         "n": 109,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.20974124809741249,
+          0.7902587519025875
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -12506,17 +12509,17 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T01:02:19+00:00",
+     "updated": "2026-11-04T01:03:38+00:00",
      "tier": "tossup",
-     "precincts_reporting": 85,
+     "precincts_reporting": 93,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1698776,
+     "counted": 1815928,
      "modes": {
-      "election_day": 19509,
-      "early": 1600593,
-      "mail": 78674,
+      "election_day": 39456,
+      "early": 1695345,
+      "mail": 81127,
       "provisional": 0
      }
     },
@@ -13811,15 +13814,18 @@
       {
        "name": "Habersham County",
        "votes": [
-        0,
-        0
+        3374,
+        9740
        ],
-       "outstanding": 13249,
+       "outstanding": 135,
        "remainder": [
         {
-         "n": 13249,
+         "n": 135,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.2572822937318896,
+          0.7427177062681104
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -15578,17 +15584,17 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T01:02:19+00:00",
+     "updated": "2026-11-04T01:03:38+00:00",
      "tier": "safe",
-     "precincts_reporting": 85,
+     "precincts_reporting": 93,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1698424,
+     "counted": 1815541,
      "modes": {
-      "election_day": 19454,
-      "early": 1599537,
-      "mail": 79433,
+      "election_day": 39359,
+      "early": 1694291,
+      "mail": 81891,
       "provisional": 0
      }
     }

@@ -93,6 +93,27 @@ def county_rows(race_block, counties, candidates):
     at, rather than as one number.
     """
     idx = {c["name"]: i for i, c in enumerate(candidates)}
+
+    # A county that has reported NOTHING still holds early ballots, and those must be
+    # spent at an EARLY share. Falling back to the statewide ALL-MODES share mixes in
+    # election-day votes that break the other way: South Carolina's counted vote was
+    # 507,736 early (D-leaning) plus 98,399 election day (R-leaning), and Charleston,
+    # Richland, York and Spartanburg - 300,000+ early ballots between them - had
+    # reported nothing, so their early pile was projected at a Republican-tinted blend
+    # and the card flipped the race to Graham while Andrews led the count.
+    # Build the statewide EARLY-only share first, from the counties that have reported.
+    sw_early = [0] * len(candidates)
+    for _c, _rec in counties.items():
+        _r = (_rec.get("races") or {}).get(race_block) if "races" in _rec else _rec.get(race_block)
+        if not isinstance(_r, dict):
+            continue
+        _e, _ = split_modes(_r.get("choices"), candidates,
+                            (_rec.get("by_mode_races") or {}).get(race_block))
+        if _e:
+            for _i, _v in enumerate(_e):
+                sw_early[_i] += _v or 0
+    sw_early_share = ([x / sum(sw_early) for x in sw_early]) if sum(sw_early) else None
+
     rows = []
     for cty, rec in sorted(counties.items()):
         r = (rec.get("races") or {}).get(race_block) if "races" in rec else rec.get(race_block)
@@ -123,13 +144,21 @@ def county_rows(race_block, counties, candidates):
                 measured += v
         if measured:
             remainder.append({"n": measured, "basis": "measured",
-                              "share": norm(early_v) if early_v else None})
+                              "share": (norm(early_v) if early_v else sw_early_share)})
         # 2. election-day ballots from precincts not yet reporting, scaled from what
         #    the reporting precincts have already produced. An estimate, and labelled
         #    one - it cannot be made at all until some precinct has reported.
         pr = rr.get("precincts_reporting") or rec.get("precincts_reporting") or 0
         pt = rr.get("precincts_total") or rec.get("precincts_total") or 0
-        if pr and pt and pt > pr and eday_v and sum(eday_v):
+        # Scaling a county's whole election-day vote off a handful of precincts is not a
+        # measurement, it is a forecast in a costume - which this file's own header warns
+        # against. Franklin County, Ohio had 3 of 889 precincts in, so (pt-pr)/pr
+        # multiplied its vote by 295x; across Ohio that invented 6,261,231 outstanding
+        # ballots against an early vote of 1,753,509, and the board projected a 7.9M
+        # turnout for a state expecting 4.5M. Require a real sample before scaling.
+        MIN_PR_FRAC, MIN_PR_N = 0.10, 10
+        if (pr and pt and pt > pr and eday_v and sum(eday_v)
+                and pr >= MIN_PR_N and pr / pt >= MIN_PR_FRAC):
             est = round(sum(eday_v) * (pt - pr) / pr)
             if est:
                 remainder.append({"n": est, "basis": "scaled from precincts reporting",

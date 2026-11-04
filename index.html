@@ -850,7 +850,7 @@ function cardFor(key, st, abbr, tier){
   el.innerHTML = `
     <div class="sthd"><span class="stname">${st.name}${FEEDLBL[st.feedStatus]
       ? '<span class="feed '+st.feedStatus+'">'+FEEDLBL[st.feedStatus]+"</span>" : ""}</span>
-      <span class="pin"><span class="evtag ${(EVORDER[st.countsFirst]||{}).when==="LAST"?"last":""}">EV ${(EVORDER[st.countsFirst]||{when:"?"}).when.toLowerCase()}</span> ${p.pctIn==null?"no data":"<b>"+pct(1-p.pctIn)+"</b> out"} ${open?"&#9662;":"&#9656;"}</span></div>
+      <span class="pin"><span class="evtag ${(EVORDER[st.countsFirst]||{}).when==="LAST"?"last":""}">EV ${(EVORDER[st.countsFirst]||{when:"?"}).when.toLowerCase()}</span> ${pctLeftAll==null?"no data":"<b>"+pct(pctLeftAll)+"</b> out"} ${open?"&#9662;":"&#9656;"}</span></div>
     <div class="share">${bars}</div>
     ${ledger}
     ${needBig}
@@ -1917,7 +1917,7 @@ setInterval(load, 120000);
 // fix was live on the server while the board on screen still read "+1,704,584" against
 // candidate rows summing to 41,912. Poll this file's own build stamp and reload when it
 // changes. Bump BUILD whenever index.html changes.
-const BUILD = "1793754843";
+const BUILD = "1793754983";
 async function checkBuild(){
   try {
     const t = await fetch("index.html?cb=" + Date.now(), {cache: "no-store"}).then(r => r.text());

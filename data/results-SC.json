@@ -4,9 +4,9 @@
  "source_kind": "clarity",
  "election": "2026 Statewide General Election",
  "election_date": "11/3/2026",
- "feed_timestamp": "10/30/2026 10:03:31 AM EDT",
- "version": "382659",
- "fetched": "2026-11-04T00:22:31+00:00",
+ "feed_timestamp": "11/3/2026 7:23:51 PM EST",
+ "version": "383470",
+ "fetched": "2026-11-04T00:26:50+00:00",
  "early_cast_as_of": "2026-10-31",
  "counties": {
   "Abbeville": {
@@ -852,41 +852,41 @@
   "Chesterfield": {
    "senate": {
     "choices": {
+     "DEM Annie Andrews": {
+      "party": "D",
+      "votes": 528,
+      "by_mode": {
+       "election_day": 151,
+       "early": 307,
+       "mail": 70,
+       "provisional": 0
+      }
+     },
      "REP Darline Graham": {
       "party": "R",
-      "votes": 0,
+      "votes": 480,
       "by_mode": {
-       "election_day": 0,
-       "early": 0,
+       "election_day": 277,
+       "early": 161,
+       "mail": 42,
+       "provisional": 0
+      }
+     },
+     "CON Mark Hackett": {
+      "party": "O",
+      "votes": 5,
+      "by_mode": {
+       "election_day": 2,
+       "early": 3,
        "mail": 0,
        "provisional": 0
       }
      },
      "LIB Kasie Whitener": {
       "party": "O",
-      "votes": 0,
+      "votes": 4,
       "by_mode": {
-       "election_day": 0,
-       "early": 0,
-       "mail": 0,
-       "provisional": 0
-      }
-     },
-     "DEM Annie Andrews": {
-      "party": "D",
-      "votes": 0,
-      "by_mode": {
-       "election_day": 0,
-       "early": 0,
-       "mail": 0,
-       "provisional": 0
-      }
-     },
-     "CON Mark Hackett": {
-      "party": "O",
-      "votes": 0,
-      "by_mode": {
-       "election_day": 0,
+       "election_day": 4,
        "early": 0,
        "mail": 0,
        "provisional": 0
@@ -894,29 +894,29 @@
      },
      "Write-In": {
       "party": "O",
-      "votes": 0,
+      "votes": 1,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
+       "early": 1,
        "mail": 0,
        "provisional": 0
       }
      }
     },
     "modes": {
-     "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "election_day": 434,
+     "early": 472,
+     "mail": 112,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 1018,
     "precincts_total": 25,
-    "precincts_reporting": 0,
+    "precincts_reporting": 1,
     "registered": 26199,
-    "ballots_cast": 0,
+    "ballots_cast": 1029,
     "early_and_mail_cast": 5012,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 5012
+    "early_and_mail_counted": 584,
+    "early_and_mail_left": 4428
    }
   },
   "Clarendon": {
@@ -1622,52 +1622,52 @@
   "Greenwood": {
    "senate": {
     "choices": {
-     "REP Darline Graham": {
-      "party": "R",
-      "votes": 0,
+     "DEM Annie Andrews": {
+      "party": "D",
+      "votes": 6489,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
-       "provisional": 0
+       "early": 6178,
+       "mail": 293,
+       "provisional": 18
+      }
+     },
+     "REP Darline Graham": {
+      "party": "R",
+      "votes": 4976,
+      "by_mode": {
+       "election_day": 0,
+       "early": 4714,
+       "mail": 256,
+       "provisional": 6
       }
      },
      "LIB Kasie Whitener": {
       "party": "O",
-      "votes": 0,
+      "votes": 87,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
-       "provisional": 0
-      }
-     },
-     "DEM Annie Andrews": {
-      "party": "D",
-      "votes": 0,
-      "by_mode": {
-       "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 85,
+       "mail": 2,
        "provisional": 0
       }
      },
      "CON Mark Hackett": {
       "party": "O",
-      "votes": 0,
+      "votes": 66,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 63,
+       "mail": 3,
        "provisional": 0
       }
      },
      "Write-In": {
       "party": "O",
-      "votes": 0,
+      "votes": 10,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
+       "early": 10,
        "mail": 0,
        "provisional": 0
       }
@@ -1675,18 +1675,18 @@
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
-     "provisional": 0
+     "early": 11050,
+     "mail": 554,
+     "provisional": 24
     },
-    "counted": 0,
+    "counted": 11628,
     "precincts_total": 50,
     "precincts_reporting": 0,
     "registered": 41677,
-    "ballots_cast": 0,
+    "ballots_cast": 11733,
     "early_and_mail_cast": 11720,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 11720
+    "early_and_mail_counted": 11604,
+    "early_and_mail_left": 116
    }
   },
   "Hampton": {
@@ -3234,11 +3234,11 @@
   "senate": {
    "contest_name": "U.S.  Senate",
    "choices": {
-    "REP Darline Graham": 0,
-    "LIB Kasie Whitener": 0,
-    "DEM Annie Andrews": 0,
-    "CON Mark Hackett": 0,
-    "Write-In": 0
+    "DEM Annie Andrews": 7017,
+    "REP Darline Graham": 5456,
+    "LIB Kasie Whitener": 91,
+    "CON Mark Hackett": 71,
+    "Write-In": 11
    },
    "parties": {
     "REP Darline Graham": "R",
@@ -3247,21 +3247,21 @@
     "CON Mark Hackett": "O",
     "Write-In": "O"
    },
-   "total": 0,
+   "total": 12646,
    "modes": {
-    "election_day": 0,
-    "early": 0,
-    "mail": 0,
-    "provisional": 0
+    "election_day": 434,
+    "early": 11522,
+    "mail": 666,
+    "provisional": 24
    },
-   "precincts_reporting": 0,
+   "precincts_reporting": 1,
    "precincts_total": 2312,
    "early_and_mail_cast": 1086229,
-   "early_and_mail_counted": 0,
-   "early_and_mail_left": 1086229
+   "early_and_mail_counted": 12188,
+   "early_and_mail_left": 1074041
   }
  },
- "source": "https://www.enr-scvotes.org/SC/127300/382659/reports/detailxml.zip",
+ "source": "https://www.enr-scvotes.org/SC/127300/383470/reports/detailxml.zip",
  "notes": {
   "modes": "Votes split by mode; early and mail are never pooled with election day, because they break in opposite directions.",
   "left": "early_and_mail_left is measured - ballots recorded cast early or by mail in that county, minus those modes as counted here.",

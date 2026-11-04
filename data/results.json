@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T00:22:45+00:00",
+ "updated": "2026-11-04T00:27:01+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -187,11 +187,15 @@
    "countsFirst": "election-day",
    "partyReg": false,
    "unit": "county",
-   "source": "https://www.enr-scvotes.org/SC/127300/382659/reports/detailxml.zip",
-   "updated": "2026-11-04T00:22:31+00:00",
+   "source": "https://www.enr-scvotes.org/SC/127300/383470/reports/detailxml.zip",
+   "updated": "2026-11-04T00:26:50+00:00",
    "races": {
     "senate": {
      "candidates": [
+      {
+       "name": "DEM Annie Andrews",
+       "party": "D"
+      },
       {
        "name": "REP Darline Graham",
        "party": "R"
@@ -199,10 +203,6 @@
       {
        "name": "LIB Kasie Whitener",
        "party": "O"
-      },
-      {
-       "name": "DEM Annie Andrews",
-       "party": "D"
       },
       {
        "name": "CON Mark Hackett",
@@ -457,21 +457,38 @@
       {
        "name": "Chesterfield",
        "votes": [
-        0,
-        0,
-        0,
-        0,
-        0
+        528,
+        480,
+        4,
+        5,
+        1
        ],
-       "outstanding": 5012,
+       "outstanding": 14844,
        "remainder": [
         {
-         "n": 5012,
+         "n": 4428,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.6455479452054794,
+          0.3476027397260274,
+          0.0,
+          0.005136986301369863,
+          0.0017123287671232876
+         ]
+        },
+        {
+         "n": 10416,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.347926267281106,
+          0.6382488479262672,
+          0.009216589861751152,
+          0.004608294930875576,
+          0.0
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 25
       },
       {
@@ -677,18 +694,24 @@
       {
        "name": "Greenwood",
        "votes": [
-        0,
-        0,
-        0,
-        0,
-        0
+        6489,
+        4976,
+        87,
+        66,
+        10
        ],
-       "outstanding": 11720,
+       "outstanding": 116,
        "remainder": [
         {
-         "n": 11720,
+         "n": 116,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.5576525336091003,
+          0.4283005860048259,
+          0.00749741468459152,
+          0.005687693898655636,
+          0.0008617718028266115
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -1135,18 +1158,18 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T00:22:31+00:00",
+     "updated": "2026-11-04T00:26:50+00:00",
      "tier": "tossup",
-     "precincts_reporting": 0,
+     "precincts_reporting": 1,
      "precincts_total": 2312,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 0,
+     "counted": 12646,
      "modes": {
-      "election_day": 0,
-      "early": 0,
-      "mail": 0,
-      "provisional": 0
+      "election_day": 434,
+      "early": 11522,
+      "mail": 666,
+      "provisional": 24
      }
     }
    },
@@ -9198,7 +9221,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T00:22:45+00:00",
+   "updated": "2026-11-04T00:27:01+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -10307,15 +10330,18 @@
       {
        "name": "Gordon County",
        "votes": [
-        0,
-        0
+        2866,
+        6919
        ],
-       "outstanding": 9857,
+       "outstanding": 72,
        "remainder": [
         {
-         "n": 9857,
+         "n": 72,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.2928972917731221,
+          0.7071027082268779
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -10398,18 +10424,21 @@
       {
        "name": "Hall County",
        "votes": [
-        0,
-        0
+        11965,
+        20949
        ],
-       "outstanding": 54208,
+       "outstanding": 21294,
        "remainder": [
         {
-         "n": 54208,
+         "n": 21294,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.36352312086042415,
+          0.6364768791395758
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 31,
        "precincts_total": 31
       },
       {
@@ -10432,15 +10461,18 @@
       {
        "name": "Haralson County",
        "votes": [
-        0,
-        0
+        1019,
+        4551
        ],
-       "outstanding": 5595,
+       "outstanding": 25,
        "remainder": [
         {
-         "n": 5595,
+         "n": 25,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.1829443447037702,
+          0.8170556552962298
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -10806,15 +10838,18 @@
       {
        "name": "Lumpkin County",
        "votes": [
-        0,
-        0
+        2137,
+        7064
        ],
-       "outstanding": 9296,
+       "outstanding": 95,
        "remainder": [
         {
-         "n": 9296,
+         "n": 95,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.23225736333007282,
+          0.7677426366699271
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11177,17 +11212,17 @@
       {
        "name": "Polk County",
        "votes": [
-        143,
-        200
+        2377,
+        6528
        ],
-       "outstanding": 8602,
+       "outstanding": 40,
        "remainder": [
         {
-         "n": 8602,
+         "n": 40,
          "basis": "measured",
          "share": [
-          0.41690962099125367,
-          0.5830903790087464
+          0.26692869174621,
+          0.73307130825379
          ]
         }
        ],
@@ -11370,18 +11405,21 @@
       {
        "name": "Spalding County",
        "votes": [
-        0,
-        0
+        8777,
+        8488
        ],
-       "outstanding": 17299,
+       "outstanding": 34,
        "remainder": [
         {
-         "n": 17299,
+         "n": 34,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.5083695337387779,
+          0.49163046626122214
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 8,
        "precincts_total": 8
       },
       {
@@ -11645,18 +11683,29 @@
       {
        "name": "Turner County",
        "votes": [
-        0,
-        0
+        947,
+        1469
        ],
-       "outstanding": 2110,
+       "outstanding": 672,
        "remainder": [
         {
-         "n": 2110,
+         "n": 20,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.4267942583732057,
+          0.5732057416267943
+         ]
+        },
+        {
+         "n": 652,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.1687116564417178,
+          0.8312883435582822
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 3
       },
       {
@@ -11952,17 +12001,17 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:22:45+00:00",
+     "updated": "2026-11-04T00:27:01+00:00",
      "tier": "tossup",
-     "precincts_reporting": 27,
+     "precincts_reporting": 33,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 874550,
+     "counted": 960263,
      "modes": {
-      "election_day": 0,
-      "early": 838398,
-      "mail": 36152,
+      "election_day": 326,
+      "early": 918693,
+      "mail": 41244,
       "provisional": 0
      }
     },
@@ -13073,15 +13122,18 @@
       {
        "name": "Gordon County",
        "votes": [
-        0,
-        0
+        3355,
+        6411
        ],
-       "outstanding": 9857,
+       "outstanding": 91,
        "remainder": [
         {
-         "n": 9857,
+         "n": 91,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3435388081097686,
+          0.6564611918902314
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -13164,18 +13216,21 @@
       {
        "name": "Hall County",
        "votes": [
-        0,
-        0
+        13666,
+        19168
        ],
-       "outstanding": 54208,
+       "outstanding": 21374,
        "remainder": [
         {
-         "n": 54208,
+         "n": 21374,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.41621489918986415,
+          0.5837851008101358
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 31,
        "precincts_total": 31
       },
       {
@@ -13198,15 +13253,18 @@
       {
        "name": "Haralson County",
        "votes": [
-        0,
-        0
+        1275,
+        4275
        ],
-       "outstanding": 5595,
+       "outstanding": 45,
        "remainder": [
         {
-         "n": 5595,
+         "n": 45,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.22972972972972974,
+          0.7702702702702703
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -13572,15 +13630,18 @@
       {
        "name": "Lumpkin County",
        "votes": [
-        0,
-        0
+        2594,
+        6579
        ],
-       "outstanding": 9296,
+       "outstanding": 123,
        "remainder": [
         {
-         "n": 9296,
+         "n": 123,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.2827864384606999,
+          0.7172135615393002
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -13943,17 +14004,17 @@
       {
        "name": "Polk County",
        "votes": [
-        167,
-        175
+        2781,
+        6103
        ],
-       "outstanding": 8603,
+       "outstanding": 61,
        "remainder": [
         {
-         "n": 8603,
+         "n": 61,
          "basis": "measured",
          "share": [
-          0.48830409356725146,
-          0.5116959064327485
+          0.3130346690679874,
+          0.6869653309320126
          ]
         }
        ],
@@ -14136,18 +14197,21 @@
       {
        "name": "Spalding County",
        "votes": [
-        0,
-        0
+        9375,
+        7813
        ],
-       "outstanding": 17299,
+       "outstanding": 111,
        "remainder": [
         {
-         "n": 17299,
+         "n": 111,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.5454386781475448,
+          0.4545613218524552
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 8,
        "precincts_total": 8
       },
       {
@@ -14411,18 +14475,29 @@
       {
        "name": "Turner County",
        "votes": [
-        0,
-        0
+        1032,
+        1385
        ],
-       "outstanding": 2110,
+       "outstanding": 674,
        "remainder": [
         {
-         "n": 2110,
+         "n": 20,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.46076555023923443,
+          0.5392344497607655
+         ]
+        },
+        {
+         "n": 654,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.21100917431192662,
+          0.7889908256880734
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 3
       },
       {
@@ -14718,17 +14793,17 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:22:45+00:00",
+     "updated": "2026-11-04T00:27:01+00:00",
      "tier": "safe",
-     "precincts_reporting": 27,
+     "precincts_reporting": 33,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 875174,
+     "counted": 960644,
      "modes": {
-      "election_day": 0,
-      "early": 838630,
-      "mail": 36544,
+      "election_day": 327,
+      "early": 918643,
+      "mail": 41674,
       "provisional": 0
      }
     }

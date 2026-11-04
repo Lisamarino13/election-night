@@ -616,6 +616,14 @@ function cardFor(key, st, abbr, tier){
   const capRecTop = (typeof EDAY_CAPS !== "undefined" && EDAY_CAPS) ? (EDAY_CAPS[abbr] || null) : null;
   const edCounted = md ? (md.election_day || 0) : 0;
   let edLeft = capRecTop ? Math.max(0, (capRecTop.eday_cap || 0) - edCounted) : 0;
+  // The early component comes from the counties' own outstanding counts - but before a
+  // state posts anything there ARE no county rows, so that sum is 0 and the whole banked
+  // early vote vanished from "left to count". Texas, with 7,734,079 ballots already cast
+  // and nothing counted, read "0 early + 2,500,000 Election Day". Fall back to the
+  // state's banked early vote minus whatever early is counted.
+  const evCounted = md ? ((md.early || 0) + (md.mail || 0)) : 0;
+  const evLeftCap = capRecTop ? Math.max(0, (capRecTop.ev || 0) - evCounted) : 0;
+  const earlyLeft = Math.max(p.outstanding, evLeftCap);
   // Ballots already counted must never also be counted as "left". Subtracting only the
   // mode-tagged Election Day votes is not enough: Ohio's feed carries NO mode split at
   // all (modes:{}), so edCounted read 0 and the card added the whole 2.8M cap on top of
@@ -623,10 +631,10 @@ function cardFor(key, st, abbr, tier){
   // vote plus projected Election Day - minus what is actually counted, whatever the
   // modes say.
   const expTurnout = capRecTop ? ((capRecTop.ev || 0) + (capRecTop.eday_cap || 0)) : 0;
-  let leftAll = p.outstanding + edLeft;
+  let leftAll = earlyLeft + edLeft;
   if (expTurnout > 0) {
     const ceiling = Math.max(0, expTurnout - p.totC);
-    if (leftAll > ceiling) { leftAll = ceiling; edLeft = Math.max(0, ceiling - p.outstanding); }
+    if (leftAll > ceiling) { leftAll = ceiling; edLeft = Math.max(0, ceiling - earlyLeft); }
   }
   const pctLeftAll = (p.totC + leftAll) > 0 ? leftAll / (p.totC + leftAll) : null;
   const rows = st.candidates.map((c,i)=>{
@@ -818,7 +826,7 @@ function cardFor(key, st, abbr, tier){
     <div class="facestats">
       <div><span class="slab">Votes in</span><span class="fig fnum">${n(p.totC)}</span></div>
       <div><span class="slab">Left to count</span><span class="fig fnum ${leftAll?"amber":""}">${leftAll?n(leftAll):"—"}</span>
-        ${edLeft>0?`<span class="slab" style="grid-column:span 2;text-align:left;text-transform:none;letter-spacing:0;font-family:var(--body);font-size:11px">${n(p.outstanding)} ${st.countsFirst==="election-day"?"early/absentee":"early"} + ${n(edLeft)} Election Day</span>`:""}</div>
+        ${edLeft>0?`<span class="slab" style="grid-column:span 2;text-align:left;text-transform:none;letter-spacing:0;font-family:var(--body);font-size:11px">${n(earlyLeft)} ${st.countsFirst==="election-day"?"early/absentee":"early"} + ${n(edLeft)} Election Day</span>`:""}</div>
       <div><span class="slab">% left</span><span class="fig fnum ${pctLeftAll?"amber":""}">${pctLeftAll==null?"—":pct(pctLeftAll)}</span></div>
     </div>
     <div class="meter"><span>${p.reporting||0} of ${st.unitsExpected||p.counties||0} ${st.unit==="town"?"towns":st.unit==="district"?"districts":"counties"} reporting${p.unknownCty?" · "+p.unknownCty+" without an outstanding count":""}</span>
@@ -1877,7 +1885,7 @@ setInterval(load, 120000);
 // fix was live on the server while the board on screen still read "+1,704,584" against
 // candidate rows summing to 41,912. Poll this file's own build stamp and reload when it
 // changes. Bump BUILD whenever index.html changes.
-const BUILD = "1793754488";
+const BUILD = "1793754757";
 async function checkBuild(){
   try {
     const t = await fetch("index.html?cb=" + Date.now(), {cache: "no-store"}).then(r => r.text());

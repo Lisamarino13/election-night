@@ -4,7 +4,7 @@
  "source_kind": "louisiana-enr",
  "election": "November 2026 general",
  "election_date": "20261103",
- "fetched": "2026-11-04T02:29:34+00:00",
+ "fetched": "2026-11-04T02:30:41+00:00",
  "early_cast_as_of": null,
  "counties": {
   "Acadia": {
@@ -695,34 +695,34 @@
    "fips": "20",
    "registered": 20727,
    "ballots_cast": 0,
-   "precincts_reporting": 0,
+   "precincts_reporting": 1,
    "precincts_total": 55,
-   "percent_reporting": 0.0,
+   "percent_reporting": 1.8,
    "races": {
     "senate": {
      "choices": {
       "Jamie Davis": {
        "party": "D",
-       "votes": 1586,
+       "votes": 1646,
        "by_mode": {
         "early": 1586,
-        "election_day": 0
+        "election_day": 60
        }
       },
       "Julia Letlow": {
        "party": "R",
-       "votes": 1443,
+       "votes": 1461,
        "by_mode": {
         "early": 1443,
-        "election_day": 0
+        "election_day": 18
        }
       }
      },
-     "counted": 3029,
+     "counted": 3107,
      "early_and_mail_counted": 3029,
      "early_and_mail_cast": null,
      "early_and_mail_left": null,
-     "precincts_reporting": 0,
+     "precincts_reporting": 1,
      "precincts_total": 55
     }
    }
@@ -2316,29 +2316,29 @@
   "senate": {
    "contest_name": "U. S. Senator",
    "choices": {
-    "Julia Letlow": 146603,
-    "Jamie Davis": 132233
+    "Julia Letlow": 146621,
+    "Jamie Davis": 132293
    },
    "parties": {
     "Jamie Davis": "D",
     "Julia Letlow": "R"
    },
-   "total": 278836,
+   "total": 278914,
    "modes": {
     "early": 278395,
-    "election_day": 441
+    "election_day": 519
    },
    "choices_by_mode": {
     "Jamie Davis": {
      "early": 132049,
-     "election_day": 184
+     "election_day": 244
     },
     "Julia Letlow": {
      "early": 146346,
-     "election_day": 257
+     "election_day": 275
     }
    },
-   "precincts_reporting": 6,
+   "precincts_reporting": 7,
    "precincts_total": 3722,
    "early_and_mail_cast": null,
    "early_and_mail_counted": 278395,

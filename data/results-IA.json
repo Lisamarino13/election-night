@@ -4,9 +4,9 @@
  "source_kind": "clarity",
  "election": "2026 General Election",
  "election_date": "11/3/2026",
- "feed_timestamp": "11/3/2026 8:20:34 PM CST",
- "version": "384192",
- "fetched": "2026-11-04T02:24:18+00:00",
+ "feed_timestamp": "11/3/2026 8:27:07 PM CST",
+ "version": "384253",
+ "fetched": "2026-11-04T02:29:44+00:00",
  "early_cast_as_of": "11/3/2026",
  "counties": {
   "Adair": {
@@ -1512,51 +1512,51 @@
   "Dubuque": {
    "senate": {
     "choices": {
-     "Ashley Hinson": {
-      "party": "R",
-      "votes": 0,
-      "by_mode": {
-       "election_day": 0,
-       "mail": 0
-      }
-     },
      "Josh Turek": {
       "party": "D",
-      "votes": 0,
+      "votes": 11439,
       "by_mode": {
        "election_day": 0,
-       "mail": 0
+       "mail": 11439
+      }
+     },
+     "Ashley Hinson": {
+      "party": "R",
+      "votes": 6600,
+      "by_mode": {
+       "election_day": 0,
+       "mail": 6600
       }
      },
      "Thomas Laehn": {
       "party": "O",
-      "votes": 0,
+      "votes": 300,
       "by_mode": {
        "election_day": 0,
-       "mail": 0
+       "mail": 300
       }
      },
      "Write-in": {
       "party": "O",
-      "votes": 0,
+      "votes": 6,
       "by_mode": {
        "election_day": 0,
-       "mail": 0
+       "mail": 6
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "mail": 0
+     "mail": 18345
     },
-    "counted": 0,
+    "counted": 18345,
     "precincts_total": 34,
     "precincts_reporting": 0,
     "registered": 68944,
-    "ballots_cast": 0,
+    "ballots_cast": 18502,
     "early_and_mail_cast": 18400,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 18400
+    "early_and_mail_counted": 18345,
+    "early_and_mail_left": 55
    }
   },
   "Emmet": {
@@ -4964,10 +4964,10 @@
   "senate": {
    "contest_name": "United States Senator",
    "choices": {
-    "Josh Turek": 10568,
-    "Ashley Hinson": 8262,
-    "Thomas Laehn": 441,
-    "Write-in": 15
+    "Josh Turek": 22007,
+    "Ashley Hinson": 14862,
+    "Thomas Laehn": 741,
+    "Write-in": 21
    },
    "parties": {
     "Ashley Hinson": "R",
@@ -4975,19 +4975,19 @@
     "Thomas Laehn": "O",
     "Write-in": "O"
    },
-   "total": 19286,
+   "total": 37631,
    "modes": {
     "election_day": 0,
-    "mail": 19286
+    "mail": 37631
    },
    "precincts_reporting": 0,
    "precincts_total": 1656,
    "early_and_mail_cast": 498713,
-   "early_and_mail_counted": 19286,
-   "early_and_mail_left": 479427
+   "early_and_mail_counted": 37631,
+   "early_and_mail_left": 461082
   }
  },
- "source": "https://electionresults.iowa.gov/IA/127077/384192/reports/detailxml.zip",
+ "source": "https://electionresults.iowa.gov/IA/127077/384253/reports/detailxml.zip",
  "notes": {
   "modes": "Votes split by mode; early and mail are never pooled with election day, because they break in opposite directions.",
   "left": "early_and_mail_left is measured - ballots recorded cast early or by mail in that county, minus those modes as counted here.",

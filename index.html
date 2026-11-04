@@ -462,35 +462,51 @@ const col = p => /^(R|REP)$/i.test(p) ? "var(--r)" : /^(D|DEM|PET)$/i.test(p) ? 
 // halfway mark, while spending the election-day part at that county's own election-day
 // share was within 3,000. So when a county carries its remainder as components, each
 // with the share vector of the mode it belongs to, each is spent at its own share.
+// Returns how many outstanding ballots it was actually able to allocate. A county with
+// outstanding ballots but NO counted vote has no share vector to spend them at, so it
+// allocates NOTHING - and that has to be reported, not silently folded into the total.
+// Georgia at 00:10Z: 13 of 159 counties counted, so 1,825,517 of 1,862,765 outstanding
+// ballots had no split to spend at. The table showed "+1,862,765" against candidate rows
+// summing to +37,248, and a projected total no candidate column could reach.
 function spend(c, v, tot, k, out){
   const parts = c.remainder;
+  let spent = 0;
   if (Array.isArray(parts) && parts.length){
     for (const part of parts){
       const n = part.n || 0; if (!n) continue;
       const sh = (Array.isArray(part.share) && part.share.length === k) ? part.share : null;
+      if (!sh && !(tot>0)) continue;            // nothing to spend it at
       for (let i=0;i<k;i++)
-        out[i] += n * (sh ? (sh[i]||0) : (tot>0 ? (v[i]||0)/tot : 0));
+        out[i] += n * (sh ? (sh[i]||0) : (v[i]||0)/tot);
+      spent += n;
     }
-    return;
+    return spent;
   }
   const J = (c.outstanding==null) ? 0 : c.outstanding;   // one undifferentiated pile
-  for (let i=0;i<k;i++) out[i] += tot>0 ? (v[i]||0)/tot*J : 0;
+  if (!(tot>0) || !J) return 0;
+  for (let i=0;i<k;i++) out[i] += (v[i]||0)/tot*J;
+  return J;
 }
 
 function project(st){
   const k = st.candidates.length;
   const counted = Array(k).fill(0), proj = Array(k).fill(0);
   let outstanding = 0, known = 0, unknownCty = 0;
+  let allocated = 0, unallocated = 0, unallocCty = 0, reporting = 0;
   for (const c of (st.counties||[])){
     const v = c.votes||[]; const tot = v.reduce((a,b)=>a+(b||0),0);
     for (let i=0;i<k;i++) counted[i] += v[i]||0;
+    if (tot > 0) reporting++;
     const J = (c.outstanding==null) ? 0 : c.outstanding;
     if (c.outstanding==null) unknownCty++; else { outstanding += J; known++; }
     for (let i=0;i<k;i++) proj[i] += v[i]||0;
-    spend(c, v, tot, k, proj);
+    const spent = spend(c, v, tot, k, proj);
+    allocated += spent;
+    if (J > spent){ unallocated += (J - spent); if (tot <= 0) unallocCty++; }
   }
   const totC = counted.reduce((a,b)=>a+b,0);
   return {counted, proj, totC, outstanding, known, unknownCty,
+          allocated, unallocated, unallocCty, reporting,
           pctIn: (totC+outstanding)>0 ? totC/(totC+outstanding) : null,
           counties:(st.counties||[]).length};
 }
@@ -560,14 +576,17 @@ function cardFor(key, st, abbr, tier){
       <td class="num prj" ${win?`style="color:${col(c.party)}"`:""}>${n(p.proj[i])}</td>
     </tr>`;
   }).join("");
+  // The Total row shows what was ALLOCATED, so it equals the candidate columns above it.
+  // p.outstanding (every ballot still out, allocated or not) is reported separately in
+  // the "Left to count" figure and in the unallocated warning below.
   const tally = p.totC>0 ? `<tfoot><tr>
       <td class="cname">Total</td>
       <td class="num">${n(p.totC)}</td>
-      <td class="num outs">${anyOut?"+"+n(p.outstanding):"\u2014"}</td>
-      <td class="num">${n(p.totC+p.outstanding)}</td></tr></tfoot>` : "";
+      <td class="num outs">${p.allocated>0?"+"+n(p.allocated):"\u2014"}</td>
+      <td class="num">${n(p.totC+p.allocated)}</td></tr></tfoot>` : "";
   const ledger = p.totC>0 ? `<table class="cand">
       <thead><tr><th></th><th>Counted</th><th>Of outstanding</th><th>Projected</th></tr></thead>
-      <tbody>${rows}</tbody>${tally}</table>` :
+      <tbody>${rows}</tbody>${tally}</table>` + unalloc :
     `<table class="cand empty-cand">
       <thead><tr><th></th><th>Counted</th><th>Of outstanding</th><th>Projected</th></tr></thead>
       <tbody>${st.candidates.map(c=>
@@ -577,6 +596,12 @@ function cardFor(key, st, abbr, tier){
 
   const skew = p.pctIn!=null && p.pctIn < 0.9 && st.countsFirst!=="mixed"
     ? `<div class="warn"><b>&#9873;</b><span>Counted vote is mostly <b>${FIRST[st.countsFirst]}</b>. Outstanding ballots are a different mix, so this projection leans the wrong way until more is in.</span></div>` : "";
+
+  const unitName = st.unit==="town"?"towns":st.unit==="district"?"districts":"counties";
+  const unalloc = p.unallocated > 0
+    ? `<div class="warn"><b>&#9873;</b><span><b>${n(p.unallocated)}</b> outstanding ballots are <b>not in this projection</b>`
+      + (p.unallocCty>0 ? ` — ${p.unallocCty} ${unitName} have ballots left but no counted vote yet, so there is no split to project them at` : "")
+      + `. The projected column covers the ${n(p.allocated)} that could be allocated.</span></div>` : "";
 
   const noJ = p.unknownCty>0
     ? `<div class="warn"><b>&#9873;</b><span>${p.unknownCty} of ${p.counties} ${st.unit==="town"?"towns":st.unit==="district"?"districts":"counties"} report no outstanding count — their projection is counted vote only.</span></div>` : "";
@@ -669,7 +694,7 @@ function cardFor(key, st, abbr, tier){
       <div><span class="slab">Left to count</span><span class="fig fnum ${p.outstanding?"amber":""}">${p.outstanding?n(p.outstanding):"—"}</span></div>
       <div><span class="slab">% left</span><span class="fig fnum ${p.pctIn!=null&&(1-p.pctIn)>0?"amber":""}">${p.pctIn==null?"—":pct(1-p.pctIn)}</span></div>
     </div>
-    <div class="meter"><span>${p.counties||0}${st.unitsExpected?" of "+st.unitsExpected:""} ${st.unit==="town"?"towns":st.unit==="district"?"districts":"counties"} reporting${p.unknownCty?" · "+p.unknownCty+" without an outstanding count":""}</span>
+    <div class="meter"><span>${p.reporting||0} of ${st.unitsExpected||p.counties||0} ${st.unit==="town"?"towns":st.unit==="district"?"districts":"counties"} reporting${p.unknownCty?" · "+p.unknownCty+" without an outstanding count":""}</span>
       <span>${EARLY[abbr]?n((EARLY[abbr].totals&&EARLY[abbr].totals.outstanding&&EARLY[abbr].totals.outstanding.total)||0)+" mail out":""}</span></div>
     ${st.feedNote ? '<p class="feednote '+(st.feedStatus||"")+'">'
         + (st.feedStatus==="none" ? "<b>No live feed.</b> " : "")

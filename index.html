@@ -149,6 +149,14 @@ button:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px sol
   background:rgba(0,0,0,.035);font-size:13px;line-height:1.5}
 .thsub{display:block;font-weight:400;font-size:9.5px;letter-spacing:.02em;opacity:.7}
 .scopenote{margin:6px 0 0;font-size:12px;line-height:1.5;opacity:.85}
+.needbig{margin:10px 0 2px;padding:10px 12px;border:1px solid var(--rule);
+  border-left:4px solid var(--ink);background:rgba(0,0,0,.04);display:grid;gap:1px}
+.needlab{font-family:var(--display);font-size:10.5px;letter-spacing:.09em;
+  text-transform:uppercase;opacity:.75}
+.needfig{font-family:var(--display);font-weight:700;font-size:34px;line-height:1.05}
+.needfig.impossible{font-size:19px;line-height:1.2}
+.needsub{font-size:11.5px;opacity:.7;line-height:1.4}
+@media(max-width:700px){.needfig{font-size:28px}}
 .warn{border-left-color:var(--r);background:rgba(170,40,40,.05)}
 .srcnote .srcwho{display:block;color:var(--dim);font-size:11.5px;margin-top:4px}
 .tbd{color:var(--dim);font-style:italic;font-size:12px}
@@ -665,6 +673,29 @@ function cardFor(key, st, abbr, tier){
       + `A further <b>${n(edLeft)}</b> ${st.countsFirst==="election-day"?"Election Day":"Election Day"} ballots are still to come `
       + `and cannot be projected &mdash; nothing splits a ballot that has not been cast.</p>`
     : "";
+  // The one number that decides the race, on the face of every tile: what the trailing
+  // side must win the UNCAST ballots by. The pool is Election Day where early is counted
+  // first, and the absentee pile where Election Day is counted first.
+  const needFirst = st.countsFirst === "election-day";
+  const needPool = needFirst ? p.outstanding : edLeft;
+  const needPoolName = needFirst ? "absentee still to count" : "Election Day";
+  let needBig = "";
+  if (projUseful && needPool > 0 && p.proj.length > 1){
+    const ordN = p.proj.map((v,i)=>[v,i]).sort((a,b)=>b[0]-a[0]);
+    const gapN = ordN[0][0] - ordN[1][0];
+    if (gapN > 0){
+      const runI = ordN[1][1], runC = st.candidates[runI];
+      const pc = gapN / needPool * 100;
+      const tag = col(runC.party)==="var(--r)" ? "R" : col(runC.party)==="var(--d)" ? "D" : "";
+      const last = runC.name.split(" (")[0];
+      needBig = `<div class="needbig">`
+        + `<span class="needlab">${esc(last)} needs on ${needPoolName}</span>`
+        + (pc >= 100
+            ? `<span class="needfig impossible">more than all ${n(needPool)}</span>`
+            : `<span class="needfig" style="color:${col(runC.party)}">${tag}+${pc.toFixed(1)}</span>`)
+        + `<span class="needsub">to erase ${n(gapN)} across ${n(needPool)} ballots</span></div>`;
+    }
+  }
   const swTxt = (p.swShare && p.swShare.length === st.candidates.length)
     ? st.candidates.map((c,i)=>`${c.name.split(" (")[0]} ${pct(p.swShare[i])}`).slice(0,2).join(" / ")
     : "";
@@ -822,6 +853,7 @@ function cardFor(key, st, abbr, tier){
       <span class="pin"><span class="evtag ${(EVORDER[st.countsFirst]||{}).when==="LAST"?"last":""}">EV ${(EVORDER[st.countsFirst]||{when:"?"}).when.toLowerCase()}</span> ${p.pctIn==null?"no data":"<b>"+pct(1-p.pctIn)+"</b> out"} ${open?"&#9662;":"&#9656;"}</span></div>
     <div class="share">${bars}</div>
     ${ledger}
+    ${needBig}
     ${p.totC>0 ? `<div class="faceproj">Projected <b style="color:${col(st.candidates[mg.projLead>=0?mg.leader:mg.runner].party)}">${st.candidates[mg.projLead>=0?mg.leader:mg.runner].name}</b> +${n(Math.abs(mg.projLead))}${mg.flips?' <span class="amber">&#9873; flips</span>':''}</div>` : ""}
     <div class="facestats">
       <div><span class="slab">Votes in</span><span class="fig fnum">${n(p.totC)}</span></div>
@@ -1885,7 +1917,7 @@ setInterval(load, 120000);
 // fix was live on the server while the board on screen still read "+1,704,584" against
 // candidate rows summing to 41,912. Poll this file's own build stamp and reload when it
 // changes. Bump BUILD whenever index.html changes.
-const BUILD = "1793754757";
+const BUILD = "1793754843";
 async function checkBuild(){
   try {
     const t = await fetch("index.html?cb=" + Date.now(), {cache: "no-store"}).then(r => r.text());

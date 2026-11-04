@@ -631,7 +631,13 @@ function cardFor(key, st, abbr, tier){
   // state's banked early vote minus whatever early is counted.
   const evCounted = md ? ((md.early || 0) + (md.mail || 0)) : 0;
   const evLeftCap = capRecTop ? Math.max(0, (capRecTop.ev || 0) - evCounted) : 0;
-  const earlyLeft = Math.max(p.outstanding, evLeftCap);
+  // The banked-early-vote fallback is ONLY for a state that has posted nothing at all.
+  // Once counties are reporting, their own outstanding counts are the truth. Georgia's
+  // race.modes came through null, so evCounted read 0 and the fallback treated all
+  // 2,826,388 early ballots as uncounted against 2,448,768 actually counted - which blew
+  // past the turnout ceiling, forced edLeft to 0, and wiped the need-to-win figure off
+  // both Georgia tiles.
+  const earlyLeft = p.totC > 0 ? p.outstanding : Math.max(p.outstanding, evLeftCap);
   // Ballots already counted must never also be counted as "left". Subtracting only the
   // mode-tagged Election Day votes is not enough: Ohio's feed carries NO mode split at
   // all (modes:{}), so edCounted read 0 and the card added the whole 2.8M cap on top of
@@ -677,8 +683,14 @@ function cardFor(key, st, abbr, tier){
   // side must win the UNCAST ballots by. The pool is Election Day where early is counted
   // first, and the absentee pile where Election Day is counted first.
   const needFirst = st.countsFirst === "election-day";
-  const needPool = needFirst ? p.outstanding : edLeft;
-  const needPoolName = needFirst ? "absentee still to count" : "Election Day";
+  // Normally the pool is the ballots not yet cast - Election Day where early is counted
+  // first. But a state whose feed carries no usable mode split can report an outstanding
+  // count larger than the whole remaining ceiling (Ohio: 3,058,425 outstanding against a
+  // 2,864,714 ceiling), which drives edLeft to zero and erases the figure. When the
+  // Election Day share cannot be isolated, use everything still to count and say so.
+  let needPool = needFirst ? p.outstanding : edLeft;
+  let needPoolName = needFirst ? "absentee still to count" : "Election Day";
+  if (!(needPool > 0) && leftAll > 0) { needPool = leftAll; needPoolName = "the vote still to count"; }
   let needBig = "";
   if (projUseful && needPool > 0 && p.proj.length > 1){
     const ordN = p.proj.map((v,i)=>[v,i]).sort((a,b)=>b[0]-a[0]);
@@ -1917,7 +1929,7 @@ setInterval(load, 120000);
 // fix was live on the server while the board on screen still read "+1,704,584" against
 // candidate rows summing to 41,912. Poll this file's own build stamp and reload when it
 // changes. Bump BUILD whenever index.html changes.
-const BUILD = "1793754983";
+const BUILD = "1793755404";
 async function checkBuild(){
   try {
     const t = await fetch("index.html?cb=" + Date.now(), {cache: "no-store"}).then(r => r.text());

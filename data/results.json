@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T01:22:24+00:00",
+ "updated": "2026-11-04T01:24:00+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -188,7 +188,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/383674/reports/detailxml.zip",
-   "updated": "2026-11-04T01:22:10+00:00",
+   "updated": "2026-11-04T01:23:48+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1450,7 +1450,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T01:22:10+00:00",
+     "updated": "2026-11-04T01:23:48+00:00",
      "tier": "tossup",
      "precincts_reporting": 181,
      "precincts_total": 2312,
@@ -3425,7 +3425,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T01:21:54+00:00",
+   "updated": "2026-11-04T01:23:30+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -5556,7 +5556,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T01:21:54+00:00",
+     "updated": "2026-11-04T01:23:30+00:00",
      "tier": "tossup",
      "precincts_reporting": 149,
      "precincts_total": 8834,
@@ -7588,7 +7588,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T01:21:54+00:00",
+     "updated": "2026-11-04T01:23:30+00:00",
      "tier": "tossup",
      "precincts_reporting": 149,
      "precincts_total": 8834,
@@ -7648,7 +7648,7 @@
    "partyReg": true,
    "unit": "county",
    "source": "https://flelectionfiles.floridados.gov/enightfilespublic/20261103_ElecResultsFL.txt",
-   "updated": "2026-11-04T01:21:55+00:00",
+   "updated": "2026-11-04T01:23:31+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -8471,7 +8471,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T01:21:55+00:00",
+     "updated": "2026-11-04T01:23:31+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -9798,7 +9798,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T01:21:55+00:00",
+     "updated": "2026-11-04T01:23:31+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -9819,7 +9819,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T01:22:24+00:00",
+   "updated": "2026-11-04T01:24:00+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -9836,10 +9836,10 @@
       {
        "name": "Appling County",
        "votes": [
-        956,
-        2825
+        1308,
+        3775
        ],
-       "outstanding": 10,
+       "outstanding": 1052,
        "remainder": [
         {
          "n": 10,
@@ -9847,6 +9847,14 @@
          "share": [
           0.25284316318434275,
           0.7471568368156573
+         ]
+        },
+        {
+         "n": 1042,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.27035330261136714,
+          0.7296466973886329
          ]
         }
        ],
@@ -10405,17 +10413,17 @@
       {
        "name": "Clay County",
        "votes": [
-        617,
+        618,
         489
        ],
-       "outstanding": 4,
+       "outstanding": 3,
        "remainder": [
         {
-         "n": 4,
+         "n": 3,
          "basis": "measured",
          "share": [
-          0.532235939643347,
-          0.46776406035665297
+          0.5328767123287671,
+          0.4671232876712329
          ]
         }
        ],
@@ -10507,10 +10515,10 @@
       {
        "name": "Colquitt County",
        "votes": [
-        2439,
-        4063
+        2689,
+        5345
        ],
-       "outstanding": 27,
+       "outstanding": 4317,
        "remainder": [
         {
          "n": 27,
@@ -10519,9 +10527,17 @@
           0.37511534912334665,
           0.6248846508766533
          ]
+        },
+        {
+         "n": 4290,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.16318537859007834,
+          0.8368146214099217
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 5,
        "precincts_total": 19
       },
       {
@@ -10941,10 +10957,10 @@
       {
        "name": "Floyd County",
        "votes": [
-        7661,
-        11870
+        8075,
+        13401
        ],
-       "outstanding": 8987,
+       "outstanding": 6609,
        "remainder": [
         {
          "n": 139,
@@ -10955,15 +10971,15 @@
          ]
         },
         {
-         "n": 8848,
+         "n": 6470,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.1431316042267051,
-          0.8568683957732949
+          0.1885465505693235,
+          0.8114534494306765
          ]
         }
        ],
-       "precincts_reporting": 2,
+       "precincts_reporting": 6,
        "precincts_total": 19
       },
       {
@@ -11838,18 +11854,21 @@
       {
        "name": "Miller County",
        "votes": [
-        0,
-        0
+        470,
+        1426
        ],
-       "outstanding": 1176,
+       "outstanding": 70,
        "remainder": [
         {
-         "n": 1176,
+         "n": 70,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.23236889692585896,
+          0.7676311030741411
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 1
       },
       {
@@ -12017,17 +12036,17 @@
       {
        "name": "Oglethorpe County",
        "votes": [
-        109,
-        173
+        1583,
+        2847
        ],
-       "outstanding": 4166,
+       "outstanding": 18,
        "remainder": [
         {
-         "n": 4166,
+         "n": 18,
          "basis": "measured",
          "share": [
-          0.38652482269503546,
-          0.6134751773049646
+          0.35733634311512413,
+          0.6426636568848758
          ]
         }
        ],
@@ -12116,14 +12135,14 @@
          "share": null
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 8,
        "precincts_total": 8
       },
       {
        "name": "Polk County",
        "votes": [
-        2377,
-        6528
+        3312,
+        9968
        ],
        "outstanding": 40,
        "remainder": [
@@ -12136,7 +12155,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 7,
        "precincts_total": 7
       },
       {
@@ -12255,10 +12274,10 @@
       {
        "name": "Rockdale County",
        "votes": [
-        25724,
-        5383
+        27105,
+        6467
        ],
-       "outstanding": 5559,
+       "outstanding": 4761,
        "remainder": [
         {
          "n": 121,
@@ -12269,15 +12288,15 @@
          ]
         },
         {
-         "n": 5438,
+         "n": 4640,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.7903448275862069,
-          0.2096551724137931
+          0.6681034482758621,
+          0.33189655172413796
          ]
         }
        ],
-       "precincts_reporting": 4,
+       "precincts_reporting": 7,
        "precincts_total": 14
       },
       {
@@ -12491,10 +12510,10 @@
       {
        "name": "Telfair County",
        "votes": [
-        636,
-        1142
+        672,
+        1326
        ],
-       "outstanding": 3,
+       "outstanding": 663,
        "remainder": [
         {
          "n": 3,
@@ -12503,9 +12522,17 @@
           0.3577052868391451,
           0.6422947131608548
          ]
+        },
+        {
+         "n": 660,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.16363636363636364,
+          0.8363636363636363
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 4
       },
       {
@@ -12559,10 +12586,10 @@
       {
        "name": "Tift County",
        "votes": [
-        3227,
-        5100
+        4233,
+        8053
        ],
-       "outstanding": 11,
+       "outstanding": 1331,
        "remainder": [
         {
          "n": 11,
@@ -12571,9 +12598,17 @@
           0.38753452623994233,
           0.6124654737600577
          ]
+        },
+        {
+         "n": 1320,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.2541045718615812,
+          0.7458954281384188
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 9,
        "precincts_total": 12
       },
       {
@@ -13022,17 +13057,17 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T01:22:24+00:00",
+     "updated": "2026-11-04T01:24:00+00:00",
      "tier": "tossup",
-     "precincts_reporting": 109,
+     "precincts_reporting": 111,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 2448768,
+     "counted": 2477075,
      "modes": {
-      "election_day": 84430,
-      "early": 2268351,
-      "mail": 95961,
+      "election_day": 103438,
+      "early": 2277407,
+      "mail": 96204,
       "provisional": 26
      }
     },
@@ -13051,10 +13086,10 @@
       {
        "name": "Appling County",
        "votes": [
-        1064,
-        2706
+        1444,
+        3620
        ],
-       "outstanding": 21,
+       "outstanding": 1056,
        "remainder": [
         {
          "n": 21,
@@ -13062,6 +13097,14 @@
          "share": [
           0.28222811671087533,
           0.7177718832891247
+         ]
+        },
+        {
+         "n": 1035,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.2936630602782071,
+          0.7063369397217929
          ]
         }
        ],
@@ -13620,17 +13663,17 @@
       {
        "name": "Clay County",
        "votes": [
-        635,
+        636,
         468
        ],
-       "outstanding": 4,
+       "outstanding": 3,
        "remainder": [
         {
-         "n": 4,
+         "n": 3,
          "basis": "measured",
          "share": [
-          0.5541838134430727,
-          0.4458161865569273
+          0.5547945205479452,
+          0.4452054794520548
          ]
         }
        ],
@@ -13722,10 +13765,10 @@
       {
        "name": "Colquitt County",
        "votes": [
-        2643,
-        3848
+        2948,
+        5078
        ],
-       "outstanding": 38,
+       "outstanding": 4336,
        "remainder": [
         {
          "n": 38,
@@ -13734,9 +13777,17 @@
           0.4071791711600678,
           0.5928208288399323
          ]
+        },
+        {
+         "n": 4298,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.1986970684039088,
+          0.8013029315960912
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 5,
        "precincts_total": 19
       },
       {
@@ -14156,10 +14207,10 @@
       {
        "name": "Floyd County",
        "votes": [
-        8721,
-        10834
+        9240,
+        12259
        ],
-       "outstanding": 8954,
+       "outstanding": 6579,
        "remainder": [
         {
          "n": 114,
@@ -14170,15 +14221,15 @@
          ]
         },
         {
-         "n": 8840,
+         "n": 6465,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.20096153846153847,
-          0.7990384615384616
+          0.24396782841823056,
+          0.7560321715817694
          ]
         }
        ],
-       "precincts_reporting": 2,
+       "precincts_reporting": 6,
        "precincts_total": 19
       },
       {
@@ -15045,18 +15096,21 @@
       {
        "name": "Miller County",
        "votes": [
-        0,
-        0
+        525,
+        1358
        ],
-       "outstanding": 1176,
+       "outstanding": 78,
        "remainder": [
         {
-         "n": 1176,
+         "n": 78,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.2659380692167577,
+          0.7340619307832422
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 1
       },
       {
@@ -15224,17 +15278,17 @@
       {
        "name": "Oglethorpe County",
        "votes": [
-        125,
-        156
+        1746,
+        2663
        ],
-       "outstanding": 4167,
+       "outstanding": 39,
        "remainder": [
         {
-         "n": 4167,
+         "n": 39,
          "basis": "measured",
          "share": [
-          0.44483985765124556,
-          0.5551601423487544
+          0.39600816511680653,
+          0.6039918348831934
          ]
         }
        ],
@@ -15323,14 +15377,14 @@
          "share": null
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 8,
        "precincts_total": 8
       },
       {
        "name": "Polk County",
        "votes": [
-        2781,
-        6103
+        3910,
+        9351
        ],
        "outstanding": 61,
        "remainder": [
@@ -15343,7 +15397,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 7,
        "precincts_total": 7
       },
       {
@@ -15471,10 +15525,10 @@
       {
        "name": "Rockdale County",
        "votes": [
-        26475,
-        4608
+        27991,
+        5549
        ],
-       "outstanding": 5541,
+       "outstanding": 4753,
        "remainder": [
         {
          "n": 133,
@@ -15485,15 +15539,15 @@
          ]
         },
         {
-         "n": 5408,
+         "n": 4620,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.8312528895053167,
-          0.1687471104946833
+          0.7173160173160174,
+          0.2826839826839827
          ]
         }
        ],
-       "precincts_reporting": 4,
+       "precincts_reporting": 7,
        "precincts_total": 14
       },
       {
@@ -15707,10 +15761,10 @@
       {
        "name": "Telfair County",
        "votes": [
-        690,
-        1082
+        738,
+        1254
        ],
-       "outstanding": 9,
+       "outstanding": 669,
        "remainder": [
         {
          "n": 9,
@@ -15719,9 +15773,17 @@
           0.3893905191873589,
           0.6106094808126411
          ]
+        },
+        {
+         "n": 660,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.21818181818181817,
+          0.7818181818181819
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 4
       },
       {
@@ -15775,10 +15837,10 @@
       {
        "name": "Tift County",
        "votes": [
-        3636,
-        4649
+        4891,
+        7350
        ],
-       "outstanding": 53,
+       "outstanding": 1372,
        "remainder": [
         {
          "n": 53,
@@ -15787,9 +15849,17 @@
           0.43886541943270974,
           0.5611345805672903
          ]
+        },
+        {
+         "n": 1319,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.3172396359959555,
+          0.6827603640040445
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 9,
        "precincts_total": 12
       },
       {
@@ -16254,17 +16324,17 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T01:22:24+00:00",
+     "updated": "2026-11-04T01:24:00+00:00",
      "tier": "safe",
-     "precincts_reporting": 109,
+     "precincts_reporting": 111,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 2448744,
+     "counted": 2476975,
      "modes": {
-      "election_day": 84215,
-      "early": 2267422,
-      "mail": 97069,
+      "election_day": 103185,
+      "early": 2276437,
+      "mail": 97315,
       "provisional": 38
      }
     }

@@ -219,6 +219,8 @@ def build(eid, name, label=""):
 def main():
     if "--proof" in sys.argv:
         i = sys.argv.index("--proof")
+        if len(sys.argv) <= i + 1:
+            sys.exit("--proof needs an election id, e.g. --proof 49664 (the 2024 general)")
         eid = sys.argv[i + 1]
         payload, totals, counties = build(eid, f"proof {eid}")
         print(f"TX proof via election {eid} ({payload['election_date']}, ver {payload['version']})")

@@ -196,6 +196,8 @@ def proof(tag, stamp):
 def main():
     if "--proof" in sys.argv:
         i = sys.argv.index("--proof")
+        if len(sys.argv) <= i + 2:
+            sys.exit("--proof needs two arguments, e.g. --proof 2024_11_05 20241105")
         return proof(sys.argv[i + 1], sys.argv[i + 2])
     res_body = fetch(f"results_pct_{ELECTION[1]}.zip")
     out_body = fetch(f"absentee_spoiled_outstanding_{ELECTION[1]}.zip", timeout=60)

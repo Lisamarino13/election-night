@@ -385,6 +385,8 @@ def proof(st, eid):
 if __name__ == "__main__":
     if "--proof" in sys.argv:
         i = sys.argv.index("--proof")
+        if len(sys.argv) <= i + 2:
+            sys.exit("--proof needs two arguments, e.g. --proof SC 115412   (or: --proof IA 106279)")
         sys.exit(proof(sys.argv[i+1].upper(), sys.argv[i+2]))
     states = [a.upper() for a in sys.argv[1:] if a.isalpha()] or sorted(HOSTS)
     rc = 0

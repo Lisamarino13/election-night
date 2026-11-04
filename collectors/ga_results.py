@@ -394,7 +394,10 @@ def proof(eid):
 
 if __name__ == "__main__":
     if "--proof" in sys.argv:
-        sys.exit(proof(sys.argv[sys.argv.index("--proof") + 1]))
+        i = sys.argv.index("--proof")
+        if len(sys.argv) <= i + 1:
+            sys.exit("--proof needs an election id, e.g. --proof 2024NovGen   (--list shows every staged election)")
+        sys.exit(proof(sys.argv[i + 1]))
     if "--list" in sys.argv:
         j = get(f"{API}/jurisdictions/Georgia")
         els = sorted(j.get("elections") or [],

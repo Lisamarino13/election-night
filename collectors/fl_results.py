@@ -219,6 +219,8 @@ def build(date=ELECTION_DATE):
 def main():
     if "--proof" in sys.argv:
         i = sys.argv.index("--proof")
+        if len(sys.argv) <= i + 1:
+            sys.exit("--proof needs an election id, e.g. --proof 20241105")
         payload, totals, counties = build(sys.argv[i + 1])
         print(f"FL proof via {sys.argv[i+1]}: {len(counties)} counties, precincts "
               f"{list(totals.values())[0]['precincts_reporting']:,}/"

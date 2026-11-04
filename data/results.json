@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T01:45:55+00:00",
+ "updated": "2026-11-04T01:47:01+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -4115,7 +4115,7 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T01:45:13+00:00",
+     "updated": "2026-11-04T01:46:33+00:00",
      "tier": "safe",
      "precincts_reporting": 1583,
      "precincts_total": 2626,
@@ -4131,7 +4131,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T01:45:13+00:00",
+   "updated": "2026-11-04T01:46:33+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -4142,7 +4142,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T01:45:14+00:00",
+   "updated": "2026-11-04T01:46:34+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -4179,10 +4179,10 @@
       {
        "name": "Adams",
        "votes": [
-        1338,
-        2894,
-        155,
-        105,
+        1555,
+        3658,
+        228,
+        158,
         0,
         0,
         0
@@ -4290,7 +4290,7 @@
         0,
         0
        ],
-       "outstanding": 14,
+       "outstanding": 40141,
        "remainder": [
         {
          "n": 14,
@@ -4304,9 +4304,22 @@
           0.0,
           0.0
          ]
+        },
+        {
+         "n": 40127,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.5251009303142005,
+          0.428822187116026,
+          0.026417412673336842,
+          0.019659469896436722,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
-       "precincts_reporting": 3,
+       "precincts_reporting": 23,
        "precincts_total": 104
       },
       {
@@ -4380,7 +4393,7 @@
         0,
         0
        ],
-       "outstanding": 12,
+       "outstanding": 64446,
        "remainder": [
         {
          "n": 12,
@@ -4394,9 +4407,22 @@
           0.0,
           0.0
          ]
+        },
+        {
+         "n": 64434,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.40930317736471017,
+          0.5511400054940023,
+          0.023166376705429904,
+          0.016390440435857523,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
-       "precincts_reporting": 1,
+       "precincts_reporting": 10,
        "precincts_total": 69
       },
       {
@@ -4612,15 +4638,15 @@
       {
        "name": "Columbiana",
        "votes": [
-        6221,
-        9281,
-        568,
-        359,
+        9438,
+        17574,
+        1127,
+        692,
         0,
         0,
         0
        ],
-       "outstanding": 43551,
+       "outstanding": 8107,
        "remainder": [
         {
          "n": 14,
@@ -4636,20 +4662,20 @@
          ]
         },
         {
-         "n": 43537,
+         "n": 8093,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.3786596871385964,
-          0.5649156978513604,
-          0.03457301113883986,
-          0.02185160387120336,
+          0.3273559710034338,
+          0.6095522180985744,
+          0.03908986854427526,
+          0.024001942353716485,
           0.0,
           0.0,
           0.0
          ]
         }
        ],
-       "precincts_reporting": 20,
+       "precincts_reporting": 57,
        "precincts_total": 73
       },
       {
@@ -5058,10 +5084,10 @@
       {
        "name": "Greene",
        "votes": [
-        17527,
-        14936,
-        547,
-        371,
+        18014,
+        15592,
+        580,
+        393,
         0,
         0,
         0
@@ -5082,7 +5108,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 3,
        "precincts_total": 151
       },
       {
@@ -5237,15 +5263,15 @@
       {
        "name": "Henry",
        "votes": [
-        3282,
-        6629,
-        418,
-        231,
+        3420,
+        7062,
+        437,
+        238,
         0,
         0,
         0
        ],
-       "outstanding": 1009,
+       "outstanding": 3,
        "remainder": [
         {
          "n": 3,
@@ -5259,22 +5285,9 @@
           0.0,
           0.0
          ]
-        },
-        {
-         "n": 1006,
-         "basis": "scaled from precincts reporting",
-         "share": [
-          0.31079545454545454,
-          0.6277462121212121,
-          0.03958333333333333,
-          0.021875,
-          0.0,
-          0.0,
-          0.0
-         ]
         }
        ],
-       "precincts_reporting": 21,
+       "precincts_reporting": 23,
        "precincts_total": 23
       },
       {
@@ -5340,10 +5353,10 @@
       {
        "name": "Holmes",
        "votes": [
-        1012,
-        2430,
-        72,
-        43,
+        1292,
+        4189,
+        150,
+        85,
         0,
         0,
         0
@@ -5490,15 +5503,15 @@
       {
        "name": "Lake",
        "votes": [
-        26166,
-        19012,
-        924,
-        693,
+        28221,
+        22521,
+        1135,
+        804,
         0,
         0,
         0
        ],
-       "outstanding": 377036,
+       "outstanding": 207607,
        "remainder": [
         {
          "n": 76,
@@ -5514,20 +5527,20 @@
          ]
         },
         {
-         "n": 376960,
+         "n": 207531,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.5591623036649215,
-          0.406282722513089,
-          0.01974569932685116,
-          0.01480927449513837,
+          0.5356959814733965,
+          0.42749757977259356,
+          0.021544769461475675,
+          0.01526166929253431,
           0.0,
           0.0,
           0.0
          ]
         }
        ],
-       "precincts_reporting": 18,
+       "precincts_reporting": 33,
        "precincts_total": 163
       },
       {
@@ -5563,15 +5576,15 @@
       {
        "name": "Licking",
        "votes": [
-        16766,
-        18337,
-        966,
-        568,
+        18127,
+        22414,
+        1212,
+        689,
         0,
         0,
         0
        ],
-       "outstanding": 214638,
+       "outstanding": 114317,
        "remainder": [
         {
          "n": 50,
@@ -5587,20 +5600,20 @@
          ]
         },
         {
-         "n": 214588,
+         "n": 114267,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.4576248055244698,
-          0.500504954008243,
-          0.026366787673663235,
-          0.015503452793623931,
+          0.4271005136421469,
+          0.5281089486829085,
+          0.028556618443994156,
+          0.016233919230950473,
           0.0,
           0.0,
           0.0
          ]
         }
        ],
-       "precincts_reporting": 14,
+       "precincts_reporting": 26,
        "precincts_total": 96
       },
       {
@@ -6086,7 +6099,7 @@
         0,
         0
        ],
-       "outstanding": 14,
+       "outstanding": 35095,
        "remainder": [
         {
          "n": 14,
@@ -6100,9 +6113,22 @@
           0.0,
           0.0
          ]
+        },
+        {
+         "n": 35081,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.43289254889539946,
+          0.5268825718584211,
+          0.022963021616913454,
+          0.017261857629265975,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 18,
        "precincts_total": 68
       },
       {
@@ -6498,10 +6524,10 @@
         0,
         0
        ],
-       "outstanding": 13,
+       "outstanding": 325,
        "remainder": [
         {
-         "n": 13,
+         "n": 325,
          "basis": "measured",
          "share": [
           0.6225033254346723,
@@ -6726,15 +6752,15 @@
       {
        "name": "Tuscarawas",
        "votes": [
-        5682,
-        5770,
-        333,
-        220,
+        8012,
+        10729,
+        778,
+        428,
         0,
         0,
         0
        ],
-       "outstanding": 18397,
+       "outstanding": 30558,
        "remainder": [
         {
          "n": 14,
@@ -6750,13 +6776,13 @@
          ]
         },
         {
-         "n": 18383,
+         "n": 30544,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.4733027905039567,
-          0.48063306955435237,
-          0.02773844231570179,
-          0.018325697625989172,
+          0.40166441068832404,
+          0.5378753697297839,
+          0.03900335890108788,
+          0.02145686068080413,
           0.0,
           0.0,
           0.0
@@ -6915,15 +6941,15 @@
       {
        "name": "Washington",
        "votes": [
-        5178,
-        6897,
-        361,
-        233,
+        6893,
+        10538,
+        652,
+        405,
         0,
         0,
         0
        ],
-       "outstanding": 4944,
+       "outstanding": 7207,
        "remainder": [
         {
          "n": 17,
@@ -6939,13 +6965,13 @@
          ]
         },
         {
-         "n": 4927,
+         "n": 7190,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.40871418422922096,
-          0.5443997158418186,
-          0.028494750966927145,
-          0.01839134896203331,
+          0.37283643444396364,
+          0.5699913457377759,
+          0.03526611856339247,
+          0.021906101254868023,
           0.0,
           0.0,
           0.0
@@ -7089,13 +7115,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T01:45:14+00:00",
+     "updated": "2026-11-04T01:46:34+00:00",
      "tier": "tossup",
-     "precincts_reporting": 672,
+     "precincts_reporting": 788,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1774830,
+     "counted": 1817745,
      "modes": null
     },
     "governor": {
@@ -7129,9 +7155,9 @@
       {
        "name": "Adams",
        "votes": [
-        1409,
-        2855,
-        201,
+        1658,
+        3641,
+        270,
         0,
         0,
         0
@@ -7232,7 +7258,7 @@
         0,
         0
        ],
-       "outstanding": 14,
+       "outstanding": 39560,
        "remainder": [
         {
          "n": 14,
@@ -7245,9 +7271,21 @@
           0.0,
           0.0
          ]
+        },
+        {
+         "n": 39546,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.5404755543681539,
+          0.4248820019592128,
+          0.03464244367263336,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
-       "precincts_reporting": 3,
+       "precincts_reporting": 23,
        "precincts_total": 104
       },
       {
@@ -7316,7 +7354,7 @@
         0,
         0
        ],
-       "outstanding": 12,
+       "outstanding": 64192,
        "remainder": [
         {
          "n": 12,
@@ -7329,9 +7367,21 @@
           0.0,
           0.0
          ]
+        },
+        {
+         "n": 64180,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.4111969111969112,
+          0.5549733406876264,
+          0.0338297481154624,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
-       "precincts_reporting": 1,
+       "precincts_reporting": 10,
        "precincts_total": 69
       },
       {
@@ -7533,14 +7583,14 @@
       {
        "name": "Columbiana",
        "votes": [
-        6536,
-        9192,
-        660,
+        9995,
+        17471,
+        1276,
         0,
         0,
         0
        ],
-       "outstanding": 43442,
+       "outstanding": 8082,
        "remainder": [
         {
          "n": 14,
@@ -7555,19 +7605,19 @@
          ]
         },
         {
-         "n": 43428,
+         "n": 8068,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.3988284110324628,
-          0.5608982182084452,
-          0.04027337075909202,
+          0.3477489388351541,
+          0.607856099088442,
+          0.044394962076403865,
           0.0,
           0.0,
           0.0
          ]
         }
        ],
-       "precincts_reporting": 20,
+       "precincts_reporting": 57,
        "precincts_total": 73
       },
       {
@@ -7949,9 +7999,9 @@
       {
        "name": "Greene",
        "votes": [
-        17984,
-        14456,
-        694,
+        18518,
+        15073,
+        737,
         0,
         0,
         0
@@ -7971,7 +8021,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 3,
        "precincts_total": 151
       },
       {
@@ -8116,14 +8166,14 @@
       {
        "name": "Henry",
        "votes": [
-        3532,
-        6561,
-        467,
+        3674,
+        6995,
+        488,
         0,
         0,
         0
        ],
-       "outstanding": 1009,
+       "outstanding": 3,
        "remainder": [
         {
          "n": 3,
@@ -8136,21 +8186,9 @@
           0.0,
           0.0
          ]
-        },
-        {
-         "n": 1006,
-         "basis": "scaled from precincts reporting",
-         "share": [
-          0.334469696969697,
-          0.6213068181818182,
-          0.044223484848484845,
-          0.0,
-          0.0,
-          0.0
-         ]
         }
        ],
-       "precincts_reporting": 21,
+       "precincts_reporting": 23,
        "precincts_total": 23
       },
       {
@@ -8212,9 +8250,9 @@
       {
        "name": "Holmes",
        "votes": [
-        1036,
-        2402,
-        85,
+        1354,
+        4162,
+        161,
         0,
         0,
         0
@@ -8352,14 +8390,14 @@
       {
        "name": "Lake",
        "votes": [
-        27006,
-        18465,
-        1283,
+        29224,
+        21875,
+        1545,
         0,
         0,
         0
        ],
-       "outstanding": 376705,
+       "outstanding": 207461,
        "remainder": [
         {
          "n": 76,
@@ -8374,19 +8412,19 @@
          ]
         },
         {
-         "n": 376629,
+         "n": 207385,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.5776190272490054,
-          0.3949394704196432,
-          0.027441502331351328,
+          0.5551249905022415,
+          0.4155269356431882,
+          0.029348073854570323,
           0.0,
           0.0,
           0.0
          ]
         }
        ],
-       "precincts_reporting": 18,
+       "precincts_reporting": 33,
        "precincts_total": 163
       },
       {
@@ -8420,14 +8458,14 @@
       {
        "name": "Licking",
        "votes": [
-        17519,
-        17750,
-        1241,
+        19018,
+        21778,
+        1487,
         0,
         0,
         0
        ],
-       "outstanding": 213894,
+       "outstanding": 113889,
        "remainder": [
         {
          "n": 50,
@@ -8442,19 +8480,19 @@
          ]
         },
         {
-         "n": 213844,
+         "n": 113839,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.4798411394138592,
-          0.4861681731032594,
-          0.0339906874828814,
+          0.44977887094104013,
+          0.5150533311259844,
+          0.03516779793297543,
           0.0,
           0.0,
           0.0
          ]
         }
        ],
-       "precincts_reporting": 14,
+       "precincts_reporting": 26,
        "precincts_total": 96
       },
       {
@@ -8907,7 +8945,7 @@
         0,
         0
        ],
-       "outstanding": 14,
+       "outstanding": 34936,
        "remainder": [
         {
          "n": 14,
@@ -8920,9 +8958,21 @@
           0.0,
           0.0
          ]
+        },
+        {
+         "n": 34922,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.44686605154311165,
+          0.5179764556156539,
+          0.03515749284123449,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 18,
        "precincts_total": 68
       },
       {
@@ -9291,10 +9341,10 @@
         0,
         0
        ],
-       "outstanding": 13,
+       "outstanding": 325,
        "remainder": [
         {
-         "n": 13,
+         "n": 325,
          "basis": "measured",
          "share": [
           0.6395950106787386,
@@ -9504,14 +9554,14 @@
       {
        "name": "Tuscarawas",
        "votes": [
-        5867,
-        5712,
-        385,
+        8381,
+        10680,
+        802,
         0,
         0,
         0
        ],
-       "outstanding": 18334,
+       "outstanding": 30429,
        "remainder": [
         {
          "n": 14,
@@ -9526,12 +9576,12 @@
          ]
         },
         {
-         "n": 18320,
+         "n": 30415,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.4903878301571381,
-          0.477432296890672,
-          0.0321798729521899,
+          0.42194029099330416,
+          0.537683129436641,
+          0.040376579570054874,
           0.0,
           0.0,
           0.0
@@ -9680,14 +9730,14 @@
       {
        "name": "Washington",
        "votes": [
-        5427,
-        6782,
-        448,
+        7305,
+        10402,
+        780,
         0,
         0,
         0
        ],
-       "outstanding": 4939,
+       "outstanding": 7206,
        "remainder": [
         {
          "n": 17,
@@ -9702,12 +9752,12 @@
          ]
         },
         {
-         "n": 4922,
+         "n": 7189,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.4287745911353401,
-          0.5358299755076242,
-          0.035395433357035634,
+          0.395142532590469,
+          0.5626656569481258,
+          0.04219181046140531,
           0.0,
           0.0,
           0.0
@@ -9842,13 +9892,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T01:45:14+00:00",
+     "updated": "2026-11-04T01:46:34+00:00",
      "tier": "tossup",
-     "precincts_reporting": 672,
+     "precincts_reporting": 788,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1770879,
+     "counted": 1813674,
      "modes": null
     }
    },
@@ -9902,7 +9952,7 @@
    "partyReg": true,
    "unit": "county",
    "source": "https://flelectionfiles.floridados.gov/enightfilespublic/20261103_ElecResultsFL.txt",
-   "updated": "2026-11-04T01:45:17+00:00",
+   "updated": "2026-11-04T01:46:35+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -10725,7 +10775,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T01:45:17+00:00",
+     "updated": "2026-11-04T01:46:35+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -12052,7 +12102,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T01:45:17+00:00",
+     "updated": "2026-11-04T01:46:35+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -12073,7 +12123,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T01:45:55+00:00",
+   "updated": "2026-11-04T01:47:01+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -15228,7 +15278,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T01:45:55+00:00",
+     "updated": "2026-11-04T01:47:01+00:00",
      "tier": "tossup",
      "precincts_reporting": 123,
      "precincts_total": 159,
@@ -18413,7 +18463,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T01:45:55+00:00",
+     "updated": "2026-11-04T01:47:01+00:00",
      "tier": "safe",
      "precincts_reporting": 123,
      "precincts_total": 159,

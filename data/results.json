@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T00:57:52+00:00",
+ "updated": "2026-11-04T00:58:57+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -188,7 +188,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/383537/reports/detailxml.zip",
-   "updated": "2026-11-04T00:57:36+00:00",
+   "updated": "2026-11-04T00:58:43+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1270,7 +1270,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T00:57:36+00:00",
+     "updated": "2026-11-04T00:58:43+00:00",
      "tier": "tossup",
      "precincts_reporting": 20,
      "precincts_total": 2312,
@@ -3218,7 +3218,7 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T00:57:21+00:00",
+     "updated": "2026-11-04T00:58:27+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 2626,
@@ -3234,7 +3234,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T00:57:21+00:00",
+   "updated": "2026-11-04T00:58:27+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -3245,7 +3245,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T00:57:22+00:00",
+   "updated": "2026-11-04T00:58:29+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -3502,18 +3502,18 @@
       {
        "name": "Champaign",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        2660,
+        3708,
+        223,
+        160,
         0,
         0,
         0
        ],
-       "outstanding": 6789,
+       "outstanding": 8,
        "remainder": [
         {
-         "n": 6789,
+         "n": 8,
          "basis": "measured",
          "share": null
         }
@@ -4126,18 +4126,18 @@
       {
        "name": "Huron",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        3647,
+        3900,
+        230,
+        157,
         0,
         0,
         0
        ],
-       "outstanding": 7969,
+       "outstanding": 10,
        "remainder": [
         {
-         "n": 7969,
+         "n": 10,
          "basis": "measured",
          "share": null
         }
@@ -4478,18 +4478,18 @@
       {
        "name": "Miami",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        8401,
+        11518,
+        492,
+        270,
         0,
         0,
         0
        ],
-       "outstanding": 20745,
+       "outstanding": 35,
        "remainder": [
         {
-         "n": 20745,
+         "n": 35,
          "basis": "measured",
          "share": null
         }
@@ -4632,18 +4632,18 @@
       {
        "name": "Ottawa",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        4046,
+        3821,
+        159,
+        97,
         0,
         0,
         0
        ],
-       "outstanding": 8056,
+       "outstanding": 14,
        "remainder": [
         {
-         "n": 8056,
+         "n": 14,
          "basis": "measured",
          "share": null
         }
@@ -4786,18 +4786,18 @@
       {
        "name": "Putnam",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        1447,
+        4654,
+        110,
+        70,
         0,
         0,
         0
        ],
-       "outstanding": 6280,
+       "outstanding": 8,
        "remainder": [
         {
-         "n": 6280,
+         "n": 8,
          "basis": "measured",
          "share": null
         }
@@ -4874,18 +4874,18 @@
       {
        "name": "Scioto",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        3619,
+        4038,
+        136,
+        128,
         0,
         0,
         0
        ],
-       "outstanding": 7896,
+       "outstanding": 16,
        "remainder": [
         {
-         "n": 7896,
+         "n": 16,
          "basis": "measured",
          "share": null
         }
@@ -5080,22 +5080,16 @@
       {
        "name": "Vinton",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        641,
+        1093,
+        69,
+        32,
         0,
         0,
         0
        ],
-       "outstanding": 1850,
-       "remainder": [
-        {
-         "n": 1850,
-         "basis": "measured",
-         "share": null
-        }
-       ],
+       "outstanding": null,
+       "remainder": null,
        "precincts_reporting": null,
        "precincts_total": 20
       },
@@ -5190,18 +5184,18 @@
       {
        "name": "Wood",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        13159,
+        7869,
+        367,
+        315,
         0,
         0,
         0
        ],
-       "outstanding": 21739,
+       "outstanding": 69,
        "remainder": [
         {
-         "n": 21739,
+         "n": 69,
          "basis": "measured",
          "share": null
         }
@@ -5232,13 +5226,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:57:22+00:00",
+     "updated": "2026-11-04T00:58:29+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1071833,
+     "counted": 1153069,
      "modes": null
     },
     "governor": {
@@ -5482,17 +5476,17 @@
       {
        "name": "Champaign",
        "votes": [
-        0,
-        0,
-        0,
+        2763,
+        3688,
+        295,
         0,
         0,
         0
        ],
-       "outstanding": 6789,
+       "outstanding": 8,
        "remainder": [
         {
-         "n": 6789,
+         "n": 8,
          "basis": "measured",
          "share": null
         }
@@ -6077,17 +6071,17 @@
       {
        "name": "Huron",
        "votes": [
-        0,
-        0,
-        0,
+        3668,
+        3914,
+        334,
         0,
         0,
         0
        ],
-       "outstanding": 7969,
+       "outstanding": 10,
        "remainder": [
         {
-         "n": 7969,
+         "n": 10,
          "basis": "measured",
          "share": null
         }
@@ -6413,17 +6407,17 @@
       {
        "name": "Miami",
        "votes": [
-        0,
-        0,
-        0,
+        8716,
+        11258,
+        657,
         0,
         0,
         0
        ],
-       "outstanding": 20745,
+       "outstanding": 35,
        "remainder": [
         {
-         "n": 20745,
+         "n": 35,
          "basis": "measured",
          "share": null
         }
@@ -6560,17 +6554,17 @@
       {
        "name": "Ottawa",
        "votes": [
-        0,
-        0,
-        0,
+        4179,
+        3701,
+        222,
         0,
         0,
         0
        ],
-       "outstanding": 8056,
+       "outstanding": 14,
        "remainder": [
         {
-         "n": 8056,
+         "n": 14,
          "basis": "measured",
          "share": null
         }
@@ -6707,17 +6701,17 @@
       {
        "name": "Putnam",
        "votes": [
-        0,
-        0,
-        0,
+        1532,
+        4535,
+        196,
         0,
         0,
         0
        ],
-       "outstanding": 6280,
+       "outstanding": 8,
        "remainder": [
         {
-         "n": 6280,
+         "n": 8,
          "basis": "measured",
          "share": null
         }
@@ -6791,17 +6785,17 @@
       {
        "name": "Scioto",
        "votes": [
-        0,
-        0,
-        0,
+        3692,
+        4043,
+        191,
         0,
         0,
         0
        ],
-       "outstanding": 7896,
+       "outstanding": 16,
        "remainder": [
         {
-         "n": 7896,
+         "n": 16,
          "basis": "measured",
          "share": null
         }
@@ -6987,21 +6981,15 @@
       {
        "name": "Vinton",
        "votes": [
-        0,
-        0,
-        0,
+        667,
+        1080,
+        71,
         0,
         0,
         0
        ],
-       "outstanding": 1850,
-       "remainder": [
-        {
-         "n": 1850,
-         "basis": "measured",
-         "share": null
-        }
-       ],
+       "outstanding": null,
+       "remainder": null,
        "precincts_reporting": null,
        "precincts_total": 20
       },
@@ -7092,17 +7080,17 @@
       {
        "name": "Wood",
        "votes": [
-        0,
-        0,
-        0,
+        13584,
+        7594,
+        536,
         0,
         0,
         0
        ],
-       "outstanding": 21739,
+       "outstanding": 69,
        "remainder": [
         {
-         "n": 21739,
+         "n": 69,
          "basis": "measured",
          "share": null
         }
@@ -7132,13 +7120,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:57:22+00:00",
+     "updated": "2026-11-04T00:58:29+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1069737,
+     "counted": 1150853,
      "modes": null
     }
    },
@@ -9363,7 +9351,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T00:57:51+00:00",
+   "updated": "2026-11-04T00:58:57+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -12366,7 +12354,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:57:51+00:00",
+     "updated": "2026-11-04T00:58:57+00:00",
      "tier": "tossup",
      "precincts_reporting": 85,
      "precincts_total": 159,
@@ -15390,7 +15378,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:57:51+00:00",
+     "updated": "2026-11-04T00:58:57+00:00",
      "tier": "safe",
      "precincts_reporting": 85,
      "precincts_total": 159,

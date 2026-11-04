@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T00:48:54+00:00",
+ "updated": "2026-11-04T00:50:07+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -188,7 +188,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/383510/reports/detailxml.zip",
-   "updated": "2026-11-04T00:48:36+00:00",
+   "updated": "2026-11-04T00:49:50+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1230,7 +1230,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T00:48:36+00:00",
+     "updated": "2026-11-04T00:49:50+00:00",
      "tier": "tossup",
      "precincts_reporting": 4,
      "precincts_total": 2312,
@@ -3178,7 +3178,7 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T00:48:20+00:00",
+     "updated": "2026-11-04T00:49:30+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 2626,
@@ -3194,7 +3194,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T00:48:20+00:00",
+   "updated": "2026-11-04T00:49:30+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -3205,7 +3205,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T00:48:21+00:00",
+   "updated": "2026-11-04T00:49:32+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -3218,11 +3218,11 @@
        "party": "R"
       },
       {
-       "name": "William Redpath",
+       "name": "Greg Levy",
        "party": "O"
       },
       {
-       "name": "Greg Levy",
+       "name": "William Redpath",
        "party": "O"
       },
       {
@@ -3266,8 +3266,8 @@
        "votes": [
         5034,
         6187,
-        238,
         208,
+        238,
         0,
         0,
         0
@@ -3332,8 +3332,8 @@
        "votes": [
         6773,
         1705,
-        128,
         169,
+        128,
         0,
         0,
         0
@@ -3396,18 +3396,18 @@
       {
        "name": "Brown",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        1933,
+        3555,
+        92,
+        163,
         0,
         0,
         0
        ],
-       "outstanding": 5777,
+       "outstanding": 7,
        "remainder": [
         {
-         "n": 5777,
+         "n": 7,
          "basis": "measured",
          "share": null
         }
@@ -3420,8 +3420,8 @@
        "votes": [
         28573,
         27027,
-        927,
         757,
+        927,
         0,
         0,
         0
@@ -3486,8 +3486,8 @@
        "votes": [
         10020,
         8359,
-        402,
         345,
+        402,
         0,
         0,
         0
@@ -3662,8 +3662,8 @@
        "votes": [
         3074,
         3730,
-        178,
         123,
+        178,
         0,
         0,
         0
@@ -3772,8 +3772,8 @@
        "votes": [
         126744,
         34350,
-        1921,
         2253,
+        1921,
         0,
         0,
         0
@@ -3786,8 +3786,8 @@
          "share": [
           0.7668998233172786,
           0.20784422876781955,
-          0.011623544787859718,
           0.013632403127042137,
+          0.011623544787859718,
           0.0,
           0.0,
           0.0
@@ -3998,18 +3998,18 @@
       {
        "name": "Henry",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        1864,
+        2424,
+        67,
+        96,
         0,
         0,
         0
        ],
-       "outstanding": 4490,
+       "outstanding": 3,
        "remainder": [
         {
-         "n": 4490,
+         "n": 3,
          "basis": "measured",
          "share": null
         }
@@ -4042,18 +4042,18 @@
       {
        "name": "Hocking",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        2124,
+        2655,
+        100,
+        109,
         0,
         0,
         0
        ],
-       "outstanding": 5000,
+       "outstanding": 7,
        "remainder": [
         {
-         "n": 5000,
+         "n": 7,
          "basis": "measured",
          "share": null
         }
@@ -4066,8 +4066,8 @@
        "votes": [
         1012,
         2430,
-        72,
         43,
+        72,
         0,
         0,
         0
@@ -4264,8 +4264,8 @@
        "votes": [
         34303,
         18095,
-        899,
         745,
+        899,
         0,
         0,
         0
@@ -4330,8 +4330,8 @@
        "votes": [
         21418,
         10663,
-        528,
         534,
+        528,
         0,
         0,
         0
@@ -4484,8 +4484,8 @@
        "votes": [
         45511,
         17974,
-        907,
         909,
+        907,
         0,
         0,
         0
@@ -4638,8 +4638,8 @@
        "votes": [
         1936,
         2959,
-        146,
         99,
+        146,
         0,
         0,
         0
@@ -4704,8 +4704,8 @@
        "votes": [
         14026,
         8392,
-        445,
         409,
+        445,
         0,
         0,
         0
@@ -4792,8 +4792,8 @@
        "votes": [
         5369,
         5813,
-        207,
         156,
+        207,
         0,
         0,
         0
@@ -4902,8 +4902,8 @@
        "votes": [
         29475,
         20668,
-        1059,
         836,
+        1059,
         0,
         0,
         0
@@ -4916,8 +4916,8 @@
          "share": [
           0.5664130058803182,
           0.3971712978976901,
-          0.02035051308659057,
           0.01606518313540105,
+          0.02035051308659057,
           0.0,
           0.0,
           0.0
@@ -4932,8 +4932,8 @@
        "votes": [
         52492,
         18961,
-        1006,
         1053,
+        1006,
         0,
         0,
         0
@@ -4954,8 +4954,8 @@
        "votes": [
         17424,
         10628,
-        566,
         502,
+        566,
         0,
         0,
         0
@@ -5084,18 +5084,18 @@
       {
        "name": "Washington",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        4967,
+        6117,
+        201,
+        287,
         0,
         0,
         0
        ],
-       "outstanding": 11702,
+       "outstanding": 17,
        "remainder": [
         {
-         "n": 11702,
+         "n": 17,
          "basis": "measured",
          "share": null
         }
@@ -5108,8 +5108,8 @@
        "votes": [
         1842,
         1883,
-        100,
         79,
+        100,
         0,
         0,
         0
@@ -5172,18 +5172,18 @@
       {
        "name": "Wyandot",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        1621,
+        2337,
+        969,
+        262,
         0,
         0,
         0
        ],
-       "outstanding": 3848,
+       "outstanding": 3,
        "remainder": [
         {
-         "n": 3848,
+         "n": 3,
          "basis": "measured",
          "share": null
         }
@@ -5192,13 +5192,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:48:21+00:00",
+     "updated": "2026-11-04T00:49:32+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 623799,
+     "counted": 655742,
      "modes": null
     },
     "governor": {
@@ -5379,17 +5379,17 @@
       {
        "name": "Brown",
        "votes": [
-        0,
-        0,
-        0,
+        1997,
+        3538,
+        204,
         0,
         0,
         0
        ],
-       "outstanding": 5777,
+       "outstanding": 7,
        "remainder": [
         {
-         "n": 5777,
+         "n": 7,
          "basis": "measured",
          "share": null
         }
@@ -5953,17 +5953,17 @@
       {
        "name": "Henry",
        "votes": [
-        0,
-        0,
-        0,
+        1922,
+        2393,
+        134,
         0,
         0,
         0
        ],
-       "outstanding": 4490,
+       "outstanding": 3,
        "remainder": [
         {
-         "n": 4490,
+         "n": 3,
          "basis": "measured",
          "share": null
         }
@@ -5995,17 +5995,17 @@
       {
        "name": "Hocking",
        "votes": [
-        0,
-        0,
-        0,
+        2223,
+        2573,
+        178,
         0,
         0,
         0
        ],
-       "outstanding": 5000,
+       "outstanding": 7,
        "remainder": [
         {
-         "n": 5000,
+         "n": 7,
          "basis": "measured",
          "share": null
         }
@@ -6989,17 +6989,17 @@
       {
        "name": "Washington",
        "votes": [
-        0,
-        0,
-        0,
+        5186,
+        5995,
+        373,
         0,
         0,
         0
        ],
-       "outstanding": 11702,
+       "outstanding": 17,
        "remainder": [
         {
-         "n": 11702,
+         "n": 17,
          "basis": "measured",
          "share": null
         }
@@ -7073,17 +7073,17 @@
       {
        "name": "Wyandot",
        "votes": [
-        0,
-        0,
-        0,
+        1744,
+        2937,
+        354,
         0,
         0,
         0
        ],
-       "outstanding": 3848,
+       "outstanding": 3,
        "remainder": [
         {
-         "n": 3848,
+         "n": 3,
          "basis": "measured",
          "share": null
         }
@@ -7092,13 +7092,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:48:21+00:00",
+     "updated": "2026-11-04T00:49:32+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 622451,
+     "counted": 654202,
      "modes": null
     }
    },
@@ -9323,7 +9323,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T00:48:54+00:00",
+   "updated": "2026-11-04T00:50:07+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -9747,15 +9747,18 @@
       {
        "name": "Catoosa County",
        "votes": [
-        0,
-        0
+        4040,
+        10475
        ],
-       "outstanding": 15249,
+       "outstanding": 734,
        "remainder": [
         {
-         "n": 15249,
+         "n": 734,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.2783327592146056,
+          0.7216672407853945
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -9818,18 +9821,29 @@
       {
        "name": "Chattooga County",
        "votes": [
-        0,
-        0
+        1342,
+        4307
        ],
-       "outstanding": 3941,
+       "outstanding": 1182,
        "remainder": [
         {
-         "n": 3941,
+         "n": 26,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.26871008939974456,
+          0.7312899106002554
+         ]
+        },
+        {
+         "n": 1156,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.16724336793540945,
+          0.8327566320645905
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 3,
        "precincts_total": 5
       },
       {
@@ -10739,15 +10753,18 @@
       {
        "name": "Irwin County",
        "votes": [
-        0,
-        0
+        514,
+        1531
        ],
-       "outstanding": 2058,
+       "outstanding": 13,
        "remainder": [
         {
-         "n": 2058,
+         "n": 13,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.25134474327628364,
+          0.7486552567237164
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11405,17 +11422,11 @@
       {
        "name": "Pierce County",
        "votes": [
-        0,
-        0
+        663,
+        4253
        ],
-       "outstanding": 4912,
-       "remainder": [
-        {
-         "n": 4912,
-         "basis": "measured",
-         "share": null
-        }
-       ],
+       "outstanding": null,
+       "remainder": null,
        "precincts_reporting": null,
        "precincts_total": 8
       },
@@ -11826,15 +11837,18 @@
       {
        "name": "Thomas County",
        "votes": [
-        0,
-        0
+        4964,
+        6504
        ],
-       "outstanding": 11521,
+       "outstanding": 53,
        "remainder": [
         {
-         "n": 11521,
+         "n": 53,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.4328566445762121,
+          0.5671433554237879
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11934,10 +11948,10 @@
       {
        "name": "Turner County",
        "votes": [
-        1186,
-        1578
+        1206,
+        1764
        ],
-       "outstanding": 357,
+       "outstanding": 20,
        "remainder": [
         {
          "n": 20,
@@ -11946,17 +11960,9 @@
           0.4267942583732057,
           0.5732057416267943
          ]
-        },
-        {
-         "n": 337,
-         "basis": "scaled from precincts reporting",
-         "share": [
-          0.4362017804154303,
-          0.5637982195845698
-         ]
         }
        ],
-       "precincts_reporting": 2,
+       "precincts_reporting": 3,
        "precincts_total": 3
       },
       {
@@ -12255,7 +12261,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:48:54+00:00",
+     "updated": "2026-11-04T00:50:07+00:00",
      "tier": "tossup",
      "precincts_reporting": 62,
      "precincts_total": 159,
@@ -12691,15 +12697,18 @@
       {
        "name": "Catoosa County",
        "votes": [
-        0,
-        0
+        4885,
+        9686
        ],
-       "outstanding": 15249,
+       "outstanding": 678,
        "remainder": [
         {
-         "n": 15249,
+         "n": 678,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.335254958479171,
+          0.664745041520829
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -12762,18 +12771,29 @@
       {
        "name": "Chattooga County",
        "votes": [
-        0,
-        0
+        1603,
+        4028
        ],
-       "outstanding": 3941,
+       "outstanding": 1188,
        "remainder": [
         {
-         "n": 3941,
+         "n": 37,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.31173155737704916,
+          0.6882684426229508
+         ]
+        },
+        {
+         "n": 1151,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.2235089751013318,
+          0.7764910248986682
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 3,
        "precincts_total": 5
       },
       {
@@ -13683,15 +13703,18 @@
       {
        "name": "Irwin County",
        "votes": [
-        0,
-        0
+        635,
+        1396
        ],
-       "outstanding": 2058,
+       "outstanding": 27,
        "remainder": [
         {
-         "n": 2058,
+         "n": 27,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3126538650910881,
+          0.6873461349089118
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -14341,17 +14364,11 @@
       {
        "name": "Pierce County",
        "votes": [
-        0,
-        0
+        772,
+        4142
        ],
-       "outstanding": 4912,
-       "remainder": [
-        {
-         "n": 4912,
-         "basis": "measured",
-         "share": null
-        }
-       ],
+       "outstanding": null,
+       "remainder": null,
        "precincts_reporting": null,
        "precincts_total": 8
       },
@@ -14770,15 +14787,18 @@
       {
        "name": "Thomas County",
        "votes": [
-        0,
-        0
+        5377,
+        6054
        ],
-       "outstanding": 11521,
+       "outstanding": 90,
        "remainder": [
         {
-         "n": 11521,
+         "n": 90,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.47038754264718746,
+          0.5296124573528125
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -14878,10 +14898,10 @@
       {
        "name": "Turner County",
        "votes": [
-        1276,
-        1485
+        1303,
+        1661
        ],
-       "outstanding": 356,
+       "outstanding": 20,
        "remainder": [
         {
          "n": 20,
@@ -14890,17 +14910,9 @@
           0.46076555023923443,
           0.5392344497607655
          ]
-        },
-        {
-         "n": 336,
-         "basis": "scaled from precincts reporting",
-         "share": [
-          0.46646795827123694,
-          0.533532041728763
-         ]
         }
        ],
-       "precincts_reporting": 2,
+       "precincts_reporting": 3,
        "precincts_total": 3
       },
       {
@@ -15208,7 +15220,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:48:54+00:00",
+     "updated": "2026-11-04T00:50:07+00:00",
      "tier": "safe",
      "precincts_reporting": 62,
      "precincts_total": 159,

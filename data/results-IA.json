@@ -4,9 +4,9 @@
  "source_kind": "clarity",
  "election": "2026 General Election",
  "election_date": "11/3/2026",
- "feed_timestamp": "11/3/2026 8:29:09 PM CST",
- "version": "384270",
- "fetched": "2026-11-04T02:34:41+00:00",
+ "feed_timestamp": "11/3/2026 8:34:42 PM CST",
+ "version": "384322",
+ "fetched": "2026-11-04T02:35:53+00:00",
  "early_cast_as_of": "11/3/2026",
  "counties": {
   "Adair": {
@@ -1162,27 +1162,27 @@
   "Crawford": {
    "senate": {
     "choices": {
-     "Josh Turek": {
-      "party": "D",
-      "votes": 909,
-      "by_mode": {
-       "election_day": 0,
-       "mail": 909
-      }
-     },
      "Ashley Hinson": {
       "party": "R",
-      "votes": 859,
+      "votes": 1462,
       "by_mode": {
-       "election_day": 0,
+       "election_day": 603,
        "mail": 859
+      }
+     },
+     "Josh Turek": {
+      "party": "D",
+      "votes": 1146,
+      "by_mode": {
+       "election_day": 237,
+       "mail": 909
       }
      },
      "Thomas Laehn": {
       "party": "O",
-      "votes": 58,
+      "votes": 98,
       "by_mode": {
-       "election_day": 0,
+       "election_day": 40,
        "mail": 58
       }
      },
@@ -1196,14 +1196,14 @@
      }
     },
     "modes": {
-     "election_day": 0,
+     "election_day": 880,
      "mail": 1830
     },
-    "counted": 1830,
+    "counted": 2710,
     "precincts_total": 8,
-    "precincts_reporting": 0,
+    "precincts_reporting": 2,
     "registered": 8952,
-    "ballots_cast": 1895,
+    "ballots_cast": 2801,
     "early_and_mail_cast": 1889,
     "early_and_mail_counted": 1830,
     "early_and_mail_left": 59
@@ -1264,49 +1264,49 @@
     "choices": {
      "Ashley Hinson": {
       "party": "R",
-      "votes": 0,
+      "votes": 567,
       "by_mode": {
        "election_day": 0,
-       "mail": 0
+       "mail": 567
       }
      },
      "Josh Turek": {
       "party": "D",
-      "votes": 0,
+      "votes": 427,
       "by_mode": {
        "election_day": 0,
-       "mail": 0
+       "mail": 427
       }
      },
      "Thomas Laehn": {
       "party": "O",
-      "votes": 0,
+      "votes": 39,
       "by_mode": {
        "election_day": 0,
-       "mail": 0
+       "mail": 39
       }
      },
      "Write-in": {
       "party": "O",
-      "votes": 0,
+      "votes": 1,
       "by_mode": {
        "election_day": 0,
-       "mail": 0
+       "mail": 1
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "mail": 0
+     "mail": 1034
     },
-    "counted": 0,
+    "counted": 1034,
     "precincts_total": 8,
     "precincts_reporting": 0,
     "registered": 4865,
-    "ballots_cast": 0,
+    "ballots_cast": 1070,
     "early_and_mail_cast": 1073,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 1073
+    "early_and_mail_counted": 1034,
+    "early_and_mail_left": 39
    }
   },
   "Decatur": {
@@ -3812,51 +3812,51 @@
   "Polk": {
    "senate": {
     "choices": {
-     "Ashley Hinson": {
-      "party": "R",
-      "votes": 0,
-      "by_mode": {
-       "election_day": 0,
-       "mail": 0
-      }
-     },
      "Josh Turek": {
       "party": "D",
-      "votes": 0,
+      "votes": 113389,
       "by_mode": {
-       "election_day": 0,
-       "mail": 0
+       "election_day": 63013,
+       "mail": 50376
+      }
+     },
+     "Ashley Hinson": {
+      "party": "R",
+      "votes": 61839,
+      "by_mode": {
+       "election_day": 45163,
+       "mail": 16676
       }
      },
      "Thomas Laehn": {
       "party": "O",
-      "votes": 0,
+      "votes": 4077,
       "by_mode": {
-       "election_day": 0,
-       "mail": 0
+       "election_day": 3136,
+       "mail": 941
       }
      },
      "Write-in": {
       "party": "O",
-      "votes": 0,
+      "votes": 301,
       "by_mode": {
-       "election_day": 0,
-       "mail": 0
+       "election_day": 240,
+       "mail": 61
       }
      }
     },
     "modes": {
-     "election_day": 0,
-     "mail": 0
+     "election_day": 111552,
+     "mail": 68054
     },
-    "counted": 0,
+    "counted": 179606,
     "precincts_total": 176,
-    "precincts_reporting": 0,
+    "precincts_reporting": 128,
     "registered": 336621,
-    "ballots_cast": 0,
+    "ballots_cast": 182810,
     "early_and_mail_cast": 70500,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 70500
+    "early_and_mail_counted": 68054,
+    "early_and_mail_left": 2446
    }
   },
   "Pottawattamie": {
@@ -4964,10 +4964,10 @@
   "senate": {
    "contest_name": "United States Senator",
    "choices": {
-    "Josh Turek": 25290,
-    "Ashley Hinson": 19472,
-    "Thomas Laehn": 944,
-    "Write-in": 29
+    "Josh Turek": 139343,
+    "Ashley Hinson": 82481,
+    "Thomas Laehn": 5100,
+    "Write-in": 331
    },
    "parties": {
     "Ashley Hinson": "R",
@@ -4975,19 +4975,19 @@
     "Thomas Laehn": "O",
     "Write-in": "O"
    },
-   "total": 45735,
+   "total": 227255,
    "modes": {
-    "election_day": 0,
-    "mail": 45735
+    "election_day": 112432,
+    "mail": 114823
    },
-   "precincts_reporting": 0,
+   "precincts_reporting": 130,
    "precincts_total": 1656,
    "early_and_mail_cast": 498713,
-   "early_and_mail_counted": 45735,
-   "early_and_mail_left": 452978
+   "early_and_mail_counted": 114823,
+   "early_and_mail_left": 383890
   }
  },
- "source": "https://electionresults.iowa.gov/IA/127077/384270/reports/detailxml.zip",
+ "source": "https://electionresults.iowa.gov/IA/127077/384322/reports/detailxml.zip",
  "notes": {
   "modes": "Votes split by mode; early and mail are never pooled with election day, because they break in opposite directions.",
   "left": "early_and_mail_left is measured - ballots recorded cast early or by mail in that county, minus those modes as counted here.",

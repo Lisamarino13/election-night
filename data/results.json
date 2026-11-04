@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T00:36:07+00:00",
+ "updated": "2026-11-04T00:37:15+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -188,7 +188,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/383470/reports/detailxml.zip",
-   "updated": "2026-11-04T00:35:51+00:00",
+   "updated": "2026-11-04T00:37:02+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1158,7 +1158,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T00:35:51+00:00",
+     "updated": "2026-11-04T00:37:02+00:00",
      "tier": "tossup",
      "precincts_reporting": 1,
      "precincts_total": 2312,
@@ -3106,7 +3106,7 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T00:35:32+00:00",
+     "updated": "2026-11-04T00:36:43+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 2626,
@@ -3122,7 +3122,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T00:35:32+00:00",
+   "updated": "2026-11-04T00:36:43+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -3133,21 +3133,13 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T00:35:33+00:00",
+   "updated": "2026-11-04T00:36:44+00:00",
    "races": {
     "senate": {
      "candidates": [
       {
        "name": "Sherrod Brown",
        "party": "D"
-      },
-      {
-       "name": "Stephen Faris",
-       "party": "O"
-      },
-      {
-       "name": "Anthony Holliman",
-       "party": "O"
       },
       {
        "name": "Jon Husted",
@@ -3159,6 +3151,14 @@
       },
       {
        "name": "William Redpath",
+       "party": "O"
+      },
+      {
+       "name": "Stephen Faris",
+       "party": "O"
+      },
+      {
+       "name": "Anthony Holliman",
        "party": "O"
       },
       {
@@ -3698,20 +3698,28 @@
       {
        "name": "Franklin",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        126744,
+        34350,
+        2253,
+        1921,
         0,
         0,
         0
        ],
-       "outstanding": 166027,
+       "outstanding": 579,
        "remainder": [
         {
-         "n": 166027,
+         "n": 579,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.7668998233172786,
+          0.20784422876781955,
+          0.013632403127042137,
+          0.011623544787859718,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -4820,20 +4828,28 @@
       {
        "name": "Stark",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        29475,
+        20668,
+        836,
+        1059,
         0,
         0,
         0
        ],
-       "outstanding": 52490,
+       "outstanding": 100,
        "remainder": [
         {
-         "n": 52490,
+         "n": 100,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.5664130058803182,
+          0.3971712978976901,
+          0.01606518313540105,
+          0.02035051308659057,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -5104,13 +5120,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:35:33+00:00",
+     "updated": "2026-11-04T00:36:44+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 0,
+     "counted": 217306,
      "modes": null
     },
     "governor": {
@@ -5120,20 +5136,20 @@
        "party": "D"
       },
       {
-       "name": "Timothy Grady",
-       "party": "O"
-      },
-      {
-       "name": "Heather Hill",
-       "party": "O"
+       "name": "Vivek Ramaswamy",
+       "party": "R"
       },
       {
        "name": "Don Kissick",
        "party": "O"
       },
       {
-       "name": "Vivek Ramaswamy",
-       "party": "R"
+       "name": "Timothy Grady",
+       "party": "O"
+      },
+      {
+       "name": "Heather Hill",
+       "party": "O"
       },
       {
        "name": "Renea Turner",
@@ -5648,19 +5664,26 @@
       {
        "name": "Franklin",
        "votes": [
-        0,
-        0,
-        0,
+        129692,
+        32952,
+        2570,
         0,
         0,
         0
        ],
-       "outstanding": 166027,
+       "outstanding": 579,
        "remainder": [
         {
-         "n": 166027,
+         "n": 579,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.7849940077717384,
+          0.199450409771569,
+          0.015555582456692533,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -6719,19 +6742,26 @@
       {
        "name": "Stark",
        "votes": [
-        0,
-        0,
-        0,
+        30397,
+        20226,
+        1398,
         0,
         0,
         0
        ],
-       "outstanding": 52490,
+       "outstanding": 100,
        "remainder": [
         {
-         "n": 52490,
+         "n": 100,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.5843217162299841,
+          0.38880452125103326,
+          0.026873762518982717,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -6990,13 +7020,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:35:33+00:00",
+     "updated": "2026-11-04T00:36:44+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 0,
+     "counted": 217235,
      "modes": null
     }
    },
@@ -9221,7 +9251,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T00:36:07+00:00",
+   "updated": "2026-11-04T00:37:14+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -12056,17 +12086,17 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:36:07+00:00",
+     "updated": "2026-11-04T00:37:14+00:00",
      "tier": "tossup",
-     "precincts_reporting": 40,
+     "precincts_reporting": 47,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1022741,
+     "counted": 1290518,
      "modes": {
-      "election_day": 2651,
-      "early": 974016,
-      "mail": 46074,
+      "election_day": 6218,
+      "early": 1228510,
+      "mail": 55790,
       "provisional": 0
      }
     },
@@ -14904,17 +14934,17 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:36:07+00:00",
+     "updated": "2026-11-04T00:37:14+00:00",
      "tier": "safe",
-     "precincts_reporting": 40,
+     "precincts_reporting": 47,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1023051,
+     "counted": 1290571,
      "modes": {
-      "election_day": 2638,
-      "early": 973870,
-      "mail": 46543,
+      "election_day": 6203,
+      "early": 1227976,
+      "mail": 56392,
       "provisional": 0
      }
     }

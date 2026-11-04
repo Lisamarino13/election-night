@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T00:29:07+00:00",
+ "updated": "2026-11-04T00:30:13+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -188,7 +188,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/383470/reports/detailxml.zip",
-   "updated": "2026-11-04T00:28:55+00:00",
+   "updated": "2026-11-04T00:29:56+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1158,7 +1158,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T00:28:55+00:00",
+     "updated": "2026-11-04T00:29:56+00:00",
      "tier": "tossup",
      "precincts_reporting": 1,
      "precincts_total": 2312,
@@ -9221,7 +9221,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T00:29:07+00:00",
+   "updated": "2026-11-04T00:30:13+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -9913,15 +9913,18 @@
       {
        "name": "Crisp County",
        "votes": [
-        0,
-        0
+        1667,
+        2594
        ],
-       "outstanding": 4271,
+       "outstanding": 10,
        "remainder": [
         {
-         "n": 4271,
+         "n": 10,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.391222717671908,
+          0.608777282328092
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -10080,8 +10083,8 @@
       {
        "name": "Echols County",
        "votes": [
-        79,
-        512
+        131,
+        814
        ],
        "outstanding": 3,
        "remainder": [
@@ -10094,7 +10097,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 1
       },
       {
@@ -10185,15 +10188,18 @@
       {
        "name": "Fayette County",
        "votes": [
-        0,
-        0
+        1258,
+        685
        ],
-       "outstanding": 46035,
+       "outstanding": 44092,
        "remainder": [
         {
-         "n": 46035,
+         "n": 44092,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.6474523932063819,
+          0.35254760679361813
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -10821,15 +10827,18 @@
       {
        "name": "Lowndes County",
        "votes": [
-        0,
-        0
+        11958,
+        11480
        ],
-       "outstanding": 23515,
+       "outstanding": 77,
        "remainder": [
         {
-         "n": 23515,
+         "n": 77,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.510197115794863,
+          0.48980288420513696
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -10982,10 +10991,10 @@
       {
        "name": "Monroe County",
        "votes": [
-        2859,
-        5493
+        3319,
+        6237
        ],
-       "outstanding": 23,
+       "outstanding": 7247,
        "remainder": [
         {
          "n": 23,
@@ -10994,9 +11003,17 @@
           0.3423132183908046,
           0.6576867816091954
          ]
+        },
+        {
+         "n": 7224,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.38205980066445183,
+          0.6179401993355482
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 2,
        "precincts_total": 14
       },
       {
@@ -11232,18 +11249,21 @@
       {
        "name": "Pulaski County",
        "votes": [
-        0,
-        0
+        869,
+        1916
        ],
-       "outstanding": 2384,
+       "outstanding": 18,
        "remainder": [
         {
-         "n": 2384,
+         "n": 18,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3169907016060862,
+          0.6830092983939138
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 1
       },
       {
@@ -11683,10 +11703,10 @@
       {
        "name": "Turner County",
        "votes": [
-        947,
-        1469
+        1186,
+        1578
        ],
-       "outstanding": 672,
+       "outstanding": 357,
        "remainder": [
         {
          "n": 20,
@@ -11697,15 +11717,15 @@
          ]
         },
         {
-         "n": 652,
+         "n": 337,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.1687116564417178,
-          0.8312883435582822
+          0.4362017804154303,
+          0.5637982195845698
          ]
         }
        ],
-       "precincts_reporting": 1,
+       "precincts_reporting": 2,
        "precincts_total": 3
       },
       {
@@ -11728,15 +11748,18 @@
       {
        "name": "Union County",
        "votes": [
-        0,
-        0
+        2035,
+        7479
        ],
-       "outstanding": 9586,
+       "outstanding": 72,
        "remainder": [
         {
-         "n": 9586,
+         "n": 72,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.21389531217153668,
+          0.7861046878284633
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11986,22 +12009,16 @@
       {
        "name": "Worth County",
        "votes": [
-        0,
-        0
+        1216,
+        2356
        ],
-       "outstanding": 3565,
-       "remainder": [
-        {
-         "n": 3565,
-         "basis": "measured",
-         "share": null
-        }
-       ],
+       "outstanding": null,
+       "remainder": null,
        "precincts_reporting": null,
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:29:07+00:00",
+     "updated": "2026-11-04T00:30:13+00:00",
      "tier": "tossup",
      "precincts_reporting": 33,
      "precincts_total": 159,
@@ -12705,15 +12722,18 @@
       {
        "name": "Crisp County",
        "votes": [
-        0,
-        0
+        1841,
+        2404
        ],
-       "outstanding": 4271,
+       "outstanding": 26,
        "remainder": [
         {
-         "n": 4271,
+         "n": 26,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.4336866902237927,
+          0.5663133097762073
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -12872,8 +12892,8 @@
       {
        "name": "Echols County",
        "votes": [
-        94,
-        496
+        158,
+        787
        ],
        "outstanding": 4,
        "remainder": [
@@ -12886,7 +12906,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 1
       },
       {
@@ -12977,15 +12997,18 @@
       {
        "name": "Fayette County",
        "votes": [
-        0,
-        0
+        1356,
+        604
        ],
-       "outstanding": 46035,
+       "outstanding": 44075,
        "remainder": [
         {
-         "n": 46035,
+         "n": 44075,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.6918367346938775,
+          0.3081632653061224
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -13613,15 +13636,18 @@
       {
        "name": "Lowndes County",
        "votes": [
-        0,
-        0
+        12670,
+        10760
        ],
-       "outstanding": 23515,
+       "outstanding": 85,
        "remainder": [
         {
-         "n": 23515,
+         "n": 85,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.5407597097737943,
+          0.4592402902262057
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -13774,10 +13800,10 @@
       {
        "name": "Monroe County",
        "votes": [
-        3160,
-        5171
+        3672,
+        5857
        ],
-       "outstanding": 44,
+       "outstanding": 7232,
        "remainder": [
         {
          "n": 44,
@@ -13786,9 +13812,17 @@
           0.37930620573760654,
           0.6206937942623935
          ]
+        },
+        {
+         "n": 7188,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.4273789649415693,
+          0.5726210350584308
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 2,
        "precincts_total": 14
       },
       {
@@ -14024,18 +14058,21 @@
       {
        "name": "Pulaski County",
        "votes": [
-        0,
-        0
+        959,
+        1819
        ],
-       "outstanding": 2384,
+       "outstanding": 20,
        "remainder": [
         {
-         "n": 2384,
+         "n": 20,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.35279187817258884,
+          0.6472081218274112
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 1
       },
       {
@@ -14475,10 +14512,10 @@
       {
        "name": "Turner County",
        "votes": [
-        1032,
-        1385
+        1276,
+        1485
        ],
-       "outstanding": 674,
+       "outstanding": 356,
        "remainder": [
         {
          "n": 20,
@@ -14489,15 +14526,15 @@
          ]
         },
         {
-         "n": 654,
+         "n": 336,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.21100917431192662,
-          0.7889908256880734
+          0.46646795827123694,
+          0.533532041728763
          ]
         }
        ],
-       "precincts_reporting": 1,
+       "precincts_reporting": 2,
        "precincts_total": 3
       },
       {
@@ -14520,15 +14557,18 @@
       {
        "name": "Union County",
        "votes": [
-        0,
-        0
+        2519,
+        6991
        ],
-       "outstanding": 9586,
+       "outstanding": 76,
        "remainder": [
         {
-         "n": 9586,
+         "n": 76,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.26487907465825444,
+          0.7351209253417456
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -14778,22 +14818,25 @@
       {
        "name": "Worth County",
        "votes": [
-        0,
-        0
+        1343,
+        2216
        ],
-       "outstanding": 3565,
+       "outstanding": 6,
        "remainder": [
         {
-         "n": 3565,
+         "n": 6,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.37735318909806126,
+          0.6226468109019387
+         ]
         }
        ],
        "precincts_reporting": null,
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:29:07+00:00",
+     "updated": "2026-11-04T00:30:13+00:00",
      "tier": "safe",
      "precincts_reporting": 33,
      "precincts_total": 159,

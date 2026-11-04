@@ -158,6 +158,46 @@ def candidates_for(state_totals_race):
 NOT_TRACKED = {("AK", "governor"), ("MN", "governor"), ("KS", "governor")}
 
 
+def refresh_eday_caps(data_dir):
+    """Keep eday-caps.json's early-vote figure in step with the early-vote files.
+
+    `ev` was written once by hand and never updated, while data/early-<ST>.json is
+    refreshed every cycle. By 01:25Z on election night six states had drifted - Michigan
+    by 454,434 ballots, South Carolina by 99,878, Ohio by 75,687 - and every figure the
+    board derives from `ev` was wrong with them: percent outstanding, left-to-count, and
+    the Election Day pool the need-to-win margin is divided by. Ohio's own outstanding
+    count had grown LARGER than the remaining ceiling computed off its stale `ev`, which
+    zeroed its Election Day pool entirely.
+
+    The early-vote file is the count; the cap file should follow it, not lead it.
+    """
+    caps_path = data_dir / "eday-caps.json"
+    if not caps_path.exists():
+        return
+    caps = json.loads(caps_path.read_text())
+    moved = []
+    for st, rec in caps.items():
+        ev_path = data_dir / f"early-{st}.json"
+        if not ev_path.exists():
+            continue
+        try:
+            actual = (json.loads(ev_path.read_text()).get("state_totals") or {}).get("total")
+        except Exception:
+            continue
+        if not isinstance(actual, int) or actual <= 0:
+            continue
+        if abs(actual - (rec.get("ev") or 0)) < 1:
+            continue
+        moved.append(f"{st} {rec.get('ev', 0):,}->{actual:,}")
+        rec["ev"] = actual
+        cap = rec.get("eday_cap") or 0
+        rec["turnout"] = actual + cap
+        rec["banked_pct"] = round(actual / (actual + cap) * 100, 1) if (actual + cap) else None
+    if moved:
+        caps_path.write_text(json.dumps(caps, indent=1) + "\n")
+        print("  eday-caps refreshed from the early-vote files: " + "; ".join(moved))
+
+
 def main():
     base_path = DATA / "results.json"
     board = json.loads(base_path.read_text()) if base_path.exists() else {"states": {}}
@@ -257,6 +297,7 @@ def main():
         ent = board["states"].get(st) or {}
         if (ent.get("races") or {}).pop(race, None) is not None:
             print(f"  {st}: dropped {race} - not a race this board follows")
+    refresh_eday_caps(base_path.parent)
     base_path.write_text(json.dumps(board, indent=1) + "\n")
     print(f"-> results.json ({len(touched)} state(s) with a live feed: {', '.join(touched) or 'none'})")
     return 0

@@ -548,6 +548,7 @@ function project(st){
 
 function margins(st, p){
   const k = st.candidates.length;
+  const swShare = p.swShare || null;   // same fallback project() uses, or the two disagree
   const ord = p.counted.map((v,i)=>[v,i]).sort((a,b)=>b[0]-a[0]);
   const [l1,i1] = ord[0], [l2,i2] = ord[1] || [0,1];
   const lead = l1 - l2;
@@ -558,7 +559,7 @@ function margins(st, p){
     if(!c.outstanding) continue;
     const v = c.votes||[], t = v.reduce((a,b)=>a+(b||0),0);
     const add = Array(k).fill(0);
-    spend(c, v, t, k, add);          // same per-mode rule the projection uses
+    spend(c, v, t, k, add, swShare);  // same per-mode rule AND fallback the projection uses
     net += add[i1] - add[i2];
   }
   const projLead = lead + net;
@@ -682,18 +683,16 @@ function cardFor(key, st, abbr, tier){
   // The one number that decides the race, on the face of every tile: what the trailing
   // side must win the UNCAST ballots by. The pool is Election Day where early is counted
   // first, and the absentee pile where Election Day is counted first.
-  const needFirst = st.countsFirst === "election-day";
-  // Normally the pool is the ballots not yet cast - Election Day where early is counted
-  // first. But a state whose feed carries no usable mode split can report an outstanding
-  // count larger than the whole remaining ceiling (Ohio: 3,058,425 outstanding against a
-  // 2,864,714 ceiling), which drives edLeft to zero and erases the figure. When the
-  // Election Day share cannot be isolated, use everything still to count and say so.
-  let needPool = needFirst ? p.outstanding : edLeft;
-  let needPoolName = needFirst ? "absentee still to count" : "Election Day";
-  if (!(needPool > 0) && leftAll > 0) { needPool = leftAll; needPoolName = "the vote still to count"; }
+  // Who is BEHIND is decided by votes actually counted, never by the projection. South
+  // Carolina had Andrews ahead on the count 229,750-217,436 while the projection flipped
+  // it, so the card called the leader the loser. And the pool is every ballot still to
+  // count - early still being tallied plus Election Day - because the deficit being
+  // erased is the one on the board now, not a projected one.
+  const needPool = leftAll;
+  const needPoolName = "the vote still to count";
   let needBig = "";
-  if (projUseful && needPool > 0 && p.proj.length > 1){
-    const ordN = p.proj.map((v,i)=>[v,i]).sort((a,b)=>b[0]-a[0]);
+  if (needPool > 0 && p.counted.length > 1){
+    const ordN = p.counted.map((v,i)=>[v,i]).sort((a,b)=>b[0]-a[0]);
     const gapN = ordN[0][0] - ordN[1][0];
     if (gapN > 0){
       const runI = ordN[1][1], runC = st.candidates[runI];
@@ -1929,7 +1928,7 @@ setInterval(load, 120000);
 // fix was live on the server while the board on screen still read "+1,704,584" against
 // candidate rows summing to 41,912. Poll this file's own build stamp and reload when it
 // changes. Bump BUILD whenever index.html changes.
-const BUILD = "1793755404";
+const BUILD = "1793755611";
 async function checkBuild(){
   try {
     const t = await fetch("index.html?cb=" + Date.now(), {cache: "no-store"}).then(r => r.text());

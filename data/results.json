@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T00:13:21+00:00",
+ "updated": "2026-11-04T00:16:48+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -188,7 +188,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/382659/reports/detailxml.zip",
-   "updated": "2026-11-04T00:13:08+00:00",
+   "updated": "2026-11-04T00:16:37+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1135,7 +1135,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T00:13:08+00:00",
+     "updated": "2026-11-04T00:16:37+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 2312,
@@ -9198,7 +9198,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T00:13:21+00:00",
+   "updated": "2026-11-04T00:16:48+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -9419,15 +9419,18 @@
       {
        "name": "Brantley County",
        "votes": [
-        0,
-        0
+        350,
+        2614
        ],
-       "outstanding": 2971,
+       "outstanding": 7,
        "remainder": [
         {
-         "n": 2971,
+         "n": 7,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.11808367071524967,
+          0.8819163292847504
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -9960,15 +9963,18 @@
       {
        "name": "Dodge County",
        "votes": [
-        0,
-        0
+        1202,
+        2510
        ],
-       "outstanding": 3729,
+       "outstanding": 17,
        "remainder": [
         {
-         "n": 3729,
+         "n": 17,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3238146551724138,
+          0.6761853448275862
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -10045,15 +10051,18 @@
       {
        "name": "Echols County",
        "votes": [
-        0,
-        0
+        1,
+        5
        ],
-       "outstanding": 594,
+       "outstanding": 588,
        "remainder": [
         {
-         "n": 594,
+         "n": 588,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.16666666666666666,
+          0.8333333333333334
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -10468,15 +10477,18 @@
       {
        "name": "Heard County",
        "votes": [
-        0,
-        0
+        420,
+        1682
        ],
-       "outstanding": 2103,
+       "outstanding": 1,
        "remainder": [
         {
-         "n": 2103,
+         "n": 1,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.19980970504281637,
+          0.8001902949571836
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -10539,15 +10551,18 @@
       {
        "name": "Jackson County",
        "votes": [
-        0,
-        0
+        7079,
+        17713
        ],
-       "outstanding": 25026,
+       "outstanding": 234,
        "remainder": [
         {
-         "n": 25026,
+         "n": 234,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.28553565666343983,
+          0.7144643433365602
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -10703,15 +10718,18 @@
       {
        "name": "Lee County",
        "votes": [
-        0,
-        0
+        2790,
+        4636
        ],
-       "outstanding": 7466,
+       "outstanding": 40,
        "remainder": [
         {
-         "n": 7466,
+         "n": 40,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.37570697549151627,
+          0.6242930245084837
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11079,15 +11097,18 @@
       {
        "name": "Peach County",
        "votes": [
-        0,
-        0
+        4113,
+        3765
        ],
-       "outstanding": 7928,
+       "outstanding": 50,
        "remainder": [
         {
-         "n": 7928,
+         "n": 50,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.5220868240670221,
+          0.47791317593297794
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11269,15 +11290,18 @@
       {
        "name": "Rockdale County",
        "votes": [
-        0,
-        0
+        24005,
+        4927
        ],
-       "outstanding": 29053,
+       "outstanding": 121,
        "remainder": [
         {
-         "n": 29053,
+         "n": 121,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.8297041338310521,
+          0.17029586616894787
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11575,18 +11599,21 @@
       {
        "name": "Treutlen County",
        "votes": [
-        0,
-        0
+        500,
+        925
        ],
-       "outstanding": 1437,
+       "outstanding": 12,
        "remainder": [
         {
-         "n": 1437,
+         "n": 12,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3508771929824561,
+          0.6491228070175439
+         ]
         }
        ],
-       "precincts_reporting": 2,
+       "precincts_reporting": null,
        "precincts_total": 2
       },
       {
@@ -11916,17 +11943,17 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:13:21+00:00",
+     "updated": "2026-11-04T00:16:48+00:00",
      "tier": "tossup",
-     "precincts_reporting": 13,
+     "precincts_reporting": 22,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 715588,
+     "counted": 794825,
      "modes": {
       "election_day": 0,
-      "early": 685761,
-      "mail": 29827,
+      "early": 761564,
+      "mail": 33261,
       "provisional": 0
      }
     },
@@ -12149,15 +12176,18 @@
       {
        "name": "Brantley County",
        "votes": [
-        0,
-        0
+        456,
+        2499
        ],
-       "outstanding": 2971,
+       "outstanding": 16,
        "remainder": [
         {
-         "n": 2971,
+         "n": 16,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.15431472081218275,
+          0.8456852791878172
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -12690,15 +12720,18 @@
       {
        "name": "Dodge County",
        "votes": [
-        0,
-        0
+        1330,
+        2368
        ],
-       "outstanding": 3729,
+       "outstanding": 31,
        "remainder": [
         {
-         "n": 3729,
+         "n": 31,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.35965386695511087,
+          0.6403461330448891
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -12775,15 +12808,18 @@
       {
        "name": "Echols County",
        "votes": [
-        0,
-        0
+        1,
+        5
        ],
-       "outstanding": 594,
+       "outstanding": 588,
        "remainder": [
         {
-         "n": 594,
+         "n": 588,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.16666666666666666,
+          0.8333333333333334
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -13198,15 +13234,18 @@
       {
        "name": "Heard County",
        "votes": [
-        0,
-        0
+        514,
+        1574
        ],
-       "outstanding": 2103,
+       "outstanding": 15,
        "remainder": [
         {
-         "n": 2103,
+         "n": 15,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.24616858237547892,
+          0.7538314176245211
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -13269,15 +13308,18 @@
       {
        "name": "Jackson County",
        "votes": [
-        0,
-        0
+        8294,
+        16435
        ],
-       "outstanding": 25026,
+       "outstanding": 297,
        "remainder": [
         {
-         "n": 25026,
+         "n": 297,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.33539568927170527,
+          0.6646043107282947
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -13433,15 +13475,18 @@
       {
        "name": "Lee County",
        "votes": [
-        0,
-        0
+        3036,
+        4398
        ],
-       "outstanding": 7466,
+       "outstanding": 32,
        "remainder": [
         {
-         "n": 7466,
+         "n": 32,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.40839386602098465,
+          0.5916061339790153
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -13809,15 +13854,18 @@
       {
        "name": "Peach County",
        "votes": [
-        0,
-        0
+        4404,
+        3463
        ],
-       "outstanding": 7928,
+       "outstanding": 61,
        "remainder": [
         {
-         "n": 7928,
+         "n": 61,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.5598067878479726,
+          0.44019321215202745
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -13999,15 +14047,18 @@
       {
        "name": "Rockdale County",
        "votes": [
-        0,
-        0
+        24677,
+        4243
        ],
-       "outstanding": 29053,
+       "outstanding": 133,
        "remainder": [
         {
-         "n": 29053,
+         "n": 133,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.8532849239280774,
+          0.14671507607192255
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -14305,18 +14356,21 @@
       {
        "name": "Treutlen County",
        "votes": [
-        0,
-        0
+        536,
+        883
        ],
-       "outstanding": 1437,
+       "outstanding": 18,
        "remainder": [
         {
-         "n": 1437,
+         "n": 18,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3777307963354475,
+          0.6222692036645525
+         ]
         }
        ],
-       "precincts_reporting": 2,
+       "precincts_reporting": null,
        "precincts_total": 2
       },
       {
@@ -14646,17 +14700,17 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:13:21+00:00",
+     "updated": "2026-11-04T00:16:48+00:00",
      "tier": "safe",
-     "precincts_reporting": 13,
+     "precincts_reporting": 22,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 716360,
+     "counted": 795476,
      "modes": {
       "election_day": 0,
-      "early": 686167,
-      "mail": 30193,
+      "early": 761826,
+      "mail": 33650,
       "provisional": 0
      }
     }

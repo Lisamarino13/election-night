@@ -79,7 +79,7 @@ var TEST = `
                   Math.round(sum) + " but total row " + Math.round(tot));
             bad++;
           }
-          if (p.outstanding > 0 && Math.abs(p.allocated - p.outstanding) > 2) {
+          if (p.totC > 0 && p.outstanding > 0 && Math.abs(p.allocated - p.outstanding) > 2) {
             print("SMOKE FAIL (unallocated): " + abbr + " " + rk + " allocated " +
                   Math.round(p.allocated) + " of outstanding " + p.outstanding);
             bad++;

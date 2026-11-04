@@ -595,7 +595,14 @@ function cardFor(key, st, abbr, tier){
   // "Projected" it reads as a forecast of the finish. Georgia at 00:27Z: 1,564,307 of
   // 1,619,849 outstanding ballots sat in counties with no counted vote, so nothing
   // could be projected for them. Below half allocated, the column is withheld.
-  const projUseful = true;   // every outstanding ballot is allocated somewhere now
+  // Unreported counties are projected at the STATEWIDE COUNTED SPLIT, which is only
+  // meaningful once the counted vote is a representative slice of the state. Ohio at
+  // 00:42Z had 250,120 counted - all of it Franklin, Stark and Mahoning - and projecting
+  // the other 1.5M ballots at Franklin's D+72 gave "Brown 1,246,585 to Husted 460,901".
+  // Ohio is not going D+73. Below a fifth of the expected vote the projection is the
+  // first counties' politics, not the state's, so it is withheld and the card says why.
+  const PROJ_MIN_IN = 0.20;
+  const projUseful = p.pctIn != null && p.pctIn >= PROJ_MIN_IN;
   const rows = st.candidates.map((c,i)=>{
     const win = i===winner && p.totC>0;
     return `<tr class="${win?"win":""}">
@@ -618,11 +625,18 @@ function cardFor(key, st, abbr, tier){
     ? st.candidates.map((c,i)=>`${c.name.split(" (")[0]} ${pct(p.swShare[i])}`).slice(0,2).join(" / ")
     : "";
   const unalloc = p.fallback > 0
-    ? `<div class="warn"><b>&#9873;</b><span><b>${n(p.fallback)}</b> of ${n(p.outstanding)} outstanding `
-      + `ballots (<b>${pct(p.fallback/p.outstanding)}</b>) sit in ${p.fallbackCty} ${unitName} that have `
-      + `reported nothing, so they are projected at the <b>statewide counted split</b>`
-      + (swTxt ? ` (${swTxt})` : "") + ` rather than their own. Early in the night that split is `
-      + `only whichever ${unitName} reported first, so these may break very differently.</span></div>` : "";
+    ? (projUseful
+        ? `<div class="warn"><b>&#9873;</b><span><b>${n(p.fallback)}</b> of ${n(p.outstanding)} outstanding `
+          + `ballots (<b>${pct(p.fallback/p.outstanding)}</b>) sit in ${p.fallbackCty} ${unitName} that have `
+          + `reported nothing, so they are projected at the <b>statewide counted split</b>`
+          + (swTxt ? ` (${swTxt})` : "") + ` rather than their own — those ${unitName} may break `
+          + `differently.</span></div>`
+        : `<div class="warn"><b>&#9873;</b><span><b>No projection yet &mdash; only `
+          + `${pct(p.pctIn||0)} of the expected vote is counted</b>, and it is `
+          + `${p.reporting} ${unitName} out of ${st.unitsExpected||p.counties}. Projecting the other `
+          + `${n(p.fallback)} ballots at those ${unitName}&rsquo; split would show their politics, not `
+          + `the state&rsquo;s. The projected column returns at ${pct(PROJ_MIN_IN)} counted.</span></div>`)
+    : "";
 
   const ledger = p.totC>0 ? `<table class="cand">
       <thead><tr><th></th><th>Counted</th><th>Of outstanding</th><th>Projected</th></tr></thead>
@@ -1801,7 +1815,7 @@ setInterval(load, 120000);
 // fix was live on the server while the board on screen still read "+1,704,584" against
 // candidate rows summing to 41,912. Poll this file's own build stamp and reload when it
 // changes. Bump BUILD whenever index.html changes.
-const BUILD = "1793752677";
+const BUILD = "1793752950";
 async function checkBuild(){
   try {
     const t = await fetch("index.html?cb=" + Date.now(), {cache: "no-store"}).then(r => r.text());

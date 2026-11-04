@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T01:39:35+00:00",
+ "updated": "2026-11-04T01:40:49+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -4006,7 +4006,7 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T01:39:02+00:00",
+     "updated": "2026-11-04T01:40:13+00:00",
      "tier": "safe",
      "precincts_reporting": 1439,
      "precincts_total": 2626,
@@ -4022,7 +4022,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T01:39:02+00:00",
+   "updated": "2026-11-04T01:40:13+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -4033,7 +4033,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T01:39:03+00:00",
+   "updated": "2026-11-04T01:40:13+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -4377,7 +4377,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 3,
        "precincts_total": 23
       },
       {
@@ -4437,7 +4437,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 4,
        "precincts_total": 78
       },
       {
@@ -4546,10 +4546,10 @@
       {
        "name": "Coshocton",
        "votes": [
-        2150,
-        3398,
-        158,
-        112,
+        2451,
+        4607,
+        265,
+        172,
         0,
         0,
         0
@@ -4570,7 +4570,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 5,
        "precincts_total": 23
       },
       {
@@ -4606,10 +4606,10 @@
       {
        "name": "Cuyahoga",
        "votes": [
-        117171,
-        32467,
-        1737,
-        2011,
+        120991,
+        32848,
+        1793,
+        2116,
         0,
         0,
         0
@@ -5505,7 +5505,7 @@
         0,
         0
        ],
-       "outstanding": 17,
+       "outstanding": 17329,
        "remainder": [
         {
          "n": 17,
@@ -5519,9 +5519,22 @@
           0.0,
           0.0
          ]
+        },
+        {
+         "n": 17312,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.3039847508396115,
+          0.6433693382953617,
+          0.03240446582554234,
+          0.020241445039484433,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 14,
        "precincts_total": 36
       },
       {
@@ -6016,10 +6029,10 @@
       {
        "name": "Ottawa",
        "votes": [
-        4046,
-        3821,
-        159,
-        97,
+        4858,
+        5337,
+        269,
+        161,
         0,
         0,
         0
@@ -6089,10 +6102,10 @@
       {
        "name": "Perry",
        "votes": [
-        1936,
-        2959,
-        146,
-        99,
+        2254,
+        3683,
+        209,
+        137,
         0,
         0,
         0
@@ -6113,7 +6126,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 7,
        "precincts_total": 33
       },
       {
@@ -6368,15 +6381,15 @@
       {
        "name": "Sandusky",
        "votes": [
-        6661,
-        7715,
-        605,
-        377,
+        9034,
+        11982,
+        964,
+        597,
         0,
         0,
         0
        ],
-       "outstanding": 10854,
+       "outstanding": 13,
        "remainder": [
         {
          "n": 13,
@@ -6390,22 +6403,9 @@
           0.0,
           0.0
          ]
-        },
-        {
-         "n": 10841,
-         "basis": "scaled from precincts reporting",
-         "share": [
-          0.43371532751660374,
-          0.5023440552155228,
-          0.03939315014975908,
-          0.024547467118114338,
-          0.0,
-          0.0,
-          0.0
-         ]
         }
        ],
-       "precincts_reporting": 34,
+       "precincts_reporting": 58,
        "precincts_total": 58
       },
       {
@@ -6690,15 +6690,15 @@
       {
        "name": "Van Wert",
        "votes": [
-        1629,
-        3550,
-        181,
-        105,
+        2174,
+        5608,
+        368,
+        226,
         0,
         0,
         0
        ],
-       "outstanding": 2489,
+       "outstanding": 3812,
        "remainder": [
         {
          "n": 5,
@@ -6714,13 +6714,13 @@
          ]
         },
         {
-         "n": 2484,
+         "n": 3807,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.2980786825251601,
-          0.6495882891125343,
-          0.03311985361390668,
-          0.0192131747483989,
+          0.2595510983763133,
+          0.6695319961795606,
+          0.04393505253104107,
+          0.026981852913085004,
           0.0,
           0.0,
           0.0
@@ -6733,10 +6733,10 @@
       {
        "name": "Vinton",
        "votes": [
-        641,
-        1093,
-        69,
-        32,
+        1096,
+        2526,
+        199,
+        82,
         0,
         0,
         0
@@ -6940,13 +6940,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T01:39:03+00:00",
+     "updated": "2026-11-04T01:40:13+00:00",
      "tier": "tossup",
-     "precincts_reporting": 538,
+     "precincts_reporting": 595,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1745162,
+     "counted": 1767044,
      "modes": null
     },
     "governor": {
@@ -7266,7 +7266,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 3,
        "precincts_total": 23
       },
       {
@@ -7322,7 +7322,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 4,
        "precincts_total": 78
       },
       {
@@ -7424,9 +7424,9 @@
       {
        "name": "Coshocton",
        "votes": [
-        2296,
-        3291,
-        208,
+        2664,
+        4502,
+        306,
         0,
         0,
         0
@@ -7446,7 +7446,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 5,
        "precincts_total": 23
       },
       {
@@ -7480,9 +7480,9 @@
       {
        "name": "Cuyahoga",
        "votes": [
-        119235,
-        31188,
-        2815,
+        123182,
+        31561,
+        2873,
         0,
         0,
         0
@@ -8318,7 +8318,7 @@
         0,
         0
        ],
-       "outstanding": 17,
+       "outstanding": 17290,
        "remainder": [
         {
          "n": 17,
@@ -8331,9 +8331,21 @@
           0.0,
           0.0
          ]
+        },
+        {
+         "n": 17273,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.32086972343522563,
+          0.6381914119359534,
+          0.04093886462882096,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 14,
        "precincts_total": 36
       },
       {
@@ -8795,9 +8807,9 @@
       {
        "name": "Ottawa",
        "votes": [
-        4179,
-        3701,
-        222,
+        5070,
+        5154,
+        371,
         0,
         0,
         0
@@ -8863,9 +8875,9 @@
       {
        "name": "Perry",
        "votes": [
-        2046,
-        2895,
-        187,
+        2394,
+        3623,
+        255,
         0,
         0,
         0
@@ -8885,7 +8897,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 7,
        "precincts_total": 33
       },
       {
@@ -9123,14 +9135,14 @@
       {
        "name": "Sandusky",
        "votes": [
-        6962,
-        7663,
-        724,
+        9518,
+        11862,
+        1191,
         0,
         0,
         0
        ],
-       "outstanding": 10848,
+       "outstanding": 13,
        "remainder": [
         {
          "n": 13,
@@ -9143,21 +9155,9 @@
           0.0,
           0.0
          ]
-        },
-        {
-         "n": 10835,
-         "basis": "scaled from precincts reporting",
-         "share": [
-          0.453580037787478,
-          0.49925076552218384,
-          0.04716919669033813,
-          0.0,
-          0.0,
-          0.0
-         ]
         }
        ],
-       "precincts_reporting": 34,
+       "precincts_reporting": 58,
        "precincts_total": 58
       },
       {
@@ -9423,14 +9423,14 @@
       {
        "name": "Van Wert",
        "votes": [
-        1700,
-        3528,
-        229,
+        2315,
+        5637,
+        417,
         0,
         0,
         0
        ],
-       "outstanding": 2485,
+       "outstanding": 3809,
        "remainder": [
         {
          "n": 5,
@@ -9445,12 +9445,12 @@
          ]
         },
         {
-         "n": 2480,
+         "n": 3804,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.3115264797507788,
-          0.6465090709180868,
-          0.04196444933113432,
+          0.27661608316405784,
+          0.6735571752897598,
+          0.049826741546182336,
           0.0,
           0.0,
           0.0
@@ -9463,9 +9463,9 @@
       {
        "name": "Vinton",
        "votes": [
-        667,
-        1080,
-        71,
+        1144,
+        2564,
+        184,
         0,
         0,
         0
@@ -9656,13 +9656,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T01:39:03+00:00",
+     "updated": "2026-11-04T01:40:13+00:00",
      "tier": "tossup",
-     "precincts_reporting": 538,
+     "precincts_reporting": 595,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1741204,
+     "counted": 1763104,
      "modes": null
     }
    },
@@ -9716,7 +9716,7 @@
    "partyReg": true,
    "unit": "county",
    "source": "https://flelectionfiles.floridados.gov/enightfilespublic/20261103_ElecResultsFL.txt",
-   "updated": "2026-11-04T01:39:03+00:00",
+   "updated": "2026-11-04T01:40:14+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -10539,7 +10539,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T01:39:03+00:00",
+     "updated": "2026-11-04T01:40:14+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -11866,7 +11866,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T01:39:03+00:00",
+     "updated": "2026-11-04T01:40:14+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -11887,7 +11887,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T01:39:35+00:00",
+   "updated": "2026-11-04T01:40:49+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -15042,7 +15042,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T01:39:35+00:00",
+     "updated": "2026-11-04T01:40:49+00:00",
      "tier": "tossup",
      "precincts_reporting": 123,
      "precincts_total": 159,
@@ -18227,7 +18227,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T01:39:35+00:00",
+     "updated": "2026-11-04T01:40:49+00:00",
      "tier": "safe",
      "precincts_reporting": 123,
      "precincts_total": 159,

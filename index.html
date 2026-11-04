@@ -419,6 +419,14 @@ const EVORDER = {
   "election-day":{when:"LAST", note:"counted vote is Election Day; what's left is absentee"},
   mixed:      {when:"Mixed",  note:"no consistent order across jurisdictions"}
 };
+// esc() was never defined in this file. A comment below claims it "lives in texas.js",
+// but texas.js, compare.js and georgia.js each define their own inside an IIFE, so none
+// is global - confirmed on the live page: typeof esc === "undefined". Every state carries
+// a feed note and the detail panel escapes it, so EXPANDING any card threw
+// ReferenceError and the detail never rendered. Found by tools/smoke.js.
+const esc = s => String(s == null ? "" : s)
+  .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+  .replace(/"/g, "&quot;");
 const FIRST = {early:"early vote",absentee:"absentee",advance:"advance vote","election-day":"Election Day",mixed:"mixed"};
 const PARTYREG = ["FL","IA","NE","ME","AK"];
 const SKELETON = {"updated":null,"note":"Written by the per-state collectors. Each state's cron replaces its own block.","states":{"MI":{"name":"Michigan","abbr":"MI","countsFirst":"mixed","partyReg":false,"unit":"county","source":null,"updated":null,"unitsExpected":83,"races":{"senate":{"candidates":[{"name":"Mike Rogers","party":"R"},{"name":"Abdul El-Sayed","party":"D"}],"counties":[],"updated":null,"tier":"tossup"}}},"MN":{"name":"Minnesota","abbr":"MN","countsFirst":"mixed","partyReg":false,"unit":"county","source":null,"updated":null,"unitsExpected":87,"races":{"senate":{"candidates":[{"name":"Michele Tafoya","party":"R"},{"name":"Peggy Flanagan","party":"D"},{"name":"Marisa Simonetti","party":"O"},{"name":"Rebecca Whiting","party":"O"},{"name":"WRITE-IN","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}}},"ME":{"name":"Maine","abbr":"ME","countsFirst":"mixed","partyReg":true,"unit":"town","source":null,"updated":null,"unitsExpected":16,"unitsNote":"16 counties, ~500 municipalities reporting","races":{"senate":{"candidates":[{"name":"Susan Collins","party":"R"},{"name":"Troy Jackson","party":"D"}],"counties":[],"updated":null,"tier":"tossup"}}},"NE":{"name":"Nebraska","abbr":"NE","countsFirst":"early","partyReg":true,"unit":"county","source":"electionresults.nebraska.gov","updated":null,"unitsExpected":93,"races":{"senate":{"candidates":[{"name":"Pete Ricketts","party":"REP"},{"name":"Dan Osborn","party":"PET"},{"name":"Other","party":"O"}],"counties":[],"updated":null,"tier":"watch"}}},"AK":{"name":"Alaska","abbr":"AK","countsFirst":"election-day","partyReg":true,"unit":"district","source":null,"updated":null,"unitsExpected":40,"races":{"senate":{"candidates":[{"name":"Heikes, Gerald L.","party":"R"},{"name":"Sullivan, Dan S.","party":"R"},{"name":"Peltola, Mary","party":"D"},{"name":"Sullivan, Daniel J. Jr.","party":"O"}],"counties":[],"updated":null,"tier":"watch"}}},"SC":{"name":"South Carolina","abbr":"SC","countsFirst":"election-day","partyReg":false,"unit":"county","source":null,"updated":null,"unitsExpected":46,"races":{"senate":{"candidates":[{"name":"Darline Graham","party":"R"},{"name":"Annie Andrews","party":"D"}],"counties":[],"updated":null,"tier":"tossup"}}},"NC":{"name":"North Carolina","abbr":"NC","countsFirst":"early","partyReg":true,"unit":"county","source":"https://s3.amazonaws.com/dl.ncsbe.gov/ENRS/2026_11_03/results_pct_20261103.zip","unitsExpected":100,"updated":"2026-10-25T22:48:30+00:00","races":{"senate":{"candidates":[{"name":"Michael Dublin","party":"O"},{"name":"Michael Whatley","party":"R"},{"name":"Roy Cooper","party":"D"},{"name":"Shannon W. Bray","party":"O"}],"counties":[],"updated":null,"tier":"safe"}}},"OH":{"name":"Ohio","abbr":"OH","countsFirst":"absentee","partyReg":false,"unit":"county","source":"https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob","updated":"2026-10-25T22:48:31+00:00","unitsExpected":88,"races":{"senate":{"candidates":[{"name":"Sherrod Brown","party":"D"},{"name":"Stephen Faris","party":"O"},{"name":"Anthony Holliman","party":"O"},{"name":"Jon Husted","party":"R"},{"name":"Greg Levy","party":"O"},{"name":"William Redpath","party":"O"},{"name":"Timothy Telymonde","party":"O"}],"counties":[],"updated":null,"tier":"tossup"},"governor":{"candidates":[{"name":"Amy Acton","party":"D"},{"name":"Timothy Grady","party":"O"},{"name":"Heather Hill","party":"O"},{"name":"Don Kissick","party":"O"},{"name":"Vivek Ramaswamy","party":"R"},{"name":"Renea Turner","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}}},"IA":{"name":"Iowa","abbr":"IA","countsFirst":"absentee","partyReg":true,"unit":"county","source":null,"updated":null,"unitsExpected":99,"races":{"senate":{"candidates":[{"name":"Ashley Hinson","party":"R"},{"name":"Josh Turek","party":"D"},{"name":"Thomas Laehn","party":"O"},{"name":"Write-in","party":"O"}],"counties":[],"updated":null,"tier":"watch"}}},"FL":{"name":"Florida","abbr":"FL","countsFirst":"early","partyReg":true,"unit":"county","source":"https://flelectionfiles.floridados.gov/enightfilespublic/20261103_ElecResultsFL.txt","updated":"2026-10-25T22:48:31+00:00","unitsExpected":67,"races":{"senate":{"candidates":[{"name":"Ashley Moody","party":"R"},{"name":"Angie Nixon","party":"D"},{"name":"Neil J. Gillespie","party":"O"}],"counties":[],"updated":null,"tier":"safe"},"governor":{"candidates":[{"name":"Donalds / Avila","party":"R"},{"name":"Jolly / Graham","party":"D"},{"name":"Jewett / Skelly","party":"O"},{"name":"Burkett / Coto","party":"O"},{"name":"Russo / Rodriguez","party":"O"},{"name":"Dimanche / Rojas","party":"O"},{"name":"Abrams / Van Vactor","party":"O"},{"name":"Datto / Santana","party":"O"},{"name":"Anderson / Nokovich","party":"O"},{"name":"Morris / Alaways","party":"O"}],"counties":[],"updated":null,"tier":"tossup"}}},"GA":{"name":"Georgia","abbr":"GA","countsFirst":"early","partyReg":false,"unit":"county","source":"clarity","updated":null,"unitsExpected":159,"races":{"governor":{"candidates":[{"name":"Rick Jackson (Rep)","party":"R"},{"name":"Keisha Lance Bottoms (Dem)","party":"D"}],"counties":[],"updated":null,"tier":"tossup"},"senate":{"candidates":[{"name":"Mike Collins (Rep)","party":"R"},{"name":"Jon Ossoff (I) (Dem)","party":"D"}],"counties":[],"updated":null,"tier":"safe"}}},"TX":{"name":"Texas","abbr":"TX","countsFirst":"early","partyReg":false,"unit":"county","source":null,"updated":null,"unitsExpected":254,"races":{"senate":{"candidates":[{"name":"Ken Paxton","party":"R"},{"name":"James Talarico","party":"D"},{"name":"Ted Brown","party":"L"}],"counties":[],"updated":null,"tier":"watch"},"governor":{"candidates":[{"name":"Greg Abbott","party":"R"},{"name":"Gina Hinojosa","party":"D"},{"name":"Pat Dixon","party":"L"}],"counties":[],"updated":null,"tier":"tossup"}}},"KS":{"name":"Kansas","abbr":"KS","countsFirst":"advance","partyReg":true,"unit":"county","source":null,"updated":null,"unitsExpected":105,"races":{"senate":{"candidates":[{"name":"Roger Marshall","party":"R"},{"name":"Adam Hamilton","party":"D"},{"name":"David C Graham","party":"O"}],"counties":[],"updated":null,"tier":"watch"}}},"MS":{"name":"Mississippi","abbr":"MS","countsFirst":"election-day","partyReg":false,"unit":"county","source":null,"updated":null,"unitsExpected":82,"races":{"senate":{"candidates":[{"name":"Cindy Hyde-Smith","party":"R"},{"name":"Scott Colom","party":"D"},{"name":"Ty Pinkins","party":"I"}],"counties":[],"updated":null,"tier":"watch"}}},"LA":{"name":"Louisiana","abbr":"LA","countsFirst":"early","partyReg":true,"unit":"parish","source":null,"updated":null,"unitsExpected":64,"unitsNote":"64 parishes. First Senate race under the 2024 party-primary law: plurality wins, no December runoff.","races":{"senate":{"candidates":[{"name":"Julia Letlow","party":"R"},{"name":"Jamie Davis","party":"D"}],"counties":[],"updated":null,"tier":"watch"}}}}};
@@ -468,45 +476,60 @@ const col = p => /^(R|REP)$/i.test(p) ? "var(--r)" : /^(D|DEM|PET)$/i.test(p) ? 
 // Georgia at 00:10Z: 13 of 159 counties counted, so 1,825,517 of 1,862,765 outstanding
 // ballots had no split to spend at. The table showed "+1,862,765" against candidate rows
 // summing to +37,248, and a projected total no candidate column could reach.
-function spend(c, v, tot, k, out){
+// A county that has reported nothing has no share of its own to spend its remainder at.
+// Georgia tonight: 112 of 159 counties, holding 1,242,942 ballots, each carrying a
+// remainder of {n: 3791, share: null}. Spending those at ZERO put them in the state
+// total and in no candidate column - the "+1,704,584 against candidate rows summing to
+// 41,912" the board was showing. They are now spent at the STATEWIDE counted split, and
+// the card says so, because early in the night that split is only whichever counties
+// reported first.
+function spend(c, v, tot, k, out, swShare){
   const parts = c.remainder;
+  const share = tot > 0 ? v.map(x => (x||0)/tot) : swShare;
+  if (!share) return {spent: 0, fellBack: false};   // nothing counted anywhere yet
+  const fellBack = !(tot > 0);
   let spent = 0;
   if (Array.isArray(parts) && parts.length){
     for (const part of parts){
       const n = part.n || 0; if (!n) continue;
-      const sh = (Array.isArray(part.share) && part.share.length === k) ? part.share : null;
-      if (!sh && !(tot>0)) continue;            // nothing to spend it at
-      for (let i=0;i<k;i++)
-        out[i] += n * (sh ? (sh[i]||0) : (v[i]||0)/tot);
+      const sh = (Array.isArray(part.share) && part.share.length === k) ? part.share : share;
+      for (let i=0;i<k;i++) out[i] += n * (sh[i]||0);
       spent += n;
     }
-    return spent;
+    return {spent, fellBack};
   }
   const J = (c.outstanding==null) ? 0 : c.outstanding;   // one undifferentiated pile
-  if (!(tot>0) || !J) return 0;
-  for (let i=0;i<k;i++) out[i] += (v[i]||0)/tot*J;
-  return J;
+  if (!J) return {spent: 0, fellBack: false};
+  for (let i=0;i<k;i++) out[i] += share[i]*J;
+  return {spent: J, fellBack};
 }
 
 function project(st){
   const k = st.candidates.length;
-  const counted = Array(k).fill(0), proj = Array(k).fill(0);
+  const counted = Array(k).fill(0);
   let outstanding = 0, known = 0, unknownCty = 0;
-  let allocated = 0, unallocated = 0, unallocCty = 0, reporting = 0;
+  let reporting = 0;
   for (const c of (st.counties||[])){
     const v = c.votes||[]; const tot = v.reduce((a,b)=>a+(b||0),0);
     for (let i=0;i<k;i++) counted[i] += v[i]||0;
     if (tot > 0) reporting++;
     const J = (c.outstanding==null) ? 0 : c.outstanding;
     if (c.outstanding==null) unknownCty++; else { outstanding += J; known++; }
-    for (let i=0;i<k;i++) proj[i] += v[i]||0;
-    const spent = spend(c, v, tot, k, proj);
-    allocated += spent;
-    if (J > spent){ unallocated += (J - spent); if (tot <= 0) unallocCty++; }
   }
   const totC = counted.reduce((a,b)=>a+b,0);
+  const swShare = totC > 0 ? counted.map(x => x/totC) : null;
+  const proj = counted.slice();
+  let allocated = 0, unallocated = 0, unallocCty = 0, fallback = 0, fallbackCty = 0;
+  for (const c of (st.counties||[])){
+    const v = c.votes||[]; const tot = v.reduce((a,b)=>a+(b||0),0);
+    const r = spend(c, v, tot, k, proj, swShare);
+    allocated += r.spent;
+    if (r.fellBack && r.spent > 0){ fallback += r.spent; fallbackCty++; }
+    const J = (c.outstanding==null) ? 0 : c.outstanding;
+    if (J > r.spent){ unallocated += (J - r.spent); if (tot <= 0) unallocCty++; }
+  }
   return {counted, proj, totC, outstanding, known, unknownCty,
-          allocated, unallocated, unallocCty, reporting,
+          allocated, unallocated, unallocCty, reporting, fallback, fallbackCty, swShare,
           pctIn: (totC+outstanding)>0 ? totC/(totC+outstanding) : null,
           counties:(st.counties||[]).length};
 }
@@ -572,8 +595,7 @@ function cardFor(key, st, abbr, tier){
   // "Projected" it reads as a forecast of the finish. Georgia at 00:27Z: 1,564,307 of
   // 1,619,849 outstanding ballots sat in counties with no counted vote, so nothing
   // could be projected for them. Below half allocated, the column is withheld.
-  const allocShare = p.outstanding > 0 ? p.allocated / p.outstanding : 1;
-  const projUseful = allocShare >= 0.5;
+  const projUseful = true;   // every outstanding ballot is allocated somewhere now
   const rows = st.candidates.map((c,i)=>{
     const win = i===winner && p.totC>0;
     return `<tr class="${win?"win":""}">
@@ -592,13 +614,15 @@ function cardFor(key, st, abbr, tier){
       <td class="num outs">${p.allocated>0?"+"+n(p.allocated):"\u2014"}</td>
       <td class="num">${projUseful?n(p.totC+p.allocated):"\u2014"}</td></tr></tfoot>` : "";
   const unitName = st.unit==="town"?"towns":st.unit==="district"?"districts":"counties";
-  const unalloc = p.unallocated > 0
-    ? `<div class="warn"><b>&#9873;</b><span><b>No projection yet.</b> <b>${n(p.unallocated)}</b> of `
-      + `${n(p.outstanding)} outstanding ballots (<b>${pct(p.unallocated/p.outstanding)}</b>) sit in `
-      + `${p.unallocCty} ${unitName} with no counted vote, so there is no split to project them at`
-      + (projUseful ? `. The projected column covers only the ${n(p.allocated)} that could be allocated.`
-                    : `. Too little to project from, so the projected column is withheld rather than shown as a forecast.`)
-      + `</span></div>` : "";
+  const swTxt = (p.swShare && p.swShare.length === st.candidates.length)
+    ? st.candidates.map((c,i)=>`${c.name.split(" (")[0]} ${pct(p.swShare[i])}`).slice(0,2).join(" / ")
+    : "";
+  const unalloc = p.fallback > 0
+    ? `<div class="warn"><b>&#9873;</b><span><b>${n(p.fallback)}</b> of ${n(p.outstanding)} outstanding `
+      + `ballots (<b>${pct(p.fallback/p.outstanding)}</b>) sit in ${p.fallbackCty} ${unitName} that have `
+      + `reported nothing, so they are projected at the <b>statewide counted split</b>`
+      + (swTxt ? ` (${swTxt})` : "") + ` rather than their own. Early in the night that split is `
+      + `only whichever ${unitName} reported first, so these may break very differently.</span></div>` : "";
 
   const ledger = p.totC>0 ? `<table class="cand">
       <thead><tr><th></th><th>Counted</th><th>Of outstanding</th><th>Projected</th></tr></thead>
@@ -1777,7 +1801,7 @@ setInterval(load, 120000);
 // fix was live on the server while the board on screen still read "+1,704,584" against
 // candidate rows summing to 41,912. Poll this file's own build stamp and reload when it
 // changes. Bump BUILD whenever index.html changes.
-const BUILD = "1793752204";
+const BUILD = "1793752677";
 async function checkBuild(){
   try {
     const t = await fetch("index.html?cb=" + Date.now(), {cache: "no-store"}).then(r => r.text());

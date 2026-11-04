@@ -81,7 +81,51 @@ def split_modes(choices, candidates, by_mode_race=None):
     return (early, eday) if seen else (None, None)
 
 
-def county_rows(race_block, counties, candidates):
+_LEAN_CACHE = {}
+
+
+def lean_2024(state):
+    """{county -> that county's 2024 two-party margin MINUS the state's}, D positive.
+
+    A county that has reported nothing still holds early ballots, and spending them at
+    the statewide split prices every unreported county at the state mean. In South
+    Carolina the counties still out included Richland and Charleston - the two most
+    Democratic in the state, holding 200,885 uncounted early ballots - so the board had
+    Graham taking MORE of the outstanding (+347,859) than Andrews (+331,279) while
+    Andrews led the count by 28,284.
+
+    data/county-2024.json already carries D and R per county for all fourteen states, so
+    every state uses the SAME baseline rather than a different hand-built file each. Only
+    the RELATIVE lean is carried forward - each county's distance from its own state in
+    2024 - so 2024's national environment is discarded and tonight's statewide split
+    supplies the level.
+    """
+    if state in _LEAN_CACHE:
+        return _LEAN_CACHE[state]
+    out = {}
+    path = DATA / "county-2024.json"
+    if path.exists():
+        try:
+            cs = ((json.loads(path.read_text()).get("states") or {}).get(state) or {}).get("counties") or {}
+            td = sum((c.get("D") or 0) for c in cs.values())
+            tr = sum((c.get("R") or 0) for c in cs.values())
+            if td + tr:
+                sw = (td - tr) / (td + tr)
+                for key, c in cs.items():
+                    d, r = c.get("D") or 0, c.get("R") or 0
+                    if d + r < 50:
+                        continue
+                    rel = (d - r) / (d + r) - sw
+                    for k in {key, (c.get("name") or ""), (c.get("name") or "").replace(" County", "")}:
+                        if k:
+                            out[k.upper().replace(" ", "")] = rel
+        except Exception:
+            out = {}
+    _LEAN_CACHE[state] = out
+    return out
+
+
+def county_rows(race_block, counties, candidates, leans=None):
     """[{name, votes[], outstanding, remainder[]}] in the order the board will draw.
 
     `remainder` is the part that matters. Testing the method against North Carolina
@@ -114,6 +158,29 @@ def county_rows(race_block, counties, candidates):
                 sw_early[_i] += _v or 0
     sw_early_share = ([x / sum(sw_early) for x in sw_early]) if sum(sw_early) else None
 
+    di = ri = None
+    for _i, _c in enumerate(candidates):
+        _p = (_c.get("party") or "").upper()
+        if _p.startswith("D") and di is None: di = _i
+        elif _p.startswith("R") and ri is None: ri = _i
+
+    def leaned_share(cty):
+        """Tonight's statewide early split, shifted to where this county actually sits."""
+        if not (sw_early_share and leans and di is not None and ri is not None):
+            return sw_early_share
+        rel = leans.get(cty.upper().replace(" ", "").replace("COUNTY", "")) \
+            or leans.get(cty.upper().replace(" ", ""))
+        if rel is None:
+            return sw_early_share
+        two = sw_early_share[di] + sw_early_share[ri]
+        if two <= 0:
+            return sw_early_share
+        m = max(-0.98, min(0.98, (sw_early_share[di] - sw_early_share[ri]) / two + rel))
+        sh = list(sw_early_share)
+        sh[di] = two * (1 + m) / 2
+        sh[ri] = two * (1 - m) / 2
+        return sh
+
     rows = []
     for cty, rec in sorted(counties.items()):
         r = (rec.get("races") or {}).get(race_block) if "races" in rec else rec.get(race_block)
@@ -144,7 +211,11 @@ def county_rows(race_block, counties, candidates):
                 measured += v
         if measured:
             remainder.append({"n": measured, "basis": "measured",
-                              "share": (norm(early_v) if early_v else sw_early_share)})
+                              # early_v for a county that has reported nothing is [0,0,...] - a non-empty
+                              # list, so a bare `if early_v` is TRUE and norm() of all zeros returns
+                              # None. Every unreported county therefore got share:null and fell back
+                              # to the statewide split, never reaching its own lean.
+                              "share": (norm(early_v) if (early_v and sum(early_v)) else leaned_share(cty))})
         # 2. election-day ballots from precincts not yet reporting, scaled from what
         #    the reporting precincts have already produced. An estimate, and labelled
         #    one - it cannot be made at all until some precinct has reported.
@@ -283,7 +354,7 @@ def main():
             cands = candidates_for(tot)
             if not cands:
                 continue
-            rows = county_rows(race, counties, cands)
+            rows = county_rows(race, counties, cands, lean_2024(st))
             blk = entry["races"].setdefault(race, {})
             blk["candidates"] = cands
             blk["counties"] = rows
@@ -311,7 +382,7 @@ def main():
         entry["updated"] = d.get("fetched")
         touched.append(st)
         measured = sum(1 for race in totals
-                       for r in county_rows(race, counties, candidates_for(totals[race]))
+                       for r in county_rows(race, counties, candidates_for(totals[race]), lean_2024(st))
                        if r["outstanding"] is not None)
         print(f"  {st}: {len(counties)} counties, races {sorted(totals)}, "
               f"{measured} county rows with a measured remainder"

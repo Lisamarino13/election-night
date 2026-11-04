@@ -1,7 +1,7 @@
 {
- "ran_at": "2026-11-04T03:37:51Z",
- "host": "dopple-cron",
- "status": "ok",
- "failed": "",
+ "ran_at": "2026-11-04T03:38:12Z",
+ "host": "Lisas-Laptop",
+ "status": "collectors-failed",
+ "failed": " clarity_results.py",
  "note": "Written by publish.sh on every run, even when no figure changed. If ran_at stops advancing the collector has stopped, which is not the same as the numbers not moving."
 }

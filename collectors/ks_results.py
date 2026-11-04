@@ -253,7 +253,7 @@ def early_cast():
     Florida writes both early_in_person and in_person and was over by 2,880,909,
     the whole in-person vote again. early_cast.by_unit takes one stream per mode.
     """
-    return early_cast_shared.by_unit("KS", key=lambda s: s.strip().upper())
+    return early_cast_shared.by_unit("KS", key=early_cast_shared.ckey)
 
 
 def proof(b, election=None):
@@ -550,7 +550,7 @@ def main(argv):
                     "counted": r["counted"],
                     "precincts_reporting": r["precincts_reporting"],
                     "precincts_total": r["precincts_total"],
-                    "early_and_mail_cast": cast.get(cname.upper()),
+                    "early_and_mail_cast": cast.get(early_cast_shared.ckey(cname)),
                 }
             if not rec["races"]:
                 raise RuntimeError(f"{slug}.html carried none of {sorted(WANT)}")

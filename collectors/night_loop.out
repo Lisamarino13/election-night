@@ -1,0 +1,16 @@
+2026-11-04T00:44:20Z --- tick 1 ---
+2026-11-04T00:44:20Z === results pull starting ===
+2026-11-04T00:44:24Z OK      nc_results.py --    -> results-NC.json (100 counties)
+2026-11-04T00:44:25Z OK      oh_results.py --    -> results-OH.json (88 counties)
+2026-11-04T00:44:27Z PENDING fl_results.py -- not staged yet
+2026-11-04T00:44:28Z PENDING tx_results.py -- not staged yet
+2026-11-04T00:44:31Z PENDING la_results.py -- not staged yet
+2026-11-04T00:44:41Z PENDING ak_results.py -- not staged yet
+2026-11-04T00:44:43Z PENDING ne_results.py -- not staged yet
+2026-11-04T00:44:46Z PENDING mn_results.py -- not staged yet
+2026-11-04T00:44:48Z PENDING clarity_results.py -- not staged yet
+2026-11-04T00:44:48Z PENDING me_results.py -- not staged yet
+2026-11-04T00:44:58Z OK      ga_results.py --    -> results-GA.json (159 counties, feed 2026-11-04T00:43:00.5543508Z)
+2026-11-04T00:44:58Z BUILD   -> results.json (5 state(s) with a live feed: FL, GA, NC, OH, SC)
+2026-11-04T00:44:58Z === done: 3 ok, 8 pending, 0 failed ===
+publish: pushed 6 file(s)

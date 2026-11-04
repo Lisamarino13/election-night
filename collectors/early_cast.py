@@ -57,6 +57,20 @@ def total(block):
     return (mail or 0) + (ip or 0)
 
 
+def ckey(s):
+    """Letters and digits only, upper-cased - a county key that survives spelling.
+
+    Early-vote files and results feeds rarely agree on how a county is written.
+    Georgia's early file says DEKALB, BENHILL, MCDUFFIE; its results API says
+    "DeKalb County", "Ben Hill County", "McDuffie County". Normalising with .title()
+    produced "Dekalb", which matches neither, and five Georgia counties silently got
+    cast=None on election night - DeKalb among them, holding 240,254 ballots - so the
+    per-county outstanding summed 249,868 short and the board projected a state total
+    below its own early vote. Case and punctuation are not information here.
+    """
+    return "".join(ch for ch in str(s).upper() if ch.isalnum())
+
+
 def by_unit(state, key=None):
     """{unit -> ballots cast}, plus the file's as_of.
 

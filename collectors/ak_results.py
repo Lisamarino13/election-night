@@ -75,7 +75,7 @@ def load(eid):
 
 
 def early_cast():
-    return early_cast_shared.by_unit("AK", key=lambda s: s.upper())
+    return early_cast_shared.by_unit("AK", key=early_cast_shared.ckey)
 
 
 def num(v):

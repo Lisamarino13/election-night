@@ -159,7 +159,7 @@ def early_cast():
     Florida writes both early_in_person and in_person and was over by 2,880,909,
     the whole in-person vote again. early_cast.by_unit takes one stream per mode.
     """
-    return early_cast_shared.by_unit("NE", key=lambda s: s.title())
+    return early_cast_shared.by_unit("NE", key=early_cast_shared.ckey)
 
 
 def build(eid=None):
@@ -213,7 +213,7 @@ def build(eid=None):
                 "counted": sum(rec0["ch"].values()),
                 "precincts_reporting": rec0["pr"],
                 "precincts_total": rec0["pt"],
-                "early_and_mail_cast": cast.get(cty),
+                "early_and_mail_cast": cast.get(early_cast_shared.ckey(cty)),
             }
             if sum(rec0["ch"].values()):
                 any_votes = True

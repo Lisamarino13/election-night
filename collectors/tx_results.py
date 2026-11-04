@@ -101,7 +101,7 @@ def early_cast():
     Florida writes both early_in_person and in_person and was over by 2,880,909,
     the whole in-person vote again. early_cast.by_unit takes one stream per mode.
     """
-    return early_cast_shared.by_unit("TX", key=lambda s: s.upper())
+    return early_cast_shared.by_unit("TX", key=early_cast_shared.ckey)
 
 
 def build(eid, name, label=""):
@@ -152,7 +152,7 @@ def build(eid, name, label=""):
                 state[race]["early"][nm] += ev
                 state[race]["parties"][nm] = choices[nm]["party"]
             counted_early = sum(x["by_mode"]["early"] for x in choices.values())
-            was = cast.get((c.get("N") or "").strip().upper())
+            was = cast.get(early_cast_shared.ckey(c.get("N") or ""))
             rec["races"][race] = {
                 "choices": dict(sorted(choices.items(), key=lambda x: -x[1]["votes"])),
                 "counted": sum(x["votes"] for x in choices.values()),

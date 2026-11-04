@@ -234,7 +234,7 @@ def early_cast():
     Florida writes both early_in_person and in_person and was over by 2,880,909,
     the whole in-person vote again. early_cast.by_unit takes one stream per mode.
     """
-    return early_cast_shared.by_unit("OH", key=lambda s: s.title())
+    return early_cast_shared.by_unit("OH", key=early_cast_shared.ckey)
 
 
 def main():
@@ -250,7 +250,7 @@ def main():
     for cty, info in sorted(cty_xml.items()):
         s = summary.get(cty, {})
         absentee = info["by_mode"].get("absentee") or 0
-        was = cast.get(cty)
+        was = cast.get(early_cast_shared.ckey(cty))
         rec = {
             "registered": info["registered"], "ballots_cast": info["ballots_cast"],
             "precincts_total": info["precincts_total"],

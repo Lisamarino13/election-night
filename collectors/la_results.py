@@ -143,7 +143,7 @@ def build(folder, want=None):
     if not found:
         raise RuntimeError(f"none of {sorted(want)} found among {len(rlist)} Louisiana races")
 
-    cast, cast_as_of = early_cast_shared.by_unit("LA", key=lambda s: s.upper())
+    cast, cast_as_of = early_cast_shared.by_unit("LA", key=early_cast_shared.ckey)
     counties, totals = {}, {}
     for key, race in found.items():
         by_parish = get(f"{folder}/VotesRaceByParish/Votes_{race['id']}.htm")
@@ -182,7 +182,7 @@ def build(folder, want=None):
             pr_in += ri
             pr_all += ra
             counted_early = sum(x["by_mode"]["early"] for x in choices.values())
-            was = cast.get(nm.upper())
+            was = cast.get(early_cast_shared.ckey(nm))
             rec = counties.setdefault(nm, {
                 "fips": code, "registered": int(p.get("VoterCountQualified") or 0),
                 "ballots_cast": int(p.get("VoterCountVoted") or 0),

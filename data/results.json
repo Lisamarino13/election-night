@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T00:39:48+00:00",
+ "updated": "2026-11-04T00:40:51+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -188,7 +188,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/383470/reports/detailxml.zip",
-   "updated": "2026-11-04T00:39:35+00:00",
+   "updated": "2026-11-04T00:40:38+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1158,7 +1158,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T00:39:35+00:00",
+     "updated": "2026-11-04T00:40:38+00:00",
      "tier": "tossup",
      "precincts_reporting": 1,
      "precincts_total": 2312,
@@ -3106,7 +3106,7 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T00:39:17+00:00",
+     "updated": "2026-11-04T00:40:24+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 2626,
@@ -3122,7 +3122,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T00:39:17+00:00",
+   "updated": "2026-11-04T00:40:24+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -3133,7 +3133,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T00:39:18+00:00",
+   "updated": "2026-11-04T00:40:25+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -4256,18 +4256,18 @@
       {
        "name": "Mahoning",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        21418,
+        10663,
+        534,
+        528,
         0,
         0,
         0
        ],
-       "outstanding": 33222,
+       "outstanding": 36,
        "remainder": [
         {
-         "n": 33222,
+         "n": 36,
          "basis": "measured",
          "share": null
         }
@@ -5120,13 +5120,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:39:18+00:00",
+     "updated": "2026-11-04T00:40:25+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 217306,
+     "counted": 250449,
      "modes": null
     },
     "governor": {
@@ -6196,17 +6196,17 @@
       {
        "name": "Mahoning",
        "votes": [
-        0,
-        0,
-        0,
+        21999,
+        10137,
+        749,
         0,
         0,
         0
        ],
-       "outstanding": 33222,
+       "outstanding": 36,
        "remainder": [
         {
-         "n": 33222,
+         "n": 36,
          "basis": "measured",
          "share": null
         }
@@ -7020,13 +7020,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:39:18+00:00",
+     "updated": "2026-11-04T00:40:25+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 217235,
+     "counted": 250120,
      "modes": null
     }
    },
@@ -9251,7 +9251,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T00:39:48+00:00",
+   "updated": "2026-11-04T00:40:51+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -10483,17 +10483,17 @@
       {
        "name": "Hall County",
        "votes": [
-        18853,
-        35038
+        11965,
+        20949
        ],
-       "outstanding": 317,
+       "outstanding": 21294,
        "remainder": [
         {
-         "n": 317,
+         "n": 21294,
          "basis": "measured",
          "share": [
-          0.34983577962925166,
-          0.6501642203707484
+          0.36352312086042415,
+          0.6364768791395758
          ]
         }
        ],
@@ -12106,17 +12106,17 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:39:48+00:00",
+     "updated": "2026-11-04T00:40:51+00:00",
      "tier": "tossup",
-     "precincts_reporting": 47,
+     "precincts_reporting": 52,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1290518,
+     "counted": 1330607,
      "modes": {
-      "election_day": 6218,
-      "early": 1228510,
-      "mail": 55790,
+      "election_day": 10619,
+      "early": 1263284,
+      "mail": 56704,
       "provisional": 0
      }
     },
@@ -13350,17 +13350,17 @@
       {
        "name": "Hall County",
        "votes": [
-        21675,
-        32062
+        13666,
+        19168
        ],
-       "outstanding": 471,
+       "outstanding": 21374,
        "remainder": [
         {
-         "n": 471,
+         "n": 21374,
          "basis": "measured",
          "share": [
-          0.4033533691869661,
-          0.5966466308130338
+          0.41621489918986415,
+          0.5837851008101358
          ]
         }
        ],
@@ -14974,17 +14974,17 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:39:48+00:00",
+     "updated": "2026-11-04T00:40:51+00:00",
      "tier": "safe",
-     "precincts_reporting": 47,
+     "precincts_reporting": 52,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1290571,
+     "counted": 1330538,
      "modes": {
-      "election_day": 6203,
-      "early": 1227976,
-      "mail": 56392,
+      "election_day": 10591,
+      "early": 1262642,
+      "mail": 57305,
       "provisional": 0
      }
     }

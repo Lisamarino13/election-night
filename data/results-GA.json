@@ -4,9 +4,9 @@
  "source_kind": "ga-sos-api",
  "election": "November 3, 2026 - General & Special Elections",
  "election_date": "2026-11-03",
- "feed_timestamp": "2026-11-04T00:34:25.5546995Z",
+ "feed_timestamp": "2026-11-04T00:38:24.9806958Z",
  "version": "11032026GeneralAndSpecialElection",
- "fetched": "2026-11-04T00:39:48+00:00",
+ "fetched": "2026-11-04T00:40:51+00:00",
  "early_cast_as_of": "11/3/2026",
  "counties": {
   "Appling County": {
@@ -277,7 +277,7 @@
     "precincts_total": 5,
     "precincts_reporting": 0,
     "registered": 2043,
-    "ballots_cast": 0.0,
+    "ballots_cast": 5050.0,
     "early_and_mail_cast": 669,
     "early_and_mail_counted": 0,
     "early_and_mail_left": 669
@@ -315,7 +315,7 @@
     "precincts_total": 5,
     "precincts_reporting": 0,
     "registered": 2043,
-    "ballots_cast": 0.0,
+    "ballots_cast": 5050.0,
     "early_and_mail_cast": 669,
     "early_and_mail_counted": 0,
     "early_and_mail_left": 669
@@ -1213,7 +1213,7 @@
     "precincts_total": 16,
     "precincts_reporting": 0,
     "registered": 51729,
-    "ballots_cast": 0.0,
+    "ballots_cast": 4935.0,
     "early_and_mail_cast": 13880,
     "early_and_mail_counted": 0,
     "early_and_mail_left": 13880
@@ -1251,7 +1251,7 @@
     "precincts_total": 16,
     "precincts_reporting": 0,
     "registered": 51729,
-    "ballots_cast": 0.0,
+    "ballots_cast": 4935.0,
     "early_and_mail_cast": 13880,
     "early_and_mail_counted": 0,
     "early_and_mail_left": 13880
@@ -3709,7 +3709,7 @@
     "precincts_total": 25,
     "precincts_reporting": 0,
     "registered": 105557,
-    "ballots_cast": 0.0,
+    "ballots_cast": 3671.0,
     "early_and_mail_cast": 43178,
     "early_and_mail_counted": 0,
     "early_and_mail_left": 43178
@@ -3747,7 +3747,7 @@
     "precincts_total": 25,
     "precincts_reporting": 0,
     "registered": 105557,
-    "ballots_cast": 0.0,
+    "ballots_cast": 3671.0,
     "early_and_mail_cast": 43178,
     "early_and_mail_counted": 0,
     "early_and_mail_left": 43178
@@ -5318,77 +5318,77 @@
     "choices": {
      "Mike Collins (Rep)": {
       "party": "R",
-      "votes": 32062,
+      "votes": 19168,
       "by_mode": {
        "election_day": 0,
-       "early": 30714,
-       "mail": 1348,
+       "early": 17828,
+       "mail": 1340,
        "provisional": 0
       }
      },
      "Jon Ossoff (I) (Dem)": {
       "party": "D",
-      "votes": 21675,
+      "votes": 13666,
       "by_mode": {
        "election_day": 0,
-       "early": 20162,
-       "mail": 1513,
+       "early": 12170,
+       "mail": 1496,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 50876,
-     "mail": 2861,
+     "early": 29998,
+     "mail": 2836,
      "provisional": 0
     },
-    "counted": 53737,
+    "counted": 32834,
     "precincts_total": 31,
     "precincts_reporting": 31,
     "registered": 147821,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 54208,
-    "early_and_mail_counted": 53737,
-    "early_and_mail_left": 471
+    "early_and_mail_counted": 32834,
+    "early_and_mail_left": 21374
    },
    "governor": {
     "choices": {
      "Rick Jackson (Rep)": {
       "party": "R",
-      "votes": 35038,
+      "votes": 20949,
       "by_mode": {
        "election_day": 0,
-       "early": 33507,
-       "mail": 1531,
+       "early": 19429,
+       "mail": 1520,
        "provisional": 0
       }
      },
      "Keisha Lance Bottoms (Dem)": {
       "party": "D",
-      "votes": 18853,
+      "votes": 11965,
       "by_mode": {
        "election_day": 0,
-       "early": 17559,
-       "mail": 1294,
+       "early": 10686,
+       "mail": 1279,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 51066,
-     "mail": 2825,
+     "early": 30115,
+     "mail": 2799,
      "provisional": 0
     },
-    "counted": 53891,
+    "counted": 32914,
     "precincts_total": 31,
     "precincts_reporting": 31,
     "registered": 147821,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 54208,
-    "early_and_mail_counted": 53891,
-    "early_and_mail_left": 317
+    "early_and_mail_counted": 32914,
+    "early_and_mail_left": 21294
    }
   },
   "Hancock County": {
@@ -5659,7 +5659,7 @@
     "precincts_total": 7,
     "precincts_reporting": 0,
     "registered": 19925,
-    "ballots_cast": 33204.0,
+    "ballots_cast": 54329.0,
     "early_and_mail_cast": 6828,
     "early_and_mail_counted": 0,
     "early_and_mail_left": 6828
@@ -5697,7 +5697,7 @@
     "precincts_total": 7,
     "precincts_reporting": 0,
     "registered": 19925,
-    "ballots_cast": 33204.0,
+    "ballots_cast": 54329.0,
     "early_and_mail_cast": 6828,
     "early_and_mail_counted": 0,
     "early_and_mail_left": 6828
@@ -7375,7 +7375,7 @@
     "precincts_total": 12,
     "precincts_reporting": 0,
     "registered": 22975,
-    "ballots_cast": 0.0,
+    "ballots_cast": 3799.0,
     "early_and_mail_cast": 7125,
     "early_and_mail_counted": 0,
     "early_and_mail_left": 7125
@@ -7413,7 +7413,7 @@
     "precincts_total": 12,
     "precincts_reporting": 0,
     "registered": 22975,
-    "ballots_cast": 0.0,
+    "ballots_cast": 3799.0,
     "early_and_mail_cast": 7125,
     "early_and_mail_counted": 0,
     "early_and_mail_left": 7125
@@ -7843,7 +7843,7 @@
     "precincts_total": 9,
     "precincts_reporting": 0,
     "registered": 13447,
-    "ballots_cast": 9850.0,
+    "ballots_cast": 9871.0,
     "early_and_mail_cast": 3784,
     "early_and_mail_counted": 0,
     "early_and_mail_left": 3784
@@ -7881,7 +7881,7 @@
     "precincts_total": 9,
     "precincts_reporting": 0,
     "registered": 13447,
-    "ballots_cast": 9850.0,
+    "ballots_cast": 9871.0,
     "early_and_mail_cast": 3784,
     "early_and_mail_counted": 0,
     "early_and_mail_left": 3784
@@ -10495,7 +10495,7 @@
     "precincts_total": 6,
     "precincts_reporting": 0,
     "registered": 6158,
-    "ballots_cast": 0.0,
+    "ballots_cast": 222.0,
     "early_and_mail_cast": 2019,
     "early_and_mail_counted": 0,
     "early_and_mail_left": 2019
@@ -10533,7 +10533,7 @@
     "precincts_total": 6,
     "precincts_reporting": 0,
     "registered": 6158,
-    "ballots_cast": 0.0,
+    "ballots_cast": 222.0,
     "early_and_mail_cast": 2019,
     "early_and_mail_counted": 0,
     "early_and_mail_left": 2019
@@ -10729,7 +10729,7 @@
     "precincts_total": 5,
     "precincts_reporting": 0,
     "registered": 16797,
-    "ballots_cast": 149.0,
+    "ballots_cast": 1684.0,
     "early_and_mail_cast": 4955,
     "early_and_mail_counted": 0,
     "early_and_mail_left": 4955
@@ -10767,7 +10767,7 @@
     "precincts_total": 5,
     "precincts_reporting": 0,
     "registered": 16797,
-    "ballots_cast": 149.0,
+    "ballots_cast": 1684.0,
     "early_and_mail_cast": 4955,
     "early_and_mail_counted": 0,
     "early_and_mail_left": 4955
@@ -12416,48 +12416,48 @@
   "senate": {
    "contest_name": "US Senate",
    "choices": {
-    "Jon Ossoff (I) (Dem)": 848921,
-    "Mike Collins (Rep)": 441650
+    "Jon Ossoff (I) (Dem)": 864631,
+    "Mike Collins (Rep)": 465907
    },
    "parties": {
     "Mike Collins (Rep)": "R",
     "Jon Ossoff (I) (Dem)": "D"
    },
-   "total": 1290571,
+   "total": 1330538,
    "modes": {
-    "election_day": 6203,
-    "early": 1227976,
-    "mail": 56392,
+    "election_day": 10591,
+    "early": 1262642,
+    "mail": 57305,
     "provisional": 0
    },
-   "precincts_reporting": 47,
+   "precincts_reporting": 52,
    "precincts_total": 159,
    "early_and_mail_cast": 2834893,
-   "early_and_mail_counted": 1284368,
-   "early_and_mail_left": 1550525
+   "early_and_mail_counted": 1319947,
+   "early_and_mail_left": 1514946
   },
   "governor": {
    "contest_name": "Governor",
    "choices": {
-    "Keisha Lance Bottoms (Dem)": 794913,
-    "Rick Jackson (Rep)": 495605
+    "Keisha Lance Bottoms (Dem)": 808805,
+    "Rick Jackson (Rep)": 521802
    },
    "parties": {
     "Rick Jackson (Rep)": "R",
     "Keisha Lance Bottoms (Dem)": "D"
    },
-   "total": 1290518,
+   "total": 1330607,
    "modes": {
-    "election_day": 6218,
-    "early": 1228510,
-    "mail": 55790,
+    "election_day": 10619,
+    "early": 1263284,
+    "mail": 56704,
     "provisional": 0
    },
-   "precincts_reporting": 47,
+   "precincts_reporting": 52,
    "precincts_total": 159,
    "early_and_mail_cast": 2834893,
-   "early_and_mail_counted": 1284300,
-   "early_and_mail_left": 1550593
+   "early_and_mail_counted": 1319988,
+   "early_and_mail_left": 1514905
   }
  },
  "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",

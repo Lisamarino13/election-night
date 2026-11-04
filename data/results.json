@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T00:31:21+00:00",
+ "updated": "2026-11-04T00:32:32+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -188,7 +188,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/383470/reports/detailxml.zip",
-   "updated": "2026-11-04T00:31:05+00:00",
+   "updated": "2026-11-04T00:32:13+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1158,7 +1158,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T00:31:05+00:00",
+     "updated": "2026-11-04T00:32:13+00:00",
      "tier": "tossup",
      "precincts_reporting": 1,
      "precincts_total": 2312,
@@ -3106,7 +3106,7 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T00:30:49+00:00",
+     "updated": "2026-11-04T00:31:55+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 2626,
@@ -3122,7 +3122,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T00:30:49+00:00",
+   "updated": "2026-11-04T00:31:55+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -3133,7 +3133,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T00:30:50+00:00",
+   "updated": "2026-11-04T00:31:56+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -5104,7 +5104,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:30:50+00:00",
+     "updated": "2026-11-04T00:31:56+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
@@ -6990,7 +6990,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:30:50+00:00",
+     "updated": "2026-11-04T00:31:56+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
@@ -9221,7 +9221,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T00:31:21+00:00",
+   "updated": "2026-11-04T00:32:31+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -12024,17 +12024,17 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:31:21+00:00",
+     "updated": "2026-11-04T00:32:31+00:00",
      "tier": "tossup",
-     "precincts_reporting": 33,
+     "precincts_reporting": 40,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 960263,
+     "counted": 1022741,
      "modes": {
-      "election_day": 326,
-      "early": 918693,
-      "mail": 41244,
+      "election_day": 2651,
+      "early": 974016,
+      "mail": 46074,
       "provisional": 0
      }
     },
@@ -14848,17 +14848,17 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:31:21+00:00",
+     "updated": "2026-11-04T00:32:31+00:00",
      "tier": "safe",
-     "precincts_reporting": 33,
+     "precincts_reporting": 40,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 960644,
+     "counted": 1023051,
      "modes": {
-      "election_day": 327,
-      "early": 918643,
-      "mail": 41674,
+      "election_day": 2638,
+      "early": 973870,
+      "mail": 46543,
       "provisional": 0
      }
     }

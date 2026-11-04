@@ -1,5 +1,9 @@
 {
+<<<<<<< Updated upstream
  "updated": "2026-11-03T16:31:31+00:00",
+=======
+ "updated": "2026-11-04T00:08:31+00:00",
+>>>>>>> Stashed changes
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -8270,8 +8274,13 @@
    "countsFirst": "early",
    "partyReg": false,
    "unit": "county",
+<<<<<<< Updated upstream
    "source": "clarity",
    "updated": null,
+=======
+   "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
+   "updated": "2026-11-04T00:08:31+00:00",
+>>>>>>> Stashed changes
    "races": {
     "governor": {
      "candidates": [
@@ -8284,8 +8293,2687 @@
        "party": "D"
       }
      ],
+<<<<<<< Updated upstream
      "counties": [],
      "updated": null,
+=======
+     "counties": [
+      {
+       "name": "Appling County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3791,
+       "remainder": [
+        {
+         "n": 3791,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 9
+      },
+      {
+       "name": "Atkinson County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1159,
+       "remainder": [
+        {
+         "n": 1159,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Bacon County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2551,
+       "remainder": [
+        {
+         "n": 2551,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Baker County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 669,
+       "remainder": [
+        {
+         "n": 669,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Baldwin County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 10404,
+       "remainder": [
+        {
+         "n": 10404,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Banks County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4825,
+       "remainder": [
+        {
+         "n": 4825,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 13
+      },
+      {
+       "name": "Barrow County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 19752,
+       "remainder": [
+        {
+         "n": 19752,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Bartow County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 25204,
+       "remainder": [
+        {
+         "n": 25204,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 17
+      },
+      {
+       "name": "Ben Hill County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Berrien County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3313,
+       "remainder": [
+        {
+         "n": 3313,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Bibb County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 34422,
+       "remainder": [
+        {
+         "n": 34422,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 31
+      },
+      {
+       "name": "Bleckley County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3143,
+       "remainder": [
+        {
+         "n": 3143,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Brantley County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2971,
+       "remainder": [
+        {
+         "n": 2971,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 3
+      },
+      {
+       "name": "Brooks County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3038,
+       "remainder": [
+        {
+         "n": 3038,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Bryan County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 12352,
+       "remainder": [
+        {
+         "n": 12352,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Bulloch County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 13880,
+       "remainder": [
+        {
+         "n": 13880,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 16
+      },
+      {
+       "name": "Burke County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4705,
+       "remainder": [
+        {
+         "n": 4705,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Butts County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 7662,
+       "remainder": [
+        {
+         "n": 7662,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Calhoun County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 915,
+       "remainder": [
+        {
+         "n": 915,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Camden County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 12875,
+       "remainder": [
+        {
+         "n": 12875,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Candler County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2283,
+       "remainder": [
+        {
+         "n": 2283,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Carroll County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 24649,
+       "remainder": [
+        {
+         "n": 24649,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 28
+      },
+      {
+       "name": "Catoosa County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 15249,
+       "remainder": [
+        {
+         "n": 15249,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Charlton County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1817,
+       "remainder": [
+        {
+         "n": 1817,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 6
+      },
+      {
+       "name": "Chatham County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 66971,
+       "remainder": [
+        {
+         "n": 66971,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 86
+      },
+      {
+       "name": "Chattahoochee County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 623,
+       "remainder": [
+        {
+         "n": 623,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Chattooga County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3941,
+       "remainder": [
+        {
+         "n": 3941,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Cherokee County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 86631,
+       "remainder": [
+        {
+         "n": 86631,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 42
+      },
+      {
+       "name": "Clarke County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 29700,
+       "remainder": [
+        {
+         "n": 29700,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 24
+      },
+      {
+       "name": "Clay County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 733,
+       "remainder": [
+        {
+         "n": 733,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Clayton County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 71020,
+       "remainder": [
+        {
+         "n": 71020,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 70
+      },
+      {
+       "name": "Clinch County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1081,
+       "remainder": [
+        {
+         "n": 1081,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Cobb County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 237129,
+       "remainder": [
+        {
+         "n": 237129,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 148
+      },
+      {
+       "name": "Coffee County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 7445,
+       "remainder": [
+        {
+         "n": 7445,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 6
+      },
+      {
+       "name": "Colquitt County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6529,
+       "remainder": [
+        {
+         "n": 6529,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 19
+      },
+      {
+       "name": "Columbia County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 42692,
+       "remainder": [
+        {
+         "n": 42692,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 40
+      },
+      {
+       "name": "Cook County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3344,
+       "remainder": [
+        {
+         "n": 3344,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Coweta County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 41512,
+       "remainder": [
+        {
+         "n": 41512,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 24
+      },
+      {
+       "name": "Crawford County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2820,
+       "remainder": [
+        {
+         "n": 2820,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Crisp County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4271,
+       "remainder": [
+        {
+         "n": 4271,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Dade County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2762,
+       "remainder": [
+        {
+         "n": 2762,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Dawson County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 10589,
+       "remainder": [
+        {
+         "n": 10589,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "DeKalb County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 191
+      },
+      {
+       "name": "Decatur County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 5079,
+       "remainder": [
+        {
+         "n": 5079,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Dodge County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3729,
+       "remainder": [
+        {
+         "n": 3729,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Dooly County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1910,
+       "remainder": [
+        {
+         "n": 1910,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Dougherty County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 15583,
+       "remainder": [
+        {
+         "n": 15583,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 23
+      },
+      {
+       "name": "Douglas County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 43178,
+       "remainder": [
+        {
+         "n": 43178,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 25
+      },
+      {
+       "name": "Early County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2039,
+       "remainder": [
+        {
+         "n": 2039,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Echols County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 594,
+       "remainder": [
+        {
+         "n": 594,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Effingham County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 14022,
+       "remainder": [
+        {
+         "n": 14022,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 20
+      },
+      {
+       "name": "Elbert County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4045,
+       "remainder": [
+        {
+         "n": 4045,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Emanuel County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3808,
+       "remainder": [
+        {
+         "n": 3808,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Evans County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2083,
+       "remainder": [
+        {
+         "n": 2083,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Fannin County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6735,
+       "remainder": [
+        {
+         "n": 6735,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Fayette County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 46035,
+       "remainder": [
+        {
+         "n": 46035,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 35
+      },
+      {
+       "name": "Floyd County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 18629,
+       "remainder": [
+        {
+         "n": 18629,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 19
+      },
+      {
+       "name": "Forsyth County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 75237,
+       "remainder": [
+        {
+         "n": 75237,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 29
+      },
+      {
+       "name": "Franklin County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4901,
+       "remainder": [
+        {
+         "n": 4901,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Fulton County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 340476,
+       "remainder": [
+        {
+         "n": 340476,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 437
+      },
+      {
+       "name": "Gilmer County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 8307,
+       "remainder": [
+        {
+         "n": 8307,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 13
+      },
+      {
+       "name": "Glascock County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 769,
+       "remainder": [
+        {
+         "n": 769,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Glynn County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 24566,
+       "remainder": [
+        {
+         "n": 24566,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Gordon County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 9857,
+       "remainder": [
+        {
+         "n": 9857,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Grady County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4595,
+       "remainder": [
+        {
+         "n": 4595,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 9
+      },
+      {
+       "name": "Greene County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 8321,
+       "remainder": [
+        {
+         "n": 8321,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Gwinnett County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 238889,
+       "remainder": [
+        {
+         "n": 238889,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 156
+      },
+      {
+       "name": "Habersham County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 13249,
+       "remainder": [
+        {
+         "n": 13249,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Hall County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 54208,
+       "remainder": [
+        {
+         "n": 54208,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 31
+      },
+      {
+       "name": "Hancock County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2278,
+       "remainder": [
+        {
+         "n": 2278,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Haralson County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 5595,
+       "remainder": [
+        {
+         "n": 5595,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Harris County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 9481,
+       "remainder": [
+        {
+         "n": 9481,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Hart County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6828,
+       "remainder": [
+        {
+         "n": 6828,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Heard County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2103,
+       "remainder": [
+        {
+         "n": 2103,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 6
+      },
+      {
+       "name": "Henry County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 81318,
+       "remainder": [
+        {
+         "n": 81318,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 37
+      },
+      {
+       "name": "Houston County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 45764,
+       "remainder": [
+        {
+         "n": 45764,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 17
+      },
+      {
+       "name": "Irwin County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2058,
+       "remainder": [
+        {
+         "n": 2058,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 2
+      },
+      {
+       "name": "Jackson County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 25026,
+       "remainder": [
+        {
+         "n": 25026,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Jasper County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3976,
+       "remainder": [
+        {
+         "n": 3976,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 3
+      },
+      {
+       "name": "Jeff Davis County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 9
+      },
+      {
+       "name": "Jefferson County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2960,
+       "remainder": [
+        {
+         "n": 2960,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Jenkins County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1445,
+       "remainder": [
+        {
+         "n": 1445,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Johnson County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1825,
+       "remainder": [
+        {
+         "n": 1825,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Jones County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 7391,
+       "remainder": [
+        {
+         "n": 7391,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Lamar County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 5194,
+       "remainder": [
+        {
+         "n": 5194,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Lanier County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1661,
+       "remainder": [
+        {
+         "n": 1661,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Laurens County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 9750,
+       "remainder": [
+        {
+         "n": 9750,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 13
+      },
+      {
+       "name": "Lee County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 7466,
+       "remainder": [
+        {
+         "n": 7466,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Liberty County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 11783,
+       "remainder": [
+        {
+         "n": 11783,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Lincoln County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2535,
+       "remainder": [
+        {
+         "n": 2535,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Long County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2863,
+       "remainder": [
+        {
+         "n": 2863,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Lowndes County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 23515,
+       "remainder": [
+        {
+         "n": 23515,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 15
+      },
+      {
+       "name": "Lumpkin County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 9296,
+       "remainder": [
+        {
+         "n": 9296,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Macon County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2304,
+       "remainder": [
+        {
+         "n": 2304,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Madison County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 7125,
+       "remainder": [
+        {
+         "n": 7125,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Marion County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1631,
+       "remainder": [
+        {
+         "n": 1631,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "McDuffie County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "McIntosh County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 6
+      },
+      {
+       "name": "Meriwether County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4215,
+       "remainder": [
+        {
+         "n": 4215,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Miller County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1176,
+       "remainder": [
+        {
+         "n": 1176,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Mitchell County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3784,
+       "remainder": [
+        {
+         "n": 3784,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 9
+      },
+      {
+       "name": "Monroe County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 8375,
+       "remainder": [
+        {
+         "n": 8375,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Montgomery County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1499,
+       "remainder": [
+        {
+         "n": 1499,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 3
+      },
+      {
+       "name": "Morgan County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6957,
+       "remainder": [
+        {
+         "n": 6957,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Murray County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6370,
+       "remainder": [
+        {
+         "n": 6370,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Muscogee County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 43048,
+       "remainder": [
+        {
+         "n": 43048,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 25
+      },
+      {
+       "name": "Newton County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 31591,
+       "remainder": [
+        {
+         "n": 31591,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 17
+      },
+      {
+       "name": "Oconee County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 16459,
+       "remainder": [
+        {
+         "n": 16459,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Oglethorpe County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4448,
+       "remainder": [
+        {
+         "n": 4448,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 3
+      },
+      {
+       "name": "Paulding County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 52416,
+       "remainder": [
+        {
+         "n": 52416,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 20
+      },
+      {
+       "name": "Peach County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 7928,
+       "remainder": [
+        {
+         "n": 7928,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Pickens County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 9692,
+       "remainder": [
+        {
+         "n": 9692,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Pierce County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4912,
+       "remainder": [
+        {
+         "n": 4912,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Pike County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 5474,
+       "remainder": [
+        {
+         "n": 5474,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Polk County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 8945,
+       "remainder": [
+        {
+         "n": 8945,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Pulaski County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2384,
+       "remainder": [
+        {
+         "n": 2384,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Putnam County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 7538,
+       "remainder": [
+        {
+         "n": 7538,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Quitman County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 545,
+       "remainder": [
+        {
+         "n": 545,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 2
+      },
+      {
+       "name": "Rabun County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6009,
+       "remainder": [
+        {
+         "n": 6009,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Randolph County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1399,
+       "remainder": [
+        {
+         "n": 1399,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 6
+      },
+      {
+       "name": "Richmond County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 40619,
+       "remainder": [
+        {
+         "n": 40619,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 65
+      },
+      {
+       "name": "Rockdale County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 29053,
+       "remainder": [
+        {
+         "n": 29053,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Schley County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1176,
+       "remainder": [
+        {
+         "n": 1176,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Screven County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3325,
+       "remainder": [
+        {
+         "n": 3325,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Seminole County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1246,
+       "remainder": [
+        {
+         "n": 1246,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Spalding County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 17299,
+       "remainder": [
+        {
+         "n": 17299,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Stephens County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 7181,
+       "remainder": [
+        {
+         "n": 7181,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Stewart County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 748,
+       "remainder": [
+        {
+         "n": 748,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Sumter County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6261,
+       "remainder": [
+        {
+         "n": 6261,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Talbot County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1462,
+       "remainder": [
+        {
+         "n": 1462,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Taliaferro County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 507,
+       "remainder": [
+        {
+         "n": 507,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 2
+      },
+      {
+       "name": "Tattnall County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3734,
+       "remainder": [
+        {
+         "n": 3734,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Taylor County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2019,
+       "remainder": [
+        {
+         "n": 2019,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 3
+      },
+      {
+       "name": "Telfair County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1781,
+       "remainder": [
+        {
+         "n": 1781,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Terrell County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2019,
+       "remainder": [
+        {
+         "n": 2019,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 6
+      },
+      {
+       "name": "Thomas County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 11521,
+       "remainder": [
+        {
+         "n": 11521,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 20
+      },
+      {
+       "name": "Tift County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 8338,
+       "remainder": [
+        {
+         "n": 8338,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Toombs County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4955,
+       "remainder": [
+        {
+         "n": 4955,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Towns County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 5703,
+       "remainder": [
+        {
+         "n": 5703,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 2
+      },
+      {
+       "name": "Treutlen County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1437,
+       "remainder": [
+        {
+         "n": 1437,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 2
+      },
+      {
+       "name": "Troup County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 13041,
+       "remainder": [
+        {
+         "n": 13041,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Turner County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2110,
+       "remainder": [
+        {
+         "n": 2110,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 3
+      },
+      {
+       "name": "Twiggs County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1862,
+       "remainder": [
+        {
+         "n": 1862,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Union County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 9586,
+       "remainder": [
+        {
+         "n": 9586,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Upson County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6982,
+       "remainder": [
+        {
+         "n": 6982,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Walker County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 12458,
+       "remainder": [
+        {
+         "n": 12458,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Walton County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 29944,
+       "remainder": [
+        {
+         "n": 29944,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 15
+      },
+      {
+       "name": "Ware County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 5999,
+       "remainder": [
+        {
+         "n": 5999,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 13
+      },
+      {
+       "name": "Warren County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1444,
+       "remainder": [
+        {
+         "n": 1444,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Washington County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 5144,
+       "remainder": [
+        {
+         "n": 5144,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Wayne County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6243,
+       "remainder": [
+        {
+         "n": 6243,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Webster County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 655,
+       "remainder": [
+        {
+         "n": 655,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Wheeler County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1092,
+       "remainder": [
+        {
+         "n": 1092,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 2
+      },
+      {
+       "name": "White County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 8121,
+       "remainder": [
+        {
+         "n": 8121,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Whitfield County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 14185,
+       "remainder": [
+        {
+         "n": 14185,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 23
+      },
+      {
+       "name": "Wilcox County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1220,
+       "remainder": [
+        {
+         "n": 1220,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Wilkes County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2744,
+       "remainder": [
+        {
+         "n": 2744,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Wilkinson County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1694,
+       "remainder": [
+        {
+         "n": 1694,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 6
+      },
+      {
+       "name": "Worth County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3565,
+       "remainder": [
+        {
+         "n": 3565,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 9
+      }
+     ],
+     "updated": "2026-11-04T00:08:31+00:00",
+>>>>>>> Stashed changes
      "tier": "tossup",
      "roster_only": true,
      "roster_source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data"
@@ -8301,8 +10989,2687 @@
        "party": "D"
       }
      ],
+<<<<<<< Updated upstream
      "counties": [],
      "updated": null,
+=======
+     "counties": [
+      {
+       "name": "Appling County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3791,
+       "remainder": [
+        {
+         "n": 3791,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 9
+      },
+      {
+       "name": "Atkinson County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1159,
+       "remainder": [
+        {
+         "n": 1159,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Bacon County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2551,
+       "remainder": [
+        {
+         "n": 2551,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Baker County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 669,
+       "remainder": [
+        {
+         "n": 669,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Baldwin County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 10404,
+       "remainder": [
+        {
+         "n": 10404,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Banks County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4825,
+       "remainder": [
+        {
+         "n": 4825,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 13
+      },
+      {
+       "name": "Barrow County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 19752,
+       "remainder": [
+        {
+         "n": 19752,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Bartow County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 25204,
+       "remainder": [
+        {
+         "n": 25204,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 17
+      },
+      {
+       "name": "Ben Hill County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Berrien County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3313,
+       "remainder": [
+        {
+         "n": 3313,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Bibb County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 34422,
+       "remainder": [
+        {
+         "n": 34422,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 31
+      },
+      {
+       "name": "Bleckley County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3143,
+       "remainder": [
+        {
+         "n": 3143,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Brantley County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2971,
+       "remainder": [
+        {
+         "n": 2971,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 3
+      },
+      {
+       "name": "Brooks County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3038,
+       "remainder": [
+        {
+         "n": 3038,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Bryan County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 12352,
+       "remainder": [
+        {
+         "n": 12352,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Bulloch County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 13880,
+       "remainder": [
+        {
+         "n": 13880,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 16
+      },
+      {
+       "name": "Burke County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4705,
+       "remainder": [
+        {
+         "n": 4705,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Butts County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 7662,
+       "remainder": [
+        {
+         "n": 7662,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Calhoun County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 915,
+       "remainder": [
+        {
+         "n": 915,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Camden County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 12875,
+       "remainder": [
+        {
+         "n": 12875,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Candler County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2283,
+       "remainder": [
+        {
+         "n": 2283,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Carroll County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 24649,
+       "remainder": [
+        {
+         "n": 24649,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 28
+      },
+      {
+       "name": "Catoosa County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 15249,
+       "remainder": [
+        {
+         "n": 15249,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Charlton County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1817,
+       "remainder": [
+        {
+         "n": 1817,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 6
+      },
+      {
+       "name": "Chatham County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 66971,
+       "remainder": [
+        {
+         "n": 66971,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 86
+      },
+      {
+       "name": "Chattahoochee County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 623,
+       "remainder": [
+        {
+         "n": 623,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Chattooga County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3941,
+       "remainder": [
+        {
+         "n": 3941,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Cherokee County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 86631,
+       "remainder": [
+        {
+         "n": 86631,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 42
+      },
+      {
+       "name": "Clarke County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 29700,
+       "remainder": [
+        {
+         "n": 29700,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 24
+      },
+      {
+       "name": "Clay County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 733,
+       "remainder": [
+        {
+         "n": 733,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Clayton County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 71020,
+       "remainder": [
+        {
+         "n": 71020,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 70
+      },
+      {
+       "name": "Clinch County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1081,
+       "remainder": [
+        {
+         "n": 1081,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Cobb County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 237129,
+       "remainder": [
+        {
+         "n": 237129,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 148
+      },
+      {
+       "name": "Coffee County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 7445,
+       "remainder": [
+        {
+         "n": 7445,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 6
+      },
+      {
+       "name": "Colquitt County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6529,
+       "remainder": [
+        {
+         "n": 6529,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 19
+      },
+      {
+       "name": "Columbia County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 42692,
+       "remainder": [
+        {
+         "n": 42692,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 40
+      },
+      {
+       "name": "Cook County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3344,
+       "remainder": [
+        {
+         "n": 3344,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Coweta County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 41512,
+       "remainder": [
+        {
+         "n": 41512,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 24
+      },
+      {
+       "name": "Crawford County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2820,
+       "remainder": [
+        {
+         "n": 2820,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Crisp County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4271,
+       "remainder": [
+        {
+         "n": 4271,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Dade County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2762,
+       "remainder": [
+        {
+         "n": 2762,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Dawson County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 10589,
+       "remainder": [
+        {
+         "n": 10589,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "DeKalb County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 191
+      },
+      {
+       "name": "Decatur County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 5079,
+       "remainder": [
+        {
+         "n": 5079,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Dodge County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3729,
+       "remainder": [
+        {
+         "n": 3729,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Dooly County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1910,
+       "remainder": [
+        {
+         "n": 1910,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Dougherty County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 15583,
+       "remainder": [
+        {
+         "n": 15583,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 23
+      },
+      {
+       "name": "Douglas County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 43178,
+       "remainder": [
+        {
+         "n": 43178,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 25
+      },
+      {
+       "name": "Early County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2039,
+       "remainder": [
+        {
+         "n": 2039,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Echols County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 594,
+       "remainder": [
+        {
+         "n": 594,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Effingham County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 14022,
+       "remainder": [
+        {
+         "n": 14022,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 20
+      },
+      {
+       "name": "Elbert County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4045,
+       "remainder": [
+        {
+         "n": 4045,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Emanuel County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3808,
+       "remainder": [
+        {
+         "n": 3808,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Evans County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2083,
+       "remainder": [
+        {
+         "n": 2083,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Fannin County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6735,
+       "remainder": [
+        {
+         "n": 6735,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Fayette County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 46035,
+       "remainder": [
+        {
+         "n": 46035,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 35
+      },
+      {
+       "name": "Floyd County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 18629,
+       "remainder": [
+        {
+         "n": 18629,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 19
+      },
+      {
+       "name": "Forsyth County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 75237,
+       "remainder": [
+        {
+         "n": 75237,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 29
+      },
+      {
+       "name": "Franklin County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4901,
+       "remainder": [
+        {
+         "n": 4901,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Fulton County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 340476,
+       "remainder": [
+        {
+         "n": 340476,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 437
+      },
+      {
+       "name": "Gilmer County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 8307,
+       "remainder": [
+        {
+         "n": 8307,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 13
+      },
+      {
+       "name": "Glascock County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 769,
+       "remainder": [
+        {
+         "n": 769,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Glynn County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 24566,
+       "remainder": [
+        {
+         "n": 24566,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Gordon County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 9857,
+       "remainder": [
+        {
+         "n": 9857,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Grady County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4595,
+       "remainder": [
+        {
+         "n": 4595,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 9
+      },
+      {
+       "name": "Greene County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 8321,
+       "remainder": [
+        {
+         "n": 8321,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Gwinnett County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 238889,
+       "remainder": [
+        {
+         "n": 238889,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 156
+      },
+      {
+       "name": "Habersham County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 13249,
+       "remainder": [
+        {
+         "n": 13249,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Hall County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 54208,
+       "remainder": [
+        {
+         "n": 54208,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 31
+      },
+      {
+       "name": "Hancock County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2278,
+       "remainder": [
+        {
+         "n": 2278,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Haralson County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 5595,
+       "remainder": [
+        {
+         "n": 5595,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Harris County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 9481,
+       "remainder": [
+        {
+         "n": 9481,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Hart County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6828,
+       "remainder": [
+        {
+         "n": 6828,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Heard County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2103,
+       "remainder": [
+        {
+         "n": 2103,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 6
+      },
+      {
+       "name": "Henry County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 81318,
+       "remainder": [
+        {
+         "n": 81318,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 37
+      },
+      {
+       "name": "Houston County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 45764,
+       "remainder": [
+        {
+         "n": 45764,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 17
+      },
+      {
+       "name": "Irwin County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2058,
+       "remainder": [
+        {
+         "n": 2058,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 2
+      },
+      {
+       "name": "Jackson County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 25026,
+       "remainder": [
+        {
+         "n": 25026,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Jasper County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3976,
+       "remainder": [
+        {
+         "n": 3976,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 3
+      },
+      {
+       "name": "Jeff Davis County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 9
+      },
+      {
+       "name": "Jefferson County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2960,
+       "remainder": [
+        {
+         "n": 2960,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Jenkins County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1445,
+       "remainder": [
+        {
+         "n": 1445,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Johnson County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1825,
+       "remainder": [
+        {
+         "n": 1825,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Jones County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 7391,
+       "remainder": [
+        {
+         "n": 7391,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Lamar County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 5194,
+       "remainder": [
+        {
+         "n": 5194,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Lanier County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1661,
+       "remainder": [
+        {
+         "n": 1661,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Laurens County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 9750,
+       "remainder": [
+        {
+         "n": 9750,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 13
+      },
+      {
+       "name": "Lee County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 7466,
+       "remainder": [
+        {
+         "n": 7466,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Liberty County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 11783,
+       "remainder": [
+        {
+         "n": 11783,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Lincoln County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2535,
+       "remainder": [
+        {
+         "n": 2535,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Long County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2863,
+       "remainder": [
+        {
+         "n": 2863,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Lowndes County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 23515,
+       "remainder": [
+        {
+         "n": 23515,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 15
+      },
+      {
+       "name": "Lumpkin County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 9296,
+       "remainder": [
+        {
+         "n": 9296,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Macon County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2304,
+       "remainder": [
+        {
+         "n": 2304,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Madison County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 7125,
+       "remainder": [
+        {
+         "n": 7125,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Marion County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1631,
+       "remainder": [
+        {
+         "n": 1631,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "McDuffie County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "McIntosh County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": null,
+       "remainder": null,
+       "precincts_reporting": null,
+       "precincts_total": 6
+      },
+      {
+       "name": "Meriwether County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4215,
+       "remainder": [
+        {
+         "n": 4215,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Miller County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1176,
+       "remainder": [
+        {
+         "n": 1176,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Mitchell County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3784,
+       "remainder": [
+        {
+         "n": 3784,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 9
+      },
+      {
+       "name": "Monroe County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 8375,
+       "remainder": [
+        {
+         "n": 8375,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Montgomery County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1499,
+       "remainder": [
+        {
+         "n": 1499,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 3
+      },
+      {
+       "name": "Morgan County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6957,
+       "remainder": [
+        {
+         "n": 6957,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Murray County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6370,
+       "remainder": [
+        {
+         "n": 6370,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Muscogee County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 43048,
+       "remainder": [
+        {
+         "n": 43048,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 25
+      },
+      {
+       "name": "Newton County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 31591,
+       "remainder": [
+        {
+         "n": 31591,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 17
+      },
+      {
+       "name": "Oconee County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 16459,
+       "remainder": [
+        {
+         "n": 16459,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Oglethorpe County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4448,
+       "remainder": [
+        {
+         "n": 4448,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 3
+      },
+      {
+       "name": "Paulding County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 52416,
+       "remainder": [
+        {
+         "n": 52416,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 20
+      },
+      {
+       "name": "Peach County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 7928,
+       "remainder": [
+        {
+         "n": 7928,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Pickens County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 9692,
+       "remainder": [
+        {
+         "n": 9692,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Pierce County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4912,
+       "remainder": [
+        {
+         "n": 4912,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Pike County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 5474,
+       "remainder": [
+        {
+         "n": 5474,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Polk County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 8945,
+       "remainder": [
+        {
+         "n": 8945,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Pulaski County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2384,
+       "remainder": [
+        {
+         "n": 2384,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Putnam County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 7538,
+       "remainder": [
+        {
+         "n": 7538,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Quitman County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 545,
+       "remainder": [
+        {
+         "n": 545,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 2
+      },
+      {
+       "name": "Rabun County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6009,
+       "remainder": [
+        {
+         "n": 6009,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Randolph County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1399,
+       "remainder": [
+        {
+         "n": 1399,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 6
+      },
+      {
+       "name": "Richmond County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 40619,
+       "remainder": [
+        {
+         "n": 40619,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 65
+      },
+      {
+       "name": "Rockdale County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 29053,
+       "remainder": [
+        {
+         "n": 29053,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 14
+      },
+      {
+       "name": "Schley County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1176,
+       "remainder": [
+        {
+         "n": 1176,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Screven County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3325,
+       "remainder": [
+        {
+         "n": 3325,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Seminole County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1246,
+       "remainder": [
+        {
+         "n": 1246,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Spalding County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 17299,
+       "remainder": [
+        {
+         "n": 17299,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Stephens County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 7181,
+       "remainder": [
+        {
+         "n": 7181,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Stewart County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 748,
+       "remainder": [
+        {
+         "n": 748,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Sumter County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6261,
+       "remainder": [
+        {
+         "n": 6261,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Talbot County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1462,
+       "remainder": [
+        {
+         "n": 1462,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 7
+      },
+      {
+       "name": "Taliaferro County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 507,
+       "remainder": [
+        {
+         "n": 507,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 2
+      },
+      {
+       "name": "Tattnall County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3734,
+       "remainder": [
+        {
+         "n": 3734,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Taylor County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2019,
+       "remainder": [
+        {
+         "n": 2019,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 3
+      },
+      {
+       "name": "Telfair County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1781,
+       "remainder": [
+        {
+         "n": 1781,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Terrell County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2019,
+       "remainder": [
+        {
+         "n": 2019,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 6
+      },
+      {
+       "name": "Thomas County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 11521,
+       "remainder": [
+        {
+         "n": 11521,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 20
+      },
+      {
+       "name": "Tift County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 8338,
+       "remainder": [
+        {
+         "n": 8338,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Toombs County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 4955,
+       "remainder": [
+        {
+         "n": 4955,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Towns County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 5703,
+       "remainder": [
+        {
+         "n": 5703,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 2
+      },
+      {
+       "name": "Treutlen County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1437,
+       "remainder": [
+        {
+         "n": 1437,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 2
+      },
+      {
+       "name": "Troup County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 13041,
+       "remainder": [
+        {
+         "n": 13041,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Turner County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2110,
+       "remainder": [
+        {
+         "n": 2110,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 3
+      },
+      {
+       "name": "Twiggs County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1862,
+       "remainder": [
+        {
+         "n": 1862,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 5
+      },
+      {
+       "name": "Union County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 9586,
+       "remainder": [
+        {
+         "n": 9586,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Upson County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6982,
+       "remainder": [
+        {
+         "n": 6982,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Walker County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 12458,
+       "remainder": [
+        {
+         "n": 12458,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 11
+      },
+      {
+       "name": "Walton County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 29944,
+       "remainder": [
+        {
+         "n": 29944,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 15
+      },
+      {
+       "name": "Ware County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 5999,
+       "remainder": [
+        {
+         "n": 5999,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 13
+      },
+      {
+       "name": "Warren County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1444,
+       "remainder": [
+        {
+         "n": 1444,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Washington County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 5144,
+       "remainder": [
+        {
+         "n": 5144,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 8
+      },
+      {
+       "name": "Wayne County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 6243,
+       "remainder": [
+        {
+         "n": 6243,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 12
+      },
+      {
+       "name": "Webster County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 655,
+       "remainder": [
+        {
+         "n": 655,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 1
+      },
+      {
+       "name": "Wheeler County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1092,
+       "remainder": [
+        {
+         "n": 1092,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 2
+      },
+      {
+       "name": "White County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 8121,
+       "remainder": [
+        {
+         "n": 8121,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 10
+      },
+      {
+       "name": "Whitfield County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 14185,
+       "remainder": [
+        {
+         "n": 14185,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 23
+      },
+      {
+       "name": "Wilcox County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1220,
+       "remainder": [
+        {
+         "n": 1220,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Wilkes County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 2744,
+       "remainder": [
+        {
+         "n": 2744,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 4
+      },
+      {
+       "name": "Wilkinson County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 1694,
+       "remainder": [
+        {
+         "n": 1694,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 6
+      },
+      {
+       "name": "Worth County",
+       "votes": [
+        0,
+        0
+       ],
+       "outstanding": 3565,
+       "remainder": [
+        {
+         "n": 3565,
+         "basis": "measured",
+         "share": null
+        }
+       ],
+       "precincts_reporting": null,
+       "precincts_total": 9
+      }
+     ],
+     "updated": "2026-11-04T00:08:31+00:00",
+>>>>>>> Stashed changes
      "tier": "safe",
      "roster_only": true,
      "roster_source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data"

@@ -567,13 +567,20 @@ function cardFor(key, st, abbr, tier){
 
   const winner = p.proj.indexOf(Math.max(...p.proj));
   const anyOut = p.outstanding > 0;
+  // A "projection" that could only allocate 3% of the outstanding vote is not a
+  // projection, it is the counted vote plus a sliver - and shown in a column headed
+  // "Projected" it reads as a forecast of the finish. Georgia at 00:27Z: 1,564,307 of
+  // 1,619,849 outstanding ballots sat in counties with no counted vote, so nothing
+  // could be projected for them. Below half allocated, the column is withheld.
+  const allocShare = p.outstanding > 0 ? p.allocated / p.outstanding : 1;
+  const projUseful = allocShare >= 0.5;
   const rows = st.candidates.map((c,i)=>{
     const win = i===winner && p.totC>0;
     return `<tr class="${win?"win":""}">
       <td class="cname"><i class="sw" style="background:${col(c.party)}"></i>${c.name}</td>
       <td class="num cnt">${n(p.counted[i])}</td>
       <td class="num outs">${anyOut?"+"+n(p.proj[i]-p.counted[i]):"\u2014"}</td>
-      <td class="num prj" ${win?`style="color:${col(c.party)}"`:""}>${n(p.proj[i])}</td>
+      <td class="num prj" ${win&&projUseful?`style="color:${col(c.party)}"`:""}>${projUseful?n(p.proj[i]):"\u2014"}</td>
     </tr>`;
   }).join("");
   // The Total row shows what was ALLOCATED, so it equals the candidate columns above it.
@@ -583,7 +590,7 @@ function cardFor(key, st, abbr, tier){
       <td class="cname">Total</td>
       <td class="num">${n(p.totC)}</td>
       <td class="num outs">${p.allocated>0?"+"+n(p.allocated):"\u2014"}</td>
-      <td class="num">${n(p.totC+p.allocated)}</td></tr></tfoot>` : "";
+      <td class="num">${projUseful?n(p.totC+p.allocated):"\u2014"}</td></tr></tfoot>` : "";
   const ledger = p.totC>0 ? `<table class="cand">
       <thead><tr><th></th><th>Counted</th><th>Of outstanding</th><th>Projected</th></tr></thead>
       <tbody>${rows}</tbody>${tally}</table>` + unalloc :
@@ -616,9 +623,12 @@ function cardFor(key, st, abbr, tier){
 
   const unitName = st.unit==="town"?"towns":st.unit==="district"?"districts":"counties";
   const unalloc = p.unallocated > 0
-    ? `<div class="warn"><b>&#9873;</b><span><b>${n(p.unallocated)}</b> outstanding ballots are <b>not in this projection</b>`
-      + (p.unallocCty>0 ? ` — ${p.unallocCty} ${unitName} have ballots left but no counted vote yet, so there is no split to project them at` : "")
-      + `. The projected column covers the ${n(p.allocated)} that could be allocated.</span></div>` : "";
+    ? `<div class="warn"><b>&#9873;</b><span><b>No projection yet.</b> <b>${n(p.unallocated)}</b> of `
+      + `${n(p.outstanding)} outstanding ballots (<b>${pct(p.unallocated/p.outstanding)}</b>) sit in `
+      + `${p.unallocCty} ${unitName} with no counted vote, so there is no split to project them at`
+      + (projUseful ? `. The projected column covers only the ${n(p.allocated)} that could be allocated.`
+                    : `. Too little to project from, so the projected column is withheld rather than shown as a forecast.`)
+      + `</span></div>` : "";
 
   const noJ = p.unknownCty>0
     ? `<div class="warn"><b>&#9873;</b><span>${p.unknownCty} of ${p.counties} ${st.unit==="town"?"towns":st.unit==="district"?"districts":"counties"} report no outstanding count — their projection is counted vote only.</span></div>` : "";

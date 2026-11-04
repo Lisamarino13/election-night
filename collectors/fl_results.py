@@ -37,8 +37,22 @@ PARTY = {"REP": "R", "DEM": "D"}
 
 
 def get(url, timeout=180):
-    import gzip
-    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout) as r:
+    """Fetch the night file, defeating the CDN in front of it.
+
+    Florida serves this through a cache that happily returns the PRE-ELECTION copy for
+    hours: on election night a plain GET came back 352,661 bytes with 0 votes and
+    "x-cache: TCP_HIT", while the same URL with a unique query string returned 365,457
+    bytes with the real count. The loop therefore fetched a good file at 04:21Z, then at
+    05:02Z got the stale cached one and OVERWROTE Florida with zeros.
+
+    A per-request cache-buster plus no-cache headers makes the edge go to origin.
+    """
+    import gzip, time
+    url = url + ("&" if "?" in url else "?") + f"cb={int(time.time() * 1000)}"
+    headers = dict(UA)
+    headers["Cache-Control"] = "no-cache"
+    headers["Pragma"] = "no-cache"
+    with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=timeout) as r:
         if r.status != 200:
             raise RuntimeError(f"{url}: HTTP {r.status}")
         body = r.read()

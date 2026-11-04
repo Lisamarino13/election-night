@@ -191,8 +191,18 @@ def county_roster(state_data):
     return reg
 
 
+# Georgia's early-vote file spells counties uppercase with no spaces (DEKALB, BENHILL,
+# MCDUFFIE), while the results API spells them "DeKalb County", "Ben Hill County",
+# "McDuffie County". .title() turned DEKALB into "Dekalb", which matches neither, so five
+# counties silently got cast=None - DeKalb among them, holding 240,254 early ballots. The
+# per-county outstanding then summed 249,868 short and the board projected a Georgia
+# total BELOW its own early vote. Match on letters only, case-folded.
+def _ckey(s):
+    return "".join(ch for ch in str(s).upper() if ch.isalnum())
+
+
 def early_cast():
-    return early_cast_shared.by_unit("GA", key=lambda s: s.title())
+    return early_cast_shared.by_unit("GA", key=_ckey)
 
 
 def build():
@@ -247,7 +257,8 @@ def build():
             for ch in choices.values():
                 modes.update(ch["by_mode"])
             counted_early = sum(modes[m] for m in EARLY_MODES)
-            was = cast.get(cname) or cast.get(re.sub(r"\s+County$", "", cname))
+            was = (cast.get(_ckey(cname))
+                   or cast.get(_ckey(re.sub(r"\s+County$", "", cname))))
             pr_in, pr_all = reporting_of(item)
             out[race] = {
                 "choices": {c: v for c, v in sorted(choices.items(),

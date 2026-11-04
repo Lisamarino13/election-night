@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T00:43:09+00:00",
+ "updated": "2026-11-04T00:44:15+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -188,7 +188,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/383470/reports/detailxml.zip",
-   "updated": "2026-11-04T00:42:51+00:00",
+   "updated": "2026-11-04T00:44:01+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1158,7 +1158,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T00:42:51+00:00",
+     "updated": "2026-11-04T00:44:01+00:00",
      "tier": "tossup",
      "precincts_reporting": 1,
      "precincts_total": 2312,
@@ -3106,7 +3106,7 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T00:42:36+00:00",
+     "updated": "2026-11-04T00:43:44+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 2626,
@@ -3122,7 +3122,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T00:42:36+00:00",
+   "updated": "2026-11-04T00:43:44+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -3133,7 +3133,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T00:42:38+00:00",
+   "updated": "2026-11-04T00:43:45+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -5120,7 +5120,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:42:38+00:00",
+     "updated": "2026-11-04T00:43:45+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
@@ -7020,7 +7020,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:42:38+00:00",
+     "updated": "2026-11-04T00:43:45+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
@@ -9251,7 +9251,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T00:43:09+00:00",
+   "updated": "2026-11-04T00:44:15+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -9422,8 +9422,17 @@
         1950,
         2957
        ],
-       "outstanding": null,
-       "remainder": null,
+       "outstanding": 15,
+       "remainder": [
+        {
+         "n": 15,
+         "basis": "measured",
+         "share": [
+          0.3984265243045799,
+          0.6015734756954201
+         ]
+        }
+       ],
        "precincts_reporting": 1,
        "precincts_total": 1
       },
@@ -9447,15 +9456,18 @@
       {
        "name": "Bibb County",
        "votes": [
-        0,
-        0
+        17451,
+        8852
        ],
-       "outstanding": 34422,
+       "outstanding": 8119,
        "remainder": [
         {
-         "n": 34422,
+         "n": 8119,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.6634604417747025,
+          0.3365395582252975
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -9643,15 +9655,18 @@
       {
        "name": "Carroll County",
        "votes": [
-        0,
-        0
+        10272,
+        14278
        ],
-       "outstanding": 24649,
+       "outstanding": 99,
        "remainder": [
         {
-         "n": 24649,
+         "n": 99,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.4184114052953157,
+          0.5815885947046843
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -9694,15 +9709,18 @@
       {
        "name": "Chatham County",
        "votes": [
-        0,
-        0
+        10618,
+        4567
        ],
-       "outstanding": 66971,
+       "outstanding": 51786,
        "remainder": [
         {
-         "n": 66971,
+         "n": 51786,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.6992426736911426,
+          0.30075732630885743
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -9992,15 +10010,18 @@
       {
        "name": "Dawson County",
        "votes": [
-        0,
-        0
+        2189,
+        8338
        ],
-       "outstanding": 10589,
+       "outstanding": 62,
        "remainder": [
         {
-         "n": 10589,
+         "n": 62,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.20794148380355276,
+          0.7920585161964472
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -10012,8 +10033,14 @@
         0,
         0
        ],
-       "outstanding": null,
-       "remainder": null,
+       "outstanding": 240254,
+       "remainder": [
+        {
+         "n": 240254,
+         "basis": "measured",
+         "share": null
+        }
+       ],
        "precincts_reporting": null,
        "precincts_total": 191
       },
@@ -10691,8 +10718,14 @@
         0,
         0
        ],
-       "outstanding": null,
-       "remainder": null,
+       "outstanding": 2291,
+       "remainder": [
+        {
+         "n": 2291,
+         "basis": "measured",
+         "share": null
+        }
+       ],
        "precincts_reporting": null,
        "precincts_total": 9
       },
@@ -10894,10 +10927,10 @@
       {
        "name": "Lowndes County",
        "votes": [
-        11958,
-        11480
+        12942,
+        12423
        ],
-       "outstanding": 77,
+       "outstanding": 5376,
        "remainder": [
         {
          "n": 77,
@@ -10906,9 +10939,17 @@
           0.510197115794863,
           0.48980288420513696
          ]
+        },
+        {
+         "n": 5299,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.5106382978723404,
+          0.48936170212765956
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 4,
        "precincts_total": 15
       },
       {
@@ -10988,8 +11029,14 @@
         0,
         0
        ],
-       "outstanding": null,
-       "remainder": null,
+       "outstanding": 5957,
+       "remainder": [
+        {
+         "n": 5957,
+         "basis": "measured",
+         "share": null
+        }
+       ],
        "precincts_reporting": null,
        "precincts_total": 7
       },
@@ -10999,8 +11046,14 @@
         0,
         0
        ],
-       "outstanding": null,
-       "remainder": null,
+       "outstanding": 3742,
+       "remainder": [
+        {
+         "n": 3742,
+         "basis": "measured",
+         "share": null
+        }
+       ],
        "precincts_reporting": null,
        "precincts_total": 6
       },
@@ -11197,15 +11250,18 @@
       {
        "name": "Oglethorpe County",
        "votes": [
-        0,
-        0
+        109,
+        173
        ],
-       "outstanding": 4448,
+       "outstanding": 4166,
        "remainder": [
         {
-         "n": 4448,
+         "n": 4166,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.38652482269503546,
+          0.6134751773049646
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11373,7 +11429,7 @@
          "share": null
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 2
       },
       {
@@ -11870,15 +11926,18 @@
       {
        "name": "Walker County",
        "votes": [
-        0,
-        0
+        253,
+        556
        ],
-       "outstanding": 12458,
+       "outstanding": 11649,
        "remainder": [
         {
-         "n": 12458,
+         "n": 11649,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3127317676143387,
+          0.6872682323856613
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11986,7 +12045,7 @@
          "share": null
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 1
       },
       {
@@ -12106,17 +12165,17 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:43:09+00:00",
+     "updated": "2026-11-04T00:44:15+00:00",
      "tier": "tossup",
-     "precincts_reporting": 52,
+     "precincts_reporting": 62,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1330607,
+     "counted": 1415271,
      "modes": {
-      "election_day": 10619,
-      "early": 1263284,
-      "mail": 56704,
+      "election_day": 13132,
+      "early": 1339091,
+      "mail": 63048,
       "provisional": 0
      }
     },
@@ -12289,8 +12348,17 @@
         2163,
         2720
        ],
-       "outstanding": null,
-       "remainder": null,
+       "outstanding": 39,
+       "remainder": [
+        {
+         "n": 39,
+         "basis": "measured",
+         "share": [
+          0.4446958981612447,
+          0.5553041018387553
+         ]
+        }
+       ],
        "precincts_reporting": 1,
        "precincts_total": 1
       },
@@ -12314,15 +12382,18 @@
       {
        "name": "Bibb County",
        "votes": [
-        0,
-        0
+        18175,
+        8106
        ],
-       "outstanding": 34422,
+       "outstanding": 8141,
        "remainder": [
         {
-         "n": 34422,
+         "n": 8141,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.6915642479357711,
+          0.3084357520642289
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -12510,15 +12581,18 @@
       {
        "name": "Carroll County",
        "votes": [
-        0,
-        0
+        11272,
+        13226
        ],
-       "outstanding": 24649,
+       "outstanding": 151,
        "remainder": [
         {
-         "n": 24649,
+         "n": 151,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.4601191934035431,
+          0.5398808065964569
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -12561,15 +12635,18 @@
       {
        "name": "Chatham County",
        "votes": [
-        0,
-        0
+        11243,
+        4018
        ],
-       "outstanding": 66971,
+       "outstanding": 51710,
        "remainder": [
         {
-         "n": 66971,
+         "n": 51710,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.7367145010156608,
+          0.2632854989843392
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -12859,15 +12936,18 @@
       {
        "name": "Dawson County",
        "votes": [
-        0,
-        0
+        2706,
+        7765
        ],
-       "outstanding": 10589,
+       "outstanding": 118,
        "remainder": [
         {
-         "n": 10589,
+         "n": 118,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.2584280393467673,
+          0.7415719606532327
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -12879,8 +12959,14 @@
         0,
         0
        ],
-       "outstanding": null,
-       "remainder": null,
+       "outstanding": 240254,
+       "remainder": [
+        {
+         "n": 240254,
+         "basis": "measured",
+         "share": null
+        }
+       ],
        "precincts_reporting": null,
        "precincts_total": 191
       },
@@ -13558,8 +13644,14 @@
         0,
         0
        ],
-       "outstanding": null,
-       "remainder": null,
+       "outstanding": 2291,
+       "remainder": [
+        {
+         "n": 2291,
+         "basis": "measured",
+         "share": null
+        }
+       ],
        "precincts_reporting": null,
        "precincts_total": 9
       },
@@ -13753,10 +13845,10 @@
       {
        "name": "Lowndes County",
        "votes": [
-        12670,
-        10760
+        13705,
+        11647
        ],
-       "outstanding": 85,
+       "outstanding": 5371,
        "remainder": [
         {
          "n": 85,
@@ -13765,9 +13857,17 @@
           0.5407597097737943,
           0.4592402902262057
          ]
+        },
+        {
+         "n": 5286,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.5385015608740895,
+          0.4614984391259105
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 4,
        "precincts_total": 15
       },
       {
@@ -13847,8 +13947,14 @@
         0,
         0
        ],
-       "outstanding": null,
-       "remainder": null,
+       "outstanding": 5957,
+       "remainder": [
+        {
+         "n": 5957,
+         "basis": "measured",
+         "share": null
+        }
+       ],
        "precincts_reporting": null,
        "precincts_total": 7
       },
@@ -13858,8 +13964,14 @@
         0,
         0
        ],
-       "outstanding": null,
-       "remainder": null,
+       "outstanding": 3742,
+       "remainder": [
+        {
+         "n": 3742,
+         "basis": "measured",
+         "share": null
+        }
+       ],
        "precincts_reporting": null,
        "precincts_total": 6
       },
@@ -14056,15 +14168,18 @@
       {
        "name": "Oglethorpe County",
        "votes": [
-        0,
-        0
+        125,
+        156
        ],
-       "outstanding": 4448,
+       "outstanding": 4167,
        "remainder": [
         {
-         "n": 4448,
+         "n": 4167,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.44483985765124556,
+          0.5551601423487544
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -14232,7 +14347,7 @@
          "share": null
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 2
       },
       {
@@ -14729,15 +14844,18 @@
       {
        "name": "Walker County",
        "votes": [
-        0,
-        0
+        318,
+        497
        ],
-       "outstanding": 12458,
+       "outstanding": 11643,
        "remainder": [
         {
-         "n": 12458,
+         "n": 11643,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3901840490797546,
+          0.6098159509202454
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -14845,7 +14963,7 @@
          "share": null
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 1
       },
       {
@@ -14974,17 +15092,17 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:43:09+00:00",
+     "updated": "2026-11-04T00:44:15+00:00",
      "tier": "safe",
-     "precincts_reporting": 52,
+     "precincts_reporting": 62,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1330538,
+     "counted": 1415143,
      "modes": {
-      "election_day": 10591,
-      "early": 1262642,
-      "mail": 57305,
+      "election_day": 13098,
+      "early": 1338340,
+      "mail": 63705,
       "provisional": 0
      }
     }

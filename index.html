@@ -1770,6 +1770,22 @@ document.getElementById("applyEarly").onclick = ()=>{
 setTab("ev");
 load();
 setInterval(load, 120000);
+
+// GitHub Pages serves this HTML with cache-control: max-age=600, and the HTML carries
+// no version hash the way the .js/.css do - so a viewer could sit on a ten-minute-old
+// page showing arithmetic that was already fixed. That happened tonight: the projection
+// fix was live on the server while the board on screen still read "+1,704,584" against
+// candidate rows summing to 41,912. Poll this file's own build stamp and reload when it
+// changes. Bump BUILD whenever index.html changes.
+const BUILD = "1793752162";
+async function checkBuild(){
+  try {
+    const t = await fetch("index.html?cb=" + Date.now(), {cache: "no-store"}).then(r => r.text());
+    const m = t.match(/const BUILD = "(\d+)"/);
+    if (m && m[1] !== BUILD) location.reload();
+  } catch (e) { /* offline or blocked - try again next tick */ }
+}
+setInterval(checkBuild, 45000);
 </script>
 <script src="compare.js?v=8f5cbe14"></script>
 <script src="texas.js?v=d99c7d84"></script>

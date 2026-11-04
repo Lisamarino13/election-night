@@ -5,7 +5,7 @@
  "election": "2026 General",
  "feed_updated": "11/3/2026 9:00 PM CT",
  "registered": 1265162,
- "fetched": "2026-11-04T03:04:36+00:00",
+ "fetched": "2026-11-04T03:07:12+00:00",
  "early_cast_as_of": "11/3/2026",
  "counties": {
   "Adams": {
@@ -98,7 +98,7 @@
       }
      },
      "counted": 0,
-     "precincts_reporting": 0,
+     "precincts_reporting": 1,
      "precincts_total": 1,
      "early_and_mail_cast": 30
     }
@@ -1454,26 +1454,26 @@
      "choices": {
       "Pete Ricketts": {
        "party": "R",
-       "votes": 0
-      },
-      "Mike Marvin": {
-       "party": "O",
-       "votes": 0
-      },
-      "Robin Richards": {
-       "party": "O",
-       "votes": 0
-      },
-      "Chuck Conboy": {
-       "party": "O",
-       "votes": 0
+       "votes": 264
       },
       "Dan Osborn": {
        "party": "O",
-       "votes": 0
+       "votes": 57
+      },
+      "Mike Marvin": {
+       "party": "O",
+       "votes": 7
+      },
+      "Robin Richards": {
+       "party": "O",
+       "votes": 6
+      },
+      "Chuck Conboy": {
+       "party": "O",
+       "votes": 2
       }
      },
-     "counted": 0,
+     "counted": 336,
      "precincts_reporting": 0,
      "precincts_total": 1,
      "early_and_mail_cast": 47
@@ -2830,26 +2830,26 @@
      "choices": {
       "Pete Ricketts": {
        "party": "R",
-       "votes": 0
-      },
-      "Mike Marvin": {
-       "party": "O",
-       "votes": 0
-      },
-      "Robin Richards": {
-       "party": "O",
-       "votes": 0
-      },
-      "Chuck Conboy": {
-       "party": "O",
-       "votes": 0
+       "votes": 1224
       },
       "Dan Osborn": {
        "party": "O",
-       "votes": 0
+       "votes": 1164
+      },
+      "Robin Richards": {
+       "party": "O",
+       "votes": 55
+      },
+      "Mike Marvin": {
+       "party": "O",
+       "votes": 41
+      },
+      "Chuck Conboy": {
+       "party": "O",
+       "votes": 22
       }
      },
-     "counted": 0,
+     "counted": 2506,
      "precincts_reporting": 0,
      "precincts_total": 15,
      "early_and_mail_cast": 2410
@@ -2990,11 +2990,11 @@
    "contest_name": "For United States Senator - 6 Year Term",
    "race_id": 13224,
    "choices": {
-    "Dan Osborn": 162287,
-    "Pete Ricketts": 124751,
-    "Robin Richards": 7399,
-    "Mike Marvin": 5652,
-    "Chuck Conboy": 2906
+    "Dan Osborn": 163508,
+    "Pete Ricketts": 126239,
+    "Robin Richards": 7460,
+    "Mike Marvin": 5700,
+    "Chuck Conboy": 2930
    },
    "parties": {
     "Pete Ricketts": "R",
@@ -3003,7 +3003,7 @@
     "Chuck Conboy": "O",
     "Dan Osborn": "O"
    },
-   "total": 302995,
+   "total": 305837,
    "precincts_total": 1322,
    "early_and_mail_cast": 261816
   }

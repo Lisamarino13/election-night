@@ -69,6 +69,26 @@ def num(v):
     return int(v) if v.lstrip("-").isdigit() else 0
 
 
+
+def _text(f):
+    """Decode a member of the NCSBE zip, whatever encoding it arrived in.
+
+    On election night the results file came back UTF-16: read as UTF-8 with
+    errors="ignore" every second byte survives as NUL and csv raises "line contains
+    NUL", so the whole state failed with results already posted. Sniff the BOM, fall
+    back to UTF-8, and strip any stray NULs either way.
+    """
+    raw = f.read()
+    if raw[:2] in (b"\xff\xfe", b"\xfe\xff"):
+        txt = raw.decode("utf-16", "ignore")
+    elif raw[:3] == b"\xef\xbb\xbf":
+        txt = raw.decode("utf-8-sig", "ignore")
+    else:
+        txt = raw.decode("utf-8", "ignore")
+        if txt.count("\x00") > len(txt) // 4:      # looks like UTF-16 read as UTF-8
+            txt = raw.decode("utf-16", "ignore")
+    return io.StringIO(txt.replace("\x00", ""))
+
 def parse_results(body):
     """county -> race -> {choices, modes, precincts}."""
     z = zipfile.ZipFile(io.BytesIO(body))
@@ -83,8 +103,7 @@ def parse_results(body):
     }))
     rows = 0
     with z.open(names[0]) as f:
-        rd = csv.DictReader(io.TextIOWrapper(f, encoding="utf-8", errors="ignore"),
-                            delimiter="\t")
+        rd = csv.DictReader(_text(f), delimiter="\t")
         need = ["County", "Precinct", "Contest Name", "Choice", "Choice Party",
                 "Total Votes", "Real Precinct"] + MODES
         for c in need:
@@ -137,7 +156,7 @@ def parse_outstanding(body):
         raise RuntimeError("outstanding zip: no .csv inside")
     out = {}
     with z.open(names[0]) as f:
-        rd = csv.DictReader(io.TextIOWrapper(f, encoding="utf-8", errors="ignore"))
+        rd = csv.DictReader(_text(f))
         if "abs_outstanding" not in (rd.fieldnames or []):
             raise RuntimeError("outstanding: abs_outstanding column missing")
         for row in rd:

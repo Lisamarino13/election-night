@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T05:44:41+00:00",
+ "updated": "2026-11-04T05:52:10+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -41,7 +41,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://electionresultsfiles.sos.mn.gov/20261103/allracesbycounty.txt (+ Cntytbl.txt for the precinct cross-check)",
-   "updated": "2026-11-04T05:44:02+00:00",
+   "updated": "2026-11-04T05:52:03+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -84,15 +84,15 @@
       {
        "name": "Anoka",
        "votes": [
-        87506,
-        82604,
-        2744,
-        2194,
-        215
+        88113,
+        83841,
+        2778,
+        2219,
+        219
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 124,
+       "precincts_reporting": 125,
        "precincts_total": 128
       },
       {
@@ -224,15 +224,15 @@
       {
        "name": "Chippewa",
        "votes": [
-        0,
-        0,
-        0,
-        0,
-        0
+        1691,
+        3233,
+        90,
+        56,
+        4
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 1,
+       "precincts_reporting": 25,
        "precincts_total": 25
       },
       {
@@ -308,15 +308,15 @@
       {
        "name": "Crow Wing",
        "votes": [
-        9958,
-        17946,
-        495,
-        348,
-        25
+        11869,
+        22022,
+        567,
+        422,
+        29
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 54,
+       "precincts_reporting": 61,
        "precincts_total": 62
       },
       {
@@ -406,29 +406,29 @@
       {
        "name": "Goodhue",
        "votes": [
-        6395,
-        9099,
-        295,
-        244,
-        13
+        9160,
+        12240,
+        390,
+        327,
+        18
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 28,
+       "precincts_reporting": 37,
        "precincts_total": 40
       },
       {
        "name": "Grant",
        "votes": [
-        800,
-        1435,
+        823,
+        1558,
         37,
-        34,
-        0
+        35,
+        1
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 16,
+       "precincts_reporting": 18,
        "precincts_total": 23
       },
       {
@@ -532,24 +532,24 @@
       {
        "name": "Kandiyohi",
        "votes": [
-        6587,
-        11747,
-        266,
-        199,
-        25
+        6879,
+        12130,
+        278,
+        208,
+        26
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 47,
+       "precincts_reporting": 48,
        "precincts_total": 48
       },
       {
        "name": "Kittson",
        "votes": [
-        580,
-        831,
-        19,
-        23,
+        717,
+        979,
+        25,
+        25,
         3
        ],
        "outstanding": null,
@@ -588,15 +588,15 @@
       {
        "name": "Lake",
        "votes": [
-        1032,
-        969,
-        29,
-        31,
+        1982,
+        1580,
+        59,
+        55,
         2
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 8,
+       "precincts_reporting": 12,
        "precincts_total": 19
       },
       {
@@ -700,15 +700,15 @@
       {
        "name": "Mcleod",
        "votes": [
-        5237,
-        10972,
-        327,
-        201,
+        5358,
+        11332,
+        335,
+        209,
         38
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 28,
+       "precincts_reporting": 29,
        "precincts_total": 29
       },
       {
@@ -840,15 +840,15 @@
       {
        "name": "Otter Tail",
        "votes": [
-        10070,
-        20060,
-        463,
+        10075,
+        20087,
+        469,
         402,
         14
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 90,
+       "precincts_reporting": 91,
        "precincts_total": 91
       },
       {
@@ -896,15 +896,15 @@
       {
        "name": "Polk",
        "votes": [
-        2807,
-        5652,
-        126,
-        145,
-        3
+        4157,
+        7405,
+        176,
+        193,
+        6
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 77,
+       "precincts_reporting": 82,
        "precincts_total": 82
       },
       {
@@ -932,21 +932,21 @@
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 139,
+       "precincts_reporting": 140,
        "precincts_total": 162
       },
       {
        "name": "Red Lake",
        "votes": [
-        571,
-        1122,
-        38,
-        34,
+        607,
+        1206,
+        39,
+        37,
         3
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 19,
+       "precincts_reporting": 21,
        "precincts_total": 21
       },
       {
@@ -1008,15 +1008,15 @@
       {
        "name": "Roseau",
        "votes": [
-        448,
-        1466,
-        28,
-        17,
+        480,
+        1583,
+        30,
+        19,
         5
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 20,
+       "precincts_reporting": 22,
        "precincts_total": 44
       },
       {
@@ -1064,15 +1064,15 @@
       {
        "name": "St. Louis",
        "votes": [
-        50565,
-        28536,
-        1459,
-        1073,
-        73
+        51820,
+        29882,
+        1522,
+        1108,
+        74
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 113,
+       "precincts_reporting": 117,
        "precincts_total": 167
       },
       {
@@ -1120,29 +1120,29 @@
       {
        "name": "Swift",
        "votes": [
-        40,
-        116,
-        2,
-        3,
-        0
+        160,
+        358,
+        10,
+        4,
+        1
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 2,
+       "precincts_reporting": 7,
        "precincts_total": 30
       },
       {
        "name": "Todd",
        "votes": [
-        1860,
-        5527,
-        146,
-        137,
-        6
+        2696,
+        8101,
+        210,
+        184,
+        8
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 29,
+       "precincts_reporting": 39,
        "precincts_total": 40
       },
       {
@@ -1162,7 +1162,7 @@
       {
        "name": "Wabasha",
        "votes": [
-        4040,
+        4039,
         6817,
         200,
         149,
@@ -1204,15 +1204,15 @@
       {
        "name": "Washington",
        "votes": [
-        74550,
-        57736,
-        1801,
-        1509,
-        196
+        75301,
+        58145,
+        1821,
+        1523,
+        199
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": 77,
+       "precincts_reporting": 78,
        "precincts_total": 84
       },
       {
@@ -1233,7 +1233,7 @@
        "name": "Wilkin",
        "votes": [
         655,
-        1419,
+        1418,
         48,
         31,
         1
@@ -1286,13 +1286,13 @@
        "precincts_total": 30
       }
      ],
-     "updated": "2026-11-04T05:44:02+00:00",
+     "updated": "2026-11-04T05:52:03+00:00",
      "tier": "tossup",
-     "precincts_reporting": 3606,
+     "precincts_reporting": 3686,
      "precincts_total": 4105,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 2584839,
+     "counted": 2618605,
      "modes": null
     }
    },
@@ -1339,7 +1339,7 @@
    "partyReg": true,
    "unit": "county",
    "source": "https://neresultswebservice.azurewebsites.us/ResultsAjax.svc/GetMapData (county map data behind the results page)",
-   "updated": "2026-11-04T05:44:01+00:00",
+   "updated": "2026-11-04T05:52:02+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1782,7 +1782,7 @@
        ],
        "outstanding": null,
        "remainder": null,
-       "precincts_reporting": null,
+       "precincts_reporting": 7,
        "precincts_total": 7
       },
       {
@@ -2180,11 +2180,11 @@
       {
        "name": "Madison",
        "votes": [
-        3438,
-        1719,
-        130,
-        123,
-        59
+        5366,
+        2351,
+        201,
+        179,
+        90
        ],
        "outstanding": null,
        "remainder": null,
@@ -2348,11 +2348,11 @@
       {
        "name": "Platte",
        "votes": [
-        3774,
-        1795,
-        133,
-        94,
-        66
+        5346,
+        2367,
+        173,
+        137,
+        88
        ],
        "outstanding": null,
        "remainder": null,
@@ -2668,13 +2668,13 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T05:44:01+00:00",
+     "updated": "2026-11-04T05:52:02+00:00",
      "tier": "watch",
      "precincts_reporting": null,
      "precincts_total": 1322,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 499594,
+     "counted": 504561,
      "modes": null
     }
    },
@@ -2689,7 +2689,7 @@
    "partyReg": true,
    "unit": "district",
    "source": "https://www.elections.alaska.gov/enr/26GENR/results/GA_ENR_Precinct_State_of_Alaska.csv",
-   "updated": "2026-11-04T05:43:57+00:00",
+   "updated": "2026-11-04T05:52:01+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -3245,7 +3245,7 @@
        "precincts_total": 1
       }
      ],
-     "updated": "2026-11-04T05:43:57+00:00",
+     "updated": "2026-11-04T05:52:01+00:00",
      "tier": "watch",
      "precincts_reporting": 0,
      "precincts_total": 443,
@@ -3292,7 +3292,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/385272/reports/detailxml.zip",
-   "updated": "2026-11-04T05:44:36+00:00",
+   "updated": "2026-11-04T05:52:04+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -4479,7 +4479,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T05:44:36+00:00",
+     "updated": "2026-11-04T05:52:04+00:00",
      "tier": "tossup",
      "precincts_reporting": 2312,
      "precincts_total": 2312,
@@ -6927,7 +6927,7 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T05:43:51+00:00",
+     "updated": "2026-11-04T05:51:56+00:00",
      "tier": "safe",
      "precincts_reporting": 2626,
      "precincts_total": 2626,
@@ -6943,7 +6943,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T05:43:51+00:00",
+   "updated": "2026-11-04T05:51:56+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -13255,7 +13255,7 @@
    "partyReg": true,
    "unit": "county",
    "source": "https://flelectionfiles.floridados.gov/enightfilespublic/20261103_ElecResultsFL.txt",
-   "updated": "2026-11-04T05:43:52+00:00",
+   "updated": "2026-11-04T05:51:57+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -14078,7 +14078,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T05:43:52+00:00",
+     "updated": "2026-11-04T05:51:57+00:00",
      "tier": "safe",
      "precincts_reporting": 5626,
      "precincts_total": 5626,
@@ -15405,7 +15405,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T05:43:52+00:00",
+     "updated": "2026-11-04T05:51:57+00:00",
      "tier": "tossup",
      "precincts_reporting": 5626,
      "precincts_total": 5626,
@@ -15426,7 +15426,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T05:44:40+00:00",
+   "updated": "2026-11-04T05:52:10+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -18466,7 +18466,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T05:44:40+00:00",
+     "updated": "2026-11-04T05:52:10+00:00",
      "tier": "tossup",
      "precincts_reporting": 159,
      "precincts_total": 159,
@@ -21572,7 +21572,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T05:44:40+00:00",
+     "updated": "2026-11-04T05:52:10+00:00",
      "tier": "safe",
      "precincts_reporting": 159,
      "precincts_total": 159,
@@ -22988,7 +22988,7 @@
    "partyReg": true,
    "unit": "parish",
    "source": "https://voterportal.sos.la.gov/ElectionResults/ElectionResults/Data?blob=20261103/VotesRaceByParish/Votes_<race>.htm",
-   "updated": "2026-11-04T05:43:54+00:00",
+   "updated": "2026-11-04T05:52:00+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -23707,7 +23707,7 @@
        "precincts_total": 26
       }
      ],
-     "updated": "2026-11-04T05:43:54+00:00",
+     "updated": "2026-11-04T05:52:00+00:00",
      "precincts_reporting": 3722,
      "precincts_total": 3722,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",

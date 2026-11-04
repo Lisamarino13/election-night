@@ -207,6 +207,17 @@ def early_cast(st):
     return out, d.get("as_of")
 
 
+# Clarity's own discovery endpoint can be EMPTY while the election exists. South
+# Carolina served elections.json = [] at 00:07Z on election night, seven minutes after
+# polls closed, while www.enr-scvotes.org/SC/127300/ was live and serving a 1.3MB
+# detail.xml titled "2026 Statewide General Election". scvotes.gov links to that id
+# directly. So discovery stays primary and these are the fallback, used ONLY when
+# discovery finds nothing - never in preference to it, because a pinned id goes stale.
+PINNED_EID = {
+    "SC": "127300",   # found on scvotes.gov; verified live, U.S. Senate contest present
+}
+
+
 def build(st):
     last = None
     for host, path in HOSTS.get(st, []):
@@ -215,6 +226,16 @@ def build(st):
         except Exception as exc:
             last = f"{host}: {exc}"
             continue
+        if e is None and st in PINNED_EID:
+            eid = PINNED_EID[st]
+            try:
+                # Prove the pin before trusting it: current_ver.txt must answer.
+                get(f"https://{host}/{path}/{eid}/current_ver.txt", timeout=40)
+                e = {"EID": eid, "ElectionName": f"pinned {eid}"}
+                print(f"   {st}: elections.json was empty — using pinned EID {eid}")
+            except Exception as exc:
+                last = f"{host}: discovery empty and pinned EID {eid} failed: {exc}"
+                continue
         if e is None:
             last = f"{host}: no November 2026 general staged yet"
             continue

@@ -2,7 +2,7 @@
  "state": "NC",
  "unit": "county",
  "election": "2026 General",
- "fetched": "2026-11-04T01:53:02+00:00",
+ "fetched": "2026-11-04T01:54:22+00:00",
  "rows": 141523,
  "early_cast_as_of": "2026-11-04",
  "counties": {
@@ -68,6 +68,16 @@
   "Alexander": {
    "senate": {
     "choices": {
+     "Roy Cooper": {
+      "party": "D",
+      "votes": 0,
+      "by_mode": {
+       "Election Day": 0,
+       "Early Voting": 0,
+       "Absentee by Mail": 0,
+       "Provisional": 0
+      }
+     },
      "Michael Whatley": {
       "party": "R",
       "votes": 0,
@@ -90,16 +100,6 @@
      },
      "Shannon W. Bray": {
       "party": "O",
-      "votes": 0,
-      "by_mode": {
-       "Election Day": 0,
-       "Early Voting": 0,
-       "Absentee by Mail": 0,
-       "Provisional": 0
-      }
-     },
-     "Roy Cooper": {
-      "party": "D",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -186,26 +186,6 @@
   "Anson": {
    "senate": {
     "choices": {
-     "Roy Cooper": {
-      "party": "D",
-      "votes": 0,
-      "by_mode": {
-       "Election Day": 0,
-       "Early Voting": 0,
-       "Absentee by Mail": 0,
-       "Provisional": 0
-      }
-     },
-     "Michael Dublin": {
-      "party": "O",
-      "votes": 0,
-      "by_mode": {
-       "Election Day": 0,
-       "Early Voting": 0,
-       "Absentee by Mail": 0,
-       "Provisional": 0
-      }
-     },
      "Shannon W. Bray": {
       "party": "O",
       "votes": 0,
@@ -216,8 +196,28 @@
        "Provisional": 0
       }
      },
+     "Roy Cooper": {
+      "party": "D",
+      "votes": 0,
+      "by_mode": {
+       "Election Day": 0,
+       "Early Voting": 0,
+       "Absentee by Mail": 0,
+       "Provisional": 0
+      }
+     },
      "Michael Whatley": {
       "party": "R",
+      "votes": 0,
+      "by_mode": {
+       "Election Day": 0,
+       "Early Voting": 0,
+       "Absentee by Mail": 0,
+       "Provisional": 0
+      }
+     },
+     "Michael Dublin": {
+      "party": "O",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -245,8 +245,8 @@
   "Ashe": {
    "senate": {
     "choices": {
-     "Roy Cooper": {
-      "party": "D",
+     "Shannon W. Bray": {
+      "party": "O",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -265,8 +265,8 @@
        "Provisional": 0
       }
      },
-     "Michael Whatley": {
-      "party": "R",
+     "Roy Cooper": {
+      "party": "D",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -275,8 +275,8 @@
        "Provisional": 0
       }
      },
-     "Shannon W. Bray": {
-      "party": "O",
+     "Michael Whatley": {
+      "party": "R",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -422,8 +422,8 @@
   "Bertie": {
    "senate": {
     "choices": {
-     "Michael Whatley": {
-      "party": "R",
+     "Roy Cooper": {
+      "party": "D",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -442,8 +442,8 @@
        "Provisional": 0
       }
      },
-     "Michael Dublin": {
-      "party": "O",
+     "Michael Whatley": {
+      "party": "R",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -452,8 +452,8 @@
        "Provisional": 0
       }
      },
-     "Roy Cooper": {
-      "party": "D",
+     "Michael Dublin": {
+      "party": "O",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -719,9 +719,9 @@
     "choices": {
      "Roy Cooper": {
       "party": "D",
-      "votes": 35537,
+      "votes": 37623,
       "by_mode": {
-       "Election Day": 1581,
+       "Election Day": 3667,
        "Early Voting": 32089,
        "Absentee by Mail": 1867,
        "Provisional": 0
@@ -729,9 +729,9 @@
      },
      "Michael Whatley": {
       "party": "R",
-      "votes": 19786,
+      "votes": 22211,
       "by_mode": {
-       "Election Day": 1643,
+       "Election Day": 4068,
        "Early Voting": 17552,
        "Absentee by Mail": 591,
        "Provisional": 0
@@ -739,9 +739,9 @@
      },
      "Shannon W. Bray": {
       "party": "O",
-      "votes": 564,
+      "votes": 659,
       "by_mode": {
-       "Election Day": 67,
+       "Election Day": 162,
        "Early Voting": 472,
        "Absentee by Mail": 25,
        "Provisional": 0
@@ -749,9 +749,9 @@
      },
      "Michael Dublin": {
       "party": "O",
-      "votes": 469,
+      "votes": 519,
       "by_mode": {
-       "Election Day": 43,
+       "Election Day": 93,
        "Early Voting": 394,
        "Absentee by Mail": 32,
        "Provisional": 0
@@ -759,14 +759,14 @@
      }
     },
     "modes": {
-     "Election Day": 3334,
+     "Election Day": 7990,
      "Early Voting": 50507,
      "Absentee by Mail": 2515,
      "Provisional": 0
     },
-    "counted": 56356,
+    "counted": 61012,
     "precincts_total": 38,
-    "precincts_reporting": 5,
+    "precincts_reporting": 10,
     "early_and_mail_cast": 52984,
     "early_and_mail_counted": 53022,
     "early_and_mail_left": 0,
@@ -963,8 +963,8 @@
        "Provisional": 0
       }
      },
-     "Shannon W. Bray": {
-      "party": "O",
+     "Michael Whatley": {
+      "party": "R",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -983,8 +983,8 @@
        "Provisional": 0
       }
      },
-     "Michael Whatley": {
-      "party": "R",
+     "Shannon W. Bray": {
+      "party": "O",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -1130,8 +1130,8 @@
   "Cherokee": {
    "senate": {
     "choices": {
-     "Roy Cooper": {
-      "party": "D",
+     "Michael Whatley": {
+      "party": "R",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -1150,8 +1150,8 @@
        "Provisional": 0
       }
      },
-     "Michael Whatley": {
-      "party": "R",
+     "Shannon W. Bray": {
+      "party": "O",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -1160,8 +1160,8 @@
        "Provisional": 0
       }
      },
-     "Shannon W. Bray": {
-      "party": "O",
+     "Roy Cooper": {
+      "party": "D",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -1368,9 +1368,9 @@
     "choices": {
      "Michael Whatley": {
       "party": "R",
-      "votes": 5903,
+      "votes": 7048,
       "by_mode": {
-       "Election Day": 1110,
+       "Election Day": 2255,
        "Early Voting": 4729,
        "Absentee by Mail": 64,
        "Provisional": 0
@@ -1378,9 +1378,9 @@
      },
      "Roy Cooper": {
       "party": "D",
-      "votes": 5529,
+      "votes": 6079,
       "by_mode": {
-       "Election Day": 661,
+       "Election Day": 1211,
        "Early Voting": 4721,
        "Absentee by Mail": 147,
        "Provisional": 0
@@ -1388,9 +1388,9 @@
      },
      "Shannon W. Bray": {
       "party": "O",
-      "votes": 134,
+      "votes": 172,
       "by_mode": {
-       "Election Day": 32,
+       "Election Day": 70,
        "Early Voting": 97,
        "Absentee by Mail": 5,
        "Provisional": 0
@@ -1398,9 +1398,9 @@
      },
      "Michael Dublin": {
       "party": "O",
-      "votes": 76,
+      "votes": 92,
       "by_mode": {
-       "Election Day": 18,
+       "Election Day": 34,
        "Early Voting": 49,
        "Absentee by Mail": 9,
        "Provisional": 0
@@ -1408,12 +1408,12 @@
      }
     },
     "modes": {
-     "Election Day": 1821,
+     "Election Day": 3570,
      "Early Voting": 9596,
      "Absentee by Mail": 225,
      "Provisional": 0
     },
-    "counted": 11642,
+    "counted": 13391,
     "precincts_total": 16,
     "precincts_reporting": 16,
     "early_and_mail_cast": 9874,
@@ -2025,6 +2025,16 @@
        "Provisional": 0
       }
      },
+     "Shannon W. Bray": {
+      "party": "O",
+      "votes": 0,
+      "by_mode": {
+       "Election Day": 0,
+       "Early Voting": 0,
+       "Absentee by Mail": 0,
+       "Provisional": 0
+      }
+     },
      "Roy Cooper": {
       "party": "D",
       "votes": 0,
@@ -2036,16 +2046,6 @@
       }
      },
      "Michael Dublin": {
-      "party": "O",
-      "votes": 0,
-      "by_mode": {
-       "Election Day": 0,
-       "Early Voting": 0,
-       "Absentee by Mail": 0,
-       "Provisional": 0
-      }
-     },
-     "Shannon W. Bray": {
       "party": "O",
       "votes": 0,
       "by_mode": {
@@ -2076,9 +2076,9 @@
     "choices": {
      "Roy Cooper": {
       "party": "D",
-      "votes": 31036,
+      "votes": 32842,
       "by_mode": {
-       "Election Day": 1803,
+       "Election Day": 3609,
        "Early Voting": 28056,
        "Absentee by Mail": 1177,
        "Provisional": 0
@@ -2086,9 +2086,9 @@
      },
      "Michael Whatley": {
       "party": "R",
-      "votes": 27123,
+      "votes": 29583,
       "by_mode": {
-       "Election Day": 2354,
+       "Election Day": 4814,
        "Early Voting": 24210,
        "Absentee by Mail": 559,
        "Provisional": 0
@@ -2096,9 +2096,9 @@
      },
      "Shannon W. Bray": {
       "party": "O",
-      "votes": 697,
+      "votes": 787,
       "by_mode": {
-       "Election Day": 100,
+       "Election Day": 190,
        "Early Voting": 581,
        "Absentee by Mail": 16,
        "Provisional": 0
@@ -2106,9 +2106,9 @@
      },
      "Michael Dublin": {
       "party": "O",
-      "votes": 483,
+      "votes": 532,
       "by_mode": {
-       "Election Day": 55,
+       "Election Day": 104,
        "Early Voting": 410,
        "Absentee by Mail": 18,
        "Provisional": 0
@@ -2116,12 +2116,12 @@
      }
     },
     "modes": {
-     "Election Day": 4312,
+     "Election Day": 8717,
      "Early Voting": 53257,
      "Absentee by Mail": 1770,
      "Provisional": 0
     },
-    "counted": 59339,
+    "counted": 63744,
     "precincts_total": 40,
     "precincts_reporting": 40,
     "early_and_mail_cast": 55053,
@@ -2310,6 +2310,16 @@
   "Greene": {
    "senate": {
     "choices": {
+     "Michael Dublin": {
+      "party": "O",
+      "votes": 0,
+      "by_mode": {
+       "Election Day": 0,
+       "Early Voting": 0,
+       "Absentee by Mail": 0,
+       "Provisional": 0
+      }
+     },
      "Roy Cooper": {
       "party": "D",
       "votes": 0,
@@ -2331,16 +2341,6 @@
       }
      },
      "Shannon W. Bray": {
-      "party": "O",
-      "votes": 0,
-      "by_mode": {
-       "Election Day": 0,
-       "Early Voting": 0,
-       "Absentee by Mail": 0,
-       "Provisional": 0
-      }
-     },
-     "Michael Dublin": {
       "party": "O",
       "votes": 0,
       "by_mode": {
@@ -2487,6 +2487,16 @@
   "Harnett": {
    "senate": {
     "choices": {
+     "Shannon W. Bray": {
+      "party": "O",
+      "votes": 0,
+      "by_mode": {
+       "Election Day": 0,
+       "Early Voting": 0,
+       "Absentee by Mail": 0,
+       "Provisional": 0
+      }
+     },
      "Michael Whatley": {
       "party": "R",
       "votes": 0,
@@ -2508,16 +2518,6 @@
       }
      },
      "Michael Dublin": {
-      "party": "O",
-      "votes": 0,
-      "by_mode": {
-       "Election Day": 0,
-       "Early Voting": 0,
-       "Absentee by Mail": 0,
-       "Provisional": 0
-      }
-     },
-     "Shannon W. Bray": {
       "party": "O",
       "votes": 0,
       "by_mode": {
@@ -2674,8 +2674,8 @@
        "Provisional": 0
       }
      },
-     "Michael Whatley": {
-      "party": "R",
+     "Shannon W. Bray": {
+      "party": "O",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -2684,8 +2684,8 @@
        "Provisional": 0
       }
      },
-     "Shannon W. Bray": {
-      "party": "O",
+     "Michael Whatley": {
+      "party": "R",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -2843,9 +2843,9 @@
     "choices": {
      "Michael Whatley": {
       "party": "R",
-      "votes": 23470,
+      "votes": 29125,
       "by_mode": {
-       "Election Day": 0,
+       "Election Day": 5655,
        "Early Voting": 23470,
        "Absentee by Mail": 0,
        "Provisional": 0
@@ -2853,9 +2853,9 @@
      },
      "Roy Cooper": {
       "party": "D",
-      "votes": 22570,
+      "votes": 25679,
       "by_mode": {
-       "Election Day": 0,
+       "Election Day": 3109,
        "Early Voting": 22570,
        "Absentee by Mail": 0,
        "Provisional": 0
@@ -2863,9 +2863,9 @@
      },
      "Shannon W. Bray": {
       "party": "O",
-      "votes": 505,
+      "votes": 723,
       "by_mode": {
-       "Election Day": 0,
+       "Election Day": 218,
        "Early Voting": 505,
        "Absentee by Mail": 0,
        "Provisional": 0
@@ -2873,9 +2873,9 @@
      },
      "Michael Dublin": {
       "party": "O",
-      "votes": 321,
+      "votes": 427,
       "by_mode": {
-       "Election Day": 0,
+       "Election Day": 106,
        "Early Voting": 321,
        "Absentee by Mail": 0,
        "Provisional": 0
@@ -2883,12 +2883,12 @@
      }
     },
     "modes": {
-     "Election Day": 0,
+     "Election Day": 9088,
      "Early Voting": 46866,
      "Absentee by Mail": 0,
      "Provisional": 0
     },
-    "counted": 46866,
+    "counted": 55954,
     "precincts_total": 30,
     "precincts_reporting": 30,
     "early_and_mail_cast": 48843,
@@ -2959,26 +2959,6 @@
   "Johnston": {
    "senate": {
     "choices": {
-     "Michael Dublin": {
-      "party": "O",
-      "votes": 0,
-      "by_mode": {
-       "Election Day": 0,
-       "Early Voting": 0,
-       "Absentee by Mail": 0,
-       "Provisional": 0
-      }
-     },
-     "Shannon W. Bray": {
-      "party": "O",
-      "votes": 0,
-      "by_mode": {
-       "Election Day": 0,
-       "Early Voting": 0,
-       "Absentee by Mail": 0,
-       "Provisional": 0
-      }
-     },
      "Michael Whatley": {
       "party": "R",
       "votes": 0,
@@ -2991,6 +2971,26 @@
      },
      "Roy Cooper": {
       "party": "D",
+      "votes": 0,
+      "by_mode": {
+       "Election Day": 0,
+       "Early Voting": 0,
+       "Absentee by Mail": 0,
+       "Provisional": 0
+      }
+     },
+     "Michael Dublin": {
+      "party": "O",
+      "votes": 0,
+      "by_mode": {
+       "Election Day": 0,
+       "Early Voting": 0,
+       "Absentee by Mail": 0,
+       "Provisional": 0
+      }
+     },
+     "Shannon W. Bray": {
+      "party": "O",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -3374,9 +3374,9 @@
     "choices": {
      "Roy Cooper": {
       "party": "D",
-      "votes": 3169,
+      "votes": 3739,
       "by_mode": {
-       "Election Day": 0,
+       "Election Day": 570,
        "Early Voting": 3092,
        "Absentee by Mail": 77,
        "Provisional": 0
@@ -3384,9 +3384,9 @@
      },
      "Michael Whatley": {
       "party": "R",
-      "votes": 1945,
+      "votes": 2557,
       "by_mode": {
-       "Election Day": 0,
+       "Election Day": 612,
        "Early Voting": 1921,
        "Absentee by Mail": 24,
        "Provisional": 0
@@ -3394,9 +3394,9 @@
      },
      "Shannon W. Bray": {
       "party": "O",
-      "votes": 55,
+      "votes": 82,
       "by_mode": {
-       "Election Day": 0,
+       "Election Day": 27,
        "Early Voting": 52,
        "Absentee by Mail": 3,
        "Provisional": 0
@@ -3404,9 +3404,9 @@
      },
      "Michael Dublin": {
       "party": "O",
-      "votes": 35,
+      "votes": 43,
       "by_mode": {
-       "Election Day": 0,
+       "Election Day": 8,
        "Early Voting": 32,
        "Absentee by Mail": 3,
        "Provisional": 0
@@ -3414,12 +3414,12 @@
      }
     },
     "modes": {
-     "Election Day": 0,
+     "Election Day": 1217,
      "Early Voting": 5097,
      "Absentee by Mail": 107,
      "Provisional": 0
     },
-    "counted": 5204,
+    "counted": 6421,
     "precincts_total": 9,
     "precincts_reporting": 9,
     "early_and_mail_cast": 5234,
@@ -3844,16 +3844,6 @@
   "Northampton": {
    "senate": {
     "choices": {
-     "Michael Whatley": {
-      "party": "R",
-      "votes": 0,
-      "by_mode": {
-       "Election Day": 0,
-       "Early Voting": 0,
-       "Absentee by Mail": 0,
-       "Provisional": 0
-      }
-     },
      "Shannon W. Bray": {
       "party": "O",
       "votes": 0,
@@ -3866,6 +3856,16 @@
      },
      "Roy Cooper": {
       "party": "D",
+      "votes": 0,
+      "by_mode": {
+       "Election Day": 0,
+       "Early Voting": 0,
+       "Absentee by Mail": 0,
+       "Provisional": 0
+      }
+     },
+     "Michael Whatley": {
+      "party": "R",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -3903,8 +3903,8 @@
   "Onslow": {
    "senate": {
     "choices": {
-     "Michael Dublin": {
-      "party": "O",
+     "Roy Cooper": {
+      "party": "D",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -3923,8 +3923,8 @@
        "Provisional": 0
       }
      },
-     "Roy Cooper": {
-      "party": "D",
+     "Michael Dublin": {
+      "party": "O",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -4080,8 +4080,8 @@
   "Pasquotank": {
    "senate": {
     "choices": {
-     "Shannon W. Bray": {
-      "party": "O",
+     "Roy Cooper": {
+      "party": "D",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -4110,8 +4110,8 @@
        "Provisional": 0
       }
      },
-     "Roy Cooper": {
-      "party": "D",
+     "Shannon W. Bray": {
+      "party": "O",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -4208,6 +4208,16 @@
        "Provisional": 0
       }
      },
+     "Roy Cooper": {
+      "party": "D",
+      "votes": 0,
+      "by_mode": {
+       "Election Day": 0,
+       "Early Voting": 0,
+       "Absentee by Mail": 0,
+       "Provisional": 0
+      }
+     },
      "Michael Whatley": {
       "party": "R",
       "votes": 0,
@@ -4220,16 +4230,6 @@
      },
      "Shannon W. Bray": {
       "party": "O",
-      "votes": 0,
-      "by_mode": {
-       "Election Day": 0,
-       "Early Voting": 0,
-       "Absentee by Mail": 0,
-       "Provisional": 0
-      }
-     },
-     "Roy Cooper": {
-      "party": "D",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -4318,9 +4318,9 @@
     "choices": {
      "Roy Cooper": {
       "party": "D",
-      "votes": 32368,
+      "votes": 34595,
       "by_mode": {
-       "Election Day": 4721,
+       "Election Day": 6948,
        "Early Voting": 26976,
        "Absentee by Mail": 671,
        "Provisional": 0
@@ -4328,9 +4328,9 @@
      },
      "Michael Whatley": {
       "party": "R",
-      "votes": 18116,
+      "votes": 19676,
       "by_mode": {
-       "Election Day": 4807,
+       "Election Day": 6367,
        "Early Voting": 13128,
        "Absentee by Mail": 181,
        "Provisional": 0
@@ -4338,9 +4338,9 @@
      },
      "Shannon W. Bray": {
       "party": "O",
-      "votes": 524,
+      "votes": 601,
       "by_mode": {
-       "Election Day": 194,
+       "Election Day": 271,
        "Early Voting": 327,
        "Absentee by Mail": 3,
        "Provisional": 0
@@ -4348,9 +4348,9 @@
      },
      "Michael Dublin": {
       "party": "O",
-      "votes": 353,
+      "votes": 388,
       "by_mode": {
-       "Election Day": 69,
+       "Election Day": 104,
        "Early Voting": 274,
        "Absentee by Mail": 10,
        "Provisional": 0
@@ -4358,14 +4358,14 @@
      }
     },
     "modes": {
-     "Election Day": 9791,
+     "Election Day": 13690,
      "Early Voting": 40705,
      "Absentee by Mail": 865,
      "Provisional": 0
     },
-    "counted": 51361,
+    "counted": 55260,
     "precincts_total": 40,
-    "precincts_reporting": 19,
+    "precincts_reporting": 28,
     "early_and_mail_cast": 41577,
     "early_and_mail_counted": 41570,
     "early_and_mail_left": 7,
@@ -4731,9 +4731,9 @@
     "choices": {
      "Michael Whatley": {
       "party": "R",
-      "votes": 11045,
+      "votes": 12347,
       "by_mode": {
-       "Election Day": 3270,
+       "Election Day": 4572,
        "Early Voting": 7634,
        "Absentee by Mail": 141,
        "Provisional": 0
@@ -4741,9 +4741,9 @@
      },
      "Roy Cooper": {
       "party": "D",
-      "votes": 6659,
+      "votes": 7206,
       "by_mode": {
-       "Election Day": 1139,
+       "Election Day": 1686,
        "Early Voting": 5292,
        "Absentee by Mail": 228,
        "Provisional": 0
@@ -4751,9 +4751,9 @@
      },
      "Shannon W. Bray": {
       "party": "O",
-      "votes": 275,
+      "votes": 299,
       "by_mode": {
-       "Election Day": 109,
+       "Election Day": 133,
        "Early Voting": 158,
        "Absentee by Mail": 8,
        "Provisional": 0
@@ -4761,9 +4761,9 @@
      },
      "Michael Dublin": {
       "party": "O",
-      "votes": 167,
+      "votes": 195,
       "by_mode": {
-       "Election Day": 61,
+       "Election Day": 89,
        "Early Voting": 100,
        "Absentee by Mail": 6,
        "Provisional": 0
@@ -4771,12 +4771,12 @@
      }
     },
     "modes": {
-     "Election Day": 4579,
+     "Election Day": 6480,
      "Early Voting": 13184,
      "Absentee by Mail": 383,
      "Provisional": 0
     },
-    "counted": 18146,
+    "counted": 20047,
     "precincts_total": 17,
     "precincts_reporting": 17,
     "early_and_mail_cast": 13614,
@@ -5437,6 +5437,16 @@
   "Warren": {
    "senate": {
     "choices": {
+     "Roy Cooper": {
+      "party": "D",
+      "votes": 0,
+      "by_mode": {
+       "Election Day": 0,
+       "Early Voting": 0,
+       "Absentee by Mail": 0,
+       "Provisional": 0
+      }
+     },
      "Michael Whatley": {
       "party": "R",
       "votes": 0,
@@ -5459,16 +5469,6 @@
      },
      "Shannon W. Bray": {
       "party": "O",
-      "votes": 0,
-      "by_mode": {
-       "Election Day": 0,
-       "Early Voting": 0,
-       "Absentee by Mail": 0,
-       "Provisional": 0
-      }
-     },
-     "Roy Cooper": {
-      "party": "D",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -5742,6 +5742,16 @@
        "Provisional": 0
       }
      },
+     "Michael Whatley": {
+      "party": "R",
+      "votes": 0,
+      "by_mode": {
+       "Election Day": 0,
+       "Early Voting": 0,
+       "Absentee by Mail": 0,
+       "Provisional": 0
+      }
+     },
      "Roy Cooper": {
       "party": "D",
       "votes": 0,
@@ -5754,16 +5764,6 @@
      },
      "Shannon W. Bray": {
       "party": "O",
-      "votes": 0,
-      "by_mode": {
-       "Election Day": 0,
-       "Early Voting": 0,
-       "Absentee by Mail": 0,
-       "Provisional": 0
-      }
-     },
-     "Michael Whatley": {
-      "party": "R",
       "votes": 0,
       "by_mode": {
        "Election Day": 0,
@@ -5910,25 +5910,25 @@
  "state_totals": {
   "senate": {
    "choices": {
-    "Roy Cooper": 1712610,
-    "Michael Whatley": 981533,
-    "Shannon W. Bray": 28490,
-    "Michael Dublin": 20765
+    "Roy Cooper": 1723505,
+    "Michael Whatley": 996692,
+    "Shannon W. Bray": 29059,
+    "Michael Dublin": 21057
    },
    "parties": {
+    "Michael Dublin": "O",
     "Shannon W. Bray": "O",
-    "Michael Whatley": "R",
     "Roy Cooper": "D",
-    "Michael Dublin": "O"
+    "Michael Whatley": "R"
    },
-   "total": 2743398,
+   "total": 2770313,
    "modes": {
-    "Election Day": 240994,
+    "Election Day": 267909,
     "Early Voting": 2434171,
     "Absentee by Mail": 68143,
     "Provisional": 90
    },
-   "precincts_reporting": 1627,
+   "precincts_reporting": 1641,
    "precincts_total": 2626,
    "early_and_mail_cast": 2828288,
    "early_and_mail_counted": 2502314,

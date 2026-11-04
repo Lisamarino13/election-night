@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T01:53:45+00:00",
+ "updated": "2026-11-04T01:55:05+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -188,7 +188,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/383881/reports/detailxml.zip",
-   "updated": "2026-11-04T01:53:26+00:00",
+   "updated": "2026-11-04T01:54:48+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1607,7 +1607,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T01:53:26+00:00",
+     "updated": "2026-11-04T01:54:48+00:00",
      "tier": "tossup",
      "precincts_reporting": 639,
      "precincts_total": 2312,
@@ -1965,12 +1965,12 @@
       {
        "name": "Cabarrus",
        "votes": [
-        35537,
-        19786,
-        564,
-        469
+        37623,
+        22211,
+        659,
+        519
        ],
-       "outstanding": 1369,
+       "outstanding": 23741,
        "remainder": [
         {
          "n": 1369,
@@ -1981,9 +1981,19 @@
           0.009373467617215496,
           0.008034400814756138
          ]
+        },
+        {
+         "n": 22372,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.4589486858573216,
+          0.5091364205256571,
+          0.020275344180225283,
+          0.011639549436795994
+         ]
         }
        ],
-       "precincts_reporting": 5,
+       "precincts_reporting": 10,
        "precincts_total": 38
       },
       {
@@ -2229,10 +2239,10 @@
       {
        "name": "Columbus",
        "votes": [
-        5529,
-        5903,
-        134,
-        76
+        6079,
+        7048,
+        172,
+        92
        ],
        "outstanding": 167,
        "remainder": [
@@ -2517,10 +2527,10 @@
       {
        "name": "Gaston",
        "votes": [
-        31036,
-        27123,
-        697,
-        483
+        32842,
+        29583,
+        787,
+        532
        ],
        "outstanding": 1090,
        "remainder": [
@@ -2839,10 +2849,10 @@
       {
        "name": "Iredell",
        "votes": [
-        22570,
-        23470,
-        505,
-        321
+        25679,
+        29125,
+        723,
+        427
        ],
        "outstanding": 3031,
        "remainder": [
@@ -3055,10 +3065,10 @@
       {
        "name": "Martin",
        "votes": [
-        3169,
-        1945,
-        55,
-        35
+        3739,
+        2557,
+        82,
+        43
        ],
        "outstanding": 78,
        "remainder": [
@@ -3449,12 +3459,12 @@
       {
        "name": "Pitt",
        "votes": [
-        32368,
-        18116,
-        524,
-        353
+        34595,
+        19676,
+        601,
+        388
        ],
-       "outstanding": 11454,
+       "outstanding": 6499,
        "remainder": [
         {
          "n": 632,
@@ -3467,17 +3477,17 @@
          ]
         },
         {
-         "n": 10822,
+         "n": 5867,
          "basis": "scaled from precincts reporting",
          "share": [
-          0.4821775099581248,
-          0.4909610867122868,
-          0.01981411500357471,
-          0.007047288326013686
+          0.5075237399561724,
+          0.46508400292184077,
+          0.019795471146822497,
+          0.007596785975164354
          ]
         }
        ],
-       "precincts_reporting": 19,
+       "precincts_reporting": 28,
        "precincts_total": 40
       },
       {
@@ -3627,10 +3637,10 @@
       {
        "name": "Rutherford",
        "votes": [
-        6659,
-        11045,
-        275,
-        167
+        7206,
+        12347,
+        299,
+        195
        ],
        "outstanding": 292,
        "remainder": [
@@ -4125,15 +4135,15 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T01:53:02+00:00",
+     "updated": "2026-11-04T01:54:22+00:00",
      "tier": "safe",
-     "precincts_reporting": 1627,
+     "precincts_reporting": 1641,
      "precincts_total": 2626,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 2743398,
+     "counted": 2770313,
      "modes": {
-      "Election Day": 240994,
+      "Election Day": 267909,
       "Early Voting": 2434171,
       "Absentee by Mail": 68143,
       "Provisional": 90
@@ -4141,7 +4151,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T01:53:02+00:00",
+   "updated": "2026-11-04T01:54:22+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -4152,7 +4162,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T01:53:03+00:00",
+   "updated": "2026-11-04T01:54:24+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -7216,7 +7226,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T01:53:03+00:00",
+     "updated": "2026-11-04T01:54:24+00:00",
      "tier": "tossup",
      "precincts_reporting": 1317,
      "precincts_total": 8834,
@@ -10077,7 +10087,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T01:53:03+00:00",
+     "updated": "2026-11-04T01:54:24+00:00",
      "tier": "tossup",
      "precincts_reporting": 1317,
      "precincts_total": 8834,
@@ -10123,7 +10133,7 @@
      "updated": null,
      "tier": "watch",
      "roster_only": true,
-     "roster_source": "https://electionresults.iowa.gov/IA/127077/383889/reports/detailxml.zip"
+     "roster_source": "https://electionresults.iowa.gov/IA/127077/383929/reports/detailxml.zip"
     }
    },
    "unitsExpected": 99,
@@ -10137,7 +10147,7 @@
    "partyReg": true,
    "unit": "county",
    "source": "https://flelectionfiles.floridados.gov/enightfilespublic/20261103_ElecResultsFL.txt",
-   "updated": "2026-11-04T01:53:04+00:00",
+   "updated": "2026-11-04T01:54:25+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -10960,7 +10970,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T01:53:04+00:00",
+     "updated": "2026-11-04T01:54:25+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -12287,7 +12297,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T01:53:04+00:00",
+     "updated": "2026-11-04T01:54:25+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -12308,7 +12318,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T01:53:45+00:00",
+   "updated": "2026-11-04T01:55:05+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -15485,7 +15495,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T01:53:45+00:00",
+     "updated": "2026-11-04T01:55:05+00:00",
      "tier": "tossup",
      "precincts_reporting": 130,
      "precincts_total": 159,
@@ -18692,7 +18702,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T01:53:45+00:00",
+     "updated": "2026-11-04T01:55:05+00:00",
      "tier": "safe",
      "precincts_reporting": 130,
      "precincts_total": 159,

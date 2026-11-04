@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T01:17:36+00:00",
+ "updated": "2026-11-04T01:18:53+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -3398,7 +3398,7 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T01:17:04+00:00",
+     "updated": "2026-11-04T01:18:11+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 2626,
@@ -3414,7 +3414,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T01:17:04+00:00",
+   "updated": "2026-11-04T01:18:11+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -3425,7 +3425,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T01:17:05+00:00",
+   "updated": "2026-11-04T01:18:12+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -5439,7 +5439,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T01:17:05+00:00",
+     "updated": "2026-11-04T01:18:12+00:00",
      "tier": "tossup",
      "precincts_reporting": 6,
      "precincts_total": 8834,
@@ -7363,7 +7363,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T01:17:05+00:00",
+     "updated": "2026-11-04T01:18:12+00:00",
      "tier": "tossup",
      "precincts_reporting": 6,
      "precincts_total": 8834,
@@ -7423,7 +7423,7 @@
    "partyReg": true,
    "unit": "county",
    "source": "https://flelectionfiles.floridados.gov/enightfilespublic/20261103_ElecResultsFL.txt",
-   "updated": "2026-11-04T01:17:07+00:00",
+   "updated": "2026-11-04T01:18:13+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -8246,7 +8246,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T01:17:07+00:00",
+     "updated": "2026-11-04T01:18:13+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -9573,7 +9573,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T01:17:07+00:00",
+     "updated": "2026-11-04T01:18:13+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -9594,7 +9594,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T01:17:36+00:00",
+   "updated": "2026-11-04T01:18:53+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -12797,18 +12797,18 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T01:17:36+00:00",
+     "updated": "2026-11-04T01:18:53+00:00",
      "tier": "tossup",
-     "precincts_reporting": 107,
+     "precincts_reporting": 109,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 2160878,
+     "counted": 2448768,
      "modes": {
-      "election_day": 70743,
-      "early": 2002638,
-      "mail": 87472,
-      "provisional": 25
+      "election_day": 84430,
+      "early": 2268351,
+      "mail": 95961,
+      "provisional": 26
      }
     },
     "senate": {
@@ -16029,18 +16029,18 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T01:17:36+00:00",
+     "updated": "2026-11-04T01:18:53+00:00",
      "tier": "safe",
-     "precincts_reporting": 107,
+     "precincts_reporting": 109,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 2160106,
+     "counted": 2448744,
      "modes": {
-      "election_day": 70555,
-      "early": 2001253,
-      "mail": 88261,
-      "provisional": 37
+      "election_day": 84215,
+      "early": 2267422,
+      "mail": 97069,
+      "provisional": 38
      }
     }
    },

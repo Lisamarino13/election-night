@@ -4,9 +4,9 @@
  "source_kind": "clarity",
  "election": "2026 General Election",
  "election_date": "11/3/2026",
- "feed_timestamp": "11/3/2026 7:58:01 PM CST",
- "version": "383965",
- "fetched": "2026-11-04T02:01:51+00:00",
+ "feed_timestamp": "11/3/2026 8:00:41 PM CST",
+ "version": "383981",
+ "fetched": "2026-11-04T02:03:14+00:00",
  "early_cast_as_of": "11/3/2026",
  "counties": {
   "Adair": {
@@ -664,49 +664,49 @@
     "choices": {
      "Ashley Hinson": {
       "party": "R",
-      "votes": 0,
+      "votes": 1691,
       "by_mode": {
        "election_day": 0,
-       "mail": 0
+       "mail": 1691
       }
      },
      "Josh Turek": {
       "party": "D",
-      "votes": 0,
+      "votes": 1563,
       "by_mode": {
        "election_day": 0,
-       "mail": 0
+       "mail": 1563
       }
      },
      "Thomas Laehn": {
       "party": "O",
-      "votes": 0,
+      "votes": 107,
       "by_mode": {
        "election_day": 0,
-       "mail": 0
+       "mail": 107
       }
      },
      "Write-in": {
       "party": "O",
-      "votes": 0,
+      "votes": 3,
       "by_mode": {
        "election_day": 0,
-       "mail": 0
+       "mail": 3
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "mail": 0
+     "mail": 3364
     },
-    "counted": 0,
+    "counted": 3364,
     "precincts_total": 13,
     "precincts_reporting": 0,
     "registered": 14397,
-    "ballots_cast": 0,
+    "ballots_cast": 3522,
     "early_and_mail_cast": 3512,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 3512
+    "early_and_mail_counted": 3364,
+    "early_and_mail_left": 148
    }
   },
   "Cass": {
@@ -4964,10 +4964,10 @@
   "senate": {
    "contest_name": "United States Senator",
    "choices": {
-    "Ashley Hinson": 0,
-    "Josh Turek": 0,
-    "Thomas Laehn": 0,
-    "Write-in": 0
+    "Ashley Hinson": 1691,
+    "Josh Turek": 1563,
+    "Thomas Laehn": 107,
+    "Write-in": 3
    },
    "parties": {
     "Ashley Hinson": "R",
@@ -4975,19 +4975,19 @@
     "Thomas Laehn": "O",
     "Write-in": "O"
    },
-   "total": 0,
+   "total": 3364,
    "modes": {
     "election_day": 0,
-    "mail": 0
+    "mail": 3364
    },
    "precincts_reporting": 0,
    "precincts_total": 1656,
    "early_and_mail_cast": 498713,
-   "early_and_mail_counted": 0,
-   "early_and_mail_left": 498713
+   "early_and_mail_counted": 3364,
+   "early_and_mail_left": 495349
   }
  },
- "source": "https://electionresults.iowa.gov/IA/127077/383965/reports/detailxml.zip",
+ "source": "https://electionresults.iowa.gov/IA/127077/383981/reports/detailxml.zip",
  "notes": {
   "modes": "Votes split by mode; early and mail are never pooled with election day, because they break in opposite directions.",
   "left": "early_and_mail_left is measured - ballots recorded cast early or by mail in that county, minus those modes as counted here.",

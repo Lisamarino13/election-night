@@ -1,0 +1,33 @@
+{
+ "state": "NE",
+ "note": "Who is on the ballot. No vote counts: this is written before polls close, when the results themselves are withheld.",
+ "election": "2026 General",
+ "source": "https://neresultswebservice.azurewebsites.us/ResultsAjax.svc/GetMapData (county map data behind the results page)",
+ "races": {
+  "senate": {
+   "contest_name": "For United States Senator - 6 Year Term",
+   "candidates": [
+    {
+     "name": "Chuck Conboy",
+     "party": "O"
+    },
+    {
+     "name": "Dan Osborn",
+     "party": "O"
+    },
+    {
+     "name": "Mike Marvin",
+     "party": "O"
+    },
+    {
+     "name": "Pete Ricketts",
+     "party": "R"
+    },
+    {
+     "name": "Robin Richards",
+     "party": "O"
+    }
+   ]
+  }
+ }
+}

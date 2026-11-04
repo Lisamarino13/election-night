@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T01:11:23+00:00",
+ "updated": "2026-11-04T01:13:15+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -188,7 +188,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/383570/reports/detailxml.zip",
-   "updated": "2026-11-04T01:11:01+00:00",
+   "updated": "2026-11-04T01:13:03+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1349,7 +1349,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T01:11:01+00:00",
+     "updated": "2026-11-04T01:13:03+00:00",
      "tier": "tossup",
      "precincts_reporting": 67,
      "precincts_total": 2312,
@@ -3297,7 +3297,7 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T01:10:38+00:00",
+     "updated": "2026-11-04T01:12:42+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 2626,
@@ -3313,7 +3313,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T01:10:38+00:00",
+   "updated": "2026-11-04T01:12:42+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -3324,7 +3324,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T01:10:39+00:00",
+   "updated": "2026-11-04T01:12:44+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -3427,23 +3427,36 @@
       {
        "name": "Ashtabula",
        "votes": [
-        5731,
-        4405,
-        249,
-        190,
+        5983,
+        4886,
+        301,
+        224,
         0,
         0,
         0
        ],
-       "outstanding": 14,
+       "outstanding": 383612,
        "remainder": [
         {
          "n": 14,
          "basis": "measured",
          "share": null
+        },
+        {
+         "n": 383598,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.5251009303142005,
+          0.428822187116026,
+          0.026417412673336842,
+          0.019659469896436722,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 3,
        "precincts_total": 104
       },
       {
@@ -3919,18 +3932,18 @@
       {
        "name": "Fulton",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        2809,
+        3350,
+        139,
+        78,
         0,
         0,
         0
        ],
-       "outstanding": 6416,
+       "outstanding": 16,
        "remainder": [
         {
-         "n": 6416,
+         "n": 16,
          "basis": "measured",
          "share": null
         }
@@ -4485,18 +4498,18 @@
       {
        "name": "Medina",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        21157,
+        18266,
+        603,
+        444,
         0,
         0,
         0
        ],
-       "outstanding": 40500,
+       "outstanding": 49,
        "remainder": [
         {
-         "n": 40500,
+         "n": 49,
          "basis": "measured",
          "share": null
         }
@@ -4529,18 +4542,18 @@
       {
        "name": "Mercer",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        2280,
+        5684,
+        167,
+        109,
         0,
         0,
         0
        ],
-       "outstanding": 8288,
+       "outstanding": 9,
        "remainder": [
         {
-         "n": 8288,
+         "n": 9,
          "basis": "measured",
          "share": null
         }
@@ -5100,18 +5113,18 @@
       {
        "name": "Tuscarawas",
        "votes": [
-        0,
-        0,
-        0,
-        0,
+        5682,
+        5770,
+        333,
+        220,
         0,
         0,
         0
        ],
-       "outstanding": 12040,
+       "outstanding": 14,
        "remainder": [
         {
-         "n": 12040,
+         "n": 14,
          "basis": "measured",
          "share": null
         }
@@ -5312,13 +5325,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T01:10:39+00:00",
+     "updated": "2026-11-04T01:12:44+00:00",
      "tier": "tossup",
-     "precincts_reporting": 1,
+     "precincts_reporting": 4,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1408076,
+     "counted": 1475986,
      "modes": null
     },
     "governor": {
@@ -5415,22 +5428,34 @@
       {
        "name": "Ashtabula",
        "votes": [
-        5814,
-        4284,
-        326,
+        6069,
+        4771,
+        389,
         0,
         0,
         0
        ],
-       "outstanding": 14,
+       "outstanding": 378057,
        "remainder": [
         {
          "n": 14,
          "basis": "measured",
          "share": null
+        },
+        {
+         "n": 378043,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.5404755543681539,
+          0.4248820019592128,
+          0.03464244367263336,
+          0.0,
+          0.0,
+          0.0
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 3,
        "precincts_total": 104
       },
       {
@@ -5884,17 +5909,17 @@
       {
        "name": "Fulton",
        "votes": [
-        0,
-        0,
-        0,
+        2929,
+        3239,
+        202,
         0,
         0,
         0
        ],
-       "outstanding": 6416,
+       "outstanding": 16,
        "remainder": [
         {
-         "n": 6416,
+         "n": 16,
          "basis": "measured",
          "share": null
         }
@@ -6424,17 +6449,17 @@
       {
        "name": "Medina",
        "votes": [
-        0,
-        0,
-        0,
+        21728,
+        17807,
+        880,
         0,
         0,
         0
        ],
-       "outstanding": 40500,
+       "outstanding": 49,
        "remainder": [
         {
-         "n": 40500,
+         "n": 49,
          "basis": "measured",
          "share": null
         }
@@ -6466,17 +6491,17 @@
       {
        "name": "Mercer",
        "votes": [
-        0,
-        0,
-        0,
+        2331,
+        5656,
+        244,
         0,
         0,
         0
        ],
-       "outstanding": 8288,
+       "outstanding": 9,
        "remainder": [
         {
-         "n": 8288,
+         "n": 9,
          "basis": "measured",
          "share": null
         }
@@ -7010,17 +7035,17 @@
       {
        "name": "Tuscarawas",
        "votes": [
-        0,
-        0,
-        0,
+        5867,
+        5712,
+        385,
         0,
         0,
         0
        ],
-       "outstanding": 12040,
+       "outstanding": 14,
        "remainder": [
         {
-         "n": 12040,
+         "n": 14,
          "basis": "measured",
          "share": null
         }
@@ -7212,13 +7237,13 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T01:10:39+00:00",
+     "updated": "2026-11-04T01:12:44+00:00",
      "tier": "tossup",
-     "precincts_reporting": 1,
+     "precincts_reporting": 4,
      "precincts_total": 8834,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 1405066,
+     "counted": 1472851,
      "modes": null
     }
    },
@@ -7272,7 +7297,7 @@
    "partyReg": true,
    "unit": "county",
    "source": "https://flelectionfiles.floridados.gov/enightfilespublic/20261103_ElecResultsFL.txt",
-   "updated": "2026-11-04T01:10:40+00:00",
+   "updated": "2026-11-04T01:12:44+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -8095,7 +8120,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T01:10:40+00:00",
+     "updated": "2026-11-04T01:12:44+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -9422,7 +9447,7 @@
        "precincts_total": 12
       }
      ],
-     "updated": "2026-11-04T01:10:40+00:00",
+     "updated": "2026-11-04T01:12:44+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 5626,
@@ -9443,7 +9468,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T01:11:23+00:00",
+   "updated": "2026-11-04T01:13:15+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -9639,15 +9664,18 @@
       {
        "name": "Berrien County",
        "votes": [
-        0,
-        0
+        51,
+        111
        ],
-       "outstanding": 3313,
+       "outstanding": 3151,
        "remainder": [
         {
-         "n": 3313,
+         "n": 3151,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3148148148148148,
+          0.6851851851851852
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -10023,15 +10051,18 @@
       {
        "name": "Clay County",
        "votes": [
-        0,
-        0
+        617,
+        489
        ],
-       "outstanding": 733,
+       "outstanding": 4,
        "remainder": [
         {
-         "n": 733,
+         "n": 4,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.532235939643347,
+          0.46776406035665297
+         ]
         }
        ],
        "precincts_reporting": 5,
@@ -10040,10 +10071,10 @@
       {
        "name": "Clayton County",
        "votes": [
-        63890,
-        6751
+        65396,
+        7066
        ],
-       "outstanding": 379,
+       "outstanding": 16768,
        "remainder": [
         {
          "n": 379,
@@ -10052,9 +10083,17 @@
           0.9044322702113503,
           0.09556772978864965
          ]
+        },
+        {
+         "n": 16389,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.8270181219110379,
+          0.17298187808896212
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 7,
        "precincts_total": 70
       },
       {
@@ -10211,10 +10250,10 @@
       {
        "name": "Crisp County",
        "votes": [
-        1667,
-        2594
+        1756,
+        3258
        ],
-       "outstanding": 10,
+       "outstanding": 512,
        "remainder": [
         {
          "n": 10,
@@ -10223,9 +10262,17 @@
           0.391222717671908,
           0.608777282328092
          ]
+        },
+        {
+         "n": 502,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.11819389110225764,
+          0.8818061088977424
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 3,
        "precincts_total": 5
       },
       {
@@ -10704,10 +10751,10 @@
       {
        "name": "Grady County",
        "votes": [
-        1862,
-        2724
+        2621,
+        4199
        ],
-       "outstanding": 9,
+       "outstanding": 1126,
        "remainder": [
         {
          "n": 9,
@@ -10716,9 +10763,17 @@
           0.4060183166157872,
           0.5939816833842129
          ]
+        },
+        {
+         "n": 1117,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.3397493285586392,
+          0.6602506714413607
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 6,
        "precincts_total": 9
       },
       {
@@ -10829,10 +10884,10 @@
       {
        "name": "Haralson County",
        "votes": [
-        1019,
-        4551
+        1196,
+        6438
        ],
-       "outstanding": 25,
+       "outstanding": 2089,
        "remainder": [
         {
          "n": 25,
@@ -10841,9 +10896,17 @@
           0.1829443447037702,
           0.8170556552962298
          ]
+        },
+        {
+         "n": 2064,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.08575581395348837,
+          0.9142441860465116
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 6,
        "precincts_total": 12
       },
       {
@@ -11178,10 +11241,10 @@
       {
        "name": "Lee County",
        "votes": [
-        2796,
-        4643
+        2871,
+        5149
        ],
-       "outstanding": 27,
+       "outstanding": 2351,
        "remainder": [
         {
          "n": 27,
@@ -11190,9 +11253,17 @@
           0.3758569700228525,
           0.6241430299771474
          ]
+        },
+        {
+         "n": 2324,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.12908777969018934,
+          0.8709122203098106
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 2,
        "precincts_total": 10
       },
       {
@@ -12083,18 +12154,21 @@
       {
        "name": "Terrell County",
        "votes": [
-        0,
-        0
+        1753,
+        1474
        ],
-       "outstanding": 2019,
+       "outstanding": 241,
        "remainder": [
         {
-         "n": 2019,
-         "basis": "measured",
-         "share": null
+         "n": 241,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.43993371996686,
+          0.56006628003314
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 5,
        "precincts_total": 6
       },
       {
@@ -12566,18 +12640,18 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T01:11:23+00:00",
+     "updated": "2026-11-04T01:13:15+00:00",
      "tier": "tossup",
-     "precincts_reporting": 101,
+     "precincts_reporting": 107,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 2118729,
+     "counted": 2160878,
      "modes": {
-      "election_day": 47972,
-      "early": 1986292,
-      "mail": 84462,
-      "provisional": 3
+      "election_day": 70743,
+      "early": 2002638,
+      "mail": 87472,
+      "provisional": 25
      }
     },
     "senate": {
@@ -12774,15 +12848,18 @@
       {
        "name": "Berrien County",
        "votes": [
-        0,
-        0
+        56,
+        104
        ],
-       "outstanding": 3313,
+       "outstanding": 3153,
        "remainder": [
         {
-         "n": 3313,
+         "n": 3153,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.35,
+          0.65
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -13158,15 +13235,18 @@
       {
        "name": "Clay County",
        "votes": [
-        0,
-        0
+        635,
+        468
        ],
-       "outstanding": 733,
+       "outstanding": 4,
        "remainder": [
         {
-         "n": 733,
+         "n": 4,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.5541838134430727,
+          0.4458161865569273
+         ]
         }
        ],
        "precincts_reporting": 5,
@@ -13175,10 +13255,10 @@
       {
        "name": "Clayton County",
        "votes": [
-        65030,
-        5605
+        66593,
+        5857
        ],
-       "outstanding": 385,
+       "outstanding": 16720,
        "remainder": [
         {
          "n": 385,
@@ -13187,9 +13267,17 @@
           0.9206484037658385,
           0.07935159623416153
          ]
+        },
+        {
+         "n": 16335,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.8611570247933884,
+          0.13884297520661157
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 7,
        "precincts_total": 70
       },
       {
@@ -13346,10 +13434,10 @@
       {
        "name": "Crisp County",
        "votes": [
-        1841,
-        2404
+        1956,
+        3037
        ],
-       "outstanding": 26,
+       "outstanding": 525,
        "remainder": [
         {
          "n": 26,
@@ -13358,9 +13446,17 @@
           0.4336866902237927,
           0.5663133097762073
          ]
+        },
+        {
+         "n": 499,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.1537433155080214,
+          0.8462566844919787
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 3,
        "precincts_total": 5
       },
       {
@@ -13839,10 +13935,10 @@
       {
        "name": "Grady County",
        "votes": [
-        2023,
-        2540
+        2861,
+        3929
        ],
-       "outstanding": 32,
+       "outstanding": 1146,
        "remainder": [
         {
          "n": 32,
@@ -13851,9 +13947,17 @@
           0.4433486741179049,
           0.5566513258820951
          ]
+        },
+        {
+         "n": 1114,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.3762909744050292,
+          0.6237090255949708
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 6,
        "precincts_total": 9
       },
       {
@@ -13964,10 +14068,10 @@
       {
        "name": "Haralson County",
        "votes": [
-        1275,
-        4275
+        1533,
+        6064
        ],
-       "outstanding": 45,
+       "outstanding": 2092,
        "remainder": [
         {
          "n": 45,
@@ -13976,9 +14080,17 @@
           0.22972972972972974,
           0.7702702702702703
          ]
+        },
+        {
+         "n": 2047,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.126038104543234,
+          0.873961895456766
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 6,
        "precincts_total": 12
       },
       {
@@ -14305,10 +14417,10 @@
       {
        "name": "Lee County",
        "votes": [
-        3042,
-        4405
+        3146,
+        4883
        ],
-       "outstanding": 19,
+       "outstanding": 2347,
        "remainder": [
         {
          "n": 19,
@@ -14317,9 +14429,17 @@
           0.4084866389149993,
           0.5915133610850006
          ]
+        },
+        {
+         "n": 2328,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.17869415807560138,
+          0.8213058419243986
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 2,
        "precincts_total": 10
       },
       {
@@ -15219,18 +15339,21 @@
       {
        "name": "Terrell County",
        "votes": [
-        0,
-        0
+        1842,
+        1384
        ],
-       "outstanding": 2019,
+       "outstanding": 241,
        "remainder": [
         {
-         "n": 2019,
-         "basis": "measured",
-         "share": null
+         "n": 241,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.4630091438071488,
+          0.5369908561928513
+         ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 5,
        "precincts_total": 6
       },
       {
@@ -15719,18 +15842,18 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T01:11:23+00:00",
+     "updated": "2026-11-04T01:13:15+00:00",
      "tier": "safe",
-     "precincts_reporting": 101,
+     "precincts_reporting": 107,
      "precincts_total": 159,
      "outstanding_basis": "measured early and mail not yet counted, plus any outstanding mail, provisional and UOCAVA the state publishes, plus election-day ballots from precincts not yet reporting, scaled from what the reporting precincts produced. Each part is spent at the vote share of its OWN mode.",
      "is_test_data": false,
-     "counted": 2118059,
+     "counted": 2160106,
      "modes": {
-      "election_day": 47856,
-      "early": 1984961,
-      "mail": 85239,
-      "provisional": 3
+      "election_day": 70555,
+      "early": 2001253,
+      "mail": 88261,
+      "provisional": 37
      }
     }
    },

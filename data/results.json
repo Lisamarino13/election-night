@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T00:34:58+00:00",
+ "updated": "2026-11-04T00:36:07+00:00",
  "note": "Projections apply each county's own counted vote share to that county's own outstanding ballots. Outstanding counts only ballots already cast and not yet counted - election-day turnout that has not happened is not in it, so it is a floor.",
  "states": {
   "MI": {
@@ -188,7 +188,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://www.enr-scvotes.org/SC/127300/383470/reports/detailxml.zip",
-   "updated": "2026-11-04T00:34:39+00:00",
+   "updated": "2026-11-04T00:35:51+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -1158,7 +1158,7 @@
        "precincts_total": 100
       }
      ],
-     "updated": "2026-11-04T00:34:39+00:00",
+     "updated": "2026-11-04T00:35:51+00:00",
      "tier": "tossup",
      "precincts_reporting": 1,
      "precincts_total": 2312,
@@ -3106,7 +3106,7 @@
        "precincts_total": 11
       }
      ],
-     "updated": "2026-11-04T00:34:22+00:00",
+     "updated": "2026-11-04T00:35:32+00:00",
      "tier": "safe",
      "precincts_reporting": 0,
      "precincts_total": 2626,
@@ -3122,7 +3122,7 @@
     }
    },
    "unitsExpected": 100,
-   "updated": "2026-11-04T00:34:22+00:00",
+   "updated": "2026-11-04T00:35:32+00:00",
    "feed_status": "proven",
    "feed_note": "2024 replay: 100 counties, final margins match"
   },
@@ -3133,7 +3133,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
-   "updated": "2026-11-04T00:34:23+00:00",
+   "updated": "2026-11-04T00:35:33+00:00",
    "races": {
     "senate": {
      "candidates": [
@@ -5104,7 +5104,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:34:23+00:00",
+     "updated": "2026-11-04T00:35:33+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
@@ -6990,7 +6990,7 @@
        "precincts_total": 23
       }
      ],
-     "updated": "2026-11-04T00:34:23+00:00",
+     "updated": "2026-11-04T00:35:33+00:00",
      "tier": "tossup",
      "precincts_reporting": 0,
      "precincts_total": 8834,
@@ -9221,7 +9221,7 @@
    "partyReg": false,
    "unit": "county",
    "source": "https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data",
-   "updated": "2026-11-04T00:34:57+00:00",
+   "updated": "2026-11-04T00:36:07+00:00",
    "races": {
     "governor": {
      "candidates": [
@@ -9346,17 +9346,17 @@
       {
        "name": "Barrow County",
        "votes": [
-        7476,
-        11224
+        7926,
+        11740
        ],
-       "outstanding": 1052,
+       "outstanding": 86,
        "remainder": [
         {
-         "n": 1052,
+         "n": 86,
          "basis": "measured",
          "share": [
-          0.3997860962566845,
-          0.6002139037433155
+          0.40303061120715955,
+          0.5969693887928404
          ]
         }
        ],
@@ -9366,15 +9366,18 @@
       {
        "name": "Bartow County",
        "votes": [
-        0,
-        0
+        8558,
+        16557
        ],
-       "outstanding": 25204,
+       "outstanding": 89,
        "remainder": [
         {
-         "n": 25204,
+         "n": 89,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.34075253832371094,
+          0.6592474616762891
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -9448,8 +9451,8 @@
       {
        "name": "Brantley County",
        "votes": [
-        350,
-        2614
+        570,
+        4928
        ],
        "outstanding": 7,
        "remainder": [
@@ -9462,7 +9465,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 3,
        "precincts_total": 3
       },
       {
@@ -9848,15 +9851,18 @@
       {
        "name": "Columbia County",
        "votes": [
-        0,
-        0
+        18735,
+        22772
        ],
-       "outstanding": 42692,
+       "outstanding": 1185,
        "remainder": [
         {
-         "n": 42692,
+         "n": 1185,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.4513696484930253,
+          0.5486303515069747
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -10191,17 +10197,17 @@
       {
        "name": "Fayette County",
        "votes": [
-        1258,
-        685
+        25528,
+        20238
        ],
-       "outstanding": 44092,
+       "outstanding": 269,
        "remainder": [
         {
-         "n": 44092,
+         "n": 269,
          "basis": "measured",
          "share": [
-          0.6474523932063819,
-          0.35254760679361813
+          0.5577939955425425,
+          0.4422060044574575
          ]
         }
        ],
@@ -10544,15 +10550,18 @@
       {
        "name": "Henry County",
        "votes": [
-        0,
-        0
+        61316,
+        19626
        ],
-       "outstanding": 81318,
+       "outstanding": 376,
        "remainder": [
         {
-         "n": 81318,
+         "n": 376,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.7575300832695017,
+          0.2424699167304984
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -10680,21 +10689,29 @@
       {
        "name": "Johnson County",
        "votes": [
-        46,
-        55
+        793,
+        1508
        ],
-       "outstanding": 1724,
+       "outstanding": 1436,
        "remainder": [
         {
-         "n": 1724,
+         "n": 2,
          "basis": "measured",
          "share": [
-          0.45544554455445546,
-          0.5445544554455446
+          0.3247394404827208,
+          0.6752605595172793
+         ]
+        },
+        {
+         "n": 1434,
+         "basis": "scaled from precincts reporting",
+         "share": [
+          0.4205020920502092,
+          0.5794979079497908
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 4
       },
       {
@@ -10946,15 +10963,18 @@
       {
        "name": "Meriwether County",
        "votes": [
-        0,
-        0
+        1862,
+        2339
        ],
-       "outstanding": 4215,
+       "outstanding": 14,
        "remainder": [
         {
-         "n": 4215,
+         "n": 14,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.44322780290407043,
+          0.5567721970959295
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11059,15 +11079,18 @@
       {
        "name": "Murray County",
        "votes": [
-        0,
-        0
+        1343,
+        4994
        ],
-       "outstanding": 6370,
+       "outstanding": 33,
        "remainder": [
         {
-         "n": 6370,
+         "n": 33,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.21192993530061544,
+          0.7880700646993846
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11147,15 +11170,18 @@
       {
        "name": "Paulding County",
        "votes": [
-        0,
-        0
+        24986,
+        27114
        ],
-       "outstanding": 52416,
+       "outstanding": 316,
        "remainder": [
         {
-         "n": 52416,
+         "n": 316,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.4795777351247601,
+          0.5204222648752399
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11255,8 +11281,8 @@
       {
        "name": "Pulaski County",
        "votes": [
-        869,
-        1916
+        1026,
+        2314
        ],
        "outstanding": 18,
        "remainder": [
@@ -11655,15 +11681,18 @@
       {
        "name": "Towns County",
        "votes": [
-        0,
-        0
+        1131,
+        4508
        ],
-       "outstanding": 5703,
+       "outstanding": 64,
        "remainder": [
         {
-         "n": 5703,
+         "n": 64,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.20056747650292606,
+          0.7994325234970739
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -11737,15 +11766,18 @@
       {
        "name": "Twiggs County",
        "votes": [
-        0,
-        0
+        1059,
+        799
        ],
-       "outstanding": 1862,
+       "outstanding": 4,
        "remainder": [
         {
-         "n": 1862,
+         "n": 4,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.569967707212056,
+          0.430032292787944
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -12024,7 +12056,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:34:57+00:00",
+     "updated": "2026-11-04T00:36:07+00:00",
      "tier": "tossup",
      "precincts_reporting": 40,
      "precincts_total": 159,
@@ -12161,17 +12193,17 @@
       {
        "name": "Barrow County",
        "votes": [
-        8342,
-        10299
+        8861,
+        10748
        ],
-       "outstanding": 1111,
+       "outstanding": 143,
        "remainder": [
         {
-         "n": 1111,
+         "n": 143,
          "basis": "measured",
          "share": [
-          0.44750818089158306,
-          0.5524918191084169
+          0.45188433882400936,
+          0.5481156611759906
          ]
         }
        ],
@@ -12181,15 +12213,18 @@
       {
        "name": "Bartow County",
        "votes": [
-        0,
-        0
+        9698,
+        15334
        ],
-       "outstanding": 25204,
+       "outstanding": 172,
        "remainder": [
         {
-         "n": 25204,
+         "n": 172,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.3874240971556408,
+          0.6125759028443593
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -12263,8 +12298,8 @@
       {
        "name": "Brantley County",
        "votes": [
-        456,
-        2499
+        771,
+        4717
        ],
        "outstanding": 16,
        "remainder": [
@@ -12277,7 +12312,7 @@
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 3,
        "precincts_total": 3
       },
       {
@@ -12663,15 +12698,18 @@
       {
        "name": "Columbia County",
        "votes": [
-        0,
-        0
+        20576,
+        20966
        ],
-       "outstanding": 42692,
+       "outstanding": 1150,
        "remainder": [
         {
-         "n": 42692,
+         "n": 1150,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.4953059554186125,
+          0.5046940445813876
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -13006,17 +13044,17 @@
       {
        "name": "Fayette County",
        "votes": [
-        1356,
-        604
+        27556,
+        18197
        ],
-       "outstanding": 44075,
+       "outstanding": 282,
        "remainder": [
         {
-         "n": 44075,
+         "n": 282,
          "basis": "measured",
          "share": [
-          0.6918367346938775,
-          0.3081632653061224
+          0.6022774462876751,
+          0.3977225537123249
          ]
         }
        ],
@@ -13359,15 +13397,18 @@
       {
        "name": "Henry County",
        "votes": [
-        0,
-        0
+        63425,
+        17458
        ],
-       "outstanding": 81318,
+       "outstanding": 435,
        "remainder": [
         {
-         "n": 81318,
+         "n": 435,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.7841573631047315,
+          0.21584263689526847
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -13495,21 +13536,21 @@
       {
        "name": "Johnson County",
        "votes": [
-        52,
-        50
+        841,
+        1464
        ],
-       "outstanding": 1723,
+       "outstanding": 1434,
        "remainder": [
         {
-         "n": 1723,
-         "basis": "measured",
+         "n": 1434,
+         "basis": "scaled from precincts reporting",
          "share": [
-          0.5098039215686274,
-          0.49019607843137253
+          0.4330543933054393,
+          0.5669456066945606
          ]
         }
        ],
-       "precincts_reporting": null,
+       "precincts_reporting": 1,
        "precincts_total": 4
       },
       {
@@ -13761,15 +13802,18 @@
       {
        "name": "Meriwether County",
        "votes": [
-        0,
-        0
+        1995,
+        2200
        ],
-       "outstanding": 4215,
+       "outstanding": 20,
        "remainder": [
         {
-         "n": 4215,
+         "n": 20,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.4755661501787843,
+          0.5244338498212158
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -13874,15 +13918,18 @@
       {
        "name": "Murray County",
        "votes": [
-        0,
-        0
+        1701,
+        4611
        ],
-       "outstanding": 6370,
+       "outstanding": 58,
        "remainder": [
         {
-         "n": 6370,
+         "n": 58,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.26948669201520914,
+          0.7305133079847909
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -13962,15 +14009,18 @@
       {
        "name": "Paulding County",
        "votes": [
-        0,
-        0
+        26959,
+        25059
        ],
-       "outstanding": 52416,
+       "outstanding": 398,
        "remainder": [
         {
-         "n": 52416,
+         "n": 398,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.5182629089930408,
+          0.4817370910069591
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -14070,8 +14120,8 @@
       {
        "name": "Pulaski County",
        "votes": [
-        959,
-        1819
+        1131,
+        2201
        ],
        "outstanding": 20,
        "remainder": [
@@ -14470,15 +14520,18 @@
       {
        "name": "Towns County",
        "votes": [
-        0,
-        0
+        1445,
+        4185
        ],
-       "outstanding": 5703,
+       "outstanding": 73,
        "remainder": [
         {
-         "n": 5703,
+         "n": 73,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.2566607460035524,
+          0.7433392539964476
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -14552,15 +14605,18 @@
       {
        "name": "Twiggs County",
        "votes": [
-        0,
-        0
+        1094,
+        763
        ],
-       "outstanding": 1862,
+       "outstanding": 5,
        "remainder": [
         {
-         "n": 1862,
+         "n": 5,
          "basis": "measured",
-         "share": null
+         "share": [
+          0.589122240172321,
+          0.41087775982767905
+         ]
         }
        ],
        "precincts_reporting": null,
@@ -14848,7 +14904,7 @@
        "precincts_total": 9
       }
      ],
-     "updated": "2026-11-04T00:34:57+00:00",
+     "updated": "2026-11-04T00:36:07+00:00",
      "tier": "safe",
      "precincts_reporting": 40,
      "precincts_total": 159,

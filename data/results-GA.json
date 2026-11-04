@@ -6,7 +6,7 @@
  "election_date": "2026-11-03",
  "feed_timestamp": "2026-11-04T00:29:33.9106226Z",
  "version": "11032026GeneralAndSpecialElection",
- "fetched": "2026-11-04T00:34:57+00:00",
+ "fetched": "2026-11-04T00:36:07+00:00",
  "early_cast_as_of": "11/3/2026",
  "counties": {
   "Appling County": {
@@ -482,21 +482,21 @@
     "choices": {
      "Mike Collins (Rep)": {
       "party": "R",
-      "votes": 10299,
+      "votes": 10748,
       "by_mode": {
        "election_day": 0,
        "early": 10299,
-       "mail": 0,
+       "mail": 449,
        "provisional": 0
       }
      },
      "Jon Ossoff (I) (Dem)": {
       "party": "D",
-      "votes": 8342,
+      "votes": 8861,
       "by_mode": {
        "election_day": 0,
        "early": 8342,
-       "mail": 0,
+       "mail": 519,
        "provisional": 0
       }
      }
@@ -504,37 +504,37 @@
     "modes": {
      "election_day": 0,
      "early": 18641,
-     "mail": 0,
+     "mail": 968,
      "provisional": 0
     },
-    "counted": 18641,
+    "counted": 19609,
     "precincts_total": 8,
     "precincts_reporting": 0,
     "registered": 65290,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 19752,
-    "early_and_mail_counted": 18641,
-    "early_and_mail_left": 1111
+    "early_and_mail_counted": 19609,
+    "early_and_mail_left": 143
    },
    "governor": {
     "choices": {
      "Rick Jackson (Rep)": {
       "party": "R",
-      "votes": 11224,
+      "votes": 11740,
       "by_mode": {
        "election_day": 0,
        "early": 11224,
-       "mail": 0,
+       "mail": 516,
        "provisional": 0
       }
      },
      "Keisha Lance Bottoms (Dem)": {
       "party": "D",
-      "votes": 7476,
+      "votes": 7926,
       "by_mode": {
        "election_day": 0,
        "early": 7476,
-       "mail": 0,
+       "mail": 450,
        "provisional": 0
       }
      }
@@ -542,17 +542,17 @@
     "modes": {
      "election_day": 0,
      "early": 18700,
-     "mail": 0,
+     "mail": 966,
      "provisional": 0
     },
-    "counted": 18700,
+    "counted": 19666,
     "precincts_total": 8,
     "precincts_reporting": 0,
     "registered": 65290,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 19752,
-    "early_and_mail_counted": 18700,
-    "early_and_mail_left": 1052
+    "early_and_mail_counted": 19666,
+    "early_and_mail_left": 86
    }
   },
   "Bartow County": {
@@ -560,77 +560,77 @@
     "choices": {
      "Mike Collins (Rep)": {
       "party": "R",
-      "votes": 0,
+      "votes": 15334,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 14732,
+       "mail": 602,
        "provisional": 0
       }
      },
      "Jon Ossoff (I) (Dem)": {
       "party": "D",
-      "votes": 0,
+      "votes": 9698,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 9087,
+       "mail": 611,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 23819,
+     "mail": 1213,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 25032,
     "precincts_total": 17,
     "precincts_reporting": 0,
     "registered": 86129,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 25204,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 25204
+    "early_and_mail_counted": 25032,
+    "early_and_mail_left": 172
    },
    "governor": {
     "choices": {
      "Rick Jackson (Rep)": {
       "party": "R",
-      "votes": 0,
+      "votes": 16557,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 15875,
+       "mail": 682,
        "provisional": 0
       }
      },
      "Keisha Lance Bottoms (Dem)": {
       "party": "D",
-      "votes": 0,
+      "votes": 8558,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 8040,
+       "mail": 518,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 23915,
+     "mail": 1200,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 25115,
     "precincts_total": 17,
     "precincts_reporting": 0,
     "registered": 86129,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 25204,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 25204
+    "early_and_mail_counted": 25115,
+    "early_and_mail_left": 89
    }
   },
   "Ben Hill County": {
@@ -950,9 +950,9 @@
     "choices": {
      "Mike Collins (Rep)": {
       "party": "R",
-      "votes": 2499,
+      "votes": 4717,
       "by_mode": {
-       "election_day": 0,
+       "election_day": 2218,
        "early": 2444,
        "mail": 55,
        "provisional": 0
@@ -960,9 +960,9 @@
      },
      "Jon Ossoff (I) (Dem)": {
       "party": "D",
-      "votes": 456,
+      "votes": 771,
       "by_mode": {
-       "election_day": 0,
+       "election_day": 315,
        "early": 423,
        "mail": 33,
        "provisional": 0
@@ -970,14 +970,14 @@
      }
     },
     "modes": {
-     "election_day": 0,
+     "election_day": 2533,
      "early": 2867,
      "mail": 88,
      "provisional": 0
     },
-    "counted": 2955,
+    "counted": 5488,
     "precincts_total": 3,
-    "precincts_reporting": 0,
+    "precincts_reporting": 3,
     "registered": 13150,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 2971,
@@ -988,9 +988,9 @@
     "choices": {
      "Rick Jackson (Rep)": {
       "party": "R",
-      "votes": 2614,
+      "votes": 4928,
       "by_mode": {
-       "election_day": 0,
+       "election_day": 2314,
        "early": 2556,
        "mail": 58,
        "provisional": 0
@@ -998,9 +998,9 @@
      },
      "Keisha Lance Bottoms (Dem)": {
       "party": "D",
-      "votes": 350,
+      "votes": 570,
       "by_mode": {
-       "election_day": 0,
+       "election_day": 220,
        "early": 320,
        "mail": 30,
        "provisional": 0
@@ -1008,14 +1008,14 @@
      }
     },
     "modes": {
-     "election_day": 0,
+     "election_day": 2534,
      "early": 2876,
      "mail": 88,
      "provisional": 0
     },
-    "counted": 2964,
+    "counted": 5498,
     "precincts_total": 3,
-    "precincts_reporting": 0,
+    "precincts_reporting": 3,
     "registered": 13150,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 2971,
@@ -2744,77 +2744,77 @@
     "choices": {
      "Mike Collins (Rep)": {
       "party": "R",
-      "votes": 0,
+      "votes": 20966,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 20454,
+       "mail": 512,
        "provisional": 0
       }
      },
      "Jon Ossoff (I) (Dem)": {
       "party": "D",
-      "votes": 0,
+      "votes": 20576,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 19623,
+       "mail": 953,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 40077,
+     "mail": 1465,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 41542,
     "precincts_total": 40,
     "precincts_reporting": 0,
     "registered": 115295,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 42692,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 42692
+    "early_and_mail_counted": 41542,
+    "early_and_mail_left": 1150
    },
    "governor": {
     "choices": {
      "Rick Jackson (Rep)": {
       "party": "R",
-      "votes": 0,
+      "votes": 22772,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 22178,
+       "mail": 594,
        "provisional": 0
       }
      },
      "Keisha Lance Bottoms (Dem)": {
       "party": "D",
-      "votes": 0,
+      "votes": 18735,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 17881,
+       "mail": 854,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 40059,
+     "mail": 1448,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 41507,
     "precincts_total": 40,
     "precincts_reporting": 0,
     "registered": 115295,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 42692,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 42692
+    "early_and_mail_counted": 41507,
+    "early_and_mail_left": 1185
    }
   },
   "Cook County": {
@@ -4304,20 +4304,20 @@
     "choices": {
      "Jon Ossoff (I) (Dem)": {
       "party": "D",
-      "votes": 1356,
+      "votes": 27556,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
+       "early": 26200,
        "mail": 1356,
        "provisional": 0
       }
      },
      "Mike Collins (Rep)": {
       "party": "R",
-      "votes": 604,
+      "votes": 18197,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
+       "early": 17593,
        "mail": 604,
        "provisional": 0
       }
@@ -4325,37 +4325,37 @@
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
+     "early": 43793,
      "mail": 1960,
      "provisional": 0
     },
-    "counted": 1960,
+    "counted": 45753,
     "precincts_total": 35,
     "precincts_reporting": 0,
     "registered": 93294,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 46035,
-    "early_and_mail_counted": 1960,
-    "early_and_mail_left": 44075
+    "early_and_mail_counted": 45753,
+    "early_and_mail_left": 282
    },
    "governor": {
     "choices": {
      "Keisha Lance Bottoms (Dem)": {
       "party": "D",
-      "votes": 1258,
+      "votes": 25528,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
+       "early": 24270,
        "mail": 1258,
        "provisional": 0
       }
      },
      "Rick Jackson (Rep)": {
       "party": "R",
-      "votes": 685,
+      "votes": 20238,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
+       "early": 19553,
        "mail": 685,
        "provisional": 0
       }
@@ -4363,18 +4363,18 @@
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
+     "early": 43823,
      "mail": 1943,
      "provisional": 0
     },
-    "counted": 1943,
+    "counted": 45766,
     "precincts_total": 35,
     "precincts_reporting": 0,
     "registered": 93294,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 46035,
-    "early_and_mail_counted": 1943,
-    "early_and_mail_left": 44092
+    "early_and_mail_counted": 45766,
+    "early_and_mail_left": 269
    }
   },
   "Floyd County": {
@@ -5784,79 +5784,79 @@
   "Henry County": {
    "senate": {
     "choices": {
-     "Mike Collins (Rep)": {
-      "party": "R",
-      "votes": 0,
+     "Jon Ossoff (I) (Dem)": {
+      "party": "D",
+      "votes": 63425,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 61277,
+       "mail": 2148,
        "provisional": 0
       }
      },
-     "Jon Ossoff (I) (Dem)": {
-      "party": "D",
-      "votes": 0,
+     "Mike Collins (Rep)": {
+      "party": "R",
+      "votes": 17458,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 16851,
+       "mail": 607,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 78128,
+     "mail": 2755,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 80883,
     "precincts_total": 37,
     "precincts_reporting": 0,
     "registered": 189314,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 81318,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 81318
+    "early_and_mail_counted": 80883,
+    "early_and_mail_left": 435
    },
    "governor": {
     "choices": {
-     "Rick Jackson (Rep)": {
-      "party": "R",
-      "votes": 0,
+     "Keisha Lance Bottoms (Dem)": {
+      "party": "D",
+      "votes": 61316,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 59365,
+       "mail": 1951,
        "provisional": 0
       }
      },
-     "Keisha Lance Bottoms (Dem)": {
-      "party": "D",
-      "votes": 0,
+     "Rick Jackson (Rep)": {
+      "party": "R",
+      "votes": 19626,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 18915,
+       "mail": 711,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 78280,
+     "mail": 2662,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 80942,
     "precincts_total": 37,
     "precincts_reporting": 0,
     "registered": 189314,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 81318,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 81318
+    "early_and_mail_counted": 80942,
+    "early_and_mail_left": 376
    }
   },
   "Houston County": {
@@ -6408,79 +6408,79 @@
   "Johnson County": {
    "senate": {
     "choices": {
-     "Jon Ossoff (I) (Dem)": {
-      "party": "D",
-      "votes": 52,
+     "Mike Collins (Rep)": {
+      "party": "R",
+      "votes": 1464,
       "by_mode": {
-       "election_day": 0,
-       "early": 0,
-       "mail": 52,
+       "election_day": 271,
+       "early": 1143,
+       "mail": 50,
        "provisional": 0
       }
      },
-     "Mike Collins (Rep)": {
-      "party": "R",
-      "votes": 50,
+     "Jon Ossoff (I) (Dem)": {
+      "party": "D",
+      "votes": 841,
       "by_mode": {
-       "election_day": 0,
-       "early": 0,
-       "mail": 50,
+       "election_day": 207,
+       "early": 582,
+       "mail": 52,
        "provisional": 0
       }
      }
     },
     "modes": {
-     "election_day": 0,
-     "early": 0,
+     "election_day": 478,
+     "early": 1725,
      "mail": 102,
      "provisional": 0
     },
-    "counted": 102,
+    "counted": 2305,
     "precincts_total": 4,
-    "precincts_reporting": 0,
+    "precincts_reporting": 1,
     "registered": 5638,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 1825,
-    "early_and_mail_counted": 102,
-    "early_and_mail_left": 1723
+    "early_and_mail_counted": 1827,
+    "early_and_mail_left": 0
    },
    "governor": {
     "choices": {
      "Rick Jackson (Rep)": {
       "party": "R",
-      "votes": 55,
+      "votes": 1508,
       "by_mode": {
-       "election_day": 0,
-       "early": 0,
+       "election_day": 277,
+       "early": 1176,
        "mail": 55,
        "provisional": 0
       }
      },
      "Keisha Lance Bottoms (Dem)": {
       "party": "D",
-      "votes": 46,
+      "votes": 793,
       "by_mode": {
-       "election_day": 0,
-       "early": 0,
+       "election_day": 201,
+       "early": 546,
        "mail": 46,
        "provisional": 0
       }
      }
     },
     "modes": {
-     "election_day": 0,
-     "early": 0,
+     "election_day": 478,
+     "early": 1722,
      "mail": 101,
      "provisional": 0
     },
-    "counted": 101,
+    "counted": 2301,
     "precincts_total": 4,
-    "precincts_reporting": 0,
+    "precincts_reporting": 1,
     "registered": 5638,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 1825,
-    "early_and_mail_counted": 101,
-    "early_and_mail_left": 1724
+    "early_and_mail_counted": 1823,
+    "early_and_mail_left": 2
    }
   },
   "Jones County": {
@@ -7658,77 +7658,77 @@
     "choices": {
      "Mike Collins (Rep)": {
       "party": "R",
-      "votes": 0,
+      "votes": 2200,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 2076,
+       "mail": 124,
        "provisional": 0
       }
      },
      "Jon Ossoff (I) (Dem)": {
       "party": "D",
-      "votes": 0,
+      "votes": 1995,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 1790,
+       "mail": 205,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 3866,
+     "mail": 329,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 4195,
     "precincts_total": 14,
     "precincts_reporting": 0,
     "registered": 17346,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 4215,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 4215
+    "early_and_mail_counted": 4195,
+    "early_and_mail_left": 20
    },
    "governor": {
     "choices": {
      "Rick Jackson (Rep)": {
       "party": "R",
-      "votes": 0,
+      "votes": 2339,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 2201,
+       "mail": 138,
        "provisional": 0
       }
      },
      "Keisha Lance Bottoms (Dem)": {
       "party": "D",
-      "votes": 0,
+      "votes": 1862,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 1670,
+       "mail": 192,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 3871,
+     "mail": 330,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 4201,
     "precincts_total": 14,
     "precincts_reporting": 0,
     "registered": 17346,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 4215,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 4215
+    "early_and_mail_counted": 4201,
+    "early_and_mail_left": 14
    }
   },
   "Miller County": {
@@ -8126,77 +8126,77 @@
     "choices": {
      "Mike Collins (Rep)": {
       "party": "R",
-      "votes": 0,
+      "votes": 4611,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 4504,
+       "mail": 107,
        "provisional": 0
       }
      },
      "Jon Ossoff (I) (Dem)": {
       "party": "D",
-      "votes": 0,
+      "votes": 1701,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 1615,
+       "mail": 86,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 6119,
+     "mail": 193,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 6312,
     "precincts_total": 7,
     "precincts_reporting": 0,
     "registered": 26450,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 6370,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 6370
+    "early_and_mail_counted": 6312,
+    "early_and_mail_left": 58
    },
    "governor": {
     "choices": {
      "Rick Jackson (Rep)": {
       "party": "R",
-      "votes": 0,
+      "votes": 4994,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 4873,
+       "mail": 121,
        "provisional": 0
       }
      },
      "Keisha Lance Bottoms (Dem)": {
       "party": "D",
-      "votes": 0,
+      "votes": 1343,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 1271,
+       "mail": 72,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 6144,
+     "mail": 193,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 6337,
     "precincts_total": 7,
     "precincts_reporting": 0,
     "registered": 26450,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 6370,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 6370
+    "early_and_mail_counted": 6337,
+    "early_and_mail_left": 33
    }
   },
   "Muscogee County": {
@@ -8514,79 +8514,79 @@
   "Paulding County": {
    "senate": {
     "choices": {
-     "Mike Collins (Rep)": {
-      "party": "R",
-      "votes": 0,
+     "Jon Ossoff (I) (Dem)": {
+      "party": "D",
+      "votes": 26959,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 25551,
+       "mail": 1408,
        "provisional": 0
       }
      },
-     "Jon Ossoff (I) (Dem)": {
-      "party": "D",
-      "votes": 0,
+     "Mike Collins (Rep)": {
+      "party": "R",
+      "votes": 25059,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 24116,
+       "mail": 943,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 49667,
+     "mail": 2351,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 52018,
     "precincts_total": 20,
     "precincts_reporting": 0,
     "registered": 131839,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 52416,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 52416
+    "early_and_mail_counted": 52018,
+    "early_and_mail_left": 398
    },
    "governor": {
     "choices": {
      "Rick Jackson (Rep)": {
       "party": "R",
-      "votes": 0,
+      "votes": 27114,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 26053,
+       "mail": 1061,
        "provisional": 0
       }
      },
      "Keisha Lance Bottoms (Dem)": {
       "party": "D",
-      "votes": 0,
+      "votes": 24986,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 23705,
+       "mail": 1281,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 49758,
+     "mail": 2342,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 52100,
     "precincts_total": 20,
     "precincts_reporting": 0,
     "registered": 131839,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 52416,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 52416
+    "early_and_mail_counted": 52100,
+    "early_and_mail_left": 316
    }
   },
   "Peach County": {
@@ -8984,9 +8984,9 @@
     "choices": {
      "Mike Collins (Rep)": {
       "party": "R",
-      "votes": 1819,
+      "votes": 2201,
       "by_mode": {
-       "election_day": 289,
+       "election_day": 671,
        "early": 1470,
        "mail": 60,
        "provisional": 0
@@ -8994,9 +8994,9 @@
      },
      "Jon Ossoff (I) (Dem)": {
       "party": "D",
-      "votes": 959,
+      "votes": 1131,
       "by_mode": {
-       "election_day": 125,
+       "election_day": 297,
        "early": 749,
        "mail": 85,
        "provisional": 0
@@ -9004,12 +9004,12 @@
      }
     },
     "modes": {
-     "election_day": 414,
+     "election_day": 968,
      "early": 2219,
      "mail": 145,
      "provisional": 0
     },
-    "counted": 2778,
+    "counted": 3332,
     "precincts_total": 1,
     "precincts_reporting": 1,
     "registered": 6161,
@@ -9022,9 +9022,9 @@
     "choices": {
      "Rick Jackson (Rep)": {
       "party": "R",
-      "votes": 1916,
+      "votes": 2314,
       "by_mode": {
-       "election_day": 300,
+       "election_day": 698,
        "early": 1551,
        "mail": 65,
        "provisional": 0
@@ -9032,9 +9032,9 @@
      },
      "Keisha Lance Bottoms (Dem)": {
       "party": "D",
-      "votes": 869,
+      "votes": 1026,
       "by_mode": {
-       "election_day": 119,
+       "election_day": 276,
        "early": 670,
        "mail": 80,
        "provisional": 0
@@ -9042,12 +9042,12 @@
      }
     },
     "modes": {
-     "election_day": 419,
+     "election_day": 974,
      "early": 2221,
      "mail": 145,
      "provisional": 0
     },
-    "counted": 2785,
+    "counted": 3340,
     "precincts_total": 1,
     "precincts_reporting": 1,
     "registered": 6161,
@@ -10778,77 +10778,77 @@
     "choices": {
      "Mike Collins (Rep)": {
       "party": "R",
-      "votes": 0,
+      "votes": 4185,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 3989,
+       "mail": 196,
        "provisional": 0
       }
      },
      "Jon Ossoff (I) (Dem)": {
       "party": "D",
-      "votes": 0,
+      "votes": 1445,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 1290,
+       "mail": 155,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 5279,
+     "mail": 351,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 5630,
     "precincts_total": 2,
     "precincts_reporting": 0,
     "registered": 10918,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 5703,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 5703
+    "early_and_mail_counted": 5630,
+    "early_and_mail_left": 73
    },
    "governor": {
     "choices": {
      "Rick Jackson (Rep)": {
       "party": "R",
-      "votes": 0,
+      "votes": 4508,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 4281,
+       "mail": 227,
        "provisional": 0
       }
      },
      "Keisha Lance Bottoms (Dem)": {
       "party": "D",
-      "votes": 0,
+      "votes": 1131,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 1006,
+       "mail": 125,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 5287,
+     "mail": 352,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 5639,
     "precincts_total": 2,
     "precincts_reporting": 0,
     "registered": 10918,
     "ballots_cast": 0.0,
     "early_and_mail_cast": 5703,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 5703
+    "early_and_mail_counted": 5639,
+    "early_and_mail_left": 64
    }
   },
   "Treutlen County": {
@@ -11088,79 +11088,79 @@
   "Twiggs County": {
    "senate": {
     "choices": {
-     "Mike Collins (Rep)": {
-      "party": "R",
-      "votes": 0,
+     "Jon Ossoff (I) (Dem)": {
+      "party": "D",
+      "votes": 1094,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 899,
+       "mail": 195,
        "provisional": 0
       }
      },
-     "Jon Ossoff (I) (Dem)": {
-      "party": "D",
-      "votes": 0,
+     "Mike Collins (Rep)": {
+      "party": "R",
+      "votes": 763,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 734,
+       "mail": 29,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 1633,
+     "mail": 224,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 1857,
     "precincts_total": 5,
     "precincts_reporting": 0,
     "registered": 6185,
     "ballots_cast": 2977.0,
     "early_and_mail_cast": 1862,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 1862
+    "early_and_mail_counted": 1857,
+    "early_and_mail_left": 5
    },
    "governor": {
     "choices": {
-     "Rick Jackson (Rep)": {
-      "party": "R",
-      "votes": 0,
+     "Keisha Lance Bottoms (Dem)": {
+      "party": "D",
+      "votes": 1059,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 868,
+       "mail": 191,
        "provisional": 0
       }
      },
-     "Keisha Lance Bottoms (Dem)": {
-      "party": "D",
-      "votes": 0,
+     "Rick Jackson (Rep)": {
+      "party": "R",
+      "votes": 799,
       "by_mode": {
        "election_day": 0,
-       "early": 0,
-       "mail": 0,
+       "early": 767,
+       "mail": 32,
        "provisional": 0
       }
      }
     },
     "modes": {
      "election_day": 0,
-     "early": 0,
-     "mail": 0,
+     "early": 1635,
+     "mail": 223,
      "provisional": 0
     },
-    "counted": 0,
+    "counted": 1858,
     "precincts_total": 5,
     "precincts_reporting": 0,
     "registered": 6185,
     "ballots_cast": 2977.0,
     "early_and_mail_cast": 1862,
-    "early_and_mail_counted": 0,
-    "early_and_mail_left": 1862
+    "early_and_mail_counted": 1858,
+    "early_and_mail_left": 4
    }
   },
   "Union County": {

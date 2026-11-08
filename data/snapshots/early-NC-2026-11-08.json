@@ -970,19 +970,19 @@
     "total": 141644
    },
    "mail_returned": {
-    "D": 2089,
+    "D": 2090,
     "NPA": 1679,
     "O": 14,
     "R": 845,
-    "total": 4627
+    "total": 4628
    },
    "outstanding": null,
    "returned": {
-    "D": 2089,
+    "D": 2090,
     "NPA": 1679,
     "O": 14,
     "R": 845,
-    "total": 4627
+    "total": 4628
    }
   },
   "Halifax": {
@@ -1162,19 +1162,19 @@
     "total": 46996
    },
    "mail_returned": {
-    "D": 627,
+    "D": 628,
     "NPA": 802,
     "O": 11,
     "R": 522,
-    "total": 1962
+    "total": 1963
    },
    "outstanding": null,
    "returned": {
-    "D": 627,
+    "D": 628,
     "NPA": 802,
     "O": 11,
     "R": 522,
-    "total": 1962
+    "total": 1963
    }
   },
   "Jackson": {
@@ -1210,19 +1210,19 @@
     "total": 54281
    },
    "mail_returned": {
-    "D": 735,
+    "D": 736,
     "NPA": 716,
     "O": 7,
     "R": 427,
-    "total": 1885
+    "total": 1886
    },
    "outstanding": null,
    "returned": {
-    "D": 735,
+    "D": 736,
     "NPA": 716,
     "O": 7,
     "R": 427,
-    "total": 1885
+    "total": 1886
    }
   },
   "Jones": {
@@ -1516,34 +1516,34 @@
   "Nash": {
    "early_in_person": {
     "D": 12239,
-    "NPA": 8088,
+    "NPA": 8086,
     "O": 47,
-    "R": 7849,
-    "total": 28223
+    "R": 7850,
+    "total": 28222
    },
    "mail_returned": {
-    "D": 289,
+    "D": 288,
     "NPA": 164,
     "O": 6,
     "R": 86,
-    "total": 545
+    "total": 544
    },
    "outstanding": null,
    "returned": {
-    "D": 289,
+    "D": 288,
     "NPA": 164,
     "O": 6,
     "R": 86,
-    "total": 545
+    "total": 544
    }
   },
   "New Hanover": {
    "early_in_person": {
-    "D": 22515,
-    "NPA": 25683,
+    "D": 22514,
+    "NPA": 25686,
     "O": 238,
-    "R": 18797,
-    "total": 67233
+    "R": 18798,
+    "total": 67236
    },
    "mail_returned": {
     "D": 1254,
@@ -1595,18 +1595,18 @@
    },
    "mail_returned": {
     "D": 475,
-    "NPA": 512,
+    "NPA": 513,
     "O": 13,
     "R": 318,
-    "total": 1318
+    "total": 1319
    },
    "outstanding": null,
    "returned": {
     "D": 475,
-    "NPA": 512,
+    "NPA": 513,
     "O": 13,
     "R": 318,
-    "total": 1318
+    "total": 1319
    }
   },
   "Orange": {
@@ -1755,10 +1755,10 @@
   },
   "Pitt": {
    "early_in_person": {
-    "D": 18922,
+    "D": 18924,
     "NPA": 12388,
     "O": 126,
-    "R": 9366,
+    "R": 9364,
     "total": 40802
    },
    "mail_returned": {
@@ -1899,8 +1899,8 @@
   },
   "Rowan": {
    "early_in_person": {
-    "D": 7641,
-    "NPA": 8828,
+    "D": 7642,
+    "NPA": 8827,
     "O": 91,
     "R": 12010,
     "total": 28570
@@ -2283,26 +2283,26 @@
   },
   "Wayne": {
    "early_in_person": {
-    "D": 10872,
-    "NPA": 6274,
+    "D": 10868,
+    "NPA": 6273,
     "O": 69,
     "R": 9301,
-    "total": 26516
+    "total": 26511
    },
    "mail_returned": {
-    "D": 270,
+    "D": 268,
     "NPA": 192,
     "O": 8,
-    "R": 151,
-    "total": 621
+    "R": 150,
+    "total": 618
    },
    "outstanding": null,
    "returned": {
-    "D": 270,
+    "D": 268,
     "NPA": 192,
     "O": 8,
-    "R": 151,
-    "total": 621
+    "R": 150,
+    "total": 618
    }
   },
   "Wilkes": {
@@ -2403,33 +2403,36 @@
   }
  },
  "election": "2026 General",
- "fetched": "2026-11-08T10:07:31+00:00",
+ "fetched": "2026-11-08T10:37:39+00:00",
  "in_person": true,
+ "notes": {
+  "fell": "A figure is lower than this board last recorded: early_in_person was 2,728,918, now 2,728,915. Ballots already cast do not un-cast, so the source has restated something or served an older file. The number shown is the one the source gave."
+ },
  "outstanding_available": false,
- "rows": 2903707,
+ "rows": 2903721,
  "source": "https://s3.amazonaws.com/dl.ncsbe.gov/ENRS/2026_11_03/absentee_20261103.zip",
  "state": "NC",
  "state_totals": {
   "early_in_person": {
-   "D": 1045119,
-   "NPA": 955449,
+   "D": 1045117,
+   "NPA": 955448,
    "O": 8447,
    "R": 719903,
-   "total": 2728918
+   "total": 2728915
   },
   "mail_returned": {
    "D": 43848,
-   "NPA": 43923,
+   "NPA": 43924,
    "O": 391,
-   "R": 20272,
+   "R": 20271,
    "total": 108434
   },
   "outstanding": null,
   "returned": {
    "D": 43848,
-   "NPA": 43923,
+   "NPA": 43924,
    "O": 391,
-   "R": 20272,
+   "R": 20271,
    "total": 108434
   }
  },

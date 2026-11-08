@@ -3,7 +3,7 @@
  "unit": "county",
  "election": "2026 General",
  "as_of": "2026-11-08",
- "fetched": "2026-11-08T10:37:39+00:00",
+ "fetched": "2026-11-08T11:07:33+00:00",
  "rows": 2903721,
  "in_person": true,
  "counties": {
@@ -2433,8 +2433,5 @@
   "outstanding": null
  },
  "source": "https://s3.amazonaws.com/dl.ncsbe.gov/ENRS/2026_11_03/absentee_20261103.zip",
- "outstanding_available": false,
- "notes": {
-  "fell": "A figure is lower than this board last recorded: early_in_person was 2,728,918, now 2,728,915. Ballots already cast do not un-cast, so the source has restated something or served an older file. The number shown is the one the source gave."
- }
+ "outstanding_available": false
 }

@@ -2,7 +2,7 @@
  "as_of": "2026-11-03",
  "compiled": {
   "in_person": "11/03/2026 11:02AM",
-  "outstanding": "11/12/2026 11:01AM",
+  "outstanding": "11/12/2026  8:04AM",
   "returned": "11/12/2026  8:04AM"
  },
  "counties": {
@@ -1912,18 +1912,18 @@
     "total": 94371
    },
    "outstanding": {
-    "D": 4740,
-    "NPA": 2956,
+    "D": 4733,
+    "NPA": 2953,
     "O": 441,
-    "R": 4397,
-    "total": 12534
+    "R": 4394,
+    "total": 12521
    },
    "returned": {
-    "D": 25072,
-    "NPA": 12973,
+    "D": 25079,
+    "NPA": 12976,
     "O": 1964,
-    "R": 24040,
-    "total": 64049
+    "R": 24043,
+    "total": 64062
    }
   },
   "Wakulla": {
@@ -2018,12 +2018,11 @@
   }
  },
  "election": "2026 General",
- "fetched": "2026-11-12T23:07:11+00:00",
+ "fetched": "2026-11-12T23:37:04+00:00",
  "in_person": true,
  "mixed_days": true,
  "notes": {
-  "mixed_days": "Florida publishes these files on separate schedules and they are a day apart right now, so the total early vote spans two: in_person compiled 11/03/2026, outstanding compiled 11/11/2026, returned compiled 11/11/2026. The figure is dated by the OLDEST of them, which is the day every part of it is good through.",
-  "stale_fetch": "The source served an older file this run (2026-11-11 against the 2026-11-12 already recorded), so the figures it carried were lower. The newer figures are kept: returned held at 2,080,068"
+  "mixed_days": "Florida publishes these files on separate schedules and they are a day apart right now, so the total early vote spans two: in_person compiled 11/03/2026, outstanding compiled 11/12/2026, returned compiled 11/12/2026. The figure is dated by the OLDEST of them, which is the day every part of it is good through."
  },
  "outstanding_available": true,
  "state": "FL",
@@ -2043,17 +2042,17 @@
    "total": 3467306
   },
   "outstanding": {
-   "D": 152966,
-   "NPA": 91083,
+   "D": 152959,
+   "NPA": 91080,
    "O": 11741,
-   "R": 126481,
-   "total": 382271
+   "R": 126478,
+   "total": 382258
   },
   "returned": {
-   "D": 885531,
-   "NPA": 417661,
+   "D": 885538,
+   "NPA": 417664,
    "O": 51809,
-   "R": 725054,
+   "R": 725057,
    "total": 2080068
   }
  },

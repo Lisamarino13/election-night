@@ -482,16 +482,16 @@
       "R": 1497468
      },
      "mail_outstanding": {
-      "D": 152959,
-      "NPA": 91080,
+      "D": 152966,
+      "NPA": 91083,
       "O": 11741,
-      "R": 126478
+      "R": 126481
      },
      "mail_returned": {
-      "D": 885538,
-      "NPA": 417664,
+      "D": 885531,
+      "NPA": 417661,
       "O": 51809,
-      "R": 725057
+      "R": 725054
      }
     }
    ]
@@ -2392,6 +2392,28 @@
     },
     {
      "as_of": "2026-11-12",
+     "registered": null,
+     "in_person_returned": {
+      "D": 1045088,
+      "NPA": 955397,
+      "O": 8446,
+      "R": 719871
+     },
+     "mail_outstanding": {
+      "D": null,
+      "NPA": null,
+      "O": null,
+      "R": null
+     },
+     "mail_returned": {
+      "D": 43940,
+      "NPA": 44042,
+      "O": 393,
+      "R": 20324
+     }
+    },
+    {
+     "as_of": "2026-11-13",
      "registered": null,
      "in_person_returned": {
       "D": 1045088,

@@ -2,10 +2,10 @@
  "state": "FL",
  "unit": "county",
  "election": "2026 General",
- "fetched": "2026-11-15T18:07:05+00:00",
+ "fetched": "2026-11-15T18:37:09+00:00",
  "compiled": {
-  "outstanding": "11/14/2026  8:04AM",
-  "returned": "11/14/2026  8:04AM",
+  "outstanding": "11/15/2026  8:04AM",
+  "returned": "11/15/2026  8:04AM",
   "in_person": "11/03/2026 11:02AM"
  },
  "counties": {
@@ -1061,18 +1061,18 @@
   },
   "Leon": {
    "outstanding": {
-    "R": 1407,
-    "D": 3080,
-    "NPA": 975,
+    "R": 1406,
+    "D": 3073,
+    "NPA": 973,
     "O": 141,
-    "total": 5603
+    "total": 5593
    },
    "returned": {
-    "R": 7309,
-    "D": 18223,
-    "NPA": 4395,
+    "R": 7310,
+    "D": 18230,
+    "NPA": 4396,
     "O": 539,
-    "total": 30466
+    "total": 30475
    },
    "early_in_person": {
     "R": 14197,
@@ -2023,24 +2023,24 @@
  "in_person": true,
  "outstanding_available": true,
  "notes": {
-  "mixed_days": "Florida publishes these files on separate schedules and they are a day apart right now, so the total early vote spans two: in_person compiled 11/03/2026, outstanding compiled 11/14/2026, returned compiled 11/14/2026. The figure is dated by the OLDEST of them, which is the day every part of it is good through."
+  "mixed_days": "Florida publishes these files on separate schedules and they are a day apart right now, so the total early vote spans two: in_person compiled 11/03/2026, outstanding compiled 11/15/2026, returned compiled 11/15/2026. The figure is dated by the OLDEST of them, which is the day every part of it is good through."
  },
  "mixed_days": true,
  "as_of": "2026-11-03",
  "state_totals": {
   "outstanding": {
-   "R": 126102,
-   "D": 152233,
-   "NPA": 90650,
+   "R": 126101,
+   "D": 152226,
+   "NPA": 90648,
    "O": 11696,
-   "total": 380681
+   "total": 380671
   },
   "returned": {
-   "R": 725141,
-   "D": 885867,
-   "NPA": 417827,
+   "R": 725142,
+   "D": 885874,
+   "NPA": 417828,
    "O": 51828,
-   "total": 2080663
+   "total": 2080672
   },
   "early_in_person": {
    "R": 1497468,

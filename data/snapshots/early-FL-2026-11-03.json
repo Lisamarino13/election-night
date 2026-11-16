@@ -2,8 +2,8 @@
  "as_of": "2026-11-03",
  "compiled": {
   "in_person": "11/03/2026 11:02AM",
-  "outstanding": "11/15/2026  8:04AM",
-  "returned": "11/15/2026  8:04AM"
+  "outstanding": "11/16/2026 11:01AM",
+  "returned": "11/16/2026 11:01AM"
  },
  "counties": {
   "Alachua": {
@@ -1762,18 +1762,18 @@
     "total": 64788
    },
    "outstanding": {
-    "D": 2572,
-    "NPA": 1351,
+    "D": 2567,
+    "NPA": 1348,
     "O": 223,
-    "R": 1804,
-    "total": 5950
+    "R": 1802,
+    "total": 5940
    },
    "returned": {
-    "D": 16071,
-    "NPA": 6784,
+    "D": 16076,
+    "NPA": 6787,
     "O": 1047,
-    "R": 11138,
-    "total": 35040
+    "R": 11140,
+    "total": 35050
    }
   },
   "Sumter": {
@@ -2018,11 +2018,11 @@
   }
  },
  "election": "2026 General",
- "fetched": "2026-11-16T19:37:11+00:00",
+ "fetched": "2026-11-16T20:07:05+00:00",
  "in_person": true,
  "mixed_days": true,
  "notes": {
-  "mixed_days": "Florida publishes these files on separate schedules and they are a day apart right now, so the total early vote spans two: in_person compiled 11/03/2026, outstanding compiled 11/15/2026, returned compiled 11/15/2026. The figure is dated by the OLDEST of them, which is the day every part of it is good through."
+  "mixed_days": "Florida publishes these files on separate schedules and they are a day apart right now, so the total early vote spans two: in_person compiled 11/03/2026, outstanding compiled 11/16/2026, returned compiled 11/16/2026. The figure is dated by the OLDEST of them, which is the day every part of it is good through."
  },
  "outstanding_available": true,
  "state": "FL",
@@ -2042,18 +2042,18 @@
    "total": 3467306
   },
   "outstanding": {
-   "D": 152226,
-   "NPA": 90648,
+   "D": 152221,
+   "NPA": 90645,
    "O": 11696,
-   "R": 126101,
-   "total": 380671
+   "R": 126099,
+   "total": 380661
   },
   "returned": {
-   "D": 885874,
-   "NPA": 417828,
+   "D": 885879,
+   "NPA": 417831,
    "O": 51828,
-   "R": 725142,
-   "total": 2080672
+   "R": 725144,
+   "total": 2080682
   }
  },
  "unit": "county"

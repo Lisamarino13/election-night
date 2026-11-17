@@ -1762,18 +1762,18 @@
     "total": 64788
    },
    "outstanding": {
-    "D": 2567,
-    "NPA": 1348,
+    "D": 2572,
+    "NPA": 1351,
     "O": 223,
-    "R": 1802,
-    "total": 5940
+    "R": 1804,
+    "total": 5950
    },
    "returned": {
-    "D": 16076,
-    "NPA": 6787,
+    "D": 16071,
+    "NPA": 6784,
     "O": 1047,
-    "R": 11140,
-    "total": 35050
+    "R": 11138,
+    "total": 35040
    }
   },
   "Sumter": {
@@ -2018,11 +2018,12 @@
   }
  },
  "election": "2026 General",
- "fetched": "2026-11-17T01:37:11+00:00",
+ "fetched": "2026-11-17T02:07:05+00:00",
  "in_person": true,
  "mixed_days": true,
  "notes": {
-  "mixed_days": "Florida publishes these files on separate schedules and they are a day apart right now, so the total early vote spans two: in_person compiled 11/03/2026, outstanding compiled 11/16/2026, returned compiled 11/16/2026. The figure is dated by the OLDEST of them, which is the day every part of it is good through."
+  "mixed_days": "Florida publishes these files on separate schedules and they are a day apart right now, so the total early vote spans two: in_person compiled 11/03/2026, outstanding compiled 11/15/2026, returned compiled 11/15/2026. The figure is dated by the OLDEST of them, which is the day every part of it is good through.",
+  "stale_fetch": "The source served an older file this run (2026-11-15 against the 2026-11-16 already recorded), so the figures it carried were lower. The newer figures are kept: returned held at 2,080,682"
  },
  "outstanding_available": true,
  "state": "FL",
@@ -2042,17 +2043,17 @@
    "total": 3467306
   },
   "outstanding": {
-   "D": 152221,
-   "NPA": 90645,
+   "D": 152226,
+   "NPA": 90648,
    "O": 11696,
-   "R": 126099,
-   "total": 380661
+   "R": 126101,
+   "total": 380671
   },
   "returned": {
-   "D": 885879,
-   "NPA": 417831,
+   "D": 885874,
+   "NPA": 417828,
    "O": 51828,
-   "R": 725144,
+   "R": 725142,
    "total": 2080682
   }
  },

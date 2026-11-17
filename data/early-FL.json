@@ -2,7 +2,7 @@
  "state": "FL",
  "unit": "county",
  "election": "2026 General",
- "fetched": "2026-11-17T01:37:11+00:00",
+ "fetched": "2026-11-17T02:07:05+00:00",
  "compiled": {
   "outstanding": "11/16/2026 11:01AM",
   "returned": "11/16/2026 11:01AM",
@@ -1751,18 +1751,18 @@
   },
   "St. Lucie": {
    "outstanding": {
-    "R": 1802,
-    "D": 2567,
-    "NPA": 1348,
+    "R": 1804,
+    "D": 2572,
+    "NPA": 1351,
     "O": 223,
-    "total": 5940
+    "total": 5950
    },
    "returned": {
-    "R": 11140,
-    "D": 16076,
-    "NPA": 6787,
+    "R": 11138,
+    "D": 16071,
+    "NPA": 6784,
     "O": 1047,
-    "total": 35050
+    "total": 35040
    },
    "early_in_person": {
     "R": 26558,
@@ -2023,22 +2023,23 @@
  "in_person": true,
  "outstanding_available": true,
  "notes": {
-  "mixed_days": "Florida publishes these files on separate schedules and they are a day apart right now, so the total early vote spans two: in_person compiled 11/03/2026, outstanding compiled 11/16/2026, returned compiled 11/16/2026. The figure is dated by the OLDEST of them, which is the day every part of it is good through."
+  "mixed_days": "Florida publishes these files on separate schedules and they are a day apart right now, so the total early vote spans two: in_person compiled 11/03/2026, outstanding compiled 11/15/2026, returned compiled 11/15/2026. The figure is dated by the OLDEST of them, which is the day every part of it is good through.",
+  "stale_fetch": "The source served an older file this run (2026-11-15 against the 2026-11-16 already recorded), so the figures it carried were lower. The newer figures are kept: returned held at 2,080,682"
  },
  "mixed_days": true,
  "as_of": "2026-11-03",
  "state_totals": {
   "outstanding": {
-   "R": 126099,
-   "D": 152221,
-   "NPA": 90645,
+   "R": 126101,
+   "D": 152226,
+   "NPA": 90648,
    "O": 11696,
-   "total": 380661
+   "total": 380671
   },
   "returned": {
-   "R": 725144,
-   "D": 885879,
-   "NPA": 417831,
+   "R": 725142,
+   "D": 885874,
+   "NPA": 417828,
    "O": 51828,
    "total": 2080682
   },

@@ -1,7 +1,7 @@
 {
- "ran_at": "2026-11-23T00:37:48Z",
+ "ran_at": "2026-11-23T01:07:42Z",
  "host": "dopple-cron",
- "status": "ok",
- "failed": "",
+ "status": "collectors-failed",
+ "failed": " sc_earlyvote.py",
  "note": "Written by publish.sh on every run, even when no figure changed. If ran_at stops advancing the collector has stopped, which is not the same as the numbers not moving."
 }
